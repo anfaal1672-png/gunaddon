@@ -26,7 +26,7 @@ export const HUD2 = {
     { name: "heat", key: "e", len: 1, doc: "熱・充電・リロード進行 0〜9" },
     { name: "plate", key: "p", len: 1, doc: "プレート残り 0〜4 / - ボディアーマーなし" },
     { name: "hp", key: "h", len: 2, doc: "体力（切り上げ、00〜99）" },
-    { name: "hdg", key: "g", len: 2, doc: "方位 00〜15（22.5° ごと、00 = 南）" },
+    { name: "hdg", key: "g", len: 3, doc: "方位 000〜179（2° ごと、000 = 南）/ --- 非表示" },
     { name: "sup", key: "u", len: 1, doc: "制圧 0〜3" },
     { name: "nvg", key: "n", len: 1, doc: "暗視の画面効果 0 / 1" },
     { name: "gm", key: "o", len: 1, doc: "ゲームモード 0 なし / 1 FFA / 2 TDM / 3 ガンゲーム / 4 ホード / 5 陣取り" },
@@ -41,6 +41,7 @@ export const HUD2 = {
     { name: "wstr", key: "y", len: 1, doc: "風の強さ 1〜3 / - なし" },
     { name: "sz", key: "z", len: 1, doc: "HUD の大きさ 0 小 / 1 標準 / 2 大" },
     { name: "lay", key: "l", len: 1, doc: "配置 0 標準 / 1 高め（スマホの操作ボタンを避ける）/ 2 左寄せ" },
+    { name: "seq", key: "i", len: 1, doc: "送るたびに 0〜9 で変わる番号。同じ内容の再送でもタイトルの文字列を変えて、JSON UI に表示条件を評価し直させる" },
   ],
   /** 送信間隔（変化がなくてもこの tick ごとに再送する。タイトルの表示時間より短く） */
   resendTicks: 10,

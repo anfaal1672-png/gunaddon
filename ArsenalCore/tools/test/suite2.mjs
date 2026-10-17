@@ -84,7 +84,7 @@ export async function suite2(ctx) {
   console.log("HUD 2.0");
   // =====================================================================
   {
-    const vals = { hit: "2", dir: "3", xh: "4", ammo: 27, res: 120, mode: "A", st: "R", heat: "5", plate: "3", hp: 17, hdg: "07", sup: "1", nvg: "0", gm: "2", sa: 12, sb: 9, tm: " 4:05", stk: 3, cr: 1234, ks: "1", rng: 150, wdir: "3", wstr: "2", sz: "1", lay: "0" };
+    const vals = { hit: "2", dir: "3", xh: "4", ammo: 27, res: 120, mode: "A", st: "R", heat: "5", plate: "3", hp: 17, hdg: "037", sup: "1", nvg: "0", gm: "2", sa: 12, sb: 9, tm: " 4:05", stk: 3, cr: 1234, ks: "1", rng: 150, wdir: "3", wstr: "2", sz: "1", lay: "0" };
     const enc = hud2.encodeHud2(vals);
     const dec = hud2.decodeHud2(enc);
     check("HUD 2.0：符号化の長さが配置表と一致", enc.length === D.HUD2_LAYOUT.length, `(${enc.length} vs ${D.HUD2_LAYOUT.length})`);

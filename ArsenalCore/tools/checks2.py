@@ -456,6 +456,15 @@ def _hud2_controls(rp):
     return out, ui
 
 
+def _ancestors(name, parent_of):
+    out = []
+    p = parent_of.get(name)
+    while p:
+        out.append(p)
+        p = parent_of.get(p)
+    return out
+
+
 def _visible(ev, conds):
     return all(bool(ev.run(c)) for c in conds)
 
@@ -499,23 +508,30 @@ def check_hud2_roundtrip(rp, mark):
     by_key = {f["key"]: f["name"] for f in H["fields"]}
     if len(by_key) != len(H["fields"]) or any(not re.fullmatch(r"[a-z]", k) for k in by_key):
         errs.append("フィールドのキーが英小文字 1 文字で一意でない")
-    # 文字ごとのラベル（名前 <グループ>_<桁>_<文字コード>、条件は札 1 つ）と固定の文字（<グループ>_<桁>）
-    cells = {}  # グループ名 → {桁: [(文字, 条件の札 or None, 名前)]}
+    # 文字ごとのラベル（名前 <グループ>_<桁>_<文字コード>、条件は「グループの条件 and 札」または札だけ）と固定の文字（<グループ>_<桁>）
+    cells = {}  # グループ名 → {桁: [(文字, (フィールド, 位置) or None, 名前, 札以外の条件 or None)]}
     for name, conds, body, parent in controls:
         if body.get("type") != "label" or body.get("localize"):
             continue
         m = re.fullmatch(rf"{re.escape(parent)}_(\d+)(?:_(\d+))?", name)
         if not m:
             continue
-        tok = None
+        tok, extra = None, None
         if m.group(2):
-            tm = TOKEN_IN_EXPR.fullmatch(conds[-1].replace(f"(not (({TITLE_VAR} - ", "").replace(f") = {TITLE_VAR}))", ""))
-            tok = (by_key.get(tm.group(1)), int(tm.group(2))) if tm else None
-            tok_ch = (" " if tm.group(3) == H["blank"] else tm.group(3)) if tm else None
+            toks = TOKEN_IN_EXPR.findall(conds[-1]) if conds else []
+            key, pos, ch = toks[-1] if toks else (None, None, None)
+            tok = (by_key.get(key), int(pos)) if key else None
+            tok_ch = " " if ch == H["blank"] else ch
             if not tok or tok[0] is None or body["text"] != chr(int(m.group(2))) or body["text"] != tok_ch:
                 errs.append(f"{name}: 文字ラベルの条件と文字が合わない")
                 continue
-        cells.setdefault(parent, {}).setdefault(int(m.group(1)), []).append((body["text"], tok, name))
+            own = E.has(tok[0], tok[1], body["text"])
+            if conds[-1] != own:
+                if not (conds[-1].startswith("(") and conds[-1].endswith(f" and {own})")):
+                    errs.append(f"{name}: 条件の形が「グループの条件 and 札」でない")
+                    continue
+                extra = conds[-1][1:-len(f" and {own})")]
+        cells.setdefault(parent, {}).setdefault(int(m.group(1)), []).append((body["text"], tok, name, extra))
     try:
         n = _hud2_vectors(vec, controls, cells, E, TITLE_VAR, mark, errs)
     except (KeyError, ValueError) as e:
@@ -544,8 +560,8 @@ def _hud2_vectors(vec, controls, cells, E, TITLE_VAR, mark, errs):
         xh = [k for k in vis if re.fullmatch(r"xh\d", k) and vis[k]]
         if (d["xh"].isdigit() and xh != [f"xh{d['xh']}"]) or (not d["xh"].isdigit() and xh):
             errs.append(f"クロスヘア {d['xh']!r} → 表示 {xh}")
-        cmp_ = [k for k in vis if k.startswith("cmp") and vis[k]]
-        if cmp_ != [f"cmp{int(d['hdg'])}"]:
+        cmp_ = [k for k in vis if re.fullmatch(r"cmp\d+", k) and vis[k]]
+        if (d["hdg"].isdigit() and cmp_ != [f"cmp{int(d['hdg'])}"]) or (not d["hdg"].isdigit() and cmp_):
             errs.append(f"方位 {d['hdg']!r} → 表示 {cmp_}")
         panels = [k for k in vis if re.fullmatch(r"l\d_panel", k) and vis[k]]
         bars = [k for k in vis if re.fullmatch(r"l\d_bar\d", k) and vis[k]]
@@ -554,28 +570,28 @@ def _hud2_vectors(vec, controls, cells, E, TITLE_VAR, mark, errs):
             errs.append(f"熱 {d['heat']!r} → {bars}")
         if panels != [f"l{d['lay']}_panel"]:
             errs.append(f"配置 {d['lay']!r} → パネル {panels}")
-        ammo = [k for k in vis if re.fullmatch(r"l\d_ammo\d", k) and vis[k]]
+        parent_of = {name: parent for name, _, _, parent in controls}
+        def shown_in(grp):
+            return any(vis[name] for ks in cells.get(grp, {}).values() for _, _, name, _ in ks)
+        ammo = [g for g in cells if re.fullmatch(r"l\d_ammo\d", g) and shown_in(g)]
         want_ammo = [] if d["ammo"] == "---" else [f"l{d['lay']}_ammo{d['sz']}"]
         if ammo != want_ammo:
             errs.append(f"弾数 {d['ammo']!r} 大きさ {d['sz']} → {ammo}")
-        # 文字ごとのラベル：見えているグループでは、各桁でちょうど値の文字だけが見える（その文字のラベルがなければ何も見えない）
+        # 文字ごとのラベル：グループの条件（と親パネル）が真の欄では、各桁でちょうど値の文字のラベルだけが見える
         for grp, ks in cells.items():
             if not vis.get(grp):
                 continue
             for k, items in ks.items():
-                shown = [txt for txt, tok, name in items if vis[name]]
-                want = []
-                for txt, tok, name in items:
+                for txt, tok, name, extra in items:
                     if tok is None:
-                        want.append(txt)
-                    elif d[tok[0]][tok[1]] == txt:
-                        want.append(txt)
-                if sorted(shown) != sorted(want):
-                    errs.append(f"{grp}[{k}]: 表示 {shown} ≠ 期待 {want}（値 {title[:40]}…）")
+                        continue
+                    want = all(vis[a] for a in _ancestors(name, parent_of)) and (extra is None or bool(ev.run(extra))) and d[tok[0]][tok[1]] == txt
+                    if vis[name] != want:
+                        errs.append(f"{name}: 表示 {vis[name]} ≠ 期待 {want}（値 {d[tok[0]]!r}）")
         # 表示される文字列そのもの（弾数・体力・クレジット）
         def text_of(grp):
             ks = cells.get(grp, {})
-            return "".join(next((txt for txt, _, name in ks[k] if vis[name]), " ") for k in sorted(ks))
+            return "".join(next((txt for txt, tok, name, _ in ks[k] if tok and vis[name]), " ") for k in sorted(ks) if any(t for _, t, _, _ in ks[k]))
         if want_ammo and text_of(want_ammo[0]) != d["ammo"]:
             errs.append(f"弾数の表示 {text_of(want_ammo[0])!r} ≠ {d['ammo']!r}")
         hp_grp = f"l{d['lay']}_hp"

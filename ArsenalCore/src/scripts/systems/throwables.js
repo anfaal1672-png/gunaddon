@@ -65,7 +65,7 @@ export function tickThrowable(player, tid) {
   if (s.throwing && th.cook && (now - s.throwing.start) % 20 === 0 && now > s.throwing.start) {
     playTo(player, "arsenal.fx.c4_beep", { pitch: 0.8, volume: 0.4 });
   }
-  if (player.isSneaking && P(player).trajectory && now - s.trajTick >= 3) {
+  if ((player.isSneaking || s.throwing) && P(player).trajectory && now - s.trajTick >= 2) {
     s.trajTick = now;
     previewTrajectory(player, tid);
   }

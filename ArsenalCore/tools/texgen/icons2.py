@@ -510,21 +510,21 @@ def damage_arc(i, size=256):
     return img.filter(ImageFilter.GaussianBlur(0.6))
 
 
-def compass_strip(step, w=256, h=24):
-    """方位バー：step（0〜15、22.5° ごと、0 = 南を向いている）を中央にした帯"""
+def compass_strip(center_deg, w=256, h=24):
+    """方位バー：center_deg（度、0 = 南を向いている＝マイクラの yaw 0）を中央にした帯。2° ごとに 1 枚作る"""
     img = Image.new("RGBA", (w, h), (0, 0, 0, 0))
     d = ImageDraw.Draw(img)
     d.rectangle([0, 0, w - 1, h - 1], fill=(0, 0, 0, 90))
-    center_deg = step * 22.5  # 0 = 南（マイクラの yaw 0）
     labels = {0: "S", 90: "W", 180: "N", 270: "E", 45: "SW", 135: "NW", 225: "NE", 315: "SE"}
     px_per_deg = w / 180.0
-    for deg in range(0, 360, 15):
+    for deg in range(0, 360, 5):
         rel = ((deg - center_deg + 540) % 360) - 180
         x = w / 2 + rel * px_per_deg
         if not (0 <= x < w):
             continue
         big = deg % 45 == 0
-        d.line([x, h - (9 if big else 5), x, h - 1], fill=(255, 255, 255, 220 if big else 140), width=1)
+        mid = deg % 15 == 0
+        d.line([x, h - (9 if big else 5 if mid else 3), x, h - 1], fill=(255, 255, 255, 220 if big else 140 if mid else 90), width=1)
         if deg in labels:
             _tiny_text(d, labels[deg], x, 2, (255, 220, 120, 255) if len(labels[deg]) == 1 else (220, 220, 220, 230))
     d.polygon([(w / 2 - 4, 0), (w / 2 + 4, 0), (w / 2, 5)], fill=(255, 80, 60, 255))

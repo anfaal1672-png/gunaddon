@@ -85,7 +85,9 @@ function spawnVisual(dim, pos, kind) {
  */
 function addProj(p, visual) {
   if (list.length >= MAX_ACTIVE) {
-    const old = list.shift();
+    // あふれたら、いちばん古い銃弾から消す（設置した C4 や投げた手榴弾を先に消さない）
+    const i = list.findIndex((x) => x.type === "bullet" && !x.dead);
+    const old = i >= 0 ? list.splice(i, 1)[0] : list.shift();
     if (old) removeProj(old);
   }
   /** @type {Proj} */
@@ -133,6 +135,21 @@ export function fireBallistic(shooter, muzzle, dir, st) {
   const pr = st.projectile ?? { speed: 18, gravity: 0.012 };
   const eye = shooter.getHeadLocation();
   addProj({ type: "bullet", kind: "flare", dim: shooter.dimension, pos: eye, vel: mul(dir, pr.speed), ownerId: shooter.id, maxAge: Math.ceil(st.range1 / pr.speed) + 4, data: { st, gravity: pr.gravity, pen: st.pen, mulDmg: 1, muzzle, first: true } }, false);
+}
+
+/**
+ * 弾が飛ぶ普通の銃弾（ヒットスキャンの代わり）：目から撃ち、1 tick ごとに弾速ぶん進んで重力で落ちる。
+ * 撃ったその tick に最初の 1 区間を進めるので、近距離は今までどおりすぐ当たる
+ * @param {import("@minecraft/server").Entity} shooter @param {import("../util/math.js").Vec3} eye @param {import("../util/math.js").Vec3} dir @param {any} st
+ * @param {{pen:number, silent:boolean, tracer:boolean, whizz:boolean, muzzle:import("../util/math.js").Vec3}} o
+ */
+export function fireBullet(shooter, eye, dir, st, o) {
+  const tr = st.travel;
+  const p = addProj({
+    type: "bullet", kind: "flare", dim: shooter.dimension, pos: eye, vel: mul(dir, tr.speed), ownerId: shooter.id, maxAge: Math.ceil(st.range1 / tr.speed) + 4,
+    data: { st, gravity: tr.gravity, pen: o.pen, mulDmg: 1, muzzle: o.muzzle, first: true, tracer: o.tracer, whizz: o.whizz, silent: o.silent },
+  }, false);
+  safe("proj.bullet", () => tickBullet(p));
 }
 
 /** 40mm @param {import("@minecraft/server").Entity} shooter @param {import("../util/math.js").Vec3} muzzle @param {import("../util/math.js").Vec3} dir @param {any} st */
@@ -550,15 +567,20 @@ function tickOne(p) {
 
 /** @param {Proj} p */
 function tickBullet(p) {
+  if (p.dead) return;
+  // 1 tick に 1 区間だけ進める（撃った tick にその場で進めた弾を、同じ tick の一斉更新でもう一度進めない）
+  if (p.data.stepTick === system.currentTick) return;
+  p.data.stepTick = system.currentTick;
   const shooter = owner(p.ownerId);
   if (!shooter) return removeProj(p);
   const st = p.data.st;
   const from = p.pos;
   const L = len(p.vel);
   const dir = mul(p.vel, 1 / L);
-  const r = traceHitscan(shooter, from, dir, st, { maxRange: L, pen: p.data.pen, hitSet: p.hitSet, distOffset: p.traveled, mulDmg: p.data.mulDmg });
-  drawTracer(shooter, p.data.first ? p.data.muzzle : from, r.end, st, true);
-  if (p.data.first) whizzBy(shooter, from, add(from, mul(dir, Math.min(200, st.range1))));
+  const r = traceHitscan(shooter, from, dir, st, { maxRange: L, pen: p.data.pen, hitSet: p.hitSet, distOffset: p.traveled, mulDmg: p.data.mulDmg, silent: !!p.data.silent });
+  if (p.data.tracer !== false) drawTracer(shooter, p.data.first ? p.data.muzzle : from, r.end, st, true);
+  if (p.data.first && p.data.whizz !== false) whizzBy(shooter, from, add(from, mul(dir, Math.min(200, st.range1))));
+  if (st.explosive && (r.stopped || r.hitEntity)) miniBlast(shooter, r.end, 1.4, 3.0, st.id);
   p.data.first = false;
   p.data.pen = r.pen;
   p.data.mulDmg = r.mulDmg;
@@ -566,6 +588,37 @@ function tickBullet(p) {
   if (r.stopped || r.cut || p.traveled >= st.range1) return removeProj(p);
   p.pos = r.end;
   p.vel = add(p.vel, { x: WS().wind ? wind.x : 0, y: -p.data.gravity, z: WS().wind ? wind.z : 0 });
+}
+
+/** 見た目のエンティティ（arsenal:projectile）の当たり判定の半分の幅と高さ（entities.py の collision_box） */
+const VIS_HALF = 0.05;
+const VIS_H = 0.1;
+
+/**
+ * mob にくっつく位置：当たった面のすぐ外側。見た目のエンティティの箱が mob の箱に重なると、
+ * mob が押し出され続ける（BDS で確認：重なると 5 秒で約 0.67 ブロック、重ならなければ 0）
+ * @param {import("@minecraft/server").Entity} e @param {import("../util/math.js").Vec3} point
+ */
+function outsideBox(e, point) {
+  const box = safe("stick.aabb", () => e.getAABB());
+  if (!box) return point;
+  const c = box.center;
+  const x = box.extent;
+  const l = sub(point, c);
+  const rx = Math.abs(l.x) / Math.max(1e-3, x.x);
+  const ry = Math.abs(l.y) / Math.max(1e-3, x.y);
+  const rz = Math.abs(l.z) / Math.max(1e-3, x.z);
+  // すき間：横は 0.03 で押されない。上は 0.02 だと豚・牛・羊が押され、0.1 なら押されない（BDS で確認）
+  const gap = 0.03;
+  const gapTop = 0.1;
+  if (ry >= rx && ry >= rz) {
+    // 上面（または下面）：箱の下端が mob の上端より上、または箱の上端が mob の下端より下
+    const y = l.y >= 0 ? c.y + x.y + gapTop : c.y - x.y - VIS_H - gapTop;
+    return { x: c.x + clamp(l.x, -x.x, x.x), y, z: c.z + clamp(l.z, -x.z, x.z) };
+  }
+  const y = c.y + clamp(l.y, -(x.y - VIS_H / 2), x.y - VIS_H / 2) - VIS_H / 2;
+  if (rx >= rz) return { x: c.x + Math.sign(l.x || 1) * (x.x + VIS_HALF + gap), y, z: c.z + clamp(l.z, -x.z, x.z) };
+  return { x: c.x + clamp(l.x, -x.x, x.x), y, z: c.z + Math.sign(l.z || 1) * (x.z + VIS_HALF + gap) };
 }
 
 /** @param {Proj} p */
@@ -1060,8 +1113,9 @@ function tickThrow(p, now) {
     }
     if (t.kind === "sticky" || t.kind === "c4") {
       if (h.kind === "entity") {
-        p.stuck = { entityId: h.entity.id, offset: sub(h.point, h.entity.location) };
-        p.pos = h.point;
+        const pt = outsideBox(h.entity, h.point);
+        p.stuck = { entityId: h.entity.id, offset: sub(pt, h.entity.location) };
+        p.pos = pt;
       } else {
         p.stuck = { entityId: null, offset: null };
         p.pos = add(h.point, mul(h.normal, 0.08));
@@ -1220,7 +1274,11 @@ export function sweepOrphans() {
   }
 }
 
-/** 投擲の軌道予測（スニーク中）@param {Player} player @param {string} tid */
+/**
+ * 投擲の軌道予測（スニーク中・握っている間）。投擲物と同じ式で 1 tick ずつ進め、
+ * 道筋を太めの点で描き、着地点に印と、爆発物なら被害の範囲の輪を出す
+ * @param {Player} player @param {string} tid
+ */
 export function previewTrajectory(player, tid) {
   const t = /** @type {any} */ (DATA.THROWABLES)[tid];
   if (!t || t.kind === "mine") return;
@@ -1230,20 +1288,41 @@ export function previewTrajectory(player, tid) {
   let vel = add(mul(aim, t.speed), mul(player.getVelocity(), 0.6));
   let pos = add(eye, mul(dir, 0.5));
   const dim = player.dimension;
+  const knife = t.kind === "knife";
   safe("traj", () => {
-    for (let i = 0; i < 60; i++) {
-      vel = add(mul(vel, 0.985), { x: 0, y: -0.05, z: 0 });
+    for (let i = 0; i < 80; i++) {
+      vel = knife ? add(vel, { x: 0, y: -0.02, z: 0 }) : add(mul(vel, 0.985), { x: 0, y: -0.05, z: 0 });
       const L = len(vel);
       const bh = dim.getBlockFromRay(pos, mul(vel, 1 / L), { maxDistance: L, includePassableBlocks: false, includeLiquidBlocks: false });
       if (bh) {
-        const pt = add(bh.block.location, bh.faceLocation);
+        const nrm = faceNormal(bh.face);
+        const pt = add(add(bh.block.location, bh.faceLocation), mul(nrm, 0.05));
         const v = new MolangVariableMap();
-        player.spawnParticle("arsenal:lock_marker", add(pt, mul(faceNormal(bh.face), 0.05)), v);
+        v.setFloat("variable.locked", 0.2);
+        player.spawnParticle("arsenal:lock_marker", pt, v);
+        const r = t.power ? t.power * 2 : t.radius && t.radius <= 6 ? t.radius : 0;
+        if (r > 0 && nrm.y > 0.5) previewRing(player, pt, r);
         return;
       }
       pos = add(pos, vel);
-      if (i % 2 === 0) player.spawnParticle("arsenal:trajectory", pos);
+      // 手前ほど薄く、先ほど濃く（自分の視界をふさがない）
+      if (i >= 2) {
+        const v = new MolangVariableMap();
+        v.setFloat("variable.alpha", Math.min(1, 0.35 + i * 0.05));
+        player.spawnParticle("arsenal:trajectory", pos, v);
+      }
     }
   });
+}
+
+/** 着地点の被害範囲の輪 @param {Player} player @param {import("../util/math.js").Vec3} c @param {number} r */
+function previewRing(player, c, r) {
+  const n = Math.max(12, Math.min(32, Math.round(r * 5)));
+  for (let k = 0; k < n; k++) {
+    const a = (k / n) * Math.PI * 2;
+    const v = new MolangVariableMap();
+    v.setFloat("variable.alpha", 0.55);
+    player.spawnParticle("arsenal:trajectory", { x: c.x + Math.cos(a) * r, y: c.y + 0.05, z: c.z + Math.sin(a) * r }, v);
+  }
 }
 

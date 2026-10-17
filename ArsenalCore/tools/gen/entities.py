@@ -24,7 +24,9 @@ class EntitiesMixin:
                 },
                 "components": {
                     "minecraft:type_family": {"family": ["arsenal_fx", "inanimate"]},
-                    "minecraft:collision_box": {"width": 0.25, "height": 0.25},
+                    # 当たり判定は小さく：mob にくっついた C4 の箱が mob の箱に重なると mob が押し出される（BDS で確認）。
+                    # 弾の当たりはスクリプトのレイで取るので、この箱は見た目の位置の目安だけ
+                    "minecraft:collision_box": {"width": 0.1, "height": 0.1},
                     "minecraft:physics": {"has_gravity": False, "has_collision": False},
                     "minecraft:damage_sensor": {"triggers": [{"cause": "all", "deals_damage": "no"}]},
                     "minecraft:health": {"value": 1, "max": 1},

@@ -96,12 +96,6 @@ export function hud2Values(player, s) {
   const v = {};
   v.hit = s.hit && now - s.hit.tick <= 10 && prefs.hitmarkers ? (s.hit.kind === "kill" ? "3" : s.hit.kind === "head" ? "2" : "1") : "0";
   v.dir = s.dmgDir && now - s.dmgDir.tick <= 30 && prefs.damageDir ? String(s.dmgDir.dir + 1) : "0";
-  const code = scopeCode(s);
-  if (st && s.weaponId && !(code && code !== "5" && code !== "6")) {
-    const sp = spreadNow(player, s, st);
-    v.xh = String(Math.max(0, Math.min(9, Math.round(sp * 1.4))));
-  } else if (s.meleeId) v.xh = "0";
-  else v.xh = "x";
   if (st && s.weaponId) {
     if (st.ammoFamily === "none") {
       v.ammo = "---";
@@ -142,8 +136,6 @@ export function hud2Values(player, s) {
   const pl = plateInfo(player);
   v.plate = pl.plates < 0 ? "-" : String(Math.min(4, pl.plates));
   v.hp = Math.ceil(safe("hud2.hp", () => player.getComponent("minecraft:health")?.currentValue) ?? 20);
-  const yaw = ((player.getRotation().y % 360) + 360) % 360;
-  v.hdg = prefs.compass ? String(Math.round(yaw / 22.5) % 16).padStart(2, "0") : "--";
   v.sup = prefs.suppressionFx ? String(Math.min(3, Math.ceil(s.sup))) : "0";
   v.nvg = s.nvgActive ? "1" : "0";
   v.gm = "0";
@@ -174,6 +166,24 @@ export function hud2Values(player, s) {
   }
   v.sz = prefs.hudScale === "small" ? "0" : prefs.hudScale === "large" ? "2" : "1";
   v.lay = layoutCode(player, prefs.hudLayout);
+  return liveValues(player, s, v);
+}
+
+/**
+ * 毎 tick 変わる値（クロスヘアの広がり・方位）だけを入れ直す。ほかの値は変化時と再送時に hud2Values で集める
+ * @param {import("@minecraft/server").Player} player @param {import("../core/state.js").PlayerState} s @param {Record<string, string|number>} v
+ */
+function liveValues(player, s, v) {
+  const st = s.stats;
+  const code = scopeCode(s);
+  if (st && s.weaponId && !(code && code !== "5" && code !== "6")) {
+    const sp = spreadNow(player, s, st);
+    v.xh = String(Math.max(0, Math.min(9, Math.round(sp * 1.4))));
+  } else if (s.meleeId) v.xh = "0";
+  else v.xh = "x";
+  // 方位：2° ごと（000 = 南）。方位バーの画像も 2° ごとにある
+  const yaw = ((player.getRotation().y % 360) + 360) % 360;
+  v.hdg = P(player).compass ? String(Math.round(yaw / 2) % 180).padStart(3, "0") : "---";
   return v;
 }
 
@@ -214,14 +224,22 @@ export function announce(player, msg, stay = 40) {
  */
 export function renderHud2(player, s, force) {
   const now = system.currentTick;
-  if (!force && !s.hudDirty && now - s.hud2Tick < H.resendTicks) return;
-  const payload = encodeHud2(hud2Values(player, s));
+  // 方位と照準は毎 tick 見る（向きを変えたら次の tick で方位バーが動く）。ほかの値は変化時と再送時だけ集め直す
+  const full = force || s.hudDirty || !s.hud2Vals || now - s.hud2Tick >= H.resendTicks;
+  const v = full ? hud2Values(player, s) : liveValues(player, s, /** @type {Record<string, string|number>} */ (s.hud2Vals));
+  s.hud2Vals = v;
+  v.seq = "0";
   const code = scopeCode(s);
-  const text = payload + SCOPE_MARK + "§" + (code || "0");
-  if (text === s.hud2Last && now - s.hud2Tick < H.resendTicks && !force) return;
+  const key = encodeHud2(v) + SCOPE_MARK + "§" + (code || "0");
+  if (key === s.hud2Last && now - s.hud2Tick < H.resendTicks && !force) return;
   s.hud2Tick = now;
-  s.hud2Last = text;
+  s.hud2Last = key;
   s.hudDirty = false;
   s.lastMark = code ? SCOPE_MARK + "§" + code : "";
+  // 送るたびに番号を変える：同じ内容の再送でも文字列が変わり、JSON UI が表示条件を評価し直す
+  // （表示条件のあるパネルが現れた直後に、子の数字が古い状態のまま残るのを防ぐ）
+  s.hud2Seq = (s.hud2Seq + 1) % 10;
+  const seqTok = `${H.sep}${L.fields.seq.key}0`;
+  const text = key.replace(seqTok + "0" + H.sep, seqTok + s.hud2Seq + H.sep);
   safe("hud2.send", () => player.onScreenDisplay.setTitle(text, { fadeInDuration: 0, stayDuration: H.stayTicks, fadeOutDuration: 0 }));
 }

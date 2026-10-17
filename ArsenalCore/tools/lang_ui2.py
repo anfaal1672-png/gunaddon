@@ -73,6 +73,7 @@ UI2 = {
     "arsenal.ws.backstab_pvp": ("PvP backstab cap (x0.1)", "PvP の背後攻撃の上限（×0.1）"),
     "arsenal.ws.aim_assist_pvp": ("Allow aim assist against players", "プレイヤーへのエイムアシストを許可"),
     "arsenal.ws.wind": ("Wind (affects long shots)", "風（遠距離弾に影響）"),
+    "arsenal.ws.bullet_travel": ("Bullet travel & drop (lead moving targets)", "弾が飛んで落ちる（動く相手には偏差が要る）"),
     "arsenal.ws.suppression": ("Suppression (near misses add spread)", "制圧（至近弾で拡散が増える）"),
     "arsenal.ws.bosses": ("Bosses can be summoned", "ボスの召喚を許可"),
     # ---- 一人称の位置の調整 ----

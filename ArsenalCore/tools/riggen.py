@@ -328,6 +328,21 @@ def misc_animations():
                 "position": {"0.0": [0, 0, 0], "0.1": [0, "variable.is_first_person ? -2.0 : 0.0", "variable.is_first_person ? -3.0 : 0.0"], "0.3": [0, "variable.is_first_person ? 1.0 : 0.0", "variable.is_first_person ? 3.0 : 0.0"], "0.45": [0, 0, 0]},
             }},
         },
+        # 走っている間の構え（ロウレディ）：三人称は両腕を下げて銃を体の前で斜めに抱える、一人称は銃を下げて体の中心へ寄せる。
+        # 保持ポーズ（hold）に足し合わされる。0.18 秒かけて構え、走るのをやめると script 側の blendOutTime で戻る
+        "animation.arsenal.sprint": {
+            "loop": "hold_on_last_frame",
+            "animation_length": 0.18,
+            "bones": {
+                "rightarm": {
+                    "rotation": {"0.0": [0, 0, 0], "0.18": ["variable.is_first_person ? 0.0 : 48.0", "variable.is_first_person ? 0.0 : -32.0", "variable.is_first_person ? 0.0 : -6.0"]},
+                    "position": {"0.0": [0, 0, 0], "0.18": ["variable.is_first_person ? -3.0 : 0.0", "variable.is_first_person ? -3.2 : 0.0", "variable.is_first_person ? -0.8 : 0.0"]},
+                },
+                "leftarm": {
+                    "rotation": {"0.0": [0, 0, 0], "0.18": ["variable.is_first_person ? 0.0 : 44.0", "variable.is_first_person ? 0.0 : -22.0", "variable.is_first_person ? 0.0 : 4.0"]},
+                },
+            },
+        },
         "animation.arsenal.inspect": {
             "animation_length": 1.6,
             "bones": {"rightarm": {
