@@ -504,8 +504,22 @@ def check_hud2_roundtrip(rp, mark):
             errs.append(f"{name}: テクスチャがない {t}")
     import sys
     sys.path.insert(0, TOOLS)
-    from gen.ui import Hud2Expr, TITLE_VAR
+    from gen.ui import Hud2Expr, TITLE_VAR, SUB_VAR
     E = Hud2Expr(H)
+    EL = Hud2Expr(H, SUB_VAR)
+    live = set(H.get("live", []))
+    # 式が見ている文字列と、バインドしている文字列が合っている。毎 tick 変わる値はサブタイトルだけで見る
+    live_keys = {f["key"] for f in H["fields"] if f["name"] in live}
+    for name, conds, body, _ in controls:
+        c = next((b["source_property_name"] for b in body.get("bindings", []) if b.get("target_property_name") == "#visible"), None)
+        if not c:
+            continue
+        names = {b.get("binding_name") for b in body.get("bindings", [])}
+        if (TITLE_VAR in c) != ("#hud_title_text_string" in names) or (SUB_VAR in c) != ("#hud_subtitle_text_string" in names):
+            errs.append(f"{name}: 式の文字列とバインドが合わない")
+        for key, _, _ in TOKEN_IN_EXPR.findall(c):
+            if key in live_keys and TITLE_VAR in c and SUB_VAR not in c:
+                errs.append(f"{name}: 毎 tick 変わる値をタイトルで見ている")
     by_key = {f["key"]: f["name"] for f in H["fields"]}
     if len(by_key) != len(H["fields"]) or any(not re.fullmatch(r"[a-z]", k) for k in by_key):
         errs.append("フィールドのキーが英小文字 1 文字で一意でない")
@@ -526,7 +540,7 @@ def check_hud2_roundtrip(rp, mark):
             if not tok or tok[0] is None or body["text"] != chr(int(m.group(2))) or body["text"] != tok_ch:
                 errs.append(f"{name}: 文字ラベルの条件と文字が合わない")
                 continue
-            own = E.has(tok[0], tok[1], body["text"])
+            own = (EL if tok[0] in live else E).has(tok[0], tok[1], body["text"])
             if conds[-1] != own:
                 if not (conds[-1].startswith("(") and conds[-1].endswith(f" and {own})")):
                     errs.append(f"{name}: 条件の形が「グループの条件 and 札」でない")
@@ -534,25 +548,27 @@ def check_hud2_roundtrip(rp, mark):
                 extra = conds[-1][1:-len(f" and {own})")]
         cells.setdefault(parent, {}).setdefault(int(m.group(1)), []).append((body["text"], tok, name, extra))
     try:
-        n = _hud2_vectors(vec, controls, cells, E, TITLE_VAR, mark, errs)
+        n = _hud2_vectors(vec, controls, cells, E, EL, TITLE_VAR, SUB_VAR, mark, errs)
     except (KeyError, ValueError) as e:
         return 0, errs + [f"JSON UI の式を評価できない: {e!r}"]
     return n, errs[:20]
 
 
-def _hud2_vectors(vec, controls, cells, E, TITLE_VAR, mark, errs):
+def _hud2_vectors(vec, controls, cells, E, EL, TITLE_VAR, SUB_VAR, mark, errs):
     """試験ベクトルごとに、札の判定・表示条件・表示される文字を確かめる（評価できた件数を返す）"""
     H = vec["hud2"]
+    live = set(H.get("live", []))
     n = 0
     for v in vec["vectors"]:
         title = v["encoded"] + mark + "§0"
-        ev = _Eval({TITLE_VAR: title})
+        ev = _Eval({TITLE_VAR: title, SUB_VAR: v["live"] + mark})
         d = v["decoded"]
-        # 札：各桁の文字だけが「含む」になり、ほかの文字は含まない
+        # 札：各桁の文字だけが「含む」になり、ほかの文字は含まない（毎 tick 変わる値はサブタイトルの札）
         for f in H["fields"]:
+            ex = EL if f["name"] in live else E
             for i in range(f["len"]):
                 for ch in set("0123456789 -:") | {d[f["name"]][i]}:
-                    got = bool(ev.run(E.has(f["name"], i, ch)))
+                    got = bool(ev.run(ex.has(f["name"], i, ch)))
                     if got != (d[f["name"]][i] == ch):
                         errs.append(f"{f['name']}[{i}] {ch!r}: 札の判定 {got}（値 {d[f['name']]!r}）")
                     n += 1
@@ -604,7 +620,7 @@ def _hud2_vectors(vec, controls, cells, E, TITLE_VAR, mark, errs):
             break
     # 目印だけのタイトル（スコープ表示）・空のタイトルでは HUD 2.0 は一切出ない
     for t in (mark + "§3", ""):
-        ev2 = _Eval({TITLE_VAR: t})
+        ev2 = _Eval({TITLE_VAR: t, SUB_VAR: ""})
         shown = [name for name, conds, _, _ in controls if _visible(ev2, conds)]
         if shown:
             errs.append(f"タイトル {t!r} で HUD 2.0 が出る: {shown[:5]}")

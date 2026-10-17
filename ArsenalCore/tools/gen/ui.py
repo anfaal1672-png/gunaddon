@@ -1,9 +1,10 @@
 """ARSENAL CORE 生成：HUD（JSON UI）— 1.0.2 のスコープ表示 ＋ 2.0 の HUD 2.0
 
-データの受け渡しはタイトル文字列（#hud_title_text_string）だけを使う。
+データの受け渡しはタイトル文字列（#hud_title_text_string）とサブタイトル（#hud_subtitle_text_string）を使う。
   ・スコープ表示：目印 "§a§r§s§n" + "§" + 番号 が含まれているか（1.0.2 と同じ）
   ・HUD 2.0：1 文字ごとの札（".a12." ＝ 弾数の 1 桁目が 2）を含むかで、画像と 1 文字ずつのラベルを出し分ける（data/hud.js）。
     スコープ表示と同じく引き算と比較だけを使い、文字列の * 演算（'%.Ns' * #t）は使わない
+  ・毎 tick 変わる値（照準の広がり・方位）だけはサブタイトルの札で受け取る（タイトルを毎 tick 変えない。data/hud.js の live）
 バニラの要素は置き換えない。root_panel の先頭に 1 つ足すのと、目印入りのタイトルの枠を隠すだけ。
 """
 import os
@@ -16,15 +17,21 @@ from gen.common import NS, wjson, wpng  # noqa: E402,F401
 
 
 TITLE_VAR = "#arsenal_t"
+# 毎 tick 変わる値（照準の広がり・方位）はサブタイトルで受け取る（data/hud.js の live）
+SUB_VAR = "#arsenal_s"
 
 
 def _bind_title():
     return {"binding_name": "#hud_title_text_string", "binding_name_override": TITLE_VAR, "binding_type": "global"}
 
 
-def _contains(s):
-    """タイトルが s を含むか（スコープ表示と同じ、引き算と比較だけの式）"""
-    return f"(not (({TITLE_VAR} - '{s}') = {TITLE_VAR}))"
+def _bind_sub():
+    return {"binding_name": "#hud_subtitle_text_string", "binding_name_override": SUB_VAR, "binding_type": "global"}
+
+
+def _contains(s, var=TITLE_VAR):
+    """タイトル（var がサブタイトルならサブタイトル）が s を含むか（スコープ表示と同じ、引き算と比較だけの式）"""
+    return f"(not (({var} - '{s}') = {var}))"
 
 
 class Hud2Expr:
@@ -34,8 +41,9 @@ class Hud2Expr:
     文字列の * 演算（'%.Ns' * #t の切り出し）は使わない。
     """
 
-    def __init__(self, hud2):
+    def __init__(self, hud2, var=TITLE_VAR):
         self.h = hud2
+        self.var = var
         self.f = {f["name"]: f for f in hud2["fields"]}
 
     def token(self, name, i, ch):
@@ -43,7 +51,9 @@ class Hud2Expr:
         return f"{sep}{self.f[name]['key']}{i}{self.h['blank'] if ch == ' ' else ch}{sep}"
 
     def has(self, name, i, ch):
-        return _contains(self.token(name, i, ch))
+        if (name in self.h.get("live", [])) != (self.var == SUB_VAR):
+            raise ValueError(f"{name}: {'サブタイトル' if name in self.h.get('live', []) else 'タイトル'}で送る値を {self.var} で見ている")
+        return _contains(self.token(name, i, ch), self.var)
 
     def eq(self, name, value):
         if len(value) != self.f[name]["len"]:
@@ -55,7 +65,7 @@ class Hud2Expr:
         return "(" + " or ".join(self.eq(name, v) for v in values) + ")"
 
     def active(self):
-        return _contains(self.h["header"] + self.h["sep"])
+        return _contains(self.h["header"] + self.h["sep"], self.var)
 
 
 class UiMixin:
@@ -143,6 +153,33 @@ class UiMixin:
                 ],
             }}},
         ]}
+        # HUD 2.0 のサブタイトル（毎 tick 変わる値。目印を含む）も枠ごと隠す。目印のない知らせ（従来の HUD）はバニラと同じに出る
+        ui["hud_title_text"]["modifications"].append(
+            {"array_name": "controls", "operation": "replace", "control_name": "subtitle_frame", "value": {"subtitle_frame": {
+                "type": "panel",
+                "size": ["100%", "100%cm"],
+                "controls": [
+                    {"subtitle_background": {
+                        "type": "image", "size": ["100%sm + 20px", "100%sm + 5px"], "offset": [0, 16], "texture": "textures/ui/hud_tip_text_background",
+                        "variables": [{"requires": "$subtitle_initially_visible", "$subtitle_bg": "@hud.anim_title_background_alpha_in"},
+                                      {"requires": "(not $subtitle_initially_visible)", "$subtitle_bg": "@hud.anim_subtitle_background_alpha_in"}],
+                        "alpha": "$subtitle_bg"}},
+                    {"subtitle": {
+                        "type": "label", "anchor_from": "top_middle", "anchor_to": "top_middle",
+                        "color": "$title_command_text_color", "enable_profanity_filter": True,
+                        "text": "#text", "layer": 31, "localize": False, "font_size": "large",
+                        "variables": [{"requires": "$subtitle_initially_visible", "$anim_type": 1.0},
+                                      {"requires": "(not $subtitle_initially_visible)", "$anim_type": "@hud.anim_subtitle_text_alpha_in"},
+                                      {"requires": "(not $title_shadow)", "$show_shadow": False}, {"requires": "$title_shadow", "$show_shadow": True}],
+                        "shadow": "$show_shadow", "alpha": "$anim_type", "text_alignment": "center", "offset": [1, 19],
+                        "bindings": [{"binding_name": "#hud_subtitle_text_string", "binding_name_override": "#text", "binding_type": "global"}],
+                    }},
+                ],
+                "bindings": [
+                    {"binding_name": "#hud_subtitle_text_string", "binding_name_override": "#arsenal_s", "binding_type": "global"},
+                    {"binding_type": "view", "source_property_name": f"((#arsenal_s - '{M}') = #arsenal_s)", "target_property_name": "#visible"},
+                ],
+            }}})
         wjson(f"{self.rp}/ui/hud_screen.json", ui)
         self.ui_textures = [f"textures/ui/arsenal/{n}" for n in ("scope_2x", "scope_4x", "scope_8x", "scope_thermal", "reticle_dot", "reticle_holo", "black")]
         self.log(f"  hud ui: scope 4 + reticle 2 + HUD 2.0 ({self.hud2_count} controls)")
@@ -153,6 +190,7 @@ class UiMixin:
     def _hud2(self, ui):
         H = self.d["HUD2"]
         E = Hud2Expr(H)
+        EL = Hud2Expr(H, SUB_VAR)  # 毎 tick 変わる値（照準の広がり・方位）
         self.hud2_expr = E
         tex = f"{self.rp}/textures/ui/arsenal/hud2"
         for i in range(10):
@@ -180,7 +218,11 @@ class UiMixin:
         DIGITS = "0123456789"
 
         def vis(cond):
-            return [_bind_title(), {"binding_type": "view", "source_property_name": cond, "target_property_name": "#visible"}] if cond else []
+            """表示条件。式が見ている文字列（タイトル・サブタイトル）だけをバインドする"""
+            if not cond:
+                return []
+            binds = ([_bind_title()] if TITLE_VAR in cond else []) + ([_bind_sub()] if SUB_VAR in cond else [])
+            return binds + [{"binding_type": "view", "source_property_name": cond, "target_property_name": "#visible"}]
 
         def img(name, texture, size, anchor="center", offset=(0, 0), cond=None, layer=2):
             n[0] += 1
@@ -253,7 +295,7 @@ class UiMixin:
             out.append(img(f"sup{lv}", f"sup_{lv}.png", ("100%", "100%"), cond=E.eq("sup", str(lv)), layer=0))
         # 中央：クロスヘア・ヒットマーカー・被弾方向
         for i in range(10):
-            out.append(img(f"xh{i}", f"xh_{i}.png", (48, 48), cond=E.eq("xh", str(i))))
+            out.append(img(f"xh{i}", f"xh_{i}.png", (48, 48), cond=EL.eq("xh", str(i))))
         for code, k in (("1", "hit"), ("2", "head"), ("3", "kill")):
             out.append(img(f"hm_{k}", f"hm_{k}.png", (32, 32), cond=E.eq("hit", code), layer=4))
         for i in range(8):
@@ -268,9 +310,9 @@ class UiMixin:
         # 方位バー：2° ごとの 180 枚。上 2 桁のパネル（18 個）で絞り、子は下 1 桁だけを見る（毎フレームの式を減らす）
         for hi in range(18):
             tens = "%02d" % hi
-            kids = [img(f"cmp{hi * 10 + lo}", f"compass_{hi * 10 + lo}.png", (192, 18), anchor="top_middle", offset=(0, 2), cond=E.has("hdg", 2, str(lo)))
+            kids = [img(f"cmp{hi * 10 + lo}", f"compass_{hi * 10 + lo}.png", (192, 18), anchor="top_middle", offset=(0, 2), cond=EL.has("hdg", 2, str(lo)))
                     for lo in range(10)]
-            out.append(group(f"cmpg{tens}", kids, f"({E.has('hdg', 0, tens[0])} and {E.has('hdg', 1, tens[1])})"))
+            out.append(group(f"cmpg{tens}", kids, f"({EL.has('hdg', 0, tens[0])} and {EL.has('hdg', 1, tens[1])})"))
         # 上：ゲームモードの得点（試合中だけ。子はモード名と得点・時間）
         gm_names = {"1": "arsenal.mode_name.ffa", "2": "arsenal.mode_name.tdm", "3": "arsenal.mode_name.gungame", "4": "arsenal.mode_name.horde", "5": "arsenal.mode_name.koth"}
         gm = [img("gm_panel", "panel.png", (150, 30), anchor="top_middle", offset=(0, 22))]

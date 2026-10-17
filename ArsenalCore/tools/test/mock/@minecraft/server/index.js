@@ -13,7 +13,7 @@ export const CommandPermissionLevel = { Any: 0, GameDirectors: 1, Admin: 2, Host
 export const DisplaySlotId = { Sidebar: "Sidebar", List: "List", BelowName: "BelowName" };
 export const ItemLockMode = { inventory: "inventory", slot: "slot", none: "none" };
 
-export const LOG = { api: { blockRay: 0, entityRay: 0, getEntities: 0, getBlock: 0 }, events: [], placed: [], cameras: [], commands: [], particles: 0, particleIds: {}, sounds: {}, damage: [], explosions: [], anims: [], animOpts: [], fov: [], actionbar: [], titles: [], spawned: [], messages: [], heldWrites: 0, shakes: [], lights: [], early: [] };
+export const LOG = { api: { blockRay: 0, entityRay: 0, getEntities: 0, getBlock: 0 }, events: [], placed: [], cameras: [], commands: [], particles: 0, particleIds: {}, sounds: {}, damage: [], explosions: [], anims: [], animOpts: [], fov: [], actionbar: [], titles: [], subtitles: [], spawned: [], messages: [], heldWrites: 0, shakes: [], lights: [], early: [] };
 
 // 実機の「早期実行」：モジュールの読み込み中と beforeEvents.startup の中では、
 // ワールドの状態に触れるネイティブ関数が例外を投げる。worldLoad（または最初の tick）で解除。
@@ -200,7 +200,7 @@ export class Player extends Entity {
     this.inv = new Container(36);
     this.selectedSlotIndex = 0;
     this.camera = new Camera();
-    this.onScreenDisplay = { setActionBar: (m) => LOG.actionbar.push(m), setTitle: (t, o) => LOG.titles.push({ t, o }) };
+    this.onScreenDisplay = { setActionBar: (m) => LOG.actionbar.push(m), setTitle: (t, o) => LOG.titles.push({ t, o }), updateSubtitle: (t) => LOG.subtitles.push(t) };
     this.buttons = { Jump: "Released", Sneak: "Released" };
     this.inputInfo = { getButtonState: (b) => this.buttons[b] };
     this.gm = "Survival";

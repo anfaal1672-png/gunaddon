@@ -22,6 +22,7 @@ JSON UI（画面）以外の挙動は、BDS（Bedrock Dedicated Server、Linux �
 | `dev:mother` | ホロウの心臓でホロウ・マザーを呼び、増援が戦闘中に残るか・撃破後に倒れるか |
 | `dev:structure <id>` | 構造物を置いて宝箱を数える（例：`dev:structure checkpoint`） |
 | `dev:despawn` / `dev:despawn ai` | 出した敵が勝手に消えないか（`ai` はボスの増援と同じ出し方） |
+| `dev:hud2` | HUD 2.0 で 60 tick 向きを変え続け、タイトルとサブタイトルが変わった回数を出す（タイトルは変わらず、サブタイトルだけが変わるはず） |
 | `dev:ariadne back` / `window` / `closed` / `swap` | アリアドネ：小屋の中のゾンビを壁越しに覗いてロックし撃つ。裏の穴・正面の端の窓・穴なし・飛行中に穴をふさぐ。ミサイルがブロックの中に入った回数（`inside`）も出す |
 
 注意：BDS の試験用コピーだけ `@minecraft/server-gametest`（ベータ）に依存させます。配布するパックは安定版の API だけです。バニラのゾンビは 40 ブロックより遠いと出した直後に消えるので、的は 40 ブロック以内に置きます。

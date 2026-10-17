@@ -30,7 +30,7 @@ for (let i = 0; i < 64; i++) {
     wdir: pick(["-", "0", "7", "4"]), wstr: pick(["-", "1", "3"]), sz: pick(["0", "1", "2"]), lay: pick(["0", "1", "2"]), seq: String(Math.floor(rnd() * 10)),
   };
   const enc = hud2.encodeHud2(v);
-  out.push({ values: v, encoded: enc, decoded: hud2.decodeHud2(enc) });
+  out.push({ values: v, encoded: enc, live: hud2.encodeLive(v), decoded: hud2.decodeHud2(enc) });
 }
 fs.rmSync(run, { recursive: true, force: true });
 process.stdout.write(JSON.stringify({ hud2: D.HUD2, layout: D.HUD2_LAYOUT, vectors: out }));

@@ -387,6 +387,7 @@ world.afterEvents.playerSpawn.subscribe((ev) => {
     s.reload = null;
     s.ridingId = null;
     s.hud2Last = "";
+    s.hud2Live = "";
     resetMove(player);
     if (ev.initialSpawn) {
       migratePlayer(player);
@@ -546,6 +547,7 @@ function tickPlayer(player) {
 function clearHud2(player, s, force = false) {
   if (!s.hud2Last && !force) return;
   s.hud2Last = "";
+  s.hud2Live = "";
   s.hud2Tick = -99;
   safe("hud2.clear", () => player.onScreenDisplay.setTitle(SCOPE_OFF, { fadeInDuration: 0, stayDuration: 1, fadeOutDuration: 0 }));
 }

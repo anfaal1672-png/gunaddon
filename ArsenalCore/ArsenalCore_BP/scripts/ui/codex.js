@@ -291,6 +291,7 @@ export async function openPrefs2(player) {
   const s = S(player);
   s.hudDirty = true;
   s.hud2Last = "";
+  s.hud2Live = "";
   s.fpoffAnim = "?";
   resetScopeMark(player, s);
   // 残っている HUD 2.0 の文字列を消す（従来型に切り替えたとき）

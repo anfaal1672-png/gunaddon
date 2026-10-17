@@ -8,6 +8,7 @@ import { isIndoor } from "./fx/effects.js";
 import { summonBoss } from "./systems/bosses.js";
 import { spawnEnemy } from "./systems/ai/brain.js";
 import { nearPoint } from "./core/pathlock.js";
+import { setPrefs } from "./core/settings.js";
 const log = (...a) => console.warn("[DEVTEST] " + a.join(" "));
 const dim = () => world.getDimension("overworld");
 const Y = 120;
@@ -52,6 +53,7 @@ system.afterEvents.scriptEventReceive.subscribe((ev) => {
     if (ev.id === "dev:mother") motherTest();
     if (ev.id === "dev:despawn") despawnTest(ev.message);
     if (ev.id === "dev:ariadne") ariadneTest(ev.message || "back");
+    if (ev.id === "dev:hud2") hud2Test();
     if (ev.id === "dev:structure") structureTest(ev.message);
   } catch (e) { log("ERR", e, e.stack); }
 });
@@ -408,4 +410,25 @@ function ariadneTest(mode) {
       });
     });
   });
+}
+
+// 2.4.1：HUD 2.0 の照準・方位はサブタイトルで送る。向きを変え続けても例外が出ず、タイトルは毎 tick 送らないか
+function hud2Test() {
+  const p = getSim();
+  give(p, "arsenal:sentinel", 1, 0);
+  p.selectedSlotIndex = 0;
+  setPrefs(p, { hudStyle: "hud2", compass: true });
+  const s = S(p);
+  let yaw = 0, k = 0, titles = 0, lives = 0, lastLast = s.hud2Last, lastLive = s.hud2Live;
+  const mv = system.runInterval(() => {
+    k++;
+    yaw += 7;
+    p.setRotation({ x: 0, y: yaw });
+    if (s.hud2Last !== lastLast) { titles++; lastLast = s.hud2Last; }
+    if (s.hud2Live !== lastLive) { lives++; lastLive = s.hud2Live; }
+    if (k >= 60) {
+      system.clearRun(mv);
+      log(`hud2 ticks=${k} titleChanges=${titles} subtitleChanges=${lives} live=${JSON.stringify(s.hud2Live)}`);
+    }
+  }, 1);
 }

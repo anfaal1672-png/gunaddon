@@ -3,6 +3,7 @@
  * HUD 2.0：JSON UI（RP の ui/hud_screen.json）へのデータ受け渡し
  *
  * タイトルの文字列 = "AC2" + 1 文字ごとの札（".a12" ＝ 弾数の 1 桁目が 2）の並び + "." + 目印 "§a§r§s§n" + "§" + スコープ表示の番号
+ * サブタイトルの文字列 = "AC2L" + 毎 tick 変わる値（照準の広がり・方位）の札 + "." + 目印（data/hud.js の live）
  *   ・フィールドのキーと長さは data/hud.js（HUD2）。JSON UI 側は札を含むかだけを見る（文字列の * 演算は使わない）
  *   ・目印を含むので、バニラのタイトル枠は表示されない（1.0.2 と同じ仕組み）
  *   ・送信は変化したときと、10 tick ごと（タイトルの表示時間より短い間隔）
@@ -48,6 +49,20 @@ export function encodeHud2(values) {
   let out = H.header;
   for (const f of H.fields) {
     const s = fit(f.name, values[f.name] ?? (f.len === 1 ? "0" : ""));
+    for (let i = 0; i < s.length; i++) out += H.sep + f.key + i + (s[i] === " " ? H.blank : s[i]);
+  }
+  return out + H.sep;
+}
+
+/**
+ * 毎 tick 変わる値（data/hud.js の live）をサブタイトル用に符号化する。札の形はタイトルと同じ
+ * @param {Record<string, string|number>} values
+ */
+export function encodeLive(values) {
+  let out = H.liveHeader;
+  for (const name of H.live) {
+    const f = L.fields[name];
+    const s = fit(name, values[name] ?? (f.len === 1 ? "0" : ""));
     for (let i = 0; i < s.length; i++) out += H.sep + f.key + i + (s[i] === " " ? H.blank : s[i]);
   }
   return out + H.sep;
@@ -166,14 +181,18 @@ export function hud2Values(player, s) {
   }
   v.sz = prefs.hudScale === "small" ? "0" : prefs.hudScale === "large" ? "2" : "1";
   v.lay = layoutCode(player, prefs.hudLayout);
-  return liveValues(player, s, v);
+  // 毎 tick 変わる値はサブタイトルで送るので、タイトルでは固定（向きを変えてもタイトルが変わらない）
+  for (const name of H.live) v[name] = "-".repeat(L.fields[name].len);
+  return v;
 }
 
 /**
- * 毎 tick 変わる値（クロスヘアの広がり・方位）だけを入れ直す。ほかの値は変化時と再送時に hud2Values で集める
- * @param {import("@minecraft/server").Player} player @param {import("../core/state.js").PlayerState} s @param {Record<string, string|number>} v
+ * 毎 tick 変わる値（クロスヘアの広がり・方位）。サブタイトルで送る
+ * @param {import("@minecraft/server").Player} player @param {import("../core/state.js").PlayerState} s
  */
-function liveValues(player, s, v) {
+function liveValues(player, s) {
+  /** @type {Record<string, string>} */
+  const v = {};
   const st = s.stats;
   const code = scopeCode(s);
   if (st && s.weaponId && !(code && code !== "5" && code !== "6")) {
@@ -224,14 +243,17 @@ export function announce(player, msg, stay = 40) {
  */
 export function renderHud2(player, s, force) {
   const now = system.currentTick;
-  // 方位と照準は毎 tick 見る（向きを変えたら次の tick で方位バーが動く）。ほかの値は変化時と再送時だけ集め直す
+  // 方位と照準は毎 tick 見て、サブタイトルで送る（向きを変えたら次の tick で方位バーが動く）。
+  // ほかの値は変化時と再送時だけ集め直してタイトルで送る。向きを変えただけではタイトルは変わらない
+  const live = encodeLive(liveValues(player, s)) + SCOPE_MARK;
   const full = force || s.hudDirty || !s.hud2Vals || now - s.hud2Tick >= H.resendTicks;
-  const v = full ? hud2Values(player, s) : liveValues(player, s, /** @type {Record<string, string|number>} */ (s.hud2Vals));
+  if (!full) return sendLive(player, s, live);
+  const v = hud2Values(player, s);
   s.hud2Vals = v;
   v.seq = "0";
   const code = scopeCode(s);
   const key = encodeHud2(v) + SCOPE_MARK + "§" + (code || "0");
-  if (key === s.hud2Last && now - s.hud2Tick < H.resendTicks && !force) return;
+  if (key === s.hud2Last && now - s.hud2Tick < H.resendTicks && !force) return sendLive(player, s, live);
   s.hud2Tick = now;
   s.hud2Last = key;
   s.hudDirty = false;
@@ -241,5 +263,16 @@ export function renderHud2(player, s, force) {
   s.hud2Seq = (s.hud2Seq + 1) % 10;
   const seqTok = `${H.sep}${L.fields.seq.key}0`;
   const text = key.replace(seqTok + "0" + H.sep, seqTok + s.hud2Seq + H.sep);
-  safe("hud2.send", () => player.onScreenDisplay.setTitle(text, { fadeInDuration: 0, stayDuration: H.stayTicks, fadeOutDuration: 0 }));
+  s.hud2Live = live;
+  safe("hud2.send", () => player.onScreenDisplay.setTitle(text, { subtitle: live, fadeInDuration: 0, stayDuration: H.stayTicks, fadeOutDuration: 0 }));
+}
+
+/**
+ * 毎 tick 変わる値だけが変わった：サブタイトルだけを差し替える（タイトルの表示時間はそのまま）
+ * @param {import("@minecraft/server").Player} player @param {import("../core/state.js").PlayerState} s @param {string} live
+ */
+function sendLive(player, s, live) {
+  if (live === s.hud2Live) return;
+  s.hud2Live = live;
+  safe("hud2.live", () => player.onScreenDisplay.updateSubtitle(live));
 }
