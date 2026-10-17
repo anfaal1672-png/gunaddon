@@ -230,7 +230,8 @@ function tickNests() {
     if (!players.length) continue;
     const alive = dim.getEntities({ location: c, maxDistance: 24, families: ["arsenal_hollow"] }).length;
     if (alive >= 4 || Math.random() > 0.5) continue;
-    spawnEnemy(dim, c, Math.random() < 0.8 ? "hollow_runner" : "hollow_bloater", { src: "nest" });
+    const r = Math.random();
+    spawnEnemy(dim, c, r < 0.55 ? "hollow_runner" : r < 0.8 ? "hollow_crawler" : "hollow_bloater", { src: "nest" });
   }
 }
 

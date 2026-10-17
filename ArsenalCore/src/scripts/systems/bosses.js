@@ -124,7 +124,7 @@ function doAction(e, def, b, act, tg, ai) {
       if (d < 5 || d > 24) return;
       for (let i = 0; i < (b.phase >= 3 ? 2 : 1); i++) {
         const aim = add(tg.location, { x: rand(-2, 2), y: 0, z: rand(-2, 2) });
-        later(b, i * 8, () => e.isValid && throwAt(e, "grenade_frag", aim));
+        later(b, i * 8, () => e.isValid && throwAt(e, def.grenade ?? "grenade_frag", aim));
       }
       playNear(dim, e.location, "arsenal.fx.grenade_pin", { range: 24 });
       return;
@@ -142,7 +142,8 @@ function doAction(e, def, b, act, tg, ai) {
         const a = (i / n) * Math.PI * 2 + rand(0, 1);
         const pos = { x: e.location.x + Math.cos(a) * 6, y: e.location.y + 0.5, z: e.location.z + Math.sin(a) * 6 };
         later(b, 20 + i * 6, () => {
-          const m = spawnEnemy(dim, pos, r.ids[i % r.ids.length], { tag: `arsenal_minion:${e.id}`, src: "boss" });
+          // 増援はボス戦の途中で消えないよう persist（ボスが倒れると wither で片づく）
+          const m = spawnEnemy(dim, pos, r.ids[i % r.ids.length], { tag: `arsenal_minion:${e.id}`, src: "boss", persist: true });
           if (m) emit(dim, "arsenal:signal_smoke", pos, undefined, { range: 64 });
         });
       }
@@ -381,9 +382,9 @@ function reward(dead, def) {
   for (const p of fighters) {
     announce(p, { rawtext: [{ text: "§6" }, t("arsenal.boss.defeated", { translate: `entity.${NS}:${enemyIdOf(dead.typeId)}.name` })] }, 60);
   }
-  // 手下は撤退（消える）
+  // 手下は朽ちて倒れる（増援は persist なので、体力 26 の兵でも確実に倒れる強さにする）
   for (const o of allAI().values()) {
-    if (o.ent.isValid && o.ent.hasTag(`arsenal_minion:${dead.id}`)) safe("boss.minion", () => o.ent.addEffect("wither", 200, { amplifier: 1 }));
+    if (o.ent.isValid && o.ent.hasTag(`arsenal_minion:${dead.id}`)) safe("boss.minion", () => o.ent.addEffect("wither", 400, { amplifier: 2 }));
   }
 }
 

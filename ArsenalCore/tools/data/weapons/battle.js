@@ -39,4 +39,24 @@ export const BATTLE = {
     slots: ["optic", "muzzle", "underbarrel", "mag", "laser", "stock"],
     model: { type: "rifle", body: 14, h: 5, barrel: 9, guard: 8, mag: "straight_short", stock: "fixed", finish: "black", accent: "tier" },
   },
+
+  // ---- 2.3 で追加 ----
+  warhorse: {
+    cat: "battle", tier: "rare", name: { ja: "ウォーホース", en: "Warhorse" },
+    desc: { ja: "フルオートで撃てるバトルライフル。抑えるのは大変", en: "Full-auto battle rifle. Hard to tame" },
+    ammo: "heavy", mag: 20, rpm: 560, modes: ["auto", "semi"], dmg: 6.6, head: 1.9, range: [40, 84], falloff: 0.63,
+    spread: R(3.6, 0.45, 2.0, 0.6, 4.4, 0.32), recoil: { v: 2.0, h: 0.9, shake: 0.05 },
+    reload: { tac: 40, empty: 52 }, ads: 5, move: 0.93, pen: 3, sound: "battle", pitch: 0.95, optic: "iron",
+    slots: ["optic", "muzzle", "underbarrel", "mag", "laser", "stock"],
+    model: { type: "rifle", body: 14, h: 4.6, barrel: 10, guard: 8, mag: "straight", stock: "fixed", finish: "black", accent: "tier" },
+  },
+  highlander: {
+    cat: "battle", tier: "uncommon", name: { ja: "ハイランダー", en: "Highlander" },
+    desc: { ja: "木製ストックの古い半自動小銃。1 発 1 発が重い", en: "Classic wooden semi-auto battle rifle" },
+    ammo: "heavy", mag: 10, rpm: 260, modes: ["semi"], dmg: 8.2, head: 2.0, range: [48, 96], falloff: 0.66,
+    spread: R(3.4, 0.28, 2.0, 0.9, 3.6, 0.34), recoil: { v: 2.4, h: 0.5, shake: 0.05 },
+    reload: { tac: 36, empty: 48 }, ads: 5, move: 0.95, pen: 3, sound: "battle", pitch: 1.05, optic: "iron",
+    slots: ["optic", "muzzle", "mag", "stock"],
+    model: { type: "rifle", body: 15, h: 4.2, barrel: 12, guard: 10, mag: "straight_short", stock: "wood", finish: "wood", accent: "tier" },
+  },
 };

@@ -83,4 +83,16 @@ export const LAUNCHER = {
     slots: [],
     model: { type: "mortar", body: 16, h: 4, finish: "od", accent: "tier" },
   },
+
+  // ---- 2.3 で追加 ----
+  pelican: {
+    cat: "launcher", tier: "rare", name: { ja: "ペリカン", en: "Pelican" },
+    desc: { ja: "4 発入りの半自動グレネードランチャー", en: "4-shot semi-auto grenade launcher" },
+    ammo: "gl40", mag: 4, rpm: 150, modes: ["semi"], dmg: 6, head: 1.0, range: [80, 100], falloff: 1.0,
+    spread: R(1.5, 0.5, 1.1, 0, 0, 0.4), recoil: { v: 3.4, h: 0.7, shake: 0.075 },
+    reload: { tac: 60, empty: 70 }, ads: 5, move: 0.9, pen: 0, sound: "launcher", pitch: 1.05, optic: "reddot",
+    fire: "gl40", projectile: { speed: 1.85, gravity: 0.045, power: 2.1, arm: 0.5 },
+    slots: ["optic", "laser"],
+    model: { type: "launcher", body: 11, h: 5, barrel: 8, bore: 3, stock: "fixed", finish: "black", accent: "tier" },
+  },
 };

@@ -18,5 +18,9 @@ JSON UI（画面）以外の挙動は、BDS（Bedrock Dedicated Server、Linux �
 | `dev:limb` | ゾンビの脚を撃ち、鈍足になるか |
 | `dev:ready` | 走るのをやめた直後は撃てず、構え終わってから撃つか |
 | `dev:indoor` | 石の小屋の中と外の屋内判定 |
+| `dev:spawn23` | 2.3 の新しい敵 6 種・自動擲弾銃座・装甲車を出し、3 秒後に残っているか |
+| `dev:mother` | ホロウの心臓でホロウ・マザーを呼び、増援が戦闘中に残るか・撃破後に倒れるか |
+| `dev:structure <id>` | 構造物を置いて宝箱を数える（例：`dev:structure checkpoint`） |
+| `dev:despawn` / `dev:despawn ai` | 出した敵が勝手に消えないか（`ai` はボスの増援と同じ出し方） |
 
 注意：BDS の試験用コピーだけ `@minecraft/server-gametest`（ベータ）に依存させます。配布するパックは安定版の API だけです。バニラのゾンビは 40 ブロックより遠いと出した直後に消えるので、的は 40 ブロック以内に置きます。

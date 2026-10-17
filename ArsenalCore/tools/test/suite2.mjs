@@ -63,17 +63,17 @@ export async function suite2(ctx) {
   const nGuns = Object.keys(D.WEAPONS).length, nMelee = Object.keys(D.MELEE).length;
   check(`武器 90 種以上（銃 ${nGuns}＋近接 ${nMelee}）`, nGuns + nMelee >= 90 && nMelee >= 6);
   check(`アタッチメント 50 種以上（${Object.keys(D.ATTACHMENTS).length}）`, Object.keys(D.ATTACHMENTS).length >= 50);
-  check("迷彩 8 種", Object.keys(D.CAMOS).length === 8);
+  check("迷彩 12 種", Object.keys(D.CAMOS).length === 12);
   const armorFam = new Set(Object.values(D.ARMOR).map((a) => a.family));
   check(`防具 4 系統×3 段階＋特殊 3（${Object.keys(D.ARMOR).length}）`, armorFam.size === 4 && Object.values(D.ARMOR).filter((a) => a.special).length === 3 && Object.keys(D.ARMOR).length >= 27);
   const gearN = Object.keys(D.THROWABLES).length + Object.keys(D.MEDICAL).length + Object.keys(D.DEPLOYABLES).length + Object.keys(D.VEHICLES).length;
   check(`装備 24 種以上（${gearN}）`, gearN >= 24);
-  check(`3 勢力・敵 14 種以上（${Object.keys(D.ENEMIES).length}）・ボス 2`, Object.keys(D.FACTIONS).length === 3 && Object.keys(D.ENEMIES).length >= 14 && Object.keys(D.BOSSES).length === 2);
+  check(`3 勢力・敵 20 種以上（${Object.keys(D.ENEMIES).length}）・ボス 3`, Object.keys(D.FACTIONS).length === 3 && Object.keys(D.ENEMIES).length >= 20 && Object.keys(D.BOSSES).length === 3);
   check(`構造物 6 種以上（${Object.keys(D.STRUCTURES).length}）`, Object.keys(D.STRUCTURES).length >= 6);
-  check("銃座 3・乗り物 1", Object.values(D.VEHICLES).filter((v) => v.kind === "emplacement").length === 3 && Object.values(D.VEHICLES).filter((v) => v.kind === "vehicle").length === 1);
+  check("銃座 4・乗り物 2", Object.values(D.VEHICLES).filter((v) => v.kind === "emplacement").length === 4 && Object.values(D.VEHICLES).filter((v) => v.kind === "vehicle").length === 2);
   check("キルストリーク 6 種", Object.keys(D.KILLSTREAKS).length === 6);
   check("ゲームモード 5 種（FFA・TDM・ガンゲーム・ホード・陣取り）", ["ffa", "tdm", "gungame", "horde", "koth"].every((m) => D.MODES[m]));
-  check("武器レベル 1〜30・階級 1〜50 の経験値表", D.WEAPON_XP_TABLE.length === 31 && D.RANK_XP_TABLE.length === 51 && D.WEAPON_XP_TABLE[30] > D.WEAPON_XP_TABLE[29]);
+  check("武器レベル 1〜40・階級 1〜50 の経験値表", D.WEAPON_XP_TABLE.length === 41 && D.RANK_XP_TABLE.length === 51 && D.WEAPON_XP_TABLE[40] > D.WEAPON_XP_TABLE[39]);
   const variants = Object.keys(D.VARIANT_OF);
   check(`見た目違い ID（${variants.length}）がすべて元の武器を指す`, variants.length > 0 && variants.every((v) => D.WEAPONS[D.VARIANT_OF[v].base]));
   check("ガンゲームのはしごは実在の武器で最後が近接", D.MODES.gungame.ladder.every((w) => D.WEAPONS[w] || D.MELEE[w]) && D.MELEE[D.MODES.gungame.ladder.at(-1)]);
@@ -722,6 +722,70 @@ export async function suite2(ctx) {
   }
 
   // =====================================================================
+  console.log("2.3 ボリューム（アタッチメント・迷彩・敵・ボス・銃座）");
+  // =====================================================================
+  {
+    reset();
+    clearInv();
+    const ws = await imp("core/weaponState.js");
+    const base = ws.computeStats("sentinel", {}, "std");
+    const pm = ws.computeStats("sentinel", { mag: "mag_polymer" }, "std");
+    check("ポリマーマガジン：装弾数 ×1.2", pm.mag === Math.ceil(base.mag * 1.2), `(${base.mag} → ${pm.mag})`);
+    const ap = ws.computeStats("sentinel", { ammo: "ammo_ap_core" }, "std");
+    check("徹甲芯弾：貫通 +1・ダメージ ×0.92", ap.pen === base.pen + 1 && Math.abs(ap.dmg - base.dmg * 0.92) < 1e-9, `(pen ${base.pen} → ${ap.pen})`);
+    check("迷彩 12 種：最後の迷彩は武器 Lv40", D.CAMOS.c12.level === D.WEAPON_MAX_LEVEL && D.WEAPON_MAX_LEVEL === 40 && !prog.camoUnlocked(player, "sentinel", "c12"));
+    check("新しい投擲物（ミニ・高性能インパクト・テルミット）", D.THROWABLES.grenade_mini?.kind === "frag" && D.THROWABLES.grenade_heavy_impact?.kind === "impact" && D.THROWABLES.thermite?.kind === "molotov");
+    // 新しい敵はすべて出せる
+    const ids = ["raider_breacher", "raider_scout", "raider_marksman", "legion_lancer", "legion_hunter", "hollow_crawler"];
+    const spawned = ids.map((id, i) => brain.spawnEnemy(dim, { x: -20.5 + i * 3, y: 64, z: 30.5 }, id, {}));
+    check("新しい敵 6 種を出せる", spawned.every((e) => e && e.isValid), ids.filter((_, i) => !spawned[i]).join(","));
+    player.addEffect("resistance", 100000, { amplifier: 4 });
+    __tick(100);
+    killAllArsenal();
+    heal(player);
+    __tick(3);
+    // 自動擲弾銃座
+    inv.items[0] = new ItemStack("arsenal:gl_post", 1);
+    gear.tryDeploy(player, dim.getBlock({ x: 0, y: 63, z: 2 }), "Up", "arsenal:gl_post");
+    const gl = [...__entities.values()].find((x) => x.typeId === "arsenal:gl_post" && x.isValid);
+    check("自動擲弾銃座を設置", !!gl);
+    player.riding = gl;
+    inv.items[1] = new ItemStack("arsenal:ammo_40mm", 10);
+    player.setRotation({ x: -10, y: 0 });
+    __tick(3);
+    player.buttons.Jump = "Pressed";
+    __tick(12);
+    player.buttons.Jump = "Released";
+    check("乗ってジャンプで 40mm 擲弾を撃つ", count("arsenal:ammo_40mm") < 10, `(ammo=${count("arsenal:ammo_40mm")})`);
+    player.riding = null;
+    __tick(60);
+    killAllArsenal();
+    clearInv();
+    heal(player);
+    __tick(3);
+    // ホロウ・マザー
+    settings.setWorld({ bosses: true });
+    inv.items[0] = new ItemStack("arsenal:hollow_heart", 1);
+    check("ホロウの心臓でホロウ・マザーを呼ぶ（アイテム消費）", bosses.summonBoss(player, "boss_hollow_mother", "arsenal:hollow_heart") && count("arsenal:hollow_heart") === 0);
+    __tick(65);
+    const mom = [...__entities.values()].find((x) => x.typeId === "arsenal:boss_hollow_mother" && x.isValid);
+    check("ホロウ・マザーが出現", !!mom);
+    __tick(400);
+    const kids = [...__entities.values()].filter((x) => x.isValid && x.hasTag?.(`arsenal_minion:${mom?.id}`));
+    check("ホロウの群れを産む", kids.length > 0 && kids.every((k) => k.typeId.startsWith("arsenal:hollow_")), `(kids=${kids.map((k) => k.typeId).join(",")})`);
+    const k0 = emitted.bossKill;
+    heal(player);
+    dmg.dealDamage(player, mom, 9999, { weaponId: "sentinel" });
+    __tick(3);
+    check("ホロウ・マザーの撃破で bossKill", emitted.bossKill === k0 + 1);
+    killAllArsenal();
+    clearInv();
+    player.removeEffect("resistance");
+    heal(player);
+    __tick(3);
+  }
+
+  // =====================================================================
   console.log("キルストリーク");
   // =====================================================================
   {
@@ -839,6 +903,22 @@ export async function suite2(ctx) {
     check("構造物の記録を保存（再起動後も制圧済み）", JSON.parse(world.getDynamicProperty("a:sites")).some((s) => s.sid === "raider_camp" && s.cleared) && sites.length >= 1);
     const lt = lootgen.rollLoot("legendary");
     check("レジェンダリーの宝箱には必ずレジェンダリー武器", lt.some((it) => D.WEAPONS[it.typeId.replace("arsenal:", "")]?.tier === "legendary"));
+    // 2.3 の構造物：それぞれ離して展開し、宝箱と守備隊が揃うか
+    for (const [i, sid] of ["checkpoint", "radar_station", "infested_farm"].entries()) {
+      killAllArsenal();
+      dim.containers.clear();
+      const [x, zz] = [[-120, -120], [120, -120], [-120, 120]][i];
+      player.location = { x: x + 0.5, y: 64, z: zz + 0.5 };
+      const mk = mark(x + 5, zz + 5, kinds.indexOf(sid));
+      comps.block["arsenal:site"].onTick({ block: mk, dimension: dim });
+      __tick(4);
+      const wantCh = D.STRUCTURES[sid].chests.reduce((a, c) => a + c.count, 0);
+      const ch = [...dim.containers.values()];
+      const gar = [...__entities.values()].filter((e) => e.isValid && e.getTags?.().some((t) => t.startsWith("arsenal_site:")));
+      const wantG = D.STRUCTURES[sid].garrison.reduce((a, g) => a + g.count, 0);
+      check(`${sid}：展開・宝箱 ${ch.length}/${wantCh}・守備隊 ${gar.length}/${wantG}`, LOG.placed.some((p) => p.name === `arsenal:${sid}`) && ch.length === wantCh && gar.length === wantG);
+    }
+    player.location = { x: 0.5, y: 64, z: 0.5 };
     settings.setWorld({ structures: "normal" });
     killAllArsenal();
     __tick(3);

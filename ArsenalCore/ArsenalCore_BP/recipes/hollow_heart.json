@@ -1,0 +1,37 @@
+{
+  "format_version": "1.20.10",
+  "minecraft:recipe_shapeless": {
+    "description": {
+      "identifier": "arsenal:hollow_heart"
+    },
+    "tags": [
+      "crafting_table"
+    ],
+    "ingredients": [
+      {
+        "item": "minecraft:rotten_flesh",
+        "count": 16
+      },
+      {
+        "item": "minecraft:fermented_spider_eye",
+        "count": 2
+      },
+      {
+        "item": "minecraft:sculk_catalyst"
+      },
+      {
+        "item": "minecraft:gold_ingot",
+        "count": 4
+      }
+    ],
+    "result": {
+      "item": "arsenal:hollow_heart",
+      "count": 1
+    },
+    "unlock": [
+      {
+        "item": "minecraft:rotten_flesh"
+      }
+    ]
+  }
+}

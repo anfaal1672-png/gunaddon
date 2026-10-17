@@ -594,9 +594,167 @@ def hollow_ruin(sd):
     return v
 
 
+def checkpoint(sd):
+    sx, sy, sz = sd["size"]
+    v = Vox(sx, sy, sz, "checkpoint")
+    g = sd["sink"]
+    cz = sz // 2
+    # 地面と道（x 方向に通る）
+    for x in range(sx):
+        for z in range(sz):
+            road = abs(z - cz) <= 2
+            v.set(x, g - 1, z, "minecraft:gravel" if road else v.rng.choice(["minecraft:coarse_dirt", "minecraft:dirt", "minecraft:gravel"]))
+            v.air(x, g, z, x, sy - 1, z)
+    # 遮断機（縞模様）と支柱
+    v.box(9, g, cz - 3, 9, g + 1, cz - 3, "minecraft:stone_brick_wall")
+    for i, z in enumerate(range(cz - 2, cz + 3)):
+        v.set(9, g + 1, z, "minecraft:red_concrete" if i % 2 == 0 else "minecraft:white_concrete")
+    # 土嚢（泥レンガ）の陣地を道の両側に
+    for x0 in (3, 14):
+        for z in range(cz - 2, cz + 3):
+            v.set(x0, g, z, "minecraft:mud_bricks")
+            if z != cz:
+                v.set(x0, g + 1, z, "minecraft:packed_mud")
+    # 見張り小屋（2 階建て、屋上に狙撃手）
+    hx0, hz0, hx1, hz1 = 11, 0, 16, 3
+    v.walls(hx0, g, hz0, hx1, g + 3, hz1, "minecraft:spruce_planks")
+    v.box(hx0, g + 4, hz0, hx1, g + 4, hz1, "minecraft:spruce_planks")
+    v.air(13, g, hz1, 14, g + 1, hz1)
+    for x in (12, 15):
+        v.set(x, g + 2, hz0, "minecraft:glass_pane")
+        v.set(x, g + 2, hz1, "minecraft:glass_pane")
+    for x in range(hx0, hx1 + 1):
+        for z in (hz0, hz1):
+            v.set(x, g + 5, z, "minecraft:spruce_fence")
+    for z in range(hz0, hz1 + 1):
+        for x in (hx0, hx1):
+            v.set(x, g + 5, z, "minecraft:spruce_fence")
+    for y in range(g, g + 5):
+        v.set(hx0 + 1, y, hz0 + 1, "minecraft:ladder", facing_direction=3)
+    v.air(hx0 + 1, g + 4, hz0 + 1, hx0 + 1, g + 4, hz0 + 1)
+    v.chest(hx1 - 1, g, hz0 + 1, "west")
+    v.set(hx1 - 1, g, hz0 + 2, "minecraft:barrel", facing_direction=1)
+    # 反対側：物資置き場と有刺鉄線
+    v.chest(3, g, sz - 2, "north")
+    for p in ((1, sz - 2), (5, sz - 2), (2, sz - 1)):
+        v.set(p[0], g, p[1], "minecraft:barrel", facing_direction=1)
+    for x in range(0, sx, 2):
+        v.set(x, g, 0, "minecraft:iron_bars") if x < hx0 - 1 else None
+        v.set(x, g, sz - 1, "minecraft:iron_bars") if x > 7 else None
+    for (x, z) in ((0, cz - 3), (sx - 1, cz + 3)):
+        v.set(x, g, z, "minecraft:oak_fence")
+        v.set(x, g + 1, z, "minecraft:lantern", hanging=False)
+    for (x, z, r) in ((4, cz - 1, 0), (15, cz + 1, 0), (6, sz - 3, 0), (9, cz + 4, 2), (13, hz0 + 2, 1), (1, 1, 3), (sx - 2, sz - 2, 3)):
+        v.marker(x, g + 5 if r == 1 else g, z, r)
+    return v
+
+
+def radar_station(sd):
+    sx, sy, sz = sd["size"]
+    v = Vox(sx, sy, sz, "radar_station")
+    g = sd["sink"]
+    c = sx // 2
+    v.box(0, 0, 0, sx - 1, g - 1, sz - 1, "minecraft:smooth_stone")
+    v.air(0, g, 0, sx - 1, sy - 1, sz - 1)
+    # 外周フェンス（入口は南）
+    for i in range(sx):
+        for (x, z) in ((i, 0), (i, sz - 1), (0, i), (sx - 1, i)):
+            if z == sz - 1 and abs(x - c) <= 1:
+                continue
+            v.set(x, g, z, "minecraft:iron_bars")
+            v.set(x, g + 1, z, "minecraft:iron_bars")
+    # 管制棟
+    x0, z0, x1, z1 = 2, 2, 8, 7
+    v.walls(x0, g, z0, x1, g + 3, z1, "minecraft:light_gray_concrete")
+    v.box(x0, g + 4, z0, x1, g + 4, z1, "minecraft:gray_concrete")
+    v.air(5, g, z1, 5, g + 1, z1)
+    for x in range(x0 + 1, x1, 2):
+        v.set(x, g + 2, z0, "minecraft:glass_pane")
+    v.chest(x0 + 1, g, z0 + 1, "south")
+    v.chest(x1 - 1, g, z0 + 1, "south")
+    v.set(x0 + 3, g, z0 + 1, "minecraft:observer", **{"minecraft:facing_direction": "up"})
+    v.set(x0 + 4, g, z0 + 1, "minecraft:redstone_lamp")
+    # レーダー塔（鉄格子の骨組み＋頂上の皿）
+    tx, tz = 12, 5
+    for y in range(g, g + 11):
+        for (dx, dz) in ((-1, -1), (1, -1), (-1, 1), (1, 1)):
+            v.set(tx + dx, y, tz + dz, "minecraft:iron_bars")
+        v.set(tx, y, tz, "minecraft:ladder", facing_direction=3) if y < g + 11 else None
+    v.box(tx - 2, g + 11, tz - 2, tx + 2, g + 11, tz + 2, "minecraft:iron_block")
+    v.set(tx, g + 11, tz, AIR)
+    v.box(tx - 3, g + 13, tz - 1, tx + 3, g + 13, tz + 1, "minecraft:white_concrete")
+    v.box(tx, g + 12, tz, tx, g + 14, tz, "minecraft:iron_block")
+    v.set(tx, g + 14, tz, "minecraft:daylight_detector")
+    for x in range(tx - 2, tx + 3):
+        for z in (tz - 2, tz + 2):
+            v.set(x, g + 12, z, "minecraft:iron_bars")
+    # 発電機
+    for (x, z) in ((10, 11), (13, 11)):
+        v.box(x, g, z, x + 1, g + 1, z + 2, "minecraft:iron_block")
+        v.set(x, g + 2, z + 1, "minecraft:redstone_lamp")
+    v.chest(c, g, sz - 3, "north")
+    v.set(c - 3, g, sz - 4, "minecraft:barrel", facing_direction=1)
+    for (x, z, r) in ((5, 9, 0), (11, 9, 0), (c, c + 2, 2), (2, sz - 3, 3), (sx - 3, 2, 3)):
+        v.marker(x, g, z, r)
+    v.marker(tx + 1, g + 12, tz, 1)
+    return v
+
+
+def infested_farm(sd):
+    sx, sy, sz = sd["size"]
+    v = Vox(sx, sy, sz, "infested_farm")
+    g = sd["sink"]
+    for x in range(sx):
+        for z in range(sz):
+            v.set(x, g - 1, z, "minecraft:coarse_dirt" if v.rng.random() < 0.5 else "minecraft:dirt")
+            v.air(x, g, z, x, sy - 1, z)
+    # 枯れた畑
+    for x in range(1, 7):
+        for z in range(1, sz - 1):
+            v.set(x, g - 1, z, "minecraft:farmland", moisturized_amount=0)
+            if v.rng.random() < 0.4:
+                v.set(x, g, z, "minecraft:wheat", growth=v.rng.randint(0, 3))
+    for z in range(1, sz - 1, 4):
+        v.set(0, g, z, "minecraft:oak_fence")
+    v.set(3, g, sz // 2, "minecraft:carved_pumpkin", **{"minecraft:cardinal_direction": "east"})
+    # 納屋（壊れた壁と屋根）
+    x0, z0, x1, z1 = 8, 1, sx - 2, sz - 2
+    for x in range(x0, x1 + 1):
+        for z in range(z0, z1 + 1):
+            v.set(x, g - 1, z, "minecraft:spruce_planks")
+    for y in range(g, g + 5):
+        for x in range(x0, x1 + 1):
+            for z in (z0, z1):
+                if v.rng.random() < 0.85 or y < g + 2:
+                    v.set(x, y, z, "minecraft:dark_oak_planks" if x in (x0, x1) else "minecraft:spruce_planks")
+        for z in range(z0, z1 + 1):
+            for x in (x0, x1):
+                if v.rng.random() < 0.85 or y < g + 2:
+                    v.set(x, y, z, "minecraft:dark_oak_log", pillar_axis="y") if z in (z0, z1) else v.set(x, y, z, "minecraft:spruce_planks")
+    v.air(x0, g, (z0 + z1) // 2 - 1, x0, g + 2, (z0 + z1) // 2 + 1)
+    for x in range(x0, x1 + 1):
+        for z in range(z0, z1 + 1):
+            if v.rng.random() < 0.7:
+                v.set(x, g + 5, z, "minecraft:oak_slab", **{"minecraft:vertical_half": "bottom"})
+    # 中の干し草・骨・苔
+    for (x, z) in ((x1 - 1, z0 + 1), (x1 - 1, z0 + 2), (x1 - 2, z0 + 1)):
+        v.set(x, g, z, "minecraft:hay_block", pillar_axis="y")
+    v.scatter(x0 + 1, z0 + 1, x1 - 1, z1 - 1, g, ["minecraft:moss_carpet", "minecraft:moss_carpet", "minecraft:bone_block"], 0.15)
+    v.scatter(x0 + 1, z0 + 1, x1 - 1, z1 - 1, g + 4, ["minecraft:web"], 0.12)
+    v.chest(x0 + 1, g, z1 - 1, "north")
+    v.chest(x1 - 1, g, z1 - 1, "north")
+    v.chest(2, g, sz - 2, "north")
+    v.set(5, g, 1, "minecraft:composter", composter_fill_level=0)
+    cx, cz = (x0 + x1) // 2, (z0 + z1) // 2
+    for (x, z, r) in ((x0 + 2, z0 + 2, 0), (x1 - 3, z1 - 3, 0), (3, 3, 0), (4, sz - 4, 0), (cx, cz, 2), (sx - 1, sz - 1, 3)):
+        v.marker(x, g, z, r)
+    return v
+
+
 BUILDERS = {
     "raider_camp": raider_camp, "outpost": outpost, "armory_bunker": armory_bunker, "legion_lab": legion_lab,
     "crashed_transport": crashed_transport, "derelict_port": derelict_port, "hollow_ruin": hollow_ruin,
+    "checkpoint": checkpoint, "radar_station": radar_station, "infested_farm": infested_farm,
 }
 
 

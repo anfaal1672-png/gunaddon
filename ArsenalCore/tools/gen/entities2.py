@@ -422,6 +422,8 @@ class Entities2Mixin:
                     {"position": [0.0, 0.75, -0.1], "min_rider_count": 0, "max_rider_count": 2},
                     {"position": [0.0, 1.35, 0.95], "min_rider_count": 1, "max_rider_count": 2, "lock_rider_rotation": 0},
                 ]
+                if vid == "apc":
+                    seats[1]["position"] = [0.0, 1.9, 0.25]
             comps = {
                 "minecraft:type_family": {"family": ["arsenal_deployable", "arsenal_player_deployable", "arsenal_vehicle", f"arsenal_{vid}"]},
                 "minecraft:collision_box": {"width": 1.6 if not is_car else 2.4, "height": 1.2 if not is_car else 1.8},
@@ -572,6 +574,6 @@ class Entities2Mixin:
             "animation.arsenal.buggy.wheels": {"loop": True, "bones": {w: {"rotation": ["q.modified_distance_moved * -90.0", 0, 0]} for w in ("wheel_fl", "wheel_fr", "wheel_bl", "wheel_br")}},
         }
         for vid in self.d["VEHICLES"]:
-            bone = {"hmg_nest": "gun", "aa_gun": "guns", "at_post": "tube", "buggy": "gun"}[vid]
+            bone = {"hmg_nest": "gun", "aa_gun": "guns", "at_post": "tube", "buggy": "gun", "gl_post": "gun", "apc": "gun"}[vid]
             a[f"animation.arsenal.{vid}.aim"] = {"loop": True, "bones": {bone: {"rotation": [f"-q.property('{NS}:pitch')", 0, 0]}}}
         return a

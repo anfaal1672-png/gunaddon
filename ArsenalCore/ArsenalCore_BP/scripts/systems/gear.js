@@ -26,7 +26,7 @@ const DEPLOYABLES = /** @type {Record<string, any>} */ (DATA.DEPLOYABLES);
 const VEHICLES = /** @type {Record<string, any>} */ (DATA.VEHICLES);
 
 /** 1 人が同時に置ける数（種類ごと） */
-export const DEPLOY_LIMIT = { sentry: 2, shield_wall: 3, claymore: 6, ammo_station: 2, med_station: 2, mortar_emplacement: 1, hmg_nest: 2, aa_gun: 1, at_post: 1, buggy: 2 };
+export const DEPLOY_LIMIT = { sentry: 2, shield_wall: 3, claymore: 6, ammo_station: 2, med_station: 2, mortar_emplacement: 1, hmg_nest: 2, aa_gun: 1, at_post: 1, buggy: 2, gl_post: 1, apc: 1 };
 const DEFIB_COOLDOWN = 600;
 /** @type {Map<string, number>} */
 const lastDeploy = new Map();
@@ -266,7 +266,7 @@ export function tryDeploy(player, block, face, typeId) {
     e.setRotation({ x: 0, y: yaw });
     if (kind === "sentry") e.setDynamicProperty("a:ammo", 0);
     if (kind === "ammo_station") e.setDynamicProperty("a:stock", def.stock ?? 300);
-    if (kind === "buggy") e.setDynamicProperty("a:fuel", Math.round((def.fuel ?? 2400) * 0.5));
+    if (kind === "buggy" || kind === "apc") e.setDynamicProperty("a:fuel", Math.round((def.fuel ?? 2400) * 0.5));
     e.nameTag = "";
   });
   playNear(dim, pos, "arsenal.gear.deploy", { range: 16 });

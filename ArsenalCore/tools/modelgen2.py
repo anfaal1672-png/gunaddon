@@ -598,6 +598,60 @@ def buggy_model(key):
     return m
 
 
+def gl_post_model(key):
+    """自動擲弾銃座：三脚と箱型の機関部、ドラム弾倉"""
+    m = Model(key)
+    m.bone("root", None, (0, 0, 0))
+    m.bone("gun", "root", (0, 12, -2))
+    for i in range(3):
+        a = math.radians(i * 120 + 60)
+        x, z = math.sin(a) * 7.0, math.cos(a) * 7.0
+        m.box("root", x - 0.6, 0, z - 0.6, 1.2, 11.0, 1.2, "metal_dark")
+    m.box("root", -3.0, 9.0, -3.0, 6.0, 3.0, 6.0, "main_dark")
+    m.box("gun", -3.5, 11.0, -10.0, 7.0, 6.0, 14.0, "main")
+    m.box("gun", -1.5, 12.5, -22.0, 3.0, 3.0, 12.0, "metal_dark")
+    m.box("gun", -2.0, 12.0, -23.0, 4.0, 4.0, 1.5, "main_dark")
+    m.box("gun", 3.5, 9.0, -8.0, 5.0, 7.0, 7.0, "mag")  # ドラム
+    m.box("gun", -2.6, 10.0, 4.0, 1.2, 4.0, 1.2, "grip")
+    m.box("gun", 1.4, 10.0, 4.0, 1.2, 4.0, 1.2, "grip")
+    m.box("gun", -1.0, 17.0, -6.0, 2.0, 2.5, 3.0, "lens")
+    return m
+
+
+def apc_model(key):
+    """装甲兵員輸送車：箱型の車体、4 輪＋飾りの中輪、上部の重機関銃塔"""
+    m = Model(key)
+    m.bone("root", None, (0, 0, 0))
+    m.bone("hull", "root", (0, 8, 0))
+    m.bone("gun", "hull", (0, 30, 4))
+    wheels = (("wheel_fl", -15, -20), ("wheel_fr", 15, -20), ("wheel_bl", -15, 20), ("wheel_br", 15, 20))
+    for name, x, z in wheels:
+        m.bone(name, "root", (x, 7, z))
+        m.box(name, x - 3.0, 0.0, z - 7.0, 6.0, 14.0, 14.0, "rubber")
+        m.box(name, x - 3.2, 4.5, z - 2.5, 6.4, 5.0, 5.0, "metal_light")
+    for x in (-15, 15):
+        m.box("hull", x - 3.0, 0.0, -7.0, 6.0, 14.0, 14.0, "rubber")
+    m.box("hull", -13.0, 6.0, -30.0, 26.0, 16.0, 60.0, "main")
+    m.box("hull", -12.0, 22.0, -18.0, 24.0, 4.0, 44.0, "main_dark")
+    m.box("hull", -13.0, 10.0, -33.0, 26.0, 10.0, 3.0, "main_dark")  # 傾斜した前面
+    m.box("hull", -14.0, 6.0, -34.0, 28.0, 3.0, 4.0, "metal_dark")
+    m.box("hull", -8.0, 18.0, -30.2, 16.0, 3.0, 0.6, "lens")  # 覗き窓
+    m.box("hull", -4.0, 12.0, -33.2, 2.0, 2.0, 0.6, "glow")
+    m.box("hull", 2.0, 12.0, -33.2, 2.0, 2.0, 0.6, "glow")
+    m.box("hull", -13.6, 14.0, -24.0, 0.6, 3.0, 48.0, "accent")
+    m.box("hull", 13.0, 14.0, -24.0, 0.6, 3.0, 48.0, "accent")
+    m.box("hull", -6.0, 8.0, 30.0, 12.0, 12.0, 1.0, "furniture")  # 後部ハッチ
+    m.box("hull", 8.0, 22.0, 18.0, 4.0, 4.0, 8.0, "furniture")  # 荷物
+    # 銃塔
+    m.box("gun", -5.0, 26.0, -1.0, 10.0, 4.0, 10.0, "main_dark")
+    m.box("gun", -3.0, 30.0, -6.0, 6.0, 4.0, 10.0, "main")
+    m.box("gun", -0.8, 31.0, -24.0, 1.6, 1.6, 18.0, "metal_dark")
+    m.box("gun", -1.5, 30.3, -10.0, 3.0, 3.0, 5.0, "main_dark")
+    m.box("gun", 3.0, 29.0, -3.0, 3.0, 4.0, 4.0, "mag")
+    m.box("gun", -6.0, 28.0, -7.0, 12.0, 7.0, 0.8, "metal_dark")  # 防盾
+    return m
+
+
 def supply_crate_model(key):
     m = Model(key)
     m.bone("root", None, (0, 0, 0))
@@ -668,6 +722,8 @@ def entity_model(kind, key):
         "aa_gun": (lambda: aa_gun_model(key), (5, 3, 1.0)),
         "at_post": (lambda: at_post_model(key), (4, 3, 0.8)),
         "buggy": (lambda: buggy_model(key), (6, 4, 1.2)),
+        "gl_post": (lambda: gl_post_model(key), (4, 3, 0.8)),
+        "apc": (lambda: apc_model(key), (7, 5, 1.4)),
         "supply_crate": (lambda: supply_crate_model(key), (4, 4, 1.2)),
         "quartermaster": (lambda: quartermaster_model(key), (2, 3, 1.5)),
         "empty": (lambda: empty_model(key), (1, 1, 0.5)),

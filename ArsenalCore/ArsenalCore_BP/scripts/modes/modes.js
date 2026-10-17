@@ -832,7 +832,7 @@ function hordeTick(now) {
     const pos = pickEnemySpawn(a, dim);
     if (pos) {
       const r = Math.random();
-      const id = m.wave >= 4 && r < 0.12 ? "hollow_brute" : m.wave >= 2 && r < 0.3 ? "hollow_bloater" : "hollow_runner";
+      const id = m.wave >= 4 && r < 0.12 ? "hollow_brute" : m.wave >= 2 && r < 0.3 ? "hollow_bloater" : m.wave >= 3 && r < 0.5 ? "hollow_crawler" : "hollow_runner";
       if (spawnEnemy(dim, pos, id, { tag: "arsenal_mode_enemy", persist: true, src: "horde" })) m.toSpawn--;
     }
   }

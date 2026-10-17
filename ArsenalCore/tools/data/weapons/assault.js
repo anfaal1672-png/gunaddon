@@ -93,4 +93,42 @@ export const ASSAULT = {
     slots: ["optic", "muzzle", "mag", "laser"],
     model: { type: "rifle", body: 13, h: 4, barrel: 12, guard: 9, mag: "box", stock: "wood", finish: "wood", accent: "tier" },
   },
+
+  // ---- 2.3 で追加 ----
+  valkyrie: {
+    cat: "assault", tier: "uncommon", name: { ja: "ヴァルキリー", en: "Valkyrie" },
+    desc: { ja: "ブルパップのアサルトライフル。短いのに銃身は長い", en: "Bullpup assault rifle" },
+    ammo: "medium", mag: 30, rpm: 750, modes: ["auto", "semi"], dmg: 4.0, head: 1.8, range: [30, 68], falloff: 0.6,
+    spread: R(3.0, 0.5, 1.6, 0.3, 3.6, 0.36), recoil: { v: 1.0, h: 0.55, shake: 0.025 },
+    reload: { tac: 38, empty: 50 }, ads: 4, move: 0.98, pen: 2, sound: "rifle", pitch: 1.04, optic: "holo",
+    slots: ["optic", "muzzle", "underbarrel", "mag", "laser"],
+    model: { type: "rifle", body: 13, h: 4.2, barrel: 7, guard: 5, mag: "curved", stock: "none", finish: "od", accent: "tier", bullpup: true },
+  },
+  hydra: {
+    cat: "assault", tier: "rare", name: { ja: "ハイドラ", en: "Hydra" },
+    desc: { ja: "2 点バーストとフルオートを切り替えられる重めのライフル", en: "2-round burst / auto heavy rifle" },
+    ammo: "medium", mag: 30, rpm: 640, burstRpm: 1100, burstDelay: 6, modes: ["burst2", "auto", "semi"], dmg: 4.6, head: 1.8, range: [32, 72], falloff: 0.6,
+    spread: R(3.1, 0.5, 1.8, 0.35, 3.8, 0.35), recoil: { v: 1.25, h: 0.55, shake: 0.03 },
+    reload: { tac: 38, empty: 50 }, ads: 4, move: 0.96, pen: 2, sound: "rifle_heavy", pitch: 1.02, optic: "iron",
+    slots: ["optic", "muzzle", "underbarrel", "mag", "laser", "stock"],
+    model: { type: "rifle", body: 13, h: 4.5, barrel: 8, guard: 8, mag: "curved", stock: "fixed", finish: "steel", accent: "tier" },
+  },
+  sirocco: {
+    cat: "assault", tier: "uncommon", name: { ja: "シロッコ", en: "Sirocco" },
+    desc: { ja: "砂漠向けの頑丈なライフル。ゆっくり重く撃つ", en: "Rugged desert rifle with a slow heavy cycle" },
+    ammo: "medium", mag: 30, rpm: 600, modes: ["auto", "semi"], dmg: 4.9, head: 1.8, range: [30, 70], falloff: 0.6,
+    spread: R(3.3, 0.6, 1.8, 0.4, 4.0, 0.34), recoil: { v: 1.35, h: 0.7, shake: 0.035 },
+    reload: { tac: 40, empty: 52 }, ads: 5, move: 0.96, pen: 2, sound: "rifle_heavy", pitch: 0.92, optic: "iron",
+    slots: ["optic", "muzzle", "underbarrel", "mag", "laser", "stock"],
+    model: { type: "rifle", body: 13, h: 4.5, barrel: 8, guard: 7, mag: "curved", stock: "wood", finish: "tan", accent: "tier" },
+  },
+  aurora: {
+    cat: "assault", tier: "rare", name: { ja: "オーロラ", en: "Aurora" },
+    desc: { ja: "精密射撃向けのライフル。セミオートと 3 点バースト", en: "Precision rifle: semi and 3-round burst" },
+    ammo: "medium", mag: 25, rpm: 680, burstRpm: 950, burstDelay: 7, modes: ["semi", "burst3"], dmg: 5.0, head: 1.9, range: [36, 80], falloff: 0.62,
+    spread: R(3.0, 0.35, 1.8, 0.35, 3.4, 0.36), recoil: { v: 1.1, h: 0.4, shake: 0.03 },
+    reload: { tac: 38, empty: 50 }, ads: 5, move: 0.96, pen: 2, sound: "rifle", pitch: 0.98, optic: "scope3",
+    slots: ["optic", "muzzle", "underbarrel", "mag", "laser", "stock"],
+    model: { type: "rifle", body: 13, h: 4.2, barrel: 10, guard: 9, mag: "straight", stock: "skeleton", finish: "white", accent: "tier", scope: 3 },
+  },
 };

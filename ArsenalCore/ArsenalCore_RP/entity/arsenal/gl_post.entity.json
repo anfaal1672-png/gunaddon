@@ -1,0 +1,28 @@
+{
+  "format_version": "1.10.0",
+  "minecraft:client_entity": {
+    "description": {
+      "identifier": "arsenal:gl_post",
+      "materials": {
+        "default": "entity_alphatest"
+      },
+      "textures": {
+        "default": "textures/entity/arsenal/gear/gl_post"
+      },
+      "geometry": {
+        "default": "geometry.arsenal.gl_post"
+      },
+      "render_controllers": [
+        "controller.render.arsenal.simple"
+      ],
+      "animations": {
+        "aim": "animation.arsenal.gl_post.aim"
+      },
+      "scripts": {
+        "animate": [
+          "aim"
+        ]
+      }
+    }
+  }
+}

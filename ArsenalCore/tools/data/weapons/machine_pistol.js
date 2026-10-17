@@ -39,4 +39,24 @@ export const MACHINE_PISTOL = {
     slots: ["optic", "muzzle", "laser", "mag", "stock"],
     model: { type: "pistol", slide: 9, h: 2.5, grip: "pistol", finish: "tan", accent: "tier", extMag: true, stub: true },
   },
+
+  // ---- 2.3 で追加 ----
+  hummingbird: {
+    cat: "machine_pistol", tier: "rare", name: { ja: "ハミングバード", en: "Hummingbird" },
+    desc: { ja: "毎分 1500 発。一瞬で弾倉が空になる至近距離の掃射器", en: "1500 rpm close-range hose" },
+    ammo: "light", mag: 25, rpm: 1500, modes: ["auto"], dmg: 2.1, head: 1.5, range: [8, 20], falloff: 0.45,
+    spread: R(3.8, 1.8, 1.6, 0.3, 5.5, 0.42), recoil: { v: 0.6, h: 1.3, shake: 0.02 },
+    reload: { tac: 22, empty: 30 }, ads: 2, move: 1.07, pen: 1, sound: "smg", pitch: 1.45, optic: "iron",
+    slots: ["optic", "muzzle", "laser", "mag"],
+    model: { type: "pistol", slide: 9, h: 2.6, grip: "pistol", finish: "orange", accent: "tier", extMag: true, stub: true },
+  },
+  gadfly: {
+    cat: "machine_pistol", tier: "uncommon", name: { ja: "ガドフライ", en: "Gadfly" },
+    desc: { ja: "3 点バーストのマシンピストル。反動が素直", en: "Controllable 3-round burst machine pistol" },
+    ammo: "light", mag: 21, rpm: 900, burstRpm: 1200, burstDelay: 6, modes: ["burst3", "semi"], dmg: 2.9, head: 1.6, range: [12, 26], falloff: 0.5,
+    spread: R(3.0, 1.2, 1.5, 0.3, 4.2, 0.4), recoil: { v: 0.75, h: 0.6, shake: 0.02 },
+    reload: { tac: 24, empty: 32 }, ads: 2, move: 1.06, pen: 1, sound: "smg", pitch: 1.3, optic: "iron",
+    slots: ["optic", "muzzle", "laser", "mag"],
+    model: { type: "pistol", slide: 10, h: 2.7, grip: "pistol", finish: "black", accent: "tier", extMag: true },
+  },
 };

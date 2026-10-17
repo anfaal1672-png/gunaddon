@@ -2,9 +2,9 @@
 // 進行（2.0 で追加）：武器経験値・武器レベル・迷彩・階級・チャレンジ・統計
 
 // ---------------------------------------------------------------------------
-//  武器レベル（1〜30）
+//  武器レベル（1〜40。2.3 で 30 → 40）
 // ---------------------------------------------------------------------------
-export const WEAPON_MAX_LEVEL = 30;
+export const WEAPON_MAX_LEVEL = 40;
 
 /**
  * レベル lv から lv+1 に上がるのに必要な経験値
@@ -15,7 +15,7 @@ export function weaponXpToNext(lv) {
   return Math.round(80 + lv * 35 + lv * lv * 2.5);
 }
 
-/** 1〜30 の累計必要経験値（index = レベル。1 は 0） */
+/** 1〜40 の累計必要経験値（index = レベル。1 は 0） */
 export const WEAPON_XP_TABLE = (() => {
   const t = [0, 0];
   for (let lv = 1; lv < WEAPON_MAX_LEVEL; lv++) t.push(t[lv] + weaponXpToNext(lv));
@@ -48,6 +48,11 @@ export const CAMOS = {
   c6: { name: { ja: "タイガー", en: "Tiger Stripe" }, kind: "tiger", colors: [[176, 120, 50], [40, 34, 28], [120, 90, 44]], level: 21 },
   c7: { name: { ja: "ゴールド", en: "Gold" }, kind: "gold", colors: [[236, 186, 60], [180, 130, 30], [255, 232, 140]], level: 26 },
   c8: { name: { ja: "ダイヤモンド", en: "Diamond" }, kind: "diamond", colors: [[120, 230, 236], [70, 180, 200], [220, 255, 255]], level: 30 },
+  // ---- 2.3 で追加 ----
+  c9: { name: { ja: "アークティック", en: "Arctic" }, kind: "digital", colors: [[226, 232, 236], [188, 196, 204], [150, 158, 168], [246, 248, 250]], level: 33 },
+  c10: { name: { ja: "ジャングル", en: "Jungle" }, kind: "woodland", colors: [[44, 92, 40], [86, 120, 52], [24, 40, 22], [140, 150, 70]], level: 36 },
+  c11: { name: { ja: "ブラッドストライプ", en: "Blood Stripe" }, kind: "tiger", colors: [[150, 30, 30], [26, 22, 22], [96, 20, 24]], level: 38 },
+  c12: { name: { ja: "ガンメタル", en: "Gunmetal" }, kind: "solid", colors: [[84, 90, 98], [58, 62, 70]], level: 40 },
 };
 
 // ---------------------------------------------------------------------------

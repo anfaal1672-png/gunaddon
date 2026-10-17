@@ -57,4 +57,33 @@ export const HANDGUN = {
     slots: [],
     model: { type: "flare", slide: 9, h: 3, grip: "pistol", finish: "orange", accent: "tier" },
   },
+
+  // ---- 2.3 で追加 ----
+  kodiak: {
+    cat: "handgun", tier: "rare", name: { ja: "コディアック .50", en: "Kodiak .50" },
+    desc: { ja: "マグナム弾の大型自動拳銃。1 発が重いが反動も大きい", en: "Big-bore semi-auto magnum pistol" },
+    ammo: "magnum", mag: 7, rpm: 220, modes: ["semi"], dmg: 9.5, head: 2.0, range: [22, 50], falloff: 0.62,
+    spread: R(2.4, 0.4, 1.8, 1.1, 4.2, 0.28), recoil: { v: 3.8, h: 1.0, shake: 0.07 },
+    reload: { tac: 30, empty: 38 }, ads: 4, move: 1.02, pen: 2, sound: "magnum", pitch: 0.9, optic: "iron",
+    slots: ["optic", "muzzle", "laser", "mag"],
+    model: { type: "pistol", slide: 11, h: 3, grip: "pistol", finish: "steel", accent: "tier", compensator: true },
+  },
+  sparrow: {
+    cat: "handgun", tier: "common", name: { ja: "スパロウ", en: "Sparrow" },
+    desc: { ja: "軽くて小さい護身用の拳銃。持ったまま速く動ける", en: "Light compact pistol. Move fast while holding it" },
+    ammo: "light", mag: 12, rpm: 420, modes: ["semi"], dmg: 4.4, head: 1.9, range: [14, 34], falloff: 0.55,
+    spread: R(2.0, 0.5, 1.4, 0.5, 3.2, 0.34), recoil: { v: 1.2, h: 0.45, shake: 0.025 },
+    reload: { tac: 20, empty: 28 }, ads: 2, move: 1.08, pen: 1, sound: "pistol", pitch: 1.15, optic: "iron",
+    slots: ["optic", "muzzle", "laser", "mag"],
+    model: { type: "pistol", slide: 8, h: 2.4, grip: "pistol", finish: "tan", accent: "tier" },
+  },
+  regent: {
+    cat: "handgun", tier: "uncommon", name: { ja: "リージェント", en: "Regent" },
+    desc: { ja: "2 点バーストの拳銃。至近距離で素早く 2 発を叩き込む", en: "2-round burst pistol" },
+    ammo: "light", mag: 18, rpm: 600, burstRpm: 1100, burstDelay: 6, modes: ["burst2", "semi"], dmg: 4.0, head: 1.8, range: [16, 36], falloff: 0.55,
+    spread: R(2.3, 0.55, 1.6, 0.45, 3.6, 0.32), recoil: { v: 1.3, h: 0.6, shake: 0.028 },
+    reload: { tac: 24, empty: 32 }, ads: 3, move: 1.05, pen: 1, sound: "pistol", pitch: 1.0, optic: "iron",
+    slots: ["optic", "muzzle", "laser", "mag"],
+    model: { type: "pistol", slide: 10, h: 2.6, grip: "pistol", finish: "od", accent: "tier", extMag: true },
+  },
 };

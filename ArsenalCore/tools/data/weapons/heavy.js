@@ -51,4 +51,15 @@ export const HEAVY = {
     slots: ["optic", "laser"],
     model: { type: "lmg", body: 16, h: 5.5, barrel: 12, guard: 8, mag: "belt_box", stock: "fixed", finish: "black", accent: "tier", shroud: true },
   },
+
+  // ---- 2.3 で追加 ----
+  avalanche: {
+    cat: "heavy", tier: "legendary", name: { ja: "アバランチ", en: "Avalanche" },
+    desc: { ja: "回転銃身の手持ち機関砲。回り始めると止まらない", en: "Hand-held rotary cannon. Unstoppable once spun up" },
+    ammo: "medium", mag: 250, rpm: 1600, modes: ["auto"], spinup: 20, dmg: 2.7, head: 1.4, range: [24, 54], falloff: 0.55,
+    spread: R(5.8, 2.6, 2.4, 0.12, 5.0, 0.3), recoil: { v: 0.5, h: 1.2, shake: 0.035 },
+    reload: { tac: 140, empty: 160 }, ads: 10, move: 0.7, pen: 2, sound: "rotary", pitch: 0.9, optic: "iron",
+    slots: ["laser", "trigger", "ammo"],
+    model: { type: "rotary", body: 16, h: 6.5, barrel: 16, mag: "belt", stock: "none", finish: "black", accent: "tier" },
+  },
 };

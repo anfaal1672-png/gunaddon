@@ -33,8 +33,8 @@ export const MODES = {
     name: { ja: "ホード", en: "Horde" },
     desc: { ja: "協力してホロウのウェーブを生き延びる。ウェーブの合間に買い物", en: "Survive waves of Hollow together. Shop between waves" },
     teams: 1, minPlayers: 1, scoreLimit: 0, timeLimit: 0, respawn: null, loadouts: ["assault", "cqb", "marksman", "support"], streaks: true, lobbySecs: 15,
-    waves: 15, bossEvery: 5, breakSecs: 25, baseCount: 6, perWave: 3, perPlayer: 0.6, maxAlive: 24,
-    boss: { 5: "hollow_brute_pack", 10: "boss_warlord", 15: "boss_juggernaut" },
+    waves: 20, bossEvery: 5, breakSecs: 25, baseCount: 6, perWave: 3, perPlayer: 0.6, maxAlive: 24,
+    boss: { 5: "hollow_brute_pack", 10: "boss_warlord", 15: "boss_juggernaut", 20: "boss_hollow_mother" },
   },
   koth: {
     name: { ja: "陣取り", en: "King of the Hill" },

@@ -93,4 +93,36 @@ export const SNIPER = {
     slots: ["optic", "muzzle", "underbarrel", "mag", "stock"],
     model: { type: "sniper", body: 15, h: 4.5, barrel: 14, mag: "box", stock: "skeleton", finish: "white", accent: "tier", scope: 8, bolt: true },
   },
+
+  // ---- 2.3 で追加 ----
+  condor: {
+    cat: "sniper", tier: "legendary", name: { ja: "コンドル", en: "Condor" },
+    desc: { ja: "半自動の対物ライフル。装甲も壁も撃ち抜く", en: "Semi-auto anti-materiel rifle" },
+    ammo: "antimat", mag: 5, rpm: 60, modes: ["semi"], dmg: 24, head: 1.8, range: [130, 230], falloff: 0.85, ap: 0.8, armorBonus: 1.8,
+    spread: R(9.5, 0, 4.4, 0, 0, 0.25), recoil: { v: 8.5, h: 1.4, shake: 0.14 },
+    reload: { tac: 70, empty: 84 }, ads: 9, move: 0.78, pen: 7, wallPierce: true, sound: "antimat", pitch: 0.9, optic: "scope8",
+    fire: "ballistic", projectile: { speed: 20, gravity: 0.011 },
+    slots: ["optic", "underbarrel", "stock", "trigger", "ammo"], fixed: { muzzle: "muzzle_brake" },
+    model: { type: "sniper", body: 17, h: 5.5, barrel: 18, mag: "box", stock: "fixed", finish: "tan", accent: "tier", scope: 8, brake: true },
+  },
+  shrike: {
+    cat: "sniper", tier: "rare", name: { ja: "シュライク", en: "Shrike" },
+    desc: { ja: "弾速の速いボルトアクション。遠くでも落ちにくい", en: "High-velocity bolt-action rifle" },
+    ammo: "precision", mag: 5, rpm: 42, modes: ["semi"], dmg: 17, head: 2.5, range: [120, 230], falloff: 0.8,
+    spread: R(7.0, 0, 3.0, 0, 0, 0.3), recoil: { v: 5.2, h: 0.8, shake: 0.09 },
+    reload: { tac: 52, empty: 62 }, ads: 7, move: 0.9, pen: 3, sound: "sniper", pitch: 0.95, optic: "scope8", bolt: true,
+    fire: "ballistic", projectile: { speed: 22, gravity: 0.009 },
+    slots: ["optic", "muzzle", "underbarrel", "mag", "stock"],
+    model: { type: "sniper", body: 16, h: 4.5, barrel: 17, mag: "box", stock: "skeleton", finish: "steel", accent: "tier", scope: 8, bolt: true },
+  },
+  phantom_lr: {
+    cat: "sniper", tier: "rare", name: { ja: "ファントム LR", en: "Phantom LR" },
+    desc: { ja: "消音器一体型の半自動狙撃銃。静かに連射できる", en: "Integrally suppressed semi-auto sniper" },
+    ammo: "precision", mag: 10, rpm: 90, modes: ["semi"], dmg: 12.5, head: 2.4, range: [90, 170], falloff: 0.75,
+    spread: R(6.0, 0, 2.8, 0.4, 1.6, 0.3), recoil: { v: 3.2, h: 0.6, shake: 0.06 },
+    reload: { tac: 46, empty: 56 }, ads: 6, move: 0.92, pen: 3, sound: "suppressed_heavy", pitch: 0.95, optic: "scope8",
+    fire: "ballistic", projectile: { speed: 15, gravity: 0.014 },
+    slots: ["optic", "underbarrel", "mag", "stock"], fixed: { muzzle: "muzzle_suppressor" },
+    model: { type: "sniper", body: 15, h: 4.6, barrel: 4, mag: "box", stock: "fixed", finish: "black", accent: "tier", scope: 8, intSuppressor: 12 },
+  },
 };

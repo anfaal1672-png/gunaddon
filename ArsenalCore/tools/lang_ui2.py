@@ -104,6 +104,7 @@ UI2 = {
     "arsenal.boss.already": ("§cThat boss is already nearby.", "§cそのボスはすでに近くにいます。"),
     "arsenal.boss.incoming": ("%s approaches!", "%s が来る！"),
     "arsenal.boss.desc.boss_warlord": ("Raider chieftain. Calls reinforcements and airstrikes as he weakens, then enrages.", "レイダーの首領。弱るほど増援と空爆を呼び、最後は激昂する。"),
+    "arsenal.boss.desc.boss_hollow_mother": ("Mother of the Hollow. Births swarms, spits toxic sacs and shakes the ground; she enrages near death.", "ホロウの母体。群れを産み、毒ガス袋を吐き、地面を揺らす。死に際に激昂する。"),
     "arsenal.boss.desc.boss_juggernaut": ("Legion war machine. Destroy its missile pods and chest plating; beware the EMP and stomp.", "レギオンの戦闘機械。ミサイルポッドと胸部装甲を壊せ。EMP と踏みつけに注意。"),
     # ---- 装備 ----
     "arsenal.gear.plate_full": ("§cNo room for a plate (wear body armor with free plate slots).", "§cプレートを入れられない（空きのあるボディアーマーを着けること）。"),
@@ -292,7 +293,7 @@ GUIDE = {
         ("Place turrets, shields, claymores and stations on the top face of a block.", "砲台・シールド・クレイモア・ステーションはブロックの上面に向けて使って設置。"),
         ("Sneak-interact with your own deployable to pick it up.", "自分の設置物にスニークで触ると回収。"),
         ("Mount emplacements and aim with your view; hold Jump to fire.", "銃座に乗って視点で狙い、ジャンプで撃つ。"),
-        ("The buggy needs fuel canisters; steel ingots repair vehicles.", "バギーは燃料キャニスターで給油、鋼鉄インゴットで修理。"),
+        ("The buggy and APC need fuel canisters; steel ingots repair vehicles.", "バギーと装甲車は燃料キャニスターで給油、鋼鉄インゴットで修理。"),
         ("Night vision goggles switch on in the dark (toggle in the Field Manual).", "暗視ゴーグルは暗所で自動オン（野戦マニュアルで切替）。"),
     ]),
     "enemies": (("Enemies", "敵"), [
@@ -314,7 +315,7 @@ GUIDE = {
         ("Hollow nests spawn mutants at night.", "変異体の巣は夜になると変異体を生む。"),
     ]),
     "progress": (("Progression", "進行"), [
-        ("Weapons gain XP from hits and kills and level up to 30.", "武器は命中とキルで経験値を得て Lv30 まで上がる。"),
+        ("Weapons gain XP from hits and kills and level up to 40.", "武器は命中とキルで経験値を得て Lv40 まで上がる。"),
         ("Weapon levels unlock camos; attachment tiers need weapon levels (world setting).", "武器レベルで迷彩が解放。アタッチメントのティアも武器レベルで解放（ワールド設定）。"),
         ("Your rank (1-50) rises with every kill, challenge and match.", "階級（1〜50）はキル・チャレンジ・試合で上がる。"),
         ("Three daily and three weekly challenges rotate automatically.", "デイリー 3・ウィークリー 3 のチャレンジが自動で入れ替わる。"),
@@ -328,7 +329,7 @@ GUIDE = {
         ("Join from the Field Manual > Game Modes during the lobby countdown.", "ロビーの間に野戦マニュアル「ゲームモード」から参加。"),
         ("Your inventory and position are stored and returned after the match - even after a restart.", "持ち物と位置は保管され、試合後に戻る（再起動があっても戻る）。"),
         ("You can't die in a match: you respawn after a few seconds.", "試合中は死なない。数秒後に復活する。"),
-        ("Horde: survive 15 waves of Hollow together, with bosses every 5 waves.", "ホード：協力して 15 ウェーブを生き延びる。5 ウェーブごとにボス。"),
+        ("Horde: survive 20 waves of Hollow together, with bosses every 5 waves.", "ホード：協力して 20 ウェーブを生き延びる。5 ウェーブごとにボス。"),
         ("Gun Game: every kill swaps your gun; win with the knife.", "ガンゲーム：キルごとに武器が変わり、最後はナイフで倒して勝ち。"),
     ]),
     "mobile": (("Phones & Tablets", "スマホ・タブレット"), [

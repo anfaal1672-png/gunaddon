@@ -446,7 +446,35 @@
         },
         {
           "type": "item",
+          "name": "arsenal:kodiak",
+          "weight": 2,
+          "functions": [
+            {
+              "function": "set_damage",
+              "damage": {
+                "min": 0.35,
+                "max": 0.9
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
           "name": "arsenal:cinder",
+          "weight": 2,
+          "functions": [
+            {
+              "function": "set_damage",
+              "damage": {
+                "min": 0.35,
+                "max": 0.9
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "arsenal:hummingbird",
           "weight": 2,
           "functions": [
             {
@@ -475,6 +503,20 @@
         {
           "type": "item",
           "name": "arsenal:specter",
+          "weight": 2,
+          "functions": [
+            {
+              "function": "set_damage",
+              "damage": {
+                "min": 0.35,
+                "max": 0.9
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "arsenal:jackal",
           "weight": 2,
           "functions": [
             {
@@ -544,6 +586,34 @@
         },
         {
           "type": "item",
+          "name": "arsenal:hydra",
+          "weight": 2,
+          "functions": [
+            {
+              "function": "set_damage",
+              "damage": {
+                "min": 0.35,
+                "max": 0.9
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "arsenal:aurora",
+          "weight": 2,
+          "functions": [
+            {
+              "function": "set_damage",
+              "damage": {
+                "min": 0.35,
+                "max": 0.9
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
           "name": "arsenal:anvil",
           "weight": 2,
           "functions": [
@@ -573,6 +643,20 @@
         {
           "type": "item",
           "name": "arsenal:halberd",
+          "weight": 2,
+          "functions": [
+            {
+              "function": "set_damage",
+              "damage": {
+                "min": 0.35,
+                "max": 0.9
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "arsenal:warhorse",
           "weight": 2,
           "functions": [
             {
@@ -642,6 +726,20 @@
         },
         {
           "type": "item",
+          "name": "arsenal:peregrine",
+          "weight": 2,
+          "functions": [
+            {
+              "function": "set_damage",
+              "damage": {
+                "min": 0.35,
+                "max": 0.9
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
           "name": "arsenal:whisper",
           "weight": 2,
           "functions": [
@@ -685,6 +783,34 @@
         {
           "type": "item",
           "name": "arsenal:wraithmark",
+          "weight": 2,
+          "functions": [
+            {
+              "function": "set_damage",
+              "damage": {
+                "min": 0.35,
+                "max": 0.9
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "arsenal:shrike",
+          "weight": 2,
+          "functions": [
+            {
+              "function": "set_damage",
+              "damage": {
+                "min": 0.35,
+                "max": 0.9
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "arsenal:phantom_lr",
           "weight": 2,
           "functions": [
             {
@@ -754,6 +880,20 @@
         },
         {
           "type": "item",
+          "name": "arsenal:hammerhead",
+          "weight": 2,
+          "functions": [
+            {
+              "function": "set_damage",
+              "damage": {
+                "min": 0.35,
+                "max": 0.9
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
           "name": "arsenal:grinder",
           "weight": 2,
           "functions": [
@@ -769,6 +909,20 @@
         {
           "type": "item",
           "name": "arsenal:bulwark",
+          "weight": 2,
+          "functions": [
+            {
+              "function": "set_damage",
+              "damage": {
+                "min": 0.35,
+                "max": 0.9
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "arsenal:goliath",
           "weight": 2,
           "functions": [
             {
@@ -880,6 +1034,20 @@
         },
         {
           "type": "item",
+          "name": "arsenal:pelican",
+          "weight": 2,
+          "functions": [
+            {
+              "function": "set_damage",
+              "damage": {
+                "min": 0.35,
+                "max": 0.9
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
           "name": "arsenal:pulse_rifle",
           "weight": 2,
           "functions": [
@@ -950,6 +1118,20 @@
         },
         {
           "type": "item",
+          "name": "arsenal:ion_carbine",
+          "weight": 2,
+          "functions": [
+            {
+              "function": "set_damage",
+              "damage": {
+                "min": 0.35,
+                "max": 0.9
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
           "name": "arsenal:leviathan",
           "weight": 1,
           "functions": [
@@ -979,6 +1161,48 @@
         {
           "type": "item",
           "name": "arsenal:behemoth",
+          "weight": 1,
+          "functions": [
+            {
+              "function": "set_damage",
+              "damage": {
+                "min": 0.35,
+                "max": 0.9
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "arsenal:condor",
+          "weight": 1,
+          "functions": [
+            {
+              "function": "set_damage",
+              "damage": {
+                "min": 0.35,
+                "max": 0.9
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "arsenal:cyclone",
+          "weight": 1,
+          "functions": [
+            {
+              "function": "set_damage",
+              "damage": {
+                "min": 0.35,
+                "max": 0.9
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "arsenal:avalanche",
           "weight": 1,
           "functions": [
             {
@@ -1177,6 +1401,31 @@
         {
           "type": "item",
           "name": "arsenal:trigger_rapid",
+          "weight": 2
+        },
+        {
+          "type": "item",
+          "name": "arsenal:optic_thermal_compact",
+          "weight": 2
+        },
+        {
+          "type": "item",
+          "name": "arsenal:muzzle_tank_brake",
+          "weight": 2
+        },
+        {
+          "type": "item",
+          "name": "arsenal:stock_precision",
+          "weight": 2
+        },
+        {
+          "type": "item",
+          "name": "arsenal:barrel_match",
+          "weight": 2
+        },
+        {
+          "type": "item",
+          "name": "arsenal:ammo_ap_core",
           "weight": 2
         },
         {

@@ -14,6 +14,15 @@
     "arsenal_albatross__c1": {
       "textures": "textures/items/arsenal/weapons/albatross__c1"
     },
+    "arsenal_albatross__c10": {
+      "textures": "textures/items/arsenal/weapons/albatross__c10"
+    },
+    "arsenal_albatross__c11": {
+      "textures": "textures/items/arsenal/weapons/albatross__c11"
+    },
+    "arsenal_albatross__c12": {
+      "textures": "textures/items/arsenal/weapons/albatross__c12"
+    },
     "arsenal_albatross__c2": {
       "textures": "textures/items/arsenal/weapons/albatross__c2"
     },
@@ -35,6 +44,9 @@
     "arsenal_albatross__c8": {
       "textures": "textures/items/arsenal/weapons/albatross__c8"
     },
+    "arsenal_albatross__c9": {
+      "textures": "textures/items/arsenal/weapons/albatross__c9"
+    },
     "arsenal_albatross__o0": {
       "textures": "textures/items/arsenal/weapons/albatross__o0"
     },
@@ -49,6 +61,9 @@
     },
     "arsenal_ammo_antimat_ap": {
       "textures": "textures/items/arsenal/ammo/ammo_antimat_ap"
+    },
+    "arsenal_ammo_ap_core": {
+      "textures": "textures/items/arsenal/attachments/ammo_ap_core"
     },
     "arsenal_ammo_explosive": {
       "textures": "textures/items/arsenal/attachments/ammo_explosive"
@@ -95,6 +110,9 @@
     "arsenal_ammo_magnum_tracer": {
       "textures": "textures/items/arsenal/ammo/ammo_magnum_tracer"
     },
+    "arsenal_ammo_match": {
+      "textures": "textures/items/arsenal/attachments/ammo_match"
+    },
     "arsenal_ammo_medium": {
       "textures": "textures/items/arsenal/ammo/ammo_medium"
     },
@@ -134,6 +152,15 @@
     "arsenal_anvil__c1": {
       "textures": "textures/items/arsenal/weapons/anvil__c1"
     },
+    "arsenal_anvil__c10": {
+      "textures": "textures/items/arsenal/weapons/anvil__c10"
+    },
+    "arsenal_anvil__c11": {
+      "textures": "textures/items/arsenal/weapons/anvil__c11"
+    },
+    "arsenal_anvil__c12": {
+      "textures": "textures/items/arsenal/weapons/anvil__c12"
+    },
     "arsenal_anvil__c2": {
       "textures": "textures/items/arsenal/weapons/anvil__c2"
     },
@@ -155,17 +182,32 @@
     "arsenal_anvil__c8": {
       "textures": "textures/items/arsenal/weapons/anvil__c8"
     },
+    "arsenal_anvil__c9": {
+      "textures": "textures/items/arsenal/weapons/anvil__c9"
+    },
     "arsenal_anvil__o1": {
       "textures": "textures/items/arsenal/weapons/anvil__o1"
     },
     "arsenal_anvil__o2": {
       "textures": "textures/items/arsenal/weapons/anvil__o2"
     },
+    "arsenal_apc": {
+      "textures": "textures/items/arsenal/gear/apc"
+    },
     "arsenal_arc_caster": {
       "textures": "textures/items/arsenal/weapons/arc_caster"
     },
     "arsenal_arc_caster__c1": {
       "textures": "textures/items/arsenal/weapons/arc_caster__c1"
+    },
+    "arsenal_arc_caster__c10": {
+      "textures": "textures/items/arsenal/weapons/arc_caster__c10"
+    },
+    "arsenal_arc_caster__c11": {
+      "textures": "textures/items/arsenal/weapons/arc_caster__c11"
+    },
+    "arsenal_arc_caster__c12": {
+      "textures": "textures/items/arsenal/weapons/arc_caster__c12"
     },
     "arsenal_arc_caster__c2": {
       "textures": "textures/items/arsenal/weapons/arc_caster__c2"
@@ -188,6 +230,9 @@
     "arsenal_arc_caster__c8": {
       "textures": "textures/items/arsenal/weapons/arc_caster__c8"
     },
+    "arsenal_arc_caster__c9": {
+      "textures": "textures/items/arsenal/weapons/arc_caster__c9"
+    },
     "arsenal_arc_caster__o1": {
       "textures": "textures/items/arsenal/weapons/arc_caster__o1"
     },
@@ -199,6 +244,15 @@
     },
     "arsenal_arc_coilgun__c1": {
       "textures": "textures/items/arsenal/weapons/arc_coilgun__c1"
+    },
+    "arsenal_arc_coilgun__c10": {
+      "textures": "textures/items/arsenal/weapons/arc_coilgun__c10"
+    },
+    "arsenal_arc_coilgun__c11": {
+      "textures": "textures/items/arsenal/weapons/arc_coilgun__c11"
+    },
+    "arsenal_arc_coilgun__c12": {
+      "textures": "textures/items/arsenal/weapons/arc_coilgun__c12"
     },
     "arsenal_arc_coilgun__c2": {
       "textures": "textures/items/arsenal/weapons/arc_coilgun__c2"
@@ -221,6 +275,9 @@
     "arsenal_arc_coilgun__c8": {
       "textures": "textures/items/arsenal/weapons/arc_coilgun__c8"
     },
+    "arsenal_arc_coilgun__c9": {
+      "textures": "textures/items/arsenal/weapons/arc_coilgun__c9"
+    },
     "arsenal_arc_coilgun__o0": {
       "textures": "textures/items/arsenal/weapons/arc_coilgun__o0"
     },
@@ -236,6 +293,90 @@
     "arsenal_at_post": {
       "textures": "textures/items/arsenal/gear/at_post"
     },
+    "arsenal_aurora": {
+      "textures": "textures/items/arsenal/weapons/aurora"
+    },
+    "arsenal_aurora__c1": {
+      "textures": "textures/items/arsenal/weapons/aurora__c1"
+    },
+    "arsenal_aurora__c10": {
+      "textures": "textures/items/arsenal/weapons/aurora__c10"
+    },
+    "arsenal_aurora__c11": {
+      "textures": "textures/items/arsenal/weapons/aurora__c11"
+    },
+    "arsenal_aurora__c12": {
+      "textures": "textures/items/arsenal/weapons/aurora__c12"
+    },
+    "arsenal_aurora__c2": {
+      "textures": "textures/items/arsenal/weapons/aurora__c2"
+    },
+    "arsenal_aurora__c3": {
+      "textures": "textures/items/arsenal/weapons/aurora__c3"
+    },
+    "arsenal_aurora__c4": {
+      "textures": "textures/items/arsenal/weapons/aurora__c4"
+    },
+    "arsenal_aurora__c5": {
+      "textures": "textures/items/arsenal/weapons/aurora__c5"
+    },
+    "arsenal_aurora__c6": {
+      "textures": "textures/items/arsenal/weapons/aurora__c6"
+    },
+    "arsenal_aurora__c7": {
+      "textures": "textures/items/arsenal/weapons/aurora__c7"
+    },
+    "arsenal_aurora__c8": {
+      "textures": "textures/items/arsenal/weapons/aurora__c8"
+    },
+    "arsenal_aurora__c9": {
+      "textures": "textures/items/arsenal/weapons/aurora__c9"
+    },
+    "arsenal_aurora__o0": {
+      "textures": "textures/items/arsenal/weapons/aurora__o0"
+    },
+    "arsenal_aurora__o1": {
+      "textures": "textures/items/arsenal/weapons/aurora__o1"
+    },
+    "arsenal_avalanche": {
+      "textures": "textures/items/arsenal/weapons/avalanche"
+    },
+    "arsenal_avalanche__c1": {
+      "textures": "textures/items/arsenal/weapons/avalanche__c1"
+    },
+    "arsenal_avalanche__c10": {
+      "textures": "textures/items/arsenal/weapons/avalanche__c10"
+    },
+    "arsenal_avalanche__c11": {
+      "textures": "textures/items/arsenal/weapons/avalanche__c11"
+    },
+    "arsenal_avalanche__c12": {
+      "textures": "textures/items/arsenal/weapons/avalanche__c12"
+    },
+    "arsenal_avalanche__c2": {
+      "textures": "textures/items/arsenal/weapons/avalanche__c2"
+    },
+    "arsenal_avalanche__c3": {
+      "textures": "textures/items/arsenal/weapons/avalanche__c3"
+    },
+    "arsenal_avalanche__c4": {
+      "textures": "textures/items/arsenal/weapons/avalanche__c4"
+    },
+    "arsenal_avalanche__c5": {
+      "textures": "textures/items/arsenal/weapons/avalanche__c5"
+    },
+    "arsenal_avalanche__c6": {
+      "textures": "textures/items/arsenal/weapons/avalanche__c6"
+    },
+    "arsenal_avalanche__c7": {
+      "textures": "textures/items/arsenal/weapons/avalanche__c7"
+    },
+    "arsenal_avalanche__c8": {
+      "textures": "textures/items/arsenal/weapons/avalanche__c8"
+    },
+    "arsenal_avalanche__c9": {
+      "textures": "textures/items/arsenal/weapons/avalanche__c9"
+    },
     "arsenal_bandage": {
       "textures": "textures/items/arsenal/medical/bandage"
     },
@@ -248,6 +389,12 @@
     "arsenal_barrel_long": {
       "textures": "textures/items/arsenal/attachments/barrel_long"
     },
+    "arsenal_barrel_match": {
+      "textures": "textures/items/arsenal/attachments/barrel_match"
+    },
+    "arsenal_barrel_ported": {
+      "textures": "textures/items/arsenal/attachments/barrel_ported"
+    },
     "arsenal_barrel_short": {
       "textures": "textures/items/arsenal/attachments/barrel_short"
     },
@@ -256,6 +403,15 @@
     },
     "arsenal_bastion__c1": {
       "textures": "textures/items/arsenal/weapons/bastion__c1"
+    },
+    "arsenal_bastion__c10": {
+      "textures": "textures/items/arsenal/weapons/bastion__c10"
+    },
+    "arsenal_bastion__c11": {
+      "textures": "textures/items/arsenal/weapons/bastion__c11"
+    },
+    "arsenal_bastion__c12": {
+      "textures": "textures/items/arsenal/weapons/bastion__c12"
     },
     "arsenal_bastion__c2": {
       "textures": "textures/items/arsenal/weapons/bastion__c2"
@@ -278,6 +434,9 @@
     "arsenal_bastion__c8": {
       "textures": "textures/items/arsenal/weapons/bastion__c8"
     },
+    "arsenal_bastion__c9": {
+      "textures": "textures/items/arsenal/weapons/bastion__c9"
+    },
     "arsenal_bastion__o1": {
       "textures": "textures/items/arsenal/weapons/bastion__o1"
     },
@@ -289,6 +448,15 @@
     },
     "arsenal_behemoth__c1": {
       "textures": "textures/items/arsenal/weapons/behemoth__c1"
+    },
+    "arsenal_behemoth__c10": {
+      "textures": "textures/items/arsenal/weapons/behemoth__c10"
+    },
+    "arsenal_behemoth__c11": {
+      "textures": "textures/items/arsenal/weapons/behemoth__c11"
+    },
+    "arsenal_behemoth__c12": {
+      "textures": "textures/items/arsenal/weapons/behemoth__c12"
     },
     "arsenal_behemoth__c2": {
       "textures": "textures/items/arsenal/weapons/behemoth__c2"
@@ -311,6 +479,9 @@
     "arsenal_behemoth__c8": {
       "textures": "textures/items/arsenal/weapons/behemoth__c8"
     },
+    "arsenal_behemoth__c9": {
+      "textures": "textures/items/arsenal/weapons/behemoth__c9"
+    },
     "arsenal_behemoth__o0": {
       "textures": "textures/items/arsenal/weapons/behemoth__o0"
     },
@@ -325,6 +496,15 @@
     },
     "arsenal_bouncer__c1": {
       "textures": "textures/items/arsenal/weapons/bouncer__c1"
+    },
+    "arsenal_bouncer__c10": {
+      "textures": "textures/items/arsenal/weapons/bouncer__c10"
+    },
+    "arsenal_bouncer__c11": {
+      "textures": "textures/items/arsenal/weapons/bouncer__c11"
+    },
+    "arsenal_bouncer__c12": {
+      "textures": "textures/items/arsenal/weapons/bouncer__c12"
     },
     "arsenal_bouncer__c2": {
       "textures": "textures/items/arsenal/weapons/bouncer__c2"
@@ -347,11 +527,23 @@
     "arsenal_bouncer__c8": {
       "textures": "textures/items/arsenal/weapons/bouncer__c8"
     },
+    "arsenal_bouncer__c9": {
+      "textures": "textures/items/arsenal/weapons/bouncer__c9"
+    },
     "arsenal_breacher": {
       "textures": "textures/items/arsenal/weapons/breacher"
     },
     "arsenal_breacher__c1": {
       "textures": "textures/items/arsenal/weapons/breacher__c1"
+    },
+    "arsenal_breacher__c10": {
+      "textures": "textures/items/arsenal/weapons/breacher__c10"
+    },
+    "arsenal_breacher__c11": {
+      "textures": "textures/items/arsenal/weapons/breacher__c11"
+    },
+    "arsenal_breacher__c12": {
+      "textures": "textures/items/arsenal/weapons/breacher__c12"
     },
     "arsenal_breacher__c2": {
       "textures": "textures/items/arsenal/weapons/breacher__c2"
@@ -374,6 +566,9 @@
     "arsenal_breacher__c8": {
       "textures": "textures/items/arsenal/weapons/breacher__c8"
     },
+    "arsenal_breacher__c9": {
+      "textures": "textures/items/arsenal/weapons/breacher__c9"
+    },
     "arsenal_breacher__o1": {
       "textures": "textures/items/arsenal/weapons/breacher__o1"
     },
@@ -386,11 +581,65 @@
     "arsenal_buggy": {
       "textures": "textures/items/arsenal/gear/buggy"
     },
+    "arsenal_bulldog": {
+      "textures": "textures/items/arsenal/weapons/bulldog"
+    },
+    "arsenal_bulldog__c1": {
+      "textures": "textures/items/arsenal/weapons/bulldog__c1"
+    },
+    "arsenal_bulldog__c10": {
+      "textures": "textures/items/arsenal/weapons/bulldog__c10"
+    },
+    "arsenal_bulldog__c11": {
+      "textures": "textures/items/arsenal/weapons/bulldog__c11"
+    },
+    "arsenal_bulldog__c12": {
+      "textures": "textures/items/arsenal/weapons/bulldog__c12"
+    },
+    "arsenal_bulldog__c2": {
+      "textures": "textures/items/arsenal/weapons/bulldog__c2"
+    },
+    "arsenal_bulldog__c3": {
+      "textures": "textures/items/arsenal/weapons/bulldog__c3"
+    },
+    "arsenal_bulldog__c4": {
+      "textures": "textures/items/arsenal/weapons/bulldog__c4"
+    },
+    "arsenal_bulldog__c5": {
+      "textures": "textures/items/arsenal/weapons/bulldog__c5"
+    },
+    "arsenal_bulldog__c6": {
+      "textures": "textures/items/arsenal/weapons/bulldog__c6"
+    },
+    "arsenal_bulldog__c7": {
+      "textures": "textures/items/arsenal/weapons/bulldog__c7"
+    },
+    "arsenal_bulldog__c8": {
+      "textures": "textures/items/arsenal/weapons/bulldog__c8"
+    },
+    "arsenal_bulldog__c9": {
+      "textures": "textures/items/arsenal/weapons/bulldog__c9"
+    },
+    "arsenal_bulldog__o1": {
+      "textures": "textures/items/arsenal/weapons/bulldog__o1"
+    },
+    "arsenal_bulldog__o2": {
+      "textures": "textures/items/arsenal/weapons/bulldog__o2"
+    },
     "arsenal_bulwark": {
       "textures": "textures/items/arsenal/weapons/bulwark"
     },
     "arsenal_bulwark__c1": {
       "textures": "textures/items/arsenal/weapons/bulwark__c1"
+    },
+    "arsenal_bulwark__c10": {
+      "textures": "textures/items/arsenal/weapons/bulwark__c10"
+    },
+    "arsenal_bulwark__c11": {
+      "textures": "textures/items/arsenal/weapons/bulwark__c11"
+    },
+    "arsenal_bulwark__c12": {
+      "textures": "textures/items/arsenal/weapons/bulwark__c12"
     },
     "arsenal_bulwark__c2": {
       "textures": "textures/items/arsenal/weapons/bulwark__c2"
@@ -413,6 +662,9 @@
     "arsenal_bulwark__c8": {
       "textures": "textures/items/arsenal/weapons/bulwark__c8"
     },
+    "arsenal_bulwark__c9": {
+      "textures": "textures/items/arsenal/weapons/bulwark__c9"
+    },
     "arsenal_bulwark__o1": {
       "textures": "textures/items/arsenal/weapons/bulwark__o1"
     },
@@ -427,6 +679,15 @@
     },
     "arsenal_cinder__c1": {
       "textures": "textures/items/arsenal/weapons/cinder__c1"
+    },
+    "arsenal_cinder__c10": {
+      "textures": "textures/items/arsenal/weapons/cinder__c10"
+    },
+    "arsenal_cinder__c11": {
+      "textures": "textures/items/arsenal/weapons/cinder__c11"
+    },
+    "arsenal_cinder__c12": {
+      "textures": "textures/items/arsenal/weapons/cinder__c12"
     },
     "arsenal_cinder__c2": {
       "textures": "textures/items/arsenal/weapons/cinder__c2"
@@ -449,6 +710,9 @@
     "arsenal_cinder__c8": {
       "textures": "textures/items/arsenal/weapons/cinder__c8"
     },
+    "arsenal_cinder__c9": {
+      "textures": "textures/items/arsenal/weapons/cinder__c9"
+    },
     "arsenal_cinder__o1": {
       "textures": "textures/items/arsenal/weapons/cinder__o1"
     },
@@ -460,6 +724,15 @@
     },
     "arsenal_clawstrike__c1": {
       "textures": "textures/items/arsenal/weapons/clawstrike__c1"
+    },
+    "arsenal_clawstrike__c10": {
+      "textures": "textures/items/arsenal/weapons/clawstrike__c10"
+    },
+    "arsenal_clawstrike__c11": {
+      "textures": "textures/items/arsenal/weapons/clawstrike__c11"
+    },
+    "arsenal_clawstrike__c12": {
+      "textures": "textures/items/arsenal/weapons/clawstrike__c12"
     },
     "arsenal_clawstrike__c2": {
       "textures": "textures/items/arsenal/weapons/clawstrike__c2"
@@ -482,6 +755,9 @@
     "arsenal_clawstrike__c8": {
       "textures": "textures/items/arsenal/weapons/clawstrike__c8"
     },
+    "arsenal_clawstrike__c9": {
+      "textures": "textures/items/arsenal/weapons/clawstrike__c9"
+    },
     "arsenal_clawstrike__o1": {
       "textures": "textures/items/arsenal/weapons/clawstrike__o1"
     },
@@ -496,6 +772,15 @@
     },
     "arsenal_coachman__c1": {
       "textures": "textures/items/arsenal/weapons/coachman__c1"
+    },
+    "arsenal_coachman__c10": {
+      "textures": "textures/items/arsenal/weapons/coachman__c10"
+    },
+    "arsenal_coachman__c11": {
+      "textures": "textures/items/arsenal/weapons/coachman__c11"
+    },
+    "arsenal_coachman__c12": {
+      "textures": "textures/items/arsenal/weapons/coachman__c12"
     },
     "arsenal_coachman__c2": {
       "textures": "textures/items/arsenal/weapons/coachman__c2"
@@ -518,14 +803,116 @@
     "arsenal_coachman__c8": {
       "textures": "textures/items/arsenal/weapons/coachman__c8"
     },
+    "arsenal_coachman__c9": {
+      "textures": "textures/items/arsenal/weapons/coachman__c9"
+    },
     "arsenal_combat_knife": {
       "textures": "textures/items/arsenal/melee/combat_knife"
+    },
+    "arsenal_condor": {
+      "textures": "textures/items/arsenal/weapons/condor"
+    },
+    "arsenal_condor__c1": {
+      "textures": "textures/items/arsenal/weapons/condor__c1"
+    },
+    "arsenal_condor__c10": {
+      "textures": "textures/items/arsenal/weapons/condor__c10"
+    },
+    "arsenal_condor__c11": {
+      "textures": "textures/items/arsenal/weapons/condor__c11"
+    },
+    "arsenal_condor__c12": {
+      "textures": "textures/items/arsenal/weapons/condor__c12"
+    },
+    "arsenal_condor__c2": {
+      "textures": "textures/items/arsenal/weapons/condor__c2"
+    },
+    "arsenal_condor__c3": {
+      "textures": "textures/items/arsenal/weapons/condor__c3"
+    },
+    "arsenal_condor__c4": {
+      "textures": "textures/items/arsenal/weapons/condor__c4"
+    },
+    "arsenal_condor__c5": {
+      "textures": "textures/items/arsenal/weapons/condor__c5"
+    },
+    "arsenal_condor__c6": {
+      "textures": "textures/items/arsenal/weapons/condor__c6"
+    },
+    "arsenal_condor__c7": {
+      "textures": "textures/items/arsenal/weapons/condor__c7"
+    },
+    "arsenal_condor__c8": {
+      "textures": "textures/items/arsenal/weapons/condor__c8"
+    },
+    "arsenal_condor__c9": {
+      "textures": "textures/items/arsenal/weapons/condor__c9"
+    },
+    "arsenal_condor__o0": {
+      "textures": "textures/items/arsenal/weapons/condor__o0"
+    },
+    "arsenal_condor__o1": {
+      "textures": "textures/items/arsenal/weapons/condor__o1"
+    },
+    "arsenal_corsair": {
+      "textures": "textures/items/arsenal/weapons/corsair"
+    },
+    "arsenal_corsair__c1": {
+      "textures": "textures/items/arsenal/weapons/corsair__c1"
+    },
+    "arsenal_corsair__c10": {
+      "textures": "textures/items/arsenal/weapons/corsair__c10"
+    },
+    "arsenal_corsair__c11": {
+      "textures": "textures/items/arsenal/weapons/corsair__c11"
+    },
+    "arsenal_corsair__c12": {
+      "textures": "textures/items/arsenal/weapons/corsair__c12"
+    },
+    "arsenal_corsair__c2": {
+      "textures": "textures/items/arsenal/weapons/corsair__c2"
+    },
+    "arsenal_corsair__c3": {
+      "textures": "textures/items/arsenal/weapons/corsair__c3"
+    },
+    "arsenal_corsair__c4": {
+      "textures": "textures/items/arsenal/weapons/corsair__c4"
+    },
+    "arsenal_corsair__c5": {
+      "textures": "textures/items/arsenal/weapons/corsair__c5"
+    },
+    "arsenal_corsair__c6": {
+      "textures": "textures/items/arsenal/weapons/corsair__c6"
+    },
+    "arsenal_corsair__c7": {
+      "textures": "textures/items/arsenal/weapons/corsair__c7"
+    },
+    "arsenal_corsair__c8": {
+      "textures": "textures/items/arsenal/weapons/corsair__c8"
+    },
+    "arsenal_corsair__c9": {
+      "textures": "textures/items/arsenal/weapons/corsair__c9"
+    },
+    "arsenal_corsair__o0": {
+      "textures": "textures/items/arsenal/weapons/corsair__o0"
+    },
+    "arsenal_corsair__o2": {
+      "textures": "textures/items/arsenal/weapons/corsair__o2"
     },
     "arsenal_cryo_lance": {
       "textures": "textures/items/arsenal/weapons/cryo_lance"
     },
     "arsenal_cryo_lance__c1": {
       "textures": "textures/items/arsenal/weapons/cryo_lance__c1"
+    },
+    "arsenal_cryo_lance__c10": {
+      "textures": "textures/items/arsenal/weapons/cryo_lance__c10"
+    },
+    "arsenal_cryo_lance__c11": {
+      "textures": "textures/items/arsenal/weapons/cryo_lance__c11"
+    },
+    "arsenal_cryo_lance__c12": {
+      "textures": "textures/items/arsenal/weapons/cryo_lance__c12"
     },
     "arsenal_cryo_lance__c2": {
       "textures": "textures/items/arsenal/weapons/cryo_lance__c2"
@@ -548,11 +935,59 @@
     "arsenal_cryo_lance__c8": {
       "textures": "textures/items/arsenal/weapons/cryo_lance__c8"
     },
+    "arsenal_cryo_lance__c9": {
+      "textures": "textures/items/arsenal/weapons/cryo_lance__c9"
+    },
     "arsenal_cryo_lance__o0": {
       "textures": "textures/items/arsenal/weapons/cryo_lance__o0"
     },
     "arsenal_cryo_lance__o2": {
       "textures": "textures/items/arsenal/weapons/cryo_lance__o2"
+    },
+    "arsenal_cyclone": {
+      "textures": "textures/items/arsenal/weapons/cyclone"
+    },
+    "arsenal_cyclone__c1": {
+      "textures": "textures/items/arsenal/weapons/cyclone__c1"
+    },
+    "arsenal_cyclone__c10": {
+      "textures": "textures/items/arsenal/weapons/cyclone__c10"
+    },
+    "arsenal_cyclone__c11": {
+      "textures": "textures/items/arsenal/weapons/cyclone__c11"
+    },
+    "arsenal_cyclone__c12": {
+      "textures": "textures/items/arsenal/weapons/cyclone__c12"
+    },
+    "arsenal_cyclone__c2": {
+      "textures": "textures/items/arsenal/weapons/cyclone__c2"
+    },
+    "arsenal_cyclone__c3": {
+      "textures": "textures/items/arsenal/weapons/cyclone__c3"
+    },
+    "arsenal_cyclone__c4": {
+      "textures": "textures/items/arsenal/weapons/cyclone__c4"
+    },
+    "arsenal_cyclone__c5": {
+      "textures": "textures/items/arsenal/weapons/cyclone__c5"
+    },
+    "arsenal_cyclone__c6": {
+      "textures": "textures/items/arsenal/weapons/cyclone__c6"
+    },
+    "arsenal_cyclone__c7": {
+      "textures": "textures/items/arsenal/weapons/cyclone__c7"
+    },
+    "arsenal_cyclone__c8": {
+      "textures": "textures/items/arsenal/weapons/cyclone__c8"
+    },
+    "arsenal_cyclone__c9": {
+      "textures": "textures/items/arsenal/weapons/cyclone__c9"
+    },
+    "arsenal_cyclone__o1": {
+      "textures": "textures/items/arsenal/weapons/cyclone__o1"
+    },
+    "arsenal_cyclone__o2": {
+      "textures": "textures/items/arsenal/weapons/cyclone__o2"
     },
     "arsenal_defibrillator": {
       "textures": "textures/items/arsenal/medical/defibrillator"
@@ -568,6 +1003,15 @@
     },
     "arsenal_dragons_breath__c1": {
       "textures": "textures/items/arsenal/weapons/dragons_breath__c1"
+    },
+    "arsenal_dragons_breath__c10": {
+      "textures": "textures/items/arsenal/weapons/dragons_breath__c10"
+    },
+    "arsenal_dragons_breath__c11": {
+      "textures": "textures/items/arsenal/weapons/dragons_breath__c11"
+    },
+    "arsenal_dragons_breath__c12": {
+      "textures": "textures/items/arsenal/weapons/dragons_breath__c12"
     },
     "arsenal_dragons_breath__c2": {
       "textures": "textures/items/arsenal/weapons/dragons_breath__c2"
@@ -590,6 +1034,9 @@
     "arsenal_dragons_breath__c8": {
       "textures": "textures/items/arsenal/weapons/dragons_breath__c8"
     },
+    "arsenal_dragons_breath__c9": {
+      "textures": "textures/items/arsenal/weapons/dragons_breath__c9"
+    },
     "arsenal_dragons_breath__o1": {
       "textures": "textures/items/arsenal/weapons/dragons_breath__o1"
     },
@@ -601,6 +1048,15 @@
     },
     "arsenal_drifter__c1": {
       "textures": "textures/items/arsenal/weapons/drifter__c1"
+    },
+    "arsenal_drifter__c10": {
+      "textures": "textures/items/arsenal/weapons/drifter__c10"
+    },
+    "arsenal_drifter__c11": {
+      "textures": "textures/items/arsenal/weapons/drifter__c11"
+    },
+    "arsenal_drifter__c12": {
+      "textures": "textures/items/arsenal/weapons/drifter__c12"
     },
     "arsenal_drifter__c2": {
       "textures": "textures/items/arsenal/weapons/drifter__c2"
@@ -623,6 +1079,9 @@
     "arsenal_drifter__c8": {
       "textures": "textures/items/arsenal/weapons/drifter__c8"
     },
+    "arsenal_drifter__c9": {
+      "textures": "textures/items/arsenal/weapons/drifter__c9"
+    },
     "arsenal_drifter__o1": {
       "textures": "textures/items/arsenal/weapons/drifter__o1"
     },
@@ -634,6 +1093,15 @@
     },
     "arsenal_echo3__c1": {
       "textures": "textures/items/arsenal/weapons/echo3__c1"
+    },
+    "arsenal_echo3__c10": {
+      "textures": "textures/items/arsenal/weapons/echo3__c10"
+    },
+    "arsenal_echo3__c11": {
+      "textures": "textures/items/arsenal/weapons/echo3__c11"
+    },
+    "arsenal_echo3__c12": {
+      "textures": "textures/items/arsenal/weapons/echo3__c12"
     },
     "arsenal_echo3__c2": {
       "textures": "textures/items/arsenal/weapons/echo3__c2"
@@ -656,6 +1124,9 @@
     "arsenal_echo3__c8": {
       "textures": "textures/items/arsenal/weapons/echo3__c8"
     },
+    "arsenal_echo3__c9": {
+      "textures": "textures/items/arsenal/weapons/echo3__c9"
+    },
     "arsenal_echo3__o0": {
       "textures": "textures/items/arsenal/weapons/echo3__o0"
     },
@@ -673,6 +1144,15 @@
     },
     "arsenal_falcon__c1": {
       "textures": "textures/items/arsenal/weapons/falcon__c1"
+    },
+    "arsenal_falcon__c10": {
+      "textures": "textures/items/arsenal/weapons/falcon__c10"
+    },
+    "arsenal_falcon__c11": {
+      "textures": "textures/items/arsenal/weapons/falcon__c11"
+    },
+    "arsenal_falcon__c12": {
+      "textures": "textures/items/arsenal/weapons/falcon__c12"
     },
     "arsenal_falcon__c2": {
       "textures": "textures/items/arsenal/weapons/falcon__c2"
@@ -695,6 +1175,9 @@
     "arsenal_falcon__c8": {
       "textures": "textures/items/arsenal/weapons/falcon__c8"
     },
+    "arsenal_falcon__c9": {
+      "textures": "textures/items/arsenal/weapons/falcon__c9"
+    },
     "arsenal_falcon__o0": {
       "textures": "textures/items/arsenal/weapons/falcon__o0"
     },
@@ -709,6 +1192,15 @@
     },
     "arsenal_flare_pistol__c1": {
       "textures": "textures/items/arsenal/weapons/flare_pistol__c1"
+    },
+    "arsenal_flare_pistol__c10": {
+      "textures": "textures/items/arsenal/weapons/flare_pistol__c10"
+    },
+    "arsenal_flare_pistol__c11": {
+      "textures": "textures/items/arsenal/weapons/flare_pistol__c11"
+    },
+    "arsenal_flare_pistol__c12": {
+      "textures": "textures/items/arsenal/weapons/flare_pistol__c12"
     },
     "arsenal_flare_pistol__c2": {
       "textures": "textures/items/arsenal/weapons/flare_pistol__c2"
@@ -731,6 +1223,9 @@
     "arsenal_flare_pistol__c8": {
       "textures": "textures/items/arsenal/weapons/flare_pistol__c8"
     },
+    "arsenal_flare_pistol__c9": {
+      "textures": "textures/items/arsenal/weapons/flare_pistol__c9"
+    },
     "arsenal_flare_shell": {
       "textures": "textures/items/arsenal/ammo/flare_shell"
     },
@@ -740,11 +1235,65 @@
     "arsenal_fuel_canister": {
       "textures": "textures/items/arsenal/ammo/fuel_canister"
     },
+    "arsenal_gadfly": {
+      "textures": "textures/items/arsenal/weapons/gadfly"
+    },
+    "arsenal_gadfly__c1": {
+      "textures": "textures/items/arsenal/weapons/gadfly__c1"
+    },
+    "arsenal_gadfly__c10": {
+      "textures": "textures/items/arsenal/weapons/gadfly__c10"
+    },
+    "arsenal_gadfly__c11": {
+      "textures": "textures/items/arsenal/weapons/gadfly__c11"
+    },
+    "arsenal_gadfly__c12": {
+      "textures": "textures/items/arsenal/weapons/gadfly__c12"
+    },
+    "arsenal_gadfly__c2": {
+      "textures": "textures/items/arsenal/weapons/gadfly__c2"
+    },
+    "arsenal_gadfly__c3": {
+      "textures": "textures/items/arsenal/weapons/gadfly__c3"
+    },
+    "arsenal_gadfly__c4": {
+      "textures": "textures/items/arsenal/weapons/gadfly__c4"
+    },
+    "arsenal_gadfly__c5": {
+      "textures": "textures/items/arsenal/weapons/gadfly__c5"
+    },
+    "arsenal_gadfly__c6": {
+      "textures": "textures/items/arsenal/weapons/gadfly__c6"
+    },
+    "arsenal_gadfly__c7": {
+      "textures": "textures/items/arsenal/weapons/gadfly__c7"
+    },
+    "arsenal_gadfly__c8": {
+      "textures": "textures/items/arsenal/weapons/gadfly__c8"
+    },
+    "arsenal_gadfly__c9": {
+      "textures": "textures/items/arsenal/weapons/gadfly__c9"
+    },
+    "arsenal_gadfly__o1": {
+      "textures": "textures/items/arsenal/weapons/gadfly__o1"
+    },
+    "arsenal_gadfly__o2": {
+      "textures": "textures/items/arsenal/weapons/gadfly__o2"
+    },
     "arsenal_garrison": {
       "textures": "textures/items/arsenal/weapons/garrison"
     },
     "arsenal_garrison__c1": {
       "textures": "textures/items/arsenal/weapons/garrison__c1"
+    },
+    "arsenal_garrison__c10": {
+      "textures": "textures/items/arsenal/weapons/garrison__c10"
+    },
+    "arsenal_garrison__c11": {
+      "textures": "textures/items/arsenal/weapons/garrison__c11"
+    },
+    "arsenal_garrison__c12": {
+      "textures": "textures/items/arsenal/weapons/garrison__c12"
     },
     "arsenal_garrison__c2": {
       "textures": "textures/items/arsenal/weapons/garrison__c2"
@@ -767,6 +1316,9 @@
     "arsenal_garrison__c8": {
       "textures": "textures/items/arsenal/weapons/garrison__c8"
     },
+    "arsenal_garrison__c9": {
+      "textures": "textures/items/arsenal/weapons/garrison__c9"
+    },
     "arsenal_garrison__o1": {
       "textures": "textures/items/arsenal/weapons/garrison__o1"
     },
@@ -779,11 +1331,68 @@
     "arsenal_ghillie_suit": {
       "textures": "textures/items/arsenal/armor/ghillie_suit"
     },
+    "arsenal_gl_post": {
+      "textures": "textures/items/arsenal/gear/gl_post"
+    },
+    "arsenal_goliath": {
+      "textures": "textures/items/arsenal/weapons/goliath"
+    },
+    "arsenal_goliath__c1": {
+      "textures": "textures/items/arsenal/weapons/goliath__c1"
+    },
+    "arsenal_goliath__c10": {
+      "textures": "textures/items/arsenal/weapons/goliath__c10"
+    },
+    "arsenal_goliath__c11": {
+      "textures": "textures/items/arsenal/weapons/goliath__c11"
+    },
+    "arsenal_goliath__c12": {
+      "textures": "textures/items/arsenal/weapons/goliath__c12"
+    },
+    "arsenal_goliath__c2": {
+      "textures": "textures/items/arsenal/weapons/goliath__c2"
+    },
+    "arsenal_goliath__c3": {
+      "textures": "textures/items/arsenal/weapons/goliath__c3"
+    },
+    "arsenal_goliath__c4": {
+      "textures": "textures/items/arsenal/weapons/goliath__c4"
+    },
+    "arsenal_goliath__c5": {
+      "textures": "textures/items/arsenal/weapons/goliath__c5"
+    },
+    "arsenal_goliath__c6": {
+      "textures": "textures/items/arsenal/weapons/goliath__c6"
+    },
+    "arsenal_goliath__c7": {
+      "textures": "textures/items/arsenal/weapons/goliath__c7"
+    },
+    "arsenal_goliath__c8": {
+      "textures": "textures/items/arsenal/weapons/goliath__c8"
+    },
+    "arsenal_goliath__c9": {
+      "textures": "textures/items/arsenal/weapons/goliath__c9"
+    },
+    "arsenal_goliath__o1": {
+      "textures": "textures/items/arsenal/weapons/goliath__o1"
+    },
+    "arsenal_goliath__o2": {
+      "textures": "textures/items/arsenal/weapons/goliath__o2"
+    },
     "arsenal_grapple": {
       "textures": "textures/items/arsenal/weapons/grapple"
     },
     "arsenal_grapple__c1": {
       "textures": "textures/items/arsenal/weapons/grapple__c1"
+    },
+    "arsenal_grapple__c10": {
+      "textures": "textures/items/arsenal/weapons/grapple__c10"
+    },
+    "arsenal_grapple__c11": {
+      "textures": "textures/items/arsenal/weapons/grapple__c11"
+    },
+    "arsenal_grapple__c12": {
+      "textures": "textures/items/arsenal/weapons/grapple__c12"
     },
     "arsenal_grapple__c2": {
       "textures": "textures/items/arsenal/weapons/grapple__c2"
@@ -806,11 +1415,23 @@
     "arsenal_grapple__c8": {
       "textures": "textures/items/arsenal/weapons/grapple__c8"
     },
+    "arsenal_grapple__c9": {
+      "textures": "textures/items/arsenal/weapons/grapple__c9"
+    },
     "arsenal_gravitas": {
       "textures": "textures/items/arsenal/weapons/gravitas"
     },
     "arsenal_gravitas__c1": {
       "textures": "textures/items/arsenal/weapons/gravitas__c1"
+    },
+    "arsenal_gravitas__c10": {
+      "textures": "textures/items/arsenal/weapons/gravitas__c10"
+    },
+    "arsenal_gravitas__c11": {
+      "textures": "textures/items/arsenal/weapons/gravitas__c11"
+    },
+    "arsenal_gravitas__c12": {
+      "textures": "textures/items/arsenal/weapons/gravitas__c12"
     },
     "arsenal_gravitas__c2": {
       "textures": "textures/items/arsenal/weapons/gravitas__c2"
@@ -833,6 +1454,9 @@
     "arsenal_gravitas__c8": {
       "textures": "textures/items/arsenal/weapons/gravitas__c8"
     },
+    "arsenal_gravitas__c9": {
+      "textures": "textures/items/arsenal/weapons/gravitas__c9"
+    },
     "arsenal_grenade_cluster": {
       "textures": "textures/items/arsenal/throwables/grenade_cluster"
     },
@@ -851,8 +1475,14 @@
     "arsenal_grenade_gas": {
       "textures": "textures/items/arsenal/throwables/grenade_gas"
     },
+    "arsenal_grenade_heavy_impact": {
+      "textures": "textures/items/arsenal/throwables/grenade_heavy_impact"
+    },
     "arsenal_grenade_impact": {
       "textures": "textures/items/arsenal/throwables/grenade_impact"
+    },
+    "arsenal_grenade_mini": {
+      "textures": "textures/items/arsenal/throwables/grenade_mini"
     },
     "arsenal_grenade_smoke": {
       "textures": "textures/items/arsenal/throwables/grenade_smoke"
@@ -865,6 +1495,15 @@
     },
     "arsenal_grinder__c1": {
       "textures": "textures/items/arsenal/weapons/grinder__c1"
+    },
+    "arsenal_grinder__c10": {
+      "textures": "textures/items/arsenal/weapons/grinder__c10"
+    },
+    "arsenal_grinder__c11": {
+      "textures": "textures/items/arsenal/weapons/grinder__c11"
+    },
+    "arsenal_grinder__c12": {
+      "textures": "textures/items/arsenal/weapons/grinder__c12"
     },
     "arsenal_grinder__c2": {
       "textures": "textures/items/arsenal/weapons/grinder__c2"
@@ -887,8 +1526,20 @@
     "arsenal_grinder__c8": {
       "textures": "textures/items/arsenal/weapons/grinder__c8"
     },
+    "arsenal_grinder__c9": {
+      "textures": "textures/items/arsenal/weapons/grinder__c9"
+    },
     "arsenal_grip_angled": {
       "textures": "textures/items/arsenal/attachments/grip_angled"
+    },
+    "arsenal_grip_handstop": {
+      "textures": "textures/items/arsenal/attachments/grip_handstop"
+    },
+    "arsenal_grip_heavy": {
+      "textures": "textures/items/arsenal/attachments/grip_heavy"
+    },
+    "arsenal_grip_stubby": {
+      "textures": "textures/items/arsenal/attachments/grip_stubby"
     },
     "arsenal_grip_vertical": {
       "textures": "textures/items/arsenal/attachments/grip_vertical"
@@ -898,6 +1549,15 @@
     },
     "arsenal_hailstorm__c1": {
       "textures": "textures/items/arsenal/weapons/hailstorm__c1"
+    },
+    "arsenal_hailstorm__c10": {
+      "textures": "textures/items/arsenal/weapons/hailstorm__c10"
+    },
+    "arsenal_hailstorm__c11": {
+      "textures": "textures/items/arsenal/weapons/hailstorm__c11"
+    },
+    "arsenal_hailstorm__c12": {
+      "textures": "textures/items/arsenal/weapons/hailstorm__c12"
     },
     "arsenal_hailstorm__c2": {
       "textures": "textures/items/arsenal/weapons/hailstorm__c2"
@@ -920,11 +1580,23 @@
     "arsenal_hailstorm__c8": {
       "textures": "textures/items/arsenal/weapons/hailstorm__c8"
     },
+    "arsenal_hailstorm__c9": {
+      "textures": "textures/items/arsenal/weapons/hailstorm__c9"
+    },
     "arsenal_halberd": {
       "textures": "textures/items/arsenal/weapons/halberd"
     },
     "arsenal_halberd__c1": {
       "textures": "textures/items/arsenal/weapons/halberd__c1"
+    },
+    "arsenal_halberd__c10": {
+      "textures": "textures/items/arsenal/weapons/halberd__c10"
+    },
+    "arsenal_halberd__c11": {
+      "textures": "textures/items/arsenal/weapons/halberd__c11"
+    },
+    "arsenal_halberd__c12": {
+      "textures": "textures/items/arsenal/weapons/halberd__c12"
     },
     "arsenal_halberd__c2": {
       "textures": "textures/items/arsenal/weapons/halberd__c2"
@@ -947,6 +1619,9 @@
     "arsenal_halberd__c8": {
       "textures": "textures/items/arsenal/weapons/halberd__c8"
     },
+    "arsenal_halberd__c9": {
+      "textures": "textures/items/arsenal/weapons/halberd__c9"
+    },
     "arsenal_halberd__o1": {
       "textures": "textures/items/arsenal/weapons/halberd__o1"
     },
@@ -958,6 +1633,15 @@
     },
     "arsenal_hammerfall__c1": {
       "textures": "textures/items/arsenal/weapons/hammerfall__c1"
+    },
+    "arsenal_hammerfall__c10": {
+      "textures": "textures/items/arsenal/weapons/hammerfall__c10"
+    },
+    "arsenal_hammerfall__c11": {
+      "textures": "textures/items/arsenal/weapons/hammerfall__c11"
+    },
+    "arsenal_hammerfall__c12": {
+      "textures": "textures/items/arsenal/weapons/hammerfall__c12"
     },
     "arsenal_hammerfall__c2": {
       "textures": "textures/items/arsenal/weapons/hammerfall__c2"
@@ -980,11 +1664,62 @@
     "arsenal_hammerfall__c8": {
       "textures": "textures/items/arsenal/weapons/hammerfall__c8"
     },
+    "arsenal_hammerfall__c9": {
+      "textures": "textures/items/arsenal/weapons/hammerfall__c9"
+    },
+    "arsenal_hammerhead": {
+      "textures": "textures/items/arsenal/weapons/hammerhead"
+    },
+    "arsenal_hammerhead__c1": {
+      "textures": "textures/items/arsenal/weapons/hammerhead__c1"
+    },
+    "arsenal_hammerhead__c10": {
+      "textures": "textures/items/arsenal/weapons/hammerhead__c10"
+    },
+    "arsenal_hammerhead__c11": {
+      "textures": "textures/items/arsenal/weapons/hammerhead__c11"
+    },
+    "arsenal_hammerhead__c12": {
+      "textures": "textures/items/arsenal/weapons/hammerhead__c12"
+    },
+    "arsenal_hammerhead__c2": {
+      "textures": "textures/items/arsenal/weapons/hammerhead__c2"
+    },
+    "arsenal_hammerhead__c3": {
+      "textures": "textures/items/arsenal/weapons/hammerhead__c3"
+    },
+    "arsenal_hammerhead__c4": {
+      "textures": "textures/items/arsenal/weapons/hammerhead__c4"
+    },
+    "arsenal_hammerhead__c5": {
+      "textures": "textures/items/arsenal/weapons/hammerhead__c5"
+    },
+    "arsenal_hammerhead__c6": {
+      "textures": "textures/items/arsenal/weapons/hammerhead__c6"
+    },
+    "arsenal_hammerhead__c7": {
+      "textures": "textures/items/arsenal/weapons/hammerhead__c7"
+    },
+    "arsenal_hammerhead__c8": {
+      "textures": "textures/items/arsenal/weapons/hammerhead__c8"
+    },
+    "arsenal_hammerhead__c9": {
+      "textures": "textures/items/arsenal/weapons/hammerhead__c9"
+    },
     "arsenal_harrier": {
       "textures": "textures/items/arsenal/weapons/harrier"
     },
     "arsenal_harrier__c1": {
       "textures": "textures/items/arsenal/weapons/harrier__c1"
+    },
+    "arsenal_harrier__c10": {
+      "textures": "textures/items/arsenal/weapons/harrier__c10"
+    },
+    "arsenal_harrier__c11": {
+      "textures": "textures/items/arsenal/weapons/harrier__c11"
+    },
+    "arsenal_harrier__c12": {
+      "textures": "textures/items/arsenal/weapons/harrier__c12"
     },
     "arsenal_harrier__c2": {
       "textures": "textures/items/arsenal/weapons/harrier__c2"
@@ -1007,6 +1742,9 @@
     "arsenal_harrier__c8": {
       "textures": "textures/items/arsenal/weapons/harrier__c8"
     },
+    "arsenal_harrier__c9": {
+      "textures": "textures/items/arsenal/weapons/harrier__c9"
+    },
     "arsenal_harrier__o0": {
       "textures": "textures/items/arsenal/weapons/harrier__o0"
     },
@@ -1018,6 +1756,15 @@
     },
     "arsenal_hellmouth__c1": {
       "textures": "textures/items/arsenal/weapons/hellmouth__c1"
+    },
+    "arsenal_hellmouth__c10": {
+      "textures": "textures/items/arsenal/weapons/hellmouth__c10"
+    },
+    "arsenal_hellmouth__c11": {
+      "textures": "textures/items/arsenal/weapons/hellmouth__c11"
+    },
+    "arsenal_hellmouth__c12": {
+      "textures": "textures/items/arsenal/weapons/hellmouth__c12"
     },
     "arsenal_hellmouth__c2": {
       "textures": "textures/items/arsenal/weapons/hellmouth__c2"
@@ -1039,6 +1786,9 @@
     },
     "arsenal_hellmouth__c8": {
       "textures": "textures/items/arsenal/weapons/hellmouth__c8"
+    },
+    "arsenal_hellmouth__c9": {
+      "textures": "textures/items/arsenal/weapons/hellmouth__c9"
     },
     "arsenal_helmet_heavy_1": {
       "textures": "textures/items/arsenal/armor/helmet_heavy_1"
@@ -1082,6 +1832,15 @@
     "arsenal_heron__c1": {
       "textures": "textures/items/arsenal/weapons/heron__c1"
     },
+    "arsenal_heron__c10": {
+      "textures": "textures/items/arsenal/weapons/heron__c10"
+    },
+    "arsenal_heron__c11": {
+      "textures": "textures/items/arsenal/weapons/heron__c11"
+    },
+    "arsenal_heron__c12": {
+      "textures": "textures/items/arsenal/weapons/heron__c12"
+    },
     "arsenal_heron__c2": {
       "textures": "textures/items/arsenal/weapons/heron__c2"
     },
@@ -1103,20 +1862,80 @@
     "arsenal_heron__c8": {
       "textures": "textures/items/arsenal/weapons/heron__c8"
     },
+    "arsenal_heron__c9": {
+      "textures": "textures/items/arsenal/weapons/heron__c9"
+    },
     "arsenal_heron__o0": {
       "textures": "textures/items/arsenal/weapons/heron__o0"
     },
     "arsenal_heron__o1": {
       "textures": "textures/items/arsenal/weapons/heron__o1"
     },
+    "arsenal_highlander": {
+      "textures": "textures/items/arsenal/weapons/highlander"
+    },
+    "arsenal_highlander__c1": {
+      "textures": "textures/items/arsenal/weapons/highlander__c1"
+    },
+    "arsenal_highlander__c10": {
+      "textures": "textures/items/arsenal/weapons/highlander__c10"
+    },
+    "arsenal_highlander__c11": {
+      "textures": "textures/items/arsenal/weapons/highlander__c11"
+    },
+    "arsenal_highlander__c12": {
+      "textures": "textures/items/arsenal/weapons/highlander__c12"
+    },
+    "arsenal_highlander__c2": {
+      "textures": "textures/items/arsenal/weapons/highlander__c2"
+    },
+    "arsenal_highlander__c3": {
+      "textures": "textures/items/arsenal/weapons/highlander__c3"
+    },
+    "arsenal_highlander__c4": {
+      "textures": "textures/items/arsenal/weapons/highlander__c4"
+    },
+    "arsenal_highlander__c5": {
+      "textures": "textures/items/arsenal/weapons/highlander__c5"
+    },
+    "arsenal_highlander__c6": {
+      "textures": "textures/items/arsenal/weapons/highlander__c6"
+    },
+    "arsenal_highlander__c7": {
+      "textures": "textures/items/arsenal/weapons/highlander__c7"
+    },
+    "arsenal_highlander__c8": {
+      "textures": "textures/items/arsenal/weapons/highlander__c8"
+    },
+    "arsenal_highlander__c9": {
+      "textures": "textures/items/arsenal/weapons/highlander__c9"
+    },
+    "arsenal_highlander__o1": {
+      "textures": "textures/items/arsenal/weapons/highlander__o1"
+    },
+    "arsenal_highlander__o2": {
+      "textures": "textures/items/arsenal/weapons/highlander__o2"
+    },
     "arsenal_hmg_nest": {
       "textures": "textures/items/arsenal/gear/hmg_nest"
+    },
+    "arsenal_hollow_heart": {
+      "textures": "textures/items/arsenal/tools/hollow_heart"
     },
     "arsenal_hornet": {
       "textures": "textures/items/arsenal/weapons/hornet"
     },
     "arsenal_hornet__c1": {
       "textures": "textures/items/arsenal/weapons/hornet__c1"
+    },
+    "arsenal_hornet__c10": {
+      "textures": "textures/items/arsenal/weapons/hornet__c10"
+    },
+    "arsenal_hornet__c11": {
+      "textures": "textures/items/arsenal/weapons/hornet__c11"
+    },
+    "arsenal_hornet__c12": {
+      "textures": "textures/items/arsenal/weapons/hornet__c12"
     },
     "arsenal_hornet__c2": {
       "textures": "textures/items/arsenal/weapons/hornet__c2"
@@ -1139,17 +1958,164 @@
     "arsenal_hornet__c8": {
       "textures": "textures/items/arsenal/weapons/hornet__c8"
     },
+    "arsenal_hornet__c9": {
+      "textures": "textures/items/arsenal/weapons/hornet__c9"
+    },
     "arsenal_hornet__o1": {
       "textures": "textures/items/arsenal/weapons/hornet__o1"
     },
     "arsenal_hornet__o2": {
       "textures": "textures/items/arsenal/weapons/hornet__o2"
     },
+    "arsenal_hummingbird": {
+      "textures": "textures/items/arsenal/weapons/hummingbird"
+    },
+    "arsenal_hummingbird__c1": {
+      "textures": "textures/items/arsenal/weapons/hummingbird__c1"
+    },
+    "arsenal_hummingbird__c10": {
+      "textures": "textures/items/arsenal/weapons/hummingbird__c10"
+    },
+    "arsenal_hummingbird__c11": {
+      "textures": "textures/items/arsenal/weapons/hummingbird__c11"
+    },
+    "arsenal_hummingbird__c12": {
+      "textures": "textures/items/arsenal/weapons/hummingbird__c12"
+    },
+    "arsenal_hummingbird__c2": {
+      "textures": "textures/items/arsenal/weapons/hummingbird__c2"
+    },
+    "arsenal_hummingbird__c3": {
+      "textures": "textures/items/arsenal/weapons/hummingbird__c3"
+    },
+    "arsenal_hummingbird__c4": {
+      "textures": "textures/items/arsenal/weapons/hummingbird__c4"
+    },
+    "arsenal_hummingbird__c5": {
+      "textures": "textures/items/arsenal/weapons/hummingbird__c5"
+    },
+    "arsenal_hummingbird__c6": {
+      "textures": "textures/items/arsenal/weapons/hummingbird__c6"
+    },
+    "arsenal_hummingbird__c7": {
+      "textures": "textures/items/arsenal/weapons/hummingbird__c7"
+    },
+    "arsenal_hummingbird__c8": {
+      "textures": "textures/items/arsenal/weapons/hummingbird__c8"
+    },
+    "arsenal_hummingbird__c9": {
+      "textures": "textures/items/arsenal/weapons/hummingbird__c9"
+    },
+    "arsenal_hummingbird__o1": {
+      "textures": "textures/items/arsenal/weapons/hummingbird__o1"
+    },
+    "arsenal_hummingbird__o2": {
+      "textures": "textures/items/arsenal/weapons/hummingbird__o2"
+    },
+    "arsenal_hydra": {
+      "textures": "textures/items/arsenal/weapons/hydra"
+    },
+    "arsenal_hydra__c1": {
+      "textures": "textures/items/arsenal/weapons/hydra__c1"
+    },
+    "arsenal_hydra__c10": {
+      "textures": "textures/items/arsenal/weapons/hydra__c10"
+    },
+    "arsenal_hydra__c11": {
+      "textures": "textures/items/arsenal/weapons/hydra__c11"
+    },
+    "arsenal_hydra__c12": {
+      "textures": "textures/items/arsenal/weapons/hydra__c12"
+    },
+    "arsenal_hydra__c2": {
+      "textures": "textures/items/arsenal/weapons/hydra__c2"
+    },
+    "arsenal_hydra__c3": {
+      "textures": "textures/items/arsenal/weapons/hydra__c3"
+    },
+    "arsenal_hydra__c4": {
+      "textures": "textures/items/arsenal/weapons/hydra__c4"
+    },
+    "arsenal_hydra__c5": {
+      "textures": "textures/items/arsenal/weapons/hydra__c5"
+    },
+    "arsenal_hydra__c6": {
+      "textures": "textures/items/arsenal/weapons/hydra__c6"
+    },
+    "arsenal_hydra__c7": {
+      "textures": "textures/items/arsenal/weapons/hydra__c7"
+    },
+    "arsenal_hydra__c8": {
+      "textures": "textures/items/arsenal/weapons/hydra__c8"
+    },
+    "arsenal_hydra__c9": {
+      "textures": "textures/items/arsenal/weapons/hydra__c9"
+    },
+    "arsenal_hydra__o1": {
+      "textures": "textures/items/arsenal/weapons/hydra__o1"
+    },
+    "arsenal_hydra__o2": {
+      "textures": "textures/items/arsenal/weapons/hydra__o2"
+    },
+    "arsenal_ion_carbine": {
+      "textures": "textures/items/arsenal/weapons/ion_carbine"
+    },
+    "arsenal_ion_carbine__c1": {
+      "textures": "textures/items/arsenal/weapons/ion_carbine__c1"
+    },
+    "arsenal_ion_carbine__c10": {
+      "textures": "textures/items/arsenal/weapons/ion_carbine__c10"
+    },
+    "arsenal_ion_carbine__c11": {
+      "textures": "textures/items/arsenal/weapons/ion_carbine__c11"
+    },
+    "arsenal_ion_carbine__c12": {
+      "textures": "textures/items/arsenal/weapons/ion_carbine__c12"
+    },
+    "arsenal_ion_carbine__c2": {
+      "textures": "textures/items/arsenal/weapons/ion_carbine__c2"
+    },
+    "arsenal_ion_carbine__c3": {
+      "textures": "textures/items/arsenal/weapons/ion_carbine__c3"
+    },
+    "arsenal_ion_carbine__c4": {
+      "textures": "textures/items/arsenal/weapons/ion_carbine__c4"
+    },
+    "arsenal_ion_carbine__c5": {
+      "textures": "textures/items/arsenal/weapons/ion_carbine__c5"
+    },
+    "arsenal_ion_carbine__c6": {
+      "textures": "textures/items/arsenal/weapons/ion_carbine__c6"
+    },
+    "arsenal_ion_carbine__c7": {
+      "textures": "textures/items/arsenal/weapons/ion_carbine__c7"
+    },
+    "arsenal_ion_carbine__c8": {
+      "textures": "textures/items/arsenal/weapons/ion_carbine__c8"
+    },
+    "arsenal_ion_carbine__c9": {
+      "textures": "textures/items/arsenal/weapons/ion_carbine__c9"
+    },
+    "arsenal_ion_carbine__o0": {
+      "textures": "textures/items/arsenal/weapons/ion_carbine__o0"
+    },
+    "arsenal_ion_carbine__o2": {
+      "textures": "textures/items/arsenal/weapons/ion_carbine__o2"
+    },
     "arsenal_ironbark": {
       "textures": "textures/items/arsenal/weapons/ironbark"
     },
     "arsenal_ironbark__c1": {
       "textures": "textures/items/arsenal/weapons/ironbark__c1"
+    },
+    "arsenal_ironbark__c10": {
+      "textures": "textures/items/arsenal/weapons/ironbark__c10"
+    },
+    "arsenal_ironbark__c11": {
+      "textures": "textures/items/arsenal/weapons/ironbark__c11"
+    },
+    "arsenal_ironbark__c12": {
+      "textures": "textures/items/arsenal/weapons/ironbark__c12"
     },
     "arsenal_ironbark__c2": {
       "textures": "textures/items/arsenal/weapons/ironbark__c2"
@@ -1172,6 +2138,9 @@
     "arsenal_ironbark__c8": {
       "textures": "textures/items/arsenal/weapons/ironbark__c8"
     },
+    "arsenal_ironbark__c9": {
+      "textures": "textures/items/arsenal/weapons/ironbark__c9"
+    },
     "arsenal_ironbark__o1": {
       "textures": "textures/items/arsenal/weapons/ironbark__o1"
     },
@@ -1183,6 +2152,15 @@
     },
     "arsenal_ironclad45__c1": {
       "textures": "textures/items/arsenal/weapons/ironclad45__c1"
+    },
+    "arsenal_ironclad45__c10": {
+      "textures": "textures/items/arsenal/weapons/ironclad45__c10"
+    },
+    "arsenal_ironclad45__c11": {
+      "textures": "textures/items/arsenal/weapons/ironclad45__c11"
+    },
+    "arsenal_ironclad45__c12": {
+      "textures": "textures/items/arsenal/weapons/ironclad45__c12"
     },
     "arsenal_ironclad45__c2": {
       "textures": "textures/items/arsenal/weapons/ironclad45__c2"
@@ -1205,17 +2183,74 @@
     "arsenal_ironclad45__c8": {
       "textures": "textures/items/arsenal/weapons/ironclad45__c8"
     },
+    "arsenal_ironclad45__c9": {
+      "textures": "textures/items/arsenal/weapons/ironclad45__c9"
+    },
     "arsenal_ironclad45__o1": {
       "textures": "textures/items/arsenal/weapons/ironclad45__o1"
     },
     "arsenal_ironclad45__o2": {
       "textures": "textures/items/arsenal/weapons/ironclad45__o2"
     },
+    "arsenal_jackal": {
+      "textures": "textures/items/arsenal/weapons/jackal"
+    },
+    "arsenal_jackal__c1": {
+      "textures": "textures/items/arsenal/weapons/jackal__c1"
+    },
+    "arsenal_jackal__c10": {
+      "textures": "textures/items/arsenal/weapons/jackal__c10"
+    },
+    "arsenal_jackal__c11": {
+      "textures": "textures/items/arsenal/weapons/jackal__c11"
+    },
+    "arsenal_jackal__c12": {
+      "textures": "textures/items/arsenal/weapons/jackal__c12"
+    },
+    "arsenal_jackal__c2": {
+      "textures": "textures/items/arsenal/weapons/jackal__c2"
+    },
+    "arsenal_jackal__c3": {
+      "textures": "textures/items/arsenal/weapons/jackal__c3"
+    },
+    "arsenal_jackal__c4": {
+      "textures": "textures/items/arsenal/weapons/jackal__c4"
+    },
+    "arsenal_jackal__c5": {
+      "textures": "textures/items/arsenal/weapons/jackal__c5"
+    },
+    "arsenal_jackal__c6": {
+      "textures": "textures/items/arsenal/weapons/jackal__c6"
+    },
+    "arsenal_jackal__c7": {
+      "textures": "textures/items/arsenal/weapons/jackal__c7"
+    },
+    "arsenal_jackal__c8": {
+      "textures": "textures/items/arsenal/weapons/jackal__c8"
+    },
+    "arsenal_jackal__c9": {
+      "textures": "textures/items/arsenal/weapons/jackal__c9"
+    },
+    "arsenal_jackal__o1": {
+      "textures": "textures/items/arsenal/weapons/jackal__o1"
+    },
+    "arsenal_jackal__o2": {
+      "textures": "textures/items/arsenal/weapons/jackal__o2"
+    },
     "arsenal_juggernaut": {
       "textures": "textures/items/arsenal/weapons/juggernaut"
     },
     "arsenal_juggernaut__c1": {
       "textures": "textures/items/arsenal/weapons/juggernaut__c1"
+    },
+    "arsenal_juggernaut__c10": {
+      "textures": "textures/items/arsenal/weapons/juggernaut__c10"
+    },
+    "arsenal_juggernaut__c11": {
+      "textures": "textures/items/arsenal/weapons/juggernaut__c11"
+    },
+    "arsenal_juggernaut__c12": {
+      "textures": "textures/items/arsenal/weapons/juggernaut__c12"
     },
     "arsenal_juggernaut__c2": {
       "textures": "textures/items/arsenal/weapons/juggernaut__c2"
@@ -1238,17 +2273,32 @@
     "arsenal_juggernaut__c8": {
       "textures": "textures/items/arsenal/weapons/juggernaut__c8"
     },
+    "arsenal_juggernaut__c9": {
+      "textures": "textures/items/arsenal/weapons/juggernaut__c9"
+    },
     "arsenal_juggernaut__o1": {
       "textures": "textures/items/arsenal/weapons/juggernaut__o1"
     },
     "arsenal_juggernaut__o2": {
       "textures": "textures/items/arsenal/weapons/juggernaut__o2"
     },
+    "arsenal_katana": {
+      "textures": "textures/items/arsenal/melee/katana"
+    },
     "arsenal_kestrel_pdw": {
       "textures": "textures/items/arsenal/weapons/kestrel_pdw"
     },
     "arsenal_kestrel_pdw__c1": {
       "textures": "textures/items/arsenal/weapons/kestrel_pdw__c1"
+    },
+    "arsenal_kestrel_pdw__c10": {
+      "textures": "textures/items/arsenal/weapons/kestrel_pdw__c10"
+    },
+    "arsenal_kestrel_pdw__c11": {
+      "textures": "textures/items/arsenal/weapons/kestrel_pdw__c11"
+    },
+    "arsenal_kestrel_pdw__c12": {
+      "textures": "textures/items/arsenal/weapons/kestrel_pdw__c12"
     },
     "arsenal_kestrel_pdw__c2": {
       "textures": "textures/items/arsenal/weapons/kestrel_pdw__c2"
@@ -1271,17 +2321,74 @@
     "arsenal_kestrel_pdw__c8": {
       "textures": "textures/items/arsenal/weapons/kestrel_pdw__c8"
     },
+    "arsenal_kestrel_pdw__c9": {
+      "textures": "textures/items/arsenal/weapons/kestrel_pdw__c9"
+    },
     "arsenal_kestrel_pdw__o0": {
       "textures": "textures/items/arsenal/weapons/kestrel_pdw__o0"
     },
     "arsenal_kestrel_pdw__o2": {
       "textures": "textures/items/arsenal/weapons/kestrel_pdw__o2"
     },
+    "arsenal_kite": {
+      "textures": "textures/items/arsenal/weapons/kite"
+    },
+    "arsenal_kite__c1": {
+      "textures": "textures/items/arsenal/weapons/kite__c1"
+    },
+    "arsenal_kite__c10": {
+      "textures": "textures/items/arsenal/weapons/kite__c10"
+    },
+    "arsenal_kite__c11": {
+      "textures": "textures/items/arsenal/weapons/kite__c11"
+    },
+    "arsenal_kite__c12": {
+      "textures": "textures/items/arsenal/weapons/kite__c12"
+    },
+    "arsenal_kite__c2": {
+      "textures": "textures/items/arsenal/weapons/kite__c2"
+    },
+    "arsenal_kite__c3": {
+      "textures": "textures/items/arsenal/weapons/kite__c3"
+    },
+    "arsenal_kite__c4": {
+      "textures": "textures/items/arsenal/weapons/kite__c4"
+    },
+    "arsenal_kite__c5": {
+      "textures": "textures/items/arsenal/weapons/kite__c5"
+    },
+    "arsenal_kite__c6": {
+      "textures": "textures/items/arsenal/weapons/kite__c6"
+    },
+    "arsenal_kite__c7": {
+      "textures": "textures/items/arsenal/weapons/kite__c7"
+    },
+    "arsenal_kite__c8": {
+      "textures": "textures/items/arsenal/weapons/kite__c8"
+    },
+    "arsenal_kite__c9": {
+      "textures": "textures/items/arsenal/weapons/kite__c9"
+    },
+    "arsenal_kite__o1": {
+      "textures": "textures/items/arsenal/weapons/kite__o1"
+    },
+    "arsenal_kite__o2": {
+      "textures": "textures/items/arsenal/weapons/kite__o2"
+    },
     "arsenal_kitehawk": {
       "textures": "textures/items/arsenal/weapons/kitehawk"
     },
     "arsenal_kitehawk__c1": {
       "textures": "textures/items/arsenal/weapons/kitehawk__c1"
+    },
+    "arsenal_kitehawk__c10": {
+      "textures": "textures/items/arsenal/weapons/kitehawk__c10"
+    },
+    "arsenal_kitehawk__c11": {
+      "textures": "textures/items/arsenal/weapons/kitehawk__c11"
+    },
+    "arsenal_kitehawk__c12": {
+      "textures": "textures/items/arsenal/weapons/kitehawk__c12"
     },
     "arsenal_kitehawk__c2": {
       "textures": "textures/items/arsenal/weapons/kitehawk__c2"
@@ -1304,17 +2411,74 @@
     "arsenal_kitehawk__c8": {
       "textures": "textures/items/arsenal/weapons/kitehawk__c8"
     },
+    "arsenal_kitehawk__c9": {
+      "textures": "textures/items/arsenal/weapons/kitehawk__c9"
+    },
     "arsenal_kitehawk__o0": {
       "textures": "textures/items/arsenal/weapons/kitehawk__o0"
     },
     "arsenal_kitehawk__o1": {
       "textures": "textures/items/arsenal/weapons/kitehawk__o1"
     },
+    "arsenal_kodiak": {
+      "textures": "textures/items/arsenal/weapons/kodiak"
+    },
+    "arsenal_kodiak__c1": {
+      "textures": "textures/items/arsenal/weapons/kodiak__c1"
+    },
+    "arsenal_kodiak__c10": {
+      "textures": "textures/items/arsenal/weapons/kodiak__c10"
+    },
+    "arsenal_kodiak__c11": {
+      "textures": "textures/items/arsenal/weapons/kodiak__c11"
+    },
+    "arsenal_kodiak__c12": {
+      "textures": "textures/items/arsenal/weapons/kodiak__c12"
+    },
+    "arsenal_kodiak__c2": {
+      "textures": "textures/items/arsenal/weapons/kodiak__c2"
+    },
+    "arsenal_kodiak__c3": {
+      "textures": "textures/items/arsenal/weapons/kodiak__c3"
+    },
+    "arsenal_kodiak__c4": {
+      "textures": "textures/items/arsenal/weapons/kodiak__c4"
+    },
+    "arsenal_kodiak__c5": {
+      "textures": "textures/items/arsenal/weapons/kodiak__c5"
+    },
+    "arsenal_kodiak__c6": {
+      "textures": "textures/items/arsenal/weapons/kodiak__c6"
+    },
+    "arsenal_kodiak__c7": {
+      "textures": "textures/items/arsenal/weapons/kodiak__c7"
+    },
+    "arsenal_kodiak__c8": {
+      "textures": "textures/items/arsenal/weapons/kodiak__c8"
+    },
+    "arsenal_kodiak__c9": {
+      "textures": "textures/items/arsenal/weapons/kodiak__c9"
+    },
+    "arsenal_kodiak__o1": {
+      "textures": "textures/items/arsenal/weapons/kodiak__o1"
+    },
+    "arsenal_kodiak__o2": {
+      "textures": "textures/items/arsenal/weapons/kodiak__o2"
+    },
     "arsenal_kraken": {
       "textures": "textures/items/arsenal/weapons/kraken"
     },
     "arsenal_kraken__c1": {
       "textures": "textures/items/arsenal/weapons/kraken__c1"
+    },
+    "arsenal_kraken__c10": {
+      "textures": "textures/items/arsenal/weapons/kraken__c10"
+    },
+    "arsenal_kraken__c11": {
+      "textures": "textures/items/arsenal/weapons/kraken__c11"
+    },
+    "arsenal_kraken__c12": {
+      "textures": "textures/items/arsenal/weapons/kraken__c12"
     },
     "arsenal_kraken__c2": {
       "textures": "textures/items/arsenal/weapons/kraken__c2"
@@ -1337,11 +2501,20 @@
     "arsenal_kraken__c8": {
       "textures": "textures/items/arsenal/weapons/kraken__c8"
     },
+    "arsenal_kraken__c9": {
+      "textures": "textures/items/arsenal/weapons/kraken__c9"
+    },
+    "arsenal_kukri": {
+      "textures": "textures/items/arsenal/melee/kukri"
+    },
     "arsenal_landmine": {
       "textures": "textures/items/arsenal/throwables/landmine"
     },
     "arsenal_laser_combo": {
       "textures": "textures/items/arsenal/attachments/laser_combo"
+    },
+    "arsenal_laser_ir": {
+      "textures": "textures/items/arsenal/attachments/laser_ir"
     },
     "arsenal_laser_tactical": {
       "textures": "textures/items/arsenal/attachments/laser_tactical"
@@ -1354,6 +2527,15 @@
     },
     "arsenal_lever12__c1": {
       "textures": "textures/items/arsenal/weapons/lever12__c1"
+    },
+    "arsenal_lever12__c10": {
+      "textures": "textures/items/arsenal/weapons/lever12__c10"
+    },
+    "arsenal_lever12__c11": {
+      "textures": "textures/items/arsenal/weapons/lever12__c11"
+    },
+    "arsenal_lever12__c12": {
+      "textures": "textures/items/arsenal/weapons/lever12__c12"
     },
     "arsenal_lever12__c2": {
       "textures": "textures/items/arsenal/weapons/lever12__c2"
@@ -1376,6 +2558,9 @@
     "arsenal_lever12__c8": {
       "textures": "textures/items/arsenal/weapons/lever12__c8"
     },
+    "arsenal_lever12__c9": {
+      "textures": "textures/items/arsenal/weapons/lever12__c9"
+    },
     "arsenal_lever12__o1": {
       "textures": "textures/items/arsenal/weapons/lever12__o1"
     },
@@ -1387,6 +2572,15 @@
     },
     "arsenal_leviathan__c1": {
       "textures": "textures/items/arsenal/weapons/leviathan__c1"
+    },
+    "arsenal_leviathan__c10": {
+      "textures": "textures/items/arsenal/weapons/leviathan__c10"
+    },
+    "arsenal_leviathan__c11": {
+      "textures": "textures/items/arsenal/weapons/leviathan__c11"
+    },
+    "arsenal_leviathan__c12": {
+      "textures": "textures/items/arsenal/weapons/leviathan__c12"
     },
     "arsenal_leviathan__c2": {
       "textures": "textures/items/arsenal/weapons/leviathan__c2"
@@ -1409,6 +2603,9 @@
     "arsenal_leviathan__c8": {
       "textures": "textures/items/arsenal/weapons/leviathan__c8"
     },
+    "arsenal_leviathan__c9": {
+      "textures": "textures/items/arsenal/weapons/leviathan__c9"
+    },
     "arsenal_leviathan__o0": {
       "textures": "textures/items/arsenal/weapons/leviathan__o0"
     },
@@ -1420,6 +2617,15 @@
     },
     "arsenal_longbow__c1": {
       "textures": "textures/items/arsenal/weapons/longbow__c1"
+    },
+    "arsenal_longbow__c10": {
+      "textures": "textures/items/arsenal/weapons/longbow__c10"
+    },
+    "arsenal_longbow__c11": {
+      "textures": "textures/items/arsenal/weapons/longbow__c11"
+    },
+    "arsenal_longbow__c12": {
+      "textures": "textures/items/arsenal/weapons/longbow__c12"
     },
     "arsenal_longbow__c2": {
       "textures": "textures/items/arsenal/weapons/longbow__c2"
@@ -1442,6 +2648,9 @@
     "arsenal_longbow__c8": {
       "textures": "textures/items/arsenal/weapons/longbow__c8"
     },
+    "arsenal_longbow__c9": {
+      "textures": "textures/items/arsenal/weapons/longbow__c9"
+    },
     "arsenal_longbow__o1": {
       "textures": "textures/items/arsenal/weapons/longbow__o1"
     },
@@ -1453,6 +2662,15 @@
     },
     "arsenal_longwatch__c1": {
       "textures": "textures/items/arsenal/weapons/longwatch__c1"
+    },
+    "arsenal_longwatch__c10": {
+      "textures": "textures/items/arsenal/weapons/longwatch__c10"
+    },
+    "arsenal_longwatch__c11": {
+      "textures": "textures/items/arsenal/weapons/longwatch__c11"
+    },
+    "arsenal_longwatch__c12": {
+      "textures": "textures/items/arsenal/weapons/longwatch__c12"
     },
     "arsenal_longwatch__c2": {
       "textures": "textures/items/arsenal/weapons/longwatch__c2"
@@ -1475,17 +2693,68 @@
     "arsenal_longwatch__c8": {
       "textures": "textures/items/arsenal/weapons/longwatch__c8"
     },
+    "arsenal_longwatch__c9": {
+      "textures": "textures/items/arsenal/weapons/longwatch__c9"
+    },
     "arsenal_longwatch__o0": {
       "textures": "textures/items/arsenal/weapons/longwatch__o0"
     },
     "arsenal_longwatch__o1": {
       "textures": "textures/items/arsenal/weapons/longwatch__o1"
     },
+    "arsenal_lynx": {
+      "textures": "textures/items/arsenal/weapons/lynx"
+    },
+    "arsenal_lynx__c1": {
+      "textures": "textures/items/arsenal/weapons/lynx__c1"
+    },
+    "arsenal_lynx__c10": {
+      "textures": "textures/items/arsenal/weapons/lynx__c10"
+    },
+    "arsenal_lynx__c11": {
+      "textures": "textures/items/arsenal/weapons/lynx__c11"
+    },
+    "arsenal_lynx__c12": {
+      "textures": "textures/items/arsenal/weapons/lynx__c12"
+    },
+    "arsenal_lynx__c2": {
+      "textures": "textures/items/arsenal/weapons/lynx__c2"
+    },
+    "arsenal_lynx__c3": {
+      "textures": "textures/items/arsenal/weapons/lynx__c3"
+    },
+    "arsenal_lynx__c4": {
+      "textures": "textures/items/arsenal/weapons/lynx__c4"
+    },
+    "arsenal_lynx__c5": {
+      "textures": "textures/items/arsenal/weapons/lynx__c5"
+    },
+    "arsenal_lynx__c6": {
+      "textures": "textures/items/arsenal/weapons/lynx__c6"
+    },
+    "arsenal_lynx__c7": {
+      "textures": "textures/items/arsenal/weapons/lynx__c7"
+    },
+    "arsenal_lynx__c8": {
+      "textures": "textures/items/arsenal/weapons/lynx__c8"
+    },
+    "arsenal_lynx__c9": {
+      "textures": "textures/items/arsenal/weapons/lynx__c9"
+    },
+    "arsenal_lynx__o1": {
+      "textures": "textures/items/arsenal/weapons/lynx__o1"
+    },
+    "arsenal_lynx__o2": {
+      "textures": "textures/items/arsenal/weapons/lynx__o2"
+    },
     "arsenal_machete": {
       "textures": "textures/items/arsenal/melee/machete"
     },
     "arsenal_mag_belt": {
       "textures": "textures/items/arsenal/attachments/mag_belt"
+    },
+    "arsenal_mag_casket": {
+      "textures": "textures/items/arsenal/attachments/mag_casket"
     },
     "arsenal_mag_drum": {
       "textures": "textures/items/arsenal/attachments/mag_drum"
@@ -1496,6 +2765,9 @@
     "arsenal_mag_extended": {
       "textures": "textures/items/arsenal/attachments/mag_extended"
     },
+    "arsenal_mag_polymer": {
+      "textures": "textures/items/arsenal/attachments/mag_polymer"
+    },
     "arsenal_mag_quick": {
       "textures": "textures/items/arsenal/attachments/mag_quick"
     },
@@ -1504,6 +2776,15 @@
     },
     "arsenal_magistrate__c1": {
       "textures": "textures/items/arsenal/weapons/magistrate__c1"
+    },
+    "arsenal_magistrate__c10": {
+      "textures": "textures/items/arsenal/weapons/magistrate__c10"
+    },
+    "arsenal_magistrate__c11": {
+      "textures": "textures/items/arsenal/weapons/magistrate__c11"
+    },
+    "arsenal_magistrate__c12": {
+      "textures": "textures/items/arsenal/weapons/magistrate__c12"
     },
     "arsenal_magistrate__c2": {
       "textures": "textures/items/arsenal/weapons/magistrate__c2"
@@ -1526,6 +2807,9 @@
     "arsenal_magistrate__c8": {
       "textures": "textures/items/arsenal/weapons/magistrate__c8"
     },
+    "arsenal_magistrate__c9": {
+      "textures": "textures/items/arsenal/weapons/magistrate__c9"
+    },
     "arsenal_magistrate__o0": {
       "textures": "textures/items/arsenal/weapons/magistrate__o0"
     },
@@ -1537,6 +2821,15 @@
     },
     "arsenal_mako__c1": {
       "textures": "textures/items/arsenal/weapons/mako__c1"
+    },
+    "arsenal_mako__c10": {
+      "textures": "textures/items/arsenal/weapons/mako__c10"
+    },
+    "arsenal_mako__c11": {
+      "textures": "textures/items/arsenal/weapons/mako__c11"
+    },
+    "arsenal_mako__c12": {
+      "textures": "textures/items/arsenal/weapons/mako__c12"
     },
     "arsenal_mako__c2": {
       "textures": "textures/items/arsenal/weapons/mako__c2"
@@ -1559,6 +2852,9 @@
     "arsenal_mako__c8": {
       "textures": "textures/items/arsenal/weapons/mako__c8"
     },
+    "arsenal_mako__c9": {
+      "textures": "textures/items/arsenal/weapons/mako__c9"
+    },
     "arsenal_mako__o1": {
       "textures": "textures/items/arsenal/weapons/mako__o1"
     },
@@ -1570,6 +2866,15 @@
     },
     "arsenal_marksman12__c1": {
       "textures": "textures/items/arsenal/weapons/marksman12__c1"
+    },
+    "arsenal_marksman12__c10": {
+      "textures": "textures/items/arsenal/weapons/marksman12__c10"
+    },
+    "arsenal_marksman12__c11": {
+      "textures": "textures/items/arsenal/weapons/marksman12__c11"
+    },
+    "arsenal_marksman12__c12": {
+      "textures": "textures/items/arsenal/weapons/marksman12__c12"
     },
     "arsenal_marksman12__c2": {
       "textures": "textures/items/arsenal/weapons/marksman12__c2"
@@ -1592,6 +2897,9 @@
     "arsenal_marksman12__c8": {
       "textures": "textures/items/arsenal/weapons/marksman12__c8"
     },
+    "arsenal_marksman12__c9": {
+      "textures": "textures/items/arsenal/weapons/marksman12__c9"
+    },
     "arsenal_marksman12__o0": {
       "textures": "textures/items/arsenal/weapons/marksman12__o0"
     },
@@ -1603,6 +2911,15 @@
     },
     "arsenal_mauler__c1": {
       "textures": "textures/items/arsenal/weapons/mauler__c1"
+    },
+    "arsenal_mauler__c10": {
+      "textures": "textures/items/arsenal/weapons/mauler__c10"
+    },
+    "arsenal_mauler__c11": {
+      "textures": "textures/items/arsenal/weapons/mauler__c11"
+    },
+    "arsenal_mauler__c12": {
+      "textures": "textures/items/arsenal/weapons/mauler__c12"
     },
     "arsenal_mauler__c2": {
       "textures": "textures/items/arsenal/weapons/mauler__c2"
@@ -1625,6 +2942,9 @@
     "arsenal_mauler__c8": {
       "textures": "textures/items/arsenal/weapons/mauler__c8"
     },
+    "arsenal_mauler__c9": {
+      "textures": "textures/items/arsenal/weapons/mauler__c9"
+    },
     "arsenal_mauler__o1": {
       "textures": "textures/items/arsenal/weapons/mauler__o1"
     },
@@ -1642,6 +2962,15 @@
     },
     "arsenal_midge__c1": {
       "textures": "textures/items/arsenal/weapons/midge__c1"
+    },
+    "arsenal_midge__c10": {
+      "textures": "textures/items/arsenal/weapons/midge__c10"
+    },
+    "arsenal_midge__c11": {
+      "textures": "textures/items/arsenal/weapons/midge__c11"
+    },
+    "arsenal_midge__c12": {
+      "textures": "textures/items/arsenal/weapons/midge__c12"
     },
     "arsenal_midge__c2": {
       "textures": "textures/items/arsenal/weapons/midge__c2"
@@ -1664,6 +2993,9 @@
     "arsenal_midge__c8": {
       "textures": "textures/items/arsenal/weapons/midge__c8"
     },
+    "arsenal_midge__c9": {
+      "textures": "textures/items/arsenal/weapons/midge__c9"
+    },
     "arsenal_midge__o1": {
       "textures": "textures/items/arsenal/weapons/midge__o1"
     },
@@ -1678,6 +3010,15 @@
     },
     "arsenal_monsoon__c1": {
       "textures": "textures/items/arsenal/weapons/monsoon__c1"
+    },
+    "arsenal_monsoon__c10": {
+      "textures": "textures/items/arsenal/weapons/monsoon__c10"
+    },
+    "arsenal_monsoon__c11": {
+      "textures": "textures/items/arsenal/weapons/monsoon__c11"
+    },
+    "arsenal_monsoon__c12": {
+      "textures": "textures/items/arsenal/weapons/monsoon__c12"
     },
     "arsenal_monsoon__c2": {
       "textures": "textures/items/arsenal/weapons/monsoon__c2"
@@ -1700,6 +3041,9 @@
     "arsenal_monsoon__c8": {
       "textures": "textures/items/arsenal/weapons/monsoon__c8"
     },
+    "arsenal_monsoon__c9": {
+      "textures": "textures/items/arsenal/weapons/monsoon__c9"
+    },
     "arsenal_monsoon__o1": {
       "textures": "textures/items/arsenal/weapons/monsoon__o1"
     },
@@ -1717,6 +3061,15 @@
     },
     "arsenal_mortarman__c1": {
       "textures": "textures/items/arsenal/weapons/mortarman__c1"
+    },
+    "arsenal_mortarman__c10": {
+      "textures": "textures/items/arsenal/weapons/mortarman__c10"
+    },
+    "arsenal_mortarman__c11": {
+      "textures": "textures/items/arsenal/weapons/mortarman__c11"
+    },
+    "arsenal_mortarman__c12": {
+      "textures": "textures/items/arsenal/weapons/mortarman__c12"
     },
     "arsenal_mortarman__c2": {
       "textures": "textures/items/arsenal/weapons/mortarman__c2"
@@ -1739,6 +3092,9 @@
     "arsenal_mortarman__c8": {
       "textures": "textures/items/arsenal/weapons/mortarman__c8"
     },
+    "arsenal_mortarman__c9": {
+      "textures": "textures/items/arsenal/weapons/mortarman__c9"
+    },
     "arsenal_muzzle_bayonet": {
       "textures": "textures/items/arsenal/attachments/muzzle_bayonet"
     },
@@ -1760,6 +3116,9 @@
     "arsenal_muzzle_flash_hider": {
       "textures": "textures/items/arsenal/attachments/muzzle_flash_hider"
     },
+    "arsenal_muzzle_linear": {
+      "textures": "textures/items/arsenal/attachments/muzzle_linear"
+    },
     "arsenal_muzzle_suppressor": {
       "textures": "textures/items/arsenal/attachments/muzzle_suppressor"
     },
@@ -1769,11 +3128,23 @@
     "arsenal_muzzle_suppressor_light": {
       "textures": "textures/items/arsenal/attachments/muzzle_suppressor_light"
     },
+    "arsenal_muzzle_tank_brake": {
+      "textures": "textures/items/arsenal/attachments/muzzle_tank_brake"
+    },
     "arsenal_nightjar": {
       "textures": "textures/items/arsenal/weapons/nightjar"
     },
     "arsenal_nightjar__c1": {
       "textures": "textures/items/arsenal/weapons/nightjar__c1"
+    },
+    "arsenal_nightjar__c10": {
+      "textures": "textures/items/arsenal/weapons/nightjar__c10"
+    },
+    "arsenal_nightjar__c11": {
+      "textures": "textures/items/arsenal/weapons/nightjar__c11"
+    },
+    "arsenal_nightjar__c12": {
+      "textures": "textures/items/arsenal/weapons/nightjar__c12"
     },
     "arsenal_nightjar__c2": {
       "textures": "textures/items/arsenal/weapons/nightjar__c2"
@@ -1796,6 +3167,9 @@
     "arsenal_nightjar__c8": {
       "textures": "textures/items/arsenal/weapons/nightjar__c8"
     },
+    "arsenal_nightjar__c9": {
+      "textures": "textures/items/arsenal/weapons/nightjar__c9"
+    },
     "arsenal_nightjar__o0": {
       "textures": "textures/items/arsenal/weapons/nightjar__o0"
     },
@@ -1807,6 +3181,15 @@
     },
     "arsenal_nomad__c1": {
       "textures": "textures/items/arsenal/weapons/nomad__c1"
+    },
+    "arsenal_nomad__c10": {
+      "textures": "textures/items/arsenal/weapons/nomad__c10"
+    },
+    "arsenal_nomad__c11": {
+      "textures": "textures/items/arsenal/weapons/nomad__c11"
+    },
+    "arsenal_nomad__c12": {
+      "textures": "textures/items/arsenal/weapons/nomad__c12"
     },
     "arsenal_nomad__c2": {
       "textures": "textures/items/arsenal/weapons/nomad__c2"
@@ -1829,6 +3212,9 @@
     "arsenal_nomad__c8": {
       "textures": "textures/items/arsenal/weapons/nomad__c8"
     },
+    "arsenal_nomad__c9": {
+      "textures": "textures/items/arsenal/weapons/nomad__c9"
+    },
     "arsenal_nomad__o0": {
       "textures": "textures/items/arsenal/weapons/nomad__o0"
     },
@@ -1843,6 +3229,15 @@
     },
     "arsenal_obelisk__c1": {
       "textures": "textures/items/arsenal/weapons/obelisk__c1"
+    },
+    "arsenal_obelisk__c10": {
+      "textures": "textures/items/arsenal/weapons/obelisk__c10"
+    },
+    "arsenal_obelisk__c11": {
+      "textures": "textures/items/arsenal/weapons/obelisk__c11"
+    },
+    "arsenal_obelisk__c12": {
+      "textures": "textures/items/arsenal/weapons/obelisk__c12"
     },
     "arsenal_obelisk__c2": {
       "textures": "textures/items/arsenal/weapons/obelisk__c2"
@@ -1865,6 +3260,9 @@
     "arsenal_obelisk__c8": {
       "textures": "textures/items/arsenal/weapons/obelisk__c8"
     },
+    "arsenal_obelisk__c9": {
+      "textures": "textures/items/arsenal/weapons/obelisk__c9"
+    },
     "arsenal_obelisk__o0": {
       "textures": "textures/items/arsenal/weapons/obelisk__o0"
     },
@@ -1886,6 +3284,9 @@
     "arsenal_optic_holo": {
       "textures": "textures/items/arsenal/attachments/optic_holo"
     },
+    "arsenal_optic_micro": {
+      "textures": "textures/items/arsenal/attachments/optic_micro"
+    },
     "arsenal_optic_nv": {
       "textures": "textures/items/arsenal/attachments/optic_nv"
     },
@@ -1901,14 +3302,71 @@
     "arsenal_optic_thermal": {
       "textures": "textures/items/arsenal/attachments/optic_thermal"
     },
+    "arsenal_optic_thermal_compact": {
+      "textures": "textures/items/arsenal/attachments/optic_thermal_compact"
+    },
     "arsenal_optic_variable": {
       "textures": "textures/items/arsenal/attachments/optic_variable"
+    },
+    "arsenal_osprey": {
+      "textures": "textures/items/arsenal/weapons/osprey"
+    },
+    "arsenal_osprey__c1": {
+      "textures": "textures/items/arsenal/weapons/osprey__c1"
+    },
+    "arsenal_osprey__c10": {
+      "textures": "textures/items/arsenal/weapons/osprey__c10"
+    },
+    "arsenal_osprey__c11": {
+      "textures": "textures/items/arsenal/weapons/osprey__c11"
+    },
+    "arsenal_osprey__c12": {
+      "textures": "textures/items/arsenal/weapons/osprey__c12"
+    },
+    "arsenal_osprey__c2": {
+      "textures": "textures/items/arsenal/weapons/osprey__c2"
+    },
+    "arsenal_osprey__c3": {
+      "textures": "textures/items/arsenal/weapons/osprey__c3"
+    },
+    "arsenal_osprey__c4": {
+      "textures": "textures/items/arsenal/weapons/osprey__c4"
+    },
+    "arsenal_osprey__c5": {
+      "textures": "textures/items/arsenal/weapons/osprey__c5"
+    },
+    "arsenal_osprey__c6": {
+      "textures": "textures/items/arsenal/weapons/osprey__c6"
+    },
+    "arsenal_osprey__c7": {
+      "textures": "textures/items/arsenal/weapons/osprey__c7"
+    },
+    "arsenal_osprey__c8": {
+      "textures": "textures/items/arsenal/weapons/osprey__c8"
+    },
+    "arsenal_osprey__c9": {
+      "textures": "textures/items/arsenal/weapons/osprey__c9"
+    },
+    "arsenal_osprey__o0": {
+      "textures": "textures/items/arsenal/weapons/osprey__o0"
+    },
+    "arsenal_osprey__o1": {
+      "textures": "textures/items/arsenal/weapons/osprey__o1"
     },
     "arsenal_pathfinder": {
       "textures": "textures/items/arsenal/weapons/pathfinder"
     },
     "arsenal_pathfinder__c1": {
       "textures": "textures/items/arsenal/weapons/pathfinder__c1"
+    },
+    "arsenal_pathfinder__c10": {
+      "textures": "textures/items/arsenal/weapons/pathfinder__c10"
+    },
+    "arsenal_pathfinder__c11": {
+      "textures": "textures/items/arsenal/weapons/pathfinder__c11"
+    },
+    "arsenal_pathfinder__c12": {
+      "textures": "textures/items/arsenal/weapons/pathfinder__c12"
     },
     "arsenal_pathfinder__c2": {
       "textures": "textures/items/arsenal/weapons/pathfinder__c2"
@@ -1931,17 +3389,158 @@
     "arsenal_pathfinder__c8": {
       "textures": "textures/items/arsenal/weapons/pathfinder__c8"
     },
+    "arsenal_pathfinder__c9": {
+      "textures": "textures/items/arsenal/weapons/pathfinder__c9"
+    },
     "arsenal_pathfinder__o0": {
       "textures": "textures/items/arsenal/weapons/pathfinder__o0"
     },
     "arsenal_pathfinder__o2": {
       "textures": "textures/items/arsenal/weapons/pathfinder__o2"
     },
+    "arsenal_pelican": {
+      "textures": "textures/items/arsenal/weapons/pelican"
+    },
+    "arsenal_pelican__c1": {
+      "textures": "textures/items/arsenal/weapons/pelican__c1"
+    },
+    "arsenal_pelican__c10": {
+      "textures": "textures/items/arsenal/weapons/pelican__c10"
+    },
+    "arsenal_pelican__c11": {
+      "textures": "textures/items/arsenal/weapons/pelican__c11"
+    },
+    "arsenal_pelican__c12": {
+      "textures": "textures/items/arsenal/weapons/pelican__c12"
+    },
+    "arsenal_pelican__c2": {
+      "textures": "textures/items/arsenal/weapons/pelican__c2"
+    },
+    "arsenal_pelican__c3": {
+      "textures": "textures/items/arsenal/weapons/pelican__c3"
+    },
+    "arsenal_pelican__c4": {
+      "textures": "textures/items/arsenal/weapons/pelican__c4"
+    },
+    "arsenal_pelican__c5": {
+      "textures": "textures/items/arsenal/weapons/pelican__c5"
+    },
+    "arsenal_pelican__c6": {
+      "textures": "textures/items/arsenal/weapons/pelican__c6"
+    },
+    "arsenal_pelican__c7": {
+      "textures": "textures/items/arsenal/weapons/pelican__c7"
+    },
+    "arsenal_pelican__c8": {
+      "textures": "textures/items/arsenal/weapons/pelican__c8"
+    },
+    "arsenal_pelican__c9": {
+      "textures": "textures/items/arsenal/weapons/pelican__c9"
+    },
+    "arsenal_peregrine": {
+      "textures": "textures/items/arsenal/weapons/peregrine"
+    },
+    "arsenal_peregrine__c1": {
+      "textures": "textures/items/arsenal/weapons/peregrine__c1"
+    },
+    "arsenal_peregrine__c10": {
+      "textures": "textures/items/arsenal/weapons/peregrine__c10"
+    },
+    "arsenal_peregrine__c11": {
+      "textures": "textures/items/arsenal/weapons/peregrine__c11"
+    },
+    "arsenal_peregrine__c12": {
+      "textures": "textures/items/arsenal/weapons/peregrine__c12"
+    },
+    "arsenal_peregrine__c2": {
+      "textures": "textures/items/arsenal/weapons/peregrine__c2"
+    },
+    "arsenal_peregrine__c3": {
+      "textures": "textures/items/arsenal/weapons/peregrine__c3"
+    },
+    "arsenal_peregrine__c4": {
+      "textures": "textures/items/arsenal/weapons/peregrine__c4"
+    },
+    "arsenal_peregrine__c5": {
+      "textures": "textures/items/arsenal/weapons/peregrine__c5"
+    },
+    "arsenal_peregrine__c6": {
+      "textures": "textures/items/arsenal/weapons/peregrine__c6"
+    },
+    "arsenal_peregrine__c7": {
+      "textures": "textures/items/arsenal/weapons/peregrine__c7"
+    },
+    "arsenal_peregrine__c8": {
+      "textures": "textures/items/arsenal/weapons/peregrine__c8"
+    },
+    "arsenal_peregrine__c9": {
+      "textures": "textures/items/arsenal/weapons/peregrine__c9"
+    },
+    "arsenal_peregrine__o0": {
+      "textures": "textures/items/arsenal/weapons/peregrine__o0"
+    },
+    "arsenal_peregrine__o1": {
+      "textures": "textures/items/arsenal/weapons/peregrine__o1"
+    },
+    "arsenal_phantom_lr": {
+      "textures": "textures/items/arsenal/weapons/phantom_lr"
+    },
+    "arsenal_phantom_lr__c1": {
+      "textures": "textures/items/arsenal/weapons/phantom_lr__c1"
+    },
+    "arsenal_phantom_lr__c10": {
+      "textures": "textures/items/arsenal/weapons/phantom_lr__c10"
+    },
+    "arsenal_phantom_lr__c11": {
+      "textures": "textures/items/arsenal/weapons/phantom_lr__c11"
+    },
+    "arsenal_phantom_lr__c12": {
+      "textures": "textures/items/arsenal/weapons/phantom_lr__c12"
+    },
+    "arsenal_phantom_lr__c2": {
+      "textures": "textures/items/arsenal/weapons/phantom_lr__c2"
+    },
+    "arsenal_phantom_lr__c3": {
+      "textures": "textures/items/arsenal/weapons/phantom_lr__c3"
+    },
+    "arsenal_phantom_lr__c4": {
+      "textures": "textures/items/arsenal/weapons/phantom_lr__c4"
+    },
+    "arsenal_phantom_lr__c5": {
+      "textures": "textures/items/arsenal/weapons/phantom_lr__c5"
+    },
+    "arsenal_phantom_lr__c6": {
+      "textures": "textures/items/arsenal/weapons/phantom_lr__c6"
+    },
+    "arsenal_phantom_lr__c7": {
+      "textures": "textures/items/arsenal/weapons/phantom_lr__c7"
+    },
+    "arsenal_phantom_lr__c8": {
+      "textures": "textures/items/arsenal/weapons/phantom_lr__c8"
+    },
+    "arsenal_phantom_lr__c9": {
+      "textures": "textures/items/arsenal/weapons/phantom_lr__c9"
+    },
+    "arsenal_phantom_lr__o0": {
+      "textures": "textures/items/arsenal/weapons/phantom_lr__o0"
+    },
+    "arsenal_phantom_lr__o1": {
+      "textures": "textures/items/arsenal/weapons/phantom_lr__o1"
+    },
     "arsenal_photon_lance": {
       "textures": "textures/items/arsenal/weapons/photon_lance"
     },
     "arsenal_photon_lance__c1": {
       "textures": "textures/items/arsenal/weapons/photon_lance__c1"
+    },
+    "arsenal_photon_lance__c10": {
+      "textures": "textures/items/arsenal/weapons/photon_lance__c10"
+    },
+    "arsenal_photon_lance__c11": {
+      "textures": "textures/items/arsenal/weapons/photon_lance__c11"
+    },
+    "arsenal_photon_lance__c12": {
+      "textures": "textures/items/arsenal/weapons/photon_lance__c12"
     },
     "arsenal_photon_lance__c2": {
       "textures": "textures/items/arsenal/weapons/photon_lance__c2"
@@ -1964,6 +3563,9 @@
     "arsenal_photon_lance__c8": {
       "textures": "textures/items/arsenal/weapons/photon_lance__c8"
     },
+    "arsenal_photon_lance__c9": {
+      "textures": "textures/items/arsenal/weapons/photon_lance__c9"
+    },
     "arsenal_photon_lance__o0": {
       "textures": "textures/items/arsenal/weapons/photon_lance__o0"
     },
@@ -1975,6 +3577,15 @@
     },
     "arsenal_plasma_repeater__c1": {
       "textures": "textures/items/arsenal/weapons/plasma_repeater__c1"
+    },
+    "arsenal_plasma_repeater__c10": {
+      "textures": "textures/items/arsenal/weapons/plasma_repeater__c10"
+    },
+    "arsenal_plasma_repeater__c11": {
+      "textures": "textures/items/arsenal/weapons/plasma_repeater__c11"
+    },
+    "arsenal_plasma_repeater__c12": {
+      "textures": "textures/items/arsenal/weapons/plasma_repeater__c12"
     },
     "arsenal_plasma_repeater__c2": {
       "textures": "textures/items/arsenal/weapons/plasma_repeater__c2"
@@ -1997,6 +3608,9 @@
     "arsenal_plasma_repeater__c8": {
       "textures": "textures/items/arsenal/weapons/plasma_repeater__c8"
     },
+    "arsenal_plasma_repeater__c9": {
+      "textures": "textures/items/arsenal/weapons/plasma_repeater__c9"
+    },
     "arsenal_plasma_repeater__o0": {
       "textures": "textures/items/arsenal/weapons/plasma_repeater__o0"
     },
@@ -2014,6 +3628,15 @@
     },
     "arsenal_pulse_rifle__c1": {
       "textures": "textures/items/arsenal/weapons/pulse_rifle__c1"
+    },
+    "arsenal_pulse_rifle__c10": {
+      "textures": "textures/items/arsenal/weapons/pulse_rifle__c10"
+    },
+    "arsenal_pulse_rifle__c11": {
+      "textures": "textures/items/arsenal/weapons/pulse_rifle__c11"
+    },
+    "arsenal_pulse_rifle__c12": {
+      "textures": "textures/items/arsenal/weapons/pulse_rifle__c12"
     },
     "arsenal_pulse_rifle__c2": {
       "textures": "textures/items/arsenal/weapons/pulse_rifle__c2"
@@ -2036,6 +3659,9 @@
     "arsenal_pulse_rifle__c8": {
       "textures": "textures/items/arsenal/weapons/pulse_rifle__c8"
     },
+    "arsenal_pulse_rifle__c9": {
+      "textures": "textures/items/arsenal/weapons/pulse_rifle__c9"
+    },
     "arsenal_pulse_rifle__o0": {
       "textures": "textures/items/arsenal/weapons/pulse_rifle__o0"
     },
@@ -2047,6 +3673,15 @@
     },
     "arsenal_quillback__c1": {
       "textures": "textures/items/arsenal/weapons/quillback__c1"
+    },
+    "arsenal_quillback__c10": {
+      "textures": "textures/items/arsenal/weapons/quillback__c10"
+    },
+    "arsenal_quillback__c11": {
+      "textures": "textures/items/arsenal/weapons/quillback__c11"
+    },
+    "arsenal_quillback__c12": {
+      "textures": "textures/items/arsenal/weapons/quillback__c12"
     },
     "arsenal_quillback__c2": {
       "textures": "textures/items/arsenal/weapons/quillback__c2"
@@ -2069,6 +3704,9 @@
     "arsenal_quillback__c8": {
       "textures": "textures/items/arsenal/weapons/quillback__c8"
     },
+    "arsenal_quillback__c9": {
+      "textures": "textures/items/arsenal/weapons/quillback__c9"
+    },
     "arsenal_quillback__o1": {
       "textures": "textures/items/arsenal/weapons/quillback__o1"
     },
@@ -2080,6 +3718,15 @@
     },
     "arsenal_railspike__c1": {
       "textures": "textures/items/arsenal/weapons/railspike__c1"
+    },
+    "arsenal_railspike__c10": {
+      "textures": "textures/items/arsenal/weapons/railspike__c10"
+    },
+    "arsenal_railspike__c11": {
+      "textures": "textures/items/arsenal/weapons/railspike__c11"
+    },
+    "arsenal_railspike__c12": {
+      "textures": "textures/items/arsenal/weapons/railspike__c12"
     },
     "arsenal_railspike__c2": {
       "textures": "textures/items/arsenal/weapons/railspike__c2"
@@ -2102,6 +3749,9 @@
     "arsenal_railspike__c8": {
       "textures": "textures/items/arsenal/weapons/railspike__c8"
     },
+    "arsenal_railspike__c9": {
+      "textures": "textures/items/arsenal/weapons/railspike__c9"
+    },
     "arsenal_railspike__o0": {
       "textures": "textures/items/arsenal/weapons/railspike__o0"
     },
@@ -2113,6 +3763,15 @@
     },
     "arsenal_rampart__c1": {
       "textures": "textures/items/arsenal/weapons/rampart__c1"
+    },
+    "arsenal_rampart__c10": {
+      "textures": "textures/items/arsenal/weapons/rampart__c10"
+    },
+    "arsenal_rampart__c11": {
+      "textures": "textures/items/arsenal/weapons/rampart__c11"
+    },
+    "arsenal_rampart__c12": {
+      "textures": "textures/items/arsenal/weapons/rampart__c12"
     },
     "arsenal_rampart__c2": {
       "textures": "textures/items/arsenal/weapons/rampart__c2"
@@ -2135,17 +3794,74 @@
     "arsenal_rampart__c8": {
       "textures": "textures/items/arsenal/weapons/rampart__c8"
     },
+    "arsenal_rampart__c9": {
+      "textures": "textures/items/arsenal/weapons/rampart__c9"
+    },
     "arsenal_rampart__o1": {
       "textures": "textures/items/arsenal/weapons/rampart__o1"
     },
     "arsenal_rampart__o2": {
       "textures": "textures/items/arsenal/weapons/rampart__o2"
     },
+    "arsenal_ranger": {
+      "textures": "textures/items/arsenal/weapons/ranger"
+    },
+    "arsenal_ranger__c1": {
+      "textures": "textures/items/arsenal/weapons/ranger__c1"
+    },
+    "arsenal_ranger__c10": {
+      "textures": "textures/items/arsenal/weapons/ranger__c10"
+    },
+    "arsenal_ranger__c11": {
+      "textures": "textures/items/arsenal/weapons/ranger__c11"
+    },
+    "arsenal_ranger__c12": {
+      "textures": "textures/items/arsenal/weapons/ranger__c12"
+    },
+    "arsenal_ranger__c2": {
+      "textures": "textures/items/arsenal/weapons/ranger__c2"
+    },
+    "arsenal_ranger__c3": {
+      "textures": "textures/items/arsenal/weapons/ranger__c3"
+    },
+    "arsenal_ranger__c4": {
+      "textures": "textures/items/arsenal/weapons/ranger__c4"
+    },
+    "arsenal_ranger__c5": {
+      "textures": "textures/items/arsenal/weapons/ranger__c5"
+    },
+    "arsenal_ranger__c6": {
+      "textures": "textures/items/arsenal/weapons/ranger__c6"
+    },
+    "arsenal_ranger__c7": {
+      "textures": "textures/items/arsenal/weapons/ranger__c7"
+    },
+    "arsenal_ranger__c8": {
+      "textures": "textures/items/arsenal/weapons/ranger__c8"
+    },
+    "arsenal_ranger__c9": {
+      "textures": "textures/items/arsenal/weapons/ranger__c9"
+    },
+    "arsenal_ranger__o1": {
+      "textures": "textures/items/arsenal/weapons/ranger__o1"
+    },
+    "arsenal_ranger__o2": {
+      "textures": "textures/items/arsenal/weapons/ranger__o2"
+    },
     "arsenal_rattler": {
       "textures": "textures/items/arsenal/weapons/rattler"
     },
     "arsenal_rattler__c1": {
       "textures": "textures/items/arsenal/weapons/rattler__c1"
+    },
+    "arsenal_rattler__c10": {
+      "textures": "textures/items/arsenal/weapons/rattler__c10"
+    },
+    "arsenal_rattler__c11": {
+      "textures": "textures/items/arsenal/weapons/rattler__c11"
+    },
+    "arsenal_rattler__c12": {
+      "textures": "textures/items/arsenal/weapons/rattler__c12"
     },
     "arsenal_rattler__c2": {
       "textures": "textures/items/arsenal/weapons/rattler__c2"
@@ -2168,6 +3884,9 @@
     "arsenal_rattler__c8": {
       "textures": "textures/items/arsenal/weapons/rattler__c8"
     },
+    "arsenal_rattler__c9": {
+      "textures": "textures/items/arsenal/weapons/rattler__c9"
+    },
     "arsenal_rattler__o1": {
       "textures": "textures/items/arsenal/weapons/rattler__o1"
     },
@@ -2179,6 +3898,15 @@
     },
     "arsenal_ravager__c1": {
       "textures": "textures/items/arsenal/weapons/ravager__c1"
+    },
+    "arsenal_ravager__c10": {
+      "textures": "textures/items/arsenal/weapons/ravager__c10"
+    },
+    "arsenal_ravager__c11": {
+      "textures": "textures/items/arsenal/weapons/ravager__c11"
+    },
+    "arsenal_ravager__c12": {
+      "textures": "textures/items/arsenal/weapons/ravager__c12"
     },
     "arsenal_ravager__c2": {
       "textures": "textures/items/arsenal/weapons/ravager__c2"
@@ -2201,6 +3929,9 @@
     "arsenal_ravager__c8": {
       "textures": "textures/items/arsenal/weapons/ravager__c8"
     },
+    "arsenal_ravager__c9": {
+      "textures": "textures/items/arsenal/weapons/ravager__c9"
+    },
     "arsenal_ravager__o1": {
       "textures": "textures/items/arsenal/weapons/ravager__o1"
     },
@@ -2212,6 +3943,15 @@
     },
     "arsenal_reaper_auto__c1": {
       "textures": "textures/items/arsenal/weapons/reaper_auto__c1"
+    },
+    "arsenal_reaper_auto__c10": {
+      "textures": "textures/items/arsenal/weapons/reaper_auto__c10"
+    },
+    "arsenal_reaper_auto__c11": {
+      "textures": "textures/items/arsenal/weapons/reaper_auto__c11"
+    },
+    "arsenal_reaper_auto__c12": {
+      "textures": "textures/items/arsenal/weapons/reaper_auto__c12"
     },
     "arsenal_reaper_auto__c2": {
       "textures": "textures/items/arsenal/weapons/reaper_auto__c2"
@@ -2234,6 +3974,9 @@
     "arsenal_reaper_auto__c8": {
       "textures": "textures/items/arsenal/weapons/reaper_auto__c8"
     },
+    "arsenal_reaper_auto__c9": {
+      "textures": "textures/items/arsenal/weapons/reaper_auto__c9"
+    },
     "arsenal_reaper_auto__o1": {
       "textures": "textures/items/arsenal/weapons/reaper_auto__o1"
     },
@@ -2243,14 +3986,113 @@
     "arsenal_recon_drone": {
       "textures": "textures/items/arsenal/gear/recon_drone"
     },
+    "arsenal_regent": {
+      "textures": "textures/items/arsenal/weapons/regent"
+    },
+    "arsenal_regent__c1": {
+      "textures": "textures/items/arsenal/weapons/regent__c1"
+    },
+    "arsenal_regent__c10": {
+      "textures": "textures/items/arsenal/weapons/regent__c10"
+    },
+    "arsenal_regent__c11": {
+      "textures": "textures/items/arsenal/weapons/regent__c11"
+    },
+    "arsenal_regent__c12": {
+      "textures": "textures/items/arsenal/weapons/regent__c12"
+    },
+    "arsenal_regent__c2": {
+      "textures": "textures/items/arsenal/weapons/regent__c2"
+    },
+    "arsenal_regent__c3": {
+      "textures": "textures/items/arsenal/weapons/regent__c3"
+    },
+    "arsenal_regent__c4": {
+      "textures": "textures/items/arsenal/weapons/regent__c4"
+    },
+    "arsenal_regent__c5": {
+      "textures": "textures/items/arsenal/weapons/regent__c5"
+    },
+    "arsenal_regent__c6": {
+      "textures": "textures/items/arsenal/weapons/regent__c6"
+    },
+    "arsenal_regent__c7": {
+      "textures": "textures/items/arsenal/weapons/regent__c7"
+    },
+    "arsenal_regent__c8": {
+      "textures": "textures/items/arsenal/weapons/regent__c8"
+    },
+    "arsenal_regent__c9": {
+      "textures": "textures/items/arsenal/weapons/regent__c9"
+    },
+    "arsenal_regent__o1": {
+      "textures": "textures/items/arsenal/weapons/regent__o1"
+    },
+    "arsenal_regent__o2": {
+      "textures": "textures/items/arsenal/weapons/regent__o2"
+    },
     "arsenal_repair_kit": {
       "textures": "textures/items/arsenal/tools/repair_kit"
+    },
+    "arsenal_rhino": {
+      "textures": "textures/items/arsenal/weapons/rhino"
+    },
+    "arsenal_rhino__c1": {
+      "textures": "textures/items/arsenal/weapons/rhino__c1"
+    },
+    "arsenal_rhino__c10": {
+      "textures": "textures/items/arsenal/weapons/rhino__c10"
+    },
+    "arsenal_rhino__c11": {
+      "textures": "textures/items/arsenal/weapons/rhino__c11"
+    },
+    "arsenal_rhino__c12": {
+      "textures": "textures/items/arsenal/weapons/rhino__c12"
+    },
+    "arsenal_rhino__c2": {
+      "textures": "textures/items/arsenal/weapons/rhino__c2"
+    },
+    "arsenal_rhino__c3": {
+      "textures": "textures/items/arsenal/weapons/rhino__c3"
+    },
+    "arsenal_rhino__c4": {
+      "textures": "textures/items/arsenal/weapons/rhino__c4"
+    },
+    "arsenal_rhino__c5": {
+      "textures": "textures/items/arsenal/weapons/rhino__c5"
+    },
+    "arsenal_rhino__c6": {
+      "textures": "textures/items/arsenal/weapons/rhino__c6"
+    },
+    "arsenal_rhino__c7": {
+      "textures": "textures/items/arsenal/weapons/rhino__c7"
+    },
+    "arsenal_rhino__c8": {
+      "textures": "textures/items/arsenal/weapons/rhino__c8"
+    },
+    "arsenal_rhino__c9": {
+      "textures": "textures/items/arsenal/weapons/rhino__c9"
+    },
+    "arsenal_rhino__o1": {
+      "textures": "textures/items/arsenal/weapons/rhino__o1"
+    },
+    "arsenal_rhino__o2": {
+      "textures": "textures/items/arsenal/weapons/rhino__o2"
     },
     "arsenal_ridgeback": {
       "textures": "textures/items/arsenal/weapons/ridgeback"
     },
     "arsenal_ridgeback__c1": {
       "textures": "textures/items/arsenal/weapons/ridgeback__c1"
+    },
+    "arsenal_ridgeback__c10": {
+      "textures": "textures/items/arsenal/weapons/ridgeback__c10"
+    },
+    "arsenal_ridgeback__c11": {
+      "textures": "textures/items/arsenal/weapons/ridgeback__c11"
+    },
+    "arsenal_ridgeback__c12": {
+      "textures": "textures/items/arsenal/weapons/ridgeback__c12"
     },
     "arsenal_ridgeback__c2": {
       "textures": "textures/items/arsenal/weapons/ridgeback__c2"
@@ -2273,6 +4115,9 @@
     "arsenal_ridgeback__c8": {
       "textures": "textures/items/arsenal/weapons/ridgeback__c8"
     },
+    "arsenal_ridgeback__c9": {
+      "textures": "textures/items/arsenal/weapons/ridgeback__c9"
+    },
     "arsenal_ridgeback__o1": {
       "textures": "textures/items/arsenal/weapons/ridgeback__o1"
     },
@@ -2290,6 +4135,15 @@
     },
     "arsenal_sawtooth__c1": {
       "textures": "textures/items/arsenal/weapons/sawtooth__c1"
+    },
+    "arsenal_sawtooth__c10": {
+      "textures": "textures/items/arsenal/weapons/sawtooth__c10"
+    },
+    "arsenal_sawtooth__c11": {
+      "textures": "textures/items/arsenal/weapons/sawtooth__c11"
+    },
+    "arsenal_sawtooth__c12": {
+      "textures": "textures/items/arsenal/weapons/sawtooth__c12"
     },
     "arsenal_sawtooth__c2": {
       "textures": "textures/items/arsenal/weapons/sawtooth__c2"
@@ -2312,6 +4166,9 @@
     "arsenal_sawtooth__c8": {
       "textures": "textures/items/arsenal/weapons/sawtooth__c8"
     },
+    "arsenal_sawtooth__c9": {
+      "textures": "textures/items/arsenal/weapons/sawtooth__c9"
+    },
     "arsenal_sawtooth__o1": {
       "textures": "textures/items/arsenal/weapons/sawtooth__o1"
     },
@@ -2323,6 +4180,15 @@
     },
     "arsenal_seeker__c1": {
       "textures": "textures/items/arsenal/weapons/seeker__c1"
+    },
+    "arsenal_seeker__c10": {
+      "textures": "textures/items/arsenal/weapons/seeker__c10"
+    },
+    "arsenal_seeker__c11": {
+      "textures": "textures/items/arsenal/weapons/seeker__c11"
+    },
+    "arsenal_seeker__c12": {
+      "textures": "textures/items/arsenal/weapons/seeker__c12"
     },
     "arsenal_seeker__c2": {
       "textures": "textures/items/arsenal/weapons/seeker__c2"
@@ -2345,11 +4211,23 @@
     "arsenal_seeker__c8": {
       "textures": "textures/items/arsenal/weapons/seeker__c8"
     },
+    "arsenal_seeker__c9": {
+      "textures": "textures/items/arsenal/weapons/seeker__c9"
+    },
     "arsenal_sentinel": {
       "textures": "textures/items/arsenal/weapons/sentinel"
     },
     "arsenal_sentinel__c1": {
       "textures": "textures/items/arsenal/weapons/sentinel__c1"
+    },
+    "arsenal_sentinel__c10": {
+      "textures": "textures/items/arsenal/weapons/sentinel__c10"
+    },
+    "arsenal_sentinel__c11": {
+      "textures": "textures/items/arsenal/weapons/sentinel__c11"
+    },
+    "arsenal_sentinel__c12": {
+      "textures": "textures/items/arsenal/weapons/sentinel__c12"
     },
     "arsenal_sentinel__c2": {
       "textures": "textures/items/arsenal/weapons/sentinel__c2"
@@ -2372,6 +4250,9 @@
     "arsenal_sentinel__c8": {
       "textures": "textures/items/arsenal/weapons/sentinel__c8"
     },
+    "arsenal_sentinel__c9": {
+      "textures": "textures/items/arsenal/weapons/sentinel__c9"
+    },
     "arsenal_sentinel__o1": {
       "textures": "textures/items/arsenal/weapons/sentinel__o1"
     },
@@ -2390,14 +4271,113 @@
     "arsenal_shell_slug": {
       "textures": "textures/items/arsenal/ammo/shell_slug"
     },
+    "arsenal_shrike": {
+      "textures": "textures/items/arsenal/weapons/shrike"
+    },
+    "arsenal_shrike__c1": {
+      "textures": "textures/items/arsenal/weapons/shrike__c1"
+    },
+    "arsenal_shrike__c10": {
+      "textures": "textures/items/arsenal/weapons/shrike__c10"
+    },
+    "arsenal_shrike__c11": {
+      "textures": "textures/items/arsenal/weapons/shrike__c11"
+    },
+    "arsenal_shrike__c12": {
+      "textures": "textures/items/arsenal/weapons/shrike__c12"
+    },
+    "arsenal_shrike__c2": {
+      "textures": "textures/items/arsenal/weapons/shrike__c2"
+    },
+    "arsenal_shrike__c3": {
+      "textures": "textures/items/arsenal/weapons/shrike__c3"
+    },
+    "arsenal_shrike__c4": {
+      "textures": "textures/items/arsenal/weapons/shrike__c4"
+    },
+    "arsenal_shrike__c5": {
+      "textures": "textures/items/arsenal/weapons/shrike__c5"
+    },
+    "arsenal_shrike__c6": {
+      "textures": "textures/items/arsenal/weapons/shrike__c6"
+    },
+    "arsenal_shrike__c7": {
+      "textures": "textures/items/arsenal/weapons/shrike__c7"
+    },
+    "arsenal_shrike__c8": {
+      "textures": "textures/items/arsenal/weapons/shrike__c8"
+    },
+    "arsenal_shrike__c9": {
+      "textures": "textures/items/arsenal/weapons/shrike__c9"
+    },
+    "arsenal_shrike__o0": {
+      "textures": "textures/items/arsenal/weapons/shrike__o0"
+    },
+    "arsenal_shrike__o1": {
+      "textures": "textures/items/arsenal/weapons/shrike__o1"
+    },
     "arsenal_side_canted": {
       "textures": "textures/items/arsenal/attachments/side_canted"
+    },
+    "arsenal_sirocco": {
+      "textures": "textures/items/arsenal/weapons/sirocco"
+    },
+    "arsenal_sirocco__c1": {
+      "textures": "textures/items/arsenal/weapons/sirocco__c1"
+    },
+    "arsenal_sirocco__c10": {
+      "textures": "textures/items/arsenal/weapons/sirocco__c10"
+    },
+    "arsenal_sirocco__c11": {
+      "textures": "textures/items/arsenal/weapons/sirocco__c11"
+    },
+    "arsenal_sirocco__c12": {
+      "textures": "textures/items/arsenal/weapons/sirocco__c12"
+    },
+    "arsenal_sirocco__c2": {
+      "textures": "textures/items/arsenal/weapons/sirocco__c2"
+    },
+    "arsenal_sirocco__c3": {
+      "textures": "textures/items/arsenal/weapons/sirocco__c3"
+    },
+    "arsenal_sirocco__c4": {
+      "textures": "textures/items/arsenal/weapons/sirocco__c4"
+    },
+    "arsenal_sirocco__c5": {
+      "textures": "textures/items/arsenal/weapons/sirocco__c5"
+    },
+    "arsenal_sirocco__c6": {
+      "textures": "textures/items/arsenal/weapons/sirocco__c6"
+    },
+    "arsenal_sirocco__c7": {
+      "textures": "textures/items/arsenal/weapons/sirocco__c7"
+    },
+    "arsenal_sirocco__c8": {
+      "textures": "textures/items/arsenal/weapons/sirocco__c8"
+    },
+    "arsenal_sirocco__c9": {
+      "textures": "textures/items/arsenal/weapons/sirocco__c9"
+    },
+    "arsenal_sirocco__o1": {
+      "textures": "textures/items/arsenal/weapons/sirocco__o1"
+    },
+    "arsenal_sirocco__o2": {
+      "textures": "textures/items/arsenal/weapons/sirocco__o2"
     },
     "arsenal_skypiercer": {
       "textures": "textures/items/arsenal/weapons/skypiercer"
     },
     "arsenal_skypiercer__c1": {
       "textures": "textures/items/arsenal/weapons/skypiercer__c1"
+    },
+    "arsenal_skypiercer__c10": {
+      "textures": "textures/items/arsenal/weapons/skypiercer__c10"
+    },
+    "arsenal_skypiercer__c11": {
+      "textures": "textures/items/arsenal/weapons/skypiercer__c11"
+    },
+    "arsenal_skypiercer__c12": {
+      "textures": "textures/items/arsenal/weapons/skypiercer__c12"
     },
     "arsenal_skypiercer__c2": {
       "textures": "textures/items/arsenal/weapons/skypiercer__c2"
@@ -2420,11 +4400,23 @@
     "arsenal_skypiercer__c8": {
       "textures": "textures/items/arsenal/weapons/skypiercer__c8"
     },
+    "arsenal_skypiercer__c9": {
+      "textures": "textures/items/arsenal/weapons/skypiercer__c9"
+    },
     "arsenal_slugger": {
       "textures": "textures/items/arsenal/weapons/slugger"
     },
     "arsenal_slugger__c1": {
       "textures": "textures/items/arsenal/weapons/slugger__c1"
+    },
+    "arsenal_slugger__c10": {
+      "textures": "textures/items/arsenal/weapons/slugger__c10"
+    },
+    "arsenal_slugger__c11": {
+      "textures": "textures/items/arsenal/weapons/slugger__c11"
+    },
+    "arsenal_slugger__c12": {
+      "textures": "textures/items/arsenal/weapons/slugger__c12"
     },
     "arsenal_slugger__c2": {
       "textures": "textures/items/arsenal/weapons/slugger__c2"
@@ -2447,6 +4439,9 @@
     "arsenal_slugger__c8": {
       "textures": "textures/items/arsenal/weapons/slugger__c8"
     },
+    "arsenal_slugger__c9": {
+      "textures": "textures/items/arsenal/weapons/slugger__c9"
+    },
     "arsenal_slugger__o1": {
       "textures": "textures/items/arsenal/weapons/slugger__o1"
     },
@@ -2458,6 +4453,15 @@
     },
     "arsenal_sonic_disruptor__c1": {
       "textures": "textures/items/arsenal/weapons/sonic_disruptor__c1"
+    },
+    "arsenal_sonic_disruptor__c10": {
+      "textures": "textures/items/arsenal/weapons/sonic_disruptor__c10"
+    },
+    "arsenal_sonic_disruptor__c11": {
+      "textures": "textures/items/arsenal/weapons/sonic_disruptor__c11"
+    },
+    "arsenal_sonic_disruptor__c12": {
+      "textures": "textures/items/arsenal/weapons/sonic_disruptor__c12"
     },
     "arsenal_sonic_disruptor__c2": {
       "textures": "textures/items/arsenal/weapons/sonic_disruptor__c2"
@@ -2480,11 +4484,68 @@
     "arsenal_sonic_disruptor__c8": {
       "textures": "textures/items/arsenal/weapons/sonic_disruptor__c8"
     },
+    "arsenal_sonic_disruptor__c9": {
+      "textures": "textures/items/arsenal/weapons/sonic_disruptor__c9"
+    },
+    "arsenal_sparrow": {
+      "textures": "textures/items/arsenal/weapons/sparrow"
+    },
+    "arsenal_sparrow__c1": {
+      "textures": "textures/items/arsenal/weapons/sparrow__c1"
+    },
+    "arsenal_sparrow__c10": {
+      "textures": "textures/items/arsenal/weapons/sparrow__c10"
+    },
+    "arsenal_sparrow__c11": {
+      "textures": "textures/items/arsenal/weapons/sparrow__c11"
+    },
+    "arsenal_sparrow__c12": {
+      "textures": "textures/items/arsenal/weapons/sparrow__c12"
+    },
+    "arsenal_sparrow__c2": {
+      "textures": "textures/items/arsenal/weapons/sparrow__c2"
+    },
+    "arsenal_sparrow__c3": {
+      "textures": "textures/items/arsenal/weapons/sparrow__c3"
+    },
+    "arsenal_sparrow__c4": {
+      "textures": "textures/items/arsenal/weapons/sparrow__c4"
+    },
+    "arsenal_sparrow__c5": {
+      "textures": "textures/items/arsenal/weapons/sparrow__c5"
+    },
+    "arsenal_sparrow__c6": {
+      "textures": "textures/items/arsenal/weapons/sparrow__c6"
+    },
+    "arsenal_sparrow__c7": {
+      "textures": "textures/items/arsenal/weapons/sparrow__c7"
+    },
+    "arsenal_sparrow__c8": {
+      "textures": "textures/items/arsenal/weapons/sparrow__c8"
+    },
+    "arsenal_sparrow__c9": {
+      "textures": "textures/items/arsenal/weapons/sparrow__c9"
+    },
+    "arsenal_sparrow__o1": {
+      "textures": "textures/items/arsenal/weapons/sparrow__o1"
+    },
+    "arsenal_sparrow__o2": {
+      "textures": "textures/items/arsenal/weapons/sparrow__o2"
+    },
     "arsenal_specter": {
       "textures": "textures/items/arsenal/weapons/specter"
     },
     "arsenal_specter__c1": {
       "textures": "textures/items/arsenal/weapons/specter__c1"
+    },
+    "arsenal_specter__c10": {
+      "textures": "textures/items/arsenal/weapons/specter__c10"
+    },
+    "arsenal_specter__c11": {
+      "textures": "textures/items/arsenal/weapons/specter__c11"
+    },
+    "arsenal_specter__c12": {
+      "textures": "textures/items/arsenal/weapons/specter__c12"
     },
     "arsenal_specter__c2": {
       "textures": "textures/items/arsenal/weapons/specter__c2"
@@ -2507,6 +4568,9 @@
     "arsenal_specter__c8": {
       "textures": "textures/items/arsenal/weapons/specter__c8"
     },
+    "arsenal_specter__c9": {
+      "textures": "textures/items/arsenal/weapons/specter__c9"
+    },
     "arsenal_specter__o1": {
       "textures": "textures/items/arsenal/weapons/specter__o1"
     },
@@ -2527,6 +4591,15 @@
     },
     "arsenal_stillwater__c1": {
       "textures": "textures/items/arsenal/weapons/stillwater__c1"
+    },
+    "arsenal_stillwater__c10": {
+      "textures": "textures/items/arsenal/weapons/stillwater__c10"
+    },
+    "arsenal_stillwater__c11": {
+      "textures": "textures/items/arsenal/weapons/stillwater__c11"
+    },
+    "arsenal_stillwater__c12": {
+      "textures": "textures/items/arsenal/weapons/stillwater__c12"
     },
     "arsenal_stillwater__c2": {
       "textures": "textures/items/arsenal/weapons/stillwater__c2"
@@ -2549,6 +4622,9 @@
     "arsenal_stillwater__c8": {
       "textures": "textures/items/arsenal/weapons/stillwater__c8"
     },
+    "arsenal_stillwater__c9": {
+      "textures": "textures/items/arsenal/weapons/stillwater__c9"
+    },
     "arsenal_stillwater__o0": {
       "textures": "textures/items/arsenal/weapons/stillwater__o0"
     },
@@ -2560,6 +4636,15 @@
     },
     "arsenal_stinger__c1": {
       "textures": "textures/items/arsenal/weapons/stinger__c1"
+    },
+    "arsenal_stinger__c10": {
+      "textures": "textures/items/arsenal/weapons/stinger__c10"
+    },
+    "arsenal_stinger__c11": {
+      "textures": "textures/items/arsenal/weapons/stinger__c11"
+    },
+    "arsenal_stinger__c12": {
+      "textures": "textures/items/arsenal/weapons/stinger__c12"
     },
     "arsenal_stinger__c2": {
       "textures": "textures/items/arsenal/weapons/stinger__c2"
@@ -2582,6 +4667,9 @@
     "arsenal_stinger__c8": {
       "textures": "textures/items/arsenal/weapons/stinger__c8"
     },
+    "arsenal_stinger__c9": {
+      "textures": "textures/items/arsenal/weapons/stinger__c9"
+    },
     "arsenal_stock_cheek": {
       "textures": "textures/items/arsenal/attachments/stock_cheek"
     },
@@ -2594,6 +4682,12 @@
     "arsenal_stock_light": {
       "textures": "textures/items/arsenal/attachments/stock_light"
     },
+    "arsenal_stock_none": {
+      "textures": "textures/items/arsenal/attachments/stock_none"
+    },
+    "arsenal_stock_precision": {
+      "textures": "textures/items/arsenal/attachments/stock_precision"
+    },
     "arsenal_stock_skeleton": {
       "textures": "textures/items/arsenal/attachments/stock_skeleton"
     },
@@ -2602,6 +4696,15 @@
     },
     "arsenal_stormcaller__c1": {
       "textures": "textures/items/arsenal/weapons/stormcaller__c1"
+    },
+    "arsenal_stormcaller__c10": {
+      "textures": "textures/items/arsenal/weapons/stormcaller__c10"
+    },
+    "arsenal_stormcaller__c11": {
+      "textures": "textures/items/arsenal/weapons/stormcaller__c11"
+    },
+    "arsenal_stormcaller__c12": {
+      "textures": "textures/items/arsenal/weapons/stormcaller__c12"
     },
     "arsenal_stormcaller__c2": {
       "textures": "textures/items/arsenal/weapons/stormcaller__c2"
@@ -2624,6 +4727,9 @@
     "arsenal_stormcaller__c8": {
       "textures": "textures/items/arsenal/weapons/stormcaller__c8"
     },
+    "arsenal_stormcaller__c9": {
+      "textures": "textures/items/arsenal/weapons/stormcaller__c9"
+    },
     "arsenal_streak_terminal": {
       "textures": "textures/items/arsenal/tools/streak_terminal"
     },
@@ -2635,6 +4741,15 @@
     },
     "arsenal_tempest__c1": {
       "textures": "textures/items/arsenal/weapons/tempest__c1"
+    },
+    "arsenal_tempest__c10": {
+      "textures": "textures/items/arsenal/weapons/tempest__c10"
+    },
+    "arsenal_tempest__c11": {
+      "textures": "textures/items/arsenal/weapons/tempest__c11"
+    },
+    "arsenal_tempest__c12": {
+      "textures": "textures/items/arsenal/weapons/tempest__c12"
     },
     "arsenal_tempest__c2": {
       "textures": "textures/items/arsenal/weapons/tempest__c2"
@@ -2657,17 +4772,32 @@
     "arsenal_tempest__c8": {
       "textures": "textures/items/arsenal/weapons/tempest__c8"
     },
+    "arsenal_tempest__c9": {
+      "textures": "textures/items/arsenal/weapons/tempest__c9"
+    },
     "arsenal_tempest__o1": {
       "textures": "textures/items/arsenal/weapons/tempest__o1"
     },
     "arsenal_tempest__o2": {
       "textures": "textures/items/arsenal/weapons/tempest__o2"
     },
+    "arsenal_thermite": {
+      "textures": "textures/items/arsenal/throwables/thermite"
+    },
     "arsenal_thresher": {
       "textures": "textures/items/arsenal/weapons/thresher"
     },
     "arsenal_thresher__c1": {
       "textures": "textures/items/arsenal/weapons/thresher__c1"
+    },
+    "arsenal_thresher__c10": {
+      "textures": "textures/items/arsenal/weapons/thresher__c10"
+    },
+    "arsenal_thresher__c11": {
+      "textures": "textures/items/arsenal/weapons/thresher__c11"
+    },
+    "arsenal_thresher__c12": {
+      "textures": "textures/items/arsenal/weapons/thresher__c12"
     },
     "arsenal_thresher__c2": {
       "textures": "textures/items/arsenal/weapons/thresher__c2"
@@ -2690,6 +4820,9 @@
     "arsenal_thresher__c8": {
       "textures": "textures/items/arsenal/weapons/thresher__c8"
     },
+    "arsenal_thresher__c9": {
+      "textures": "textures/items/arsenal/weapons/thresher__c9"
+    },
     "arsenal_thresher__o1": {
       "textures": "textures/items/arsenal/weapons/thresher__o1"
     },
@@ -2704,6 +4837,15 @@
     },
     "arsenal_thumper__c1": {
       "textures": "textures/items/arsenal/weapons/thumper__c1"
+    },
+    "arsenal_thumper__c10": {
+      "textures": "textures/items/arsenal/weapons/thumper__c10"
+    },
+    "arsenal_thumper__c11": {
+      "textures": "textures/items/arsenal/weapons/thumper__c11"
+    },
+    "arsenal_thumper__c12": {
+      "textures": "textures/items/arsenal/weapons/thumper__c12"
     },
     "arsenal_thumper__c2": {
       "textures": "textures/items/arsenal/weapons/thumper__c2"
@@ -2726,11 +4868,23 @@
     "arsenal_thumper__c8": {
       "textures": "textures/items/arsenal/weapons/thumper__c8"
     },
+    "arsenal_thumper__c9": {
+      "textures": "textures/items/arsenal/weapons/thumper__c9"
+    },
     "arsenal_titan": {
       "textures": "textures/items/arsenal/weapons/titan"
     },
     "arsenal_titan__c1": {
       "textures": "textures/items/arsenal/weapons/titan__c1"
+    },
+    "arsenal_titan__c10": {
+      "textures": "textures/items/arsenal/weapons/titan__c10"
+    },
+    "arsenal_titan__c11": {
+      "textures": "textures/items/arsenal/weapons/titan__c11"
+    },
+    "arsenal_titan__c12": {
+      "textures": "textures/items/arsenal/weapons/titan__c12"
     },
     "arsenal_titan__c2": {
       "textures": "textures/items/arsenal/weapons/titan__c2"
@@ -2753,17 +4907,32 @@
     "arsenal_titan__c8": {
       "textures": "textures/items/arsenal/weapons/titan__c8"
     },
+    "arsenal_titan__c9": {
+      "textures": "textures/items/arsenal/weapons/titan__c9"
+    },
     "arsenal_titan__o1": {
       "textures": "textures/items/arsenal/weapons/titan__o1"
     },
     "arsenal_titan__o2": {
       "textures": "textures/items/arsenal/weapons/titan__o2"
     },
+    "arsenal_tomahawk": {
+      "textures": "textures/items/arsenal/melee/tomahawk"
+    },
     "arsenal_triad": {
       "textures": "textures/items/arsenal/weapons/triad"
     },
     "arsenal_triad__c1": {
       "textures": "textures/items/arsenal/weapons/triad__c1"
+    },
+    "arsenal_triad__c10": {
+      "textures": "textures/items/arsenal/weapons/triad__c10"
+    },
+    "arsenal_triad__c11": {
+      "textures": "textures/items/arsenal/weapons/triad__c11"
+    },
+    "arsenal_triad__c12": {
+      "textures": "textures/items/arsenal/weapons/triad__c12"
     },
     "arsenal_triad__c2": {
       "textures": "textures/items/arsenal/weapons/triad__c2"
@@ -2786,6 +4955,9 @@
     "arsenal_triad__c8": {
       "textures": "textures/items/arsenal/weapons/triad__c8"
     },
+    "arsenal_triad__c9": {
+      "textures": "textures/items/arsenal/weapons/triad__c9"
+    },
     "arsenal_triad__o1": {
       "textures": "textures/items/arsenal/weapons/triad__o1"
     },
@@ -2801,6 +4973,9 @@
     "arsenal_trigger_rapid": {
       "textures": "textures/items/arsenal/attachments/trigger_rapid"
     },
+    "arsenal_trigger_twostage": {
+      "textures": "textures/items/arsenal/attachments/trigger_twostage"
+    },
     "arsenal_ub_flamer": {
       "textures": "textures/items/arsenal/attachments/ub_flamer"
     },
@@ -2812,6 +4987,51 @@
     },
     "arsenal_ub_shotgun": {
       "textures": "textures/items/arsenal/attachments/ub_shotgun"
+    },
+    "arsenal_valkyrie": {
+      "textures": "textures/items/arsenal/weapons/valkyrie"
+    },
+    "arsenal_valkyrie__c1": {
+      "textures": "textures/items/arsenal/weapons/valkyrie__c1"
+    },
+    "arsenal_valkyrie__c10": {
+      "textures": "textures/items/arsenal/weapons/valkyrie__c10"
+    },
+    "arsenal_valkyrie__c11": {
+      "textures": "textures/items/arsenal/weapons/valkyrie__c11"
+    },
+    "arsenal_valkyrie__c12": {
+      "textures": "textures/items/arsenal/weapons/valkyrie__c12"
+    },
+    "arsenal_valkyrie__c2": {
+      "textures": "textures/items/arsenal/weapons/valkyrie__c2"
+    },
+    "arsenal_valkyrie__c3": {
+      "textures": "textures/items/arsenal/weapons/valkyrie__c3"
+    },
+    "arsenal_valkyrie__c4": {
+      "textures": "textures/items/arsenal/weapons/valkyrie__c4"
+    },
+    "arsenal_valkyrie__c5": {
+      "textures": "textures/items/arsenal/weapons/valkyrie__c5"
+    },
+    "arsenal_valkyrie__c6": {
+      "textures": "textures/items/arsenal/weapons/valkyrie__c6"
+    },
+    "arsenal_valkyrie__c7": {
+      "textures": "textures/items/arsenal/weapons/valkyrie__c7"
+    },
+    "arsenal_valkyrie__c8": {
+      "textures": "textures/items/arsenal/weapons/valkyrie__c8"
+    },
+    "arsenal_valkyrie__c9": {
+      "textures": "textures/items/arsenal/weapons/valkyrie__c9"
+    },
+    "arsenal_valkyrie__o0": {
+      "textures": "textures/items/arsenal/weapons/valkyrie__o0"
+    },
+    "arsenal_valkyrie__o2": {
+      "textures": "textures/items/arsenal/weapons/valkyrie__o2"
     },
     "arsenal_vest_heavy_1": {
       "textures": "textures/items/arsenal/armor/vest_heavy_1"
@@ -2858,6 +5078,15 @@
     "arsenal_viper_auto__c1": {
       "textures": "textures/items/arsenal/weapons/viper_auto__c1"
     },
+    "arsenal_viper_auto__c10": {
+      "textures": "textures/items/arsenal/weapons/viper_auto__c10"
+    },
+    "arsenal_viper_auto__c11": {
+      "textures": "textures/items/arsenal/weapons/viper_auto__c11"
+    },
+    "arsenal_viper_auto__c12": {
+      "textures": "textures/items/arsenal/weapons/viper_auto__c12"
+    },
     "arsenal_viper_auto__c2": {
       "textures": "textures/items/arsenal/weapons/viper_auto__c2"
     },
@@ -2879,6 +5108,9 @@
     "arsenal_viper_auto__c8": {
       "textures": "textures/items/arsenal/weapons/viper_auto__c8"
     },
+    "arsenal_viper_auto__c9": {
+      "textures": "textures/items/arsenal/weapons/viper_auto__c9"
+    },
     "arsenal_viper_auto__o1": {
       "textures": "textures/items/arsenal/weapons/viper_auto__o1"
     },
@@ -2890,6 +5122,15 @@
     },
     "arsenal_void_needle__c1": {
       "textures": "textures/items/arsenal/weapons/void_needle__c1"
+    },
+    "arsenal_void_needle__c10": {
+      "textures": "textures/items/arsenal/weapons/void_needle__c10"
+    },
+    "arsenal_void_needle__c11": {
+      "textures": "textures/items/arsenal/weapons/void_needle__c11"
+    },
+    "arsenal_void_needle__c12": {
+      "textures": "textures/items/arsenal/weapons/void_needle__c12"
     },
     "arsenal_void_needle__c2": {
       "textures": "textures/items/arsenal/weapons/void_needle__c2"
@@ -2912,6 +5153,9 @@
     "arsenal_void_needle__c8": {
       "textures": "textures/items/arsenal/weapons/void_needle__c8"
     },
+    "arsenal_void_needle__c9": {
+      "textures": "textures/items/arsenal/weapons/void_needle__c9"
+    },
     "arsenal_void_needle__o0": {
       "textures": "textures/items/arsenal/weapons/void_needle__o0"
     },
@@ -2923,6 +5167,15 @@
     },
     "arsenal_vx9__c1": {
       "textures": "textures/items/arsenal/weapons/vx9__c1"
+    },
+    "arsenal_vx9__c10": {
+      "textures": "textures/items/arsenal/weapons/vx9__c10"
+    },
+    "arsenal_vx9__c11": {
+      "textures": "textures/items/arsenal/weapons/vx9__c11"
+    },
+    "arsenal_vx9__c12": {
+      "textures": "textures/items/arsenal/weapons/vx9__c12"
     },
     "arsenal_vx9__c2": {
       "textures": "textures/items/arsenal/weapons/vx9__c2"
@@ -2945,17 +5198,32 @@
     "arsenal_vx9__c8": {
       "textures": "textures/items/arsenal/weapons/vx9__c8"
     },
+    "arsenal_vx9__c9": {
+      "textures": "textures/items/arsenal/weapons/vx9__c9"
+    },
     "arsenal_vx9__o1": {
       "textures": "textures/items/arsenal/weapons/vx9__o1"
     },
     "arsenal_vx9__o2": {
       "textures": "textures/items/arsenal/weapons/vx9__o2"
     },
+    "arsenal_war_hammer": {
+      "textures": "textures/items/arsenal/melee/war_hammer"
+    },
     "arsenal_warden": {
       "textures": "textures/items/arsenal/weapons/warden"
     },
     "arsenal_warden__c1": {
       "textures": "textures/items/arsenal/weapons/warden__c1"
+    },
+    "arsenal_warden__c10": {
+      "textures": "textures/items/arsenal/weapons/warden__c10"
+    },
+    "arsenal_warden__c11": {
+      "textures": "textures/items/arsenal/weapons/warden__c11"
+    },
+    "arsenal_warden__c12": {
+      "textures": "textures/items/arsenal/weapons/warden__c12"
     },
     "arsenal_warden__c2": {
       "textures": "textures/items/arsenal/weapons/warden__c2"
@@ -2978,11 +5246,59 @@
     "arsenal_warden__c8": {
       "textures": "textures/items/arsenal/weapons/warden__c8"
     },
+    "arsenal_warden__c9": {
+      "textures": "textures/items/arsenal/weapons/warden__c9"
+    },
     "arsenal_warden__o1": {
       "textures": "textures/items/arsenal/weapons/warden__o1"
     },
     "arsenal_warden__o2": {
       "textures": "textures/items/arsenal/weapons/warden__o2"
+    },
+    "arsenal_warhorse": {
+      "textures": "textures/items/arsenal/weapons/warhorse"
+    },
+    "arsenal_warhorse__c1": {
+      "textures": "textures/items/arsenal/weapons/warhorse__c1"
+    },
+    "arsenal_warhorse__c10": {
+      "textures": "textures/items/arsenal/weapons/warhorse__c10"
+    },
+    "arsenal_warhorse__c11": {
+      "textures": "textures/items/arsenal/weapons/warhorse__c11"
+    },
+    "arsenal_warhorse__c12": {
+      "textures": "textures/items/arsenal/weapons/warhorse__c12"
+    },
+    "arsenal_warhorse__c2": {
+      "textures": "textures/items/arsenal/weapons/warhorse__c2"
+    },
+    "arsenal_warhorse__c3": {
+      "textures": "textures/items/arsenal/weapons/warhorse__c3"
+    },
+    "arsenal_warhorse__c4": {
+      "textures": "textures/items/arsenal/weapons/warhorse__c4"
+    },
+    "arsenal_warhorse__c5": {
+      "textures": "textures/items/arsenal/weapons/warhorse__c5"
+    },
+    "arsenal_warhorse__c6": {
+      "textures": "textures/items/arsenal/weapons/warhorse__c6"
+    },
+    "arsenal_warhorse__c7": {
+      "textures": "textures/items/arsenal/weapons/warhorse__c7"
+    },
+    "arsenal_warhorse__c8": {
+      "textures": "textures/items/arsenal/weapons/warhorse__c8"
+    },
+    "arsenal_warhorse__c9": {
+      "textures": "textures/items/arsenal/weapons/warhorse__c9"
+    },
+    "arsenal_warhorse__o1": {
+      "textures": "textures/items/arsenal/weapons/warhorse__o1"
+    },
+    "arsenal_warhorse__o2": {
+      "textures": "textures/items/arsenal/weapons/warhorse__o2"
     },
     "arsenal_warlord_banner": {
       "textures": "textures/items/arsenal/tools/warlord_banner"
@@ -2992,6 +5308,15 @@
     },
     "arsenal_wasp__c1": {
       "textures": "textures/items/arsenal/weapons/wasp__c1"
+    },
+    "arsenal_wasp__c10": {
+      "textures": "textures/items/arsenal/weapons/wasp__c10"
+    },
+    "arsenal_wasp__c11": {
+      "textures": "textures/items/arsenal/weapons/wasp__c11"
+    },
+    "arsenal_wasp__c12": {
+      "textures": "textures/items/arsenal/weapons/wasp__c12"
     },
     "arsenal_wasp__c2": {
       "textures": "textures/items/arsenal/weapons/wasp__c2"
@@ -3014,6 +5339,9 @@
     "arsenal_wasp__c8": {
       "textures": "textures/items/arsenal/weapons/wasp__c8"
     },
+    "arsenal_wasp__c9": {
+      "textures": "textures/items/arsenal/weapons/wasp__c9"
+    },
     "arsenal_wasp__o1": {
       "textures": "textures/items/arsenal/weapons/wasp__o1"
     },
@@ -3025,6 +5353,15 @@
     },
     "arsenal_whisper__c1": {
       "textures": "textures/items/arsenal/weapons/whisper__c1"
+    },
+    "arsenal_whisper__c10": {
+      "textures": "textures/items/arsenal/weapons/whisper__c10"
+    },
+    "arsenal_whisper__c11": {
+      "textures": "textures/items/arsenal/weapons/whisper__c11"
+    },
+    "arsenal_whisper__c12": {
+      "textures": "textures/items/arsenal/weapons/whisper__c12"
     },
     "arsenal_whisper__c2": {
       "textures": "textures/items/arsenal/weapons/whisper__c2"
@@ -3047,6 +5384,9 @@
     "arsenal_whisper__c8": {
       "textures": "textures/items/arsenal/weapons/whisper__c8"
     },
+    "arsenal_whisper__c9": {
+      "textures": "textures/items/arsenal/weapons/whisper__c9"
+    },
     "arsenal_whisper__o0": {
       "textures": "textures/items/arsenal/weapons/whisper__o0"
     },
@@ -3058,6 +5398,15 @@
     },
     "arsenal_wisp__c1": {
       "textures": "textures/items/arsenal/weapons/wisp__c1"
+    },
+    "arsenal_wisp__c10": {
+      "textures": "textures/items/arsenal/weapons/wisp__c10"
+    },
+    "arsenal_wisp__c11": {
+      "textures": "textures/items/arsenal/weapons/wisp__c11"
+    },
+    "arsenal_wisp__c12": {
+      "textures": "textures/items/arsenal/weapons/wisp__c12"
     },
     "arsenal_wisp__c2": {
       "textures": "textures/items/arsenal/weapons/wisp__c2"
@@ -3080,6 +5429,9 @@
     "arsenal_wisp__c8": {
       "textures": "textures/items/arsenal/weapons/wisp__c8"
     },
+    "arsenal_wisp__c9": {
+      "textures": "textures/items/arsenal/weapons/wisp__c9"
+    },
     "arsenal_wisp__o1": {
       "textures": "textures/items/arsenal/weapons/wisp__o1"
     },
@@ -3091,6 +5443,15 @@
     },
     "arsenal_wraithmark__c1": {
       "textures": "textures/items/arsenal/weapons/wraithmark__c1"
+    },
+    "arsenal_wraithmark__c10": {
+      "textures": "textures/items/arsenal/weapons/wraithmark__c10"
+    },
+    "arsenal_wraithmark__c11": {
+      "textures": "textures/items/arsenal/weapons/wraithmark__c11"
+    },
+    "arsenal_wraithmark__c12": {
+      "textures": "textures/items/arsenal/weapons/wraithmark__c12"
     },
     "arsenal_wraithmark__c2": {
       "textures": "textures/items/arsenal/weapons/wraithmark__c2"
@@ -3113,17 +5474,74 @@
     "arsenal_wraithmark__c8": {
       "textures": "textures/items/arsenal/weapons/wraithmark__c8"
     },
+    "arsenal_wraithmark__c9": {
+      "textures": "textures/items/arsenal/weapons/wraithmark__c9"
+    },
     "arsenal_wraithmark__o0": {
       "textures": "textures/items/arsenal/weapons/wraithmark__o0"
     },
     "arsenal_wraithmark__o1": {
       "textures": "textures/items/arsenal/weapons/wraithmark__o1"
     },
+    "arsenal_wren": {
+      "textures": "textures/items/arsenal/weapons/wren"
+    },
+    "arsenal_wren__c1": {
+      "textures": "textures/items/arsenal/weapons/wren__c1"
+    },
+    "arsenal_wren__c10": {
+      "textures": "textures/items/arsenal/weapons/wren__c10"
+    },
+    "arsenal_wren__c11": {
+      "textures": "textures/items/arsenal/weapons/wren__c11"
+    },
+    "arsenal_wren__c12": {
+      "textures": "textures/items/arsenal/weapons/wren__c12"
+    },
+    "arsenal_wren__c2": {
+      "textures": "textures/items/arsenal/weapons/wren__c2"
+    },
+    "arsenal_wren__c3": {
+      "textures": "textures/items/arsenal/weapons/wren__c3"
+    },
+    "arsenal_wren__c4": {
+      "textures": "textures/items/arsenal/weapons/wren__c4"
+    },
+    "arsenal_wren__c5": {
+      "textures": "textures/items/arsenal/weapons/wren__c5"
+    },
+    "arsenal_wren__c6": {
+      "textures": "textures/items/arsenal/weapons/wren__c6"
+    },
+    "arsenal_wren__c7": {
+      "textures": "textures/items/arsenal/weapons/wren__c7"
+    },
+    "arsenal_wren__c8": {
+      "textures": "textures/items/arsenal/weapons/wren__c8"
+    },
+    "arsenal_wren__c9": {
+      "textures": "textures/items/arsenal/weapons/wren__c9"
+    },
+    "arsenal_wren__o1": {
+      "textures": "textures/items/arsenal/weapons/wren__o1"
+    },
+    "arsenal_wren__o2": {
+      "textures": "textures/items/arsenal/weapons/wren__o2"
+    },
     "arsenal_zephyr": {
       "textures": "textures/items/arsenal/weapons/zephyr"
     },
     "arsenal_zephyr__c1": {
       "textures": "textures/items/arsenal/weapons/zephyr__c1"
+    },
+    "arsenal_zephyr__c10": {
+      "textures": "textures/items/arsenal/weapons/zephyr__c10"
+    },
+    "arsenal_zephyr__c11": {
+      "textures": "textures/items/arsenal/weapons/zephyr__c11"
+    },
+    "arsenal_zephyr__c12": {
+      "textures": "textures/items/arsenal/weapons/zephyr__c12"
     },
     "arsenal_zephyr__c2": {
       "textures": "textures/items/arsenal/weapons/zephyr__c2"
@@ -3145,6 +5563,9 @@
     },
     "arsenal_zephyr__c8": {
       "textures": "textures/items/arsenal/weapons/zephyr__c8"
+    },
+    "arsenal_zephyr__c9": {
+      "textures": "textures/items/arsenal/weapons/zephyr__c9"
     },
     "arsenal_zephyr__o1": {
       "textures": "textures/items/arsenal/weapons/zephyr__o1"
