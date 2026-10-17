@@ -56,4 +56,33 @@ export const SMG = {
     slots: ["optic", "underbarrel", "mag", "laser", "stock"], fixed: { muzzle: "muzzle_suppressor" },
     model: { type: "smg", body: 12, h: 3.5, barrel: 0, mag: "straight", stock: "fixed", finish: "black", accent: "tier", intSuppressor: 9 },
   },
+
+  // ---- 2.3 で追加 ----
+  lynx: {
+    cat: "smg", tier: "common", name: { ja: "リンクス", en: "Lynx" },
+    desc: { ja: "癖のない標準的なサブマシンガン", en: "No-nonsense standard SMG" },
+    ammo: "light", mag: 32, rpm: 900, modes: ["auto", "semi"], dmg: 2.9, head: 1.6, range: [12, 30], falloff: 0.5,
+    spread: R(2.8, 1.0, 1.2, 0.3, 4.0, 0.4), recoil: { v: 0.6, h: 0.7, shake: 0.02 },
+    reload: { tac: 30, empty: 40 }, ads: 3, move: 1.07, pen: 1, sound: "smg", pitch: 1.18, optic: "iron",
+    slots: ["optic", "muzzle", "underbarrel", "mag", "laser", "stock"],
+    model: { type: "smg", body: 11, h: 3.2, barrel: 5, mag: "straight", stock: "fixed", finish: "tan", accent: "tier" },
+  },
+  jackal: {
+    cat: "smg", tier: "rare", name: { ja: "ジャッカル", en: "Jackal" },
+    desc: { ja: "マグナム弾を撃つ重いサブマシンガン。遅いが 1 発が重い", en: "Heavy magnum-calibre SMG" },
+    ammo: "magnum", mag: 25, rpm: 650, modes: ["auto", "semi"], dmg: 3.7, head: 1.6, range: [14, 34], falloff: 0.55,
+    spread: R(2.9, 0.9, 1.3, 0.4, 4.2, 0.36), recoil: { v: 1.0, h: 0.8, shake: 0.03 },
+    reload: { tac: 34, empty: 44 }, ads: 3, move: 1.03, pen: 2, sound: "smg_heavy", pitch: 0.95, optic: "iron",
+    slots: ["optic", "muzzle", "underbarrel", "mag", "laser", "stock"],
+    model: { type: "smg", body: 12, h: 3.6, barrel: 4, mag: "straight", stock: "skeleton", finish: "od", accent: "tier" },
+  },
+  wren: {
+    cat: "smg", tier: "uncommon", name: { ja: "レン", en: "Wren" },
+    desc: { ja: "消音器一体型の静かなサブマシンガン。敵に気づかれにくい", en: "Integrally suppressed SMG" },
+    ammo: "light", mag: 30, rpm: 850, modes: ["auto", "semi"], dmg: 2.7, head: 1.7, range: [12, 26], falloff: 0.5,
+    spread: R(2.6, 0.9, 1.2, 0.3, 3.8, 0.4), recoil: { v: 0.5, h: 0.5, shake: 0.015 },
+    reload: { tac: 30, empty: 40 }, ads: 3, move: 1.06, pen: 1, sound: "suppressed", pitch: 1.2, optic: "iron",
+    slots: ["optic", "underbarrel", "mag", "laser", "stock"], fixed: { muzzle: "muzzle_suppressor" },
+    model: { type: "smg", body: 11, h: 3.3, barrel: 0, mag: "straight", stock: "wire", finish: "black", accent: "tier", intSuppressor: 8 },
+  },
 };

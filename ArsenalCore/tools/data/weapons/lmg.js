@@ -29,4 +29,24 @@ export const LMG = {
     slots: ["optic", "muzzle", "laser"], fixed: { underbarrel: "bipod" },
     model: { type: "lmg", body: 16, h: 5.5, barrel: 12, guard: 8, mag: "belt_box", stock: "fixed", finish: "black", accent: "tier", bipodBuilt: true },
   },
+
+  // ---- 2.3 で追加 ----
+  rhino: {
+    cat: "lmg", tier: "common", name: { ja: "ライノ", en: "Rhino" },
+    desc: { ja: "軽めの分隊支援火器。150 発ベルト", en: "Light squad automatic weapon" },
+    ammo: "medium", mag: 150, rpm: 750, modes: ["auto"], dmg: 3.7, head: 1.5, range: [30, 66], falloff: 0.58,
+    spread: R(4.2, 1.0, 2.0, 0.22, 4.6, 0.3), recoil: { v: 0.95, h: 0.95, shake: 0.028 },
+    reload: { tac: 96, empty: 116 }, ads: 6, move: 0.86, pen: 2, sound: "lmg", pitch: 1.08, optic: "iron",
+    slots: ["optic", "muzzle", "underbarrel", "laser", "stock"],
+    model: { type: "lmg", body: 14, h: 5, barrel: 9, guard: 6, mag: "box_side", stock: "skeleton", finish: "tan", accent: "tier" },
+  },
+  goliath: {
+    cat: "lmg", tier: "rare", name: { ja: "ゴライアス", en: "Goliath" },
+    desc: { ja: "大口径の汎用機関銃。重いが遠くまで届く", en: "Heavy-calibre general-purpose machine gun" },
+    ammo: "heavy", mag: 100, rpm: 600, modes: ["auto"], dmg: 5.4, head: 1.6, range: [42, 88], falloff: 0.62,
+    spread: R(5.0, 1.1, 2.6, 0.32, 5.2, 0.26), recoil: { v: 1.6, h: 1.1, shake: 0.04 },
+    reload: { tac: 110, empty: 130 }, ads: 8, move: 0.8, pen: 3, sound: "lmg_heavy", pitch: 0.95, optic: "iron",
+    slots: ["optic", "muzzle", "underbarrel", "laser"],
+    model: { type: "lmg", body: 16, h: 5.5, barrel: 13, guard: 8, mag: "belt_box", stock: "fixed", finish: "black", accent: "tier", carry: true },
+  },
 };

@@ -22,6 +22,8 @@ GEAR_PALETTES = {
     "aa_gun": {"main": (92, 100, 70), "main_dark": (56, 62, 40)},
     "at_post": {"main": (92, 100, 70), "main_dark": (56, 62, 40)},
     "buggy": {"main": (176, 152, 110), "main_dark": (80, 76, 66), "furniture": (120, 100, 70), "accent": (230, 170, 30)},
+    "gl_post": {"main": (92, 100, 70), "main_dark": (56, 62, 40)},
+    "apc": {"main": (88, 98, 70), "main_dark": (52, 58, 42), "furniture": (70, 76, 56), "accent": (230, 170, 30)},
     "supply_crate": {"main": (150, 110, 60), "main_dark": (100, 72, 40), "furniture": (160, 116, 64), "white": (236, 236, 230), "accent": (230, 60, 50)},
 }
 

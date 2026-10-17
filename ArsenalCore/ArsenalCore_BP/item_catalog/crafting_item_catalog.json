@@ -16,7 +16,10 @@
               "arsenal:ironclad45",
               "arsenal:viper_auto",
               "arsenal:warden",
-              "arsenal:flare_pistol"
+              "arsenal:flare_pistol",
+              "arsenal:kodiak",
+              "arsenal:sparrow",
+              "arsenal:regent"
             ]
           },
           {
@@ -28,7 +31,9 @@
               "arsenal:midge",
               "arsenal:clawstrike",
               "arsenal:cinder",
-              "arsenal:wisp"
+              "arsenal:wisp",
+              "arsenal:hummingbird",
+              "arsenal:gadfly"
             ]
           },
           {
@@ -42,7 +47,10 @@
               "arsenal:rattler",
               "arsenal:kestrel_pdw",
               "arsenal:stinger",
-              "arsenal:specter"
+              "arsenal:specter",
+              "arsenal:lynx",
+              "arsenal:jackal",
+              "arsenal:wren"
             ]
           },
           {
@@ -54,7 +62,10 @@
               "arsenal:drifter",
               "arsenal:pathfinder",
               "arsenal:ridgeback",
-              "arsenal:quillback"
+              "arsenal:quillback",
+              "arsenal:corsair",
+              "arsenal:ranger",
+              "arsenal:kite"
             ]
           },
           {
@@ -72,7 +83,11 @@
               "arsenal:monsoon",
               "arsenal:garrison",
               "arsenal:zephyr",
-              "arsenal:ironbark"
+              "arsenal:ironbark",
+              "arsenal:valkyrie",
+              "arsenal:hydra",
+              "arsenal:sirocco",
+              "arsenal:aurora"
             ]
           },
           {
@@ -84,7 +99,9 @@
               "arsenal:longbow",
               "arsenal:anvil",
               "arsenal:harrier",
-              "arsenal:halberd"
+              "arsenal:halberd",
+              "arsenal:warhorse",
+              "arsenal:highlander"
             ]
           },
           {
@@ -98,7 +115,9 @@
               "arsenal:obelisk",
               "arsenal:kitehawk",
               "arsenal:magistrate",
-              "arsenal:longwatch"
+              "arsenal:longwatch",
+              "arsenal:osprey",
+              "arsenal:peregrine"
             ]
           },
           {
@@ -115,7 +134,10 @@
               "arsenal:albatross",
               "arsenal:stillwater",
               "arsenal:behemoth",
-              "arsenal:wraithmark"
+              "arsenal:wraithmark",
+              "arsenal:condor",
+              "arsenal:shrike",
+              "arsenal:phantom_lr"
             ]
           },
           {
@@ -132,7 +154,10 @@
               "arsenal:thresher",
               "arsenal:lever12",
               "arsenal:triad",
-              "arsenal:mauler"
+              "arsenal:mauler",
+              "arsenal:bulldog",
+              "arsenal:cyclone",
+              "arsenal:hammerhead"
             ]
           },
           {
@@ -143,7 +168,9 @@
             "items": [
               "arsenal:juggernaut",
               "arsenal:grinder",
-              "arsenal:bulwark"
+              "arsenal:bulwark",
+              "arsenal:rhino",
+              "arsenal:goliath"
             ]
           },
           {
@@ -156,7 +183,8 @@
               "arsenal:hellmouth",
               "arsenal:hammerfall",
               "arsenal:rampart",
-              "arsenal:sawtooth"
+              "arsenal:sawtooth",
+              "arsenal:avalanche"
             ]
           },
           {
@@ -172,7 +200,8 @@
               "arsenal:stormcaller",
               "arsenal:skypiercer",
               "arsenal:bouncer",
-              "arsenal:mortarman"
+              "arsenal:mortarman",
+              "arsenal:pelican"
             ]
           },
           {
@@ -190,7 +219,8 @@
               "arsenal:arc_coilgun",
               "arsenal:plasma_repeater",
               "arsenal:void_needle",
-              "arsenal:sonic_disruptor"
+              "arsenal:sonic_disruptor",
+              "arsenal:ion_carbine"
             ]
           },
           {
@@ -204,7 +234,11 @@
               "arsenal:breaching_axe",
               "arsenal:riot_baton",
               "arsenal:spring_knife",
-              "arsenal:vibro_blade"
+              "arsenal:vibro_blade",
+              "arsenal:tomahawk",
+              "arsenal:war_hammer",
+              "arsenal:kukri",
+              "arsenal:katana"
             ]
           },
           {
@@ -265,7 +299,24 @@
               "arsenal:ammo_hollow",
               "arsenal:ammo_subsonic",
               "arsenal:ammo_frangible",
-              "arsenal:ammo_explosive"
+              "arsenal:ammo_explosive",
+              "arsenal:optic_micro",
+              "arsenal:optic_thermal_compact",
+              "arsenal:muzzle_linear",
+              "arsenal:muzzle_tank_brake",
+              "arsenal:grip_stubby",
+              "arsenal:grip_handstop",
+              "arsenal:grip_heavy",
+              "arsenal:mag_polymer",
+              "arsenal:mag_casket",
+              "arsenal:laser_ir",
+              "arsenal:stock_precision",
+              "arsenal:stock_none",
+              "arsenal:barrel_ported",
+              "arsenal:barrel_match",
+              "arsenal:trigger_twostage",
+              "arsenal:ammo_ap_core",
+              "arsenal:ammo_match"
             ]
           },
           {
@@ -288,6 +339,9 @@
               "arsenal:grenade_decoy",
               "arsenal:throwing_knife",
               "arsenal:grenade_snap",
+              "arsenal:grenade_mini",
+              "arsenal:grenade_heavy_impact",
+              "arsenal:thermite",
               "arsenal:detonator"
             ]
           },
@@ -356,7 +410,9 @@
               "arsenal:hmg_nest",
               "arsenal:aa_gun",
               "arsenal:at_post",
-              "arsenal:buggy"
+              "arsenal:buggy",
+              "arsenal:gl_post",
+              "arsenal:apc"
             ]
           },
           {
@@ -366,7 +422,8 @@
               "arsenal:streak_terminal",
               "arsenal:arena_tool",
               "arsenal:warlord_banner",
-              "arsenal:legion_core"
+              "arsenal:legion_core",
+              "arsenal:hollow_heart"
             ]
           }
         ]

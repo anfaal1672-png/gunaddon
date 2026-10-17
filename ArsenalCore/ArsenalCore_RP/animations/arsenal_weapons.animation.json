@@ -205,6 +205,108 @@
         }
       }
     },
+    "animation.arsenal.kodiak.tp": {
+      "loop": true,
+      "bones": {
+        "arsenal_gun": {
+          "rotation": [
+            90.0,
+            0.0,
+            0.0
+          ],
+          "position": [
+            -0.0,
+            0.0,
+            -0.5
+          ]
+        }
+      }
+    },
+    "animation.arsenal.kodiak.fp": {
+      "loop": true,
+      "bones": {
+        "arsenal_gun": {
+          "rotation": [
+            82.636,
+            61.26,
+            -51.574
+          ],
+          "position": [
+            -0.451,
+            1.233,
+            -3.046
+          ]
+        }
+      }
+    },
+    "animation.arsenal.sparrow.tp": {
+      "loop": true,
+      "bones": {
+        "arsenal_gun": {
+          "rotation": [
+            90.0,
+            0.0,
+            0.0
+          ],
+          "position": [
+            -0.0,
+            0.0,
+            -0.5
+          ]
+        }
+      }
+    },
+    "animation.arsenal.sparrow.fp": {
+      "loop": true,
+      "bones": {
+        "arsenal_gun": {
+          "rotation": [
+            82.636,
+            61.26,
+            -51.574
+          ],
+          "position": [
+            -0.451,
+            1.233,
+            -3.046
+          ]
+        }
+      }
+    },
+    "animation.arsenal.regent.tp": {
+      "loop": true,
+      "bones": {
+        "arsenal_gun": {
+          "rotation": [
+            90.0,
+            0.0,
+            0.0
+          ],
+          "position": [
+            -0.0,
+            0.0,
+            -0.5
+          ]
+        }
+      }
+    },
+    "animation.arsenal.regent.fp": {
+      "loop": true,
+      "bones": {
+        "arsenal_gun": {
+          "rotation": [
+            82.636,
+            61.26,
+            -51.574
+          ],
+          "position": [
+            -0.451,
+            1.233,
+            -3.046
+          ]
+        }
+      }
+    },
     "animation.arsenal.midge.tp": {
       "loop": true,
       "bones": {
@@ -325,6 +427,74 @@
       }
     },
     "animation.arsenal.wisp.fp": {
+      "loop": true,
+      "bones": {
+        "arsenal_gun": {
+          "rotation": [
+            82.636,
+            61.26,
+            -51.574
+          ],
+          "position": [
+            -0.0,
+            0.0,
+            0.0
+          ]
+        }
+      }
+    },
+    "animation.arsenal.hummingbird.tp": {
+      "loop": true,
+      "bones": {
+        "arsenal_gun": {
+          "rotation": [
+            90.0,
+            0.0,
+            0.0
+          ],
+          "position": [
+            -0.0,
+            0.0,
+            -0.5
+          ]
+        }
+      }
+    },
+    "animation.arsenal.hummingbird.fp": {
+      "loop": true,
+      "bones": {
+        "arsenal_gun": {
+          "rotation": [
+            82.636,
+            61.26,
+            -51.574
+          ],
+          "position": [
+            -0.0,
+            0.0,
+            0.0
+          ]
+        }
+      }
+    },
+    "animation.arsenal.gadfly.tp": {
+      "loop": true,
+      "bones": {
+        "arsenal_gun": {
+          "rotation": [
+            90.0,
+            0.0,
+            0.0
+          ],
+          "position": [
+            -0.0,
+            0.0,
+            -0.5
+          ]
+        }
+      }
+    },
+    "animation.arsenal.gadfly.fp": {
       "loop": true,
       "bones": {
         "arsenal_gun": {
@@ -545,6 +715,108 @@
         }
       }
     },
+    "animation.arsenal.lynx.tp": {
+      "loop": true,
+      "bones": {
+        "arsenal_gun": {
+          "rotation": [
+            90.0,
+            0.0,
+            0.0
+          ],
+          "position": [
+            -0.0,
+            0.0,
+            -0.5
+          ]
+        }
+      }
+    },
+    "animation.arsenal.lynx.fp": {
+      "loop": true,
+      "bones": {
+        "arsenal_gun": {
+          "rotation": [
+            82.636,
+            61.26,
+            -51.574
+          ],
+          "position": [
+            0.128,
+            0.264,
+            -1.554
+          ]
+        }
+      }
+    },
+    "animation.arsenal.jackal.tp": {
+      "loop": true,
+      "bones": {
+        "arsenal_gun": {
+          "rotation": [
+            90.0,
+            0.0,
+            0.0
+          ],
+          "position": [
+            -0.0,
+            0.0,
+            -0.5
+          ]
+        }
+      }
+    },
+    "animation.arsenal.jackal.fp": {
+      "loop": true,
+      "bones": {
+        "arsenal_gun": {
+          "rotation": [
+            82.636,
+            61.26,
+            -51.574
+          ],
+          "position": [
+            0.128,
+            0.264,
+            -1.554
+          ]
+        }
+      }
+    },
+    "animation.arsenal.wren.tp": {
+      "loop": true,
+      "bones": {
+        "arsenal_gun": {
+          "rotation": [
+            90.0,
+            0.0,
+            0.0
+          ],
+          "position": [
+            -0.0,
+            0.0,
+            -0.5
+          ]
+        }
+      }
+    },
+    "animation.arsenal.wren.fp": {
+      "loop": true,
+      "bones": {
+        "arsenal_gun": {
+          "rotation": [
+            82.636,
+            61.26,
+            -51.574
+          ],
+          "position": [
+            0.128,
+            0.264,
+            -1.554
+          ]
+        }
+      }
+    },
     "animation.arsenal.drifter.tp": {
       "loop": true,
       "bones": {
@@ -665,6 +937,108 @@
       }
     },
     "animation.arsenal.quillback.fp": {
+      "loop": true,
+      "bones": {
+        "arsenal_gun": {
+          "rotation": [
+            82.636,
+            61.26,
+            -51.574
+          ],
+          "position": [
+            -0.0,
+            0.0,
+            0.0
+          ]
+        }
+      }
+    },
+    "animation.arsenal.corsair.tp": {
+      "loop": true,
+      "bones": {
+        "arsenal_gun": {
+          "rotation": [
+            90.0,
+            0.0,
+            0.0
+          ],
+          "position": [
+            -0.0,
+            0.0,
+            -0.5
+          ]
+        }
+      }
+    },
+    "animation.arsenal.corsair.fp": {
+      "loop": true,
+      "bones": {
+        "arsenal_gun": {
+          "rotation": [
+            82.636,
+            61.26,
+            -51.574
+          ],
+          "position": [
+            -0.0,
+            0.0,
+            0.0
+          ]
+        }
+      }
+    },
+    "animation.arsenal.ranger.tp": {
+      "loop": true,
+      "bones": {
+        "arsenal_gun": {
+          "rotation": [
+            90.0,
+            0.0,
+            0.0
+          ],
+          "position": [
+            -0.0,
+            0.0,
+            -0.5
+          ]
+        }
+      }
+    },
+    "animation.arsenal.ranger.fp": {
+      "loop": true,
+      "bones": {
+        "arsenal_gun": {
+          "rotation": [
+            82.636,
+            61.26,
+            -51.574
+          ],
+          "position": [
+            -0.0,
+            0.0,
+            0.0
+          ]
+        }
+      }
+    },
+    "animation.arsenal.kite.tp": {
+      "loop": true,
+      "bones": {
+        "arsenal_gun": {
+          "rotation": [
+            90.0,
+            0.0,
+            0.0
+          ],
+          "position": [
+            -0.0,
+            0.0,
+            -0.5
+          ]
+        }
+      }
+    },
+    "animation.arsenal.kite.fp": {
       "loop": true,
       "bones": {
         "arsenal_gun": {
@@ -1021,6 +1395,142 @@
         }
       }
     },
+    "animation.arsenal.valkyrie.tp": {
+      "loop": true,
+      "bones": {
+        "arsenal_gun": {
+          "rotation": [
+            90.0,
+            0.0,
+            0.0
+          ],
+          "position": [
+            -0.0,
+            0.0,
+            -0.5
+          ]
+        }
+      }
+    },
+    "animation.arsenal.valkyrie.fp": {
+      "loop": true,
+      "bones": {
+        "arsenal_gun": {
+          "rotation": [
+            82.636,
+            61.26,
+            -51.574
+          ],
+          "position": [
+            0.652,
+            0.024,
+            -0.908
+          ]
+        }
+      }
+    },
+    "animation.arsenal.hydra.tp": {
+      "loop": true,
+      "bones": {
+        "arsenal_gun": {
+          "rotation": [
+            90.0,
+            0.0,
+            0.0
+          ],
+          "position": [
+            -0.0,
+            0.0,
+            -0.5
+          ]
+        }
+      }
+    },
+    "animation.arsenal.hydra.fp": {
+      "loop": true,
+      "bones": {
+        "arsenal_gun": {
+          "rotation": [
+            82.636,
+            61.26,
+            -51.574
+          ],
+          "position": [
+            0.652,
+            0.024,
+            -0.908
+          ]
+        }
+      }
+    },
+    "animation.arsenal.sirocco.tp": {
+      "loop": true,
+      "bones": {
+        "arsenal_gun": {
+          "rotation": [
+            90.0,
+            0.0,
+            0.0
+          ],
+          "position": [
+            -0.0,
+            0.0,
+            -0.5
+          ]
+        }
+      }
+    },
+    "animation.arsenal.sirocco.fp": {
+      "loop": true,
+      "bones": {
+        "arsenal_gun": {
+          "rotation": [
+            82.636,
+            61.26,
+            -51.574
+          ],
+          "position": [
+            0.652,
+            0.024,
+            -0.908
+          ]
+        }
+      }
+    },
+    "animation.arsenal.aurora.tp": {
+      "loop": true,
+      "bones": {
+        "arsenal_gun": {
+          "rotation": [
+            90.0,
+            0.0,
+            0.0
+          ],
+          "position": [
+            -0.0,
+            0.0,
+            -0.5
+          ]
+        }
+      }
+    },
+    "animation.arsenal.aurora.fp": {
+      "loop": true,
+      "bones": {
+        "arsenal_gun": {
+          "rotation": [
+            82.636,
+            61.26,
+            -51.574
+          ],
+          "position": [
+            0.652,
+            0.024,
+            -0.908
+          ]
+        }
+      }
+    },
     "animation.arsenal.longbow.tp": {
       "loop": true,
       "bones": {
@@ -1141,6 +1651,74 @@
       }
     },
     "animation.arsenal.halberd.fp": {
+      "loop": true,
+      "bones": {
+        "arsenal_gun": {
+          "rotation": [
+            82.636,
+            61.26,
+            -51.574
+          ],
+          "position": [
+            0.652,
+            0.024,
+            -0.908
+          ]
+        }
+      }
+    },
+    "animation.arsenal.warhorse.tp": {
+      "loop": true,
+      "bones": {
+        "arsenal_gun": {
+          "rotation": [
+            90.0,
+            0.0,
+            0.0
+          ],
+          "position": [
+            -0.0,
+            0.0,
+            -0.5
+          ]
+        }
+      }
+    },
+    "animation.arsenal.warhorse.fp": {
+      "loop": true,
+      "bones": {
+        "arsenal_gun": {
+          "rotation": [
+            82.636,
+            61.26,
+            -51.574
+          ],
+          "position": [
+            0.652,
+            0.024,
+            -0.908
+          ]
+        }
+      }
+    },
+    "animation.arsenal.highlander.tp": {
+      "loop": true,
+      "bones": {
+        "arsenal_gun": {
+          "rotation": [
+            90.0,
+            0.0,
+            0.0
+          ],
+          "position": [
+            -0.0,
+            0.0,
+            -0.5
+          ]
+        }
+      }
+    },
+    "animation.arsenal.highlander.fp": {
       "loop": true,
       "bones": {
         "arsenal_gun": {
@@ -1345,6 +1923,74 @@
       }
     },
     "animation.arsenal.longwatch.fp": {
+      "loop": true,
+      "bones": {
+        "arsenal_gun": {
+          "rotation": [
+            82.636,
+            61.26,
+            -51.574
+          ],
+          "position": [
+            0.652,
+            0.024,
+            -0.908
+          ]
+        }
+      }
+    },
+    "animation.arsenal.osprey.tp": {
+      "loop": true,
+      "bones": {
+        "arsenal_gun": {
+          "rotation": [
+            90.0,
+            0.0,
+            0.0
+          ],
+          "position": [
+            -0.0,
+            0.0,
+            -0.5
+          ]
+        }
+      }
+    },
+    "animation.arsenal.osprey.fp": {
+      "loop": true,
+      "bones": {
+        "arsenal_gun": {
+          "rotation": [
+            82.636,
+            61.26,
+            -51.574
+          ],
+          "position": [
+            0.652,
+            0.024,
+            -0.908
+          ]
+        }
+      }
+    },
+    "animation.arsenal.peregrine.tp": {
+      "loop": true,
+      "bones": {
+        "arsenal_gun": {
+          "rotation": [
+            90.0,
+            0.0,
+            0.0
+          ],
+          "position": [
+            -0.0,
+            0.0,
+            -0.5
+          ]
+        }
+      }
+    },
+    "animation.arsenal.peregrine.fp": {
       "loop": true,
       "bones": {
         "arsenal_gun": {
@@ -1667,6 +2313,108 @@
         }
       }
     },
+    "animation.arsenal.condor.tp": {
+      "loop": true,
+      "bones": {
+        "arsenal_gun": {
+          "rotation": [
+            90.0,
+            0.0,
+            0.0
+          ],
+          "position": [
+            -0.0,
+            0.0,
+            -0.5
+          ]
+        }
+      }
+    },
+    "animation.arsenal.condor.fp": {
+      "loop": true,
+      "bones": {
+        "arsenal_gun": {
+          "rotation": [
+            82.636,
+            61.26,
+            -51.574
+          ],
+          "position": [
+            1.057,
+            -0.006,
+            -0.783
+          ]
+        }
+      }
+    },
+    "animation.arsenal.shrike.tp": {
+      "loop": true,
+      "bones": {
+        "arsenal_gun": {
+          "rotation": [
+            90.0,
+            0.0,
+            0.0
+          ],
+          "position": [
+            -0.0,
+            0.0,
+            -0.5
+          ]
+        }
+      }
+    },
+    "animation.arsenal.shrike.fp": {
+      "loop": true,
+      "bones": {
+        "arsenal_gun": {
+          "rotation": [
+            82.636,
+            61.26,
+            -51.574
+          ],
+          "position": [
+            1.057,
+            -0.006,
+            -0.783
+          ]
+        }
+      }
+    },
+    "animation.arsenal.phantom_lr.tp": {
+      "loop": true,
+      "bones": {
+        "arsenal_gun": {
+          "rotation": [
+            90.0,
+            0.0,
+            0.0
+          ],
+          "position": [
+            -0.0,
+            0.0,
+            -0.5
+          ]
+        }
+      }
+    },
+    "animation.arsenal.phantom_lr.fp": {
+      "loop": true,
+      "bones": {
+        "arsenal_gun": {
+          "rotation": [
+            82.636,
+            61.26,
+            -51.574
+          ],
+          "position": [
+            1.057,
+            -0.006,
+            -0.783
+          ]
+        }
+      }
+    },
     "animation.arsenal.breacher.tp": {
       "loop": true,
       "bones": {
@@ -1973,6 +2721,108 @@
         }
       }
     },
+    "animation.arsenal.bulldog.tp": {
+      "loop": true,
+      "bones": {
+        "arsenal_gun": {
+          "rotation": [
+            90.0,
+            0.0,
+            0.0
+          ],
+          "position": [
+            -0.0,
+            0.0,
+            -0.5
+          ]
+        }
+      }
+    },
+    "animation.arsenal.bulldog.fp": {
+      "loop": true,
+      "bones": {
+        "arsenal_gun": {
+          "rotation": [
+            82.636,
+            61.26,
+            -51.574
+          ],
+          "position": [
+            0.652,
+            0.024,
+            -0.908
+          ]
+        }
+      }
+    },
+    "animation.arsenal.cyclone.tp": {
+      "loop": true,
+      "bones": {
+        "arsenal_gun": {
+          "rotation": [
+            90.0,
+            0.0,
+            0.0
+          ],
+          "position": [
+            -0.0,
+            0.0,
+            -0.5
+          ]
+        }
+      }
+    },
+    "animation.arsenal.cyclone.fp": {
+      "loop": true,
+      "bones": {
+        "arsenal_gun": {
+          "rotation": [
+            82.636,
+            61.26,
+            -51.574
+          ],
+          "position": [
+            0.652,
+            0.024,
+            -0.908
+          ]
+        }
+      }
+    },
+    "animation.arsenal.hammerhead.tp": {
+      "loop": true,
+      "bones": {
+        "arsenal_gun": {
+          "rotation": [
+            90.0,
+            0.0,
+            0.0
+          ],
+          "position": [
+            -0.0,
+            0.0,
+            -0.5
+          ]
+        }
+      }
+    },
+    "animation.arsenal.hammerhead.fp": {
+      "loop": true,
+      "bones": {
+        "arsenal_gun": {
+          "rotation": [
+            82.636,
+            61.26,
+            -51.574
+          ],
+          "position": [
+            0.652,
+            0.024,
+            -0.908
+          ]
+        }
+      }
+    },
     "animation.arsenal.juggernaut.tp": {
       "loop": true,
       "bones": {
@@ -2059,6 +2909,74 @@
       }
     },
     "animation.arsenal.bulwark.fp": {
+      "loop": true,
+      "bones": {
+        "arsenal_gun": {
+          "rotation": [
+            82.636,
+            61.26,
+            -51.574
+          ],
+          "position": [
+            1.016,
+            0.317,
+            -0.088
+          ]
+        }
+      }
+    },
+    "animation.arsenal.rhino.tp": {
+      "loop": true,
+      "bones": {
+        "arsenal_gun": {
+          "rotation": [
+            90.0,
+            0.0,
+            0.0
+          ],
+          "position": [
+            -0.0,
+            0.0,
+            -0.5
+          ]
+        }
+      }
+    },
+    "animation.arsenal.rhino.fp": {
+      "loop": true,
+      "bones": {
+        "arsenal_gun": {
+          "rotation": [
+            82.636,
+            61.26,
+            -51.574
+          ],
+          "position": [
+            1.016,
+            0.317,
+            -0.088
+          ]
+        }
+      }
+    },
+    "animation.arsenal.goliath.tp": {
+      "loop": true,
+      "bones": {
+        "arsenal_gun": {
+          "rotation": [
+            90.0,
+            0.0,
+            0.0
+          ],
+          "position": [
+            -0.0,
+            0.0,
+            -0.5
+          ]
+        }
+      }
+    },
+    "animation.arsenal.goliath.fp": {
       "loop": true,
       "bones": {
         "arsenal_gun": {
@@ -2229,6 +3147,40 @@
       }
     },
     "animation.arsenal.sawtooth.fp": {
+      "loop": true,
+      "bones": {
+        "arsenal_gun": {
+          "rotation": [
+            82.636,
+            61.26,
+            -51.574
+          ],
+          "position": [
+            -0.0,
+            0.0,
+            0.0
+          ]
+        }
+      }
+    },
+    "animation.arsenal.avalanche.tp": {
+      "loop": true,
+      "bones": {
+        "arsenal_gun": {
+          "rotation": [
+            90.0,
+            0.0,
+            0.0
+          ],
+          "position": [
+            -0.0,
+            0.0,
+            -0.5
+          ]
+        }
+      }
+    },
+    "animation.arsenal.avalanche.fp": {
       "loop": true,
       "bones": {
         "arsenal_gun": {
@@ -2501,6 +3453,40 @@
       }
     },
     "animation.arsenal.mortarman.fp": {
+      "loop": true,
+      "bones": {
+        "arsenal_gun": {
+          "rotation": [
+            82.636,
+            61.26,
+            -51.574
+          ],
+          "position": [
+            0.695,
+            0.017,
+            -0.326
+          ]
+        }
+      }
+    },
+    "animation.arsenal.pelican.tp": {
+      "loop": true,
+      "bones": {
+        "arsenal_gun": {
+          "rotation": [
+            90.0,
+            0.0,
+            0.0
+          ],
+          "position": [
+            -0.0,
+            0.0,
+            -0.5
+          ]
+        }
+      }
+    },
+    "animation.arsenal.pelican.fp": {
       "loop": true,
       "bones": {
         "arsenal_gun": {
@@ -2841,6 +3827,40 @@
       }
     },
     "animation.arsenal.sonic_disruptor.fp": {
+      "loop": true,
+      "bones": {
+        "arsenal_gun": {
+          "rotation": [
+            82.636,
+            61.26,
+            -51.574
+          ],
+          "position": [
+            0.652,
+            0.024,
+            -0.908
+          ]
+        }
+      }
+    },
+    "animation.arsenal.ion_carbine.tp": {
+      "loop": true,
+      "bones": {
+        "arsenal_gun": {
+          "rotation": [
+            90.0,
+            0.0,
+            0.0
+          ],
+          "position": [
+            -0.0,
+            0.0,
+            -0.5
+          ]
+        }
+      }
+    },
+    "animation.arsenal.ion_carbine.fp": {
       "loop": true,
       "bones": {
         "arsenal_gun": {

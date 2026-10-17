@@ -1042,7 +1042,8 @@ def raider_skin(kind, color):
     # オーバーレイ：装備
     armor = kind
     helmet_c = {"cloth": None, "vest": (70, 80, 56), "ghillie": (76, 96, 50), "heavy": (54, 56, 60), "captain": (120, 36, 36),
-                "medic": (230, 230, 222), "demo": (150, 110, 40), "warlord": (60, 20, 20)}.get(armor)
+                "medic": (230, 230, 222), "demo": (150, 110, 40), "warlord": (60, 20, 20),
+                "breacher": (40, 42, 46), "scout": (140, 122, 90)}.get(armor)
     if helmet_c:
         def helm(face, x, y, fw, fh):
             if face == "bottom":
@@ -1057,9 +1058,9 @@ def raider_skin(kind, color):
                 return (*_shade(helmet_c, rng.randint(-25, 25)), 255)
             return n(helmet_c, 6)
         _paint_box(px, 32, 0, 8, 8, 8, helm)
-    if armor in ("vest", "heavy", "captain", "ghillie", "medic", "demo", "warlord"):
+    if armor in ("vest", "heavy", "captain", "ghillie", "medic", "demo", "warlord", "breacher", "scout"):
         vest_c = {"vest": (78, 88, 60), "heavy": (46, 48, 52), "captain": (60, 60, 64), "ghillie": (70, 90, 46),
-                  "medic": (200, 196, 184), "demo": (110, 80, 36), "warlord": (40, 30, 30)}[armor]
+                  "medic": (200, 196, 184), "demo": (110, 80, 36), "warlord": (40, 30, 30), "breacher": (36, 38, 42), "scout": (120, 104, 76)}[armor]
         def vest(face, x, y, fw, fh):
             if y > 9:
                 return None

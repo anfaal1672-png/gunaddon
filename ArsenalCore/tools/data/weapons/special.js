@@ -103,4 +103,16 @@ export const SPECIAL = {
     slots: [],
     model: { type: "energy", body: 12, h: 5, barrel: 5, mag: "cells", stock: "fixed", finish: "tan", accent: "tier", dish: true, glow: [140, 220, 255] },
   },
+
+  // ---- 2.3 で追加 ----
+  ion_carbine: {
+    cat: "special", tier: "rare", name: { ja: "イオンカービン", en: "Ion Carbine" },
+    desc: { ja: "短いエネルギーカービン。連射すると熱がこもる", en: "Compact energy carbine that builds heat" },
+    ammo: "cell", ammoPerItem: 10, mag: 30, rpm: 480, modes: ["auto", "semi"], dmg: 4.6, head: 1.6, range: [50, 50], falloff: 1.0,
+    spread: R(2.4, 0.5, 1.3, 0.25, 2.8, 0.4), recoil: { v: 0.6, h: 0.4, shake: 0.018 },
+    reload: { tac: 32, empty: 42 }, ads: 3, move: 1.0, pen: 1, sound: "energy", pitch: 1.15, optic: "holo",
+    fire: "pulse", heat: { perShot: 4.0, cool: 1.8, lockout: 32 },
+    slots: ["optic", "underbarrel", "laser"],
+    model: { type: "energy", body: 12, h: 4.6, barrel: 6, mag: "cells", stock: "none", finish: "white", accent: "tier", glow: [255, 140, 60] },
+  },
 };

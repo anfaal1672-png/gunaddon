@@ -1,0 +1,43 @@
+{
+  "format_version": "1.10.0",
+  "minecraft:client_entity": {
+    "description": {
+      "identifier": "arsenal:legion_lancer",
+      "materials": {
+        "default": "entity_alphatest"
+      },
+      "textures": {
+        "default": "textures/entity/arsenal/enemies/legion_lancer"
+      },
+      "geometry": {
+        "default": "geometry.arsenal.legion_lancer"
+      },
+      "render_controllers": [
+        "controller.render.arsenal.simple"
+      ],
+      "spawn_egg": {
+        "base_color": "#5a6482",
+        "overlay_color": "#ff7040"
+      },
+      "animations": {
+        "look": "animation.arsenal.raider.look",
+        "walk": "animation.arsenal.raider.walk",
+        "aim": "animation.arsenal.raider.aim",
+        "idle": "animation.arsenal.raider.idle"
+      },
+      "scripts": {
+        "animate": [
+          "look",
+          "walk",
+          {
+            "aim": "q.has_target"
+          },
+          {
+            "idle": "!q.has_target"
+          }
+        ]
+      },
+      "enable_attachables": true
+    }
+  }
+}

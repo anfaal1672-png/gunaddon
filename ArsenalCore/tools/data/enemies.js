@@ -36,6 +36,10 @@ export const RAIDERS = {
   raider_medic: { name: { ja: "レイダー・メディック", en: "Raider Medic" }, weapon: "hornet", health: 22, speed: 0.34, damage: 2, interval: [1.4, 2.0], burst: 3, burstInterval: 0.07, range: 16, armor: "medic", color: [196, 190, 176] },
   raider_demo: { name: { ja: "レイダー・爆破兵", en: "Raider Demolisher" }, weapon: "thumper", health: 28, speed: 0.3, damage: 6, interval: [3.0, 4.0], burst: 1, burstInterval: 0, range: 20, armor: "demo", color: [150, 110, 40] },
   raider_dog: { name: { ja: "レイダーの猟犬", en: "Raider Hound" }, weapon: null, health: 16, speed: 0.4, damage: 4, interval: [0.8, 1.0], burst: 1, burstInterval: 0, range: 2, armor: "dog", color: [92, 74, 58] },
+  // ---- 2.3 で追加 ----
+  raider_breacher: { name: { ja: "レイダー・ブリーチャー", en: "Raider Breacher" }, weapon: "bulldog", health: 30, speed: 0.34, damage: 7, interval: [1.2, 1.7], burst: 1, burstInterval: 0, range: 9, armor: "breacher", color: [72, 66, 60] },
+  raider_scout: { name: { ja: "レイダー・スカウト", en: "Raider Scout" }, weapon: "lynx", health: 18, speed: 0.37, damage: 1.8, interval: [1.0, 1.5], burst: 5, burstInterval: 0.06, range: 18, armor: "scout", color: [150, 130, 96] },
+  raider_marksman: { name: { ja: "レイダー・マークスマン", en: "Raider Marksman" }, weapon: "osprey", health: 22, speed: 0.31, damage: 6, interval: [2.2, 3.0], burst: 1, burstInterval: 0, range: 32, armor: "vest", color: [96, 104, 80] },
 };
 
 /** 1.0 系の 5 種の AI 上の役割と追加の値（RAIDERS の数値はそのまま） */
@@ -48,6 +52,9 @@ const RAIDER_EXTRA = {
   raider_medic: { role: "medic", sight: 26, armorValue: 0.05, model: "raider", tier: 1, heal: 6, healCooldown: 120 },
   raider_demo: { role: "demo", sight: 28, armorValue: 0.15, model: "raider", tier: 2, grenade: "grenade_frag", grenadeCooldown: 160 },
   raider_dog: { role: "melee", sight: 20, armorValue: 0, model: "dog", tier: 1 },
+  raider_breacher: { role: "rifle", sight: 22, armorValue: 0.2, model: "raider", tier: 2 },
+  raider_scout: { role: "rifle", sight: 34, armorValue: 0, model: "raider", tier: 1 },
+  raider_marksman: { role: "sniper", sight: 40, armorValue: 0.1, model: "raider", tier: 2 },
 };
 
 const RAIDER_SPAWN = {
@@ -59,6 +66,9 @@ const RAIDER_SPAWN = {
   raider_medic: { weight: 2, herd: [1, 1] },
   raider_demo: { weight: 1, herd: [1, 1] },
   raider_dog: { weight: 2, herd: [1, 2] },
+  raider_breacher: { weight: 2, herd: [1, 1] },
+  raider_scout: { weight: 3, herd: [1, 2] },
+  raider_marksman: { weight: 1, herd: [1, 1] },
 };
 
 // ---------------------------------------------------------------------------
@@ -81,6 +91,15 @@ export const LEGION = {
     name: { ja: "レギオン迫撃砲ロボ", en: "Legion Mortar Walker" }, weapon: "mortarman", health: 36, speed: 0.22, damage: 8, interval: [5.0, 6.5], burst: 1, burstInterval: 0,
     range: 48, armor: "mortar", color: [120, 110, 90], role: "mortar", sight: 56, armorValue: 0.35, model: "mortar_bot", tier: 3, minRange: 10,
   },
+  // ---- 2.3 で追加 ----
+  legion_lancer: {
+    name: { ja: "レギオン・ランサー", en: "Legion Lancer" }, weapon: "railspike", health: 28, speed: 0.27, damage: 8, interval: [3.2, 4.2], burst: 1, burstInterval: 0,
+    range: 44, armor: "lancer", color: [90, 100, 130], role: "sniper", sight: 52, armorValue: 0.25, model: "robot", tier: 2, energy: true,
+  },
+  legion_hunter: {
+    name: { ja: "レギオン・ハンタードローン", en: "Legion Hunter Drone" }, weapon: "ion_carbine", health: 18, speed: 0.34, damage: 2.2, interval: [1.0, 1.5], burst: 4, burstInterval: 0.07,
+    range: 22, armor: "hunter", color: [170, 90, 70], role: "drone", sight: 40, armorValue: 0.15, model: "drone", tier: 2, flying: true, spots: true, energy: true,
+  },
 };
 
 // ---------------------------------------------------------------------------
@@ -98,6 +117,11 @@ export const HOLLOW = {
   hollow_brute: {
     name: { ja: "ホロウ・ブルート", en: "Hollow Brute" }, weapon: null, health: 70, speed: 0.27, damage: 9, interval: [1.4, 1.8], burst: 1, burstInterval: 0,
     range: 2.8, armor: "brute", color: [96, 110, 80], role: "melee", sight: 26, armorValue: 0.45, model: "brute", tier: 3, knockback: 1.2,
+  },
+  // ---- 2.3 で追加 ----
+  hollow_crawler: {
+    name: { ja: "ホロウ・クローラー", en: "Hollow Crawler" }, weapon: null, health: 12, speed: 0.42, damage: 3, interval: [0.6, 0.8], burst: 1, burstInterval: 0,
+    range: 1.8, armor: "crawler", color: [100, 120, 84], role: "melee", sight: 24, armorValue: 0, model: "hollow", tier: 1, scale: 0.8,
   },
 };
 
@@ -141,6 +165,22 @@ export const BOSSES = {
     reward: { legendary: 1, credits: 1000, xp: 2000 },
     summon: "legion_core",
   },
+  // ---- 2.3 で追加 ----
+  boss_hollow_mother: {
+    faction: "hollow", name: { ja: "ホロウ・マザー", en: "Hollow Mother" }, weapon: null, health: 460, speed: 0.26, damage: 10, interval: [1.2, 1.6], burst: 1, burstInterval: 0,
+    range: 3.4, armor: "mother", color: [120, 130, 70], role: "melee", sight: 40, armorValue: 0.4, model: "brute", scale: 1.7, tier: 4, knockback: 1.6,
+    phases: [1.0, 0.6, 0.3],
+    actions: {
+      1: ["stomp", "reinforce"],
+      2: ["stomp", "reinforce", "grenade"],
+      3: ["stomp", "reinforce", "grenade", "enrage"],
+    },
+    grenade: "grenade_gas",
+    reinforce: { ids: ["hollow_runner", "hollow_crawler"], count: 4, cooldown: 360 }, // ブローターの爆発は味方も巻き込むので群れには混ぜない
+    stomp: { radius: 5.5, damage: 9, cooldown: 140, warn: 18 },
+    reward: { legendary: 1, credits: 900, xp: 1800 },
+    summon: "hollow_heart",
+  },
 };
 
 /** 全勢力の敵（ボスを除く）。AI・生成・図鑑が読む */
@@ -158,13 +198,13 @@ function buildEnemies() {
   for (const [id, e] of Object.entries(LEGION)) {
     out[id] = {
       ...e, faction: "legion", skin: e.armor,
-      spawn: { biomes: ["mountains", "mountain", "extreme_hills"], dark: false, surface: true, weight: id === "legion_mortar" ? 1 : 2, herd: id === "legion_drone" ? [1, 2] : [1, 1] },
+      spawn: { biomes: ["mountains", "mountain", "extreme_hills"], dark: false, surface: true, weight: id === "legion_mortar" || id === "legion_lancer" ? 1 : 2, herd: id === "legion_drone" || id === "legion_hunter" ? [1, 2] : [1, 1] },
     };
   }
   for (const [id, e] of Object.entries(HOLLOW)) {
     out[id] = {
       ...e, faction: "hollow", skin: e.armor,
-      spawn: { biomes: [], dark: true, surface: false, underground: true, weight: id === "hollow_runner" ? 5 : id === "hollow_bloater" ? 2 : 1, herd: id === "hollow_runner" ? [2, 4] : [1, 1] },
+      spawn: { biomes: [], dark: true, surface: false, underground: true, weight: id === "hollow_runner" ? 5 : id === "hollow_crawler" ? 3 : id === "hollow_bloater" ? 2 : 1, herd: id === "hollow_runner" ? [2, 4] : id === "hollow_crawler" ? [2, 3] : [1, 1] },
     };
   }
   return out;

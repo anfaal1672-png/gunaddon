@@ -84,4 +84,33 @@ export const SHOTGUN = {
     slots: ["optic", "muzzle", "laser"],
     model: { type: "shotgun", body: 14, h: 4.5, barrel: 8, tube: true, pumpGrip: true, stock: "none", finish: "od", accent: "tier" },
   },
+
+  // ---- 2.3 で追加 ----
+  bulldog: {
+    cat: "shotgun", tier: "common", name: { ja: "ブルドッグ", en: "Bulldog" },
+    desc: { ja: "銃身の短いポンプショットガン。室内戦向け", en: "Short-barreled pump shotgun" },
+    ammo: "shell", mag: 5, rpm: 80, modes: ["semi"], pellets: 8, pelletSpread: 8, dmg: 2.5, head: 1.3, range: [5, 16], falloff: 0.3,
+    spread: R(1.4, 0.9, 0.9, 0, 0, 0.4), recoil: { v: 4.2, h: 1.1, shake: 0.085 },
+    single: { start: 7, per: 10, end: 9 }, reload: { tac: 50, empty: 50 }, ads: 3, move: 1.0, pen: 0, sound: "shotgun", pitch: 1.08, optic: "iron", pump: true,
+    slots: ["optic", "muzzle", "laser", "stock"],
+    model: { type: "shotgun", body: 11, h: 4, barrel: 8, tube: true, pumpGrip: true, stock: "fixed", finish: "od", accent: "tier" },
+  },
+  cyclone: {
+    cat: "shotgun", tier: "legendary", name: { ja: "サイクロン", en: "Cyclone" },
+    desc: { ja: "ドラムマガジンのフルオートショットガン", en: "Drum-fed full-auto shotgun" },
+    ammo: "shell", mag: 20, rpm: 360, modes: ["auto", "semi"], pellets: 6, pelletSpread: 7.5, dmg: 2.0, head: 1.2, range: [6, 18], falloff: 0.3,
+    spread: R(2.2, 1.1, 1.3, 0.45, 2.4, 0.4), recoil: { v: 2.6, h: 1.2, shake: 0.065 },
+    reload: { tac: 56, empty: 70 }, ads: 5, move: 0.92, pen: 0, sound: "shotgun", pitch: 1.12, optic: "iron",
+    slots: ["optic", "muzzle", "underbarrel", "laser", "stock"],
+    model: { type: "shotgun", body: 14, h: 4.8, barrel: 9, mag: "drum", stock: "fixed", finish: "black", accent: "tier" },
+  },
+  hammerhead: {
+    cat: "shotgun", tier: "rare", name: { ja: "ハンマーヘッド", en: "Hammerhead" },
+    desc: { ja: "大口径の中折れ式 2 連。2 発同時に撃てば何でも止まる", en: "Heavy double-barrel. Fire both at once" },
+    ammo: "shell", mag: 2, rpm: 380, modes: ["double", "semi"], pellets: 9, pelletSpread: 6.8, dmg: 3.0, head: 1.3, range: [8, 22], falloff: 0.32,
+    spread: R(1.4, 0.8, 1.0, 0, 0, 0.4), recoil: { v: 6.2, h: 1.4, shake: 0.12 },
+    reload: { tac: 38, empty: 38 }, ads: 3, move: 0.98, pen: 0, sound: "shotgun", pitch: 0.82, optic: "iron",
+    slots: ["muzzle", "barrel", "trigger"],
+    model: { type: "double", body: 9, h: 4.4, barrel: 12, stock: "fixed", finish: "steel", accent: "tier" },
+  },
 };

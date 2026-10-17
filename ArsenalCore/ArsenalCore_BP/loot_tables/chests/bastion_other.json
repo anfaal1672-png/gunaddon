@@ -537,6 +537,20 @@
         },
         {
           "type": "item",
+          "name": "arsenal:regent",
+          "weight": 2,
+          "functions": [
+            {
+              "function": "set_damage",
+              "damage": {
+                "min": 0.35,
+                "max": 0.9
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
           "name": "arsenal:midge",
           "weight": 2,
           "functions": [
@@ -566,6 +580,20 @@
         {
           "type": "item",
           "name": "arsenal:wisp",
+          "weight": 2,
+          "functions": [
+            {
+              "function": "set_damage",
+              "damage": {
+                "min": 0.35,
+                "max": 0.9
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "arsenal:gadfly",
           "weight": 2,
           "functions": [
             {
@@ -621,6 +649,20 @@
         },
         {
           "type": "item",
+          "name": "arsenal:wren",
+          "weight": 2,
+          "functions": [
+            {
+              "function": "set_damage",
+              "damage": {
+                "min": 0.35,
+                "max": 0.9
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
           "name": "arsenal:pathfinder",
           "weight": 2,
           "functions": [
@@ -636,6 +678,34 @@
         {
           "type": "item",
           "name": "arsenal:quillback",
+          "weight": 2,
+          "functions": [
+            {
+              "function": "set_damage",
+              "damage": {
+                "min": 0.35,
+                "max": 0.9
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "arsenal:corsair",
+          "weight": 2,
+          "functions": [
+            {
+              "function": "set_damage",
+              "damage": {
+                "min": 0.35,
+                "max": 0.9
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "arsenal:kite",
           "weight": 2,
           "functions": [
             {
@@ -719,7 +789,49 @@
         },
         {
           "type": "item",
+          "name": "arsenal:valkyrie",
+          "weight": 2,
+          "functions": [
+            {
+              "function": "set_damage",
+              "damage": {
+                "min": 0.35,
+                "max": 0.9
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "arsenal:sirocco",
+          "weight": 2,
+          "functions": [
+            {
+              "function": "set_damage",
+              "damage": {
+                "min": 0.35,
+                "max": 0.9
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
           "name": "arsenal:longbow",
+          "weight": 2,
+          "functions": [
+            {
+              "function": "set_damage",
+              "damage": {
+                "min": 0.35,
+                "max": 0.9
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "arsenal:highlander",
           "weight": 2,
           "functions": [
             {
@@ -943,7 +1055,35 @@
         },
         {
           "type": "item",
+          "name": "arsenal:kodiak",
+          "weight": 1,
+          "functions": [
+            {
+              "function": "set_damage",
+              "damage": {
+                "min": 0.35,
+                "max": 0.9
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
           "name": "arsenal:cinder",
+          "weight": 1,
+          "functions": [
+            {
+              "function": "set_damage",
+              "damage": {
+                "min": 0.35,
+                "max": 0.9
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "arsenal:hummingbird",
           "weight": 1,
           "functions": [
             {
@@ -972,6 +1112,20 @@
         {
           "type": "item",
           "name": "arsenal:specter",
+          "weight": 1,
+          "functions": [
+            {
+              "function": "set_damage",
+              "damage": {
+                "min": 0.35,
+                "max": 0.9
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "arsenal:jackal",
           "weight": 1,
           "functions": [
             {
@@ -1041,6 +1195,34 @@
         },
         {
           "type": "item",
+          "name": "arsenal:hydra",
+          "weight": 1,
+          "functions": [
+            {
+              "function": "set_damage",
+              "damage": {
+                "min": 0.35,
+                "max": 0.9
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "arsenal:aurora",
+          "weight": 1,
+          "functions": [
+            {
+              "function": "set_damage",
+              "damage": {
+                "min": 0.35,
+                "max": 0.9
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
           "name": "arsenal:anvil",
           "weight": 1,
           "functions": [
@@ -1070,6 +1252,20 @@
         {
           "type": "item",
           "name": "arsenal:halberd",
+          "weight": 1,
+          "functions": [
+            {
+              "function": "set_damage",
+              "damage": {
+                "min": 0.35,
+                "max": 0.9
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "arsenal:warhorse",
           "weight": 1,
           "functions": [
             {
@@ -1139,6 +1335,20 @@
         },
         {
           "type": "item",
+          "name": "arsenal:peregrine",
+          "weight": 1,
+          "functions": [
+            {
+              "function": "set_damage",
+              "damage": {
+                "min": 0.35,
+                "max": 0.9
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
           "name": "arsenal:whisper",
           "weight": 1,
           "functions": [
@@ -1182,6 +1392,34 @@
         {
           "type": "item",
           "name": "arsenal:wraithmark",
+          "weight": 1,
+          "functions": [
+            {
+              "function": "set_damage",
+              "damage": {
+                "min": 0.35,
+                "max": 0.9
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "arsenal:shrike",
+          "weight": 1,
+          "functions": [
+            {
+              "function": "set_damage",
+              "damage": {
+                "min": 0.35,
+                "max": 0.9
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "arsenal:phantom_lr",
           "weight": 1,
           "functions": [
             {
@@ -1251,6 +1489,20 @@
         },
         {
           "type": "item",
+          "name": "arsenal:hammerhead",
+          "weight": 1,
+          "functions": [
+            {
+              "function": "set_damage",
+              "damage": {
+                "min": 0.35,
+                "max": 0.9
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
           "name": "arsenal:grinder",
           "weight": 1,
           "functions": [
@@ -1266,6 +1518,20 @@
         {
           "type": "item",
           "name": "arsenal:bulwark",
+          "weight": 1,
+          "functions": [
+            {
+              "function": "set_damage",
+              "damage": {
+                "min": 0.35,
+                "max": 0.9
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "arsenal:goliath",
           "weight": 1,
           "functions": [
             {
@@ -1377,6 +1643,20 @@
         },
         {
           "type": "item",
+          "name": "arsenal:pelican",
+          "weight": 1,
+          "functions": [
+            {
+              "function": "set_damage",
+              "damage": {
+                "min": 0.35,
+                "max": 0.9
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
           "name": "arsenal:pulse_rifle",
           "weight": 1,
           "functions": [
@@ -1434,6 +1714,20 @@
         {
           "type": "item",
           "name": "arsenal:sonic_disruptor",
+          "weight": 1,
+          "functions": [
+            {
+              "function": "set_damage",
+              "damage": {
+                "min": 0.35,
+                "max": 0.9
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "arsenal:ion_carbine",
           "weight": 1,
           "functions": [
             {

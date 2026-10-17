@@ -188,13 +188,18 @@ def attachment_icon_any(aid, a):
         else:
             rect(d, 6, 12, 26, 20, MD)
     elif slot == "barrel":
-        L = {"barrel_long": 28, "barrel_short": 16, "barrel_heavy": 24, "barrel_fluted": 24}[aid]
+        L = {"barrel_long": 28, "barrel_short": 16, "barrel_heavy": 24, "barrel_fluted": 24, "barrel_ported": 22, "barrel_match": 28}[aid]
         w = 3 if aid != "barrel_heavy" else 5
         x0 = (32 - L) // 2
         rect(d, x0, 16 - w, x0 + L, 16 + w, DK)
         if aid == "barrel_fluted":
             for x in range(x0 + 2, x0 + L - 1, 3):
                 d.line([x, 16 - w + 1, x, 16 + w - 1], fill=MD + (255,))
+        if aid == "barrel_ported":
+            for x in range(x0 + L - 9, x0 + L - 2, 3):
+                rect(d, x, 16 - w, x + 1, 16 - w + 1, (20, 20, 20), hl=False)
+        if aid == "barrel_match":
+            rect(d, x0 + 3, 16 - w, x0 + 6, 16 + w, (30, 90, 180), hl=False)
         rect(d, x0 + L - 2, 16 - w - 1, x0 + L, 16 + w + 1, MD)
     elif aid == "ub_flamer":
         rect(d, 3, 10, 22, 16, (140, 40, 36))
@@ -212,6 +217,46 @@ def attachment_icon_any(aid, a):
         for x0 in (9, 16):
             d.polygon([(x0, 3), (x0 + 6, 3), (x0 + 7, 27), (x0 + 1, 27)], fill=MD + (255,))
         rect(d, 8, 12, 24, 15, (30, 90, 180), hl=False)
+    elif aid == "optic_micro":
+        rect(d, 9, 20, 23, 23, DK)
+        rect(d, 11, 12, 21, 20, MD)
+        rect(d, 13, 14, 19, 19, (60, 110, 170))
+        d.point((16, 16), fill=(255, 40, 40, 255))
+    elif aid == "optic_thermal_compact":
+        rect(d, 6, 12, 26, 20, MD)
+        rect(d, 4, 11, 8, 21, DK)
+        rect(d, 24, 11, 28, 21, DK)
+        rect(d, 25, 13, 27, 19, (230, 90, 40), hl=False)
+        rect(d, 11, 20, 14, 25, DK)
+        rect(d, 19, 20, 22, 25, DK)
+    elif aid == "muzzle_linear":
+        rect(d, 4, 13, 10, 19, DK)
+        rect(d, 10, 11, 26, 21, MD)
+        rect(d, 26, 13, 29, 19, DK)
+    elif aid == "muzzle_tank_brake":
+        rect(d, 4, 10, 28, 22, DK)
+        for x in (9, 15, 21):
+            rect(d, x, 9, x + 2, 23, LT, hl=False)
+    elif aid in ("grip_stubby", "grip_handstop", "grip_heavy"):
+        rect(d, 4, 8, 28, 12, DK)
+        if aid == "grip_stubby":
+            rect(d, 13, 12, 19, 21, MD)
+        elif aid == "grip_handstop":
+            d.polygon([(18, 12), (24, 12), (20, 20), (16, 20)], fill=MD + (255,))
+        else:
+            rect(d, 11, 12, 21, 28, MD)
+            for y in (16, 20, 24):
+                d.line([11, y, 21, y], fill=DK + (255,))
+    elif aid == "mag_polymer":
+        d.polygon([(11, 3), (19, 3), (22, 27), (14, 27)], fill=(60, 64, 70, 255))
+        rect(d, 12, 6, 18, 8, (200, 160, 60), hl=False)
+    elif aid == "mag_casket":
+        d.polygon([(8, 3), (22, 3), (25, 28), (11, 28)], fill=MD + (255,))
+        d.line([15, 4, 18, 27], fill=DK + (255,))
+    elif aid == "laser_ir":
+        rect(d, 5, 12, 22, 20, DK)
+        rect(d, 22, 13, 26, 19, MD)
+        d.line([26, 16, 31, 16], fill=(120, 60, 160, 160))
     elif aid == "mag_belt":
         rect(d, 4, 12, 22, 28, (92, 100, 70))
         for x in range(8, 30, 3):
@@ -226,19 +271,30 @@ def attachment_icon_any(aid, a):
             d.line([28, 12, 6, 12], fill=MD + (255,), width=2)
             d.line([28, 16, 8, 22], fill=MD + (255,), width=2)
             rect(d, 3, 9, 7, 25, DK)
+        elif aid == "stock_precision":
+            d.polygon([(28, 10), (28, 16), (10, 25), (3, 25), (3, 9)], fill=DK + (255,))
+            rect(d, 8, 6, 20, 9, MD)
+            rect(d, 3, 18, 6, 28, MD)
+        elif aid == "stock_none":
+            rect(d, 22, 10, 30, 18, DK)
+            rect(d, 18, 12, 22, 16, MD)
+            d.line([6, 6, 16, 26], fill=(200, 40, 40, 255), width=2)
+            d.line([16, 6, 6, 26], fill=(200, 40, 40, 255), width=2)
         else:  # cheek riser
             d.polygon([(28, 10), (28, 16), (8, 24), (4, 24), (4, 9)], fill=MD + (255,))
             rect(d, 8, 6, 20, 9, (30, 90, 180))
             rect(d, 2, 8, 5, 25, DK)
     elif slot == "trigger":
-        col = {"trigger_hair": (206, 164, 68), "trigger_match": (70, 130, 190), "trigger_rapid": (200, 40, 40)}[aid]
+        col = {"trigger_hair": (206, 164, 68), "trigger_match": (70, 130, 190), "trigger_rapid": (200, 40, 40), "trigger_twostage": (90, 170, 90)}[aid]
         rect(d, 6, 6, 26, 12, DK)
         d.arc([8, 8, 24, 28], 0, 180, fill=MD + (255,), width=2)
         d.polygon([(15, 12), (18, 12), (17, 22), (14, 20)], fill=col + (255,))
         if aid == "trigger_rapid":
             d.polygon([(24, 14), (28, 14), (26, 19)], fill=col + (255,))
+        if aid == "trigger_twostage":
+            rect(d, 19, 14, 21, 17, col, hl=False)
     elif slot == "ammo":
-        col = {"ammo_hollow": (200, 110, 60), "ammo_subsonic": (60, 70, 90), "ammo_frangible": (140, 140, 150), "ammo_explosive": (230, 60, 40)}[aid]
+        col = {"ammo_hollow": (200, 110, 60), "ammo_subsonic": (60, 70, 90), "ammo_frangible": (140, 140, 150), "ammo_explosive": (230, 60, 40), "ammo_ap_core": (30, 30, 34), "ammo_match": (70, 130, 190)}[aid]
         for i in range(3):
             x = 7 + i * 7
             rect(d, x, 12, x + 5, 28, BRASS)
@@ -393,6 +449,28 @@ def melee_icon(mid, m):
         d.line([14, 19, 28, 4], fill=(240, 220, 255, 255))
         for (x, y) in ((18, 12), (23, 7)):
             d.point((x, y), fill=(255, 255, 255, 255))
+    elif mid == "tomahawk":
+        _diag(d, 5, 28, 21, 12, (110, 70, 40), 3)
+        d.polygon([(19, 9), (25, 4), (29, 8), (27, 13), (22, 13)], fill=steel + (255,))
+        d.line([25, 4, 29, 8], fill=edge + (255,))
+        rect(d, 4, 26, 8, 30, (40, 40, 44))
+    elif mid == "war_hammer":
+        _diag(d, 5, 28, 20, 13, (70, 52, 36), 3)
+        d.polygon([(16, 8), (22, 2), (30, 10), (24, 16)], fill=(120, 124, 130, 255))
+        d.polygon([(18, 8), (22, 4), (28, 10), (24, 14)], fill=steel + (255,))
+        rect(d, 3, 26, 7, 30, (40, 40, 44))
+    elif mid == "kukri":
+        _diag(d, 5, 27, 10, 22, (60, 40, 28), 4)
+        rect(d, 9, 19, 13, 23, (200, 170, 80))
+        d.polygon([(12, 20), (18, 12), (24, 9), (29, 5), (27, 11), (20, 16), (14, 22)], fill=steel + (255,))
+        d.line([18, 12, 28, 6], fill=edge + (255,))
+    elif mid == "katana":
+        _diag(d, 3, 29, 9, 23, (30, 30, 36), 3)
+        for (x, y) in ((5, 27), (7, 25)):
+            d.point((x, y), fill=(200, 40, 40, 255))
+        rect(d, 8, 21, 12, 25, (200, 170, 80))
+        d.polygon([(11, 22), (27, 6), (30, 2), (29, 6), (13, 24)], fill=steel + (255,))
+        d.line([12, 22, 28, 5], fill=edge + (255,))
     return outline(img)
 
 
@@ -425,6 +503,13 @@ def tool_icon_any(tid):
         d.polygon([(16, 2), (27, 9), (27, 23), (16, 30), (5, 23), (5, 9)], fill=(90, 110, 140, 255))
         d.polygon([(16, 8), (22, 12), (22, 20), (16, 24), (10, 20), (10, 12)], fill=(255, 120, 60, 255))
         d.ellipse([13, 13, 19, 19], fill=(255, 230, 180, 255))
+    elif tid == "hollow_heart":
+        d.ellipse([6, 7, 26, 28], fill=(110, 130, 60, 255))
+        d.ellipse([9, 10, 21, 22], fill=(150, 170, 80, 255))
+        d.line([16, 4, 16, 9], fill=(70, 60, 50, 255), width=2)
+        d.line([10, 14, 14, 18, 12, 23], fill=(70, 30, 40, 255))
+        d.line([20, 13, 18, 19, 22, 24], fill=(70, 30, 40, 255))
+        d.ellipse([14, 15, 18, 19], fill=(200, 230, 120, 255))
     return outline(img)
 
 

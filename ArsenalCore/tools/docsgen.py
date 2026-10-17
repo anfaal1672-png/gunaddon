@@ -173,7 +173,7 @@ def readme(data, tpl, trademarks):
         for g in tbl.values():
             grows.append([NAME(g), kind, T[g.get("tier", "common")]["name"]["ja"], g["desc"]["ja"]])
     erows = [[NAME(e), data["FACTIONS"][e["faction"]]["name"]["ja"], e["role"], e["health"], W[e["weapon"]]["name"]["ja"] if e.get("weapon") else "近接"] for e in data["ENEMIES"].values()]
-    erows += [[NAME(b), data["FACTIONS"][b["faction"]]["name"]["ja"], "ボス", b["health"], W[b["weapon"]]["name"]["ja"]] for b in data["BOSSES"].values()]
+    erows += [[NAME(b), data["FACTIONS"][b["faction"]]["name"]["ja"], "ボス", b["health"], W[b["weapon"]]["name"]["ja"] if b.get("weapon") else "近接"] for b in data["BOSSES"].values()]
     srows = [[NAME(s), data["FACTIONS"][s["faction"]]["name"]["ja"], s["desc"]["ja"], "・".join(f"{c['tier']}×{c['count']}" for c in s["chests"])] for s in data["STRUCTURES"].values()]
     krows = [[NAME(k), k["kills"], k["points"], k["desc"]["ja"]] for k in data["KILLSTREAKS"].values()]
     mdrows = [[NAME(m), m["desc"]["ja"], "個人戦" if m["teams"] == 0 else "協力" if m["teams"] == 1 else "2 チーム", m["minPlayers"], m["scoreLimit"] or "—", f"{m['timeLimit'] // 60} 分" if m["timeLimit"] else "—"] for m in data["MODES"].values()]

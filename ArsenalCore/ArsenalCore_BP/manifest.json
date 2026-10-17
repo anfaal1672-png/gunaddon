@@ -6,7 +6,7 @@
     "uuid": "22593181-74a6-5f57-b76c-f1029fedc001",
     "version": [
       2,
-      2,
+      3,
       0
     ],
     "min_engine_version": [
@@ -21,7 +21,7 @@
       "uuid": "0b0e907b-52f8-5a02-a4d5-fd95345dfa07",
       "version": [
         2,
-        2,
+        3,
         0
       ]
     },
@@ -32,7 +32,7 @@
       "entry": "scripts/main.js",
       "version": [
         2,
-        2,
+        3,
         0
       ]
     }
@@ -42,7 +42,7 @@
       "uuid": "7eda1df1-bf55-58c6-a42f-ddd61899fc5d",
       "version": [
         2,
-        2,
+        3,
         0
       ]
     },
@@ -63,7 +63,7 @@
     "product_type": "addon",
     "generated_with": {
       "arsenal_core_build": [
-        "2.2.0"
+        "2.3.0"
       ]
     }
   }

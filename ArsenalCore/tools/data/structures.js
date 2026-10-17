@@ -79,6 +79,31 @@ export const STRUCTURES = {
     chests: [{ tier: "uncommon", count: 1 }, { tier: "rare", count: 1 }],
     merchant: 0.0, faction: "hollow",
   },
+  // ---- 2.3 で追加 ----
+  checkpoint: {
+    name: { ja: "検問所", en: "Raider Checkpoint" },
+    desc: { ja: "道をふさぐ遮断機と見張り小屋。土嚢の陰から撃ってくる", en: "Road barrier and guard hut, held from behind sandbags" },
+    size: [19, 8, 13], sink: 1, biomes: ["plains", "savanna", "desert", "taiga"], scatter: 0.4,
+    garrison: [{ id: "raider_scout", count: 2 }, { id: "raider_breacher", count: 1, at: "center" }, { id: "raider_marksman", count: 1, at: "roof" }, { id: "raider_dog", count: 1, at: "edge" }],
+    chests: [{ tier: "common", count: 1 }, { tier: "uncommon", count: 1 }],
+    merchant: 0.15, faction: "raiders",
+  },
+  radar_station: {
+    name: { ja: "レギオン・レーダー基地", en: "Legion Radar Station" },
+    desc: { ja: "巨大なレーダー塔と発電機。狙撃ロボとドローンが守る", en: "Radar mast and generators, watched by lancers and drones" },
+    size: [17, 16, 17], sink: 1, biomes: ["mountains", "mountain", "extreme_hills", "mesa"], scatter: 0.3,
+    garrison: [{ id: "legion_lancer", count: 1, at: "roof" }, { id: "legion_trooper", count: 2 }, { id: "legion_hunter", count: 2, at: "edge" }, { id: "legion_shield", count: 1, at: "center" }],
+    chests: [{ tier: "uncommon", count: 1 }, { tier: "rare", count: 2 }],
+    merchant: 0.0, faction: "legion",
+  },
+  infested_farm: {
+    name: { ja: "汚染された農場", en: "Infested Farm" },
+    desc: { ja: "崩れかけた納屋と枯れた畑。床下を這うものがいる", en: "A rotting barn and dead fields. Something crawls under the floor" },
+    size: [19, 10, 15], sink: 1, biomes: ["plains", "forest", "swamp", "taiga"], scatter: 0.35,
+    garrison: [{ id: "hollow_crawler", count: 3 }, { id: "hollow_runner", count: 2 }, { id: "hollow_bloater", count: 1, at: "center" }],
+    chests: [{ tier: "common", count: 1 }, { tier: "uncommon", count: 1 }, { tier: "rare", count: 1 }],
+    merchant: 0.0, faction: "hollow",
+  },
 };
 
 // ---------------------------------------------------------------------------

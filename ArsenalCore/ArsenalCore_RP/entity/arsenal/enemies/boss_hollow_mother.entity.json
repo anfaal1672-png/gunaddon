@@ -1,0 +1,36 @@
+{
+  "format_version": "1.10.0",
+  "minecraft:client_entity": {
+    "description": {
+      "identifier": "arsenal:boss_hollow_mother",
+      "materials": {
+        "default": "entity_alphatest"
+      },
+      "textures": {
+        "default": "textures/entity/arsenal/enemies/boss_hollow_mother"
+      },
+      "geometry": {
+        "default": "geometry.arsenal.boss_hollow_mother"
+      },
+      "render_controllers": [
+        "controller.render.arsenal.simple"
+      ],
+      "spawn_egg": {
+        "base_color": "#788246",
+        "overlay_color": "#1e1e22"
+      },
+      "animations": {
+        "look": "animation.arsenal.raider.look",
+        "walk": "animation.arsenal.raider.walk",
+        "reach": "animation.arsenal.hollow.reach"
+      },
+      "scripts": {
+        "animate": [
+          "look",
+          "walk",
+          "reach"
+        ]
+      }
+    }
+  }
+}

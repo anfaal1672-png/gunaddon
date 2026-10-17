@@ -58,4 +58,24 @@ export const DMR = {
     slots: ["optic", "muzzle", "underbarrel", "mag", "stock"],
     model: { type: "rifle", body: 15, h: 4.5, barrel: 15, guard: 10, mag: "box", stock: "fixed", finish: "tan", accent: "tier", scope: 4 },
   },
+
+  // ---- 2.3 で追加 ----
+  osprey: {
+    cat: "dmr", tier: "common", name: { ja: "オスプレイ", en: "Osprey" },
+    desc: { ja: "中口径の軽いマークスマンライフル。連射しやすい", en: "Light medium-calibre marksman rifle" },
+    ammo: "medium", mag: 15, rpm: 330, modes: ["semi"], dmg: 7.8, head: 2.1, range: [55, 110], falloff: 0.68,
+    spread: R(4.2, 0.15, 2.3, 0.8, 3.6, 0.36), recoil: { v: 1.9, h: 0.45, shake: 0.04 },
+    reload: { tac: 36, empty: 48 }, ads: 5, move: 0.96, pen: 2, sound: "rifle_heavy", pitch: 1.1, optic: "scope3",
+    slots: ["optic", "muzzle", "underbarrel", "mag", "stock"],
+    model: { type: "rifle", body: 13, h: 4.2, barrel: 12, guard: 8, mag: "straight", stock: "skeleton", finish: "od", accent: "tier", scope: 3 },
+  },
+  peregrine: {
+    cat: "dmr", tier: "rare", name: { ja: "ペレグリン", en: "Peregrine" },
+    desc: { ja: "20 発入りの大口径マークスマン。素早く次弾を撃てる", en: "20-round heavy marksman rifle" },
+    ammo: "heavy", mag: 20, rpm: 300, modes: ["semi"], dmg: 8.6, head: 2.2, range: [62, 125], falloff: 0.7,
+    spread: R(4.4, 0.14, 2.5, 0.95, 4.0, 0.34), recoil: { v: 2.4, h: 0.55, shake: 0.05 },
+    reload: { tac: 42, empty: 54 }, ads: 6, move: 0.93, pen: 3, sound: "battle", pitch: 0.98, optic: "scope4",
+    slots: ["optic", "muzzle", "underbarrel", "mag", "stock"],
+    model: { type: "rifle", body: 15, h: 4.6, barrel: 13, guard: 9, mag: "straight", stock: "fixed", finish: "tan", accent: "tier", scope: 4 },
+  },
 };

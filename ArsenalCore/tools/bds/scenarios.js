@@ -5,6 +5,8 @@ import { spawnSimulatedPlayer } from "@minecraft/server-gametest";
 import { S } from "./core/state.js";
 import { startReload } from "./core/reload.js";
 import { isIndoor } from "./fx/effects.js";
+import { summonBoss } from "./systems/bosses.js";
+import { spawnEnemy } from "./systems/ai/brain.js";
 const log = (...a) => console.warn("[DEVTEST] " + a.join(" "));
 const dim = () => world.getDimension("overworld");
 const Y = 120;
@@ -45,6 +47,10 @@ system.afterEvents.scriptEventReceive.subscribe((ev) => {
     if (ev.id === "dev:limb") limbTest();
     if (ev.id === "dev:ready") readyTest();
     if (ev.id === "dev:indoor") indoorTest();
+    if (ev.id === "dev:spawn23") spawn23Test();
+    if (ev.id === "dev:mother") motherTest();
+    if (ev.id === "dev:despawn") despawnTest(ev.message);
+    if (ev.id === "dev:structure") structureTest(ev.message);
   } catch (e) { log("ERR", e, e.stack); }
 });
 
@@ -258,4 +264,86 @@ function indoorTest() {
   const inside = isIndoor(d, { x: 33, y: Y + 1.5, z: -1 }, "t1");
   const outside = isIndoor(d, { x: 10, y: Y + 1.5, z: 0 }, "t2");
   log(`indoor inside=${inside} outside=${outside}`);
+}
+
+// 2.3：新しい敵・ボス・銃座・乗り物が実機で読み込まれ、出せるか
+function spawn23Test() {
+  const ids = ["raider_breacher", "raider_scout", "raider_marksman", "legion_lancer", "legion_hunter", "hollow_crawler", "gl_post", "apc"];
+  const out = ids.map((id, i) => {
+    try {
+      const e = dim().spawnEntity(`arsenal:${id}`, { x: 6 + i * 4, y: Y, z: 3 });
+      return [id, e];
+    } catch (err) {
+      return [id, null, String(err)];
+    }
+  });
+  after(60, () => log("spawn23 " + out.map(([id, e, err]) => `${id}=${e && e.isValid ? "ok" : err ?? "gone"}`).join(" ")));
+}
+
+// 2.3：ホロウ・マザーを呼び、出現と群れの召喚を確かめる
+function motherTest() {
+  for (const e of dim().getEntities({ families: ["arsenal_enemy"] })) e.remove();
+  for (const e of dim().getEntities({ type: "arsenal:boss_hollow_mother" })) e.remove();
+  // 増援は周囲 6 ブロックに出るので、足場を広げる
+  dim().fillBlocks(new BlockVolume({ x: -10, y: Y - 1, z: -16 }, { x: 30, y: Y - 1, z: 16 }), "minecraft:stone");
+  dim().fillBlocks(new BlockVolume({ x: -10, y: Y, z: -16 }, { x: 30, y: Y + 6, z: 16 }), "minecraft:air");
+  const p = getSim();
+  p.addEffect("resistance", 2400, { amplifier: 4, showParticles: false });
+  p.addEffect("fire_resistance", 2400, { amplifier: 0, showParticles: false });
+  give(p, "arsenal:hollow_heart", 1, 0);
+  world.gameRules.doMobSpawning = false;
+  p.teleport({ x: 0.5, y: Y, z: 0.5 }, { rotation: { x: 0, y: -90 } }); // 東（+x、足場の上）を向く
+  if (!globalThis.__motherDbg) {
+    globalThis.__motherDbg = true;
+    world.afterEvents.entityDie.subscribe((ev) => {
+      if (ev.deadEntity.typeId?.startsWith("arsenal:hollow")) log(`die ${ev.deadEntity.typeId} cause=${ev.damageSource.cause} by=${ev.damageSource.damagingEntity?.typeId}`);
+    });
+    globalThis.__lastPos = new Map();
+    system.runInterval(() => {
+      for (const e of dim().getEntities({ families: ["arsenal_hollow"] })) globalThis.__lastPos.set(e.id, `${e.location.x.toFixed(1)},${e.location.y.toFixed(1)},${e.location.z.toFixed(1)} v=${JSON.stringify(e.getVelocity())}`);
+    }, 1);
+    world.afterEvents.entityRemove.subscribe((ev) => {
+      if (ev.typeId?.startsWith("arsenal:hollow")) log(`removed ${ev.typeId} last=${globalThis.__lastPos.get(ev.removedEntityId)} tick=${system.currentTick}`);
+    });
+  }
+  const ok = summonBoss(p, "boss_hollow_mother", "arsenal:hollow_heart");
+  log(`mother summon=${ok}`);
+  after(100, () => {
+    const m = dim().getEntities({ type: "arsenal:boss_hollow_mother" })[0];
+    log(`mother spawned=${!!m} hp=${m?.getComponent("minecraft:health")?.currentValue} at=${m ? [m.location.x, m.location.y, m.location.z].map((v) => v.toFixed(1)).join(",") : "-"} target=${m?.target?.typeId}`);
+    if (!m) return;
+    for (const t of [100, 200, 300, 400, 500]) after(t, () => {
+      const kids = dim().getEntities({ tags: [`arsenal_minion:${m.id}`] });
+      const all = dim().getEntities({ families: ["arsenal_hollow"] }).filter((e) => e.typeId !== "arsenal:boss_hollow_mother");
+      log(`mother t=${t} minions=${kids.length} hollow=${all.length} types=${[...new Set(kids.map((k) => k.typeId))].join(",")} simHp=${p.getComponent("minecraft:health")?.currentValue}`);
+    });
+    // 撃破すると手下は朽ちて倒れる
+    after(520, () => m.isValid && m.kill());
+    after(1000, () => log(`mother killed: minions left=${dim().getEntities({ tags: [`arsenal_minion:${m.id}`] }).length}`));
+  });
+}
+
+// 2.3：構造物を置き、宝箱の数を数える
+function structureTest(sid) {
+  const at = { x: 8, y: Y + 8, z: 10 };
+  const p = getSim();
+  p.teleport({ x: 0.5, y: Y, z: 0.5 });
+  after(40, () => {
+    world.structureManager.place(`arsenal:${sid}`, dim(), at);
+    const st = world.structureManager.get(`arsenal:${sid}`);
+    let chests = 0;
+    for (let x = 0; x < st.size.x; x++) for (let y = 0; y < st.size.y; y++) for (let z = 0; z < st.size.z; z++) {
+      if (dim().getBlock({ x: at.x + x, y: at.y + y, z: at.z + z })?.typeId === "minecraft:chest") chests++;
+    }
+    log(`structure ${sid} size=${st.size.x}x${st.size.y}x${st.size.z} chests=${chests}`);
+  });
+}
+
+// 出した敵が勝手に消えないか（ボスの増援と同じく persist なしで出す）
+function despawnTest(arg) {
+  const p = getSim();
+  const ids = ["hollow_runner", "hollow_crawler", "raider_gunner", "legion_trooper"];
+  const viaAi = arg === "ai";
+  const es = ids.map((id, i) => viaAi ? spawnEnemy(dim(), { x: 6 + i * 2, y: Y, z: 2 }, id, { tag: "arsenal_minion:x", src: "boss" }) : dim().spawnEntity(`arsenal:${id}`, { x: 6 + i * 2, y: Y, z: 2 }));
+  for (const t of [40, 120, 200, 300]) after(t, () => log(`despawn t=${t} ` + es.map((e, i) => `${ids[i]}=${e.isValid ? "ok" : "gone"}`).join(" ") + ` simAt=${p.location.x.toFixed(1)},${p.location.y.toFixed(1)},${p.location.z.toFixed(1)}`));
 }

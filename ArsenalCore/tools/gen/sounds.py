@@ -72,6 +72,7 @@ class SoundsMixin:
             ent[f"{NS}:{eid}"] = {"volume": 1.0, "pitch": [0.9, 1.1] if fac != "hollow" else [0.6, 0.8], "events": ev}
         ent[f"{NS}:boss_warlord"] = {"volume": 1.0, "pitch": [0.8, 0.9], "events": {"ambient": "mob.pillager.idle", "hurt": "mob.pillager.hurt", "death": "mob.ravager.death"}}
         ent[f"{NS}:boss_juggernaut"] = {"volume": 1.2, "pitch": [0.6, 0.7], "events": {"hurt": "mob.irongolem.hit", "death": "mob.irongolem.death", "step": "mob.irongolem.walk"}}
+        ent[f"{NS}:boss_hollow_mother"] = {"volume": 1.3, "pitch": [0.45, 0.55], "events": {"ambient": "mob.zombie.say", "hurt": "mob.zombie.hurt", "death": "mob.ravager.death", "step": "mob.ravager.step"}}
         ent[f"{NS}:quartermaster"] = {"volume": 1.0, "pitch": [0.9, 1.0], "events": {"ambient": "mob.villager.idle", "hurt": "mob.villager.hit", "death": "mob.villager.death"}}
         wjson(f"{self.rp}/sounds.json", {"entity_sounds": {"entities": ent}})
         self.sound_events = sorted(defs)

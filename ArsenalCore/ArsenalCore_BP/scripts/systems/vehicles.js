@@ -17,7 +17,7 @@ import { traceHitscan, drawTracer } from "../core/ballistics.js";
 import { miniBlast } from "../core/damage.js";
 import { consumeItem, giveItem, isCreative } from "../core/inventory.js";
 import { isEmpd } from "./ai/brain.js";
-import { fireRocket } from "./projectiles.js";
+import { fireRocket, fireGrenade40 } from "./projectiles.js";
 import { gunshot, muzzleFx, emit, playNear, playTo } from "../fx/effects.js";
 import { announce } from "../ui/hud2.js";
 import { add, mul, dist, cone } from "../util/math.js";
@@ -26,7 +26,7 @@ import { safe } from "../util/log.js";
 
 const VEH = /** @type {Record<string, any>} */ (DATA.VEHICLES);
 /** 銃座ごとの基準武器（見た目・音・弾道の元） */
-const BASE = { hmg_nest: "titan", aa_gun: "titan", at_post: "thumper", buggy: "juggernaut" };
+const BASE = { hmg_nest: "titan", aa_gun: "titan", at_post: "thumper", buggy: "juggernaut", gl_post: "thumper", apc: "titan" };
 
 /** @type {Map<string, any>} */
 const statCache = new Map();
@@ -98,6 +98,11 @@ function fireOnce(p, veh, vid) {
   switch (v.fire) {
     case "wire": {
       fireRocket(p, muzzle, dir, { ...st, projectile: { speed: 1.0, accel: 0.08, max: 2.6, power: v.power, turn: 0.2 } }, null, { wire: p.id, power: v.power, kind: "rocket", maxAge: 200 });
+      emit(p.dimension, "arsenal:muzzle_smoke", muzzle, undefined, { range: 48 });
+      break;
+    }
+    case "gl40": {
+      fireGrenade40(p, muzzle, cone(dir, v.spread), st);
       emit(p.dimension, "arsenal:muzzle_smoke", muzzle, undefined, { range: 48 });
       break;
     }

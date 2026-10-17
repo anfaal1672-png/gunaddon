@@ -33,4 +33,26 @@ export const MELEE = {
     desc: { ja: "高周波の刃。防具の半分を無視し、斬った相手を燃やす", en: "High-frequency blade: ignores half of armor, ignites" },
     dmg: 11, backstab: 3.0, durability: 1500, special: "vibro", ap: 0.5, fireSecs: 3, reach: 3.2, move: 1.08,
   },
+
+  // ---- 2.3 で追加 ----
+  tomahawk: {
+    cat: "melee", tier: "uncommon", name: { ja: "トマホーク", en: "Tomahawk" },
+    desc: { ja: "片手斧。スニークしながら使うと投げられる（11 ダメージ）", en: "Hatchet. Sneak + use to throw it (11 dmg)" },
+    dmg: 7, backstab: 3.0, durability: 600, special: "throw", throwDmg: 11, reach: 3.0, move: 1.06,
+  },
+  war_hammer: {
+    cat: "melee", tier: "rare", name: { ja: "ウォーハンマー", en: "War Hammer" },
+    desc: { ja: "重い戦鎚。当てた相手をよろめかせる。振りは遅い", en: "Heavy hammer that staggers. Slow to swing" },
+    dmg: 10, backstab: 2.0, durability: 900, special: "stun", reach: 3.1, move: 0.95,
+  },
+  kukri: {
+    cat: "melee", tier: "common", name: { ja: "ククリ", en: "Kukri" },
+    desc: { ja: "内反りの山刀。素早く振れて周りの敵にも当たる", en: "Recurved blade: fast sweeping cuts" },
+    dmg: 6.5, backstab: 4.0, durability: 500, special: "sweep", reach: 2.9, move: 1.1,
+  },
+  katana: {
+    cat: "melee", tier: "rare", name: { ja: "カタナ", en: "Katana" },
+    desc: { ja: "長い刀。間合いが広く、薙ぎ払いで周りの敵も斬る", en: "Long blade with extra reach that sweeps" },
+    dmg: 8.5, backstab: 3.5, durability: 800, special: "sweep", reach: 3.5, move: 1.04,
+  },
 };

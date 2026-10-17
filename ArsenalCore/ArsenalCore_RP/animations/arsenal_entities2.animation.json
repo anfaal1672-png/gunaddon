@@ -290,6 +290,30 @@
           ]
         }
       }
+    },
+    "animation.arsenal.gl_post.aim": {
+      "loop": true,
+      "bones": {
+        "gun": {
+          "rotation": [
+            "-q.property('arsenal:pitch')",
+            0,
+            0
+          ]
+        }
+      }
+    },
+    "animation.arsenal.apc.aim": {
+      "loop": true,
+      "bones": {
+        "gun": {
+          "rotation": [
+            "-q.property('arsenal:pitch')",
+            0,
+            0
+          ]
+        }
+      }
     }
   }
 }
