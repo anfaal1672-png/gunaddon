@@ -34,7 +34,7 @@ class SoundsMixin:
         for fx in ("hit", "headshot", "kill", "lock_beep", "lock_on", "charge", "heat_vent", "overheat", "grenade_pin", "bounce", "flash_ring", "breath_in", "breath_out", "craft", "repair", "c4_beep", "mine_arm", "spin_up", "spin_down", "casing"):
             cat = "ui" if fx in ("hit", "headshot", "kill", "lock_beep", "lock_on") else "player"
             add(f"arsenal.fx.{fx}", f"fx/{fx}", category=cat, mx=16.0)
-        for fx in ("explosion", "explosion_far", "flash_bang", "smoke", "glass", "fire", "impact_block", "impact_flesh", "ricochet", "whizz"):
+        for fx in ("explosion", "explosion_far", "flash_bang", "smoke", "glass", "fire", "impact_block", "impact_flesh", "ricochet", "whizz", "crack"):
             mx = {"explosion": 96.0, "explosion_far": 320.0, "flash_bang": 64.0}.get(fx, 24.0)
             add(f"arsenal.fx.{fx}", f"fx/{fx}", category="neutral" if fx.startswith("impact") else "player", mn=4.0 if mx > 60 else 1.0, mx=mx)
         # ---- 2.0 ----

@@ -160,7 +160,16 @@ function ricochet(dim, p, dir, n) {
  * 飛翔音（弾道の近くにいたプレイヤーに風切り音）
  * @param {import("@minecraft/server").Entity} shooter @param {import("../util/math.js").Vec3} from @param {import("../util/math.js").Vec3} to
  */
-export function whizzBy(shooter, from, to) {
+/** 超音速の弾（小銃弾）か：近くを通るとクラック音がする。亜音速弾は風切り音だけ @param {any} st */
+export function isSupersonic(st) {
+  return !!st && !st.subsonic && ["carbine", "assault", "battle", "dmr", "sniper", "lmg", "heavy"].includes(st.cat);
+}
+
+/**
+ * 弾が近くを通った人に風切り音（超音速ならクラック音も）と制圧
+ * @param {import("@minecraft/server").Entity} shooter @param {import("../util/math.js").Vec3} from @param {import("../util/math.js").Vec3} to @param {boolean} [supersonic]
+ */
+export function whizzBy(shooter, from, to, supersonic = false) {
   safe("whizz", () => {
     const d = sub(to, from);
     const L = Math.sqrt(dot(d, d));
@@ -175,7 +184,8 @@ export function whizzBy(shooter, from, to) {
       const closest = add(from, mul(dirn, tt));
       const miss = dist(closest, p.getHeadLocation());
       if (miss < 2.2) {
-        p.playSound("arsenal.fx.whizz", { location: closest, volume: 0.9, pitch: 0.9 + Math.random() * 0.3 });
+        if (supersonic) p.playSound("arsenal.fx.crack", { location: closest, volume: 1.0, pitch: 0.92 + Math.random() * 0.16 });
+        p.playSound("arsenal.fx.whizz", { location: closest, volume: supersonic ? 0.5 : 0.9, pitch: 0.9 + Math.random() * 0.3 });
         // 制圧：敵（または敵チーム）の弾が至近を通過した
         suppressHook(p, shooter, miss);
       }

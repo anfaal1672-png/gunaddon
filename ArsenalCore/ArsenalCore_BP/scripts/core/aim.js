@@ -56,10 +56,11 @@ export function resetMove(player) {
 
 /**
  * 走っている間の構え：銃を体の前に下げて抱える（一人称・三人称）。走るのをやめる・銃を持ち替えると
- * stopExpression で解け、blendOutTime で元の構えへ戻る。撃った直後とリロード中は構えない
- * @param {import("@minecraft/server").Player} player @param {import("./state.js").PlayerState} s @param {number} now
+ * stopExpression で解け、blendOutTime で元の構えへ戻る。撃った直後とリロード中は構えない。
+ * 構えを解いたら、銃が重いほど撃てるまで時間がかかる（st.ready tick）
+ * @param {import("@minecraft/server").Player} player @param {import("./state.js").PlayerState} s @param {any} st @param {number} now
  */
-function tickSprintPose(player, s, now) {
+function tickSprintPose(player, s, st, now) {
   const want = player.isSprinting && !s.reload && !s.holding && !s.tapFiring && now - s.lastShotTick > 6;
   if (want && !s.sprintPose) {
     s.sprintPose = true;
@@ -70,6 +71,7 @@ function tickSprintPose(player, s, now) {
     }));
   } else if (!want && s.sprintPose) {
     s.sprintPose = false;
+    s.readyAt = now + (st.ready ?? 0);
     if (player.isSprinting) safe("sprint.stop", () => player.playAnimation("animation.arsenal.none", { controller: "arsenal_sprint", blendOutTime: 0.1 }));
   }
 }
@@ -173,7 +175,7 @@ export function tickAim(player, s, st) {
   const want = (prefs.adsMode === "toggle" ? s.adsToggle : player.isSneaking) && !(s.reload && s.reload.type === "mag") && !player.isSprinting;
   const step = 1 / Math.max(1, st.adsTime);
   s.adsLevel = want ? Math.min(1, s.adsLevel + step) : Math.max(0, s.adsLevel - step * 1.5);
-  tickSprintPose(player, s, now);
+  tickSprintPose(player, s, st, now);
   const fov = effectiveFov(s, st);
   if (want !== s.ads) {
     s.ads = want;

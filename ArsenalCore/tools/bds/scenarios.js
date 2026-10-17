@@ -2,6 +2,9 @@
 //   シミュレートプレイヤーは、それを生成したパックのスクリプトからしか扱えないため、アドオン本体のコピーに読み込ませる
 import { world, system, ItemStack, BlockVolume, GameMode } from "@minecraft/server";
 import { spawnSimulatedPlayer } from "@minecraft/server-gametest";
+import { S } from "./core/state.js";
+import { startReload } from "./core/reload.js";
+import { isIndoor } from "./fx/effects.js";
 const log = (...a) => console.warn("[DEVTEST] " + a.join(" "));
 const dim = () => world.getDimension("overworld");
 const Y = 120;
@@ -38,6 +41,10 @@ system.afterEvents.scriptEventReceive.subscribe((ev) => {
     if (ev.id === "dev:c4") c4Test();
     if (ev.id === "dev:lock") lockTest(ev.message === "nolock");
     if (ev.id === "dev:lead") leadTest(Number(ev.message || 0));
+    if (ev.id === "dev:mags") magsTest();
+    if (ev.id === "dev:limb") limbTest();
+    if (ev.id === "dev:ready") readyTest();
+    if (ev.id === "dev:indoor") indoorTest();
   } catch (e) { log("ERR", e, e.stack); }
 });
 
@@ -124,6 +131,8 @@ function leadTest(lead) {
   clearMobs();
   const p = getSim();
   p.teleport({ x: 0.5, y: Y, z: 0.5 });
+  try { p.isSprinting = false; } catch {}
+  p.stopMoving();
   give(p, "arsenal:longbow", 1, 0);
   give(p, "arsenal:ammo_heavy", 64, 1);
   p.selectedSlotIndex = 0;
@@ -158,4 +167,95 @@ function leadTest(lead) {
       }
     }, 1);
   });
+}
+
+/** 2.2：薬室の 1 発と途中のマガジン。10 発撃ってからリロード → 31 発、残り 19 発のマガジンが残る */
+function magsTest() {
+  clearMobs();
+  const p = getSim();
+  p.teleport({ x: 0.5, y: Y, z: 0.5 });
+  give(p, "arsenal:sentinel", 1, 0);
+  give(p, "arsenal:ammo_medium", 60, 1);
+  p.selectedSlotIndex = 0;
+  after(10, () => {
+    p.lookAtLocation({ x: 20, y: Y + 1, z: 0.5 });
+    p.useItemInSlot(0);
+    after(9, () => p.stopUsingItem());
+    after(25, () => {
+      const s = S(p);
+      const before = s.ammo;
+      startReload(p, s, true);
+      after(80, () => {
+        const it = p.getComponent("minecraft:inventory").container.getItem(0);
+        const res = p.getComponent("minecraft:inventory").container.getItem(1)?.amount;
+        log(`mags before=${before} after=${s.ammo} partial=${it?.getDynamicProperty("a:mg")} reserveItems=${res}`);
+      });
+    });
+  });
+}
+
+/** 2.2：ゾンビの脚を撃つと鈍足になる */
+function limbTest() {
+  clearMobs();
+  const p = getSim();
+  p.teleport({ x: 0.5, y: Y, z: 0.5 });
+  give(p, "arsenal:sentinel", 1, 0);
+  give(p, "arsenal:ammo_medium", 60, 1);
+  p.selectedSlotIndex = 0;
+  const z = zombieAt(8.5, 0.5, 20);
+  z.removeEffect("slowness");
+  after(10, () => {
+    p.isSneaking = true;
+    after(20, () => {
+      p.lookAtLocation({ x: 8.5, y: Y + 0.35, z: 0.5 });
+      p.useItemInSlot(0);
+      after(2, () => p.stopUsingItem());
+      after(10, () => {
+        const ef = z.getEffect("slowness");
+        p.isSneaking = false;
+        log(`limb slowness=${ef ? ef.duration + "t amp" + ef.amplifier : "none"} hp=${z.getComponent("minecraft:health")?.currentValue}`);
+      });
+    });
+  });
+}
+
+/** 2.2：走るのをやめた直後は撃てず、構え終わってから撃つ */
+function readyTest() {
+  clearMobs();
+  const p = getSim();
+  p.teleport({ x: 0.5, y: Y, z: 0.5 });
+  give(p, "arsenal:sentinel", 1, 0);
+  give(p, "arsenal:ammo_medium", 60, 1);
+  p.selectedSlotIndex = 0;
+  after(10, () => {
+    const s = S(p);
+    try { p.isSprinting = true; } catch (e) { log("isSprinting not settable", e); }
+    p.moveRelative(0, 1, 1);
+    after(10, () => {
+      const pose = s.sprintPose;
+      p.stopMoving();
+      try { p.isSprinting = false; } catch {}
+      after(1, () => {
+        const a0 = s.ammo;
+        p.useItemInSlot(0);
+        after(2, () => {
+          const a1 = s.ammo;
+          after(10, () => {
+            p.stopUsingItem();
+            log(`ready sprintPose=${pose} readyAt-now=${s.readyAt - system.currentTick} ammo ${a0} -> ${a1} (2t) -> ${s.ammo} (12t)`);
+          });
+        });
+      });
+    });
+  });
+}
+
+/** 2.2：石の小屋の中は屋内、外は屋外と判定する */
+function indoorTest() {
+  const d = dim();
+  d.fillBlocks(new BlockVolume({ x: 30, y: Y, z: -4 }, { x: 36, y: Y + 4, z: 2 }), "minecraft:stone");
+  d.fillBlocks(new BlockVolume({ x: 31, y: Y, z: -3 }, { x: 35, y: Y + 3, z: 1 }), "minecraft:air");
+  const inside = isIndoor(d, { x: 33, y: Y + 1.5, z: -1 }, "t1");
+  const outside = isIndoor(d, { x: 10, y: Y + 1.5, z: 0 }, "t2");
+  log(`indoor inside=${inside} outside=${outside}`);
 }

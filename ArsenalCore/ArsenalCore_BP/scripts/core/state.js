@@ -70,6 +70,10 @@
  * @property {number} lockTicks
  * @property {number} lockSeen ロック対象を最後に照準の円錐の中で見た tick
  * @property {boolean} sprintPose 走っている間の構えを再生中か
+ * @property {number} readyAt この tick まで撃てない（走ったあと構え直している）
+ * @property {number[]} mags 手持ちの銃の途中のマガジン（弾数。多い順）
+ * @property {number} armHitUntil 腕を撃たれて照準がぶれる期限
+ * @property {number} legHitUntil 脚を撃たれて足を引きずる期限
  * @property {number} lastShotTick
  * @property {number} wearPending
  * @property {number} lastWearWrite
@@ -166,7 +170,7 @@ function create(id) {
     fovApplied: false, fovValue: 0, moveApplied: false, moveValue: 0.1, nvApplied: false, slowApplied: false,
     poseWeapon: null, poseTick: 0,
     hudTick: 0, hudDirty: true, hit: null,
-    lockTarget: null, lockTicks: 0, lockSeen: 0, sprintPose: false,
+    lockTarget: null, lockTicks: 0, lockSeen: 0, sprintPose: false, readyAt: 0, mags: [], armHitUntil: 0, legHitUntil: 0,
     lastShotTick: -99, wearPending: 0, lastWearWrite: 0, lastKick: -99,
     breathUntil: 0, breathCooldown: 0, swayTick: 0, cooldownUntil: 0,
     throwing: null, lightPos: null, lightDim: null, menuOpen: false, lastEquipTick: 0,

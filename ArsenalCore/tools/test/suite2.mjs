@@ -81,6 +81,59 @@ export async function suite2(ctx) {
   check("構造物の守備隊は実在の敵", Object.values(D.STRUCTURES).every((s) => s.garrison.every((g) => D.ENEMIES[g.id])));
 
   // =====================================================================
+  console.log("2.2 リアル化（マガジン・薬室・構え・部位）");
+  // =====================================================================
+  {
+    const reloadM = await imp("core/reload.js");
+    clearInv();
+    reset();
+    inv.items[0] = new ItemStack("arsenal:sentinel", 1);
+    player.selectedSlotIndex = 0;
+    __tick(3);
+    const s = S(player);
+    // 予備弾がなくても途中のマガジンがあれば差せる。抜いたマガジンの残り（薬室の 1 発を除く）は残る
+    s.ammo = 5;
+    s.mags = [12];
+    check("予備弾がなくても途中のマガジンでリロードできる", reloadM.startReload(player, s, true) === true);
+    __tick(90);
+    check("途中のマガジンを差し、薬室の 1 発を残す（1+12、残り [4]）", s.ammo === 13 && JSON.stringify(s.mags) === "[4]", `(ammo=${s.ammo} mags=${JSON.stringify(s.mags)})`);
+    // ワールド設定で切ると継ぎ足し（従来どおり）
+    settings.setWorld({ magRealism: false });
+    inv.items[8] = new ItemStack("arsenal:ammo_medium", 64);
+    s.ammo = 5;
+    s.mags = [];
+    reloadM.startReload(player, s, true);
+    __tick(90);
+    check("マガジン単位を切ると継ぎ足し（31 発、予備から 26 発）", s.ammo === 31 && inv.items[8]?.amount === 38, `(ammo=${s.ammo} reserve=${inv.items[8]?.amount})`);
+    settings.setWorld({ magRealism: true });
+    check("満タン＋薬室（31）ではリロードしない", reloadM.startReload(player, s, true) === false);
+    // 走ったあとは構えるまで撃てない（アサルトは 6 tick）
+    s.ammo = 20;
+    player.isSprinting = true;
+    __tick(4);
+    check("走っている間は走る構えを再生", s.sprintPose === true && LOG.anims.includes("animation.arsenal.sprint"));
+    player.isSprinting = false;
+    __tick(1);
+    const a0 = s.ammo;
+    const ev = { source: player, itemStack: inv.getItem(0), useDuration: 72000 };
+    world.afterEvents.itemStartUse.fire(ev);
+    __tick(2);
+    const a1 = s.ammo;
+    __tick(8);
+    world.afterEvents.itemStopUse.fire(ev);
+    __tick(1);
+    check("構え直すまで撃てず、構えたら撃つ", a1 === a0 && s.ammo < a0, `(${a0} → ${a1} → ${s.ammo})`);
+    // 部位：胴の高さの横の端は腕、脚に当てると鈍足
+    const z = zombie(3.5, 0.5, 40);
+    const c = z.getAABB().center;
+    const fwd = { x: 0, y: 0, z: 1 };
+    check("胴の高さで弾筋が横の端なら「腕」、正面の中心は「胴」", dmg.hitZone(z, { x: c.x + 0.27, y: c.y + 0.1, z: c.z - 0.3 }, fwd) === "arm" && dmg.hitZone(z, { x: c.x, y: c.y + 0.1, z: c.z - 0.3 }, fwd) === "body" && dmg.hitZone(z, { x: c.x + 0.27, y: c.y + 0.1, z: c.z - 0.3 }) === "body");
+    dmg.bulletHit(player, z, { x: c.x, y: z.location.y + 0.3, z: c.z - 0.3 }, { x: 0, y: 0, z: 1 }, 3, s.stats, 1);
+    check("脚に当てると鈍足になる", !!z.effects?.slowness, JSON.stringify(z.effects ?? {}));
+    z.remove();
+  }
+
+  // =====================================================================
   console.log("HUD 2.0");
   // =====================================================================
   {

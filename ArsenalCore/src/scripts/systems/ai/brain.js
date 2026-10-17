@@ -18,8 +18,8 @@ import { DATA, ENTITY, NS, enemyIdOf, enemyDef } from "../../config/constants.js
 import { W as WS } from "../../core/settings.js";
 import { S } from "../../core/state.js";
 import { computeStats } from "../../core/weaponState.js";
-import { traceHitscan, whizzBy, drawTracer } from "../../core/ballistics.js";
-import { setEnemyDamageMul, explode, canDamage } from "../../core/damage.js";
+import { traceHitscan, whizzBy, drawTracer, isSupersonic } from "../../core/ballistics.js";
+import { setEnemyDamageMul, explode, canDamage, onLimbHit } from "../../core/damage.js";
 import { stealthFactor } from "../../core/armor.js";
 import { fireGrenade40, fireMortar, throwAt, setEmpHandler, getDecoys } from "../projectiles.js";
 import { gunshot, muzzleFx, emit, playNear, playTo } from "../../fx/effects.js";
@@ -678,6 +678,8 @@ export function aiFire(shooter, ai, dir0) {
     spread /= Math.max(0.35, stealthFactor(tgt));
   }
   if (now - ai.lastHurt < 20) spread *= 1.4;
+  // 腕を撃たれた：狙いが甘くなる
+  if (now < (/** @type {any} */ (ai).armHitUntil ?? 0)) spread *= 1.6;
   const { r: right, u } = basis(dir);
   const muzzle = add(add(add(eye, mul(dir, 0.9)), mul(right, 0.28)), mul(u, -0.22));
   stats.shots++;
@@ -699,7 +701,7 @@ export function aiFire(shooter, ai, dir0) {
         const dd = cone(dir, spread + (pellets > 1 ? st.pelletSpread ?? 3 : 0));
         const r = traceHitscan(shooter, eye, dd, st, { maxRange: Math.max(st.range1, def.range * 3) });
         drawTracer(shooter, muzzle, r.end, st, i === 0);
-        whizzBy(shooter, muzzle, r.end);
+        whizzBy(shooter, muzzle, r.end, isSupersonic(st));
       }
     }
   }
@@ -786,6 +788,10 @@ export function isEmpd(e) {
 
 export function attachBrain() {
   setEmpHandler(applyEmp);
+  onLimbHit((e, zone, until) => {
+    const ai = registry.get(e.id);
+    if (ai && zone === "arm") /** @type {any} */ (ai).armHitUntil = until;
+  });
   // 難易度はワールド設定（ダイナミックプロパティ）から読むので、早期実行が終わってから
   world.afterEvents.worldLoad.subscribe(() => safe("ai.difficulty", syncDifficulty));
   world.afterEvents.entitySpawn.subscribe((ev) => {

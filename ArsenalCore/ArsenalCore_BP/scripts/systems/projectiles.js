@@ -9,7 +9,7 @@
 import { world, system, MolangVariableMap, Player, LiquidType, ItemStack } from "@minecraft/server";
 import { ENTITY, PROJ_KIND, DATA } from "../config/constants.js";
 import { explosionBreaksBlocks, W as WS } from "../core/settings.js";
-import { traceHitscan, drawTracer, whizzBy } from "../core/ballistics.js";
+import { traceHitscan, drawTracer, whizzBy, isSupersonic } from "../core/ballistics.js";
 import { explode, canDamage, dealDamage, hitFeedback, miniBlast, bulletHit, isArmored, meleeDamage, hitZone } from "../core/damage.js";
 import { isGasImmune } from "../core/armor.js";
 import { emit, playNear, explosionFx, playTo } from "../fx/effects.js";
@@ -579,7 +579,7 @@ function tickBullet(p) {
   const dir = mul(p.vel, 1 / L);
   const r = traceHitscan(shooter, from, dir, st, { maxRange: L, pen: p.data.pen, hitSet: p.hitSet, distOffset: p.traveled, mulDmg: p.data.mulDmg, silent: !!p.data.silent });
   if (p.data.tracer !== false) drawTracer(shooter, p.data.first ? p.data.muzzle : from, r.end, st, true);
-  if (p.data.first && p.data.whizz !== false) whizzBy(shooter, from, add(from, mul(dir, Math.min(200, st.range1))));
+  if (p.data.first && p.data.whizz !== false) whizzBy(shooter, from, add(from, mul(dir, Math.min(200, st.range1))), isSupersonic(st));
   if (st.explosive && (r.stopped || r.hitEntity)) miniBlast(shooter, r.end, 1.4, 3.0, st.id);
   p.data.first = false;
   p.data.pen = r.pen;
