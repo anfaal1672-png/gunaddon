@@ -11,7 +11,7 @@ import { safe } from "../util/log.js";
 const { WEAPONS, ATTACHMENTS, OPTICS, AMMO_VARIANTS, TIERS } = DATA;
 
 /** 1.0 系から変えないキー（init / ammo / mode / att / at / ub）と、2.0 で足したキー（v / camo / dual） */
-export const PROP = { init: "a:init", ammo: "a:ammo", mode: "a:mode", att: "a:att", at: "a:at", ub: "a:ub", v: "a:v", camo: CAMO_PROP, dual: "a:dm", id: "a:id" };
+export const PROP = { init: "a:init", ammo: "a:ammo", mode: "a:mode", att: "a:att", at: "a:at", ub: "a:ub", v: "a:v", camo: CAMO_PROP, dual: "a:dm", id: "a:id", mags: "a:mg" };
 
 /** 武器 1 挺ごとの識別子（同じ武器を 2 挺持っていても区別する） */
 export function newWeaponUid() {
@@ -183,6 +183,11 @@ export function computeStats(weaponId, att, ammoType) {
     cooldown: w.cooldown ?? 0,
     wallPierce: !!w.wallPierce,
     projectile: w.projectile ?? null,
+    // 構えるまでの tick（走ったあと・走りながら撃つとき）
+    ready: /** @type {any} */ (DATA.CATEGORIES)[w.cat].ready ?? 6,
+    // 薬室の 1 発：クローズドボルトの箱型マガジンの銃は、残弾ありのリロードで「マガジン＋薬室 1 発」になる
+    // （リボルバー・中折れ・1 発ずつ装填・オープンボルトの機関銃・ランチャー・エネルギー兵器などは対象外）
+    chamber: !w.single && w.ammo !== "cell" && w.cat !== "lmg" && w.cat !== "launcher" && !["revolver", "double", "launcher", "tube", "flare", "grapple", "flamer", "energy", "mortar", "rotary", "lmg"].includes(w.model?.type) ? 1 : 0,
     // 弾が飛ぶ（ヒットスキャンの銃）：カテゴリの弾速と重力。亜音速弾は 0.8 倍の弾速
     travel: (!w.fire || w.fire === "hitscan") && (w.bullet ?? /** @type {any} */ (DATA.CATEGORIES)[w.cat].bullet)
       ? { speed: (w.bullet ?? /** @type {any} */ (DATA.CATEGORIES)[w.cat].bullet).speed * (subsonic ? 0.8 : 1), gravity: (w.bullet ?? /** @type {any} */ (DATA.CATEGORIES)[w.cat].bullet).gravity }

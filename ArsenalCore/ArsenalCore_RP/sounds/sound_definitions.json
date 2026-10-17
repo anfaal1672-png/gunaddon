@@ -1336,6 +1336,23 @@
         }
       ]
     },
+    "arsenal.fx.crack": {
+      "category": "player",
+      "min_distance": 1.0,
+      "max_distance": 24.0,
+      "sounds": [
+        {
+          "name": "sounds/arsenal/fx/crack_1",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        },
+        {
+          "name": "sounds/arsenal/fx/crack_2",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        }
+      ]
+    },
     "arsenal.in.pistol": {
       "category": "player",
       "min_distance": 2.0,

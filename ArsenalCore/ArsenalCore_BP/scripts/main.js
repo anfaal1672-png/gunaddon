@@ -145,6 +145,12 @@ function equip(player, s, wid, slotIdx, item) {
   s.att = ws.att;
   s.ammoType = ws.ammoType;
   s.ub = ws.ub;
+  s.mags = safe("equip.mags", () => {
+    const raw = cur.getDynamicProperty(PROP.mags);
+    const a = typeof raw === "string" ? JSON.parse(raw) : [];
+    return Array.isArray(a) ? a.filter((n) => typeof n === "number" && n > 0).slice(0, 6) : [];
+  }) ?? [];
+  s.readyAt = 0;
   s.jammed = false;
   s.heat = 0;
   s.overheatUntil = 0;

@@ -26,6 +26,8 @@ export function spreadNow(player, s, st) {
   // 息止め中は照準が安定する
   if (s.breathUntil > system.currentTick && s.adsLevel > 0.5) sp *= 0.35;
   sp += suppressionSpread(s);
+  // 腕を撃たれた：照準がぶれる
+  if (s.armHitUntil > system.currentTick) sp = sp * 1.5 + 0.6;
   return Math.max(0, sp);
 }
 
@@ -38,6 +40,7 @@ export function applyRecoil(player, s, st, mult = 1) {
   let k = mult;
   if (s.adsLevel > 0.5) k *= 0.8 * (st.adsRecoil ?? 1);
   if (player.isSneaking) k *= st.bipod ? 0.35 : 0.85;
+  if (s.armHitUntil > system.currentTick) k *= 1.3;
   s.bloom = Math.min(st.bloomMax, s.bloom + st.bloom * k);
   const v = st.recoilV * k;
   const h = st.recoilH * k;

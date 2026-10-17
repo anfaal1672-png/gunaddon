@@ -115,8 +115,10 @@ world.afterEvents.playerButtonInput.fire({ player, button: "Sneak", newButtonSta
 __tick(70);
 const ammo2 = slot0().props["a:ammo"];
 const reserve = inv.items[8]?.amount ?? 0;
-check("マガジンが満タンになる", ammo2 === 30, `(ammo=${ammo2})`);
-check("インベントリの弾薬を消費する", reserve === 128 - (30 - ammo1), `(reserve=${reserve}, expected ${128 - (30 - ammo1)})`);
+// 2.2：残弾ありのリロードは「薬室の 1 発＋満タンのマガジン」。抜いたマガジン（残り ammo1 - 1 発）は途中のマガジンとして残る
+check("マガジンが満タンになる（薬室の 1 発を足して 31）", ammo2 === 31, `(ammo=${ammo2})`);
+check("インベントリの弾薬を消費する（満タンのマガジン 1 本ぶん）", reserve === 128 - 30, `(reserve=${reserve}, expected ${128 - 30})`);
+check("抜いたマガジンの残りを途中のマガジンとして銃に残す", slot0().props["a:mg"] === JSON.stringify([ammo1 - 1]), `(a:mg=${slot0().props["a:mg"]}, ammo1=${ammo1})`);
 check("リロード音（マガジン抜き差し）", (LOG.sounds["arsenal.mech.mag_out"] ?? 0) > 0 && (LOG.sounds["arsenal.mech.mag_in"] ?? 0) > 0);
 
 // ---- 耐久 ----

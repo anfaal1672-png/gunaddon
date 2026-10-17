@@ -8,7 +8,7 @@ import { W as WS, P } from "./settings.js";
 import { heldSlot, writeProps, PROP, isWeaponItem, findWeaponSlot } from "./weaponState.js";
 import { spreadNow, applyRecoil } from "./recoil.js";
 import { startReload, reserveRounds, status, isInfinite } from "./reload.js";
-import { traceHitscan, drawTracer, whizzBy, arcLine } from "./ballistics.js";
+import { traceHitscan, drawTracer, whizzBy, arcLine, isSupersonic } from "./ballistics.js";
 import { canDamage, dealDamage, hitFeedback, bulletHit } from "./damage.js";
 import { fireBallistic, fireBullet, fireGrenade40, fireRocket, fireFlare, fireHook } from "../systems/projectiles.js";
 import { fireFlame, fireBeam, fireGravity, fireCoil, fireSonic, fireProjectile2, mortarTarget } from "./fire2.js";
@@ -128,6 +128,8 @@ export function tickFire(player, s) {
       }
     }
     if (!want || s.shotTimer > 0) break;
+    // 走る構えから銃を上げている途中（押した分は残して、構え終わったら撃つ）
+    if (now < s.readyAt) break;
     if (st.spinup > 0 && s.spin < st.spinup) break;
     if (mode !== "auto" && !burstStep) s.pressQueue = Math.max(0, s.pressQueue - 1);
     // フルオート：押下の記録は撃った時点で使い切る（離した後に 1 発余計に出ないように）
@@ -347,7 +349,7 @@ function fireHitscan(player, s, eye, view, spread, st, muzzle) {
     if (st.explosive && (r.stopped || r.hitEntity)) miniBlast(player, r.end, 1.4, 3.0, st.id);
     if (showTracer && !flame) drawTracer(player, muzzle, r.end, st, true);
   }
-  if (lastEnd && pellets === 1) whizzBy(player, eye, lastEnd);
+  if (lastEnd && pellets === 1) whizzBy(player, eye, lastEnd, isSupersonic(st));
 }
 
 /**

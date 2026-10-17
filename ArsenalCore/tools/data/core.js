@@ -2,7 +2,7 @@
 // 基本定数・ティア・カテゴリ・素材・道具・既定設定・着弾と貫通
 
 export const NS = "arsenal";
-export const ADDON_VERSION = [2, 1, 0];
+export const ADDON_VERSION = [2, 2, 0];
 /** アイテムに書く形式のバージョン（a:v）。1.0 系のアイテムは 1 とみなして移行する */
 export const ITEM_FORMAT = 2;
 export const MIN_ENGINE = [1, 26, 50];
@@ -24,21 +24,22 @@ export const TIERS = {
 // bullet：弾が飛んで落ちる（弾速 ブロック/tick・重力 ブロック/tick²）。ヒットスキャンの銃に使う。
 //   実銃より遅めにして、マイクラの交戦距離（20〜100 ブロック）でも偏差と落下が分かるようにしている
 //   （例：アサルト 12 ブロック/tick は 60 ブロック先まで 5 tick、そのあいだに約 0.25 ブロック落ち、走る相手は約 1.4 ブロック動く）
+// ready：走るのをやめて（または走りながら引き金を引いて）から撃てるまでの tick。重い銃ほど構えるのに時間がかかる
 export const CATEGORIES = {
-  handgun: { order: 0, name: { ja: "ハンドガン", en: "Handguns" }, pose: "pistol", durability: 1500, costMul: 0.6, bullet: { speed: 7, gravity: 0.03 } },
-  machine_pistol: { order: 1, name: { ja: "マシンピストル", en: "Machine Pistols" }, pose: "pistol", durability: 2000, costMul: 0.75, bullet: { speed: 7.5, gravity: 0.03 } },
-  smg: { order: 2, name: { ja: "サブマシンガン", en: "SMGs" }, pose: "rifle", durability: 2600, costMul: 0.85, bullet: { speed: 8, gravity: 0.028 } },
-  carbine: { order: 3, name: { ja: "カービン", en: "Carbines" }, pose: "rifle", durability: 2800, costMul: 0.9, bullet: { speed: 11, gravity: 0.022 } },
-  assault: { order: 4, name: { ja: "アサルトライフル", en: "Assault Rifles" }, pose: "rifle", durability: 3000, costMul: 1.0, bullet: { speed: 12, gravity: 0.02 } },
-  battle: { order: 5, name: { ja: "バトルライフル", en: "Battle Rifles" }, pose: "rifle", durability: 2600, costMul: 1.1, bullet: { speed: 14, gravity: 0.018 } },
-  dmr: { order: 6, name: { ja: "マークスマンライフル", en: "Marksman Rifles" }, pose: "rifle", durability: 1800, costMul: 1.15, bullet: { speed: 16, gravity: 0.016 } },
-  sniper: { order: 7, name: { ja: "スナイパーライフル", en: "Sniper Rifles" }, pose: "rifle", durability: 900, costMul: 1.3 },
-  shotgun: { order: 8, name: { ja: "ショットガン", en: "Shotguns" }, pose: "rifle", durability: 1100, costMul: 0.9, bullet: { speed: 7, gravity: 0.04 } },
-  lmg: { order: 9, name: { ja: "ライトマシンガン", en: "LMGs" }, pose: "rifle", durability: 5000, costMul: 1.4, bullet: { speed: 12, gravity: 0.02 } },
-  heavy: { order: 10, name: { ja: "重火器", en: "Heavy Weapons" }, pose: "rifle", durability: 4000, costMul: 1.6, bullet: { speed: 12, gravity: 0.02 } },
-  launcher: { order: 11, name: { ja: "ランチャー", en: "Launchers" }, pose: "rifle", durability: 260, costMul: 1.5 },
-  special: { order: 12, name: { ja: "特殊・エネルギー", en: "Special & Energy" }, pose: "rifle", durability: 1600, costMul: 1.4 },
-  melee: { order: 13, name: { ja: "近接武器", en: "Melee" }, pose: "melee", durability: 600, costMul: 0.5 },
+  handgun: { order: 0, name: { ja: "ハンドガン", en: "Handguns" }, pose: "pistol", durability: 1500, costMul: 0.6, bullet: { speed: 7, gravity: 0.03 }, ready: 3 },
+  machine_pistol: { order: 1, name: { ja: "マシンピストル", en: "Machine Pistols" }, pose: "pistol", durability: 2000, costMul: 0.75, bullet: { speed: 7.5, gravity: 0.03 }, ready: 3 },
+  smg: { order: 2, name: { ja: "サブマシンガン", en: "SMGs" }, pose: "rifle", durability: 2600, costMul: 0.85, bullet: { speed: 8, gravity: 0.028 }, ready: 4 },
+  carbine: { order: 3, name: { ja: "カービン", en: "Carbines" }, pose: "rifle", durability: 2800, costMul: 0.9, bullet: { speed: 11, gravity: 0.022 }, ready: 5 },
+  assault: { order: 4, name: { ja: "アサルトライフル", en: "Assault Rifles" }, pose: "rifle", durability: 3000, costMul: 1.0, bullet: { speed: 12, gravity: 0.02 }, ready: 6 },
+  battle: { order: 5, name: { ja: "バトルライフル", en: "Battle Rifles" }, pose: "rifle", durability: 2600, costMul: 1.1, bullet: { speed: 14, gravity: 0.018 }, ready: 7 },
+  dmr: { order: 6, name: { ja: "マークスマンライフル", en: "Marksman Rifles" }, pose: "rifle", durability: 1800, costMul: 1.15, bullet: { speed: 16, gravity: 0.016 }, ready: 7 },
+  sniper: { order: 7, name: { ja: "スナイパーライフル", en: "Sniper Rifles" }, pose: "rifle", durability: 900, costMul: 1.3, ready: 9 },
+  shotgun: { order: 8, name: { ja: "ショットガン", en: "Shotguns" }, pose: "rifle", durability: 1100, costMul: 0.9, bullet: { speed: 7, gravity: 0.04 }, ready: 6 },
+  lmg: { order: 9, name: { ja: "ライトマシンガン", en: "LMGs" }, pose: "rifle", durability: 5000, costMul: 1.4, bullet: { speed: 12, gravity: 0.02 }, ready: 10 },
+  heavy: { order: 10, name: { ja: "重火器", en: "Heavy Weapons" }, pose: "rifle", durability: 4000, costMul: 1.6, bullet: { speed: 12, gravity: 0.02 }, ready: 11 },
+  launcher: { order: 11, name: { ja: "ランチャー", en: "Launchers" }, pose: "rifle", durability: 260, costMul: 1.5, ready: 10 },
+  special: { order: 12, name: { ja: "特殊・エネルギー", en: "Special & Energy" }, pose: "rifle", durability: 1600, costMul: 1.4, ready: 6 },
+  melee: { order: 13, name: { ja: "近接武器", en: "Melee" }, pose: "melee", durability: 600, costMul: 0.5, ready: 0 },
 };
 
 // ---------------------------------------------------------------------------
@@ -99,6 +100,9 @@ export const DEFAULT_WORLD_SETTINGS = {
   bosses: true,
   // ---- 2.1 ----
   bulletTravel: true,
+  // ---- 2.2 ----
+  magRealism: true,
+  limbDamage: true,
 };
 
 export const DEFAULT_PLAYER_SETTINGS = {

@@ -10,7 +10,7 @@ import { W as WS, P, setPrefs, setWorld, isOperator } from "../core/settings.js"
 import { S } from "../core/state.js";
 import { canAttach, computeStats, heldSlot, writeProps, writeLore, PROP, W, A } from "../core/weaponState.js";
 import { countItem, consumeItem, giveItem, hasCost, payCost, isCreative } from "../core/inventory.js";
-import { switchAmmoType, cancelReload, status } from "../core/reload.js";
+import { switchAmmoType, cancelReload, status, repackMags } from "../core/reload.js";
 import { flushWear } from "../core/fireController.js";
 import { resetScopeMark } from "./hud.js";
 import { syncLook, CAMO_PROP } from "../core/migrate.js";
@@ -136,10 +136,18 @@ export async function openWeaponMenu(player) {
     .button(raw(t("arsenal.ui.btn_camo"), "\n§8Lv ", String(weaponLevel(player, wid))), "textures/ui/color_picker");
   const mortar = st.fire === "mortar";
   if (mortar) form.button(t("arsenal.ui.btn_mortar_target"), "textures/ui/icon_map");
+  const partial = s.mags.reduce((a, n) => a + n, 0);
+  if (partial > 0) form.button(t("arsenal.ui.btn_repack", String(partial)), ICON.ammo(AMMO_ITEMS.find((a) => a.family === st.ammoFamily)?.id ?? "ammo_light"));
   form.button(t("arsenal.ui.btn_close"));
   const r = await showForm(player, form);
   if (!r || r.canceled || r.selection === undefined) return;
   if (s.weaponId !== wid) return;
+  const repackAt = mortar ? 6 : 5;
+  if (partial > 0 && r.selection === repackAt) {
+    const n = repackMags(player, s);
+    if (n > 0) player.sendMessage(t("arsenal.ui.repacked", String(n)));
+    return;
+  }
   switch (r.selection) {
     case 0: return openAttachmentMenu(player);
     case 1: return openAmmoMenu(player);

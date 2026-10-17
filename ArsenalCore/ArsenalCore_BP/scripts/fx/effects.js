@@ -3,7 +3,7 @@
  * 演出（パーティクル・効果音）。受け手ごとの設定（演出品質・血しぶき・音量）を反映するため、
  * 近くのプレイヤーそれぞれに個別送信する。
  */
-import { MolangVariableMap } from "@minecraft/server";
+import { MolangVariableMap, system } from "@minecraft/server";
 import { P } from "../core/settings.js";
 import { DATA, FAR_SOUND_SETS } from "../config/constants.js";
 import { add, mul, basis, dist, rand } from "../util/math.js";
@@ -79,17 +79,48 @@ export function gunshot(shooter, st, loc) {
   const pitch = st.pitch * rand(0.96, 1.04);
   safe("fx.gunshot", () => {
     const dim = shooter.dimension;
+    // 屋内（天井と 2 方向以上の壁）では、短く密な残響の音（arsenal.in.*）を使い、遠くへはこもって届く
+    const indoor = !suppressed && FAR_SOUND_SETS.has(set) && isIndoor(dim, loc, shooter.id);
     for (const p of dim.getPlayers({ location: loc, maxDistance: Math.max(nearR, farR) })) {
       const d = dist(p.location, loc);
       if (d <= nearR) {
-        playTo(p, `arsenal.fire.${set}`, { location: loc, volume: p.id === shooter.id ? 0.9 : 1.0, pitch });
+        playTo(p, indoor ? `arsenal.in.${set}` : `arsenal.fire.${set}`, { location: loc, volume: p.id === shooter.id ? 0.9 : 1.0, pitch });
       }
       if (farR > 0 && d > 24 && FAR_SOUND_SETS.has(set)) {
-        const v = Math.max(0.15, 1 - (d - 24) / farR);
-        playTo(p, `arsenal.far.${set}`, { location: loc, volume: v, pitch });
+        const v = Math.max(0.15, 1 - (d - 24) / farR) * (indoor ? 0.6 : 1);
+        // 音は 1 tick に約 17 ブロック（音速 343 m/s）しか進まない：遠いほど遅れて聞こえる
+        const delay = Math.floor(d / 17);
+        if (delay <= 0) playTo(p, `arsenal.far.${set}`, { location: loc, volume: v, pitch });
+        else system.runTimeout(() => safe("fx.farshot", () => { if (p.isValid) playTo(p, `arsenal.far.${set}`, { location: loc, volume: v, pitch }); }), delay);
       }
     }
   });
+}
+
+/** 屋内判定のキャッシュ（撃った者ごと、2 秒・2 ブロック以内なら使い回す） @type {Map<string, {tick:number, x:number, y:number, z:number, v:boolean}>} */
+const indoorCache = new Map();
+
+/**
+ * 屋内か：真上 8 ブロック以内に天井があり、水平 4 方向のうち 2 方向以上で 6 ブロック以内に壁がある
+ * @param {import("@minecraft/server").Dimension} dim @param {import("../util/math.js").Vec3} loc @param {string} key
+ */
+export function isIndoor(dim, loc, key) {
+  const now = system.currentTick;
+  const c = indoorCache.get(key);
+  if (c && now - c.tick < 40 && Math.abs(c.x - loc.x) + Math.abs(c.y - loc.y) + Math.abs(c.z - loc.z) < 2) return c.v;
+  const opt = { maxDistance: 8, includePassableBlocks: false, includeLiquidBlocks: false };
+  let v = false;
+  if (safe("indoor.up", () => dim.getBlockFromRay(loc, { x: 0, y: 1, z: 0 }, opt))) {
+    let walls = 0;
+    const o2 = { ...opt, maxDistance: 6 };
+    for (const d of [{ x: 1, y: 0, z: 0 }, { x: -1, y: 0, z: 0 }, { x: 0, y: 0, z: 1 }, { x: 0, y: 0, z: -1 }]) {
+      if (safe("indoor.wall", () => dim.getBlockFromRay(loc, d, o2))) walls++;
+    }
+    v = walls >= 2;
+  }
+  if (indoorCache.size > 256) indoorCache.clear();
+  indoorCache.set(key, { tick: now, x: loc.x, y: loc.y, z: loc.z, v });
+  return v;
 }
 
 /**

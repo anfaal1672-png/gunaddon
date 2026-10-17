@@ -36,8 +36,8 @@ function render(dummy, s) {
   s.hits = recent;
   const span = recent.length > 1 ? Math.max(1, recent[recent.length - 1].tick - recent[0].tick) / 20 : 1;
   const dps = recent.length > 1 ? recent.reduce((a, /** @type {any} */ h) => a + h.dmg, 0) / span : s.lastDmg;
-  const zc = s.lastZone === "head" ? "§c" : s.lastZone === "leg" ? "§9" : "§e";
-  const zl = s.lastZone === "head" ? "HEAD" : s.lastZone === "leg" ? "LEG" : "BODY";
+  const zc = s.lastZone === "head" ? "§c" : s.lastZone === "leg" ? "§9" : s.lastZone === "arm" ? "§6" : "§e";
+  const zl = s.lastZone === "head" ? "HEAD" : s.lastZone === "leg" ? "LEG" : s.lastZone === "arm" ? "ARM" : "BODY";
   safe("dummy.name", () => {
     dummy.nameTag = `${zc}${zl} §f${s.lastDmg.toFixed(1)}\n§7DPS §a${dps.toFixed(1)} §7| TOTAL §b${s.total.toFixed(0)}\n§8${s.dist.toFixed(1)}m`;
   });

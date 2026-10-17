@@ -586,6 +586,19 @@ def whizz(seed):
     return normalize(trim_silence(s), 0.6)
 
 
+def crack(seed):
+    """超音速弾が近くを通るときの「パシッ」：N 波（衝撃波）の鋭い破裂と、ごく短い高域の残り"""
+    rng = np.random.default_rng(seed)
+    dur = 0.12
+    n = int(SR * 0.0012)
+    nw = np.zeros(int(SR * dur))
+    nw[:n] = np.linspace(1.0, -1.0, n)  # N 波：一気に上がって直線的に下がり、戻る
+    nw = highpass(nw, 700)
+    tail = highpass(noise(dur, rng), 3000) * env_exp(dur, 0.006, 0.0002) * 0.35
+    slap = bandpass(noise(dur, rng), 800, 4000) * env_exp(dur, 0.02, 0.003) * 0.15
+    return normalize(trim_silence(mix(nw, tail, slap, dur=dur)), 0.85)
+
+
 def casing(seed):
     rng = np.random.default_rng(seed)
     dur = 0.4
@@ -944,6 +957,7 @@ def catalog():
         "fx/impact_flesh_1": lambda: impact_flesh(1), "fx/impact_flesh_2": lambda: impact_flesh(2),
         "fx/ricochet_1": lambda: ricochet(1), "fx/ricochet_2": lambda: ricochet(2), "fx/ricochet_3": lambda: ricochet(3),
         "fx/whizz_1": lambda: whizz(1), "fx/whizz_2": lambda: whizz(2),
+        "fx/crack_1": lambda: crack(1), "fx/crack_2": lambda: crack(2),
         "fx/casing_1": lambda: casing(1), "fx/casing_2": lambda: casing(2), "fx/casing_3": lambda: casing(3),
         "fx/breath_in_1": lambda: breath(1, True), "fx/breath_out_1": lambda: breath(2, False),
         "fx/craft_1": lambda: craft(1), "fx/repair_1": lambda: repair(1),

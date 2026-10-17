@@ -5,12 +5,16 @@
  *   ・タクティカル（残弾あり）は空リロードより速い
  *   ・1 発ずつ装填する武器は射撃で中断できる
  *   ・持ち替え・死亡・退出で安全にキャンセル
+ *   ・薬室の 1 発：クローズドボルトの銃は、残弾ありのリロードで「マガジン＋1 発」になる
+ *   ・マガジン単位（ワールド設定）：抜いたマガジンの残りは捨てずに「途中のマガジン」として銃に残し、
+ *     次のリロードで満タンのマガジン（予備弾から）を優先して差し、予備弾が足りなければ途中のマガジンを差す
  */
 import { system, GameMode } from "@minecraft/server";
 import { ammoItemId, DATA } from "../config/constants.js";
 import { W as WS } from "./settings.js";
 import { countItem, takeUpTo, giveItem } from "./inventory.js";
 import { heldSlot, writeProps, PROP } from "./weaponState.js";
+import { S } from "./state.js";
 import { playNear } from "../fx/effects.js";
 import { safe } from "../util/log.js";
 import { t } from "../util/i18n.js";
@@ -27,13 +31,32 @@ export function ammoItemFor(st, ammoType) {
   return ammoItemId(st.ammoFamily, ammoType);
 }
 
-/** 予備弾数（発数換算）@param {import("@minecraft/server").Player} player @param {any} st @param {string} ammoType */
+/** 予備弾数（発数換算。持っている銃の途中のマガジンを含む）@param {import("@minecraft/server").Player} player @param {any} st @param {string} ammoType */
 export function reserveRounds(player, st, ammoType) {
   if (st.ammoFamily === "none") return Infinity;
   if (infinite(player)) return Infinity;
   const id = ammoItemFor(st, ammoType);
   if (!id) return 0;
-  return countItem(player, id) * st.ammoPerItem;
+  const s = S(player);
+  const partial = s.weaponId === st.id && s.ammoType === ammoType ? s.mags.reduce((a, n) => a + n, 0) : 0;
+  return countItem(player, id) * st.ammoPerItem + partial;
+}
+
+/** マガジン単位の残弾管理を使うか @param {any} st */
+function magMode(st) {
+  return WS().magRealism !== false && style(st) === "mag" && st.model.type !== "revolver" && !st.single;
+}
+
+/** 途中のマガジンの最大数（あふれた分の弾は予備弾に戻す） */
+const MAX_PARTIAL_MAGS = 6;
+
+/**
+ * 途中のマガジンを保存（手持ちの銃のアイテムへ）
+ * @param {import("@minecraft/server").Player} player @param {import("./state.js").PlayerState} s
+ */
+function saveMags(player, s) {
+  const slot = heldSlot(player);
+  if (slot) writeProps(slot, { [PROP.mags]: JSON.stringify(s.mags) });
 }
 
 /** リロードのスタイル（アニメーション名用） @param {any} st */
@@ -63,7 +86,7 @@ export function startReload(player, s, manual = false) {
     s.hudDirty = true;
     return true;
   }
-  if (s.ammo >= st.mag) {
+  if (s.ammo >= st.mag + (s.ammo > 0 ? st.chamber : 0)) {
     if (manual) status(s, t("arsenal.ui.mag_full"));
     return false;
   }
@@ -168,9 +191,15 @@ export function tickReload(player, s) {
       }
     });
     if (now >= r.end) {
-      const need = st.mag - s.ammo;
-      const got = load(player, s, need);
-      s.ammo += got;
+      // 薬室の 1 発は残す（残弾ありのリロード）
+      const kept = r.tactical ? Math.min(s.ammo, st.chamber) : 0;
+      const oldMag = s.ammo - kept;
+      if (magMode(st) && !infinite(player)) {
+        s.ammo = kept + swapMag(player, s, oldMag);
+      } else {
+        // 継ぎ足し（従来）：抜いたマガジンの弾は捨てずにそのまま足す
+        s.ammo = kept + oldMag + load(player, s, st.mag - oldMag);
+      }
       s.reload = null;
       s.hudDirty = true;
       const slot = heldSlot(player);
@@ -210,6 +239,56 @@ export function tickReload(player, s) {
   }
 }
 
+/**
+ * マガジンの差し替え：抜いたマガジン（oldMag 発）は途中のマガジンとして残し、
+ * 予備弾で満タンのマガジンが作れればそれを、作れなければ予備弾と途中のマガジンのうち多いほうを差す
+ * @param {import("@minecraft/server").Player} player @param {import("./state.js").PlayerState} s @param {number} oldMag
+ * @returns {number} 差したマガジンの弾数
+ */
+function swapMag(player, s, oldMag) {
+  const st = s.stats;
+  const id = ammoItemFor(st, s.ammoType);
+  const loose = id ? countItem(player, id) * st.ammoPerItem : 0;
+  let inserted;
+  let partialUsed = false;
+  const best = s.mags.length ? Math.max(...s.mags) : 0;
+  if (loose >= st.mag || loose >= best) {
+    inserted = load(player, s, st.mag);
+  } else {
+    s.mags.splice(s.mags.indexOf(best), 1);
+    inserted = best;
+    partialUsed = true;
+  }
+  if (oldMag > 0) {
+    s.mags.push(oldMag);
+    s.mags.sort((a, b) => b - a);
+    while (s.mags.length > MAX_PARTIAL_MAGS) {
+      const n = /** @type {number} */ (s.mags.pop());
+      if (id) giveItem(player, id, Math.floor(n / st.ammoPerItem));
+    }
+  }
+  saveMags(player, s);
+  if (partialUsed) status(s, t("arsenal.ui.partial_mag", String(inserted), String(st.mag)));
+  else if (oldMag > 0) status(s, t("arsenal.ui.mag_kept", String(oldMag)));
+  return inserted;
+}
+
+/**
+ * 途中のマガジンの弾をまとめ直す（武器メニューから）：全部を予備弾に戻す
+ * @param {import("@minecraft/server").Player} player @param {import("./state.js").PlayerState} s
+ */
+export function repackMags(player, s) {
+  const st = s.stats;
+  if (!st || !s.mags.length) return 0;
+  const id = ammoItemFor(st, s.ammoType);
+  const total = s.mags.reduce((a, n) => a + n, 0);
+  if (id) giveItem(player, id, Math.floor(total / st.ammoPerItem));
+  s.mags = [];
+  saveMags(player, s);
+  s.hudDirty = true;
+  return total;
+}
+
 /** @param {any} st */
 function baseSinglePer(st) {
   const w = /** @type {any} */ (DATA.WEAPONS)[st.id];
@@ -231,10 +310,16 @@ export function switchAmmoType(player, s, newType) {
       if (items > 0) giveItem(player, id, items);
     }
   }
+  if (s.mags.length && !infinite(player)) {
+    const id = ammoItemFor(st, s.ammoType);
+    const total = s.mags.reduce((a, n) => a + n, 0);
+    if (id && total > 0) giveItem(player, id, Math.floor(total / st.ammoPerItem));
+  }
+  s.mags = [];
   s.ammo = 0;
   s.ammoType = newType;
   const slot = heldSlot(player);
-  if (slot) writeProps(slot, { [PROP.ammo]: 0, [PROP.at]: newType });
+  if (slot) writeProps(slot, { [PROP.ammo]: 0, [PROP.at]: newType, [PROP.mags]: "[]" });
   s.hudDirty = true;
 }
 

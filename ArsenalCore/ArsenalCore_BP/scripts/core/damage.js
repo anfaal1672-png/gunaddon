@@ -60,11 +60,11 @@ function guardLethal(target, attacker, info) {
 }
 
 /**
- * 部位判定
- * @param {import("@minecraft/server").Entity} target @param {import("../util/math.js").Vec3} point
- * @returns {"head"|"body"|"leg"}
+ * 部位判定。弾の向き dir を渡すと、胴の高さで弾筋が中心から横にずれている（左右の端）ときは「腕」
+ * @param {import("@minecraft/server").Entity} target @param {import("../util/math.js").Vec3} point @param {import("../util/math.js").Vec3} [dir]
+ * @returns {"head"|"body"|"leg"|"arm"}
  */
-export function hitZone(target, point) {
+export function hitZone(target, point, dir) {
   const box = safe("hitZone", () => target.getAABB());
   if (!box) return "body";
   const h = box.extent.y * 2;
@@ -73,6 +73,16 @@ export function hitZone(target, point) {
   if (h >= 1.2) {
     if (rel >= 0.78) return "head";
     if (rel <= 0.33) return "leg";
+    // 胴の高さで、弾筋が中心から横に 70% より外へずれていれば腕（人型の腕は胴の左右にある）。
+    // 当たった点は箱の表面なので、中心からの距離ではなく「弾の向きに垂直な横ずれ」で見る
+    if (dir && rel >= 0.42) {
+      const hx = dir.x, hz = dir.z;
+      const hl = Math.hypot(hx, hz);
+      if (hl > 1e-3) {
+        const side = Math.abs(((point.x - box.center.x) * hz - (point.z - box.center.z) * hx) / hl);
+        if (side > Math.min(box.extent.x, box.extent.z) * 0.7) return "arm";
+      }
+    }
     return "body";
   }
   if (h >= 0.6 && rel >= 0.72) return "head";
@@ -289,10 +299,10 @@ export function rangeMul(st, d) {
 export function bulletHit(shooter, target, point, dir, distance, st, mul, o = {}) {
   if (target.typeId === ENTITY.dummy) {
     if (!(shooter instanceof Player)) return "pass";
-    const zone = o.noZones ? "body" : hitZone(target, point);
+    const zone = o.noZones ? "body" : hitZone(target, point, dir);
     const base = (o.baseDmg ?? st.dmg) * rangeMul(st, distance) * mul * WS().damageMul;
     const hm = 1 + (st.head - 1) * WS().headMul;
-    const dmg = base * (zone === "head" ? hm : zone === "leg" ? 0.75 : 1);
+    const dmg = base * (zone === "head" ? hm : zone === "leg" ? 0.75 : zone === "arm" ? 0.8 : 1);
     onDummyHit(shooter, target, dmg, zone, distance, st.id);
     hitFeedback(shooter, zone === "head" ? "head" : "hit", dmg);
     impactEntity(target.dimension, point, false);
@@ -327,11 +337,12 @@ export function bulletHit(shooter, target, point, dir, distance, st, mul, o = {}
     playNear(target.dimension, point, "arsenal.armor.helmet_ping", { range: 24, volume: 0.8 });
     return "block";
   }
-  let zone = o.noZones ? "body" : hitZone(target, point);
+  let zone = o.noZones ? "body" : hitZone(target, point, dir);
   let dmg = (o.baseDmg ?? st.dmg) * rangeMul(st, distance) * mul * WS().damageMul;
   const hm = 1 + (st.head - 1) * WS().headMul;
   if (zone === "head") dmg *= hm * (target instanceof Player ? helmetHeadMul(target) : 1);
   else if (zone === "leg") dmg *= 0.75;
+  else if (zone === "arm") dmg *= 0.8;
   const armored = isArmored(target);
   dmg *= armored ? (st.vsArmored ?? 1) * (st.armorBonus ?? 1) : (st.vsUnarmored ?? 1);
   // ボスの部位破壊
@@ -349,6 +360,7 @@ export function bulletHit(shooter, target, point, dir, distance, st, mul, o = {}
     playNear(target.dimension, point, robot ? "arsenal.melee.hit_metal" : "arsenal.fx.impact_flesh", { range: 16, volume: 0.6 });
   }
   if (st.mark > 0 && target.isValid) marked.set(target.id, system.currentTick + st.mark);
+  if (!r.killed && target.isValid && WS().limbDamage !== false) limbHit(target, zone, r.dealt);
   if (shooter instanceof Player) {
     if (r.killed) {
       hitFeedback(shooter, "kill", r.dealt);
@@ -359,6 +371,43 @@ export function bulletHit(shooter, target, point, dir, distance, st, mul, o = {}
   }
   emitEvent("hit", { shooter, target, head: zone === "head", distance, weaponId: st.id, dealt: r.dealt });
   return "hit";
+}
+
+/** 腕・脚・頭を撃たれたときの効き目を受け取る（AI はここに登録して命中精度を落とす） @type {((target:import("@minecraft/server").Entity, zone:string, until:number)=>void)[]} */
+const limbHooks = [];
+/** @param {(target:import("@minecraft/server").Entity, zone:string, until:number)=>void} fn */
+export function onLimbHit(fn) {
+  limbHooks.push(fn);
+}
+
+/**
+ * 部位の被弾：脚は足を引きずる（鈍足）、腕は照準がぶれる（拡散・反動が増える）、頭は一瞬目の前が暗くなる。
+ * 強い弾ほど長く効く
+ * @param {import("@minecraft/server").Entity} target @param {string} zone @param {number} dealt
+ */
+function limbHit(target, zone, dealt) {
+  if (zone !== "leg" && zone !== "arm" && zone !== "head") return;
+  const now = system.currentTick;
+  const dur = Math.round(clamp(30 + dealt * 6, 30, 120));
+  safe("limb", () => {
+    if (zone === "leg") {
+      target.addEffect("slowness", dur, { amplifier: dealt >= 8 ? 1 : 0, showParticles: false });
+    }
+    if (target instanceof Player) {
+      const s = S(target);
+      if (zone === "leg") {
+        s.legHitUntil = now + dur;
+        target.onScreenDisplay.setActionBar(t("arsenal.ui.leg_hit"));
+      } else if (zone === "arm") {
+        s.armHitUntil = now + dur;
+        s.hudDirty = true;
+        target.onScreenDisplay.setActionBar(t("arsenal.ui.arm_hit"));
+      } else {
+        target.camera.fade({ fadeColor: { red: 0.08, green: 0, blue: 0 }, fadeTime: { fadeInTime: 0.05, holdTime: 0.1, fadeOutTime: 0.45 } });
+      }
+    }
+  });
+  for (const fn of limbHooks) safe("limb.hook", () => fn(target, zone, now + dur));
 }
 
 let enemyMul = 1;
