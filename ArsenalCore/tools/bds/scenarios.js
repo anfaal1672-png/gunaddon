@@ -7,6 +7,7 @@ import { startReload } from "./core/reload.js";
 import { isIndoor } from "./fx/effects.js";
 import { summonBoss } from "./systems/bosses.js";
 import { spawnEnemy } from "./systems/ai/brain.js";
+import { nearPoint } from "./core/pathlock.js";
 const log = (...a) => console.warn("[DEVTEST] " + a.join(" "));
 const dim = () => world.getDimension("overworld");
 const Y = 120;
@@ -378,6 +379,10 @@ function ariadneTest(mode) {
     after(70, () => {
       const s = S(p);
       log(`ariadne(${mode}) lock target=${s.lockTarget === z.id} ticks=${s.lockTicks}`);
+      // レーダーの影絵の置き場所：壁（x=20）より手前の、目とゾンビを結ぶ線の上
+      const eye = p.getHeadLocation();
+      const np = nearPoint(d, eye, z.getAABB().center);
+      log(`ariadne(${mode}) radar eye=${[eye.x, eye.y, eye.z].map((v) => v.toFixed(2)).join(",")} silhouette=${np ? [np.pos.x, np.pos.y, np.pos.z].map((v) => v.toFixed(2)).join(",") + " k=" + np.k.toFixed(3) + " block=" + d.getBlock(np.pos)?.typeId : "visible"}`);
       p.useItemInSlot(0);
       after(3, () => p.stopUsingItem());
       let inside = 0, samples = 0, maxX = 0, closed = "";

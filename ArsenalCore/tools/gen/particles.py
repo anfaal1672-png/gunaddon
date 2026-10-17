@@ -334,7 +334,7 @@ class ParticlesMixin:
             "minecraft:emitter_lifetime_once": {"active_time": 0.01},
             "minecraft:emitter_shape_point": {},
             "minecraft:particle_lifetime_expression": {"max_lifetime": 0.12},
-            "minecraft:particle_appearance_billboard": {"size": [0.6, 0.6], "facing_camera_mode": "rotate_xyz", "uv": uv("hex")},
+            "minecraft:particle_appearance_billboard": {"size": ["0.6 * (v.scale ?? 1.0)", "0.6 * (v.scale ?? 1.0)"], "facing_camera_mode": "rotate_xyz", "uv": uv("hex")},
             "minecraft:particle_appearance_tinting": {"color": [1.0, "v.locked ?? 0.2", 0.1, 1.0]},
         })
         eff("scope_glint", "particles_blend", {
@@ -471,9 +471,24 @@ class ParticlesMixin:
             "minecraft:particle_appearance_billboard": {"size": ["0.4 + v.particle_age * 8.0", "0.4 + v.particle_age * 8.0"], "facing_camera_mode": "lookat_direction", "direction": {"mode": "derive_from_velocity", "min_speed_threshold": 0.01}, "uv": uv("ring")},
             "minecraft:particle_appearance_tinting": {"color": [0.7, 0.9, 1.0, "0.8 * (1.0 - v.particle_age / v.particle_lifetime)"]},
         })
+        # アリアドネのレーダー：壁の向こうの mob の影絵。撃ち手の目と mob を結ぶ線の上、壁より手前に置き、
+        # 距離の比で縮めるので、画面上は mob の位置と大きさにぴったり重なる（Bedrock には壁越しに描く素材がないため）。
+        # 大きさ v.hw / v.hh はビルボードの半分の幅・高さ。形 v.u / v.v は影絵の枠（SILHOUETTE_CELLS）
+        P["silhouette"] = {"format_version": "1.26.10", "particle_effect": {
+            "description": {"identifier": f"{NS}:silhouette", "basic_render_parameters": {"material": "particles_blend", "texture": "textures/particle/arsenal_silhouettes"}},
+            "components": {
+                "minecraft:emitter_rate_instant": {"num_particles": 1},
+                "minecraft:emitter_lifetime_once": {"active_time": 0.01},
+                "minecraft:emitter_shape_point": {},
+                "minecraft:particle_lifetime_expression": {"max_lifetime": 0.1},
+                "minecraft:particle_appearance_billboard": {"size": ["v.hw ?? 0.3", "v.hh ?? 0.9"], "facing_camera_mode": "rotate_xyz",
+                                                            "uv": {"texture_width": 64, "texture_height": 64, "uv": ["v.u ?? 0", "v.v ?? 0"], "uv_size": [32, 32]}},
+                "minecraft:particle_appearance_tinting": {"color": ["v.r ?? 1.0", "v.g ?? 0.3", "v.b ?? 0.25", "v.a ?? 0.7"]},
+            }}}
         for pid, obj in P.items():
             wjson(f"{self.rp}/particles/arsenal/{pid}.json", obj)
         wpng(f"{self.rp}/textures/particle/arsenal_particles.png", tx.particle_atlas())
+        wpng(f"{self.rp}/textures/particle/arsenal_silhouettes.png", tx.silhouette_atlas())
         self.particle_ids = [f"{NS}:{p}" for p in P]
         self.log(f"  particles: {len(P)}")
 

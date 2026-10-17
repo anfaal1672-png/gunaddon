@@ -6,6 +6,7 @@
  * 1 マスの穴・窓・開いた扉があれば道はつながり、完全に閉じた部屋の中や地中の敵にはロックできない。
  * 道が見つからなかった敵は 1.5 秒のあいだ候補から外し、次に中心に近い敵を調べる。
  * ロック中は道を点線で見せる（撃ち手にだけ）。
+ * 覗いている間は、壁の向こう・建物の中の mob を影絵で見せる（レーダー。drawRadar）。
  */
 import { world, system, MolangVariableMap } from "@minecraft/server";
 import { startSearch, cancelSearch, segOk, samplePath } from "../systems/pathfind.js";
@@ -115,6 +116,7 @@ export function tickPathLock(player, s, st) {
     const eye = player.getHeadLocation();
     const dir = player.getViewDirection();
     const locked = s.lockTicks >= st.lockTicks;
+    safe("pathlock.radar", () => drawRadar(player, eye, dir, locked ? L.targetId : null));
     const cur = L.targetId ? world.getEntity(L.targetId) : undefined;
     const curOk = !!cur && cur.isValid && cur.dimension.id === player.dimension.id && dist(cur.location, eye) <= RANGE + 8;
     /** @type {import("@minecraft/server").Entity|undefined} */
@@ -165,17 +167,14 @@ export function tickPathLock(player, s, st) {
       else if (now - L.pathTick >= RECHECK) L.pathTick = now;
     }
     s.hudDirty = true;
-    const v = new MolangVariableMap();
     if (!L.path) {
       // 道を探している間はロックが進まない
-      v.setFloat("variable.locked", 0.8);
-      player.spawnParticle("arsenal:lock_marker", center, v);
+      lockMarker(player, eye, center, 0.8);
       return;
     }
     if (s.lockTicks < st.lockTicks + 1) s.lockTicks++;
     const done = s.lockTicks >= st.lockTicks;
-    v.setFloat("variable.locked", done ? 0.2 : 0.8);
-    player.spawnParticle("arsenal:lock_marker", center, v);
+    lockMarker(player, eye, center, done ? 0.2 : 0.8);
     if (!done && s.lockTicks % 4 === 0) playTo(player, "arsenal.fx.lock_beep", { volume: 0.6, pitch: 0.8 + (0.6 * s.lockTicks) / st.lockTicks });
     if (s.lockTicks === st.lockTicks) playTo(player, "arsenal.fx.lock_on", { volume: 0.7 });
     // ミサイルが飛ぶ道を点線で（撃ち手にだけ）
@@ -188,6 +187,90 @@ export function tickPathLock(player, s, st) {
       }
     }
   });
+}
+
+// ---------------------------------------------------------------------------
+//  レーダー：壁の向こう・建物の中の mob の影絵
+//  Bedrock には壁越しに描く素材がないので、撃ち手の目と mob を結ぶ線の上の「壁より手前」に影絵を置き、
+//  距離の比で縮める。画面上は mob の位置と大きさにぴったり重なり、壁にも隠れない（撃ち手にだけ見える）。
+//  一人称で覗いているとき用（三人称はカメラが目の位置にないのでずれる）
+// ---------------------------------------------------------------------------
+
+const RADAR_RANGE = 64;
+const RADAR_MAX = 16;
+/** 影絵を置く、目からの最大の距離 */
+const NEAR = 2.4;
+/** レーダーの走査（明るくなる）間隔 */
+const PING = 30;
+const SIL_UV = { humanoid: [0, 0], quadruped: [32, 0], flyer: [0, 32], blob: [32, 32] };
+const FLYERS = /drone|bat|phantom|bee|parrot|ghast|blaze|vex|allay|wither$/;
+
+/**
+ * 目から見て c が壁に隠れているなら、壁より手前の同じ線の上の点と縮める比。見えているなら null
+ * @param {import("@minecraft/server").Dimension} dim @param {import("../util/math.js").Vec3} eye @param {import("../util/math.js").Vec3} c
+ */
+export function nearPoint(dim, eye, c) {
+  const v = sub(c, eye);
+  const d = len(v);
+  if (d < 1.5) return null;
+  const dir = { x: v.x / d, y: v.y / d, z: v.z / d };
+  const hit = dim.getBlockFromRay(eye, dir, { maxDistance: d, includePassableBlocks: false, includeLiquidBlocks: false });
+  if (!hit) return null;
+  const bd = dist(eye, add(hit.block.location, hit.faceLocation));
+  const dn = Math.max(0.35, Math.min(NEAR, bd - 0.2));
+  return { pos: add(eye, { x: dir.x * dn, y: dir.y * dn, z: dir.z * dn }), k: dn / d };
+}
+
+/**
+ * @param {import("@minecraft/server").Player} player @param {import("../util/math.js").Vec3} eye @param {import("../util/math.js").Vec3} dir
+ * @param {string|null} lockedId
+ */
+function drawRadar(player, eye, dir, lockedId) {
+  const now = system.currentTick;
+  const dim = player.dimension;
+  const list = dim.getEntities({ location: eye, maxDistance: RADAR_RANGE, excludeFamilies: ["inanimate", "arsenal_fx", "projectile"], excludeTypes: ["minecraft:item", "minecraft:xp_orb"] })
+    .filter((e) => e.id !== player.id && !!e.getComponent("minecraft:health"))
+    .map((e) => ({ e, c: e.getAABB().center }))
+    .filter((x) => dot(sub(x.c, eye), dir) > 0)
+    .sort((a, b) => dist(a.c, eye) - dist(b.c, eye))
+    .slice(0, RADAR_MAX);
+  // 走査が通った直後は明るく、だんだん薄く（レーダー風）
+  const phase = (now % PING) / PING;
+  const alpha = 0.4 + 0.45 * Math.exp(-phase * 4);
+  for (const { e, c } of list) {
+    const np = nearPoint(dim, eye, c);
+    if (!np) continue; // 見えている mob はそのまま見えるので出さない
+    const ext = e.getAABB().extent;
+    const hw = Math.max(ext.x, ext.z);
+    const hh = ext.y;
+    const ratio = hh / Math.max(0.05, hw);
+    const shape = FLYERS.test(e.typeId) || e.matches({ families: ["arsenal_flying"] }) ? "flyer" : ratio >= 1.4 ? "humanoid" : ratio < 0.9 ? "quadruped" : "blob";
+    const v = new MolangVariableMap();
+    v.setFloat("variable.hw", hw * np.k * 1.15);
+    v.setFloat("variable.hh", hh * np.k * 1.05);
+    v.setFloat("variable.u", SIL_UV[shape][0]);
+    v.setFloat("variable.v", SIL_UV[shape][1]);
+    const locked = e.id === lockedId;
+    const hostile = e.matches({ families: ["monster"] }) || e.matches({ families: ["arsenal_enemy"] });
+    const [r, g, b] = locked ? [0.35, 1.0, 0.45] : hostile ? [1.0, 0.3, 0.25] : [1.0, 0.85, 0.3];
+    v.setFloat("variable.r", r);
+    v.setFloat("variable.g", g);
+    v.setFloat("variable.b", b);
+    v.setFloat("variable.a", locked ? Math.max(alpha, 0.75) : alpha);
+    player.spawnParticle("arsenal:silhouette", np.pos, v);
+  }
+}
+
+/**
+ * ロックの印（壁に隠れていても、レーダーの影絵と同じく手前に置いて見せる）
+ * @param {import("@minecraft/server").Player} player @param {import("../util/math.js").Vec3} eye @param {import("../util/math.js").Vec3} center @param {number} locked
+ */
+function lockMarker(player, eye, center, locked) {
+  const v = new MolangVariableMap();
+  v.setFloat("variable.locked", locked);
+  const np = nearPoint(player.dimension, eye, center);
+  if (np) v.setFloat("variable.scale", np.k);
+  player.spawnParticle("arsenal:lock_marker", np ? np.pos : center, v);
 }
 
 /** 道の途中がふさがれていないか @param {import("@minecraft/server").Dimension} dim @param {import("../util/math.js").Vec3[]} path */

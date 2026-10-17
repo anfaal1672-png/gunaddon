@@ -182,6 +182,23 @@ export async function suite2(ctx) {
     player.isSneaking = true;
     __tick(60);
     check("壁の向こう（穴 1 マス）の敵にロックできる", s.lockTarget === z.id && s.lockTicks >= s.stats.lockTicks, `(target=${s.lockTarget === z.id} ticks=${s.lockTicks})`);
+    // レーダー：壁の向こうの mob の影絵は、目と mob を結ぶ線の上の壁より手前に、距離の比で縮めて置く
+    const pl = await imp("core/pathlock.js");
+    const sil0 = LOG.particleIds["arsenal:silhouette"] ?? 0;
+    __tick(5);
+    check("覗いている間、壁の向こうの mob の影絵を出す", (LOG.particleIds["arsenal:silhouette"] ?? 0) > sil0);
+    const eyeP = player.getHeadLocation();
+    const zc = z.getAABB().center;
+    const np = pl.nearPoint(dim, eyeP, zc);
+    const toZ = { x: zc.x - eyeP.x, y: zc.y - eyeP.y, z: zc.z - eyeP.z };
+    const toN = np ? { x: np.pos.x - eyeP.x, y: np.pos.y - eyeP.y, z: np.pos.z - eyeP.z } : null;
+    const Lz = Math.hypot(toZ.x, toZ.y, toZ.z);
+    const Ln = toN ? Math.hypot(toN.x, toN.y, toN.z) : 0;
+    const colinear = toN ? (toZ.x * toN.x + toZ.y * toN.y + toZ.z * toN.z) / (Lz * Ln) > 0.9999 : false;
+    check("影絵は壁（z=8）より手前・同じ線の上・距離の比で縮める", !!np && np.pos.z < 8 && colinear && Math.abs(np.k - Ln / Lz) < 1e-6 && !solidAt(np.pos), JSON.stringify(np));
+    const zv = zombie(0.5, 5.5, 20);
+    check("見えている mob には影絵を出さない", pl.nearPoint(dim, eyeP, zv.getAABB().center) === null);
+    zv.remove();
     s.ammo = 1;
     const hp0 = z.health.currentValue;
     const ex0 = LOG.explosions.length;

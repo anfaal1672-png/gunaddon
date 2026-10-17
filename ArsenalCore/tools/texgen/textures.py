@@ -658,6 +658,45 @@ PARTICLE_CELLS = {
 }
 
 
+# シルエット（アリアドネのレーダー表示）。32x32 の 4 枠：人型・四足・飛行・その他
+SILHOUETTE_CELLS = {"humanoid": (0, 0), "quadruped": (32, 0), "flyer": (0, 32), "blob": (32, 32)}
+
+
+def silhouette_atlas():
+    """白い影絵。縁は不透明、中は半透明（ホログラム風）。色はパーティクルの tint で付ける"""
+    img = Image.new("RGBA", (64, 64), (0, 0, 0, 0))
+    for kind, (ox, oy) in SILHOUETTE_CELLS.items():
+        m = Image.new("L", (32, 32), 0)
+        d = ImageDraw.Draw(m)
+        if kind == "humanoid":
+            d.ellipse([12, 0, 19, 8], fill=255)            # 頭
+            d.rectangle([14, 7, 17, 9], fill=255)          # 首
+            d.rectangle([11, 9, 20, 19], fill=255)         # 胴
+            d.polygon([(10, 9), (7, 10), (5, 19), (8, 19), (10, 13)], fill=255)    # 腕（少し開く）
+            d.polygon([(21, 9), (24, 10), (26, 19), (23, 19), (21, 13)], fill=255)
+            d.rectangle([11, 19, 14, 31], fill=255)        # 脚（間を空ける）
+            d.rectangle([17, 19, 20, 31], fill=255)
+        elif kind == "quadruped":
+            d.ellipse([3, 10, 25, 22], fill=255)           # 胴
+            d.ellipse([22, 6, 31, 15], fill=255)           # 頭
+            for x in (5, 10, 17, 21):
+                d.rectangle([x, 19, x + 3, 31], fill=255)  # 脚
+        elif kind == "flyer":
+            d.polygon([(0, 12), (12, 14), (16, 10), (20, 14), (31, 12), (24, 20), (16, 18), (8, 20)], fill=255)
+            d.ellipse([13, 9, 19, 22], fill=255)
+        else:
+            d.ellipse([4, 5, 27, 28], fill=255)
+        inner = m.filter(ImageFilter.MinFilter(5))
+        a = np.array(m, dtype=np.float32)
+        ai = np.array(inner, dtype=np.float32)
+        alpha = np.where(ai > 0, 120, a)  # 中は半透明、縁（2 px）は不透明
+        cell = np.zeros((32, 32, 4), dtype=np.uint8)
+        cell[..., :3] = 255
+        cell[..., 3] = alpha.astype(np.uint8)
+        img.paste(Image.fromarray(cell, "RGBA"), (ox, oy))
+    return img
+
+
 def particle_atlas():
     img = Image.new("RGBA", (64, 64), (0, 0, 0, 0))
     px = img.load()
