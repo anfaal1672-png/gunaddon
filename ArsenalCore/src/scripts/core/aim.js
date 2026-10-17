@@ -12,6 +12,7 @@ import { armorMove, riotShieldMove } from "./armor.js";
 import { DATA } from "../config/constants.js";
 import { fp_step } from "../util/fpstep.js";
 import { safe } from "../util/log.js";
+import { tickPathLock, clearPathLock } from "./pathlock.js";
 
 const BASE_SPEED = 0.1;
 
@@ -141,6 +142,7 @@ export function clearAim(player, s) {
   s.breathUntil = 0;
   s.lockTarget = null;
   s.lockTicks = 0;
+  clearPathLock(player);
   s.poseWeapon = null;
   s.variableHigh = false;
   s.cantedOn = false;
@@ -192,6 +194,7 @@ export function tickAim(player, s, st) {
       }
       s.lockTarget = null;
       s.lockTicks = 0;
+      clearPathLock(player);
       playAds(player, s, st);
     } else {
       stopAds(player, s);
@@ -204,6 +207,7 @@ export function tickAim(player, s, st) {
       if (s.breathUntil > now) s.breathUntil = now;
       s.lockTarget = null;
       s.lockTicks = 0;
+      clearPathLock(player);
       safe("stopShake", () => player.camera.stopShaking());
     }
   } else if (want && s.fovApplied && s.fovValue !== fov && prefs.fovZoom) {
@@ -238,7 +242,8 @@ export function tickAim(player, s, st) {
         emit(player.dimension, "arsenal:scope_glint", add(eye, mul(player.getViewDirection(), 0.7)), undefined, { range: 160, except: player.id });
       }
     }
-    if (st.lockTicks > 0) tickLock(player, s, st);
+    if (st.fire === "pathfinder") tickPathLock(player, s, st);
+    else if (st.lockTicks > 0) tickLock(player, s, st);
   }
   if (!s.ads && s.rangeDist >= 0) s.rangeDist = -1;
   // 自動射撃（スマホ向け補助）：照準が敵に重なったら撃つ

@@ -3401,6 +3401,40 @@
         }
       }
     },
+    "animation.arsenal.ariadne.tp": {
+      "loop": true,
+      "bones": {
+        "arsenal_gun": {
+          "rotation": [
+            90.0,
+            0.0,
+            0.0
+          ],
+          "position": [
+            -0.0,
+            0.0,
+            -0.5
+          ]
+        }
+      }
+    },
+    "animation.arsenal.ariadne.fp": {
+      "loop": true,
+      "bones": {
+        "arsenal_gun": {
+          "rotation": [
+            82.636,
+            61.26,
+            -51.574
+          ],
+          "position": [
+            0.695,
+            0.017,
+            -0.326
+          ]
+        }
+      }
+    },
     "animation.arsenal.bouncer.tp": {
       "loop": true,
       "bones": {

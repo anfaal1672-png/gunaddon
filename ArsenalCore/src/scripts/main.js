@@ -23,6 +23,8 @@ import { renderHud2, addHud2Provider, usesHud2 } from "./ui/hud2.js";
 import { openWeaponMenu, openManual, openBench, openPress, useCrate, useRepairKit, setMode } from "./ui/menus.js";
 import { toggleCalib, calibNext, calibSave, calibHud, openReport } from "./ui/codex.js";
 import { tickProjectiles, sweepOrphans } from "./systems/projectiles.js";
+import { tickPathfinding, attachPathfinding } from "./systems/pathfind.js";
+import { forgetPathLock } from "./core/pathlock.js";
 import { beginThrow, releaseThrow, tickThrowable, useDetonator, tryPlaceMine } from "./systems/throwables.js";
 import { tickDummies, attachDummyPickup } from "./systems/dummy.js";
 import { attachLoot } from "./systems/loot.js";
@@ -425,6 +427,7 @@ world.beforeEvents.playerLeave.subscribe((ev) => {
     forgetProfile(id);
     forgetStreaks(id);
     forgetDowned(id);
+    forgetPathLock(id);
   });
 });
 
@@ -466,6 +469,7 @@ attachBosses();
 attachBleeding();
 attachDeployables();
 attachVehicles();
+attachPathfinding();
 attachStreaks();
 attachStructures();
 attachProgression();
@@ -581,6 +585,7 @@ system.runInterval(() => {
   for (const player of world.getAllPlayers()) {
     safe("tickPlayer", () => tickPlayer(player));
   }
+  safe("tickPathfinding", () => tickPathfinding());
   safe("tickProjectiles", () => tickProjectiles());
   safe("tickBrain", () => tickBrain());
   safe("tickBosses", () => tickBosses());

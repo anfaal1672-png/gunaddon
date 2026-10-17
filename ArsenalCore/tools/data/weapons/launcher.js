@@ -63,6 +63,17 @@ export const LAUNCHER = {
     slots: [],
     model: { type: "tube", body: 28, h: 6, finish: "arctic", accent: "tier", seeker: true },
   },
+  // ---- 2.4 で追加 ----
+  ariadne: {
+    cat: "launcher", tier: "legendary", name: { ja: "アリアドネ", en: "Ariadne" },
+    desc: { ja: "経路探索ミサイル。1 マスの隙間でも道があれば、壁の向こう・建物の中の敵にロックし、障害物をよけて飛ぶ", en: "Pathfinding missile: locks through walls whenever a 1-block gap leads there, then threads the way" },
+    ammo: "rocket", mag: 1, rpm: 30, modes: ["semi"], dmg: 12.0, head: 1.0, range: [96, 160], falloff: 1.0, armorBonus: 1.3,
+    spread: R(1.4, 0.3, 1.2, 0, 0, 0.4), recoil: { v: 2.6, h: 0.5, shake: 0.1 },
+    reload: { tac: 90, empty: 90 }, ads: 7, move: 0.82, pen: 0, sound: "rocket", pitch: 0.78, optic: "scope2", lockTicks: 24,
+    fire: "pathfinder", projectile: { speed: 0.7, accel: 0.08, max: 1.5, gravity: 0.0, power: 3.0 },
+    slots: [],
+    model: { type: "tube", body: 26, h: 6, finish: "black", accent: "tier", seeker: true },
+  },
   bouncer: {
     cat: "launcher", tier: "uncommon", name: { ja: "バウンサー", en: "Bouncer" },
     desc: { ja: "跳ねるグレネード。壁や床で 3 回まで跳ね、敵に触れるか 3 秒で爆発", en: "Bouncing grenades: up to 3 bounces, blows on contact or after 3s" },

@@ -10,7 +10,8 @@ import { spreadNow, applyRecoil } from "./recoil.js";
 import { startReload, reserveRounds, status, isInfinite } from "./reload.js";
 import { traceHitscan, drawTracer, whizzBy, arcLine, isSupersonic } from "./ballistics.js";
 import { canDamage, dealDamage, hitFeedback, bulletHit } from "./damage.js";
-import { fireBallistic, fireBullet, fireGrenade40, fireRocket, fireFlare, fireHook } from "../systems/projectiles.js";
+import { fireBallistic, fireBullet, fireGrenade40, fireRocket, fireFlare, fireHook, firePathMissile } from "../systems/projectiles.js";
+import { takePathLock } from "./pathlock.js";
 import { fireFlame, fireBeam, fireGravity, fireCoil, fireSonic, fireProjectile2, mortarTarget } from "./fire2.js";
 import { miniBlast } from "./damage.js";
 import { emitEvent } from "./events.js";
@@ -243,6 +244,15 @@ export function shoot(player, s, count = 1, charge = 1) {
         const locked = s.lockTarget && s.lockTicks >= st.lockTicks ? s.lockTarget : null;
         fireRocket(player, muzzle, cone(view, spread * 0.5), st, locked);
         s.lockTicks = 0;
+        break;
+      }
+      case "pathfinder": {
+        // ロック済み（道が見つかっている）なら道の上を飛ぶミサイル、まだならまっすぐ飛ぶロケット
+        const lk = s.lockTicks >= st.lockTicks ? takePathLock(player) : null;
+        if (lk) firePathMissile(player, muzzle, cone(view, spread * 0.5), st, lk.targetId, lk.path);
+        else fireRocket(player, muzzle, cone(view, spread * 0.5), st, null);
+        s.lockTicks = 0;
+        s.lockTarget = null;
         break;
       }
       case "flare": fireFlare(player, muzzle, cone(view, spread), st); break;
