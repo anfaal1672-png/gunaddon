@@ -10,7 +10,7 @@ import { spreadNow, applyRecoil } from "./recoil.js";
 import { startReload, reserveRounds, status, isInfinite } from "./reload.js";
 import { traceHitscan, drawTracer, whizzBy, arcLine } from "./ballistics.js";
 import { canDamage, dealDamage, hitFeedback, bulletHit } from "./damage.js";
-import { fireBallistic, fireGrenade40, fireRocket, fireFlare, fireHook } from "../systems/projectiles.js";
+import { fireBallistic, fireBullet, fireGrenade40, fireRocket, fireFlare, fireHook } from "../systems/projectiles.js";
 import { fireFlame, fireBeam, fireGravity, fireCoil, fireSonic, fireProjectile2, mortarTarget } from "./fire2.js";
 import { miniBlast } from "./damage.js";
 import { emitEvent } from "./events.js";
@@ -327,6 +327,7 @@ function fireHitscan(player, s, eye, view, spread, st, muzzle) {
     emit(player.dimension, "arsenal:flame", muzzle, v, { range: 64 });
   }
   let lastEnd = null;
+  const travel = !!st.travel && WS().bulletTravel !== false;
   for (let i = 0; i < pellets; i++) {
     let d = cone(view, spread + (pellets > 1 && !st.pelletFlat ? st.pelletSpread : 0));
     if (pellets > 1 && st.pelletFlat) {
@@ -335,10 +336,15 @@ function fireHitscan(player, s, eye, view, spread, st, muzzle) {
       const k = ((i / Math.max(1, pellets - 1)) - 0.5) * Math.tan((st.pelletSpread * 1.6 * Math.PI) / 180);
       d = norm(add(d, mul(right, k)));
     }
+    const showTracer = st.tracerAlways || (st.tracer && (pellets > 1 ? i % 3 === 0 : (s.lastShotTick + s.ammo) % tracerEvery === 0));
+    if (travel) {
+      // 弾が飛ぶ：1 tick ごとに弾速ぶん進み、重力で落ちる（偏差と落下）。最初の 1 tick ぶんはこの場で進める
+      fireBullet(player, eye, d, st, { pen: pellets > 1 ? 0 : st.pen, silent: pellets > 1 && i > 0, tracer: showTracer && !flame, whizz: pellets === 1, muzzle });
+      continue;
+    }
     const r = traceHitscan(player, eye, d, st, { pen: pellets > 1 ? 0 : st.pen, silent: pellets > 1 && i > 0 });
     lastEnd = r.end;
     if (st.explosive && (r.stopped || r.hitEntity)) miniBlast(player, r.end, 1.4, 3.0, st.id);
-    const showTracer = st.tracerAlways || (st.tracer && (pellets > 1 ? i % 3 === 0 : (s.lastShotTick + s.ammo) % tracerEvery === 0));
     if (showTracer && !flame) drawTracer(player, muzzle, r.end, st, true);
   }
   if (lastEnd && pellets === 1) whizzBy(player, eye, lastEnd);

@@ -3,7 +3,7 @@
  * ADS（覗き込み）、ズーム、移動速度、保持ポーズ、スコープの揺れと息止め、
  * レーザー・フラッシュライト、ロックオン
  */
-import { system, EasingType, MolangVariableMap } from "@minecraft/server";
+import { system, world, EasingType, MolangVariableMap } from "@minecraft/server";
 import { P, W as WS } from "./settings.js";
 import { emit, playTo } from "../fx/effects.js";
 import { SCOPED_OPTICS, resetScopeMark, effectiveOptic } from "../ui/hud.js";
@@ -52,6 +52,26 @@ export function applyMove(player, mul) {
 /** @param {import("@minecraft/server").Player} player */
 export function resetMove(player) {
   safe("move.reset", () => player.getComponent("minecraft:movement")?.resetToDefaultValue());
+}
+
+/**
+ * 走っている間の構え：銃を体の前に下げて抱える（一人称・三人称）。走るのをやめる・銃を持ち替えると
+ * stopExpression で解け、blendOutTime で元の構えへ戻る。撃った直後とリロード中は構えない
+ * @param {import("@minecraft/server").Player} player @param {import("./state.js").PlayerState} s @param {number} now
+ */
+function tickSprintPose(player, s, now) {
+  const want = player.isSprinting && !s.reload && !s.holding && !s.tapFiring && now - s.lastShotTick > 6;
+  if (want && !s.sprintPose) {
+    s.sprintPose = true;
+    safe("sprint.pose", () => player.playAnimation("animation.arsenal.sprint", {
+      controller: "arsenal_sprint",
+      blendOutTime: 0.18,
+      stopExpression: "!q.is_sprinting || !q.equipped_item_any_tag('slot.weapon.mainhand', 'arsenal:firearm')",
+    }));
+  } else if (!want && s.sprintPose) {
+    s.sprintPose = false;
+    if (player.isSprinting) safe("sprint.stop", () => player.playAnimation("animation.arsenal.none", { controller: "arsenal_sprint", blendOutTime: 0.1 }));
+  }
 }
 
 /**
@@ -153,6 +173,7 @@ export function tickAim(player, s, st) {
   const want = (prefs.adsMode === "toggle" ? s.adsToggle : player.isSneaking) && !(s.reload && s.reload.type === "mag") && !player.isSprinting;
   const step = 1 / Math.max(1, st.adsTime);
   s.adsLevel = want ? Math.min(1, s.adsLevel + step) : Math.max(0, s.adsLevel - step * 1.5);
+  tickSprintPose(player, s, now);
   const fov = effectiveFov(s, st);
   if (want !== s.ads) {
     s.ads = want;
@@ -421,8 +442,49 @@ export function clearLight(player, s) {
   });
 }
 
+/** ロックオンの円錐：捕まえる（中心から 8°）・捕まえ続ける（14°）・ロック完了後に外れても保つ時間 */
+const LOCK_ACQ_COS = Math.cos((8 * Math.PI) / 180);
+const LOCK_KEEP_COS = Math.cos((14 * Math.PI) / 180);
+const LOCK_GRACE = 30;
+const LOCK_RANGE = 160;
+
 /**
- * ロックオン（シーカー）
+ * 照準の円錐の中で、いちばん中心に近い・見えている敵
+ * @param {import("@minecraft/server").Player} player @param {import("../util/math.js").Vec3} eye @param {import("../util/math.js").Vec3} dir
+ */
+function lockCandidate(player, eye, dir) {
+  let best = null;
+  let bestCos = LOCK_ACQ_COS;
+  for (const e of player.dimension.getEntities({ location: eye, maxDistance: LOCK_RANGE, excludeFamilies: ["inanimate", "arsenal_fx", "projectile"], excludeTypes: ["minecraft:item", "minecraft:xp_orb"] })) {
+    if (e.id === player.id || !e.getComponent("minecraft:health")) continue;
+    const c = lockCos(e, eye, dir);
+    if (c > bestCos && lockVisible(player, eye, e)) {
+      best = e;
+      bestCos = c;
+    }
+  }
+  return best;
+}
+
+/** @param {import("@minecraft/server").Entity} e @param {import("../util/math.js").Vec3} eye @param {import("../util/math.js").Vec3} dir */
+function lockCos(e, eye, dir) {
+  const v = sub(e.getAABB().center, eye);
+  const L = len(v);
+  return L < 1e-3 ? 1 : dot(v, dir) / L;
+}
+
+/** 目から敵の中心までブロックに遮られていないか @param {import("@minecraft/server").Player} player @param {import("../util/math.js").Vec3} eye @param {import("@minecraft/server").Entity} e */
+function lockVisible(player, eye, e) {
+  const v = sub(e.getAABB().center, eye);
+  const L = len(v);
+  if (L < 1e-3) return true;
+  const bh = player.dimension.getBlockFromRay(eye, mul(v, 1 / L), { maxDistance: L, includePassableBlocks: false, includeLiquidBlocks: false });
+  return !bh;
+}
+
+/**
+ * ロックオン（シーカー）。照準の中心から 8° 以内の見えている敵を捕まえ、14° 以内にいる間は捕まえ続ける。
+ * 見失っても進み具合は少しずつしか減らず、ロック完了後は 1.5 秒のあいだ照準から外れてもロックを保つ
  * @param {import("@minecraft/server").Player} player @param {import("./state.js").PlayerState} s @param {any} st
  */
 function tickLock(player, s, st) {
@@ -430,26 +492,35 @@ function tickLock(player, s, st) {
   safe("lock", () => {
     const eye = player.getHeadLocation();
     const dir = player.getViewDirection();
-    const hits = player.dimension.getEntitiesFromRay(eye, dir, { maxDistance: 140, excludeFamilies: ["inanimate", "arsenal_fx", "projectile"], excludeTypes: ["minecraft:item", "minecraft:xp_orb"] });
-    const h = hits.find((x) => x.entity.id !== player.id && x.entity.getComponent("minecraft:health"));
-    if (!h) {
-      if (s.lockTicks > 0 && s.lockTicks < st.lockTicks) s.lockTicks = Math.max(0, s.lockTicks - 2);
+    const cur = s.lockTarget ? world.getEntity(s.lockTarget) : undefined;
+    const curOk = !!cur && cur.isValid && cur.dimension.id === player.dimension.id;
+    /** @type {import("@minecraft/server").Entity|undefined} */
+    let target;
+    if (curOk && lockCos(/** @type {any} */ (cur), eye, dir) >= LOCK_KEEP_COS && lockVisible(player, eye, /** @type {any} */ (cur))) {
+      target = cur;
+      s.lockSeen = now;
+    } else if (curOk && s.lockTicks >= st.lockTicks && now - s.lockSeen <= LOCK_GRACE) {
+      target = cur; // ロック済み：少しのあいだ外れても保つ
+    } else if (now % 2 === 0 || !s.lockTarget) {
+      target = lockCandidate(player, eye, dir) ?? undefined;
+      if (target) s.lockSeen = now;
+    }
+    if (!target) {
+      if (s.lockTicks > 0) s.lockTicks = Math.max(0, Math.min(s.lockTicks, st.lockTicks - 1) - 1);
       if (s.lockTicks === 0) s.lockTarget = null;
       return;
     }
-    if (s.lockTarget !== h.entity.id) {
-      s.lockTarget = h.entity.id;
+    if (s.lockTarget !== target.id) {
+      s.lockTarget = target.id;
       s.lockTicks = 0;
     }
-    s.lockTicks++;
+    if (s.lockTicks < st.lockTicks + 1) s.lockTicks++;
     s.hudDirty = true;
-    const box = h.entity.getAABB();
     const v = new MolangVariableMap();
     const locked = s.lockTicks >= st.lockTicks;
     v.setFloat("variable.locked", locked ? 0.2 : 0.8);
-    player.spawnParticle("arsenal:lock_marker", box.center, v);
-    if (!locked && s.lockTicks % 5 === 0) playTo(player, "arsenal.fx.lock_beep", { volume: 0.6 });
+    player.spawnParticle("arsenal:lock_marker", target.getAABB().center, v);
+    if (!locked && s.lockTicks % 4 === 0) playTo(player, "arsenal.fx.lock_beep", { volume: 0.6, pitch: 0.8 + (0.6 * s.lockTicks) / st.lockTicks });
     if (s.lockTicks === st.lockTicks) playTo(player, "arsenal.fx.lock_on", { volume: 0.7 });
   });
-  void now;
 }

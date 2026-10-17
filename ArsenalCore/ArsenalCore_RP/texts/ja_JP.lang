@@ -902,6 +902,7 @@ arsenal.ws.aim_assist_pvp=プレイヤーへのエイムアシストを許可
 arsenal.ws.backstab_pvp=PvP の背後攻撃の上限（×0.1）
 arsenal.ws.bleeding=出血
 arsenal.ws.bosses=ボスの召喚を許可
+arsenal.ws.bullet_travel=弾が飛んで落ちる（動く相手には偏差が要る）
 arsenal.ws.downed=ダウン制（即死せず蘇生待ち）
 arsenal.ws.economy=経済（クレジット・店）
 arsenal.ws.hollow=ホロウの出現

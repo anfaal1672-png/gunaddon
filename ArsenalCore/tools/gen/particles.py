@@ -285,13 +285,14 @@ class ParticlesMixin:
             "minecraft:particle_appearance_billboard": {"size": ["0.25 * (1.0 - v.particle_age / v.particle_lifetime * 0.6)", "0.3 * (1.0 - v.particle_age / v.particle_lifetime * 0.6)"], "facing_camera_mode": "lookat_y", "uv": uv("flame0", (4, 8))},
             "minecraft:particle_appearance_tinting": {"color": {"gradient": {"0.0": [1.0, 0.8, 0.4, 1.0], "1.0": [0.8, 0.2, 0.05, 0.0]}, "interpolant": "v.particle_age / v.particle_lifetime"}},
         })
+        # 投擲の予測線：2 tick ごとに描き直すので、寿命は少し長め（途切れて点滅しない）。昼でも見えるよう大きく明るく
         eff("trajectory", "particles_blend", {
             "minecraft:emitter_rate_instant": {"num_particles": 1},
             "minecraft:emitter_lifetime_once": {"active_time": 0.01},
             "minecraft:emitter_shape_point": {},
-            "minecraft:particle_lifetime_expression": {"max_lifetime": 0.22},
-            "minecraft:particle_appearance_billboard": {"size": [0.05, 0.05], "facing_camera_mode": "rotate_xyz", "uv": uv("dot")},
-            "minecraft:particle_appearance_tinting": {"color": [1.0, 0.85, 0.3, 0.9]},
+            "minecraft:particle_lifetime_expression": {"max_lifetime": 0.16},
+            "minecraft:particle_appearance_billboard": {"size": [0.1, 0.1], "facing_camera_mode": "rotate_xyz", "uv": uv("dot")},
+            "minecraft:particle_appearance_tinting": {"color": [1.0, 0.92, 0.45, "v.alpha ?? 0.95"]},
         })
         eff("rope", "particles_alpha", {
             "minecraft:emitter_rate_instant": {"num_particles": 1},

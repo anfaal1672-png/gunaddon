@@ -68,6 +68,8 @@
  * @property {{tick:number, kind:string, dmg:number}|null} hit
  * @property {string|null} lockTarget
  * @property {number} lockTicks
+ * @property {number} lockSeen ロック対象を最後に照準の円錐の中で見た tick
+ * @property {boolean} sprintPose 走っている間の構えを再生中か
  * @property {number} lastShotTick
  * @property {number} wearPending
  * @property {number} lastWearWrite
@@ -109,6 +111,8 @@
  * @property {number} streakPts PvE のストリークポイント
  * @property {string} hud2Last HUD 2.0 に最後に送った文字列
  * @property {number} hud2Tick
+ * @property {number} hud2Seq HUD 2.0 を送った回数（タイトルに 0〜9 で載せる）
+ * @property {Record<string, string|number>|null} hud2Vals HUD 2.0 の値（毎 tick 変わる方位・照準以外は、変化時と再送時に集め直す）
  * @property {string} fpoffAnim 再生中の一人称位置調整アニメーション
  * @property {boolean} nvgOn 暗視ゴーグルの手動 ON/OFF（null は自動）
  * @property {number} nvgTick
@@ -162,7 +166,7 @@ function create(id) {
     fovApplied: false, fovValue: 0, moveApplied: false, moveValue: 0.1, nvApplied: false, slowApplied: false,
     poseWeapon: null, poseTick: 0,
     hudTick: 0, hudDirty: true, hit: null,
-    lockTarget: null, lockTicks: 0,
+    lockTarget: null, lockTicks: 0, lockSeen: 0, sprintPose: false,
     lastShotTick: -99, wearPending: 0, lastWearWrite: 0, lastKick: -99,
     breathUntil: 0, breathCooldown: 0, swayTick: 0, cooldownUntil: 0,
     throwing: null, lightPos: null, lightDim: null, menuOpen: false, lastEquipTick: 0,
@@ -170,7 +174,7 @@ function create(id) {
     grappleUntil: 0, grapplePoint: null, statusMsgUntil: 0, statusMsg: null,
     loopSoundTick: -99, empUntil: 0, mortarTarget: null, sup: 0, supTick: 0, dmgDir: null,
     meleeCd: 0, meleeStart: -1, meleeId: null, lastButt: -99, variableHigh: false, cantedOn: false,
-    assistTick: 0, autoFiring: false, streak: 0, streakPts: 0, hud2Last: "", hud2Tick: -99, fpoffAnim: "",
+    assistTick: 0, autoFiring: false, streak: 0, streakPts: 0, hud2Last: "", hud2Tick: -99, hud2Seq: 0, hud2Vals: null, fpoffAnim: "",
     nvgOn: true, nvgTick: 0, indoor: false, indoorTick: -99, rangeDist: -1, droneId: null, gunshipUntil: 0, gunshipShot: 0,
     jumpHeld: false, jumpToggle: false, vehShot: 0, ridingId: null, calib: 0, lastHurtTick: -99, medUntil: 0, bleedUntil: 0,
     hintMask: 0, lastWeaponXp: 0, magHits: 0, shieldHp: 0, look: 0, nvgActive: false, statusShownAt: -1,

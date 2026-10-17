@@ -197,6 +197,7 @@ function holster(player, s) {
   s.pressQueue = 0;
   s.burstLeft = 0;
   s.hudDirty = true;
+  s.sprintPose = false; // 走る構えは stopExpression（銃を持っていない）で解ける
   safe("pose.stop", () => player.playAnimation("animation.arsenal.none", { controller: "arsenal_hold", blendOutTime: 0.15 }));
 }
 

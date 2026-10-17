@@ -183,6 +183,10 @@ export function computeStats(weaponId, att, ammoType) {
     cooldown: w.cooldown ?? 0,
     wallPierce: !!w.wallPierce,
     projectile: w.projectile ?? null,
+    // 弾が飛ぶ（ヒットスキャンの銃）：カテゴリの弾速と重力。亜音速弾は 0.8 倍の弾速
+    travel: (!w.fire || w.fire === "hitscan") && (w.bullet ?? /** @type {any} */ (DATA.CATEGORIES)[w.cat].bullet)
+      ? { speed: (w.bullet ?? /** @type {any} */ (DATA.CATEGORIES)[w.cat].bullet).speed * (subsonic ? 0.8 : 1), gravity: (w.bullet ?? /** @type {any} */ (DATA.CATEGORIES)[w.cat].bullet).gravity }
+      : null,
     model: w.model,
     durability: /** @type {any} */ (DATA.CATEGORIES)[w.cat].durability,
     // ---- 2.0 ----

@@ -328,6 +328,7 @@ export async function openWorld2(player) {
     .toggle(t("arsenal.ws.wind"), { defaultValue: w.wind })
     .toggle(t("arsenal.ws.suppression"), { defaultValue: w.suppression })
     .toggle(t("arsenal.ws.bosses"), { defaultValue: w.bosses })
+    .toggle(t("arsenal.ws.bullet_travel"), { defaultValue: w.bulletTravel !== false })
     .submitButton(t("arsenal.ui.btn_save"));
   const r = await showForm(player, form);
   if (!r || r.canceled || !r.formValues) return;
@@ -347,6 +348,7 @@ export async function openWorld2(player) {
     wind: !!v[11],
     suppression: !!v[12],
     bosses: !!v[13],
+    bulletTravel: !!v[14],
   });
   world.sendMessage(raw("§e[ARSENAL] ", t("arsenal.ui.world_saved", player.name)));
 }

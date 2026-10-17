@@ -902,6 +902,7 @@ arsenal.ws.aim_assist_pvp=Allow aim assist against players
 arsenal.ws.backstab_pvp=PvP backstab cap (x0.1)
 arsenal.ws.bleeding=Bleeding
 arsenal.ws.bosses=Bosses can be summoned
+arsenal.ws.bullet_travel=Bullet travel & drop (lead moving targets)
 arsenal.ws.downed=Downed state instead of instant death
 arsenal.ws.economy=Economy (credits & shops)
 arsenal.ws.hollow=Hollow spawns

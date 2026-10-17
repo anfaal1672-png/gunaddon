@@ -79,7 +79,9 @@ class UiMixin:
             ]
 
         ui = {"namespace": "hud"}
-        ui["arsenal_black"] = {"type": "image", "texture": "textures/ui/arsenal/black", "size": ["fill", "100%"]}
+        # keep_ratio: false が要る。既定（縦横比を保つ）だと 16×16 の黒が正方形のまま中央に置かれ、
+        # 左右の黒い縁が画面の中ほどの帯にしかならない（スコープ中に四隅から景色が見えていた）
+        ui["arsenal_black"] = {"type": "image", "texture": "textures/ui/arsenal/black", "size": ["fill", "100%"], "keep_ratio": False}
         root_controls = []
         for code, (kind, name) in self.SCOPE_KINDS.items():
             key = f"arsenal_view_{name}"
@@ -160,8 +162,8 @@ class UiMixin:
         for i in range(8):
             wpng(f"{tex}/dmg_{i}.png", ic.damage_arc(i))
             wpng(f"{tex}/wind_{i}.png", ic.wind_arrow(i))
-        for i in range(16):
-            wpng(f"{tex}/compass_{i}.png", ic.compass_strip(i))
+        for i in range(180):
+            wpng(f"{tex}/compass_{i}.png", ic.compass_strip(i * 2))
         for lv in (1, 2, 3):
             wpng(f"{tex}/sup_{lv}.png", ic.vignette(lv))
         wpng(f"{tex}/nvg.png", ic.nvg_overlay())
@@ -184,6 +186,8 @@ class UiMixin:
             n[0] += 1
             c = {"type": "image", "texture": f"textures/ui/arsenal/hud2/{texture[:-4] if texture.endswith('.png') else texture}", "size": list(size),
                  "anchor_from": anchor, "anchor_to": anchor, "offset": list(offset), "layer": layer, "bindings": vis(cond)}
+            if "100%" in size:
+                c["keep_ratio"] = False  # 全画面の効果（暗視・制圧）を画面いっぱいに引き伸ばす
             return {name: c}
 
         def align_of(anchor):
@@ -212,6 +216,8 @@ class UiMixin:
             return ox + (k - (count - 1) / 2) * cw
 
         def text_cells(name, parts, anchor, offset, cond=None, color=(1, 1, 1), scale=1.0, layer=3):
+            # cond はグループのパネルではなく各ラベルに付ける（cond かつ札）。表示条件付きのパネルの子は、
+            # パネルが現れた直後にタイトルが変わらないと古い表示のまま残ることがある（実機で測距の数字が出ず "m" だけ出た）
             """数字などの文字列を 1 文字ずつのラベルで表示する。
             parts の要素：("f", フィールド名, 桁, 使う文字) → その桁の文字ごとに 1 枚（札を含むものだけ見える）
                           ("c", 文字)                     → 常に見える固定の文字
@@ -225,13 +231,14 @@ class UiMixin:
                     continue
                 at = (cell_x(anchor, ox, k, len(parts), cw), oy)
                 if part[0] == "c":
-                    kids.append(label(f"{name}_{k}", part[1], anchor=anchor, offset=at, color=color, scale=scale, localize=False, layer=layer))
+                    kids.append(label(f"{name}_{k}", part[1], anchor=anchor, offset=at, cond=cond, color=color, scale=scale, localize=False, layer=layer))
                     continue
                 _, field, pos, chars = part
                 for ch in chars:
-                    kids.append(label(f"{name}_{k}_{ord(ch)}", ch, anchor=anchor, offset=at, cond=E.has(field, pos, ch), color=color, scale=scale,
-                                      localize=False, layer=layer))
-            return group(name, kids, cond)
+                    own = E.has(field, pos, ch)
+                    kids.append(label(f"{name}_{k}_{ord(ch)}", ch, anchor=anchor, offset=at, cond=f"({cond} and {own})" if cond else own, color=color,
+                                      scale=scale, localize=False, layer=layer))
+            return group(name, kids)
 
         def digits(field, chars=DIGITS):
             return [("f", field, i, chars) for i in range(E.f[field]["len"])]
@@ -258,8 +265,12 @@ class UiMixin:
         for v in ("1", "2", "3"):
             out.append(label(f"wstr{v}", f"x{v}", offset=(88, 34), cond=E.eq("wstr", v), color=(0.7, 0.9, 1.0), scale=0.8, localize=False))
         # 上：方位バー
-        for i in range(16):
-            out.append(img(f"cmp{i}", f"compass_{i}.png", (192, 18), anchor="top_middle", offset=(0, 2), cond=E.eq("hdg", "%02d" % i)))
+        # 方位バー：2° ごとの 180 枚。上 2 桁のパネル（18 個）で絞り、子は下 1 桁だけを見る（毎フレームの式を減らす）
+        for hi in range(18):
+            tens = "%02d" % hi
+            kids = [img(f"cmp{hi * 10 + lo}", f"compass_{hi * 10 + lo}.png", (192, 18), anchor="top_middle", offset=(0, 2), cond=E.has("hdg", 2, str(lo)))
+                    for lo in range(10)]
+            out.append(group(f"cmpg{tens}", kids, f"({E.has('hdg', 0, tens[0])} and {E.has('hdg', 1, tens[1])})"))
         # 上：ゲームモードの得点（試合中だけ。子はモード名と得点・時間）
         gm_names = {"1": "arsenal.mode_name.ffa", "2": "arsenal.mode_name.tdm", "3": "arsenal.mode_name.gungame", "4": "arsenal.mode_name.horde", "5": "arsenal.mode_name.koth"}
         gm = [img("gm_panel", "panel.png", (150, 30), anchor="top_middle", offset=(0, 22))]
