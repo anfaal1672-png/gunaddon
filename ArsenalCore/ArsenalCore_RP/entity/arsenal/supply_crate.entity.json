@@ -1,0 +1,20 @@
+{
+  "format_version": "1.10.0",
+  "minecraft:client_entity": {
+    "description": {
+      "identifier": "arsenal:supply_crate",
+      "materials": {
+        "default": "entity_alphatest"
+      },
+      "textures": {
+        "default": "textures/entity/arsenal/gear/supply_crate"
+      },
+      "geometry": {
+        "default": "geometry.arsenal.supply_crate"
+      },
+      "render_controllers": [
+        "controller.render.arsenal.crate"
+      ]
+    }
+  }
+}

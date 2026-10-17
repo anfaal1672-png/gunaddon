@@ -1,0 +1,20 @@
+{
+  "format_version": "1.10.0",
+  "minecraft:client_entity": {
+    "description": {
+      "identifier": "arsenal:ammo_station",
+      "materials": {
+        "default": "entity_alphatest"
+      },
+      "textures": {
+        "default": "textures/entity/arsenal/gear/ammo_station"
+      },
+      "geometry": {
+        "default": "geometry.arsenal.ammo_station"
+      },
+      "render_controllers": [
+        "controller.render.arsenal.simple"
+      ]
+    }
+  }
+}

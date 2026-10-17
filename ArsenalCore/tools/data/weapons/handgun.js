@@ -1,0 +1,60 @@
+// ARSENAL CORE データ定義（tools/data/）。ランタイムにはビルド時に 1 ファイル（BP/scripts/config/weapons.data.js）へまとめて出力する。
+import { R } from "./_util.js";
+
+export const HANDGUN = {
+  vx9: {
+    cat: "handgun", tier: "common", name: { ja: "VX-9", en: "VX-9" },
+    desc: { ja: "扱いやすい標準的な自動拳銃。どんな場面でも頼れる相棒", en: "A dependable standard sidearm" },
+    ammo: "light", mag: 15, rpm: 360, modes: ["semi"], dmg: 5.0, head: 2.0, range: [18, 42], falloff: 0.6,
+    spread: R(2.2, 0.45, 1.6, 0.55, 3.5, 0.3), recoil: { v: 1.4, h: 0.5, shake: 0.03 },
+    reload: { tac: 24, empty: 32 }, ads: 3, move: 1.05, pen: 1, sound: "pistol", pitch: 1.05, optic: "iron",
+    slots: ["optic", "muzzle", "laser", "mag"],
+    model: { type: "pistol", slide: 9, h: 2.5, grip: "pistol", finish: "black", accent: "tier" },
+  },
+  wasp: {
+    cat: "handgun", tier: "uncommon", name: { ja: "ワスプ", en: "Wasp" },
+    desc: { ja: "3 点バーストを搭載した機関拳銃。一瞬で畳み掛ける", en: "Three-round burst machine pistol" },
+    ammo: "light", mag: 21, rpm: 1000, burstRpm: 1000, burstDelay: 6, modes: ["burst3", "semi"], dmg: 4.0, head: 1.8, range: [15, 34], falloff: 0.55,
+    spread: R(2.6, 0.7, 1.8, 0.45, 4.0, 0.35), recoil: { v: 1.0, h: 0.6, shake: 0.025 },
+    reload: { tac: 26, empty: 34 }, ads: 3, move: 1.05, pen: 1, sound: "pistol", pitch: 1.18, optic: "iron",
+    slots: ["optic", "muzzle", "laser", "mag"],
+    model: { type: "pistol", slide: 10, h: 2.5, grip: "pistol", finish: "tan", accent: "tier", compensator: true },
+  },
+  ironclad45: {
+    cat: "handgun", tier: "uncommon", name: { ja: "アイアンクラッド .45", en: "Ironclad .45" },
+    desc: { ja: "重いマグナム弾を撃つ大型拳銃。装弾数と引き換えの一撃", en: "Heavy-hitting magnum pistol" },
+    ammo: "magnum", mag: 8, rpm: 240, modes: ["semi"], dmg: 7.5, head: 2.0, range: [20, 46], falloff: 0.6,
+    spread: R(2.4, 0.4, 1.8, 0.9, 4.0, 0.3), recoil: { v: 2.6, h: 0.8, shake: 0.05 },
+    reload: { tac: 28, empty: 36 }, ads: 3, move: 1.03, pen: 2, sound: "magnum", pitch: 1.0, optic: "iron",
+    slots: ["optic", "muzzle", "laser"],
+    model: { type: "pistol", slide: 11, h: 3, grip: "wood", finish: "steel", accent: "tier" },
+  },
+  viper_auto: {
+    cat: "handgun", tier: "rare", name: { ja: "ヴァイパー・オート", en: "Viper Auto" },
+    desc: { ja: "フルオート射撃が可能な拳銃。近距離の瞬間火力は SMG 並み", en: "Fully automatic pistol" },
+    ammo: "light", mag: 20, rpm: 1000, modes: ["auto", "semi"], dmg: 3.0, head: 1.6, range: [12, 30], falloff: 0.5,
+    spread: R(3.2, 1.3, 1.8, 0.35, 5.0, 0.35), recoil: { v: 0.9, h: 1.0, shake: 0.025 },
+    reload: { tac: 28, empty: 38 }, ads: 3, move: 1.05, pen: 1, sound: "pistol", pitch: 1.25, optic: "iron",
+    slots: ["optic", "muzzle", "laser", "mag", "stock"],
+    model: { type: "pistol", slide: 10, h: 2.5, grip: "pistol", finish: "od", accent: "tier", extMag: true, stub: true },
+  },
+  warden: {
+    cat: "handgun", tier: "rare", name: { ja: "ウォーデン", en: "Warden" },
+    desc: { ja: "大口径リボルバー。6 発に全てを込める", en: "Large-bore revolver" },
+    ammo: "magnum", mag: 6, rpm: 150, modes: ["semi"], dmg: 11.0, head: 2.0, range: [24, 55], falloff: 0.65,
+    spread: R(2.2, 0.3, 1.8, 1.3, 4.5, 0.25), recoil: { v: 4.4, h: 1.2, shake: 0.08 },
+    reload: { tac: 44, empty: 44 }, ads: 4, move: 1.02, pen: 2, sound: "magnum", pitch: 0.82, optic: "iron",
+    slots: ["optic", "laser"],
+    model: { type: "revolver", slide: 12, h: 3, grip: "wood", finish: "steel", accent: "tier" },
+  },
+  flare_pistol: {
+    cat: "handgun", tier: "common", name: { ja: "フレアピストル", en: "Flare Pistol" },
+    desc: { ja: "照明弾を放つ。着弾点を照らし、敵を燃やす", en: "Fires illuminating, burning flares" },
+    ammo: "flare", mag: 1, rpm: 60, modes: ["semi"], dmg: 4.0, head: 1.0, range: [60, 90], falloff: 1.0,
+    spread: R(1.0, 0.4, 0.8, 0, 0, 0.3), recoil: { v: 3.0, h: 0.4, shake: 0.05 },
+    reload: { tac: 30, empty: 30 }, ads: 3, move: 1.05, pen: 0, sound: "flare", pitch: 1.0, optic: "iron",
+    fire: "flare", projectile: { speed: 1.6, gravity: 0.03, fire: 6, light: 300 },
+    slots: [],
+    model: { type: "flare", slide: 9, h: 3, grip: "pistol", finish: "orange", accent: "tier" },
+  },
+};

@@ -1,0 +1,36 @@
+{
+  "format_version": "1.20.10",
+  "minecraft:recipe_shaped": {
+    "description": {
+      "identifier": "arsenal:ammo_press"
+    },
+    "tags": [
+      "crafting_table"
+    ],
+    "pattern": [
+      "SRS",
+      "SFS",
+      "SSS"
+    ],
+    "key": {
+      "S": {
+        "item": "arsenal:steel_ingot"
+      },
+      "R": {
+        "item": "minecraft:redstone"
+      },
+      "F": {
+        "item": "minecraft:furnace"
+      }
+    },
+    "result": {
+      "item": "arsenal:ammo_press",
+      "count": 1
+    },
+    "unlock": [
+      {
+        "item": "minecraft:furnace"
+      }
+    ]
+  }
+}

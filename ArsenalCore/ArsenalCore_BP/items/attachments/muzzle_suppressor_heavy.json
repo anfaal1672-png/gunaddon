@@ -1,0 +1,25 @@
+{
+  "format_version": "1.26.30",
+  "minecraft:item": {
+    "description": {
+      "identifier": "arsenal:muzzle_suppressor_heavy",
+      "menu_category": {
+        "category": "equipment"
+      }
+    },
+    "components": {
+      "minecraft:icon": "arsenal_muzzle_suppressor_heavy",
+      "minecraft:display_name": {
+        "value": "item.arsenal.muzzle_suppressor_heavy.name"
+      },
+      "minecraft:max_stack_size": 16,
+      "minecraft:tags": {
+        "tags": [
+          "arsenal:attachment",
+          "arsenal:slot_muzzle"
+        ]
+      },
+      "minecraft:rarity": "rare"
+    }
+  }
+}

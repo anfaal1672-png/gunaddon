@@ -1,0 +1,1225 @@
+{
+  "pools": [
+    {
+      "rolls": 3,
+      "entries": [
+        {
+          "type": "item",
+          "weight": 15,
+          "functions": [
+            {
+              "function": "set_count",
+              "count": 1
+            }
+          ],
+          "name": "minecraft:netherite_ingot"
+        },
+        {
+          "type": "item",
+          "weight": 2,
+          "functions": [
+            {
+              "function": "set_count",
+              "count": 1
+            }
+          ],
+          "name": "minecraft:enchanted_golden_apple"
+        },
+        {
+          "type": "item",
+          "weight": 8,
+          "functions": [
+            {
+              "function": "set_count",
+              "count": 1
+            }
+          ],
+          "name": "minecraft:netherite_scrap"
+        },
+        {
+          "type": "item",
+          "functions": [
+            {
+              "function": "set_count",
+              "count": 2
+            }
+          ],
+          "name": "minecraft:ancient_debris",
+          "weight": 4
+        },
+        {
+          "type": "item",
+          "weight": 6,
+          "functions": [
+            {
+              "function": "minecraft:set_damage",
+              "damage": {
+                "min": 0.8,
+                "max": 1
+              }
+            },
+            {
+              "function": "enchant_randomly"
+            }
+          ],
+          "name": "minecraft:diamond_sword"
+        },
+        {
+          "type": "item",
+          "weight": 6,
+          "functions": [
+            {
+              "function": "minecraft:set_damage",
+              "damage": {
+                "min": 0.8,
+                "max": 1
+              }
+            },
+            {
+              "function": "enchant_randomly"
+            }
+          ],
+          "name": "minecraft:diamond_spear"
+        },
+        {
+          "type": "item",
+          "weight": 6,
+          "functions": [
+            {
+              "function": "minecraft:set_damage",
+              "damage": {
+                "min": 0.8,
+                "max": 1
+              }
+            },
+            {
+              "function": "enchant_randomly"
+            }
+          ],
+          "name": "minecraft:diamond_chestplate"
+        },
+        {
+          "type": "item",
+          "weight": 6,
+          "functions": [
+            {
+              "function": "minecraft:set_damage",
+              "damage": {
+                "min": 0.8,
+                "max": 1
+              }
+            },
+            {
+              "function": "enchant_randomly"
+            }
+          ],
+          "name": "minecraft:diamond_helmet"
+        },
+        {
+          "type": "item",
+          "weight": 6,
+          "functions": [
+            {
+              "function": "minecraft:set_damage",
+              "damage": {
+                "min": 0.8,
+                "max": 1
+              }
+            },
+            {
+              "function": "enchant_randomly"
+            }
+          ],
+          "name": "minecraft:diamond_leggings"
+        },
+        {
+          "type": "item",
+          "weight": 6,
+          "functions": [
+            {
+              "function": "minecraft:set_damage",
+              "damage": {
+                "min": 0.8,
+                "max": 1
+              }
+            },
+            {
+              "function": "enchant_randomly"
+            }
+          ],
+          "name": "minecraft:diamond_boots"
+        },
+        {
+          "type": "item",
+          "weight": 6,
+          "name": "minecraft:diamond_sword"
+        },
+        {
+          "type": "item",
+          "weight": 6,
+          "name": "minecraft:diamond_spear"
+        },
+        {
+          "type": "item",
+          "weight": 5,
+          "name": "minecraft:diamond_chestplate"
+        },
+        {
+          "type": "item",
+          "weight": 5,
+          "name": "minecraft:diamond_helmet"
+        },
+        {
+          "type": "item",
+          "weight": 5,
+          "name": "minecraft:diamond_boots"
+        },
+        {
+          "type": "item",
+          "weight": 5,
+          "name": "minecraft:diamond_leggings"
+        },
+        {
+          "type": "item",
+          "weight": 5,
+          "functions": [
+            {
+              "function": "set_count",
+              "count": {
+                "min": 2,
+                "max": 6
+              }
+            }
+          ],
+          "name": "minecraft:diamond"
+        }
+      ]
+    },
+    {
+      "rolls": {
+        "min": 3,
+        "max": 4
+      },
+      "entries": [
+        {
+          "type": "item",
+          "functions": [
+            {
+              "function": "set_count",
+              "count": {
+                "min": 12,
+                "max": 25
+              }
+            }
+          ],
+          "name": "minecraft:arrow",
+          "weight": 1
+        },
+        {
+          "type": "item",
+          "functions": [
+            {
+              "function": "set_count",
+              "count": {
+                "min": 2,
+                "max": 5
+              }
+            }
+          ],
+          "name": "minecraft:gold_block",
+          "weight": 1
+        },
+        {
+          "type": "item",
+          "functions": [
+            {
+              "function": "set_count",
+              "count": {
+                "min": 3,
+                "max": 9
+              }
+            }
+          ],
+          "name": "minecraft:gold_ingot",
+          "weight": 1
+        },
+        {
+          "type": "item",
+          "functions": [
+            {
+              "function": "set_count",
+              "count": {
+                "min": 3,
+                "max": 9
+              }
+            }
+          ],
+          "name": "minecraft:iron_ingot",
+          "weight": 1
+        },
+        {
+          "type": "item",
+          "functions": [
+            {
+              "function": "set_count",
+              "count": {
+                "min": 3,
+                "max": 5
+              }
+            }
+          ],
+          "name": "minecraft:crying_obsidian",
+          "weight": 1
+        },
+        {
+          "type": "item",
+          "functions": [
+            {
+              "function": "set_count",
+              "count": {
+                "min": 8,
+                "max": 23
+              }
+            }
+          ],
+          "name": "minecraft:quartz",
+          "weight": 1
+        },
+        {
+          "type": "item",
+          "functions": [
+            {
+              "function": "set_count",
+              "count": {
+                "min": 5,
+                "max": 15
+              }
+            }
+          ],
+          "name": "minecraft:gilded_blackstone",
+          "weight": 1
+        },
+        {
+          "type": "item",
+          "functions": [
+            {
+              "function": "set_count",
+              "count": {
+                "min": 3,
+                "max": 8
+              }
+            }
+          ],
+          "name": "minecraft:magma_cream",
+          "weight": 1
+        },
+        {
+          "type": "item",
+          "functions": [
+            {
+              "function": "set_count",
+              "count": {
+                "min": 2,
+                "max": 5
+              }
+            }
+          ],
+          "name": "minecraft:iron_block",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "empty",
+          "weight": 11
+        },
+        {
+          "type": "item",
+          "name": "minecraft:snout_armor_trim_smithing_template",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "item",
+          "name": "minecraft:netherite_upgrade_smithing_template",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "item",
+          "name": "arsenal:viper_auto",
+          "weight": 2,
+          "functions": [
+            {
+              "function": "set_damage",
+              "damage": {
+                "min": 0.35,
+                "max": 0.9
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "arsenal:warden",
+          "weight": 2,
+          "functions": [
+            {
+              "function": "set_damage",
+              "damage": {
+                "min": 0.35,
+                "max": 0.9
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "arsenal:cinder",
+          "weight": 2,
+          "functions": [
+            {
+              "function": "set_damage",
+              "damage": {
+                "min": 0.35,
+                "max": 0.9
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "arsenal:kestrel_pdw",
+          "weight": 2,
+          "functions": [
+            {
+              "function": "set_damage",
+              "damage": {
+                "min": 0.35,
+                "max": 0.9
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "arsenal:specter",
+          "weight": 2,
+          "functions": [
+            {
+              "function": "set_damage",
+              "damage": {
+                "min": 0.35,
+                "max": 0.9
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "arsenal:ridgeback",
+          "weight": 2,
+          "functions": [
+            {
+              "function": "set_damage",
+              "damage": {
+                "min": 0.35,
+                "max": 0.9
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "arsenal:bastion",
+          "weight": 2,
+          "functions": [
+            {
+              "function": "set_damage",
+              "damage": {
+                "min": 0.35,
+                "max": 0.9
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "arsenal:ravager",
+          "weight": 2,
+          "functions": [
+            {
+              "function": "set_damage",
+              "damage": {
+                "min": 0.35,
+                "max": 0.9
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "arsenal:monsoon",
+          "weight": 2,
+          "functions": [
+            {
+              "function": "set_damage",
+              "damage": {
+                "min": 0.35,
+                "max": 0.9
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "arsenal:anvil",
+          "weight": 2,
+          "functions": [
+            {
+              "function": "set_damage",
+              "damage": {
+                "min": 0.35,
+                "max": 0.9
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "arsenal:harrier",
+          "weight": 2,
+          "functions": [
+            {
+              "function": "set_damage",
+              "damage": {
+                "min": 0.35,
+                "max": 0.9
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "arsenal:halberd",
+          "weight": 2,
+          "functions": [
+            {
+              "function": "set_damage",
+              "damage": {
+                "min": 0.35,
+                "max": 0.9
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "arsenal:heron",
+          "weight": 2,
+          "functions": [
+            {
+              "function": "set_damage",
+              "damage": {
+                "min": 0.35,
+                "max": 0.9
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "arsenal:obelisk",
+          "weight": 2,
+          "functions": [
+            {
+              "function": "set_damage",
+              "damage": {
+                "min": 0.35,
+                "max": 0.9
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "arsenal:magistrate",
+          "weight": 2,
+          "functions": [
+            {
+              "function": "set_damage",
+              "damage": {
+                "min": 0.35,
+                "max": 0.9
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "arsenal:longwatch",
+          "weight": 2,
+          "functions": [
+            {
+              "function": "set_damage",
+              "damage": {
+                "min": 0.35,
+                "max": 0.9
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "arsenal:whisper",
+          "weight": 2,
+          "functions": [
+            {
+              "function": "set_damage",
+              "damage": {
+                "min": 0.35,
+                "max": 0.9
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "arsenal:falcon",
+          "weight": 2,
+          "functions": [
+            {
+              "function": "set_damage",
+              "damage": {
+                "min": 0.35,
+                "max": 0.9
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "arsenal:albatross",
+          "weight": 2,
+          "functions": [
+            {
+              "function": "set_damage",
+              "damage": {
+                "min": 0.35,
+                "max": 0.9
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "arsenal:wraithmark",
+          "weight": 2,
+          "functions": [
+            {
+              "function": "set_damage",
+              "damage": {
+                "min": 0.35,
+                "max": 0.9
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "arsenal:reaper_auto",
+          "weight": 2,
+          "functions": [
+            {
+              "function": "set_damage",
+              "damage": {
+                "min": 0.35,
+                "max": 0.9
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "arsenal:dragons_breath",
+          "weight": 2,
+          "functions": [
+            {
+              "function": "set_damage",
+              "damage": {
+                "min": 0.35,
+                "max": 0.9
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "arsenal:thresher",
+          "weight": 2,
+          "functions": [
+            {
+              "function": "set_damage",
+              "damage": {
+                "min": 0.35,
+                "max": 0.9
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "arsenal:triad",
+          "weight": 2,
+          "functions": [
+            {
+              "function": "set_damage",
+              "damage": {
+                "min": 0.35,
+                "max": 0.9
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "arsenal:grinder",
+          "weight": 2,
+          "functions": [
+            {
+              "function": "set_damage",
+              "damage": {
+                "min": 0.35,
+                "max": 0.9
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "arsenal:bulwark",
+          "weight": 2,
+          "functions": [
+            {
+              "function": "set_damage",
+              "damage": {
+                "min": 0.35,
+                "max": 0.9
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "arsenal:titan",
+          "weight": 2,
+          "functions": [
+            {
+              "function": "set_damage",
+              "damage": {
+                "min": 0.35,
+                "max": 0.9
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "arsenal:hellmouth",
+          "weight": 2,
+          "functions": [
+            {
+              "function": "set_damage",
+              "damage": {
+                "min": 0.35,
+                "max": 0.9
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "arsenal:hammerfall",
+          "weight": 2,
+          "functions": [
+            {
+              "function": "set_damage",
+              "damage": {
+                "min": 0.35,
+                "max": 0.9
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "arsenal:sawtooth",
+          "weight": 2,
+          "functions": [
+            {
+              "function": "set_damage",
+              "damage": {
+                "min": 0.35,
+                "max": 0.9
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "arsenal:hailstorm",
+          "weight": 2,
+          "functions": [
+            {
+              "function": "set_damage",
+              "damage": {
+                "min": 0.35,
+                "max": 0.9
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "arsenal:kraken",
+          "weight": 2,
+          "functions": [
+            {
+              "function": "set_damage",
+              "damage": {
+                "min": 0.35,
+                "max": 0.9
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "arsenal:mortarman",
+          "weight": 2,
+          "functions": [
+            {
+              "function": "set_damage",
+              "damage": {
+                "min": 0.35,
+                "max": 0.9
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "arsenal:pulse_rifle",
+          "weight": 2,
+          "functions": [
+            {
+              "function": "set_damage",
+              "damage": {
+                "min": 0.35,
+                "max": 0.9
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "arsenal:cryo_lance",
+          "weight": 2,
+          "functions": [
+            {
+              "function": "set_damage",
+              "damage": {
+                "min": 0.35,
+                "max": 0.9
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "arsenal:arc_coilgun",
+          "weight": 2,
+          "functions": [
+            {
+              "function": "set_damage",
+              "damage": {
+                "min": 0.35,
+                "max": 0.9
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "arsenal:plasma_repeater",
+          "weight": 2,
+          "functions": [
+            {
+              "function": "set_damage",
+              "damage": {
+                "min": 0.35,
+                "max": 0.9
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "arsenal:sonic_disruptor",
+          "weight": 2,
+          "functions": [
+            {
+              "function": "set_damage",
+              "damage": {
+                "min": 0.35,
+                "max": 0.9
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "arsenal:leviathan",
+          "weight": 1,
+          "functions": [
+            {
+              "function": "set_damage",
+              "damage": {
+                "min": 0.35,
+                "max": 0.9
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "arsenal:railspike",
+          "weight": 1,
+          "functions": [
+            {
+              "function": "set_damage",
+              "damage": {
+                "min": 0.35,
+                "max": 0.9
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "arsenal:behemoth",
+          "weight": 1,
+          "functions": [
+            {
+              "function": "set_damage",
+              "damage": {
+                "min": 0.35,
+                "max": 0.9
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "arsenal:seeker",
+          "weight": 1,
+          "functions": [
+            {
+              "function": "set_damage",
+              "damage": {
+                "min": 0.35,
+                "max": 0.9
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "arsenal:stormcaller",
+          "weight": 1,
+          "functions": [
+            {
+              "function": "set_damage",
+              "damage": {
+                "min": 0.35,
+                "max": 0.9
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "arsenal:skypiercer",
+          "weight": 1,
+          "functions": [
+            {
+              "function": "set_damage",
+              "damage": {
+                "min": 0.35,
+                "max": 0.9
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "arsenal:arc_caster",
+          "weight": 1,
+          "functions": [
+            {
+              "function": "set_damage",
+              "damage": {
+                "min": 0.35,
+                "max": 0.9
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "arsenal:photon_lance",
+          "weight": 1,
+          "functions": [
+            {
+              "function": "set_damage",
+              "damage": {
+                "min": 0.35,
+                "max": 0.9
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "arsenal:gravitas",
+          "weight": 1,
+          "functions": [
+            {
+              "function": "set_damage",
+              "damage": {
+                "min": 0.35,
+                "max": 0.9
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "arsenal:void_needle",
+          "weight": 1,
+          "functions": [
+            {
+              "function": "set_damage",
+              "damage": {
+                "min": 0.35,
+                "max": 0.9
+              }
+            }
+          ]
+        },
+        {
+          "type": "empty",
+          "weight": 6
+        }
+      ]
+    },
+    {
+      "rolls": {
+        "min": 1,
+        "max": 2
+      },
+      "entries": [
+        {
+          "type": "item",
+          "name": "arsenal:optic_2x",
+          "weight": 2
+        },
+        {
+          "type": "item",
+          "name": "arsenal:optic_4x",
+          "weight": 2
+        },
+        {
+          "type": "item",
+          "name": "arsenal:muzzle_suppressor",
+          "weight": 2
+        },
+        {
+          "type": "item",
+          "name": "arsenal:muzzle_brake",
+          "weight": 2
+        },
+        {
+          "type": "item",
+          "name": "arsenal:bipod",
+          "weight": 2
+        },
+        {
+          "type": "item",
+          "name": "arsenal:mag_drum",
+          "weight": 2
+        },
+        {
+          "type": "item",
+          "name": "arsenal:mag_quick",
+          "weight": 2
+        },
+        {
+          "type": "item",
+          "name": "arsenal:stock_heavy",
+          "weight": 2
+        },
+        {
+          "type": "item",
+          "name": "arsenal:optic_prism3",
+          "weight": 2
+        },
+        {
+          "type": "item",
+          "name": "arsenal:optic_rangefinder",
+          "weight": 2
+        },
+        {
+          "type": "item",
+          "name": "arsenal:side_canted",
+          "weight": 2
+        },
+        {
+          "type": "item",
+          "name": "arsenal:laser_combo",
+          "weight": 2
+        },
+        {
+          "type": "item",
+          "name": "arsenal:muzzle_duckbill",
+          "weight": 2
+        },
+        {
+          "type": "item",
+          "name": "arsenal:barrel_long",
+          "weight": 2
+        },
+        {
+          "type": "item",
+          "name": "arsenal:barrel_heavy",
+          "weight": 2
+        },
+        {
+          "type": "item",
+          "name": "arsenal:ub_grapple",
+          "weight": 2
+        },
+        {
+          "type": "item",
+          "name": "arsenal:stock_skeleton",
+          "weight": 2
+        },
+        {
+          "type": "item",
+          "name": "arsenal:stock_cheek",
+          "weight": 2
+        },
+        {
+          "type": "item",
+          "name": "arsenal:trigger_match",
+          "weight": 2
+        },
+        {
+          "type": "item",
+          "name": "arsenal:ammo_subsonic",
+          "weight": 2
+        },
+        {
+          "type": "item",
+          "name": "arsenal:ammo_frangible",
+          "weight": 2
+        },
+        {
+          "type": "item",
+          "name": "arsenal:optic_8x",
+          "weight": 3
+        },
+        {
+          "type": "item",
+          "name": "arsenal:optic_thermal",
+          "weight": 3
+        },
+        {
+          "type": "item",
+          "name": "arsenal:ub_launcher",
+          "weight": 3
+        },
+        {
+          "type": "item",
+          "name": "arsenal:ub_shotgun",
+          "weight": 3
+        },
+        {
+          "type": "item",
+          "name": "arsenal:optic_12x",
+          "weight": 3
+        },
+        {
+          "type": "item",
+          "name": "arsenal:optic_variable",
+          "weight": 3
+        },
+        {
+          "type": "item",
+          "name": "arsenal:optic_nv",
+          "weight": 3
+        },
+        {
+          "type": "item",
+          "name": "arsenal:muzzle_suppressor_heavy",
+          "weight": 3
+        },
+        {
+          "type": "item",
+          "name": "arsenal:barrel_fluted",
+          "weight": 3
+        },
+        {
+          "type": "item",
+          "name": "arsenal:ub_flamer",
+          "weight": 3
+        },
+        {
+          "type": "item",
+          "name": "arsenal:mag_belt",
+          "weight": 3
+        },
+        {
+          "type": "item",
+          "name": "arsenal:trigger_rapid",
+          "weight": 3
+        },
+        {
+          "type": "item",
+          "name": "arsenal:ammo_rocket",
+          "weight": 3,
+          "functions": [
+            {
+              "function": "set_count",
+              "count": {
+                "min": 1,
+                "max": 3
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "format_version": "1.10.0",
+  "minecraft:attachable": {
+    "description": {
+      "identifier": "arsenal:juggernaut__o2",
+      "materials": {
+        "default": "entity_alphatest",
+        "enchanted": "entity_alphatest_glint"
+      },
+      "textures": {
+        "default": "textures/entity/arsenal/weapons/juggernaut",
+        "enchanted": "textures/misc/enchanted_item_glint"
+      },
+      "geometry": {
+        "default": "geometry.arsenal.juggernaut__o2"
+      },
+      "animations": {
+        "tp": "animation.arsenal.juggernaut.tp",
+        "fp": "animation.arsenal.juggernaut.fp"
+      },
+      "scripts": {
+        "animate": [
+          {
+            "tp": "c.is_first_person == 0.0"
+          },
+          {
+            "fp": "c.is_first_person == 1.0"
+          }
+        ]
+      },
+      "render_controllers": [
+        "controller.render.item_default"
+      ]
+    }
+  }
+}

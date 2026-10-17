@@ -1,0 +1,444 @@
+{
+  "format_version": "1.26.50",
+  "minecraft:crafting_items_catalog": {
+    "categories": [
+      {
+        "category_name": "equipment",
+        "groups": [
+          {
+            "group_identifier": {
+              "icon": "arsenal:vx9",
+              "name": "arsenal:itemGroup.name.handgun"
+            },
+            "items": [
+              "arsenal:vx9",
+              "arsenal:wasp",
+              "arsenal:ironclad45",
+              "arsenal:viper_auto",
+              "arsenal:warden",
+              "arsenal:flare_pistol"
+            ]
+          },
+          {
+            "group_identifier": {
+              "icon": "arsenal:midge",
+              "name": "arsenal:itemGroup.name.machine_pistol"
+            },
+            "items": [
+              "arsenal:midge",
+              "arsenal:clawstrike",
+              "arsenal:cinder",
+              "arsenal:wisp"
+            ]
+          },
+          {
+            "group_identifier": {
+              "icon": "arsenal:hornet",
+              "name": "arsenal:itemGroup.name.smg"
+            },
+            "items": [
+              "arsenal:hornet",
+              "arsenal:mako",
+              "arsenal:rattler",
+              "arsenal:kestrel_pdw",
+              "arsenal:stinger",
+              "arsenal:specter"
+            ]
+          },
+          {
+            "group_identifier": {
+              "icon": "arsenal:drifter",
+              "name": "arsenal:itemGroup.name.carbine"
+            },
+            "items": [
+              "arsenal:drifter",
+              "arsenal:pathfinder",
+              "arsenal:ridgeback",
+              "arsenal:quillback"
+            ]
+          },
+          {
+            "group_identifier": {
+              "icon": "arsenal:sentinel",
+              "name": "arsenal:itemGroup.name.assault"
+            },
+            "items": [
+              "arsenal:sentinel",
+              "arsenal:tempest",
+              "arsenal:bastion",
+              "arsenal:echo3",
+              "arsenal:nomad",
+              "arsenal:ravager",
+              "arsenal:monsoon",
+              "arsenal:garrison",
+              "arsenal:zephyr",
+              "arsenal:ironbark"
+            ]
+          },
+          {
+            "group_identifier": {
+              "icon": "arsenal:longbow",
+              "name": "arsenal:itemGroup.name.battle"
+            },
+            "items": [
+              "arsenal:longbow",
+              "arsenal:anvil",
+              "arsenal:harrier",
+              "arsenal:halberd"
+            ]
+          },
+          {
+            "group_identifier": {
+              "icon": "arsenal:marksman12",
+              "name": "arsenal:itemGroup.name.dmr"
+            },
+            "items": [
+              "arsenal:marksman12",
+              "arsenal:heron",
+              "arsenal:obelisk",
+              "arsenal:kitehawk",
+              "arsenal:magistrate",
+              "arsenal:longwatch"
+            ]
+          },
+          {
+            "group_identifier": {
+              "icon": "arsenal:nightjar",
+              "name": "arsenal:itemGroup.name.sniper"
+            },
+            "items": [
+              "arsenal:nightjar",
+              "arsenal:leviathan",
+              "arsenal:whisper",
+              "arsenal:falcon",
+              "arsenal:railspike",
+              "arsenal:albatross",
+              "arsenal:stillwater",
+              "arsenal:behemoth",
+              "arsenal:wraithmark"
+            ]
+          },
+          {
+            "group_identifier": {
+              "icon": "arsenal:breacher",
+              "name": "arsenal:itemGroup.name.shotgun"
+            },
+            "items": [
+              "arsenal:breacher",
+              "arsenal:coachman",
+              "arsenal:reaper_auto",
+              "arsenal:slugger",
+              "arsenal:dragons_breath",
+              "arsenal:thresher",
+              "arsenal:lever12",
+              "arsenal:triad",
+              "arsenal:mauler"
+            ]
+          },
+          {
+            "group_identifier": {
+              "icon": "arsenal:juggernaut",
+              "name": "arsenal:itemGroup.name.lmg"
+            },
+            "items": [
+              "arsenal:juggernaut",
+              "arsenal:grinder",
+              "arsenal:bulwark"
+            ]
+          },
+          {
+            "group_identifier": {
+              "icon": "arsenal:titan",
+              "name": "arsenal:itemGroup.name.heavy"
+            },
+            "items": [
+              "arsenal:titan",
+              "arsenal:hellmouth",
+              "arsenal:hammerfall",
+              "arsenal:rampart",
+              "arsenal:sawtooth"
+            ]
+          },
+          {
+            "group_identifier": {
+              "icon": "arsenal:thumper",
+              "name": "arsenal:itemGroup.name.launcher"
+            },
+            "items": [
+              "arsenal:thumper",
+              "arsenal:hailstorm",
+              "arsenal:kraken",
+              "arsenal:seeker",
+              "arsenal:stormcaller",
+              "arsenal:skypiercer",
+              "arsenal:bouncer",
+              "arsenal:mortarman"
+            ]
+          },
+          {
+            "group_identifier": {
+              "icon": "arsenal:pulse_rifle",
+              "name": "arsenal:itemGroup.name.special"
+            },
+            "items": [
+              "arsenal:pulse_rifle",
+              "arsenal:arc_caster",
+              "arsenal:cryo_lance",
+              "arsenal:grapple",
+              "arsenal:photon_lance",
+              "arsenal:gravitas",
+              "arsenal:arc_coilgun",
+              "arsenal:plasma_repeater",
+              "arsenal:void_needle",
+              "arsenal:sonic_disruptor"
+            ]
+          },
+          {
+            "group_identifier": {
+              "icon": "arsenal:combat_knife",
+              "name": "arsenal:itemGroup.name.melee"
+            },
+            "items": [
+              "arsenal:combat_knife",
+              "arsenal:machete",
+              "arsenal:breaching_axe",
+              "arsenal:riot_baton",
+              "arsenal:spring_knife",
+              "arsenal:vibro_blade"
+            ]
+          },
+          {
+            "group_identifier": {
+              "icon": "arsenal:optic_4x",
+              "name": "arsenal:itemGroup.name.attachments"
+            },
+            "items": [
+              "arsenal:optic_reddot",
+              "arsenal:optic_holo",
+              "arsenal:optic_2x",
+              "arsenal:optic_4x",
+              "arsenal:optic_8x",
+              "arsenal:optic_thermal",
+              "arsenal:muzzle_suppressor",
+              "arsenal:muzzle_compensator",
+              "arsenal:muzzle_brake",
+              "arsenal:muzzle_flash_hider",
+              "arsenal:muzzle_choke",
+              "arsenal:grip_vertical",
+              "arsenal:grip_angled",
+              "arsenal:bipod",
+              "arsenal:ub_launcher",
+              "arsenal:ub_shotgun",
+              "arsenal:mag_extended",
+              "arsenal:mag_drum",
+              "arsenal:mag_quick",
+              "arsenal:laser_tactical",
+              "arsenal:flashlight",
+              "arsenal:stock_light",
+              "arsenal:stock_heavy",
+              "arsenal:optic_prism3",
+              "arsenal:optic_12x",
+              "arsenal:optic_variable",
+              "arsenal:optic_nv",
+              "arsenal:optic_rangefinder",
+              "arsenal:side_canted",
+              "arsenal:laser_combo",
+              "arsenal:muzzle_suppressor_light",
+              "arsenal:muzzle_suppressor_heavy",
+              "arsenal:muzzle_flash_cone",
+              "arsenal:muzzle_duckbill",
+              "arsenal:muzzle_bayonet",
+              "arsenal:barrel_long",
+              "arsenal:barrel_short",
+              "arsenal:barrel_heavy",
+              "arsenal:barrel_fluted",
+              "arsenal:ub_flamer",
+              "arsenal:ub_grapple",
+              "arsenal:mag_dual",
+              "arsenal:mag_belt",
+              "arsenal:stock_folding",
+              "arsenal:stock_skeleton",
+              "arsenal:stock_cheek",
+              "arsenal:trigger_hair",
+              "arsenal:trigger_match",
+              "arsenal:trigger_rapid",
+              "arsenal:ammo_hollow",
+              "arsenal:ammo_subsonic",
+              "arsenal:ammo_frangible",
+              "arsenal:ammo_explosive"
+            ]
+          },
+          {
+            "group_identifier": {
+              "icon": "arsenal:grenade_frag",
+              "name": "arsenal:itemGroup.name.throwables"
+            },
+            "items": [
+              "arsenal:grenade_frag",
+              "arsenal:grenade_impact",
+              "arsenal:grenade_smoke",
+              "arsenal:grenade_flash",
+              "arsenal:molotov",
+              "arsenal:sticky_bomb",
+              "arsenal:c4",
+              "arsenal:landmine",
+              "arsenal:grenade_gas",
+              "arsenal:grenade_emp",
+              "arsenal:grenade_cluster",
+              "arsenal:grenade_decoy",
+              "arsenal:throwing_knife",
+              "arsenal:grenade_snap",
+              "arsenal:detonator"
+            ]
+          },
+          {
+            "group_identifier": {
+              "icon": "arsenal:helmet_standard_2",
+              "name": "arsenal:itemGroup.name.armor"
+            },
+            "items": [
+              "arsenal:helmet_light_1",
+              "arsenal:vest_light_1",
+              "arsenal:helmet_light_2",
+              "arsenal:vest_light_2",
+              "arsenal:helmet_light_3",
+              "arsenal:vest_light_3",
+              "arsenal:helmet_standard_1",
+              "arsenal:vest_standard_1",
+              "arsenal:helmet_standard_2",
+              "arsenal:vest_standard_2",
+              "arsenal:helmet_standard_3",
+              "arsenal:vest_standard_3",
+              "arsenal:helmet_heavy_1",
+              "arsenal:vest_heavy_1",
+              "arsenal:helmet_heavy_2",
+              "arsenal:vest_heavy_2",
+              "arsenal:helmet_heavy_3",
+              "arsenal:vest_heavy_3",
+              "arsenal:helmet_specops_1",
+              "arsenal:vest_specops_1",
+              "arsenal:helmet_specops_2",
+              "arsenal:vest_specops_2",
+              "arsenal:helmet_specops_3",
+              "arsenal:vest_specops_3",
+              "arsenal:nvg_helmet",
+              "arsenal:gas_mask",
+              "arsenal:ghillie_suit"
+            ]
+          },
+          {
+            "group_identifier": {
+              "icon": "arsenal:medkit",
+              "name": "arsenal:itemGroup.name.medical"
+            },
+            "items": [
+              "arsenal:bandage",
+              "arsenal:medkit",
+              "arsenal:adrenaline",
+              "arsenal:defibrillator",
+              "arsenal:armor_plate"
+            ]
+          },
+          {
+            "group_identifier": {
+              "icon": "arsenal:sentry_turret",
+              "name": "arsenal:itemGroup.name.deployables"
+            },
+            "items": [
+              "arsenal:sentry_turret",
+              "arsenal:deploy_shield",
+              "arsenal:claymore",
+              "arsenal:ammo_station",
+              "arsenal:med_station",
+              "arsenal:mortar_emplacement",
+              "arsenal:recon_drone",
+              "arsenal:riot_shield",
+              "arsenal:hmg_nest",
+              "arsenal:aa_gun",
+              "arsenal:at_post",
+              "arsenal:buggy"
+            ]
+          },
+          {
+            "items": [
+              "arsenal:field_manual",
+              "arsenal:repair_kit",
+              "arsenal:streak_terminal",
+              "arsenal:arena_tool",
+              "arsenal:warlord_banner",
+              "arsenal:legion_core"
+            ]
+          }
+        ]
+      },
+      {
+        "category_name": "items",
+        "groups": [
+          {
+            "group_identifier": {
+              "icon": "arsenal:ammo_medium",
+              "name": "arsenal:itemGroup.name.ammo"
+            },
+            "items": [
+              "arsenal:ammo_light",
+              "arsenal:ammo_light_ap",
+              "arsenal:ammo_light_inc",
+              "arsenal:ammo_light_tracer",
+              "arsenal:ammo_medium",
+              "arsenal:ammo_medium_ap",
+              "arsenal:ammo_medium_inc",
+              "arsenal:ammo_medium_tracer",
+              "arsenal:ammo_heavy",
+              "arsenal:ammo_heavy_ap",
+              "arsenal:ammo_heavy_inc",
+              "arsenal:ammo_heavy_tracer",
+              "arsenal:ammo_magnum",
+              "arsenal:ammo_magnum_ap",
+              "arsenal:ammo_magnum_inc",
+              "arsenal:ammo_magnum_tracer",
+              "arsenal:ammo_precision",
+              "arsenal:ammo_precision_ap",
+              "arsenal:ammo_precision_inc",
+              "arsenal:ammo_precision_tracer",
+              "arsenal:shell_buck",
+              "arsenal:shell_slug",
+              "arsenal:shell_fire",
+              "arsenal:ammo_40mm",
+              "arsenal:ammo_rocket",
+              "arsenal:energy_cell",
+              "arsenal:flare_shell",
+              "arsenal:ammo_antimat",
+              "arsenal:ammo_antimat_ap",
+              "arsenal:fuel_canister",
+              "arsenal:mortar_shell"
+            ]
+          },
+          {
+            "group_identifier": {
+              "icon": "arsenal:steel_ingot",
+              "name": "arsenal:itemGroup.name.materials"
+            },
+            "items": [
+              "arsenal:steel_ingot",
+              "arsenal:precision_parts",
+              "arsenal:polymer",
+              "arsenal:energy_core"
+            ]
+          },
+          {
+            "group_identifier": {
+              "icon": "arsenal:weapon_bench",
+              "name": "arsenal:itemGroup.name.stations"
+            },
+            "items": [
+              "arsenal:weapon_bench",
+              "arsenal:ammo_press",
+              "arsenal:ammo_crate",
+              "arsenal:target_kit"
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

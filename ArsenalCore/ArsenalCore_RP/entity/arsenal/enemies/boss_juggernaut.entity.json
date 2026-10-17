@@ -1,0 +1,42 @@
+{
+  "format_version": "1.10.0",
+  "minecraft:client_entity": {
+    "description": {
+      "identifier": "arsenal:boss_juggernaut",
+      "materials": {
+        "default": "entity_alphatest"
+      },
+      "textures": {
+        "default": "textures/entity/arsenal/enemies/boss_juggernaut"
+      },
+      "geometry": {
+        "default": "geometry.arsenal.boss_juggernaut"
+      },
+      "render_controllers": [
+        "controller.render.arsenal.juggernaut"
+      ],
+      "spawn_egg": {
+        "base_color": "#505a6e",
+        "overlay_color": "#ff7040"
+      },
+      "animations": {
+        "look": "animation.arsenal.raider.look",
+        "walk": "animation.arsenal.raider.walk",
+        "aim": "animation.arsenal.raider.aim",
+        "idle": "animation.arsenal.raider.idle"
+      },
+      "scripts": {
+        "animate": [
+          "look",
+          "walk",
+          {
+            "aim": "q.has_target"
+          },
+          {
+            "idle": "!q.has_target"
+          }
+        ]
+      }
+    }
+  }
+}

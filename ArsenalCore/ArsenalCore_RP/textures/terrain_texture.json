@@ -1,0 +1,32 @@
+{
+  "resource_pack_name": "arsenal_core",
+  "texture_name": "atlas.terrain",
+  "padding": 8,
+  "num_mip_levels": 4,
+  "texture_data": {
+    "arsenal_bench_top": {
+      "textures": "textures/blocks/arsenal/arsenal_bench_top"
+    },
+    "arsenal_bench_side": {
+      "textures": "textures/blocks/arsenal/arsenal_bench_side"
+    },
+    "arsenal_bench_bottom": {
+      "textures": "textures/blocks/arsenal/arsenal_bench_bottom"
+    },
+    "arsenal_press_top": {
+      "textures": "textures/blocks/arsenal/arsenal_press_top"
+    },
+    "arsenal_press_side": {
+      "textures": "textures/blocks/arsenal/arsenal_press_side"
+    },
+    "arsenal_crate_side": {
+      "textures": "textures/blocks/arsenal/arsenal_crate_side"
+    },
+    "arsenal_crate_top": {
+      "textures": "textures/blocks/arsenal/arsenal_crate_top"
+    },
+    "arsenal_invisible": {
+      "textures": "textures/blocks/arsenal/arsenal_invisible"
+    }
+  }
+}

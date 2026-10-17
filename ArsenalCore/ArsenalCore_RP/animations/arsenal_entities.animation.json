@@ -1,0 +1,140 @@
+{
+  "format_version": "1.10.0",
+  "animations": {
+    "animation.arsenal.raider.look": {
+      "loop": true,
+      "bones": {
+        "head": {
+          "rotation": [
+            "q.target_x_rotation",
+            "q.target_y_rotation",
+            0
+          ]
+        }
+      }
+    },
+    "animation.arsenal.raider.walk": {
+      "loop": true,
+      "bones": {
+        "leftleg": {
+          "rotation": [
+            "math.cos(q.anim_time * 38.17 * 13.0) * 40.0 * math.min(1.0, q.modified_move_speed * 3.0)",
+            0,
+            0
+          ]
+        },
+        "rightleg": {
+          "rotation": [
+            "-math.cos(q.anim_time * 38.17 * 13.0) * 40.0 * math.min(1.0, q.modified_move_speed * 3.0)",
+            0,
+            0
+          ]
+        }
+      }
+    },
+    "animation.arsenal.raider.aim": {
+      "loop": true,
+      "bones": {
+        "rightarm": {
+          "rotation": [
+            "-90.0 + q.target_x_rotation",
+            "math.clamp(q.target_y_rotation, -60.0, 45.0)",
+            0
+          ]
+        },
+        "leftarm": {
+          "rotation": [
+            "-93.0 + q.target_x_rotation",
+            "42.0 + math.clamp(q.target_y_rotation, -45.0, 5.0)",
+            0
+          ]
+        }
+      }
+    },
+    "animation.arsenal.raider.idle": {
+      "loop": true,
+      "bones": {
+        "rightarm": {
+          "rotation": [
+            "-35.0 + math.sin(q.life_time * 60.0) * 2.0",
+            -20.0,
+            0
+          ]
+        },
+        "leftarm": {
+          "rotation": [
+            "-40.0 + math.sin(q.life_time * 60.0) * 2.0",
+            35.0,
+            0
+          ]
+        }
+      }
+    },
+    "animation.arsenal.dummy.wobble": {
+      "animation_length": 0.6,
+      "bones": {
+        "body": {
+          "rotation": {
+            "0.0": [
+              0,
+              0,
+              0
+            ],
+            "0.08": [
+              -9.0,
+              0,
+              5.0
+            ],
+            "0.22": [
+              6.0,
+              0,
+              -3.0
+            ],
+            "0.4": [
+              -2.5,
+              0,
+              1.2
+            ],
+            "0.6": [
+              0,
+              0,
+              0
+            ]
+          }
+        }
+      }
+    },
+    "animation.arsenal.proj.orient": {
+      "loop": true,
+      "bones": {
+        "body": {
+          "rotation": [
+            "q.body_x_rotation",
+            0,
+            0
+          ]
+        }
+      }
+    },
+    "animation.arsenal.proj.spin": {
+      "loop": true,
+      "bones": {
+        "body": {
+          "rotation": [
+            "q.life_time * 720.0",
+            "q.life_time * 240.0",
+            0
+          ]
+        }
+      }
+    },
+    "animation.arsenal.bullet.scale": {
+      "loop": true,
+      "bones": {
+        "body": {
+          "scale": 0.6
+        }
+      }
+    }
+  }
+}

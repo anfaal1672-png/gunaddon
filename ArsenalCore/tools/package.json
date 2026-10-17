@@ -1,0 +1,11 @@
+{
+  "name": "arsenal-core-tools",
+  "private": true,
+  "type": "module",
+  "description": "Build/verification tooling for ARSENAL CORE (not shipped in the add-on)",
+  "devDependencies": {
+    "@minecraft/server": "2.10.0",
+    "@minecraft/server-ui": "2.2.0",
+    "typescript": "^5.6.0"
+  }
+}

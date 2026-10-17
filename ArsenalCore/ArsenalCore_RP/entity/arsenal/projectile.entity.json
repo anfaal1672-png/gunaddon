@@ -1,0 +1,58 @@
+{
+  "format_version": "1.10.0",
+  "minecraft:client_entity": {
+    "description": {
+      "identifier": "arsenal:projectile",
+      "materials": {
+        "default": "entity_alphatest"
+      },
+      "textures": {
+        "default": "textures/entity/arsenal/projectiles"
+      },
+      "geometry": {
+        "frag": "geometry.arsenal.proj_frag",
+        "impact": "geometry.arsenal.proj_impact",
+        "smoke": "geometry.arsenal.proj_smoke",
+        "flash": "geometry.arsenal.proj_flash",
+        "molotov": "geometry.arsenal.proj_molotov",
+        "sticky": "geometry.arsenal.proj_sticky",
+        "c4": "geometry.arsenal.proj_c4",
+        "mine": "geometry.arsenal.proj_mine",
+        "gl40": "geometry.arsenal.proj_gl40",
+        "rocket": "geometry.arsenal.proj_rocket",
+        "flare": "geometry.arsenal.proj_flare",
+        "hook": "geometry.arsenal.proj_hook",
+        "seeker": "geometry.arsenal.proj_seeker",
+        "knife": "geometry.arsenal.proj_knife",
+        "gas": "geometry.arsenal.proj_gas",
+        "emp": "geometry.arsenal.proj_emp",
+        "cluster": "geometry.arsenal.proj_cluster",
+        "decoy": "geometry.arsenal.proj_decoy",
+        "snap": "geometry.arsenal.proj_snap",
+        "mortar": "geometry.arsenal.proj_mortar",
+        "plasma": "geometry.arsenal.proj_plasma",
+        "needle": "geometry.arsenal.proj_needle",
+        "bomblet": "geometry.arsenal.proj_bomblet",
+        "blade": "geometry.arsenal.proj_blade",
+        "missile": "geometry.arsenal.proj_missile"
+      },
+      "animations": {
+        "orient": "animation.arsenal.proj.orient",
+        "spin": "animation.arsenal.proj.spin"
+      },
+      "scripts": {
+        "animate": [
+          {
+            "orient": "q.property('arsenal:kind') == 8 || q.property('arsenal:kind') == 9 || q.property('arsenal:kind') == 10 || q.property('arsenal:kind') == 11 || q.property('arsenal:kind') == 12 || q.property('arsenal:kind') == 13 || q.property('arsenal:kind') == 19 || q.property('arsenal:kind') == 20 || q.property('arsenal:kind') == 21 || q.property('arsenal:kind') == 23 || q.property('arsenal:kind') == 24"
+          },
+          {
+            "spin": "q.property('arsenal:kind') == 0 || q.property('arsenal:kind') == 1 || q.property('arsenal:kind') == 2 || q.property('arsenal:kind') == 3 || q.property('arsenal:kind') == 4 || q.property('arsenal:kind') == 5 || q.property('arsenal:kind') == 14 || q.property('arsenal:kind') == 15 || q.property('arsenal:kind') == 16 || q.property('arsenal:kind') == 17 || q.property('arsenal:kind') == 18 || q.property('arsenal:kind') == 22"
+          }
+        ]
+      },
+      "render_controllers": [
+        "controller.render.arsenal.projectile"
+      ]
+    }
+  }
+}

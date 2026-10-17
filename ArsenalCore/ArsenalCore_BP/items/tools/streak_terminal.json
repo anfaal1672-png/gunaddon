@@ -1,0 +1,24 @@
+{
+  "format_version": "1.26.30",
+  "minecraft:item": {
+    "description": {
+      "identifier": "arsenal:streak_terminal",
+      "menu_category": {
+        "category": "equipment"
+      }
+    },
+    "components": {
+      "minecraft:icon": "arsenal_streak_terminal",
+      "minecraft:display_name": {
+        "value": "item.arsenal.streak_terminal.name"
+      },
+      "minecraft:max_stack_size": 1,
+      "minecraft:tags": {
+        "tags": [
+          "arsenal:tool"
+        ]
+      },
+      "arsenal:tool": {}
+    }
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "format_version": "1.26.30",
+  "minecraft:item": {
+    "description": {
+      "identifier": "arsenal:grenade_snap",
+      "menu_category": {
+        "category": "equipment"
+      }
+    },
+    "components": {
+      "minecraft:icon": "arsenal_grenade_snap",
+      "minecraft:display_name": {
+        "value": "item.arsenal.grenade_snap.name"
+      },
+      "minecraft:max_stack_size": 16,
+      "minecraft:tags": {
+        "tags": [
+          "arsenal:throwable"
+        ]
+      },
+      "minecraft:rarity": "uncommon",
+      "minecraft:use_modifiers": {
+        "use_duration": 60,
+        "movement_modifier": 1.0,
+        "emit_vibrations": false
+      }
+    }
+  }
+}

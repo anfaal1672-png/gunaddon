@@ -1,0 +1,49 @@
+{
+  "format_version": "1.10.0",
+  "render_controllers": {
+    "controller.render.arsenal.juggernaut": {
+      "geometry": "Geometry.default",
+      "materials": [
+        {
+          "*": "Material.default"
+        }
+      ],
+      "textures": [
+        "Texture.default"
+      ],
+      "part_visibility": [
+        {
+          "*": true
+        },
+        {
+          "left_pod": "q.property('arsenal:pod_l')"
+        },
+        {
+          "right_pod": "q.property('arsenal:pod_r')"
+        },
+        {
+          "core": "q.property('arsenal:core')"
+        }
+      ]
+    },
+    "controller.render.arsenal.crate": {
+      "geometry": "Geometry.default",
+      "materials": [
+        {
+          "*": "Material.default"
+        }
+      ],
+      "textures": [
+        "Texture.default"
+      ],
+      "part_visibility": [
+        {
+          "*": true
+        },
+        {
+          "chute": "!q.property('arsenal:landed')"
+        }
+      ]
+    }
+  }
+}

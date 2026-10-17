@@ -1,0 +1,38 @@
+{
+  "format_version": "1.26.20",
+  "minecraft:block": {
+    "description": {
+      "identifier": "arsenal:ammo_press",
+      "menu_category": {
+        "category": "items"
+      }
+    },
+    "components": {
+      "minecraft:geometry": "minecraft:geometry.full_block",
+      "minecraft:material_instances": {
+        "*": {
+          "texture": "arsenal_press_side",
+          "render_method": "opaque"
+        },
+        "up": {
+          "texture": "arsenal_press_top",
+          "render_method": "opaque"
+        },
+        "down": {
+          "texture": "arsenal_bench_bottom",
+          "render_method": "opaque"
+        }
+      },
+      "minecraft:destructible_by_mining": {
+        "seconds_to_destroy": 3.0
+      },
+      "minecraft:destructible_by_explosion": {
+        "explosion_resistance": 15
+      },
+      "minecraft:map_color": "#786c58",
+      "arsenal:station": {
+        "kind": "press"
+      }
+    }
+  }
+}

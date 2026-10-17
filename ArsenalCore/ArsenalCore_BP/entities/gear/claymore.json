@@ -1,0 +1,41 @@
+{
+  "format_version": "1.26.20",
+  "minecraft:entity": {
+    "description": {
+      "identifier": "arsenal:claymore",
+      "is_spawnable": false,
+      "is_summonable": true,
+      "is_experimental": false
+    },
+    "components": {
+      "minecraft:type_family": {
+        "family": [
+          "arsenal_deployable",
+          "arsenal_player_deployable",
+          "arsenal_claymore"
+        ]
+      },
+      "minecraft:collision_box": {
+        "width": 0.5,
+        "height": 0.4
+      },
+      "minecraft:health": {
+        "value": 4,
+        "max": 4
+      },
+      "minecraft:physics": {
+        "has_gravity": true
+      },
+      "minecraft:knockback_resistance": {
+        "value": 1.0
+      },
+      "minecraft:persistent": {},
+      "minecraft:nameable": {
+        "always_show": false,
+        "allow_name_tag_renaming": false
+      },
+      "minecraft:fire_immune": {},
+      "minecraft:conditional_bandwidth_optimization": {}
+    }
+  }
+}

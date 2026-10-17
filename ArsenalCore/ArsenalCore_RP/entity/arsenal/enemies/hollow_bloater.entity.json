@@ -1,0 +1,40 @@
+{
+  "format_version": "1.10.0",
+  "minecraft:client_entity": {
+    "description": {
+      "identifier": "arsenal:hollow_bloater",
+      "materials": {
+        "default": "entity_alphatest"
+      },
+      "textures": {
+        "default": "textures/entity/arsenal/enemies/hollow_bloater"
+      },
+      "geometry": {
+        "default": "geometry.arsenal.hollow_bloater"
+      },
+      "render_controllers": [
+        "controller.render.arsenal.simple"
+      ],
+      "spawn_egg": {
+        "base_color": "#96a046",
+        "overlay_color": "#1e1e22"
+      },
+      "animations": {
+        "look": "animation.arsenal.raider.look",
+        "walk": "animation.arsenal.raider.walk",
+        "reach": "animation.arsenal.hollow.reach",
+        "swell": "animation.arsenal.hollow.swell"
+      },
+      "scripts": {
+        "animate": [
+          "look",
+          "walk",
+          "reach",
+          {
+            "swell": "q.property('arsenal:fuse')"
+          }
+        ]
+      }
+    }
+  }
+}

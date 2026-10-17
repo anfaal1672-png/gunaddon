@@ -1,0 +1,44 @@
+{
+  "format_version": "1.26.30",
+  "minecraft:item": {
+    "description": {
+      "identifier": "arsenal:ironclad45__c6",
+      "menu_category": {
+        "category": "none",
+        "is_hidden_in_commands": false
+      }
+    },
+    "components": {
+      "minecraft:icon": "arsenal_ironclad45__c6",
+      "minecraft:display_name": {
+        "value": "item.arsenal.ironclad45.name"
+      },
+      "minecraft:max_stack_size": 1,
+      "minecraft:hand_equipped": true,
+      "minecraft:tags": {
+        "tags": [
+          "arsenal:firearm",
+          "arsenal:w_ironclad45",
+          "arsenal:cat_handgun",
+          "arsenal:variant",
+          "arsenal:camo"
+        ]
+      },
+      "minecraft:rarity": "uncommon",
+      "minecraft:durability": {
+        "max_durability": 1500,
+        "damage_chance": {
+          "min": 0,
+          "max": 0
+        }
+      },
+      "minecraft:use_modifiers": {
+        "use_duration": 3600,
+        "movement_modifier": 1.0,
+        "emit_vibrations": false
+      },
+      "minecraft:allow_off_hand": false,
+      "minecraft:can_destroy_in_creative": false
+    }
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "format_version": "1.26.30",
+  "minecraft:item": {
+    "description": {
+      "identifier": "arsenal:vest_heavy_2",
+      "menu_category": {
+        "category": "equipment"
+      }
+    },
+    "components": {
+      "minecraft:icon": "arsenal_vest_heavy_2",
+      "minecraft:display_name": {
+        "value": "item.arsenal.vest_heavy_2.name"
+      },
+      "minecraft:max_stack_size": 1,
+      "minecraft:tags": {
+        "tags": [
+          "arsenal:armor",
+          "arsenal:armor_heavy",
+          "minecraft:is_armor"
+        ]
+      },
+      "minecraft:rarity": "uncommon",
+      "minecraft:wearable": {
+        "slot": "slot.armor.chest",
+        "protection": 8
+      },
+      "minecraft:durability": {
+        "max_durability": 640
+      },
+      "minecraft:enchantable": {
+        "slot": "armor_torso",
+        "value": 10
+      },
+      "minecraft:repairable": {
+        "repair_items": [
+          {
+            "items": [
+              "arsenal:steel_ingot"
+            ],
+            "repair_amount": "context.other->q.remaining_durability + 0.25 * context.other->q.max_durability"
+          }
+        ]
+      }
+    }
+  }
+}

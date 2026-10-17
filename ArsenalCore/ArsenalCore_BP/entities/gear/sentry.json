@@ -1,0 +1,53 @@
+{
+  "format_version": "1.26.20",
+  "minecraft:entity": {
+    "description": {
+      "identifier": "arsenal:sentry",
+      "is_spawnable": false,
+      "is_summonable": true,
+      "is_experimental": false,
+      "properties": {
+        "arsenal:pitch": {
+          "type": "int",
+          "range": [
+            -60,
+            80
+          ],
+          "default": 0,
+          "client_sync": true
+        }
+      }
+    },
+    "components": {
+      "minecraft:type_family": {
+        "family": [
+          "arsenal_deployable",
+          "arsenal_player_deployable",
+          "arsenal_sentry",
+          "arsenal_robot"
+        ]
+      },
+      "minecraft:collision_box": {
+        "width": 0.9,
+        "height": 1.0
+      },
+      "minecraft:health": {
+        "value": 40,
+        "max": 40
+      },
+      "minecraft:physics": {
+        "has_gravity": true
+      },
+      "minecraft:knockback_resistance": {
+        "value": 1.0
+      },
+      "minecraft:persistent": {},
+      "minecraft:nameable": {
+        "always_show": false,
+        "allow_name_tag_renaming": false
+      },
+      "minecraft:fire_immune": {},
+      "minecraft:conditional_bandwidth_optimization": {}
+    }
+  }
+}

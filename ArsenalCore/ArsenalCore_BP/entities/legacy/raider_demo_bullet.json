@@ -1,0 +1,40 @@
+{
+  "format_version": "1.26.20",
+  "minecraft:entity": {
+    "description": {
+      "identifier": "arsenal:raider_demo_bullet",
+      "is_spawnable": false,
+      "is_summonable": true,
+      "is_experimental": false
+    },
+    "components": {
+      "minecraft:type_family": {
+        "family": [
+          "projectile",
+          "arsenal_bullet"
+        ]
+      },
+      "minecraft:collision_box": {
+        "width": 0.15,
+        "height": 0.15
+      },
+      "minecraft:physics": {},
+      "minecraft:projectile": {
+        "on_hit": {
+          "remove_on_hit": {}
+        },
+        "power": 4.0,
+        "gravity": 0.0,
+        "inertia": 1.0,
+        "uncertainty_base": 0.0,
+        "uncertainty_multiplier": 0.0,
+        "anchor": "eye_height",
+        "offset": [
+          0,
+          -0.2,
+          0
+        ]
+      }
+    }
+  }
+}

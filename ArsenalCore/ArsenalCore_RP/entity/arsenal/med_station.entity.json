@@ -1,0 +1,20 @@
+{
+  "format_version": "1.10.0",
+  "minecraft:client_entity": {
+    "description": {
+      "identifier": "arsenal:med_station",
+      "materials": {
+        "default": "entity_alphatest"
+      },
+      "textures": {
+        "default": "textures/entity/arsenal/gear/med_station"
+      },
+      "geometry": {
+        "default": "geometry.arsenal.med_station"
+      },
+      "render_controllers": [
+        "controller.render.arsenal.simple"
+      ]
+    }
+  }
+}

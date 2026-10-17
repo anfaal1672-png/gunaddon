@@ -1,0 +1,28 @@
+{
+  "format_version": "1.10.0",
+  "minecraft:client_entity": {
+    "description": {
+      "identifier": "arsenal:at_post",
+      "materials": {
+        "default": "entity_alphatest"
+      },
+      "textures": {
+        "default": "textures/entity/arsenal/gear/at_post"
+      },
+      "geometry": {
+        "default": "geometry.arsenal.at_post"
+      },
+      "render_controllers": [
+        "controller.render.arsenal.simple"
+      ],
+      "animations": {
+        "aim": "animation.arsenal.at_post.aim"
+      },
+      "scripts": {
+        "animate": [
+          "aim"
+        ]
+      }
+    }
+  }
+}

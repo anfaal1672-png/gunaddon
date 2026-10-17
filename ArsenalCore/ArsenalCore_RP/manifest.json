@@ -1,0 +1,46 @@
+{
+  "format_version": 2,
+  "header": {
+    "name": "pack.name",
+    "description": "pack.description",
+    "uuid": "7eda1df1-bf55-58c6-a42f-ddd61899fc5d",
+    "version": [
+      2,
+      0,
+      2
+    ],
+    "min_engine_version": [
+      1,
+      26,
+      50
+    ]
+  },
+  "modules": [
+    {
+      "type": "resources",
+      "uuid": "c3cfc1e0-0449-5209-a893-3f09d2fe4bf6",
+      "version": [
+        2,
+        0,
+        2
+      ]
+    }
+  ],
+  "dependencies": [
+    {
+      "uuid": "22593181-74a6-5f57-b76c-f1029fedc001",
+      "version": [
+        2,
+        0,
+        2
+      ]
+    }
+  ],
+  "metadata": {
+    "authors": [
+      "ARSENAL CORE"
+    ],
+    "license": "All rights reserved",
+    "product_type": "addon"
+  }
+}

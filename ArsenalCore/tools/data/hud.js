@@ -1,0 +1,60 @@
+// ARSENAL CORE データ定義（tools/data/）。ランタイムにはビルド時に 1 ファイル（BP/scripts/config/weapons.data.js）へまとめて出力する。
+// HUD 2.0（JSON UI）へのデータ受け渡しの形式。スクリプト（ui/hud2.js）が符号化し、生成スクリプト（gen/ui.py）が復号側の JSON UI を作る。
+//
+// タイトルの文字列 = HEADER + 1 文字ごとの札（SEP + キー + 桁 + 文字）の並び + SEP + 目印 "§a§r§s§n" + "§" + スコープ表示の番号
+//   例：弾数 " 27" → ".a0_.a12.a27"（空白は "_"）。全体は "AC2.q00.d00.x04.a0_.a12.a27. … .l00.§a§r§s§n§0"
+//   ・JSON UI 側は「札 SEP+キー+桁+文字+SEP を含むか」（(#t - '.a12.') = #t の否定）だけで判定する。
+//     スコープ表示（1.0.2）と同じ演算だけを使い、文字列の * 演算（'%.Ns' * #t の切り出し）は使わない。
+//     2.0.1 は切り出しで復号していたが、実機ではスコープ表示は出るのに HUD 2.0 が何も出なかった（違いは * 演算の有無）
+//   ・数字は桁ごと・文字ごとのラベル（0〜9 の 10 枚のうち 1 枚だけが見える）で表示する
+//   ・キーは英小文字 1 文字で重複なし。札は SEP で区切られ、値の文字に SEP は現れない（"." は "," に置き換える）
+//   ・目印を含むタイトルは、バニラのタイトル枠ごと隠れる（1.0.2 と同じ）
+export const HUD2 = {
+  header: "AC2",
+  sep: ".",
+  blank: "_",
+  mark: "§a§r§s§n",
+  fields: [
+    // 名前・キー・長さ・意味
+    { name: "hit", key: "q", len: 1, doc: "ヒットマーカー 0 なし / 1 命中 / 2 頭 / 3 キル" },
+    { name: "dir", key: "d", len: 1, doc: "被弾方向 0 なし / 1〜8（前・右前・右・右後・後・左後・左・左前）" },
+    { name: "xh", key: "x", len: 1, doc: "クロスヘアの広がり 0〜9 / x 非表示" },
+    { name: "ammo", key: "a", len: 3, doc: "装弾数（右寄せ、空白埋め）/ --- 弾薬なし" },
+    { name: "res", key: "r", len: 4, doc: "予備弾（右寄せ）/ INF 無限" },
+    { name: "mode", key: "m", len: 1, doc: "射撃モード S セミ / A フル / B バースト / C チャージ / D 二連 / U アンダーバレル / M 近接 / - なし" },
+    { name: "st", key: "s", len: 1, doc: "状態 0 なし / R リロード / J ジャム / H 過熱 / L ロック中 / K ロック完了 / B 息止め / E 弾切れ / P スポーン保護 / X 故障" },
+    { name: "heat", key: "e", len: 1, doc: "熱・充電・リロード進行 0〜9" },
+    { name: "plate", key: "p", len: 1, doc: "プレート残り 0〜4 / - ボディアーマーなし" },
+    { name: "hp", key: "h", len: 2, doc: "体力（切り上げ、00〜99）" },
+    { name: "hdg", key: "g", len: 2, doc: "方位 00〜15（22.5° ごと、00 = 南）" },
+    { name: "sup", key: "u", len: 1, doc: "制圧 0〜3" },
+    { name: "nvg", key: "n", len: 1, doc: "暗視の画面効果 0 / 1" },
+    { name: "gm", key: "o", len: 1, doc: "ゲームモード 0 なし / 1 FFA / 2 TDM / 3 ガンゲーム / 4 ホード / 5 陣取り" },
+    { name: "sa", key: "j", len: 4, doc: "得点 A（自分／味方チーム／ウェーブ）" },
+    { name: "sb", key: "b", len: 4, doc: "得点 B（目標／敵チーム／残り敵）" },
+    { name: "tm", key: "t", len: 5, doc: "残り時間 m:ss（右寄せ）" },
+    { name: "stk", key: "k", len: 2, doc: "連続キル" },
+    { name: "cr", key: "c", len: 6, doc: "クレジット（右寄せ）" },
+    { name: "ks", key: "f", len: 1, doc: "キルストリーク使用可能 0 / 1" },
+    { name: "rng", key: "v", len: 4, doc: "測距の距離（右寄せ）/ ---- なし" },
+    { name: "wdir", key: "w", len: 1, doc: "風の向き（視線に対して 8 方向）0〜7 / - なし（狙撃スコープ中のみ）" },
+    { name: "wstr", key: "y", len: 1, doc: "風の強さ 1〜3 / - なし" },
+    { name: "sz", key: "z", len: 1, doc: "HUD の大きさ 0 小 / 1 標準 / 2 大" },
+    { name: "lay", key: "l", len: 1, doc: "配置 0 標準 / 1 高め（スマホの操作ボタンを避ける）/ 2 左寄せ" },
+  ],
+  /** 送信間隔（変化がなくてもこの tick ごとに再送する。タイトルの表示時間より短く） */
+  resendTicks: 10,
+  stayTicks: 40,
+};
+
+/** フィールドのキーと長さの表（タイトルの長さは HEADER + 1 文字につき 4 文字 + 最後の SEP） */
+export const HUD2_LAYOUT = (() => {
+  let chars = 0;
+  /** @type {Record<string, {key:string, len:number}>} */
+  const out = {};
+  for (const f of HUD2.fields) {
+    out[f.name] = { key: f.key, len: f.len };
+    chars += f.len;
+  }
+  return { fields: out, length: HUD2.header.length + chars * (HUD2.sep.length + 3) + HUD2.sep.length };
+})();

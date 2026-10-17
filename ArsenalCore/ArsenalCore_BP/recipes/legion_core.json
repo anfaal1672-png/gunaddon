@@ -1,0 +1,33 @@
+{
+  "format_version": "1.20.10",
+  "minecraft:recipe_shapeless": {
+    "description": {
+      "identifier": "arsenal:legion_core"
+    },
+    "tags": [
+      "crafting_table"
+    ],
+    "ingredients": [
+      {
+        "item": "arsenal:energy_core",
+        "count": 2
+      },
+      {
+        "item": "minecraft:netherite_scrap"
+      },
+      {
+        "item": "minecraft:redstone_block",
+        "count": 4
+      }
+    ],
+    "result": {
+      "item": "arsenal:legion_core",
+      "count": 1
+    },
+    "unlock": [
+      {
+        "item": "arsenal:energy_core"
+      }
+    ]
+  }
+}

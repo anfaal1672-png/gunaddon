@@ -1,0 +1,24 @@
+{
+  "format_version": "1.26.30",
+  "minecraft:item": {
+    "description": {
+      "identifier": "arsenal:legion_core",
+      "menu_category": {
+        "category": "equipment"
+      }
+    },
+    "components": {
+      "minecraft:icon": "arsenal_legion_core",
+      "minecraft:display_name": {
+        "value": "item.arsenal.legion_core.name"
+      },
+      "minecraft:max_stack_size": 4,
+      "minecraft:tags": {
+        "tags": [
+          "arsenal:tool"
+        ]
+      },
+      "arsenal:tool": {}
+    }
+  }
+}

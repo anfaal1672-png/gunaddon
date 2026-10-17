@@ -1,0 +1,51 @@
+{
+  "format_version": "1.26.30",
+  "minecraft:item": {
+    "description": {
+      "identifier": "arsenal:combat_knife",
+      "menu_category": {
+        "category": "equipment"
+      }
+    },
+    "components": {
+      "minecraft:icon": "arsenal_combat_knife",
+      "minecraft:display_name": {
+        "value": "item.arsenal.combat_knife.name"
+      },
+      "minecraft:max_stack_size": 1,
+      "minecraft:hand_equipped": true,
+      "minecraft:tags": {
+        "tags": [
+          "arsenal:melee",
+          "arsenal:m_combat_knife",
+          "minecraft:is_sword"
+        ]
+      },
+      "minecraft:rarity": "common",
+      "minecraft:damage": {
+        "value": 6
+      },
+      "minecraft:durability": {
+        "max_durability": 400,
+        "damage_chance": {
+          "min": 60,
+          "max": 100
+        }
+      },
+      "minecraft:can_destroy_in_creative": false,
+      "minecraft:use_modifiers": {
+        "use_duration": 3600,
+        "movement_modifier": 1.0,
+        "emit_vibrations": false
+      },
+      "minecraft:swing_duration": {
+        "value": 0.25
+      },
+      "minecraft:enchantable": {
+        "slot": "sword",
+        "value": 10
+      },
+      "arsenal:melee": {}
+    }
+  }
+}

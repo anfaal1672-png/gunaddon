@@ -1,0 +1,42 @@
+{
+  "format_version": "1.8.0",
+  "minecraft:spawn_rules": {
+    "description": {
+      "identifier": "arsenal:hollow_brute",
+      "population_control": "monster"
+    },
+    "conditions": [
+      {
+        "minecraft:difficulty_filter": {
+          "min": "easy",
+          "max": "hard"
+        },
+        "minecraft:weight": {
+          "default": 1
+        },
+        "minecraft:herd": {
+          "min_size": 1,
+          "max_size": 1
+        },
+        "minecraft:spawns_underground": {},
+        "minecraft:brightness_filter": {
+          "min": 0,
+          "max": 7,
+          "adjust_for_weather": false
+        },
+        "minecraft:density_limit": {
+          "underground": 4
+        },
+        "minecraft:height_filter": {
+          "min": -48,
+          "max": 50
+        },
+        "minecraft:biome_filter": {
+          "test": "has_biome_tag",
+          "operator": "==",
+          "value": "overworld"
+        }
+      }
+    ]
+  }
+}

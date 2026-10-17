@@ -1,0 +1,26 @@
+{
+  "format_version": "1.26.30",
+  "minecraft:item": {
+    "description": {
+      "identifier": "arsenal:target_kit",
+      "menu_category": {
+        "category": "items"
+      }
+    },
+    "components": {
+      "minecraft:icon": "arsenal_target_kit",
+      "minecraft:display_name": {
+        "value": "item.arsenal.target_kit.name"
+      },
+      "minecraft:max_stack_size": 16,
+      "minecraft:tags": {
+        "tags": [
+          "arsenal:tool"
+        ]
+      },
+      "minecraft:entity_placer": {
+        "entity": "arsenal:target_dummy"
+      }
+    }
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "format_version": "1.10.0",
+  "minecraft:client_entity": {
+    "description": {
+      "identifier": "arsenal:mortar_emplacement",
+      "materials": {
+        "default": "entity_alphatest"
+      },
+      "textures": {
+        "default": "textures/entity/arsenal/gear/mortar_emplacement"
+      },
+      "geometry": {
+        "default": "geometry.arsenal.mortar_emplacement"
+      },
+      "render_controllers": [
+        "controller.render.arsenal.simple"
+      ]
+    }
+  }
+}

@@ -1,0 +1,70 @@
+{
+  "format_version": 2,
+  "header": {
+    "name": "pack.name",
+    "description": "pack.description",
+    "uuid": "22593181-74a6-5f57-b76c-f1029fedc001",
+    "version": [
+      2,
+      0,
+      2
+    ],
+    "min_engine_version": [
+      1,
+      26,
+      50
+    ]
+  },
+  "modules": [
+    {
+      "type": "data",
+      "uuid": "0b0e907b-52f8-5a02-a4d5-fd95345dfa07",
+      "version": [
+        2,
+        0,
+        2
+      ]
+    },
+    {
+      "type": "script",
+      "language": "javascript",
+      "uuid": "df159a5e-d777-539b-ac0c-3851b3555750",
+      "entry": "scripts/main.js",
+      "version": [
+        2,
+        0,
+        2
+      ]
+    }
+  ],
+  "dependencies": [
+    {
+      "uuid": "7eda1df1-bf55-58c6-a42f-ddd61899fc5d",
+      "version": [
+        2,
+        0,
+        2
+      ]
+    },
+    {
+      "module_name": "@minecraft/server",
+      "version": "2.10.0"
+    },
+    {
+      "module_name": "@minecraft/server-ui",
+      "version": "2.2.0"
+    }
+  ],
+  "metadata": {
+    "authors": [
+      "ARSENAL CORE"
+    ],
+    "license": "All rights reserved",
+    "product_type": "addon",
+    "generated_with": {
+      "arsenal_core_build": [
+        "2.0.2"
+      ]
+    }
+  }
+}

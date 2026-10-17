@@ -1,0 +1,36 @@
+{
+  "format_version": "1.10.0",
+  "minecraft:attachable": {
+    "description": {
+      "identifier": "arsenal:harrier__o2",
+      "materials": {
+        "default": "entity_alphatest",
+        "enchanted": "entity_alphatest_glint"
+      },
+      "textures": {
+        "default": "textures/entity/arsenal/weapons/harrier",
+        "enchanted": "textures/misc/enchanted_item_glint"
+      },
+      "geometry": {
+        "default": "geometry.arsenal.harrier__o2"
+      },
+      "animations": {
+        "tp": "animation.arsenal.harrier.tp",
+        "fp": "animation.arsenal.harrier.fp"
+      },
+      "scripts": {
+        "animate": [
+          {
+            "tp": "c.is_first_person == 0.0"
+          },
+          {
+            "fp": "c.is_first_person == 1.0"
+          }
+        ]
+      },
+      "render_controllers": [
+        "controller.render.item_default"
+      ]
+    }
+  }
+}

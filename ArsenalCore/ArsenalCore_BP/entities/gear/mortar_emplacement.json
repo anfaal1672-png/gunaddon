@@ -1,0 +1,52 @@
+{
+  "format_version": "1.26.20",
+  "minecraft:entity": {
+    "description": {
+      "identifier": "arsenal:mortar_emplacement",
+      "is_spawnable": false,
+      "is_summonable": true,
+      "is_experimental": false,
+      "properties": {
+        "arsenal:pitch": {
+          "type": "int",
+          "range": [
+            -60,
+            80
+          ],
+          "default": 0,
+          "client_sync": true
+        }
+      }
+    },
+    "components": {
+      "minecraft:type_family": {
+        "family": [
+          "arsenal_deployable",
+          "arsenal_player_deployable",
+          "arsenal_mortar_emplacement"
+        ]
+      },
+      "minecraft:collision_box": {
+        "width": 0.9,
+        "height": 0.8
+      },
+      "minecraft:health": {
+        "value": 50,
+        "max": 50
+      },
+      "minecraft:physics": {
+        "has_gravity": true
+      },
+      "minecraft:knockback_resistance": {
+        "value": 1.0
+      },
+      "minecraft:persistent": {},
+      "minecraft:nameable": {
+        "always_show": false,
+        "allow_name_tag_renaming": false
+      },
+      "minecraft:fire_immune": {},
+      "minecraft:conditional_bandwidth_optimization": {}
+    }
+  }
+}
