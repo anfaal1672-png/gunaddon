@@ -339,7 +339,9 @@ def check_structures(data, bp, rel):
 #  24. HUD 2.0 の往復（スクリプトの符号化 ↔ JSON UI の式）
 # ---------------------------------------------------------------------------
 class _Eval:
-    """JSON UI の式（このアドオンが使う範囲：文字列・#変数・'%.Ns' * 文字列・+ - = and or not 括弧）を評価する"""
+    """JSON UI の式（このアドオンが使う範囲：文字列・#変数・+ - = and or not 括弧）を評価する。
+
+    文字列の * 演算（'%.Ns' * #t の切り出し）は実機の HUD 2.0 で働かなかったので受け付けない"""
 
     TOK = re.compile(r"\s*(?:(\d+)|('(?:[^'])*')|(#[A-Za-z_0-9]+)|(and|or|not)\b|(\(|\)|\+|-|\*|=))")
 
@@ -414,13 +416,8 @@ class _Eval:
 
     def mul(self):
         v = self.prim()
-        while self.peek() == ("op", "*"):
-            self.take()
-            r = self.prim()
-            m = re.fullmatch(r"%\.(\d+)s", v) if isinstance(v, str) else None
-            if not m:
-                raise ValueError(f"'%.Ns' 以外の * : {v!r}")
-            v = str(r)[: int(m.group(1))]
+        if self.peek() == ("op", "*"):
+            raise ValueError("* 演算を使っている（実機の JSON UI で文字列の * は働かない）")
         return v
 
     def prim(self):
@@ -440,27 +437,43 @@ class _Eval:
 
 
 def _hud2_controls(rp):
-    """HUD 2.0 の全コントロール（親の表示条件も含めた条件の並び）"""
+    """HUD 2.0 の全コントロール（名前・親の表示条件も含めた条件の並び・本体・親の名前）"""
     ui = json.load(open(os.path.join(rp, "ui", "hud_screen.json"), encoding="utf-8"))
     out = []
 
     def own(body, target):
         return next((b["source_property_name"] for b in body.get("bindings", []) if b.get("target_property_name") == target), None)
 
-    def walk(name, body, conds):
+    def walk(name, body, conds, parent):
         c = own(body, "#visible")
         cs = conds + ([c] if c else [])
-        out.append((name, cs, own(body, "#text"), body))
+        out.append((name, cs, body, parent))
         for ch in body.get("controls", []):
             for n2, b2 in ch.items():
-                walk(n2, b2, cs)
+                walk(n2, b2, cs, name)
 
-    walk("arsenal_hud2_root", ui["arsenal_hud2_root"], [])
-    return out
+    walk("arsenal_hud2_root", ui["arsenal_hud2_root"], [], None)
+    return out, ui
 
 
 def _visible(ev, conds):
     return all(bool(ev.run(c)) for c in conds)
+
+
+def _all_exprs(node):
+    """JSON UI の全バインディングの式"""
+    if isinstance(node, dict):
+        for k, v in node.items():
+            if k == "source_property_name" and isinstance(v, str):
+                yield v
+            else:
+                yield from _all_exprs(v)
+    elif isinstance(node, list):
+        for v in node:
+            yield from _all_exprs(v)
+
+
+TOKEN_IN_EXPR = re.compile(r"'\.([a-z])(\d)(.)\.'")
 
 
 def check_hud2_roundtrip(rp, mark):
@@ -468,30 +481,65 @@ def check_hud2_roundtrip(rp, mark):
     if r.returncode != 0:
         return 0, [f"試験ベクトルを作れない: {r.stderr[:300]}"]
     vec = json.loads(r.stdout)
-    tex_err = []
-    for name, _, _, body in _hud2_controls(rp):
+    H = vec["hud2"]
+    controls, ui = _hud2_controls(rp)
+    errs = []
+    # 文字列の * 演算（切り出し）を HUD のどこにも使っていない
+    for e in _all_exprs(ui):
+        if "*" in e:
+            return 0, [f"文字列の * 演算を使っている（実機の JSON UI で働かない）: {e[:80]}"]
+    for name, _, body, _ in controls:
         t = body.get("texture")
         if t and not os.path.exists(os.path.join(rp, t + ".png")):
-            tex_err.append(f"{name}: テクスチャがない {t}")
-    layout = vec["layout"]["fields"]
-    controls = _hud2_controls(rp)
-    errs = []
-    n = 0
+            errs.append(f"{name}: テクスチャがない {t}")
     import sys
     sys.path.insert(0, TOOLS)
-    from gen.ui import Hud2Expr
-    E = Hud2Expr(vec["layout"], vec["header"])
+    from gen.ui import Hud2Expr, TITLE_VAR
+    E = Hud2Expr(H)
+    by_key = {f["key"]: f["name"] for f in H["fields"]}
+    if len(by_key) != len(H["fields"]) or any(not re.fullmatch(r"[a-z]", k) for k in by_key):
+        errs.append("フィールドのキーが英小文字 1 文字で一意でない")
+    # 文字ごとのラベル（名前 <グループ>_<桁>_<文字コード>、条件は札 1 つ）と固定の文字（<グループ>_<桁>）
+    cells = {}  # グループ名 → {桁: [(文字, 条件の札 or None, 名前)]}
+    for name, conds, body, parent in controls:
+        if body.get("type") != "label" or body.get("localize"):
+            continue
+        m = re.fullmatch(rf"{re.escape(parent)}_(\d+)(?:_(\d+))?", name)
+        if not m:
+            continue
+        tok = None
+        if m.group(2):
+            tm = TOKEN_IN_EXPR.fullmatch(conds[-1].replace(f"(not (({TITLE_VAR} - ", "").replace(f") = {TITLE_VAR}))", ""))
+            tok = (by_key.get(tm.group(1)), int(tm.group(2))) if tm else None
+            tok_ch = (" " if tm.group(3) == H["blank"] else tm.group(3)) if tm else None
+            if not tok or tok[0] is None or body["text"] != chr(int(m.group(2))) or body["text"] != tok_ch:
+                errs.append(f"{name}: 文字ラベルの条件と文字が合わない")
+                continue
+        cells.setdefault(parent, {}).setdefault(int(m.group(1)), []).append((body["text"], tok, name))
+    try:
+        n = _hud2_vectors(vec, controls, cells, E, TITLE_VAR, mark, errs)
+    except (KeyError, ValueError) as e:
+        return 0, errs + [f"JSON UI の式を評価できない: {e!r}"]
+    return n, errs[:20]
+
+
+def _hud2_vectors(vec, controls, cells, E, TITLE_VAR, mark, errs):
+    """試験ベクトルごとに、札の判定・表示条件・表示される文字を確かめる（評価できた件数を返す）"""
+    H = vec["hud2"]
+    n = 0
     for v in vec["vectors"]:
         title = v["encoded"] + mark + "§0"
-        ev = _Eval({"#t": title})
-        # 各フィールドの切り出しがスクリプトの復号と一致
-        for f, spec in layout.items():
-            got = ev.run(E.slice(f))
-            if got != v["decoded"][f] or got != v["encoded"][spec["at"]:spec["at"] + spec["len"]]:
-                errs.append(f"{f}: JSON UI {got!r} ≠ スクリプト {v['decoded'][f]!r}")
-            n += 1
-        vis = {name: _visible(ev, conds) for name, conds, _, _ in controls}
+        ev = _Eval({TITLE_VAR: title})
         d = v["decoded"]
+        # 札：各桁の文字だけが「含む」になり、ほかの文字は含まない
+        for f in H["fields"]:
+            for i in range(f["len"]):
+                for ch in set("0123456789 -:") | {d[f["name"]][i]}:
+                    got = bool(ev.run(E.has(f["name"], i, ch)))
+                    if got != (d[f["name"]][i] == ch):
+                        errs.append(f"{f['name']}[{i}] {ch!r}: 札の判定 {got}（値 {d[f['name']]!r}）")
+                    n += 1
+        vis = {name: _visible(ev, conds) for name, conds, _, _ in controls}
         # 期待：クロスヘアは値が数字なら 1 枚だけ、方位は 1 枚だけ、配置のパネルは 1 つだけ
         xh = [k for k in vis if re.fullmatch(r"xh\d", k) and vis[k]]
         if (d["xh"].isdigit() and xh != [f"xh{d['xh']}"]) or (not d["xh"].isdigit() and xh):
@@ -510,24 +558,40 @@ def check_hud2_roundtrip(rp, mark):
         want_ammo = [] if d["ammo"] == "---" else [f"l{d['lay']}_ammo{d['sz']}"]
         if ammo != want_ammo:
             errs.append(f"弾数 {d['ammo']!r} 大きさ {d['sz']} → {ammo}")
-        # ラベルの文字
-        for name, conds, txt, body in controls:
-            if not txt or not vis.get(name):
+        # 文字ごとのラベル：見えているグループでは、各桁でちょうど値の文字だけが見える（その文字のラベルがなければ何も見えない）
+        for grp, ks in cells.items():
+            if not vis.get(grp):
                 continue
-            got = ev.run(txt)
-            if not isinstance(got, str):
-                errs.append(f"{name}: 文字でない {got!r}")
-        # 目印以外のタイトル（スコープ表示）では HUD 2.0 は一切出ない
-    ev2 = _Eval({"#t": mark + "§3"})
-    shown = [name for name, conds, _, _ in controls if _visible(ev2, conds)]
-    if shown:
-        errs.append(f"スコープ表示のタイトルで HUD 2.0 が出る: {shown[:5]}")
-    errs += tex_err
-    ev3 = _Eval({"#t": ""})
-    shown = [name for name, conds, _, _ in controls if _visible(ev3, conds)]
-    if shown:
-        errs.append(f"空のタイトルで HUD 2.0 が出る: {shown[:5]}")
-    return n, errs
+            for k, items in ks.items():
+                shown = [txt for txt, tok, name in items if vis[name]]
+                want = []
+                for txt, tok, name in items:
+                    if tok is None:
+                        want.append(txt)
+                    elif d[tok[0]][tok[1]] == txt:
+                        want.append(txt)
+                if sorted(shown) != sorted(want):
+                    errs.append(f"{grp}[{k}]: 表示 {shown} ≠ 期待 {want}（値 {title[:40]}…）")
+        # 表示される文字列そのもの（弾数・体力・クレジット）
+        def text_of(grp):
+            ks = cells.get(grp, {})
+            return "".join(next((txt for txt, _, name in ks[k] if vis[name]), " ") for k in sorted(ks))
+        if want_ammo and text_of(want_ammo[0]) != d["ammo"]:
+            errs.append(f"弾数の表示 {text_of(want_ammo[0])!r} ≠ {d['ammo']!r}")
+        hp_grp = f"l{d['lay']}_hp"
+        if text_of(hp_grp) != d["hp"]:
+            errs.append(f"体力の表示 {text_of(hp_grp)!r} ≠ {d['hp']!r}")
+        if text_of("cr") != d["cr"]:
+            errs.append(f"クレジットの表示 {text_of('cr')!r} ≠ {d['cr']!r}")
+        if errs:
+            break
+    # 目印だけのタイトル（スコープ表示）・空のタイトルでは HUD 2.0 は一切出ない
+    for t in (mark + "§3", ""):
+        ev2 = _Eval({TITLE_VAR: t})
+        shown = [name for name, conds, _, _ in controls if _visible(ev2, conds)]
+        if shown:
+            errs.append(f"タイトル {t!r} で HUD 2.0 が出る: {shown[:5]}")
+    return n
 
 
 # ---------------------------------------------------------------------------

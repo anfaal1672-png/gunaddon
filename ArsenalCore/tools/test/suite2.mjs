@@ -84,12 +84,15 @@ export async function suite2(ctx) {
   console.log("HUD 2.0");
   // =====================================================================
   {
-    const vals = { hit: "2", dir: "3", xh: "4", ammo: 27, res: 120, mode: "A", st: "R", heat: "5", plate: "3", hp: 17, hdg: "07", sup: "1", nvg: "0", gm: "2", sa: 12, sb: 9, tm: "4:05", stk: 3, cr: 1234, ks: "1", rng: 150, wdir: "3", wstr: "2", sz: "1", lay: "0" };
+    const vals = { hit: "2", dir: "3", xh: "4", ammo: 27, res: 120, mode: "A", st: "R", heat: "5", plate: "3", hp: 17, hdg: "07", sup: "1", nvg: "0", gm: "2", sa: 12, sb: 9, tm: " 4:05", stk: 3, cr: 1234, ks: "1", rng: 150, wdir: "3", wstr: "2", sz: "1", lay: "0" };
     const enc = hud2.encodeHud2(vals);
     const dec = hud2.decodeHud2(enc);
     check("HUD 2.0：符号化の長さが配置表と一致", enc.length === D.HUD2_LAYOUT.length, `(${enc.length} vs ${D.HUD2_LAYOUT.length})`);
-    check("HUD 2.0：往復で値が戻る（数値は右寄せ）", dec.ammo === " 27" && dec.res === " 120" && dec.cr === "  1234" && dec.hp === "17" && dec.tm === "4:05" && dec.mode === "A");
-    check("HUD 2.0：ASCII だけ・区切り文字を含まない", /^[\x20-\x7e]+$/.test(enc.slice(4)) && !enc.slice(4).includes("|"));
+    check("HUD 2.0：往復で値が戻る（数値は右寄せ）", dec.ammo === " 27" && dec.res === " 120" && dec.cr === "  1234" && dec.hp === "17" && dec.tm === " 4:05" && dec.mode === "A");
+    check("HUD 2.0：札は 1 文字ずつ（弾数 \" 27\" → .a0_.a12.a27.）", enc.includes(".a0_.a12.a27.") && enc.includes(".m0A."));
+    check("HUD 2.0：ASCII だけ・空白を含まない", /^[\x21-\x7e]+$/.test(enc));
+    const odd = hud2.decodeHud2(hud2.encodeHud2({ ...vals, tm: "1.5_x" }));
+    check("HUD 2.0：値の区切り文字・空白の記号は置き換える", odd.tm === "1,5-x");
     const over = hud2.decodeHud2(hud2.encodeHud2({ ...vals, ammo: 12345, cr: 99999999 }));
     check("HUD 2.0：桁あふれは 9 で詰める", over.ammo === "999" && over.cr === "999999");
     settings.setPrefs(player, { hudStyle: "hud2" });
@@ -98,7 +101,7 @@ export async function suite2(ctx) {
     s.hud2Tick = -99;
     __tick(12);
     const tt = LOG.titles.slice(t0).map((x) => x.t);
-    check("HUD 2.0：タイトルに AC2| と目印を付けて送る", tt.some((x) => x.startsWith("AC2|") && x.includes("§a§r§s§n")), JSON.stringify(tt.slice(0, 1)));
+    check("HUD 2.0：タイトルに AC2. と目印を付けて送る", tt.some((x) => x.startsWith("AC2.") && x.includes("§a§r§s§n")), JSON.stringify(tt.slice(0, 1)));
     const a0 = LOG.actionbar.length;
     hud2.announce(player, "hello", 20);
     check("HUD 2.0 の知らせはアクションバーへ", LOG.actionbar.length === a0 + 1);
@@ -160,11 +163,11 @@ export async function suite2(ctx) {
     __tick(3);
     const tq = LOG.titles.length;
     __tick(30);
-    check("何も持っていないときは HUD 2.0 のタイトルを送らない（ほかの /title を邪魔しない）", LOG.titles.slice(tq).every((x) => !x.t.startsWith("AC2|")));
+    check("何も持っていないときは HUD 2.0 のタイトルを送らない（ほかの /title を邪魔しない）", LOG.titles.slice(tq).every((x) => !x.t.startsWith("AC2")));
     inv.items[0] = new ItemStack("arsenal:bandage", 2);
     player.selectedSlotIndex = 0;
     __tick(12);
-    check("ARSENAL の品を持つと HUD 2.0 を送る", LOG.titles.slice(tq).some((x) => x.t.startsWith("AC2|")));
+    check("ARSENAL の品を持つと HUD 2.0 を送る", LOG.titles.slice(tq).some((x) => x.t.startsWith("AC2.")));
     settings.setPrefs(player, { hudStyle: "classic" });
     const tr = LOG.titles.length;
     __tick(3);

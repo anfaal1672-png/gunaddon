@@ -1047,7 +1047,7 @@ function hudProvider(p) {
     v.sb = def.scoreLimit;
   }
   const left = m.endTick ? Math.max(0, Math.ceil((m.endTick - now) / 20)) : m.mode === "horde" && m.waveState === "break" ? Math.max(0, Math.ceil((m.waveUntil - now) / 20)) : -1;
-  v.tm = left >= 0 ? `${Math.floor(left / 60)}:${String(left % 60).padStart(2, "0")}` : "";
+  v.tm = left >= 0 ? `${Math.floor(left / 60)}:${String(left % 60).padStart(2, "0")}`.padStart(5, " ") : "";
   const s = S(p);
   if (s.spawnProtUntil > now && !s.weaponId) v.st = "P";
   return v;

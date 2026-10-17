@@ -2,8 +2,8 @@
 /**
  * HUD 2.0：JSON UI（RP の ui/hud_screen.json）へのデータ受け渡し
  *
- * タイトルの文字列 = "AC2|" + 固定長の ASCII フィールド + 目印 "§a§r§s§n" + "§" + スコープ表示の番号
- *   ・フィールドの並びと長さは data/hud.js（HUD2）。JSON UI 側は ('%.Ns' * #t) の差で切り出す
+ * タイトルの文字列 = "AC2" + 1 文字ごとの札（".a12" ＝ 弾数の 1 桁目が 2）の並び + "." + 目印 "§a§r§s§n" + "§" + スコープ表示の番号
+ *   ・フィールドのキーと長さは data/hud.js（HUD2）。JSON UI 側は札を含むかだけを見る（文字列の * 演算は使わない）
  *   ・目印を含むので、バニラのタイトル枠は表示されない（1.0.2 と同じ仕組み）
  *   ・送信は変化したときと、10 tick ごと（タイトルの表示時間より短い間隔）
  */
@@ -35,7 +35,7 @@ export function addHud2Provider(fn) {
 function fit(name, v) {
   const n = L.fields[name].len;
   let s = typeof v === "number" ? String(Math.max(0, Math.floor(v))) : String(v);
-  s = s.replace(/[^\x20-\x7e]/g, "?").replace(/\|/g, "!");
+  s = s.replace(/[^\x20-\x7e]/g, "?").split(H.sep).join(",").split(H.blank).join("-");
   if (s.length > n) s = typeof v === "number" ? "9".repeat(n) : s.slice(0, n);
   return typeof v === "number" ? s.padStart(n, " ") : s.padEnd(n, " ");
 }
@@ -46,8 +46,11 @@ function fit(name, v) {
  */
 export function encodeHud2(values) {
   let out = H.header;
-  for (const f of H.fields) out += fit(f.name, values[f.name] ?? (f.len === 1 ? "0" : ""));
-  return out;
+  for (const f of H.fields) {
+    const s = fit(f.name, values[f.name] ?? (f.len === 1 ? "0" : ""));
+    for (let i = 0; i < s.length; i++) out += H.sep + f.key + i + (s[i] === " " ? H.blank : s[i]);
+  }
+  return out + H.sep;
 }
 
 /**
@@ -55,10 +58,19 @@ export function encodeHud2(values) {
  * @param {string} s
  */
 export function decodeHud2(s) {
+  if (!s.startsWith(H.header + H.sep)) return null;
+  /** @type {Record<string, string[]>} */
+  const chars = {};
+  const byKey = new Map(H.fields.map((/** @type {any} */ f) => [f.key, f.name]));
+  for (const tok of s.slice(H.header.length).split(H.sep)) {
+    if (tok.length !== 3) continue;
+    const name = byKey.get(tok[0]);
+    if (!name) continue;
+    (chars[name] ??= [])[Number(tok[1])] = tok[2] === H.blank ? " " : tok[2];
+  }
   /** @type {Record<string, string>} */
   const out = {};
-  if (!s.startsWith(H.header)) return null;
-  for (const [name, f] of Object.entries(L.fields)) out[name] = s.slice(f.at, f.at + f.len);
+  for (const [name, f] of Object.entries(L.fields)) out[name] = Array.from({ length: f.len }, (_, i) => chars[name]?.[i] ?? "").join("");
   return out;
 }
 

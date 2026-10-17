@@ -512,7 +512,7 @@ def validate(data, sound_files):
     c.fail("構造物（NBT の読み戻し・ブロック ID と状態・宝箱の数）", errs) if errs else c.ok(f"構造物（.mcstructure {n} 件を読み戻し、ブロック ID・状態・大きさ・宝箱の数が一致）")
     # 24. HUD 2.0 の往復
     n, errs = checks2.check_hud2_roundtrip(RP, m.group(1) if m else "?")
-    c.fail("HUD 2.0（符号化 ↔ JSON UI の式の往復）", errs) if errs else c.ok(f"HUD 2.0（スクリプトの符号化を JSON UI の式で復号：{n} フィールド・表示条件一致）")
+    c.fail("HUD 2.0（符号化 ↔ JSON UI の式の往復）", errs) if errs else c.ok(f"HUD 2.0（スクリプトの符号化を JSON UI の式で復号：札の判定 {n} 件・表示条件と表示文字が一致、* 演算なし）")
     # 25. 言語（2.0 のキーが両言語にあり、日本語が英語のままでない）
     new_keys = set(lang_ui2.UI2) | set(lang_ui2.dynamic(data))
     n, errs = checks2.check_lang_pairs(en, ja, new_keys)

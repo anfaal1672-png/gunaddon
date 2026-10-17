@@ -25,7 +25,7 @@ for (let i = 0; i < 64; i++) {
     ammo: pick(["---", Math.floor(rnd() * 150)]), res: pick(["", "INF", Math.floor(rnd() * 9999)]), mode: pick(["S", "A", "B", "C", "D", "U", "M", "-"]),
     st: pick(["0", "R", "J", "H", "L", "K", "B", "E", "P", "X"]), heat: String(Math.floor(rnd() * 10)), plate: pick(["-", "0", "1", "2", "3", "4"]),
     hp: Math.floor(rnd() * 40), hdg: String(Math.floor(rnd() * 16)).padStart(2, "0"), sup: String(Math.floor(rnd() * 4)), nvg: pick(["0", "1"]),
-    gm: pick(["0", "1", "2", "3", "4", "5"]), sa: Math.floor(rnd() * 200), sb: Math.floor(rnd() * 200), tm: pick(["", "9:59", "0:05", "12:00"]),
+    gm: pick(["0", "1", "2", "3", "4", "5"]), sa: Math.floor(rnd() * 200), sb: Math.floor(rnd() * 200), tm: pick(["", " 9:59", " 0:05", "12:00"]),
     stk: Math.floor(rnd() * 30), cr: Math.floor(rnd() * 2000000), ks: pick(["0", "1"]), rng: pick(["----", Math.floor(rnd() * 999)]),
     wdir: pick(["-", "0", "7", "4"]), wstr: pick(["-", "1", "3"]), sz: pick(["0", "1", "2"]), lay: pick(["0", "1", "2"]),
   };
@@ -33,4 +33,4 @@ for (let i = 0; i < 64; i++) {
   out.push({ values: v, encoded: enc, decoded: hud2.decodeHud2(enc) });
 }
 fs.rmSync(run, { recursive: true, force: true });
-process.stdout.write(JSON.stringify({ header: D.HUD2.header, layout: D.HUD2_LAYOUT, vectors: out }));
+process.stdout.write(JSON.stringify({ hud2: D.HUD2, layout: D.HUD2_LAYOUT, vectors: out }));
