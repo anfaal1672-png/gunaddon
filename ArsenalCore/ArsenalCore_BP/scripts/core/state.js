@@ -116,6 +116,7 @@
  * @property {string} hud2Last HUD 2.0 に最後に送った文字列
  * @property {number} hud2Tick
  * @property {number} hud2Seq HUD 2.0 を送った回数（タイトルに 0〜9 で載せる）
+ * @property {string} hud2Live HUD 2.0 のサブタイトル（毎 tick 変わる値）に最後に送った文字列
  * @property {Record<string, string|number>|null} hud2Vals HUD 2.0 の値（毎 tick 変わる方位・照準以外は、変化時と再送時に集め直す）
  * @property {string} fpoffAnim 再生中の一人称位置調整アニメーション
  * @property {boolean} nvgOn 暗視ゴーグルの手動 ON/OFF（null は自動）
@@ -178,7 +179,7 @@ function create(id) {
     grappleUntil: 0, grapplePoint: null, statusMsgUntil: 0, statusMsg: null,
     loopSoundTick: -99, empUntil: 0, mortarTarget: null, sup: 0, supTick: 0, dmgDir: null,
     meleeCd: 0, meleeStart: -1, meleeId: null, lastButt: -99, variableHigh: false, cantedOn: false,
-    assistTick: 0, autoFiring: false, streak: 0, streakPts: 0, hud2Last: "", hud2Tick: -99, hud2Seq: 0, hud2Vals: null, fpoffAnim: "",
+    assistTick: 0, autoFiring: false, streak: 0, streakPts: 0, hud2Last: "", hud2Tick: -99, hud2Seq: 0, hud2Live: "", hud2Vals: null, fpoffAnim: "",
     nvgOn: true, nvgTick: 0, indoor: false, indoorTick: -99, rangeDist: -1, droneId: null, gunshipUntil: 0, gunshipShot: 0,
     jumpHeld: false, jumpToggle: false, vehShot: 0, ridingId: null, calib: 0, lastHurtTick: -99, medUntil: 0, bleedUntil: 0,
     hintMask: 0, lastWeaponXp: 0, magHits: 0, shieldHp: 0, look: 0, nvgActive: false, statusShownAt: -1,

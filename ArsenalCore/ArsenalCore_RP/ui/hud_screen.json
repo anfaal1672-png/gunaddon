@@ -390,13 +390,13 @@
           "layer": 2,
           "bindings": [
             {
-              "binding_name": "#hud_title_text_string",
-              "binding_name_override": "#arsenal_t",
+              "binding_name": "#hud_subtitle_text_string",
+              "binding_name_override": "#arsenal_s",
               "binding_type": "global"
             },
             {
               "binding_type": "view",
-              "source_property_name": "(not ((#arsenal_t - '.x00.') = #arsenal_t))",
+              "source_property_name": "(not ((#arsenal_s - '.x00.') = #arsenal_s))",
               "target_property_name": "#visible"
             }
           ]
@@ -419,13 +419,13 @@
           "layer": 2,
           "bindings": [
             {
-              "binding_name": "#hud_title_text_string",
-              "binding_name_override": "#arsenal_t",
+              "binding_name": "#hud_subtitle_text_string",
+              "binding_name_override": "#arsenal_s",
               "binding_type": "global"
             },
             {
               "binding_type": "view",
-              "source_property_name": "(not ((#arsenal_t - '.x01.') = #arsenal_t))",
+              "source_property_name": "(not ((#arsenal_s - '.x01.') = #arsenal_s))",
               "target_property_name": "#visible"
             }
           ]
@@ -448,13 +448,13 @@
           "layer": 2,
           "bindings": [
             {
-              "binding_name": "#hud_title_text_string",
-              "binding_name_override": "#arsenal_t",
+              "binding_name": "#hud_subtitle_text_string",
+              "binding_name_override": "#arsenal_s",
               "binding_type": "global"
             },
             {
               "binding_type": "view",
-              "source_property_name": "(not ((#arsenal_t - '.x02.') = #arsenal_t))",
+              "source_property_name": "(not ((#arsenal_s - '.x02.') = #arsenal_s))",
               "target_property_name": "#visible"
             }
           ]
@@ -477,13 +477,13 @@
           "layer": 2,
           "bindings": [
             {
-              "binding_name": "#hud_title_text_string",
-              "binding_name_override": "#arsenal_t",
+              "binding_name": "#hud_subtitle_text_string",
+              "binding_name_override": "#arsenal_s",
               "binding_type": "global"
             },
             {
               "binding_type": "view",
-              "source_property_name": "(not ((#arsenal_t - '.x03.') = #arsenal_t))",
+              "source_property_name": "(not ((#arsenal_s - '.x03.') = #arsenal_s))",
               "target_property_name": "#visible"
             }
           ]
@@ -506,13 +506,13 @@
           "layer": 2,
           "bindings": [
             {
-              "binding_name": "#hud_title_text_string",
-              "binding_name_override": "#arsenal_t",
+              "binding_name": "#hud_subtitle_text_string",
+              "binding_name_override": "#arsenal_s",
               "binding_type": "global"
             },
             {
               "binding_type": "view",
-              "source_property_name": "(not ((#arsenal_t - '.x04.') = #arsenal_t))",
+              "source_property_name": "(not ((#arsenal_s - '.x04.') = #arsenal_s))",
               "target_property_name": "#visible"
             }
           ]
@@ -535,13 +535,13 @@
           "layer": 2,
           "bindings": [
             {
-              "binding_name": "#hud_title_text_string",
-              "binding_name_override": "#arsenal_t",
+              "binding_name": "#hud_subtitle_text_string",
+              "binding_name_override": "#arsenal_s",
               "binding_type": "global"
             },
             {
               "binding_type": "view",
-              "source_property_name": "(not ((#arsenal_t - '.x05.') = #arsenal_t))",
+              "source_property_name": "(not ((#arsenal_s - '.x05.') = #arsenal_s))",
               "target_property_name": "#visible"
             }
           ]
@@ -564,13 +564,13 @@
           "layer": 2,
           "bindings": [
             {
-              "binding_name": "#hud_title_text_string",
-              "binding_name_override": "#arsenal_t",
+              "binding_name": "#hud_subtitle_text_string",
+              "binding_name_override": "#arsenal_s",
               "binding_type": "global"
             },
             {
               "binding_type": "view",
-              "source_property_name": "(not ((#arsenal_t - '.x06.') = #arsenal_t))",
+              "source_property_name": "(not ((#arsenal_s - '.x06.') = #arsenal_s))",
               "target_property_name": "#visible"
             }
           ]
@@ -593,13 +593,13 @@
           "layer": 2,
           "bindings": [
             {
-              "binding_name": "#hud_title_text_string",
-              "binding_name_override": "#arsenal_t",
+              "binding_name": "#hud_subtitle_text_string",
+              "binding_name_override": "#arsenal_s",
               "binding_type": "global"
             },
             {
               "binding_type": "view",
-              "source_property_name": "(not ((#arsenal_t - '.x07.') = #arsenal_t))",
+              "source_property_name": "(not ((#arsenal_s - '.x07.') = #arsenal_s))",
               "target_property_name": "#visible"
             }
           ]
@@ -622,13 +622,13 @@
           "layer": 2,
           "bindings": [
             {
-              "binding_name": "#hud_title_text_string",
-              "binding_name_override": "#arsenal_t",
+              "binding_name": "#hud_subtitle_text_string",
+              "binding_name_override": "#arsenal_s",
               "binding_type": "global"
             },
             {
               "binding_type": "view",
-              "source_property_name": "(not ((#arsenal_t - '.x08.') = #arsenal_t))",
+              "source_property_name": "(not ((#arsenal_s - '.x08.') = #arsenal_s))",
               "target_property_name": "#visible"
             }
           ]
@@ -651,13 +651,13 @@
           "layer": 2,
           "bindings": [
             {
-              "binding_name": "#hud_title_text_string",
-              "binding_name_override": "#arsenal_t",
+              "binding_name": "#hud_subtitle_text_string",
+              "binding_name_override": "#arsenal_s",
               "binding_type": "global"
             },
             {
               "binding_type": "view",
-              "source_property_name": "(not ((#arsenal_t - '.x09.') = #arsenal_t))",
+              "source_property_name": "(not ((#arsenal_s - '.x09.') = #arsenal_s))",
               "target_property_name": "#visible"
             }
           ]
@@ -2929,13 +2929,13 @@
                 "layer": 2,
                 "bindings": [
                   {
-                    "binding_name": "#hud_title_text_string",
-                    "binding_name_override": "#arsenal_t",
+                    "binding_name": "#hud_subtitle_text_string",
+                    "binding_name_override": "#arsenal_s",
                     "binding_type": "global"
                   },
                   {
                     "binding_type": "view",
-                    "source_property_name": "(not ((#arsenal_t - '.g20.') = #arsenal_t))",
+                    "source_property_name": "(not ((#arsenal_s - '.g20.') = #arsenal_s))",
                     "target_property_name": "#visible"
                   }
                 ]
@@ -2958,13 +2958,13 @@
                 "layer": 2,
                 "bindings": [
                   {
-                    "binding_name": "#hud_title_text_string",
-                    "binding_name_override": "#arsenal_t",
+                    "binding_name": "#hud_subtitle_text_string",
+                    "binding_name_override": "#arsenal_s",
                     "binding_type": "global"
                   },
                   {
                     "binding_type": "view",
-                    "source_property_name": "(not ((#arsenal_t - '.g21.') = #arsenal_t))",
+                    "source_property_name": "(not ((#arsenal_s - '.g21.') = #arsenal_s))",
                     "target_property_name": "#visible"
                   }
                 ]
@@ -2987,13 +2987,13 @@
                 "layer": 2,
                 "bindings": [
                   {
-                    "binding_name": "#hud_title_text_string",
-                    "binding_name_override": "#arsenal_t",
+                    "binding_name": "#hud_subtitle_text_string",
+                    "binding_name_override": "#arsenal_s",
                     "binding_type": "global"
                   },
                   {
                     "binding_type": "view",
-                    "source_property_name": "(not ((#arsenal_t - '.g22.') = #arsenal_t))",
+                    "source_property_name": "(not ((#arsenal_s - '.g22.') = #arsenal_s))",
                     "target_property_name": "#visible"
                   }
                 ]
@@ -3016,13 +3016,13 @@
                 "layer": 2,
                 "bindings": [
                   {
-                    "binding_name": "#hud_title_text_string",
-                    "binding_name_override": "#arsenal_t",
+                    "binding_name": "#hud_subtitle_text_string",
+                    "binding_name_override": "#arsenal_s",
                     "binding_type": "global"
                   },
                   {
                     "binding_type": "view",
-                    "source_property_name": "(not ((#arsenal_t - '.g23.') = #arsenal_t))",
+                    "source_property_name": "(not ((#arsenal_s - '.g23.') = #arsenal_s))",
                     "target_property_name": "#visible"
                   }
                 ]
@@ -3045,13 +3045,13 @@
                 "layer": 2,
                 "bindings": [
                   {
-                    "binding_name": "#hud_title_text_string",
-                    "binding_name_override": "#arsenal_t",
+                    "binding_name": "#hud_subtitle_text_string",
+                    "binding_name_override": "#arsenal_s",
                     "binding_type": "global"
                   },
                   {
                     "binding_type": "view",
-                    "source_property_name": "(not ((#arsenal_t - '.g24.') = #arsenal_t))",
+                    "source_property_name": "(not ((#arsenal_s - '.g24.') = #arsenal_s))",
                     "target_property_name": "#visible"
                   }
                 ]
@@ -3074,13 +3074,13 @@
                 "layer": 2,
                 "bindings": [
                   {
-                    "binding_name": "#hud_title_text_string",
-                    "binding_name_override": "#arsenal_t",
+                    "binding_name": "#hud_subtitle_text_string",
+                    "binding_name_override": "#arsenal_s",
                     "binding_type": "global"
                   },
                   {
                     "binding_type": "view",
-                    "source_property_name": "(not ((#arsenal_t - '.g25.') = #arsenal_t))",
+                    "source_property_name": "(not ((#arsenal_s - '.g25.') = #arsenal_s))",
                     "target_property_name": "#visible"
                   }
                 ]
@@ -3103,13 +3103,13 @@
                 "layer": 2,
                 "bindings": [
                   {
-                    "binding_name": "#hud_title_text_string",
-                    "binding_name_override": "#arsenal_t",
+                    "binding_name": "#hud_subtitle_text_string",
+                    "binding_name_override": "#arsenal_s",
                     "binding_type": "global"
                   },
                   {
                     "binding_type": "view",
-                    "source_property_name": "(not ((#arsenal_t - '.g26.') = #arsenal_t))",
+                    "source_property_name": "(not ((#arsenal_s - '.g26.') = #arsenal_s))",
                     "target_property_name": "#visible"
                   }
                 ]
@@ -3132,13 +3132,13 @@
                 "layer": 2,
                 "bindings": [
                   {
-                    "binding_name": "#hud_title_text_string",
-                    "binding_name_override": "#arsenal_t",
+                    "binding_name": "#hud_subtitle_text_string",
+                    "binding_name_override": "#arsenal_s",
                     "binding_type": "global"
                   },
                   {
                     "binding_type": "view",
-                    "source_property_name": "(not ((#arsenal_t - '.g27.') = #arsenal_t))",
+                    "source_property_name": "(not ((#arsenal_s - '.g27.') = #arsenal_s))",
                     "target_property_name": "#visible"
                   }
                 ]
@@ -3161,13 +3161,13 @@
                 "layer": 2,
                 "bindings": [
                   {
-                    "binding_name": "#hud_title_text_string",
-                    "binding_name_override": "#arsenal_t",
+                    "binding_name": "#hud_subtitle_text_string",
+                    "binding_name_override": "#arsenal_s",
                     "binding_type": "global"
                   },
                   {
                     "binding_type": "view",
-                    "source_property_name": "(not ((#arsenal_t - '.g28.') = #arsenal_t))",
+                    "source_property_name": "(not ((#arsenal_s - '.g28.') = #arsenal_s))",
                     "target_property_name": "#visible"
                   }
                 ]
@@ -3190,13 +3190,13 @@
                 "layer": 2,
                 "bindings": [
                   {
-                    "binding_name": "#hud_title_text_string",
-                    "binding_name_override": "#arsenal_t",
+                    "binding_name": "#hud_subtitle_text_string",
+                    "binding_name_override": "#arsenal_s",
                     "binding_type": "global"
                   },
                   {
                     "binding_type": "view",
-                    "source_property_name": "(not ((#arsenal_t - '.g29.') = #arsenal_t))",
+                    "source_property_name": "(not ((#arsenal_s - '.g29.') = #arsenal_s))",
                     "target_property_name": "#visible"
                   }
                 ]
@@ -3205,13 +3205,13 @@
           ],
           "bindings": [
             {
-              "binding_name": "#hud_title_text_string",
-              "binding_name_override": "#arsenal_t",
+              "binding_name": "#hud_subtitle_text_string",
+              "binding_name_override": "#arsenal_s",
               "binding_type": "global"
             },
             {
               "binding_type": "view",
-              "source_property_name": "((not ((#arsenal_t - '.g00.') = #arsenal_t)) and (not ((#arsenal_t - '.g10.') = #arsenal_t)))",
+              "source_property_name": "((not ((#arsenal_s - '.g00.') = #arsenal_s)) and (not ((#arsenal_s - '.g10.') = #arsenal_s)))",
               "target_property_name": "#visible"
             }
           ]
@@ -3245,13 +3245,13 @@
                 "layer": 2,
                 "bindings": [
                   {
-                    "binding_name": "#hud_title_text_string",
-                    "binding_name_override": "#arsenal_t",
+                    "binding_name": "#hud_subtitle_text_string",
+                    "binding_name_override": "#arsenal_s",
                     "binding_type": "global"
                   },
                   {
                     "binding_type": "view",
-                    "source_property_name": "(not ((#arsenal_t - '.g20.') = #arsenal_t))",
+                    "source_property_name": "(not ((#arsenal_s - '.g20.') = #arsenal_s))",
                     "target_property_name": "#visible"
                   }
                 ]
@@ -3274,13 +3274,13 @@
                 "layer": 2,
                 "bindings": [
                   {
-                    "binding_name": "#hud_title_text_string",
-                    "binding_name_override": "#arsenal_t",
+                    "binding_name": "#hud_subtitle_text_string",
+                    "binding_name_override": "#arsenal_s",
                     "binding_type": "global"
                   },
                   {
                     "binding_type": "view",
-                    "source_property_name": "(not ((#arsenal_t - '.g21.') = #arsenal_t))",
+                    "source_property_name": "(not ((#arsenal_s - '.g21.') = #arsenal_s))",
                     "target_property_name": "#visible"
                   }
                 ]
@@ -3303,13 +3303,13 @@
                 "layer": 2,
                 "bindings": [
                   {
-                    "binding_name": "#hud_title_text_string",
-                    "binding_name_override": "#arsenal_t",
+                    "binding_name": "#hud_subtitle_text_string",
+                    "binding_name_override": "#arsenal_s",
                     "binding_type": "global"
                   },
                   {
                     "binding_type": "view",
-                    "source_property_name": "(not ((#arsenal_t - '.g22.') = #arsenal_t))",
+                    "source_property_name": "(not ((#arsenal_s - '.g22.') = #arsenal_s))",
                     "target_property_name": "#visible"
                   }
                 ]
@@ -3332,13 +3332,13 @@
                 "layer": 2,
                 "bindings": [
                   {
-                    "binding_name": "#hud_title_text_string",
-                    "binding_name_override": "#arsenal_t",
+                    "binding_name": "#hud_subtitle_text_string",
+                    "binding_name_override": "#arsenal_s",
                     "binding_type": "global"
                   },
                   {
                     "binding_type": "view",
-                    "source_property_name": "(not ((#arsenal_t - '.g23.') = #arsenal_t))",
+                    "source_property_name": "(not ((#arsenal_s - '.g23.') = #arsenal_s))",
                     "target_property_name": "#visible"
                   }
                 ]
@@ -3361,13 +3361,13 @@
                 "layer": 2,
                 "bindings": [
                   {
-                    "binding_name": "#hud_title_text_string",
-                    "binding_name_override": "#arsenal_t",
+                    "binding_name": "#hud_subtitle_text_string",
+                    "binding_name_override": "#arsenal_s",
                     "binding_type": "global"
                   },
                   {
                     "binding_type": "view",
-                    "source_property_name": "(not ((#arsenal_t - '.g24.') = #arsenal_t))",
+                    "source_property_name": "(not ((#arsenal_s - '.g24.') = #arsenal_s))",
                     "target_property_name": "#visible"
                   }
                 ]
@@ -3390,13 +3390,13 @@
                 "layer": 2,
                 "bindings": [
                   {
-                    "binding_name": "#hud_title_text_string",
-                    "binding_name_override": "#arsenal_t",
+                    "binding_name": "#hud_subtitle_text_string",
+                    "binding_name_override": "#arsenal_s",
                     "binding_type": "global"
                   },
                   {
                     "binding_type": "view",
-                    "source_property_name": "(not ((#arsenal_t - '.g25.') = #arsenal_t))",
+                    "source_property_name": "(not ((#arsenal_s - '.g25.') = #arsenal_s))",
                     "target_property_name": "#visible"
                   }
                 ]
@@ -3419,13 +3419,13 @@
                 "layer": 2,
                 "bindings": [
                   {
-                    "binding_name": "#hud_title_text_string",
-                    "binding_name_override": "#arsenal_t",
+                    "binding_name": "#hud_subtitle_text_string",
+                    "binding_name_override": "#arsenal_s",
                     "binding_type": "global"
                   },
                   {
                     "binding_type": "view",
-                    "source_property_name": "(not ((#arsenal_t - '.g26.') = #arsenal_t))",
+                    "source_property_name": "(not ((#arsenal_s - '.g26.') = #arsenal_s))",
                     "target_property_name": "#visible"
                   }
                 ]
@@ -3448,13 +3448,13 @@
                 "layer": 2,
                 "bindings": [
                   {
-                    "binding_name": "#hud_title_text_string",
-                    "binding_name_override": "#arsenal_t",
+                    "binding_name": "#hud_subtitle_text_string",
+                    "binding_name_override": "#arsenal_s",
                     "binding_type": "global"
                   },
                   {
                     "binding_type": "view",
-                    "source_property_name": "(not ((#arsenal_t - '.g27.') = #arsenal_t))",
+                    "source_property_name": "(not ((#arsenal_s - '.g27.') = #arsenal_s))",
                     "target_property_name": "#visible"
                   }
                 ]
@@ -3477,13 +3477,13 @@
                 "layer": 2,
                 "bindings": [
                   {
-                    "binding_name": "#hud_title_text_string",
-                    "binding_name_override": "#arsenal_t",
+                    "binding_name": "#hud_subtitle_text_string",
+                    "binding_name_override": "#arsenal_s",
                     "binding_type": "global"
                   },
                   {
                     "binding_type": "view",
-                    "source_property_name": "(not ((#arsenal_t - '.g28.') = #arsenal_t))",
+                    "source_property_name": "(not ((#arsenal_s - '.g28.') = #arsenal_s))",
                     "target_property_name": "#visible"
                   }
                 ]
@@ -3506,13 +3506,13 @@
                 "layer": 2,
                 "bindings": [
                   {
-                    "binding_name": "#hud_title_text_string",
-                    "binding_name_override": "#arsenal_t",
+                    "binding_name": "#hud_subtitle_text_string",
+                    "binding_name_override": "#arsenal_s",
                     "binding_type": "global"
                   },
                   {
                     "binding_type": "view",
-                    "source_property_name": "(not ((#arsenal_t - '.g29.') = #arsenal_t))",
+                    "source_property_name": "(not ((#arsenal_s - '.g29.') = #arsenal_s))",
                     "target_property_name": "#visible"
                   }
                 ]
@@ -3521,13 +3521,13 @@
           ],
           "bindings": [
             {
-              "binding_name": "#hud_title_text_string",
-              "binding_name_override": "#arsenal_t",
+              "binding_name": "#hud_subtitle_text_string",
+              "binding_name_override": "#arsenal_s",
               "binding_type": "global"
             },
             {
               "binding_type": "view",
-              "source_property_name": "((not ((#arsenal_t - '.g00.') = #arsenal_t)) and (not ((#arsenal_t - '.g11.') = #arsenal_t)))",
+              "source_property_name": "((not ((#arsenal_s - '.g00.') = #arsenal_s)) and (not ((#arsenal_s - '.g11.') = #arsenal_s)))",
               "target_property_name": "#visible"
             }
           ]
@@ -3561,13 +3561,13 @@
                 "layer": 2,
                 "bindings": [
                   {
-                    "binding_name": "#hud_title_text_string",
-                    "binding_name_override": "#arsenal_t",
+                    "binding_name": "#hud_subtitle_text_string",
+                    "binding_name_override": "#arsenal_s",
                     "binding_type": "global"
                   },
                   {
                     "binding_type": "view",
-                    "source_property_name": "(not ((#arsenal_t - '.g20.') = #arsenal_t))",
+                    "source_property_name": "(not ((#arsenal_s - '.g20.') = #arsenal_s))",
                     "target_property_name": "#visible"
                   }
                 ]
@@ -3590,13 +3590,13 @@
                 "layer": 2,
                 "bindings": [
                   {
-                    "binding_name": "#hud_title_text_string",
-                    "binding_name_override": "#arsenal_t",
+                    "binding_name": "#hud_subtitle_text_string",
+                    "binding_name_override": "#arsenal_s",
                     "binding_type": "global"
                   },
                   {
                     "binding_type": "view",
-                    "source_property_name": "(not ((#arsenal_t - '.g21.') = #arsenal_t))",
+                    "source_property_name": "(not ((#arsenal_s - '.g21.') = #arsenal_s))",
                     "target_property_name": "#visible"
                   }
                 ]
@@ -3619,13 +3619,13 @@
                 "layer": 2,
                 "bindings": [
                   {
-                    "binding_name": "#hud_title_text_string",
-                    "binding_name_override": "#arsenal_t",
+                    "binding_name": "#hud_subtitle_text_string",
+                    "binding_name_override": "#arsenal_s",
                     "binding_type": "global"
                   },
                   {
                     "binding_type": "view",
-                    "source_property_name": "(not ((#arsenal_t - '.g22.') = #arsenal_t))",
+                    "source_property_name": "(not ((#arsenal_s - '.g22.') = #arsenal_s))",
                     "target_property_name": "#visible"
                   }
                 ]
@@ -3648,13 +3648,13 @@
                 "layer": 2,
                 "bindings": [
                   {
-                    "binding_name": "#hud_title_text_string",
-                    "binding_name_override": "#arsenal_t",
+                    "binding_name": "#hud_subtitle_text_string",
+                    "binding_name_override": "#arsenal_s",
                     "binding_type": "global"
                   },
                   {
                     "binding_type": "view",
-                    "source_property_name": "(not ((#arsenal_t - '.g23.') = #arsenal_t))",
+                    "source_property_name": "(not ((#arsenal_s - '.g23.') = #arsenal_s))",
                     "target_property_name": "#visible"
                   }
                 ]
@@ -3677,13 +3677,13 @@
                 "layer": 2,
                 "bindings": [
                   {
-                    "binding_name": "#hud_title_text_string",
-                    "binding_name_override": "#arsenal_t",
+                    "binding_name": "#hud_subtitle_text_string",
+                    "binding_name_override": "#arsenal_s",
                     "binding_type": "global"
                   },
                   {
                     "binding_type": "view",
-                    "source_property_name": "(not ((#arsenal_t - '.g24.') = #arsenal_t))",
+                    "source_property_name": "(not ((#arsenal_s - '.g24.') = #arsenal_s))",
                     "target_property_name": "#visible"
                   }
                 ]
@@ -3706,13 +3706,13 @@
                 "layer": 2,
                 "bindings": [
                   {
-                    "binding_name": "#hud_title_text_string",
-                    "binding_name_override": "#arsenal_t",
+                    "binding_name": "#hud_subtitle_text_string",
+                    "binding_name_override": "#arsenal_s",
                     "binding_type": "global"
                   },
                   {
                     "binding_type": "view",
-                    "source_property_name": "(not ((#arsenal_t - '.g25.') = #arsenal_t))",
+                    "source_property_name": "(not ((#arsenal_s - '.g25.') = #arsenal_s))",
                     "target_property_name": "#visible"
                   }
                 ]
@@ -3735,13 +3735,13 @@
                 "layer": 2,
                 "bindings": [
                   {
-                    "binding_name": "#hud_title_text_string",
-                    "binding_name_override": "#arsenal_t",
+                    "binding_name": "#hud_subtitle_text_string",
+                    "binding_name_override": "#arsenal_s",
                     "binding_type": "global"
                   },
                   {
                     "binding_type": "view",
-                    "source_property_name": "(not ((#arsenal_t - '.g26.') = #arsenal_t))",
+                    "source_property_name": "(not ((#arsenal_s - '.g26.') = #arsenal_s))",
                     "target_property_name": "#visible"
                   }
                 ]
@@ -3764,13 +3764,13 @@
                 "layer": 2,
                 "bindings": [
                   {
-                    "binding_name": "#hud_title_text_string",
-                    "binding_name_override": "#arsenal_t",
+                    "binding_name": "#hud_subtitle_text_string",
+                    "binding_name_override": "#arsenal_s",
                     "binding_type": "global"
                   },
                   {
                     "binding_type": "view",
-                    "source_property_name": "(not ((#arsenal_t - '.g27.') = #arsenal_t))",
+                    "source_property_name": "(not ((#arsenal_s - '.g27.') = #arsenal_s))",
                     "target_property_name": "#visible"
                   }
                 ]
@@ -3793,13 +3793,13 @@
                 "layer": 2,
                 "bindings": [
                   {
-                    "binding_name": "#hud_title_text_string",
-                    "binding_name_override": "#arsenal_t",
+                    "binding_name": "#hud_subtitle_text_string",
+                    "binding_name_override": "#arsenal_s",
                     "binding_type": "global"
                   },
                   {
                     "binding_type": "view",
-                    "source_property_name": "(not ((#arsenal_t - '.g28.') = #arsenal_t))",
+                    "source_property_name": "(not ((#arsenal_s - '.g28.') = #arsenal_s))",
                     "target_property_name": "#visible"
                   }
                 ]
@@ -3822,13 +3822,13 @@
                 "layer": 2,
                 "bindings": [
                   {
-                    "binding_name": "#hud_title_text_string",
-                    "binding_name_override": "#arsenal_t",
+                    "binding_name": "#hud_subtitle_text_string",
+                    "binding_name_override": "#arsenal_s",
                     "binding_type": "global"
                   },
                   {
                     "binding_type": "view",
-                    "source_property_name": "(not ((#arsenal_t - '.g29.') = #arsenal_t))",
+                    "source_property_name": "(not ((#arsenal_s - '.g29.') = #arsenal_s))",
                     "target_property_name": "#visible"
                   }
                 ]
@@ -3837,13 +3837,13 @@
           ],
           "bindings": [
             {
-              "binding_name": "#hud_title_text_string",
-              "binding_name_override": "#arsenal_t",
+              "binding_name": "#hud_subtitle_text_string",
+              "binding_name_override": "#arsenal_s",
               "binding_type": "global"
             },
             {
               "binding_type": "view",
-              "source_property_name": "((not ((#arsenal_t - '.g00.') = #arsenal_t)) and (not ((#arsenal_t - '.g12.') = #arsenal_t)))",
+              "source_property_name": "((not ((#arsenal_s - '.g00.') = #arsenal_s)) and (not ((#arsenal_s - '.g12.') = #arsenal_s)))",
               "target_property_name": "#visible"
             }
           ]
@@ -3877,13 +3877,13 @@
                 "layer": 2,
                 "bindings": [
                   {
-                    "binding_name": "#hud_title_text_string",
-                    "binding_name_override": "#arsenal_t",
+                    "binding_name": "#hud_subtitle_text_string",
+                    "binding_name_override": "#arsenal_s",
                     "binding_type": "global"
                   },
                   {
                     "binding_type": "view",
-                    "source_property_name": "(not ((#arsenal_t - '.g20.') = #arsenal_t))",
+                    "source_property_name": "(not ((#arsenal_s - '.g20.') = #arsenal_s))",
                     "target_property_name": "#visible"
                   }
                 ]
@@ -3906,13 +3906,13 @@
                 "layer": 2,
                 "bindings": [
                   {
-                    "binding_name": "#hud_title_text_string",
-                    "binding_name_override": "#arsenal_t",
+                    "binding_name": "#hud_subtitle_text_string",
+                    "binding_name_override": "#arsenal_s",
                     "binding_type": "global"
                   },
                   {
                     "binding_type": "view",
-                    "source_property_name": "(not ((#arsenal_t - '.g21.') = #arsenal_t))",
+                    "source_property_name": "(not ((#arsenal_s - '.g21.') = #arsenal_s))",
                     "target_property_name": "#visible"
                   }
                 ]
@@ -3935,13 +3935,13 @@
                 "layer": 2,
                 "bindings": [
                   {
-                    "binding_name": "#hud_title_text_string",
-                    "binding_name_override": "#arsenal_t",
+                    "binding_name": "#hud_subtitle_text_string",
+                    "binding_name_override": "#arsenal_s",
                     "binding_type": "global"
                   },
                   {
                     "binding_type": "view",
-                    "source_property_name": "(not ((#arsenal_t - '.g22.') = #arsenal_t))",
+                    "source_property_name": "(not ((#arsenal_s - '.g22.') = #arsenal_s))",
                     "target_property_name": "#visible"
                   }
                 ]
@@ -3964,13 +3964,13 @@
                 "layer": 2,
                 "bindings": [
                   {
-                    "binding_name": "#hud_title_text_string",
-                    "binding_name_override": "#arsenal_t",
+                    "binding_name": "#hud_subtitle_text_string",
+                    "binding_name_override": "#arsenal_s",
                     "binding_type": "global"
                   },
                   {
                     "binding_type": "view",
-                    "source_property_name": "(not ((#arsenal_t - '.g23.') = #arsenal_t))",
+                    "source_property_name": "(not ((#arsenal_s - '.g23.') = #arsenal_s))",
                     "target_property_name": "#visible"
                   }
                 ]
@@ -3993,13 +3993,13 @@
                 "layer": 2,
                 "bindings": [
                   {
-                    "binding_name": "#hud_title_text_string",
-                    "binding_name_override": "#arsenal_t",
+                    "binding_name": "#hud_subtitle_text_string",
+                    "binding_name_override": "#arsenal_s",
                     "binding_type": "global"
                   },
                   {
                     "binding_type": "view",
-                    "source_property_name": "(not ((#arsenal_t - '.g24.') = #arsenal_t))",
+                    "source_property_name": "(not ((#arsenal_s - '.g24.') = #arsenal_s))",
                     "target_property_name": "#visible"
                   }
                 ]
@@ -4022,13 +4022,13 @@
                 "layer": 2,
                 "bindings": [
                   {
-                    "binding_name": "#hud_title_text_string",
-                    "binding_name_override": "#arsenal_t",
+                    "binding_name": "#hud_subtitle_text_string",
+                    "binding_name_override": "#arsenal_s",
                     "binding_type": "global"
                   },
                   {
                     "binding_type": "view",
-                    "source_property_name": "(not ((#arsenal_t - '.g25.') = #arsenal_t))",
+                    "source_property_name": "(not ((#arsenal_s - '.g25.') = #arsenal_s))",
                     "target_property_name": "#visible"
                   }
                 ]
@@ -4051,13 +4051,13 @@
                 "layer": 2,
                 "bindings": [
                   {
-                    "binding_name": "#hud_title_text_string",
-                    "binding_name_override": "#arsenal_t",
+                    "binding_name": "#hud_subtitle_text_string",
+                    "binding_name_override": "#arsenal_s",
                     "binding_type": "global"
                   },
                   {
                     "binding_type": "view",
-                    "source_property_name": "(not ((#arsenal_t - '.g26.') = #arsenal_t))",
+                    "source_property_name": "(not ((#arsenal_s - '.g26.') = #arsenal_s))",
                     "target_property_name": "#visible"
                   }
                 ]
@@ -4080,13 +4080,13 @@
                 "layer": 2,
                 "bindings": [
                   {
-                    "binding_name": "#hud_title_text_string",
-                    "binding_name_override": "#arsenal_t",
+                    "binding_name": "#hud_subtitle_text_string",
+                    "binding_name_override": "#arsenal_s",
                     "binding_type": "global"
                   },
                   {
                     "binding_type": "view",
-                    "source_property_name": "(not ((#arsenal_t - '.g27.') = #arsenal_t))",
+                    "source_property_name": "(not ((#arsenal_s - '.g27.') = #arsenal_s))",
                     "target_property_name": "#visible"
                   }
                 ]
@@ -4109,13 +4109,13 @@
                 "layer": 2,
                 "bindings": [
                   {
-                    "binding_name": "#hud_title_text_string",
-                    "binding_name_override": "#arsenal_t",
+                    "binding_name": "#hud_subtitle_text_string",
+                    "binding_name_override": "#arsenal_s",
                     "binding_type": "global"
                   },
                   {
                     "binding_type": "view",
-                    "source_property_name": "(not ((#arsenal_t - '.g28.') = #arsenal_t))",
+                    "source_property_name": "(not ((#arsenal_s - '.g28.') = #arsenal_s))",
                     "target_property_name": "#visible"
                   }
                 ]
@@ -4138,13 +4138,13 @@
                 "layer": 2,
                 "bindings": [
                   {
-                    "binding_name": "#hud_title_text_string",
-                    "binding_name_override": "#arsenal_t",
+                    "binding_name": "#hud_subtitle_text_string",
+                    "binding_name_override": "#arsenal_s",
                     "binding_type": "global"
                   },
                   {
                     "binding_type": "view",
-                    "source_property_name": "(not ((#arsenal_t - '.g29.') = #arsenal_t))",
+                    "source_property_name": "(not ((#arsenal_s - '.g29.') = #arsenal_s))",
                     "target_property_name": "#visible"
                   }
                 ]
@@ -4153,13 +4153,13 @@
           ],
           "bindings": [
             {
-              "binding_name": "#hud_title_text_string",
-              "binding_name_override": "#arsenal_t",
+              "binding_name": "#hud_subtitle_text_string",
+              "binding_name_override": "#arsenal_s",
               "binding_type": "global"
             },
             {
               "binding_type": "view",
-              "source_property_name": "((not ((#arsenal_t - '.g00.') = #arsenal_t)) and (not ((#arsenal_t - '.g13.') = #arsenal_t)))",
+              "source_property_name": "((not ((#arsenal_s - '.g00.') = #arsenal_s)) and (not ((#arsenal_s - '.g13.') = #arsenal_s)))",
               "target_property_name": "#visible"
             }
           ]
@@ -4193,13 +4193,13 @@
                 "layer": 2,
                 "bindings": [
                   {
-                    "binding_name": "#hud_title_text_string",
-                    "binding_name_override": "#arsenal_t",
+                    "binding_name": "#hud_subtitle_text_string",
+                    "binding_name_override": "#arsenal_s",
                     "binding_type": "global"
                   },
                   {
                     "binding_type": "view",
-                    "source_property_name": "(not ((#arsenal_t - '.g20.') = #arsenal_t))",
+                    "source_property_name": "(not ((#arsenal_s - '.g20.') = #arsenal_s))",
                     "target_property_name": "#visible"
                   }
                 ]
@@ -4222,13 +4222,13 @@
                 "layer": 2,
                 "bindings": [
                   {
-                    "binding_name": "#hud_title_text_string",
-                    "binding_name_override": "#arsenal_t",
+                    "binding_name": "#hud_subtitle_text_string",
+                    "binding_name_override": "#arsenal_s",
                     "binding_type": "global"
                   },
                   {
                     "binding_type": "view",
-                    "source_property_name": "(not ((#arsenal_t - '.g21.') = #arsenal_t))",
+                    "source_property_name": "(not ((#arsenal_s - '.g21.') = #arsenal_s))",
                     "target_property_name": "#visible"
                   }
                 ]
@@ -4251,13 +4251,13 @@
                 "layer": 2,
                 "bindings": [
                   {
-                    "binding_name": "#hud_title_text_string",
-                    "binding_name_override": "#arsenal_t",
+                    "binding_name": "#hud_subtitle_text_string",
+                    "binding_name_override": "#arsenal_s",
                     "binding_type": "global"
                   },
                   {
                     "binding_type": "view",
-                    "source_property_name": "(not ((#arsenal_t - '.g22.') = #arsenal_t))",
+                    "source_property_name": "(not ((#arsenal_s - '.g22.') = #arsenal_s))",
                     "target_property_name": "#visible"
                   }
                 ]
@@ -4280,13 +4280,13 @@
                 "layer": 2,
                 "bindings": [
                   {
-                    "binding_name": "#hud_title_text_string",
-                    "binding_name_override": "#arsenal_t",
+                    "binding_name": "#hud_subtitle_text_string",
+                    "binding_name_override": "#arsenal_s",
                     "binding_type": "global"
                   },
                   {
                     "binding_type": "view",
-                    "source_property_name": "(not ((#arsenal_t - '.g23.') = #arsenal_t))",
+                    "source_property_name": "(not ((#arsenal_s - '.g23.') = #arsenal_s))",
                     "target_property_name": "#visible"
                   }
                 ]
@@ -4309,13 +4309,13 @@
                 "layer": 2,
                 "bindings": [
                   {
-                    "binding_name": "#hud_title_text_string",
-                    "binding_name_override": "#arsenal_t",
+                    "binding_name": "#hud_subtitle_text_string",
+                    "binding_name_override": "#arsenal_s",
                     "binding_type": "global"
                   },
                   {
                     "binding_type": "view",
-                    "source_property_name": "(not ((#arsenal_t - '.g24.') = #arsenal_t))",
+                    "source_property_name": "(not ((#arsenal_s - '.g24.') = #arsenal_s))",
                     "target_property_name": "#visible"
                   }
                 ]
@@ -4338,13 +4338,13 @@
                 "layer": 2,
                 "bindings": [
                   {
-                    "binding_name": "#hud_title_text_string",
-                    "binding_name_override": "#arsenal_t",
+                    "binding_name": "#hud_subtitle_text_string",
+                    "binding_name_override": "#arsenal_s",
                     "binding_type": "global"
                   },
                   {
                     "binding_type": "view",
-                    "source_property_name": "(not ((#arsenal_t - '.g25.') = #arsenal_t))",
+                    "source_property_name": "(not ((#arsenal_s - '.g25.') = #arsenal_s))",
                     "target_property_name": "#visible"
                   }
                 ]
@@ -4367,13 +4367,13 @@
                 "layer": 2,
                 "bindings": [
                   {
-                    "binding_name": "#hud_title_text_string",
-                    "binding_name_override": "#arsenal_t",
+                    "binding_name": "#hud_subtitle_text_string",
+                    "binding_name_override": "#arsenal_s",
                     "binding_type": "global"
                   },
                   {
                     "binding_type": "view",
-                    "source_property_name": "(not ((#arsenal_t - '.g26.') = #arsenal_t))",
+                    "source_property_name": "(not ((#arsenal_s - '.g26.') = #arsenal_s))",
                     "target_property_name": "#visible"
                   }
                 ]
@@ -4396,13 +4396,13 @@
                 "layer": 2,
                 "bindings": [
                   {
-                    "binding_name": "#hud_title_text_string",
-                    "binding_name_override": "#arsenal_t",
+                    "binding_name": "#hud_subtitle_text_string",
+                    "binding_name_override": "#arsenal_s",
                     "binding_type": "global"
                   },
                   {
                     "binding_type": "view",
-                    "source_property_name": "(not ((#arsenal_t - '.g27.') = #arsenal_t))",
+                    "source_property_name": "(not ((#arsenal_s - '.g27.') = #arsenal_s))",
                     "target_property_name": "#visible"
                   }
                 ]
@@ -4425,13 +4425,13 @@
                 "layer": 2,
                 "bindings": [
                   {
-                    "binding_name": "#hud_title_text_string",
-                    "binding_name_override": "#arsenal_t",
+                    "binding_name": "#hud_subtitle_text_string",
+                    "binding_name_override": "#arsenal_s",
                     "binding_type": "global"
                   },
                   {
                     "binding_type": "view",
-                    "source_property_name": "(not ((#arsenal_t - '.g28.') = #arsenal_t))",
+                    "source_property_name": "(not ((#arsenal_s - '.g28.') = #arsenal_s))",
                     "target_property_name": "#visible"
                   }
                 ]
@@ -4454,13 +4454,13 @@
                 "layer": 2,
                 "bindings": [
                   {
-                    "binding_name": "#hud_title_text_string",
-                    "binding_name_override": "#arsenal_t",
+                    "binding_name": "#hud_subtitle_text_string",
+                    "binding_name_override": "#arsenal_s",
                     "binding_type": "global"
                   },
                   {
                     "binding_type": "view",
-                    "source_property_name": "(not ((#arsenal_t - '.g29.') = #arsenal_t))",
+                    "source_property_name": "(not ((#arsenal_s - '.g29.') = #arsenal_s))",
                     "target_property_name": "#visible"
                   }
                 ]
@@ -4469,13 +4469,13 @@
           ],
           "bindings": [
             {
-              "binding_name": "#hud_title_text_string",
-              "binding_name_override": "#arsenal_t",
+              "binding_name": "#hud_subtitle_text_string",
+              "binding_name_override": "#arsenal_s",
               "binding_type": "global"
             },
             {
               "binding_type": "view",
-              "source_property_name": "((not ((#arsenal_t - '.g00.') = #arsenal_t)) and (not ((#arsenal_t - '.g14.') = #arsenal_t)))",
+              "source_property_name": "((not ((#arsenal_s - '.g00.') = #arsenal_s)) and (not ((#arsenal_s - '.g14.') = #arsenal_s)))",
               "target_property_name": "#visible"
             }
           ]
@@ -4509,13 +4509,13 @@
                 "layer": 2,
                 "bindings": [
                   {
-                    "binding_name": "#hud_title_text_string",
-                    "binding_name_override": "#arsenal_t",
+                    "binding_name": "#hud_subtitle_text_string",
+                    "binding_name_override": "#arsenal_s",
                     "binding_type": "global"
                   },
                   {
                     "binding_type": "view",
-                    "source_property_name": "(not ((#arsenal_t - '.g20.') = #arsenal_t))",
+                    "source_property_name": "(not ((#arsenal_s - '.g20.') = #arsenal_s))",
                     "target_property_name": "#visible"
                   }
                 ]
@@ -4538,13 +4538,13 @@
                 "layer": 2,
                 "bindings": [
                   {
-                    "binding_name": "#hud_title_text_string",
-                    "binding_name_override": "#arsenal_t",
+                    "binding_name": "#hud_subtitle_text_string",
+                    "binding_name_override": "#arsenal_s",
                     "binding_type": "global"
                   },
                   {
                     "binding_type": "view",
-                    "source_property_name": "(not ((#arsenal_t - '.g21.') = #arsenal_t))",
+                    "source_property_name": "(not ((#arsenal_s - '.g21.') = #arsenal_s))",
                     "target_property_name": "#visible"
                   }
                 ]
@@ -4567,13 +4567,13 @@
                 "layer": 2,
                 "bindings": [
                   {
-                    "binding_name": "#hud_title_text_string",
-                    "binding_name_override": "#arsenal_t",
+                    "binding_name": "#hud_subtitle_text_string",
+                    "binding_name_override": "#arsenal_s",
                     "binding_type": "global"
                   },
                   {
                     "binding_type": "view",
-                    "source_property_name": "(not ((#arsenal_t - '.g22.') = #arsenal_t))",
+                    "source_property_name": "(not ((#arsenal_s - '.g22.') = #arsenal_s))",
                     "target_property_name": "#visible"
                   }
                 ]
@@ -4596,13 +4596,13 @@
                 "layer": 2,
                 "bindings": [
                   {
-                    "binding_name": "#hud_title_text_string",
-                    "binding_name_override": "#arsenal_t",
+                    "binding_name": "#hud_subtitle_text_string",
+                    "binding_name_override": "#arsenal_s",
                     "binding_type": "global"
                   },
                   {
                     "binding_type": "view",
-                    "source_property_name": "(not ((#arsenal_t - '.g23.') = #arsenal_t))",
+                    "source_property_name": "(not ((#arsenal_s - '.g23.') = #arsenal_s))",
                     "target_property_name": "#visible"
                   }
                 ]
@@ -4625,13 +4625,13 @@
                 "layer": 2,
                 "bindings": [
                   {
-                    "binding_name": "#hud_title_text_string",
-                    "binding_name_override": "#arsenal_t",
+                    "binding_name": "#hud_subtitle_text_string",
+                    "binding_name_override": "#arsenal_s",
                     "binding_type": "global"
                   },
                   {
                     "binding_type": "view",
-                    "source_property_name": "(not ((#arsenal_t - '.g24.') = #arsenal_t))",
+                    "source_property_name": "(not ((#arsenal_s - '.g24.') = #arsenal_s))",
                     "target_property_name": "#visible"
                   }
                 ]
@@ -4654,13 +4654,13 @@
                 "layer": 2,
                 "bindings": [
                   {
-                    "binding_name": "#hud_title_text_string",
-                    "binding_name_override": "#arsenal_t",
+                    "binding_name": "#hud_subtitle_text_string",
+                    "binding_name_override": "#arsenal_s",
                     "binding_type": "global"
                   },
                   {
                     "binding_type": "view",
-                    "source_property_name": "(not ((#arsenal_t - '.g25.') = #arsenal_t))",
+                    "source_property_name": "(not ((#arsenal_s - '.g25.') = #arsenal_s))",
                     "target_property_name": "#visible"
                   }
                 ]
@@ -4683,13 +4683,13 @@
                 "layer": 2,
                 "bindings": [
                   {
-                    "binding_name": "#hud_title_text_string",
-                    "binding_name_override": "#arsenal_t",
+                    "binding_name": "#hud_subtitle_text_string",
+                    "binding_name_override": "#arsenal_s",
                     "binding_type": "global"
                   },
                   {
                     "binding_type": "view",
-                    "source_property_name": "(not ((#arsenal_t - '.g26.') = #arsenal_t))",
+                    "source_property_name": "(not ((#arsenal_s - '.g26.') = #arsenal_s))",
                     "target_property_name": "#visible"
                   }
                 ]
@@ -4712,13 +4712,13 @@
                 "layer": 2,
                 "bindings": [
                   {
-                    "binding_name": "#hud_title_text_string",
-                    "binding_name_override": "#arsenal_t",
+                    "binding_name": "#hud_subtitle_text_string",
+                    "binding_name_override": "#arsenal_s",
                     "binding_type": "global"
                   },
                   {
                     "binding_type": "view",
-                    "source_property_name": "(not ((#arsenal_t - '.g27.') = #arsenal_t))",
+                    "source_property_name": "(not ((#arsenal_s - '.g27.') = #arsenal_s))",
                     "target_property_name": "#visible"
                   }
                 ]
@@ -4741,13 +4741,13 @@
                 "layer": 2,
                 "bindings": [
                   {
-                    "binding_name": "#hud_title_text_string",
-                    "binding_name_override": "#arsenal_t",
+                    "binding_name": "#hud_subtitle_text_string",
+                    "binding_name_override": "#arsenal_s",
                     "binding_type": "global"
                   },
                   {
                     "binding_type": "view",
-                    "source_property_name": "(not ((#arsenal_t - '.g28.') = #arsenal_t))",
+                    "source_property_name": "(not ((#arsenal_s - '.g28.') = #arsenal_s))",
                     "target_property_name": "#visible"
                   }
                 ]
@@ -4770,13 +4770,13 @@
                 "layer": 2,
                 "bindings": [
                   {
-                    "binding_name": "#hud_title_text_string",
-                    "binding_name_override": "#arsenal_t",
+                    "binding_name": "#hud_subtitle_text_string",
+                    "binding_name_override": "#arsenal_s",
                     "binding_type": "global"
                   },
                   {
                     "binding_type": "view",
-                    "source_property_name": "(not ((#arsenal_t - '.g29.') = #arsenal_t))",
+                    "source_property_name": "(not ((#arsenal_s - '.g29.') = #arsenal_s))",
                     "target_property_name": "#visible"
                   }
                 ]
@@ -4785,13 +4785,13 @@
           ],
           "bindings": [
             {
-              "binding_name": "#hud_title_text_string",
-              "binding_name_override": "#arsenal_t",
+              "binding_name": "#hud_subtitle_text_string",
+              "binding_name_override": "#arsenal_s",
               "binding_type": "global"
             },
             {
               "binding_type": "view",
-              "source_property_name": "((not ((#arsenal_t - '.g00.') = #arsenal_t)) and (not ((#arsenal_t - '.g15.') = #arsenal_t)))",
+              "source_property_name": "((not ((#arsenal_s - '.g00.') = #arsenal_s)) and (not ((#arsenal_s - '.g15.') = #arsenal_s)))",
               "target_property_name": "#visible"
             }
           ]
@@ -4825,13 +4825,13 @@
                 "layer": 2,
                 "bindings": [
                   {
-                    "binding_name": "#hud_title_text_string",
-                    "binding_name_override": "#arsenal_t",
+                    "binding_name": "#hud_subtitle_text_string",
+                    "binding_name_override": "#arsenal_s",
                     "binding_type": "global"
                   },
                   {
                     "binding_type": "view",
-                    "source_property_name": "(not ((#arsenal_t - '.g20.') = #arsenal_t))",
+                    "source_property_name": "(not ((#arsenal_s - '.g20.') = #arsenal_s))",
                     "target_property_name": "#visible"
                   }
                 ]
@@ -4854,13 +4854,13 @@
                 "layer": 2,
                 "bindings": [
                   {
-                    "binding_name": "#hud_title_text_string",
-                    "binding_name_override": "#arsenal_t",
+                    "binding_name": "#hud_subtitle_text_string",
+                    "binding_name_override": "#arsenal_s",
                     "binding_type": "global"
                   },
                   {
                     "binding_type": "view",
-                    "source_property_name": "(not ((#arsenal_t - '.g21.') = #arsenal_t))",
+                    "source_property_name": "(not ((#arsenal_s - '.g21.') = #arsenal_s))",
                     "target_property_name": "#visible"
                   }
                 ]
@@ -4883,13 +4883,13 @@
                 "layer": 2,
                 "bindings": [
                   {
-                    "binding_name": "#hud_title_text_string",
-                    "binding_name_override": "#arsenal_t",
+                    "binding_name": "#hud_subtitle_text_string",
+                    "binding_name_override": "#arsenal_s",
                     "binding_type": "global"
                   },
                   {
                     "binding_type": "view",
-                    "source_property_name": "(not ((#arsenal_t - '.g22.') = #arsenal_t))",
+                    "source_property_name": "(not ((#arsenal_s - '.g22.') = #arsenal_s))",
                     "target_property_name": "#visible"
                   }
                 ]
@@ -4912,13 +4912,13 @@
                 "layer": 2,
                 "bindings": [
                   {
-                    "binding_name": "#hud_title_text_string",
-                    "binding_name_override": "#arsenal_t",
+                    "binding_name": "#hud_subtitle_text_string",
+                    "binding_name_override": "#arsenal_s",
                     "binding_type": "global"
                   },
                   {
                     "binding_type": "view",
-                    "source_property_name": "(not ((#arsenal_t - '.g23.') = #arsenal_t))",
+                    "source_property_name": "(not ((#arsenal_s - '.g23.') = #arsenal_s))",
                     "target_property_name": "#visible"
                   }
                 ]
@@ -4941,13 +4941,13 @@
                 "layer": 2,
                 "bindings": [
                   {
-                    "binding_name": "#hud_title_text_string",
-                    "binding_name_override": "#arsenal_t",
+                    "binding_name": "#hud_subtitle_text_string",
+                    "binding_name_override": "#arsenal_s",
                     "binding_type": "global"
                   },
                   {
                     "binding_type": "view",
-                    "source_property_name": "(not ((#arsenal_t - '.g24.') = #arsenal_t))",
+                    "source_property_name": "(not ((#arsenal_s - '.g24.') = #arsenal_s))",
                     "target_property_name": "#visible"
                   }
                 ]
@@ -4970,13 +4970,13 @@
                 "layer": 2,
                 "bindings": [
                   {
-                    "binding_name": "#hud_title_text_string",
-                    "binding_name_override": "#arsenal_t",
+                    "binding_name": "#hud_subtitle_text_string",
+                    "binding_name_override": "#arsenal_s",
                     "binding_type": "global"
                   },
                   {
                     "binding_type": "view",
-                    "source_property_name": "(not ((#arsenal_t - '.g25.') = #arsenal_t))",
+                    "source_property_name": "(not ((#arsenal_s - '.g25.') = #arsenal_s))",
                     "target_property_name": "#visible"
                   }
                 ]
@@ -4999,13 +4999,13 @@
                 "layer": 2,
                 "bindings": [
                   {
-                    "binding_name": "#hud_title_text_string",
-                    "binding_name_override": "#arsenal_t",
+                    "binding_name": "#hud_subtitle_text_string",
+                    "binding_name_override": "#arsenal_s",
                     "binding_type": "global"
                   },
                   {
                     "binding_type": "view",
-                    "source_property_name": "(not ((#arsenal_t - '.g26.') = #arsenal_t))",
+                    "source_property_name": "(not ((#arsenal_s - '.g26.') = #arsenal_s))",
                     "target_property_name": "#visible"
                   }
                 ]
@@ -5028,13 +5028,13 @@
                 "layer": 2,
                 "bindings": [
                   {
-                    "binding_name": "#hud_title_text_string",
-                    "binding_name_override": "#arsenal_t",
+                    "binding_name": "#hud_subtitle_text_string",
+                    "binding_name_override": "#arsenal_s",
                     "binding_type": "global"
                   },
                   {
                     "binding_type": "view",
-                    "source_property_name": "(not ((#arsenal_t - '.g27.') = #arsenal_t))",
+                    "source_property_name": "(not ((#arsenal_s - '.g27.') = #arsenal_s))",
                     "target_property_name": "#visible"
                   }
                 ]
@@ -5057,13 +5057,13 @@
                 "layer": 2,
                 "bindings": [
                   {
-                    "binding_name": "#hud_title_text_string",
-                    "binding_name_override": "#arsenal_t",
+                    "binding_name": "#hud_subtitle_text_string",
+                    "binding_name_override": "#arsenal_s",
                     "binding_type": "global"
                   },
                   {
                     "binding_type": "view",
-                    "source_property_name": "(not ((#arsenal_t - '.g28.') = #arsenal_t))",
+                    "source_property_name": "(not ((#arsenal_s - '.g28.') = #arsenal_s))",
                     "target_property_name": "#visible"
                   }
                 ]
@@ -5086,13 +5086,13 @@
                 "layer": 2,
                 "bindings": [
                   {
-                    "binding_name": "#hud_title_text_string",
-                    "binding_name_override": "#arsenal_t",
+                    "binding_name": "#hud_subtitle_text_string",
+                    "binding_name_override": "#arsenal_s",
                     "binding_type": "global"
                   },
                   {
                     "binding_type": "view",
-                    "source_property_name": "(not ((#arsenal_t - '.g29.') = #arsenal_t))",
+                    "source_property_name": "(not ((#arsenal_s - '.g29.') = #arsenal_s))",
                     "target_property_name": "#visible"
                   }
                 ]
@@ -5101,13 +5101,13 @@
           ],
           "bindings": [
             {
-              "binding_name": "#hud_title_text_string",
-              "binding_name_override": "#arsenal_t",
+              "binding_name": "#hud_subtitle_text_string",
+              "binding_name_override": "#arsenal_s",
               "binding_type": "global"
             },
             {
               "binding_type": "view",
-              "source_property_name": "((not ((#arsenal_t - '.g00.') = #arsenal_t)) and (not ((#arsenal_t - '.g16.') = #arsenal_t)))",
+              "source_property_name": "((not ((#arsenal_s - '.g00.') = #arsenal_s)) and (not ((#arsenal_s - '.g16.') = #arsenal_s)))",
               "target_property_name": "#visible"
             }
           ]
@@ -5141,13 +5141,13 @@
                 "layer": 2,
                 "bindings": [
                   {
-                    "binding_name": "#hud_title_text_string",
-                    "binding_name_override": "#arsenal_t",
+                    "binding_name": "#hud_subtitle_text_string",
+                    "binding_name_override": "#arsenal_s",
                     "binding_type": "global"
                   },
                   {
                     "binding_type": "view",
-                    "source_property_name": "(not ((#arsenal_t - '.g20.') = #arsenal_t))",
+                    "source_property_name": "(not ((#arsenal_s - '.g20.') = #arsenal_s))",
                     "target_property_name": "#visible"
                   }
                 ]
@@ -5170,13 +5170,13 @@
                 "layer": 2,
                 "bindings": [
                   {
-                    "binding_name": "#hud_title_text_string",
-                    "binding_name_override": "#arsenal_t",
+                    "binding_name": "#hud_subtitle_text_string",
+                    "binding_name_override": "#arsenal_s",
                     "binding_type": "global"
                   },
                   {
                     "binding_type": "view",
-                    "source_property_name": "(not ((#arsenal_t - '.g21.') = #arsenal_t))",
+                    "source_property_name": "(not ((#arsenal_s - '.g21.') = #arsenal_s))",
                     "target_property_name": "#visible"
                   }
                 ]
@@ -5199,13 +5199,13 @@
                 "layer": 2,
                 "bindings": [
                   {
-                    "binding_name": "#hud_title_text_string",
-                    "binding_name_override": "#arsenal_t",
+                    "binding_name": "#hud_subtitle_text_string",
+                    "binding_name_override": "#arsenal_s",
                     "binding_type": "global"
                   },
                   {
                     "binding_type": "view",
-                    "source_property_name": "(not ((#arsenal_t - '.g22.') = #arsenal_t))",
+                    "source_property_name": "(not ((#arsenal_s - '.g22.') = #arsenal_s))",
                     "target_property_name": "#visible"
                   }
                 ]
@@ -5228,13 +5228,13 @@
                 "layer": 2,
                 "bindings": [
                   {
-                    "binding_name": "#hud_title_text_string",
-                    "binding_name_override": "#arsenal_t",
+                    "binding_name": "#hud_subtitle_text_string",
+                    "binding_name_override": "#arsenal_s",
                     "binding_type": "global"
                   },
                   {
                     "binding_type": "view",
-                    "source_property_name": "(not ((#arsenal_t - '.g23.') = #arsenal_t))",
+                    "source_property_name": "(not ((#arsenal_s - '.g23.') = #arsenal_s))",
                     "target_property_name": "#visible"
                   }
                 ]
@@ -5257,13 +5257,13 @@
                 "layer": 2,
                 "bindings": [
                   {
-                    "binding_name": "#hud_title_text_string",
-                    "binding_name_override": "#arsenal_t",
+                    "binding_name": "#hud_subtitle_text_string",
+                    "binding_name_override": "#arsenal_s",
                     "binding_type": "global"
                   },
                   {
                     "binding_type": "view",
-                    "source_property_name": "(not ((#arsenal_t - '.g24.') = #arsenal_t))",
+                    "source_property_name": "(not ((#arsenal_s - '.g24.') = #arsenal_s))",
                     "target_property_name": "#visible"
                   }
                 ]
@@ -5286,13 +5286,13 @@
                 "layer": 2,
                 "bindings": [
                   {
-                    "binding_name": "#hud_title_text_string",
-                    "binding_name_override": "#arsenal_t",
+                    "binding_name": "#hud_subtitle_text_string",
+                    "binding_name_override": "#arsenal_s",
                     "binding_type": "global"
                   },
                   {
                     "binding_type": "view",
-                    "source_property_name": "(not ((#arsenal_t - '.g25.') = #arsenal_t))",
+                    "source_property_name": "(not ((#arsenal_s - '.g25.') = #arsenal_s))",
                     "target_property_name": "#visible"
                   }
                 ]
@@ -5315,13 +5315,13 @@
                 "layer": 2,
                 "bindings": [
                   {
-                    "binding_name": "#hud_title_text_string",
-                    "binding_name_override": "#arsenal_t",
+                    "binding_name": "#hud_subtitle_text_string",
+                    "binding_name_override": "#arsenal_s",
                     "binding_type": "global"
                   },
                   {
                     "binding_type": "view",
-                    "source_property_name": "(not ((#arsenal_t - '.g26.') = #arsenal_t))",
+                    "source_property_name": "(not ((#arsenal_s - '.g26.') = #arsenal_s))",
                     "target_property_name": "#visible"
                   }
                 ]
@@ -5344,13 +5344,13 @@
                 "layer": 2,
                 "bindings": [
                   {
-                    "binding_name": "#hud_title_text_string",
-                    "binding_name_override": "#arsenal_t",
+                    "binding_name": "#hud_subtitle_text_string",
+                    "binding_name_override": "#arsenal_s",
                     "binding_type": "global"
                   },
                   {
                     "binding_type": "view",
-                    "source_property_name": "(not ((#arsenal_t - '.g27.') = #arsenal_t))",
+                    "source_property_name": "(not ((#arsenal_s - '.g27.') = #arsenal_s))",
                     "target_property_name": "#visible"
                   }
                 ]
@@ -5373,13 +5373,13 @@
                 "layer": 2,
                 "bindings": [
                   {
-                    "binding_name": "#hud_title_text_string",
-                    "binding_name_override": "#arsenal_t",
+                    "binding_name": "#hud_subtitle_text_string",
+                    "binding_name_override": "#arsenal_s",
                     "binding_type": "global"
                   },
                   {
                     "binding_type": "view",
-                    "source_property_name": "(not ((#arsenal_t - '.g28.') = #arsenal_t))",
+                    "source_property_name": "(not ((#arsenal_s - '.g28.') = #arsenal_s))",
                     "target_property_name": "#visible"
                   }
                 ]
@@ -5402,13 +5402,13 @@
                 "layer": 2,
                 "bindings": [
                   {
-                    "binding_name": "#hud_title_text_string",
-                    "binding_name_override": "#arsenal_t",
+                    "binding_name": "#hud_subtitle_text_string",
+                    "binding_name_override": "#arsenal_s",
                     "binding_type": "global"
                   },
                   {
                     "binding_type": "view",
-                    "source_property_name": "(not ((#arsenal_t - '.g29.') = #arsenal_t))",
+                    "source_property_name": "(not ((#arsenal_s - '.g29.') = #arsenal_s))",
                     "target_property_name": "#visible"
                   }
                 ]
@@ -5417,13 +5417,13 @@
           ],
           "bindings": [
             {
-              "binding_name": "#hud_title_text_string",
-              "binding_name_override": "#arsenal_t",
+              "binding_name": "#hud_subtitle_text_string",
+              "binding_name_override": "#arsenal_s",
               "binding_type": "global"
             },
             {
               "binding_type": "view",
-              "source_property_name": "((not ((#arsenal_t - '.g00.') = #arsenal_t)) and (not ((#arsenal_t - '.g17.') = #arsenal_t)))",
+              "source_property_name": "((not ((#arsenal_s - '.g00.') = #arsenal_s)) and (not ((#arsenal_s - '.g17.') = #arsenal_s)))",
               "target_property_name": "#visible"
             }
           ]
@@ -5457,13 +5457,13 @@
                 "layer": 2,
                 "bindings": [
                   {
-                    "binding_name": "#hud_title_text_string",
-                    "binding_name_override": "#arsenal_t",
+                    "binding_name": "#hud_subtitle_text_string",
+                    "binding_name_override": "#arsenal_s",
                     "binding_type": "global"
                   },
                   {
                     "binding_type": "view",
-                    "source_property_name": "(not ((#arsenal_t - '.g20.') = #arsenal_t))",
+                    "source_property_name": "(not ((#arsenal_s - '.g20.') = #arsenal_s))",
                     "target_property_name": "#visible"
                   }
                 ]
@@ -5486,13 +5486,13 @@
                 "layer": 2,
                 "bindings": [
                   {
-                    "binding_name": "#hud_title_text_string",
-                    "binding_name_override": "#arsenal_t",
+                    "binding_name": "#hud_subtitle_text_string",
+                    "binding_name_override": "#arsenal_s",
                     "binding_type": "global"
                   },
                   {
                     "binding_type": "view",
-                    "source_property_name": "(not ((#arsenal_t - '.g21.') = #arsenal_t))",
+                    "source_property_name": "(not ((#arsenal_s - '.g21.') = #arsenal_s))",
                     "target_property_name": "#visible"
                   }
                 ]
@@ -5515,13 +5515,13 @@
                 "layer": 2,
                 "bindings": [
                   {
-                    "binding_name": "#hud_title_text_string",
-                    "binding_name_override": "#arsenal_t",
+                    "binding_name": "#hud_subtitle_text_string",
+                    "binding_name_override": "#arsenal_s",
                     "binding_type": "global"
                   },
                   {
                     "binding_type": "view",
-                    "source_property_name": "(not ((#arsenal_t - '.g22.') = #arsenal_t))",
+                    "source_property_name": "(not ((#arsenal_s - '.g22.') = #arsenal_s))",
                     "target_property_name": "#visible"
                   }
                 ]
@@ -5544,13 +5544,13 @@
                 "layer": 2,
                 "bindings": [
                   {
-                    "binding_name": "#hud_title_text_string",
-                    "binding_name_override": "#arsenal_t",
+                    "binding_name": "#hud_subtitle_text_string",
+                    "binding_name_override": "#arsenal_s",
                     "binding_type": "global"
                   },
                   {
                     "binding_type": "view",
-                    "source_property_name": "(not ((#arsenal_t - '.g23.') = #arsenal_t))",
+                    "source_property_name": "(not ((#arsenal_s - '.g23.') = #arsenal_s))",
                     "target_property_name": "#visible"
                   }
                 ]
@@ -5573,13 +5573,13 @@
                 "layer": 2,
                 "bindings": [
                   {
-                    "binding_name": "#hud_title_text_string",
-                    "binding_name_override": "#arsenal_t",
+                    "binding_name": "#hud_subtitle_text_string",
+                    "binding_name_override": "#arsenal_s",
                     "binding_type": "global"
                   },
                   {
                     "binding_type": "view",
-                    "source_property_name": "(not ((#arsenal_t - '.g24.') = #arsenal_t))",
+                    "source_property_name": "(not ((#arsenal_s - '.g24.') = #arsenal_s))",
                     "target_property_name": "#visible"
                   }
                 ]
@@ -5602,13 +5602,13 @@
                 "layer": 2,
                 "bindings": [
                   {
-                    "binding_name": "#hud_title_text_string",
-                    "binding_name_override": "#arsenal_t",
+                    "binding_name": "#hud_subtitle_text_string",
+                    "binding_name_override": "#arsenal_s",
                     "binding_type": "global"
                   },
                   {
                     "binding_type": "view",
-                    "source_property_name": "(not ((#arsenal_t - '.g25.') = #arsenal_t))",
+                    "source_property_name": "(not ((#arsenal_s - '.g25.') = #arsenal_s))",
                     "target_property_name": "#visible"
                   }
                 ]
@@ -5631,13 +5631,13 @@
                 "layer": 2,
                 "bindings": [
                   {
-                    "binding_name": "#hud_title_text_string",
-                    "binding_name_override": "#arsenal_t",
+                    "binding_name": "#hud_subtitle_text_string",
+                    "binding_name_override": "#arsenal_s",
                     "binding_type": "global"
                   },
                   {
                     "binding_type": "view",
-                    "source_property_name": "(not ((#arsenal_t - '.g26.') = #arsenal_t))",
+                    "source_property_name": "(not ((#arsenal_s - '.g26.') = #arsenal_s))",
                     "target_property_name": "#visible"
                   }
                 ]
@@ -5660,13 +5660,13 @@
                 "layer": 2,
                 "bindings": [
                   {
-                    "binding_name": "#hud_title_text_string",
-                    "binding_name_override": "#arsenal_t",
+                    "binding_name": "#hud_subtitle_text_string",
+                    "binding_name_override": "#arsenal_s",
                     "binding_type": "global"
                   },
                   {
                     "binding_type": "view",
-                    "source_property_name": "(not ((#arsenal_t - '.g27.') = #arsenal_t))",
+                    "source_property_name": "(not ((#arsenal_s - '.g27.') = #arsenal_s))",
                     "target_property_name": "#visible"
                   }
                 ]
@@ -5689,13 +5689,13 @@
                 "layer": 2,
                 "bindings": [
                   {
-                    "binding_name": "#hud_title_text_string",
-                    "binding_name_override": "#arsenal_t",
+                    "binding_name": "#hud_subtitle_text_string",
+                    "binding_name_override": "#arsenal_s",
                     "binding_type": "global"
                   },
                   {
                     "binding_type": "view",
-                    "source_property_name": "(not ((#arsenal_t - '.g28.') = #arsenal_t))",
+                    "source_property_name": "(not ((#arsenal_s - '.g28.') = #arsenal_s))",
                     "target_property_name": "#visible"
                   }
                 ]
@@ -5718,13 +5718,13 @@
                 "layer": 2,
                 "bindings": [
                   {
-                    "binding_name": "#hud_title_text_string",
-                    "binding_name_override": "#arsenal_t",
+                    "binding_name": "#hud_subtitle_text_string",
+                    "binding_name_override": "#arsenal_s",
                     "binding_type": "global"
                   },
                   {
                     "binding_type": "view",
-                    "source_property_name": "(not ((#arsenal_t - '.g29.') = #arsenal_t))",
+                    "source_property_name": "(not ((#arsenal_s - '.g29.') = #arsenal_s))",
                     "target_property_name": "#visible"
                   }
                 ]
@@ -5733,13 +5733,13 @@
           ],
           "bindings": [
             {
-              "binding_name": "#hud_title_text_string",
-              "binding_name_override": "#arsenal_t",
+              "binding_name": "#hud_subtitle_text_string",
+              "binding_name_override": "#arsenal_s",
               "binding_type": "global"
             },
             {
               "binding_type": "view",
-              "source_property_name": "((not ((#arsenal_t - '.g00.') = #arsenal_t)) and (not ((#arsenal_t - '.g18.') = #arsenal_t)))",
+              "source_property_name": "((not ((#arsenal_s - '.g00.') = #arsenal_s)) and (not ((#arsenal_s - '.g18.') = #arsenal_s)))",
               "target_property_name": "#visible"
             }
           ]
@@ -5773,13 +5773,13 @@
                 "layer": 2,
                 "bindings": [
                   {
-                    "binding_name": "#hud_title_text_string",
-                    "binding_name_override": "#arsenal_t",
+                    "binding_name": "#hud_subtitle_text_string",
+                    "binding_name_override": "#arsenal_s",
                     "binding_type": "global"
                   },
                   {
                     "binding_type": "view",
-                    "source_property_name": "(not ((#arsenal_t - '.g20.') = #arsenal_t))",
+                    "source_property_name": "(not ((#arsenal_s - '.g20.') = #arsenal_s))",
                     "target_property_name": "#visible"
                   }
                 ]
@@ -5802,13 +5802,13 @@
                 "layer": 2,
                 "bindings": [
                   {
-                    "binding_name": "#hud_title_text_string",
-                    "binding_name_override": "#arsenal_t",
+                    "binding_name": "#hud_subtitle_text_string",
+                    "binding_name_override": "#arsenal_s",
                     "binding_type": "global"
                   },
                   {
                     "binding_type": "view",
-                    "source_property_name": "(not ((#arsenal_t - '.g21.') = #arsenal_t))",
+                    "source_property_name": "(not ((#arsenal_s - '.g21.') = #arsenal_s))",
                     "target_property_name": "#visible"
                   }
                 ]
@@ -5831,13 +5831,13 @@
                 "layer": 2,
                 "bindings": [
                   {
-                    "binding_name": "#hud_title_text_string",
-                    "binding_name_override": "#arsenal_t",
+                    "binding_name": "#hud_subtitle_text_string",
+                    "binding_name_override": "#arsenal_s",
                     "binding_type": "global"
                   },
                   {
                     "binding_type": "view",
-                    "source_property_name": "(not ((#arsenal_t - '.g22.') = #arsenal_t))",
+                    "source_property_name": "(not ((#arsenal_s - '.g22.') = #arsenal_s))",
                     "target_property_name": "#visible"
                   }
                 ]
@@ -5860,13 +5860,13 @@
                 "layer": 2,
                 "bindings": [
                   {
-                    "binding_name": "#hud_title_text_string",
-                    "binding_name_override": "#arsenal_t",
+                    "binding_name": "#hud_subtitle_text_string",
+                    "binding_name_override": "#arsenal_s",
                     "binding_type": "global"
                   },
                   {
                     "binding_type": "view",
-                    "source_property_name": "(not ((#arsenal_t - '.g23.') = #arsenal_t))",
+                    "source_property_name": "(not ((#arsenal_s - '.g23.') = #arsenal_s))",
                     "target_property_name": "#visible"
                   }
                 ]
@@ -5889,13 +5889,13 @@
                 "layer": 2,
                 "bindings": [
                   {
-                    "binding_name": "#hud_title_text_string",
-                    "binding_name_override": "#arsenal_t",
+                    "binding_name": "#hud_subtitle_text_string",
+                    "binding_name_override": "#arsenal_s",
                     "binding_type": "global"
                   },
                   {
                     "binding_type": "view",
-                    "source_property_name": "(not ((#arsenal_t - '.g24.') = #arsenal_t))",
+                    "source_property_name": "(not ((#arsenal_s - '.g24.') = #arsenal_s))",
                     "target_property_name": "#visible"
                   }
                 ]
@@ -5918,13 +5918,13 @@
                 "layer": 2,
                 "bindings": [
                   {
-                    "binding_name": "#hud_title_text_string",
-                    "binding_name_override": "#arsenal_t",
+                    "binding_name": "#hud_subtitle_text_string",
+                    "binding_name_override": "#arsenal_s",
                     "binding_type": "global"
                   },
                   {
                     "binding_type": "view",
-                    "source_property_name": "(not ((#arsenal_t - '.g25.') = #arsenal_t))",
+                    "source_property_name": "(not ((#arsenal_s - '.g25.') = #arsenal_s))",
                     "target_property_name": "#visible"
                   }
                 ]
@@ -5947,13 +5947,13 @@
                 "layer": 2,
                 "bindings": [
                   {
-                    "binding_name": "#hud_title_text_string",
-                    "binding_name_override": "#arsenal_t",
+                    "binding_name": "#hud_subtitle_text_string",
+                    "binding_name_override": "#arsenal_s",
                     "binding_type": "global"
                   },
                   {
                     "binding_type": "view",
-                    "source_property_name": "(not ((#arsenal_t - '.g26.') = #arsenal_t))",
+                    "source_property_name": "(not ((#arsenal_s - '.g26.') = #arsenal_s))",
                     "target_property_name": "#visible"
                   }
                 ]
@@ -5976,13 +5976,13 @@
                 "layer": 2,
                 "bindings": [
                   {
-                    "binding_name": "#hud_title_text_string",
-                    "binding_name_override": "#arsenal_t",
+                    "binding_name": "#hud_subtitle_text_string",
+                    "binding_name_override": "#arsenal_s",
                     "binding_type": "global"
                   },
                   {
                     "binding_type": "view",
-                    "source_property_name": "(not ((#arsenal_t - '.g27.') = #arsenal_t))",
+                    "source_property_name": "(not ((#arsenal_s - '.g27.') = #arsenal_s))",
                     "target_property_name": "#visible"
                   }
                 ]
@@ -6005,13 +6005,13 @@
                 "layer": 2,
                 "bindings": [
                   {
-                    "binding_name": "#hud_title_text_string",
-                    "binding_name_override": "#arsenal_t",
+                    "binding_name": "#hud_subtitle_text_string",
+                    "binding_name_override": "#arsenal_s",
                     "binding_type": "global"
                   },
                   {
                     "binding_type": "view",
-                    "source_property_name": "(not ((#arsenal_t - '.g28.') = #arsenal_t))",
+                    "source_property_name": "(not ((#arsenal_s - '.g28.') = #arsenal_s))",
                     "target_property_name": "#visible"
                   }
                 ]
@@ -6034,13 +6034,13 @@
                 "layer": 2,
                 "bindings": [
                   {
-                    "binding_name": "#hud_title_text_string",
-                    "binding_name_override": "#arsenal_t",
+                    "binding_name": "#hud_subtitle_text_string",
+                    "binding_name_override": "#arsenal_s",
                     "binding_type": "global"
                   },
                   {
                     "binding_type": "view",
-                    "source_property_name": "(not ((#arsenal_t - '.g29.') = #arsenal_t))",
+                    "source_property_name": "(not ((#arsenal_s - '.g29.') = #arsenal_s))",
                     "target_property_name": "#visible"
                   }
                 ]
@@ -6049,13 +6049,13 @@
           ],
           "bindings": [
             {
-              "binding_name": "#hud_title_text_string",
-              "binding_name_override": "#arsenal_t",
+              "binding_name": "#hud_subtitle_text_string",
+              "binding_name_override": "#arsenal_s",
               "binding_type": "global"
             },
             {
               "binding_type": "view",
-              "source_property_name": "((not ((#arsenal_t - '.g00.') = #arsenal_t)) and (not ((#arsenal_t - '.g19.') = #arsenal_t)))",
+              "source_property_name": "((not ((#arsenal_s - '.g00.') = #arsenal_s)) and (not ((#arsenal_s - '.g19.') = #arsenal_s)))",
               "target_property_name": "#visible"
             }
           ]
@@ -6089,13 +6089,13 @@
                 "layer": 2,
                 "bindings": [
                   {
-                    "binding_name": "#hud_title_text_string",
-                    "binding_name_override": "#arsenal_t",
+                    "binding_name": "#hud_subtitle_text_string",
+                    "binding_name_override": "#arsenal_s",
                     "binding_type": "global"
                   },
                   {
                     "binding_type": "view",
-                    "source_property_name": "(not ((#arsenal_t - '.g20.') = #arsenal_t))",
+                    "source_property_name": "(not ((#arsenal_s - '.g20.') = #arsenal_s))",
                     "target_property_name": "#visible"
                   }
                 ]
@@ -6118,13 +6118,13 @@
                 "layer": 2,
                 "bindings": [
                   {
-                    "binding_name": "#hud_title_text_string",
-                    "binding_name_override": "#arsenal_t",
+                    "binding_name": "#hud_subtitle_text_string",
+                    "binding_name_override": "#arsenal_s",
                     "binding_type": "global"
                   },
                   {
                     "binding_type": "view",
-                    "source_property_name": "(not ((#arsenal_t - '.g21.') = #arsenal_t))",
+                    "source_property_name": "(not ((#arsenal_s - '.g21.') = #arsenal_s))",
                     "target_property_name": "#visible"
                   }
                 ]
@@ -6147,13 +6147,13 @@
                 "layer": 2,
                 "bindings": [
                   {
-                    "binding_name": "#hud_title_text_string",
-                    "binding_name_override": "#arsenal_t",
+                    "binding_name": "#hud_subtitle_text_string",
+                    "binding_name_override": "#arsenal_s",
                     "binding_type": "global"
                   },
                   {
                     "binding_type": "view",
-                    "source_property_name": "(not ((#arsenal_t - '.g22.') = #arsenal_t))",
+                    "source_property_name": "(not ((#arsenal_s - '.g22.') = #arsenal_s))",
                     "target_property_name": "#visible"
                   }
                 ]
@@ -6176,13 +6176,13 @@
                 "layer": 2,
                 "bindings": [
                   {
-                    "binding_name": "#hud_title_text_string",
-                    "binding_name_override": "#arsenal_t",
+                    "binding_name": "#hud_subtitle_text_string",
+                    "binding_name_override": "#arsenal_s",
                     "binding_type": "global"
                   },
                   {
                     "binding_type": "view",
-                    "source_property_name": "(not ((#arsenal_t - '.g23.') = #arsenal_t))",
+                    "source_property_name": "(not ((#arsenal_s - '.g23.') = #arsenal_s))",
                     "target_property_name": "#visible"
                   }
                 ]
@@ -6205,13 +6205,13 @@
                 "layer": 2,
                 "bindings": [
                   {
-                    "binding_name": "#hud_title_text_string",
-                    "binding_name_override": "#arsenal_t",
+                    "binding_name": "#hud_subtitle_text_string",
+                    "binding_name_override": "#arsenal_s",
                     "binding_type": "global"
                   },
                   {
                     "binding_type": "view",
-                    "source_property_name": "(not ((#arsenal_t - '.g24.') = #arsenal_t))",
+                    "source_property_name": "(not ((#arsenal_s - '.g24.') = #arsenal_s))",
                     "target_property_name": "#visible"
                   }
                 ]
@@ -6234,13 +6234,13 @@
                 "layer": 2,
                 "bindings": [
                   {
-                    "binding_name": "#hud_title_text_string",
-                    "binding_name_override": "#arsenal_t",
+                    "binding_name": "#hud_subtitle_text_string",
+                    "binding_name_override": "#arsenal_s",
                     "binding_type": "global"
                   },
                   {
                     "binding_type": "view",
-                    "source_property_name": "(not ((#arsenal_t - '.g25.') = #arsenal_t))",
+                    "source_property_name": "(not ((#arsenal_s - '.g25.') = #arsenal_s))",
                     "target_property_name": "#visible"
                   }
                 ]
@@ -6263,13 +6263,13 @@
                 "layer": 2,
                 "bindings": [
                   {
-                    "binding_name": "#hud_title_text_string",
-                    "binding_name_override": "#arsenal_t",
+                    "binding_name": "#hud_subtitle_text_string",
+                    "binding_name_override": "#arsenal_s",
                     "binding_type": "global"
                   },
                   {
                     "binding_type": "view",
-                    "source_property_name": "(not ((#arsenal_t - '.g26.') = #arsenal_t))",
+                    "source_property_name": "(not ((#arsenal_s - '.g26.') = #arsenal_s))",
                     "target_property_name": "#visible"
                   }
                 ]
@@ -6292,13 +6292,13 @@
                 "layer": 2,
                 "bindings": [
                   {
-                    "binding_name": "#hud_title_text_string",
-                    "binding_name_override": "#arsenal_t",
+                    "binding_name": "#hud_subtitle_text_string",
+                    "binding_name_override": "#arsenal_s",
                     "binding_type": "global"
                   },
                   {
                     "binding_type": "view",
-                    "source_property_name": "(not ((#arsenal_t - '.g27.') = #arsenal_t))",
+                    "source_property_name": "(not ((#arsenal_s - '.g27.') = #arsenal_s))",
                     "target_property_name": "#visible"
                   }
                 ]
@@ -6321,13 +6321,13 @@
                 "layer": 2,
                 "bindings": [
                   {
-                    "binding_name": "#hud_title_text_string",
-                    "binding_name_override": "#arsenal_t",
+                    "binding_name": "#hud_subtitle_text_string",
+                    "binding_name_override": "#arsenal_s",
                     "binding_type": "global"
                   },
                   {
                     "binding_type": "view",
-                    "source_property_name": "(not ((#arsenal_t - '.g28.') = #arsenal_t))",
+                    "source_property_name": "(not ((#arsenal_s - '.g28.') = #arsenal_s))",
                     "target_property_name": "#visible"
                   }
                 ]
@@ -6350,13 +6350,13 @@
                 "layer": 2,
                 "bindings": [
                   {
-                    "binding_name": "#hud_title_text_string",
-                    "binding_name_override": "#arsenal_t",
+                    "binding_name": "#hud_subtitle_text_string",
+                    "binding_name_override": "#arsenal_s",
                     "binding_type": "global"
                   },
                   {
                     "binding_type": "view",
-                    "source_property_name": "(not ((#arsenal_t - '.g29.') = #arsenal_t))",
+                    "source_property_name": "(not ((#arsenal_s - '.g29.') = #arsenal_s))",
                     "target_property_name": "#visible"
                   }
                 ]
@@ -6365,13 +6365,13 @@
           ],
           "bindings": [
             {
-              "binding_name": "#hud_title_text_string",
-              "binding_name_override": "#arsenal_t",
+              "binding_name": "#hud_subtitle_text_string",
+              "binding_name_override": "#arsenal_s",
               "binding_type": "global"
             },
             {
               "binding_type": "view",
-              "source_property_name": "((not ((#arsenal_t - '.g01.') = #arsenal_t)) and (not ((#arsenal_t - '.g10.') = #arsenal_t)))",
+              "source_property_name": "((not ((#arsenal_s - '.g01.') = #arsenal_s)) and (not ((#arsenal_s - '.g10.') = #arsenal_s)))",
               "target_property_name": "#visible"
             }
           ]
@@ -6405,13 +6405,13 @@
                 "layer": 2,
                 "bindings": [
                   {
-                    "binding_name": "#hud_title_text_string",
-                    "binding_name_override": "#arsenal_t",
+                    "binding_name": "#hud_subtitle_text_string",
+                    "binding_name_override": "#arsenal_s",
                     "binding_type": "global"
                   },
                   {
                     "binding_type": "view",
-                    "source_property_name": "(not ((#arsenal_t - '.g20.') = #arsenal_t))",
+                    "source_property_name": "(not ((#arsenal_s - '.g20.') = #arsenal_s))",
                     "target_property_name": "#visible"
                   }
                 ]
@@ -6434,13 +6434,13 @@
                 "layer": 2,
                 "bindings": [
                   {
-                    "binding_name": "#hud_title_text_string",
-                    "binding_name_override": "#arsenal_t",
+                    "binding_name": "#hud_subtitle_text_string",
+                    "binding_name_override": "#arsenal_s",
                     "binding_type": "global"
                   },
                   {
                     "binding_type": "view",
-                    "source_property_name": "(not ((#arsenal_t - '.g21.') = #arsenal_t))",
+                    "source_property_name": "(not ((#arsenal_s - '.g21.') = #arsenal_s))",
                     "target_property_name": "#visible"
                   }
                 ]
@@ -6463,13 +6463,13 @@
                 "layer": 2,
                 "bindings": [
                   {
-                    "binding_name": "#hud_title_text_string",
-                    "binding_name_override": "#arsenal_t",
+                    "binding_name": "#hud_subtitle_text_string",
+                    "binding_name_override": "#arsenal_s",
                     "binding_type": "global"
                   },
                   {
                     "binding_type": "view",
-                    "source_property_name": "(not ((#arsenal_t - '.g22.') = #arsenal_t))",
+                    "source_property_name": "(not ((#arsenal_s - '.g22.') = #arsenal_s))",
                     "target_property_name": "#visible"
                   }
                 ]
@@ -6492,13 +6492,13 @@
                 "layer": 2,
                 "bindings": [
                   {
-                    "binding_name": "#hud_title_text_string",
-                    "binding_name_override": "#arsenal_t",
+                    "binding_name": "#hud_subtitle_text_string",
+                    "binding_name_override": "#arsenal_s",
                     "binding_type": "global"
                   },
                   {
                     "binding_type": "view",
-                    "source_property_name": "(not ((#arsenal_t - '.g23.') = #arsenal_t))",
+                    "source_property_name": "(not ((#arsenal_s - '.g23.') = #arsenal_s))",
                     "target_property_name": "#visible"
                   }
                 ]
@@ -6521,13 +6521,13 @@
                 "layer": 2,
                 "bindings": [
                   {
-                    "binding_name": "#hud_title_text_string",
-                    "binding_name_override": "#arsenal_t",
+                    "binding_name": "#hud_subtitle_text_string",
+                    "binding_name_override": "#arsenal_s",
                     "binding_type": "global"
                   },
                   {
                     "binding_type": "view",
-                    "source_property_name": "(not ((#arsenal_t - '.g24.') = #arsenal_t))",
+                    "source_property_name": "(not ((#arsenal_s - '.g24.') = #arsenal_s))",
                     "target_property_name": "#visible"
                   }
                 ]
@@ -6550,13 +6550,13 @@
                 "layer": 2,
                 "bindings": [
                   {
-                    "binding_name": "#hud_title_text_string",
-                    "binding_name_override": "#arsenal_t",
+                    "binding_name": "#hud_subtitle_text_string",
+                    "binding_name_override": "#arsenal_s",
                     "binding_type": "global"
                   },
                   {
                     "binding_type": "view",
-                    "source_property_name": "(not ((#arsenal_t - '.g25.') = #arsenal_t))",
+                    "source_property_name": "(not ((#arsenal_s - '.g25.') = #arsenal_s))",
                     "target_property_name": "#visible"
                   }
                 ]
@@ -6579,13 +6579,13 @@
                 "layer": 2,
                 "bindings": [
                   {
-                    "binding_name": "#hud_title_text_string",
-                    "binding_name_override": "#arsenal_t",
+                    "binding_name": "#hud_subtitle_text_string",
+                    "binding_name_override": "#arsenal_s",
                     "binding_type": "global"
                   },
                   {
                     "binding_type": "view",
-                    "source_property_name": "(not ((#arsenal_t - '.g26.') = #arsenal_t))",
+                    "source_property_name": "(not ((#arsenal_s - '.g26.') = #arsenal_s))",
                     "target_property_name": "#visible"
                   }
                 ]
@@ -6608,13 +6608,13 @@
                 "layer": 2,
                 "bindings": [
                   {
-                    "binding_name": "#hud_title_text_string",
-                    "binding_name_override": "#arsenal_t",
+                    "binding_name": "#hud_subtitle_text_string",
+                    "binding_name_override": "#arsenal_s",
                     "binding_type": "global"
                   },
                   {
                     "binding_type": "view",
-                    "source_property_name": "(not ((#arsenal_t - '.g27.') = #arsenal_t))",
+                    "source_property_name": "(not ((#arsenal_s - '.g27.') = #arsenal_s))",
                     "target_property_name": "#visible"
                   }
                 ]
@@ -6637,13 +6637,13 @@
                 "layer": 2,
                 "bindings": [
                   {
-                    "binding_name": "#hud_title_text_string",
-                    "binding_name_override": "#arsenal_t",
+                    "binding_name": "#hud_subtitle_text_string",
+                    "binding_name_override": "#arsenal_s",
                     "binding_type": "global"
                   },
                   {
                     "binding_type": "view",
-                    "source_property_name": "(not ((#arsenal_t - '.g28.') = #arsenal_t))",
+                    "source_property_name": "(not ((#arsenal_s - '.g28.') = #arsenal_s))",
                     "target_property_name": "#visible"
                   }
                 ]
@@ -6666,13 +6666,13 @@
                 "layer": 2,
                 "bindings": [
                   {
-                    "binding_name": "#hud_title_text_string",
-                    "binding_name_override": "#arsenal_t",
+                    "binding_name": "#hud_subtitle_text_string",
+                    "binding_name_override": "#arsenal_s",
                     "binding_type": "global"
                   },
                   {
                     "binding_type": "view",
-                    "source_property_name": "(not ((#arsenal_t - '.g29.') = #arsenal_t))",
+                    "source_property_name": "(not ((#arsenal_s - '.g29.') = #arsenal_s))",
                     "target_property_name": "#visible"
                   }
                 ]
@@ -6681,13 +6681,13 @@
           ],
           "bindings": [
             {
-              "binding_name": "#hud_title_text_string",
-              "binding_name_override": "#arsenal_t",
+              "binding_name": "#hud_subtitle_text_string",
+              "binding_name_override": "#arsenal_s",
               "binding_type": "global"
             },
             {
               "binding_type": "view",
-              "source_property_name": "((not ((#arsenal_t - '.g01.') = #arsenal_t)) and (not ((#arsenal_t - '.g11.') = #arsenal_t)))",
+              "source_property_name": "((not ((#arsenal_s - '.g01.') = #arsenal_s)) and (not ((#arsenal_s - '.g11.') = #arsenal_s)))",
               "target_property_name": "#visible"
             }
           ]
@@ -6721,13 +6721,13 @@
                 "layer": 2,
                 "bindings": [
                   {
-                    "binding_name": "#hud_title_text_string",
-                    "binding_name_override": "#arsenal_t",
+                    "binding_name": "#hud_subtitle_text_string",
+                    "binding_name_override": "#arsenal_s",
                     "binding_type": "global"
                   },
                   {
                     "binding_type": "view",
-                    "source_property_name": "(not ((#arsenal_t - '.g20.') = #arsenal_t))",
+                    "source_property_name": "(not ((#arsenal_s - '.g20.') = #arsenal_s))",
                     "target_property_name": "#visible"
                   }
                 ]
@@ -6750,13 +6750,13 @@
                 "layer": 2,
                 "bindings": [
                   {
-                    "binding_name": "#hud_title_text_string",
-                    "binding_name_override": "#arsenal_t",
+                    "binding_name": "#hud_subtitle_text_string",
+                    "binding_name_override": "#arsenal_s",
                     "binding_type": "global"
                   },
                   {
                     "binding_type": "view",
-                    "source_property_name": "(not ((#arsenal_t - '.g21.') = #arsenal_t))",
+                    "source_property_name": "(not ((#arsenal_s - '.g21.') = #arsenal_s))",
                     "target_property_name": "#visible"
                   }
                 ]
@@ -6779,13 +6779,13 @@
                 "layer": 2,
                 "bindings": [
                   {
-                    "binding_name": "#hud_title_text_string",
-                    "binding_name_override": "#arsenal_t",
+                    "binding_name": "#hud_subtitle_text_string",
+                    "binding_name_override": "#arsenal_s",
                     "binding_type": "global"
                   },
                   {
                     "binding_type": "view",
-                    "source_property_name": "(not ((#arsenal_t - '.g22.') = #arsenal_t))",
+                    "source_property_name": "(not ((#arsenal_s - '.g22.') = #arsenal_s))",
                     "target_property_name": "#visible"
                   }
                 ]
@@ -6808,13 +6808,13 @@
                 "layer": 2,
                 "bindings": [
                   {
-                    "binding_name": "#hud_title_text_string",
-                    "binding_name_override": "#arsenal_t",
+                    "binding_name": "#hud_subtitle_text_string",
+                    "binding_name_override": "#arsenal_s",
                     "binding_type": "global"
                   },
                   {
                     "binding_type": "view",
-                    "source_property_name": "(not ((#arsenal_t - '.g23.') = #arsenal_t))",
+                    "source_property_name": "(not ((#arsenal_s - '.g23.') = #arsenal_s))",
                     "target_property_name": "#visible"
                   }
                 ]
@@ -6837,13 +6837,13 @@
                 "layer": 2,
                 "bindings": [
                   {
-                    "binding_name": "#hud_title_text_string",
-                    "binding_name_override": "#arsenal_t",
+                    "binding_name": "#hud_subtitle_text_string",
+                    "binding_name_override": "#arsenal_s",
                     "binding_type": "global"
                   },
                   {
                     "binding_type": "view",
-                    "source_property_name": "(not ((#arsenal_t - '.g24.') = #arsenal_t))",
+                    "source_property_name": "(not ((#arsenal_s - '.g24.') = #arsenal_s))",
                     "target_property_name": "#visible"
                   }
                 ]
@@ -6866,13 +6866,13 @@
                 "layer": 2,
                 "bindings": [
                   {
-                    "binding_name": "#hud_title_text_string",
-                    "binding_name_override": "#arsenal_t",
+                    "binding_name": "#hud_subtitle_text_string",
+                    "binding_name_override": "#arsenal_s",
                     "binding_type": "global"
                   },
                   {
                     "binding_type": "view",
-                    "source_property_name": "(not ((#arsenal_t - '.g25.') = #arsenal_t))",
+                    "source_property_name": "(not ((#arsenal_s - '.g25.') = #arsenal_s))",
                     "target_property_name": "#visible"
                   }
                 ]
@@ -6895,13 +6895,13 @@
                 "layer": 2,
                 "bindings": [
                   {
-                    "binding_name": "#hud_title_text_string",
-                    "binding_name_override": "#arsenal_t",
+                    "binding_name": "#hud_subtitle_text_string",
+                    "binding_name_override": "#arsenal_s",
                     "binding_type": "global"
                   },
                   {
                     "binding_type": "view",
-                    "source_property_name": "(not ((#arsenal_t - '.g26.') = #arsenal_t))",
+                    "source_property_name": "(not ((#arsenal_s - '.g26.') = #arsenal_s))",
                     "target_property_name": "#visible"
                   }
                 ]
@@ -6924,13 +6924,13 @@
                 "layer": 2,
                 "bindings": [
                   {
-                    "binding_name": "#hud_title_text_string",
-                    "binding_name_override": "#arsenal_t",
+                    "binding_name": "#hud_subtitle_text_string",
+                    "binding_name_override": "#arsenal_s",
                     "binding_type": "global"
                   },
                   {
                     "binding_type": "view",
-                    "source_property_name": "(not ((#arsenal_t - '.g27.') = #arsenal_t))",
+                    "source_property_name": "(not ((#arsenal_s - '.g27.') = #arsenal_s))",
                     "target_property_name": "#visible"
                   }
                 ]
@@ -6953,13 +6953,13 @@
                 "layer": 2,
                 "bindings": [
                   {
-                    "binding_name": "#hud_title_text_string",
-                    "binding_name_override": "#arsenal_t",
+                    "binding_name": "#hud_subtitle_text_string",
+                    "binding_name_override": "#arsenal_s",
                     "binding_type": "global"
                   },
                   {
                     "binding_type": "view",
-                    "source_property_name": "(not ((#arsenal_t - '.g28.') = #arsenal_t))",
+                    "source_property_name": "(not ((#arsenal_s - '.g28.') = #arsenal_s))",
                     "target_property_name": "#visible"
                   }
                 ]
@@ -6982,13 +6982,13 @@
                 "layer": 2,
                 "bindings": [
                   {
-                    "binding_name": "#hud_title_text_string",
-                    "binding_name_override": "#arsenal_t",
+                    "binding_name": "#hud_subtitle_text_string",
+                    "binding_name_override": "#arsenal_s",
                     "binding_type": "global"
                   },
                   {
                     "binding_type": "view",
-                    "source_property_name": "(not ((#arsenal_t - '.g29.') = #arsenal_t))",
+                    "source_property_name": "(not ((#arsenal_s - '.g29.') = #arsenal_s))",
                     "target_property_name": "#visible"
                   }
                 ]
@@ -6997,13 +6997,13 @@
           ],
           "bindings": [
             {
-              "binding_name": "#hud_title_text_string",
-              "binding_name_override": "#arsenal_t",
+              "binding_name": "#hud_subtitle_text_string",
+              "binding_name_override": "#arsenal_s",
               "binding_type": "global"
             },
             {
               "binding_type": "view",
-              "source_property_name": "((not ((#arsenal_t - '.g01.') = #arsenal_t)) and (not ((#arsenal_t - '.g12.') = #arsenal_t)))",
+              "source_property_name": "((not ((#arsenal_s - '.g01.') = #arsenal_s)) and (not ((#arsenal_s - '.g12.') = #arsenal_s)))",
               "target_property_name": "#visible"
             }
           ]
@@ -7037,13 +7037,13 @@
                 "layer": 2,
                 "bindings": [
                   {
-                    "binding_name": "#hud_title_text_string",
-                    "binding_name_override": "#arsenal_t",
+                    "binding_name": "#hud_subtitle_text_string",
+                    "binding_name_override": "#arsenal_s",
                     "binding_type": "global"
                   },
                   {
                     "binding_type": "view",
-                    "source_property_name": "(not ((#arsenal_t - '.g20.') = #arsenal_t))",
+                    "source_property_name": "(not ((#arsenal_s - '.g20.') = #arsenal_s))",
                     "target_property_name": "#visible"
                   }
                 ]
@@ -7066,13 +7066,13 @@
                 "layer": 2,
                 "bindings": [
                   {
-                    "binding_name": "#hud_title_text_string",
-                    "binding_name_override": "#arsenal_t",
+                    "binding_name": "#hud_subtitle_text_string",
+                    "binding_name_override": "#arsenal_s",
                     "binding_type": "global"
                   },
                   {
                     "binding_type": "view",
-                    "source_property_name": "(not ((#arsenal_t - '.g21.') = #arsenal_t))",
+                    "source_property_name": "(not ((#arsenal_s - '.g21.') = #arsenal_s))",
                     "target_property_name": "#visible"
                   }
                 ]
@@ -7095,13 +7095,13 @@
                 "layer": 2,
                 "bindings": [
                   {
-                    "binding_name": "#hud_title_text_string",
-                    "binding_name_override": "#arsenal_t",
+                    "binding_name": "#hud_subtitle_text_string",
+                    "binding_name_override": "#arsenal_s",
                     "binding_type": "global"
                   },
                   {
                     "binding_type": "view",
-                    "source_property_name": "(not ((#arsenal_t - '.g22.') = #arsenal_t))",
+                    "source_property_name": "(not ((#arsenal_s - '.g22.') = #arsenal_s))",
                     "target_property_name": "#visible"
                   }
                 ]
@@ -7124,13 +7124,13 @@
                 "layer": 2,
                 "bindings": [
                   {
-                    "binding_name": "#hud_title_text_string",
-                    "binding_name_override": "#arsenal_t",
+                    "binding_name": "#hud_subtitle_text_string",
+                    "binding_name_override": "#arsenal_s",
                     "binding_type": "global"
                   },
                   {
                     "binding_type": "view",
-                    "source_property_name": "(not ((#arsenal_t - '.g23.') = #arsenal_t))",
+                    "source_property_name": "(not ((#arsenal_s - '.g23.') = #arsenal_s))",
                     "target_property_name": "#visible"
                   }
                 ]
@@ -7153,13 +7153,13 @@
                 "layer": 2,
                 "bindings": [
                   {
-                    "binding_name": "#hud_title_text_string",
-                    "binding_name_override": "#arsenal_t",
+                    "binding_name": "#hud_subtitle_text_string",
+                    "binding_name_override": "#arsenal_s",
                     "binding_type": "global"
                   },
                   {
                     "binding_type": "view",
-                    "source_property_name": "(not ((#arsenal_t - '.g24.') = #arsenal_t))",
+                    "source_property_name": "(not ((#arsenal_s - '.g24.') = #arsenal_s))",
                     "target_property_name": "#visible"
                   }
                 ]
@@ -7182,13 +7182,13 @@
                 "layer": 2,
                 "bindings": [
                   {
-                    "binding_name": "#hud_title_text_string",
-                    "binding_name_override": "#arsenal_t",
+                    "binding_name": "#hud_subtitle_text_string",
+                    "binding_name_override": "#arsenal_s",
                     "binding_type": "global"
                   },
                   {
                     "binding_type": "view",
-                    "source_property_name": "(not ((#arsenal_t - '.g25.') = #arsenal_t))",
+                    "source_property_name": "(not ((#arsenal_s - '.g25.') = #arsenal_s))",
                     "target_property_name": "#visible"
                   }
                 ]
@@ -7211,13 +7211,13 @@
                 "layer": 2,
                 "bindings": [
                   {
-                    "binding_name": "#hud_title_text_string",
-                    "binding_name_override": "#arsenal_t",
+                    "binding_name": "#hud_subtitle_text_string",
+                    "binding_name_override": "#arsenal_s",
                     "binding_type": "global"
                   },
                   {
                     "binding_type": "view",
-                    "source_property_name": "(not ((#arsenal_t - '.g26.') = #arsenal_t))",
+                    "source_property_name": "(not ((#arsenal_s - '.g26.') = #arsenal_s))",
                     "target_property_name": "#visible"
                   }
                 ]
@@ -7240,13 +7240,13 @@
                 "layer": 2,
                 "bindings": [
                   {
-                    "binding_name": "#hud_title_text_string",
-                    "binding_name_override": "#arsenal_t",
+                    "binding_name": "#hud_subtitle_text_string",
+                    "binding_name_override": "#arsenal_s",
                     "binding_type": "global"
                   },
                   {
                     "binding_type": "view",
-                    "source_property_name": "(not ((#arsenal_t - '.g27.') = #arsenal_t))",
+                    "source_property_name": "(not ((#arsenal_s - '.g27.') = #arsenal_s))",
                     "target_property_name": "#visible"
                   }
                 ]
@@ -7269,13 +7269,13 @@
                 "layer": 2,
                 "bindings": [
                   {
-                    "binding_name": "#hud_title_text_string",
-                    "binding_name_override": "#arsenal_t",
+                    "binding_name": "#hud_subtitle_text_string",
+                    "binding_name_override": "#arsenal_s",
                     "binding_type": "global"
                   },
                   {
                     "binding_type": "view",
-                    "source_property_name": "(not ((#arsenal_t - '.g28.') = #arsenal_t))",
+                    "source_property_name": "(not ((#arsenal_s - '.g28.') = #arsenal_s))",
                     "target_property_name": "#visible"
                   }
                 ]
@@ -7298,13 +7298,13 @@
                 "layer": 2,
                 "bindings": [
                   {
-                    "binding_name": "#hud_title_text_string",
-                    "binding_name_override": "#arsenal_t",
+                    "binding_name": "#hud_subtitle_text_string",
+                    "binding_name_override": "#arsenal_s",
                     "binding_type": "global"
                   },
                   {
                     "binding_type": "view",
-                    "source_property_name": "(not ((#arsenal_t - '.g29.') = #arsenal_t))",
+                    "source_property_name": "(not ((#arsenal_s - '.g29.') = #arsenal_s))",
                     "target_property_name": "#visible"
                   }
                 ]
@@ -7313,13 +7313,13 @@
           ],
           "bindings": [
             {
-              "binding_name": "#hud_title_text_string",
-              "binding_name_override": "#arsenal_t",
+              "binding_name": "#hud_subtitle_text_string",
+              "binding_name_override": "#arsenal_s",
               "binding_type": "global"
             },
             {
               "binding_type": "view",
-              "source_property_name": "((not ((#arsenal_t - '.g01.') = #arsenal_t)) and (not ((#arsenal_t - '.g13.') = #arsenal_t)))",
+              "source_property_name": "((not ((#arsenal_s - '.g01.') = #arsenal_s)) and (not ((#arsenal_s - '.g13.') = #arsenal_s)))",
               "target_property_name": "#visible"
             }
           ]
@@ -7353,13 +7353,13 @@
                 "layer": 2,
                 "bindings": [
                   {
-                    "binding_name": "#hud_title_text_string",
-                    "binding_name_override": "#arsenal_t",
+                    "binding_name": "#hud_subtitle_text_string",
+                    "binding_name_override": "#arsenal_s",
                     "binding_type": "global"
                   },
                   {
                     "binding_type": "view",
-                    "source_property_name": "(not ((#arsenal_t - '.g20.') = #arsenal_t))",
+                    "source_property_name": "(not ((#arsenal_s - '.g20.') = #arsenal_s))",
                     "target_property_name": "#visible"
                   }
                 ]
@@ -7382,13 +7382,13 @@
                 "layer": 2,
                 "bindings": [
                   {
-                    "binding_name": "#hud_title_text_string",
-                    "binding_name_override": "#arsenal_t",
+                    "binding_name": "#hud_subtitle_text_string",
+                    "binding_name_override": "#arsenal_s",
                     "binding_type": "global"
                   },
                   {
                     "binding_type": "view",
-                    "source_property_name": "(not ((#arsenal_t - '.g21.') = #arsenal_t))",
+                    "source_property_name": "(not ((#arsenal_s - '.g21.') = #arsenal_s))",
                     "target_property_name": "#visible"
                   }
                 ]
@@ -7411,13 +7411,13 @@
                 "layer": 2,
                 "bindings": [
                   {
-                    "binding_name": "#hud_title_text_string",
-                    "binding_name_override": "#arsenal_t",
+                    "binding_name": "#hud_subtitle_text_string",
+                    "binding_name_override": "#arsenal_s",
                     "binding_type": "global"
                   },
                   {
                     "binding_type": "view",
-                    "source_property_name": "(not ((#arsenal_t - '.g22.') = #arsenal_t))",
+                    "source_property_name": "(not ((#arsenal_s - '.g22.') = #arsenal_s))",
                     "target_property_name": "#visible"
                   }
                 ]
@@ -7440,13 +7440,13 @@
                 "layer": 2,
                 "bindings": [
                   {
-                    "binding_name": "#hud_title_text_string",
-                    "binding_name_override": "#arsenal_t",
+                    "binding_name": "#hud_subtitle_text_string",
+                    "binding_name_override": "#arsenal_s",
                     "binding_type": "global"
                   },
                   {
                     "binding_type": "view",
-                    "source_property_name": "(not ((#arsenal_t - '.g23.') = #arsenal_t))",
+                    "source_property_name": "(not ((#arsenal_s - '.g23.') = #arsenal_s))",
                     "target_property_name": "#visible"
                   }
                 ]
@@ -7469,13 +7469,13 @@
                 "layer": 2,
                 "bindings": [
                   {
-                    "binding_name": "#hud_title_text_string",
-                    "binding_name_override": "#arsenal_t",
+                    "binding_name": "#hud_subtitle_text_string",
+                    "binding_name_override": "#arsenal_s",
                     "binding_type": "global"
                   },
                   {
                     "binding_type": "view",
-                    "source_property_name": "(not ((#arsenal_t - '.g24.') = #arsenal_t))",
+                    "source_property_name": "(not ((#arsenal_s - '.g24.') = #arsenal_s))",
                     "target_property_name": "#visible"
                   }
                 ]
@@ -7498,13 +7498,13 @@
                 "layer": 2,
                 "bindings": [
                   {
-                    "binding_name": "#hud_title_text_string",
-                    "binding_name_override": "#arsenal_t",
+                    "binding_name": "#hud_subtitle_text_string",
+                    "binding_name_override": "#arsenal_s",
                     "binding_type": "global"
                   },
                   {
                     "binding_type": "view",
-                    "source_property_name": "(not ((#arsenal_t - '.g25.') = #arsenal_t))",
+                    "source_property_name": "(not ((#arsenal_s - '.g25.') = #arsenal_s))",
                     "target_property_name": "#visible"
                   }
                 ]
@@ -7527,13 +7527,13 @@
                 "layer": 2,
                 "bindings": [
                   {
-                    "binding_name": "#hud_title_text_string",
-                    "binding_name_override": "#arsenal_t",
+                    "binding_name": "#hud_subtitle_text_string",
+                    "binding_name_override": "#arsenal_s",
                     "binding_type": "global"
                   },
                   {
                     "binding_type": "view",
-                    "source_property_name": "(not ((#arsenal_t - '.g26.') = #arsenal_t))",
+                    "source_property_name": "(not ((#arsenal_s - '.g26.') = #arsenal_s))",
                     "target_property_name": "#visible"
                   }
                 ]
@@ -7556,13 +7556,13 @@
                 "layer": 2,
                 "bindings": [
                   {
-                    "binding_name": "#hud_title_text_string",
-                    "binding_name_override": "#arsenal_t",
+                    "binding_name": "#hud_subtitle_text_string",
+                    "binding_name_override": "#arsenal_s",
                     "binding_type": "global"
                   },
                   {
                     "binding_type": "view",
-                    "source_property_name": "(not ((#arsenal_t - '.g27.') = #arsenal_t))",
+                    "source_property_name": "(not ((#arsenal_s - '.g27.') = #arsenal_s))",
                     "target_property_name": "#visible"
                   }
                 ]
@@ -7585,13 +7585,13 @@
                 "layer": 2,
                 "bindings": [
                   {
-                    "binding_name": "#hud_title_text_string",
-                    "binding_name_override": "#arsenal_t",
+                    "binding_name": "#hud_subtitle_text_string",
+                    "binding_name_override": "#arsenal_s",
                     "binding_type": "global"
                   },
                   {
                     "binding_type": "view",
-                    "source_property_name": "(not ((#arsenal_t - '.g28.') = #arsenal_t))",
+                    "source_property_name": "(not ((#arsenal_s - '.g28.') = #arsenal_s))",
                     "target_property_name": "#visible"
                   }
                 ]
@@ -7614,13 +7614,13 @@
                 "layer": 2,
                 "bindings": [
                   {
-                    "binding_name": "#hud_title_text_string",
-                    "binding_name_override": "#arsenal_t",
+                    "binding_name": "#hud_subtitle_text_string",
+                    "binding_name_override": "#arsenal_s",
                     "binding_type": "global"
                   },
                   {
                     "binding_type": "view",
-                    "source_property_name": "(not ((#arsenal_t - '.g29.') = #arsenal_t))",
+                    "source_property_name": "(not ((#arsenal_s - '.g29.') = #arsenal_s))",
                     "target_property_name": "#visible"
                   }
                 ]
@@ -7629,13 +7629,13 @@
           ],
           "bindings": [
             {
-              "binding_name": "#hud_title_text_string",
-              "binding_name_override": "#arsenal_t",
+              "binding_name": "#hud_subtitle_text_string",
+              "binding_name_override": "#arsenal_s",
               "binding_type": "global"
             },
             {
               "binding_type": "view",
-              "source_property_name": "((not ((#arsenal_t - '.g01.') = #arsenal_t)) and (not ((#arsenal_t - '.g14.') = #arsenal_t)))",
+              "source_property_name": "((not ((#arsenal_s - '.g01.') = #arsenal_s)) and (not ((#arsenal_s - '.g14.') = #arsenal_s)))",
               "target_property_name": "#visible"
             }
           ]
@@ -7669,13 +7669,13 @@
                 "layer": 2,
                 "bindings": [
                   {
-                    "binding_name": "#hud_title_text_string",
-                    "binding_name_override": "#arsenal_t",
+                    "binding_name": "#hud_subtitle_text_string",
+                    "binding_name_override": "#arsenal_s",
                     "binding_type": "global"
                   },
                   {
                     "binding_type": "view",
-                    "source_property_name": "(not ((#arsenal_t - '.g20.') = #arsenal_t))",
+                    "source_property_name": "(not ((#arsenal_s - '.g20.') = #arsenal_s))",
                     "target_property_name": "#visible"
                   }
                 ]
@@ -7698,13 +7698,13 @@
                 "layer": 2,
                 "bindings": [
                   {
-                    "binding_name": "#hud_title_text_string",
-                    "binding_name_override": "#arsenal_t",
+                    "binding_name": "#hud_subtitle_text_string",
+                    "binding_name_override": "#arsenal_s",
                     "binding_type": "global"
                   },
                   {
                     "binding_type": "view",
-                    "source_property_name": "(not ((#arsenal_t - '.g21.') = #arsenal_t))",
+                    "source_property_name": "(not ((#arsenal_s - '.g21.') = #arsenal_s))",
                     "target_property_name": "#visible"
                   }
                 ]
@@ -7727,13 +7727,13 @@
                 "layer": 2,
                 "bindings": [
                   {
-                    "binding_name": "#hud_title_text_string",
-                    "binding_name_override": "#arsenal_t",
+                    "binding_name": "#hud_subtitle_text_string",
+                    "binding_name_override": "#arsenal_s",
                     "binding_type": "global"
                   },
                   {
                     "binding_type": "view",
-                    "source_property_name": "(not ((#arsenal_t - '.g22.') = #arsenal_t))",
+                    "source_property_name": "(not ((#arsenal_s - '.g22.') = #arsenal_s))",
                     "target_property_name": "#visible"
                   }
                 ]
@@ -7756,13 +7756,13 @@
                 "layer": 2,
                 "bindings": [
                   {
-                    "binding_name": "#hud_title_text_string",
-                    "binding_name_override": "#arsenal_t",
+                    "binding_name": "#hud_subtitle_text_string",
+                    "binding_name_override": "#arsenal_s",
                     "binding_type": "global"
                   },
                   {
                     "binding_type": "view",
-                    "source_property_name": "(not ((#arsenal_t - '.g23.') = #arsenal_t))",
+                    "source_property_name": "(not ((#arsenal_s - '.g23.') = #arsenal_s))",
                     "target_property_name": "#visible"
                   }
                 ]
@@ -7785,13 +7785,13 @@
                 "layer": 2,
                 "bindings": [
                   {
-                    "binding_name": "#hud_title_text_string",
-                    "binding_name_override": "#arsenal_t",
+                    "binding_name": "#hud_subtitle_text_string",
+                    "binding_name_override": "#arsenal_s",
                     "binding_type": "global"
                   },
                   {
                     "binding_type": "view",
-                    "source_property_name": "(not ((#arsenal_t - '.g24.') = #arsenal_t))",
+                    "source_property_name": "(not ((#arsenal_s - '.g24.') = #arsenal_s))",
                     "target_property_name": "#visible"
                   }
                 ]
@@ -7814,13 +7814,13 @@
                 "layer": 2,
                 "bindings": [
                   {
-                    "binding_name": "#hud_title_text_string",
-                    "binding_name_override": "#arsenal_t",
+                    "binding_name": "#hud_subtitle_text_string",
+                    "binding_name_override": "#arsenal_s",
                     "binding_type": "global"
                   },
                   {
                     "binding_type": "view",
-                    "source_property_name": "(not ((#arsenal_t - '.g25.') = #arsenal_t))",
+                    "source_property_name": "(not ((#arsenal_s - '.g25.') = #arsenal_s))",
                     "target_property_name": "#visible"
                   }
                 ]
@@ -7843,13 +7843,13 @@
                 "layer": 2,
                 "bindings": [
                   {
-                    "binding_name": "#hud_title_text_string",
-                    "binding_name_override": "#arsenal_t",
+                    "binding_name": "#hud_subtitle_text_string",
+                    "binding_name_override": "#arsenal_s",
                     "binding_type": "global"
                   },
                   {
                     "binding_type": "view",
-                    "source_property_name": "(not ((#arsenal_t - '.g26.') = #arsenal_t))",
+                    "source_property_name": "(not ((#arsenal_s - '.g26.') = #arsenal_s))",
                     "target_property_name": "#visible"
                   }
                 ]
@@ -7872,13 +7872,13 @@
                 "layer": 2,
                 "bindings": [
                   {
-                    "binding_name": "#hud_title_text_string",
-                    "binding_name_override": "#arsenal_t",
+                    "binding_name": "#hud_subtitle_text_string",
+                    "binding_name_override": "#arsenal_s",
                     "binding_type": "global"
                   },
                   {
                     "binding_type": "view",
-                    "source_property_name": "(not ((#arsenal_t - '.g27.') = #arsenal_t))",
+                    "source_property_name": "(not ((#arsenal_s - '.g27.') = #arsenal_s))",
                     "target_property_name": "#visible"
                   }
                 ]
@@ -7901,13 +7901,13 @@
                 "layer": 2,
                 "bindings": [
                   {
-                    "binding_name": "#hud_title_text_string",
-                    "binding_name_override": "#arsenal_t",
+                    "binding_name": "#hud_subtitle_text_string",
+                    "binding_name_override": "#arsenal_s",
                     "binding_type": "global"
                   },
                   {
                     "binding_type": "view",
-                    "source_property_name": "(not ((#arsenal_t - '.g28.') = #arsenal_t))",
+                    "source_property_name": "(not ((#arsenal_s - '.g28.') = #arsenal_s))",
                     "target_property_name": "#visible"
                   }
                 ]
@@ -7930,13 +7930,13 @@
                 "layer": 2,
                 "bindings": [
                   {
-                    "binding_name": "#hud_title_text_string",
-                    "binding_name_override": "#arsenal_t",
+                    "binding_name": "#hud_subtitle_text_string",
+                    "binding_name_override": "#arsenal_s",
                     "binding_type": "global"
                   },
                   {
                     "binding_type": "view",
-                    "source_property_name": "(not ((#arsenal_t - '.g29.') = #arsenal_t))",
+                    "source_property_name": "(not ((#arsenal_s - '.g29.') = #arsenal_s))",
                     "target_property_name": "#visible"
                   }
                 ]
@@ -7945,13 +7945,13 @@
           ],
           "bindings": [
             {
-              "binding_name": "#hud_title_text_string",
-              "binding_name_override": "#arsenal_t",
+              "binding_name": "#hud_subtitle_text_string",
+              "binding_name_override": "#arsenal_s",
               "binding_type": "global"
             },
             {
               "binding_type": "view",
-              "source_property_name": "((not ((#arsenal_t - '.g01.') = #arsenal_t)) and (not ((#arsenal_t - '.g15.') = #arsenal_t)))",
+              "source_property_name": "((not ((#arsenal_s - '.g01.') = #arsenal_s)) and (not ((#arsenal_s - '.g15.') = #arsenal_s)))",
               "target_property_name": "#visible"
             }
           ]
@@ -7985,13 +7985,13 @@
                 "layer": 2,
                 "bindings": [
                   {
-                    "binding_name": "#hud_title_text_string",
-                    "binding_name_override": "#arsenal_t",
+                    "binding_name": "#hud_subtitle_text_string",
+                    "binding_name_override": "#arsenal_s",
                     "binding_type": "global"
                   },
                   {
                     "binding_type": "view",
-                    "source_property_name": "(not ((#arsenal_t - '.g20.') = #arsenal_t))",
+                    "source_property_name": "(not ((#arsenal_s - '.g20.') = #arsenal_s))",
                     "target_property_name": "#visible"
                   }
                 ]
@@ -8014,13 +8014,13 @@
                 "layer": 2,
                 "bindings": [
                   {
-                    "binding_name": "#hud_title_text_string",
-                    "binding_name_override": "#arsenal_t",
+                    "binding_name": "#hud_subtitle_text_string",
+                    "binding_name_override": "#arsenal_s",
                     "binding_type": "global"
                   },
                   {
                     "binding_type": "view",
-                    "source_property_name": "(not ((#arsenal_t - '.g21.') = #arsenal_t))",
+                    "source_property_name": "(not ((#arsenal_s - '.g21.') = #arsenal_s))",
                     "target_property_name": "#visible"
                   }
                 ]
@@ -8043,13 +8043,13 @@
                 "layer": 2,
                 "bindings": [
                   {
-                    "binding_name": "#hud_title_text_string",
-                    "binding_name_override": "#arsenal_t",
+                    "binding_name": "#hud_subtitle_text_string",
+                    "binding_name_override": "#arsenal_s",
                     "binding_type": "global"
                   },
                   {
                     "binding_type": "view",
-                    "source_property_name": "(not ((#arsenal_t - '.g22.') = #arsenal_t))",
+                    "source_property_name": "(not ((#arsenal_s - '.g22.') = #arsenal_s))",
                     "target_property_name": "#visible"
                   }
                 ]
@@ -8072,13 +8072,13 @@
                 "layer": 2,
                 "bindings": [
                   {
-                    "binding_name": "#hud_title_text_string",
-                    "binding_name_override": "#arsenal_t",
+                    "binding_name": "#hud_subtitle_text_string",
+                    "binding_name_override": "#arsenal_s",
                     "binding_type": "global"
                   },
                   {
                     "binding_type": "view",
-                    "source_property_name": "(not ((#arsenal_t - '.g23.') = #arsenal_t))",
+                    "source_property_name": "(not ((#arsenal_s - '.g23.') = #arsenal_s))",
                     "target_property_name": "#visible"
                   }
                 ]
@@ -8101,13 +8101,13 @@
                 "layer": 2,
                 "bindings": [
                   {
-                    "binding_name": "#hud_title_text_string",
-                    "binding_name_override": "#arsenal_t",
+                    "binding_name": "#hud_subtitle_text_string",
+                    "binding_name_override": "#arsenal_s",
                     "binding_type": "global"
                   },
                   {
                     "binding_type": "view",
-                    "source_property_name": "(not ((#arsenal_t - '.g24.') = #arsenal_t))",
+                    "source_property_name": "(not ((#arsenal_s - '.g24.') = #arsenal_s))",
                     "target_property_name": "#visible"
                   }
                 ]
@@ -8130,13 +8130,13 @@
                 "layer": 2,
                 "bindings": [
                   {
-                    "binding_name": "#hud_title_text_string",
-                    "binding_name_override": "#arsenal_t",
+                    "binding_name": "#hud_subtitle_text_string",
+                    "binding_name_override": "#arsenal_s",
                     "binding_type": "global"
                   },
                   {
                     "binding_type": "view",
-                    "source_property_name": "(not ((#arsenal_t - '.g25.') = #arsenal_t))",
+                    "source_property_name": "(not ((#arsenal_s - '.g25.') = #arsenal_s))",
                     "target_property_name": "#visible"
                   }
                 ]
@@ -8159,13 +8159,13 @@
                 "layer": 2,
                 "bindings": [
                   {
-                    "binding_name": "#hud_title_text_string",
-                    "binding_name_override": "#arsenal_t",
+                    "binding_name": "#hud_subtitle_text_string",
+                    "binding_name_override": "#arsenal_s",
                     "binding_type": "global"
                   },
                   {
                     "binding_type": "view",
-                    "source_property_name": "(not ((#arsenal_t - '.g26.') = #arsenal_t))",
+                    "source_property_name": "(not ((#arsenal_s - '.g26.') = #arsenal_s))",
                     "target_property_name": "#visible"
                   }
                 ]
@@ -8188,13 +8188,13 @@
                 "layer": 2,
                 "bindings": [
                   {
-                    "binding_name": "#hud_title_text_string",
-                    "binding_name_override": "#arsenal_t",
+                    "binding_name": "#hud_subtitle_text_string",
+                    "binding_name_override": "#arsenal_s",
                     "binding_type": "global"
                   },
                   {
                     "binding_type": "view",
-                    "source_property_name": "(not ((#arsenal_t - '.g27.') = #arsenal_t))",
+                    "source_property_name": "(not ((#arsenal_s - '.g27.') = #arsenal_s))",
                     "target_property_name": "#visible"
                   }
                 ]
@@ -8217,13 +8217,13 @@
                 "layer": 2,
                 "bindings": [
                   {
-                    "binding_name": "#hud_title_text_string",
-                    "binding_name_override": "#arsenal_t",
+                    "binding_name": "#hud_subtitle_text_string",
+                    "binding_name_override": "#arsenal_s",
                     "binding_type": "global"
                   },
                   {
                     "binding_type": "view",
-                    "source_property_name": "(not ((#arsenal_t - '.g28.') = #arsenal_t))",
+                    "source_property_name": "(not ((#arsenal_s - '.g28.') = #arsenal_s))",
                     "target_property_name": "#visible"
                   }
                 ]
@@ -8246,13 +8246,13 @@
                 "layer": 2,
                 "bindings": [
                   {
-                    "binding_name": "#hud_title_text_string",
-                    "binding_name_override": "#arsenal_t",
+                    "binding_name": "#hud_subtitle_text_string",
+                    "binding_name_override": "#arsenal_s",
                     "binding_type": "global"
                   },
                   {
                     "binding_type": "view",
-                    "source_property_name": "(not ((#arsenal_t - '.g29.') = #arsenal_t))",
+                    "source_property_name": "(not ((#arsenal_s - '.g29.') = #arsenal_s))",
                     "target_property_name": "#visible"
                   }
                 ]
@@ -8261,13 +8261,13 @@
           ],
           "bindings": [
             {
-              "binding_name": "#hud_title_text_string",
-              "binding_name_override": "#arsenal_t",
+              "binding_name": "#hud_subtitle_text_string",
+              "binding_name_override": "#arsenal_s",
               "binding_type": "global"
             },
             {
               "binding_type": "view",
-              "source_property_name": "((not ((#arsenal_t - '.g01.') = #arsenal_t)) and (not ((#arsenal_t - '.g16.') = #arsenal_t)))",
+              "source_property_name": "((not ((#arsenal_s - '.g01.') = #arsenal_s)) and (not ((#arsenal_s - '.g16.') = #arsenal_s)))",
               "target_property_name": "#visible"
             }
           ]
@@ -8301,13 +8301,13 @@
                 "layer": 2,
                 "bindings": [
                   {
-                    "binding_name": "#hud_title_text_string",
-                    "binding_name_override": "#arsenal_t",
+                    "binding_name": "#hud_subtitle_text_string",
+                    "binding_name_override": "#arsenal_s",
                     "binding_type": "global"
                   },
                   {
                     "binding_type": "view",
-                    "source_property_name": "(not ((#arsenal_t - '.g20.') = #arsenal_t))",
+                    "source_property_name": "(not ((#arsenal_s - '.g20.') = #arsenal_s))",
                     "target_property_name": "#visible"
                   }
                 ]
@@ -8330,13 +8330,13 @@
                 "layer": 2,
                 "bindings": [
                   {
-                    "binding_name": "#hud_title_text_string",
-                    "binding_name_override": "#arsenal_t",
+                    "binding_name": "#hud_subtitle_text_string",
+                    "binding_name_override": "#arsenal_s",
                     "binding_type": "global"
                   },
                   {
                     "binding_type": "view",
-                    "source_property_name": "(not ((#arsenal_t - '.g21.') = #arsenal_t))",
+                    "source_property_name": "(not ((#arsenal_s - '.g21.') = #arsenal_s))",
                     "target_property_name": "#visible"
                   }
                 ]
@@ -8359,13 +8359,13 @@
                 "layer": 2,
                 "bindings": [
                   {
-                    "binding_name": "#hud_title_text_string",
-                    "binding_name_override": "#arsenal_t",
+                    "binding_name": "#hud_subtitle_text_string",
+                    "binding_name_override": "#arsenal_s",
                     "binding_type": "global"
                   },
                   {
                     "binding_type": "view",
-                    "source_property_name": "(not ((#arsenal_t - '.g22.') = #arsenal_t))",
+                    "source_property_name": "(not ((#arsenal_s - '.g22.') = #arsenal_s))",
                     "target_property_name": "#visible"
                   }
                 ]
@@ -8388,13 +8388,13 @@
                 "layer": 2,
                 "bindings": [
                   {
-                    "binding_name": "#hud_title_text_string",
-                    "binding_name_override": "#arsenal_t",
+                    "binding_name": "#hud_subtitle_text_string",
+                    "binding_name_override": "#arsenal_s",
                     "binding_type": "global"
                   },
                   {
                     "binding_type": "view",
-                    "source_property_name": "(not ((#arsenal_t - '.g23.') = #arsenal_t))",
+                    "source_property_name": "(not ((#arsenal_s - '.g23.') = #arsenal_s))",
                     "target_property_name": "#visible"
                   }
                 ]
@@ -8417,13 +8417,13 @@
                 "layer": 2,
                 "bindings": [
                   {
-                    "binding_name": "#hud_title_text_string",
-                    "binding_name_override": "#arsenal_t",
+                    "binding_name": "#hud_subtitle_text_string",
+                    "binding_name_override": "#arsenal_s",
                     "binding_type": "global"
                   },
                   {
                     "binding_type": "view",
-                    "source_property_name": "(not ((#arsenal_t - '.g24.') = #arsenal_t))",
+                    "source_property_name": "(not ((#arsenal_s - '.g24.') = #arsenal_s))",
                     "target_property_name": "#visible"
                   }
                 ]
@@ -8446,13 +8446,13 @@
                 "layer": 2,
                 "bindings": [
                   {
-                    "binding_name": "#hud_title_text_string",
-                    "binding_name_override": "#arsenal_t",
+                    "binding_name": "#hud_subtitle_text_string",
+                    "binding_name_override": "#arsenal_s",
                     "binding_type": "global"
                   },
                   {
                     "binding_type": "view",
-                    "source_property_name": "(not ((#arsenal_t - '.g25.') = #arsenal_t))",
+                    "source_property_name": "(not ((#arsenal_s - '.g25.') = #arsenal_s))",
                     "target_property_name": "#visible"
                   }
                 ]
@@ -8475,13 +8475,13 @@
                 "layer": 2,
                 "bindings": [
                   {
-                    "binding_name": "#hud_title_text_string",
-                    "binding_name_override": "#arsenal_t",
+                    "binding_name": "#hud_subtitle_text_string",
+                    "binding_name_override": "#arsenal_s",
                     "binding_type": "global"
                   },
                   {
                     "binding_type": "view",
-                    "source_property_name": "(not ((#arsenal_t - '.g26.') = #arsenal_t))",
+                    "source_property_name": "(not ((#arsenal_s - '.g26.') = #arsenal_s))",
                     "target_property_name": "#visible"
                   }
                 ]
@@ -8504,13 +8504,13 @@
                 "layer": 2,
                 "bindings": [
                   {
-                    "binding_name": "#hud_title_text_string",
-                    "binding_name_override": "#arsenal_t",
+                    "binding_name": "#hud_subtitle_text_string",
+                    "binding_name_override": "#arsenal_s",
                     "binding_type": "global"
                   },
                   {
                     "binding_type": "view",
-                    "source_property_name": "(not ((#arsenal_t - '.g27.') = #arsenal_t))",
+                    "source_property_name": "(not ((#arsenal_s - '.g27.') = #arsenal_s))",
                     "target_property_name": "#visible"
                   }
                 ]
@@ -8533,13 +8533,13 @@
                 "layer": 2,
                 "bindings": [
                   {
-                    "binding_name": "#hud_title_text_string",
-                    "binding_name_override": "#arsenal_t",
+                    "binding_name": "#hud_subtitle_text_string",
+                    "binding_name_override": "#arsenal_s",
                     "binding_type": "global"
                   },
                   {
                     "binding_type": "view",
-                    "source_property_name": "(not ((#arsenal_t - '.g28.') = #arsenal_t))",
+                    "source_property_name": "(not ((#arsenal_s - '.g28.') = #arsenal_s))",
                     "target_property_name": "#visible"
                   }
                 ]
@@ -8562,13 +8562,13 @@
                 "layer": 2,
                 "bindings": [
                   {
-                    "binding_name": "#hud_title_text_string",
-                    "binding_name_override": "#arsenal_t",
+                    "binding_name": "#hud_subtitle_text_string",
+                    "binding_name_override": "#arsenal_s",
                     "binding_type": "global"
                   },
                   {
                     "binding_type": "view",
-                    "source_property_name": "(not ((#arsenal_t - '.g29.') = #arsenal_t))",
+                    "source_property_name": "(not ((#arsenal_s - '.g29.') = #arsenal_s))",
                     "target_property_name": "#visible"
                   }
                 ]
@@ -8577,13 +8577,13 @@
           ],
           "bindings": [
             {
-              "binding_name": "#hud_title_text_string",
-              "binding_name_override": "#arsenal_t",
+              "binding_name": "#hud_subtitle_text_string",
+              "binding_name_override": "#arsenal_s",
               "binding_type": "global"
             },
             {
               "binding_type": "view",
-              "source_property_name": "((not ((#arsenal_t - '.g01.') = #arsenal_t)) and (not ((#arsenal_t - '.g17.') = #arsenal_t)))",
+              "source_property_name": "((not ((#arsenal_s - '.g01.') = #arsenal_s)) and (not ((#arsenal_s - '.g17.') = #arsenal_s)))",
               "target_property_name": "#visible"
             }
           ]
@@ -38195,6 +38195,104 @@
               {
                 "binding_type": "view",
                 "source_property_name": "((#arsenal_t - '§a§r§s§n') = #arsenal_t)",
+                "target_property_name": "#visible"
+              }
+            ]
+          }
+        }
+      },
+      {
+        "array_name": "controls",
+        "operation": "replace",
+        "control_name": "subtitle_frame",
+        "value": {
+          "subtitle_frame": {
+            "type": "panel",
+            "size": [
+              "100%",
+              "100%cm"
+            ],
+            "controls": [
+              {
+                "subtitle_background": {
+                  "type": "image",
+                  "size": [
+                    "100%sm + 20px",
+                    "100%sm + 5px"
+                  ],
+                  "offset": [
+                    0,
+                    16
+                  ],
+                  "texture": "textures/ui/hud_tip_text_background",
+                  "variables": [
+                    {
+                      "requires": "$subtitle_initially_visible",
+                      "$subtitle_bg": "@hud.anim_title_background_alpha_in"
+                    },
+                    {
+                      "requires": "(not $subtitle_initially_visible)",
+                      "$subtitle_bg": "@hud.anim_subtitle_background_alpha_in"
+                    }
+                  ],
+                  "alpha": "$subtitle_bg"
+                }
+              },
+              {
+                "subtitle": {
+                  "type": "label",
+                  "anchor_from": "top_middle",
+                  "anchor_to": "top_middle",
+                  "color": "$title_command_text_color",
+                  "enable_profanity_filter": true,
+                  "text": "#text",
+                  "layer": 31,
+                  "localize": false,
+                  "font_size": "large",
+                  "variables": [
+                    {
+                      "requires": "$subtitle_initially_visible",
+                      "$anim_type": 1.0
+                    },
+                    {
+                      "requires": "(not $subtitle_initially_visible)",
+                      "$anim_type": "@hud.anim_subtitle_text_alpha_in"
+                    },
+                    {
+                      "requires": "(not $title_shadow)",
+                      "$show_shadow": false
+                    },
+                    {
+                      "requires": "$title_shadow",
+                      "$show_shadow": true
+                    }
+                  ],
+                  "shadow": "$show_shadow",
+                  "alpha": "$anim_type",
+                  "text_alignment": "center",
+                  "offset": [
+                    1,
+                    19
+                  ],
+                  "bindings": [
+                    {
+                      "binding_name": "#hud_subtitle_text_string",
+                      "binding_name_override": "#text",
+                      "binding_type": "global"
+                    }
+                  ]
+                }
+              }
+            ],
+            "bindings": [
+              {
+                "binding_name": "#hud_subtitle_text_string",
+                "binding_name_override": "#arsenal_s",
+                "binding_type": "global"
+              },
+              {
+                "binding_type": "view",
+                "source_property_name": "((#arsenal_s - '§a§r§s§n') = #arsenal_s)",
                 "target_property_name": "#visible"
               }
             ]
