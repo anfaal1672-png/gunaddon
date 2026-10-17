@@ -1,0 +1,31 @@
+{
+  "format_version": "1.20.10",
+  "minecraft:recipe_shapeless": {
+    "description": {
+      "identifier": "arsenal:detonator"
+    },
+    "tags": [
+      "crafting_table"
+    ],
+    "ingredients": [
+      {
+        "item": "minecraft:redstone_torch"
+      },
+      {
+        "item": "arsenal:precision_parts"
+      },
+      {
+        "item": "arsenal:polymer"
+      }
+    ],
+    "result": {
+      "item": "arsenal:detonator",
+      "count": 1
+    },
+    "unlock": [
+      {
+        "item": "minecraft:redstone_torch"
+      }
+    ]
+  }
+}

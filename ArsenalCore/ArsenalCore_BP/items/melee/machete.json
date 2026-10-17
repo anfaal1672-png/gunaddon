@@ -1,0 +1,51 @@
+{
+  "format_version": "1.26.30",
+  "minecraft:item": {
+    "description": {
+      "identifier": "arsenal:machete",
+      "menu_category": {
+        "category": "equipment"
+      }
+    },
+    "components": {
+      "minecraft:icon": "arsenal_machete",
+      "minecraft:display_name": {
+        "value": "item.arsenal.machete.name"
+      },
+      "minecraft:max_stack_size": 1,
+      "minecraft:hand_equipped": true,
+      "minecraft:tags": {
+        "tags": [
+          "arsenal:melee",
+          "arsenal:m_machete",
+          "minecraft:is_sword"
+        ]
+      },
+      "minecraft:rarity": "common",
+      "minecraft:damage": {
+        "value": 7
+      },
+      "minecraft:durability": {
+        "max_durability": 500,
+        "damage_chance": {
+          "min": 60,
+          "max": 100
+        }
+      },
+      "minecraft:can_destroy_in_creative": false,
+      "minecraft:use_modifiers": {
+        "use_duration": 3600,
+        "movement_modifier": 1.0,
+        "emit_vibrations": false
+      },
+      "minecraft:swing_duration": {
+        "value": 0.25
+      },
+      "minecraft:enchantable": {
+        "slot": "sword",
+        "value": 10
+      },
+      "arsenal:melee": {}
+    }
+  }
+}

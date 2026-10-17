@@ -1,0 +1,405 @@
+"""
+ARSENAL CORE 2.0 — 追加の UI 文言（英語, 日本語）
+静的なキーは UI2、データから作るキー（勢力・役割・モード・チャレンジ・階級など）は dynamic(data) が作る。
+%s は RawMessage の with 引数で順番に置き換えられる。
+"""
+
+UI2 = {
+    # ---- 共通・HUD ----
+    "arsenal.ui.ks_ready": ("STREAK READY", "ストリーク使用可"),
+    "arsenal.ui.melee": ("MELEE", "近接"),
+    "arsenal.ui.emp": ("EMP - systems offline", "EMP - 機能停止中"),
+    "arsenal.ui.spotted": ("§cYou have been spotted by a drone!", "§cドローンに発見された！"),
+    "arsenal.ui.downed": ("DOWNED - wait for a medic", "ダウン - 味方の蘇生を待て"),
+    "arsenal.ui.downed_msg": ("%s is down! Use a defibrillator to revive.", "%s がダウン！ 除細動器で蘇生できる。"),
+    "arsenal.ui.downed_left": ("DOWNED  %ss", "ダウン中  残り %s 秒"),
+    "arsenal.ui.welcome_v2": ("§6ARSENAL CORE 2.0§r is installed. Open the Field Manual for the new guide, HUD settings and game modes.", "§6ARSENAL CORE 2.0§r に更新されました。野戦マニュアルで新しいガイド・HUD 設定・ゲームモードを確認できます。"),
+    "arsenal.ui.normalized": ("Restored %s weapon(s) to their base item IDs.", "%s 挺の武器を元のアイテム ID に戻しました。"),
+    "arsenal.ui.nvg_on": ("Night vision goggles: ON", "暗視ゴーグル：オン"),
+    "arsenal.ui.nvg_off": ("Night vision goggles: OFF", "暗視ゴーグル：オフ"),
+    # ---- 野戦マニュアル・メニュー ----
+    "arsenal.ui.btn_prefs2": ("HUD & 2.0 Settings", "HUD・2.0 の設定"),
+    "arsenal.ui.btn_world2": ("World Settings (2.0)", "ワールド設定（2.0）"),
+    "arsenal.ui.btn_progress": ("Service Record", "戦績"),
+    "arsenal.ui.btn_modes": ("Game Modes", "ゲームモード"),
+    "arsenal.ui.btn_nvg": ("Night Vision Goggles", "暗視ゴーグル"),
+    "arsenal.ui.btn_camo": ("Camouflage", "迷彩"),
+    "arsenal.ui.btn_mortar_target": ("Set Mortar Target", "迫撃砲の目標"),
+    "arsenal.ui.camo_body": ("Camos unlock as this weapon levels up (now Lv %s).", "武器レベルで迷彩が解放されます（現在 Lv %s）。"),
+    "arsenal.ui.camo_none": ("No camo", "迷彩なし"),
+    "arsenal.ui.camo_need": ("Needs weapon Lv %s", "武器 Lv %s で解放"),
+    "arsenal.ui.camo_locked": ("§cThis camo unlocks at weapon level %s.", "§cこの迷彩は武器 Lv %s で解放されます。"),
+    "arsenal.ui.mortar_clear": ("Clear target (aim with your view instead)", "目標を消す（視線で狙う）"),
+    "arsenal.ui.mortar_cleared": ("Mortar target cleared.", "迫撃砲の目標を消しました。"),
+    "arsenal.ui.mortar_set": ("Mortar target set to X %s / Z %s.", "迫撃砲の目標を X %s / Z %s に設定しました。"),
+    "arsenal.ui.cat_armor": ("Armor", "防具"),
+    "arsenal.ui.cat_gear": ("Gear, Medical & Emplacements", "装備・医療品・銃座"),
+    "arsenal.ui.att_locked": ("Unlocks at weapon Lv %s", "武器 Lv %s で解放"),
+    # ---- 個人設定（2.0）----
+    "arsenal.pref.hud_style": ("HUD style", "HUD の種類"),
+    "arsenal.pref.hud_style_hud2": ("HUD 2.0 (panels)", "HUD 2.0（パネル）"),
+    "arsenal.pref.hud_style_classic": ("Classic (action bar)", "従来（アクションバー）"),
+    "arsenal.pref.hud_scale": ("HUD size", "HUD の大きさ"),
+    "arsenal.pref.hud_scale_small": ("Small", "小"),
+    "arsenal.pref.hud_scale_normal": ("Normal", "標準"),
+    "arsenal.pref.hud_scale_large": ("Large", "大"),
+    "arsenal.pref.hud_layout": ("HUD position", "HUD の配置"),
+    "arsenal.pref.hud_layout_auto": ("Auto (raised on phones)", "自動（スマホは高め）"),
+    "arsenal.pref.hud_layout_standard": ("Standard", "標準"),
+    "arsenal.pref.hud_layout_raised": ("Raised (above touch buttons)", "高め（操作ボタンを避ける）"),
+    "arsenal.pref.hud_layout_left": ("Left side", "左寄せ"),
+    "arsenal.pref.compass": ("Compass bar", "方位バー"),
+    "arsenal.pref.damage_dir": ("Damage direction indicator", "被弾方向の表示"),
+    "arsenal.pref.suppression_fx": ("Suppression screen effect", "制圧の画面効果"),
+    "arsenal.pref.aim_assist": ("Aim assist (vs mobs)", "エイムアシスト（対モブ）"),
+    "arsenal.pref.aim_assist_off": ("Off", "オフ"),
+    "arsenal.pref.aim_assist_light": ("Light", "弱"),
+    "arsenal.pref.aim_assist_strong": ("Strong", "強"),
+    "arsenal.pref.auto_fire": ("Auto-fire when aiming at a target", "照準が敵に重なったら自動で撃つ"),
+    "arsenal.pref.fp_v": ("First-person weapon height", "一人称の武器の高さ"),
+    "arsenal.pref.fp_d": ("First-person weapon distance", "一人称の武器の距離"),
+    "arsenal.pref.show_rank": ("Show rank icon next to my name", "名前の横に階級を表示"),
+    "arsenal.pref.nvg_auto": ("NVG turns on automatically in the dark", "暗視ゴーグルを暗所で自動オン"),
+    # ---- ワールド設定（2.0）----
+    "arsenal.ws.legion": ("Iron Legion spawns", "アイアン・レギオンの出現"),
+    "arsenal.ws.hollow": ("Hollow spawns", "ホロウの出現"),
+    "arsenal.ws.structures": ("Structure density", "構造物の密度"),
+    "arsenal.ws.ai_difficulty": ("Enemy AI difficulty", "敵 AI の難易度"),
+    "arsenal.ws.economy": ("Economy (credits & shops)", "経済（クレジット・店）"),
+    "arsenal.ws.progression_locks": ("Attachment crafting needs weapon levels", "アタッチメント作成に武器レベルが必要"),
+    "arsenal.ws.killstreaks": ("Killstreaks", "キルストリーク"),
+    "arsenal.ws.downed": ("Downed state instead of instant death", "ダウン制（即死せず蘇生待ち）"),
+    "arsenal.ws.bleeding": ("Bleeding", "出血"),
+    "arsenal.ws.backstab_pvp": ("PvP backstab cap (x0.1)", "PvP の背後攻撃の上限（×0.1）"),
+    "arsenal.ws.aim_assist_pvp": ("Allow aim assist against players", "プレイヤーへのエイムアシストを許可"),
+    "arsenal.ws.wind": ("Wind (affects long shots)", "風（遠距離弾に影響）"),
+    "arsenal.ws.suppression": ("Suppression (near misses add spread)", "制圧（至近弾で拡散が増える）"),
+    "arsenal.ws.bosses": ("Bosses can be summoned", "ボスの召喚を許可"),
+    # ---- 一人称の位置の調整 ----
+    "arsenal.calib.start": ("§eCalibration: Jump = next position, double-tap Sneak = save, run /scriptevent arsenal:calib again to cancel.", "§e位置調整：ジャンプで次の位置、スニーク 2 回で保存、もう一度 /scriptevent arsenal:calib で中止。"),
+    "arsenal.calib.hud": ("Calibrate  height %s / distance %s  (Jump: next, Sneak x2: save)", "位置調整  高さ %s / 距離 %s （ジャンプ：次　スニーク×2：保存）"),
+    "arsenal.calib.saved": ("§aFirst-person offset saved: height %s, distance %s.", "§a一人称の位置を保存しました：高さ %s・距離 %s"),
+    "arsenal.calib.cancel": ("Calibration cancelled.", "位置調整を中止しました。"),
+    # ---- ボス ----
+    "arsenal.boss.reinforce": ("Reinforcements incoming!", "増援が来る！"),
+    "arsenal.boss.airstrike": ("AIRSTRIKE - get off the markers!", "空爆 - 印から離れろ！"),
+    "arsenal.boss.enrage": ("The boss is enraged!", "ボスが激昂した！"),
+    "arsenal.boss.emp": ("EMP charging - get clear!", "EMP 充電中 - 離れろ！"),
+    "arsenal.boss.phase": ("Phase %s", "第 %s 段階"),
+    "arsenal.boss.part_broken": ("%s destroyed!", "%s を破壊した！"),
+    "arsenal.boss.part.left_pod": ("Left Missile Pod", "左ミサイルポッド"),
+    "arsenal.boss.part.right_pod": ("Right Missile Pod", "右ミサイルポッド"),
+    "arsenal.boss.part.core": ("Chest Plating", "胸部装甲"),
+    "arsenal.boss.defeated": ("%s defeated!", "%s を撃破！"),
+    "arsenal.boss.disabled": ("§cBoss summoning is disabled in world settings.", "§cボスの召喚はワールド設定で無効です。"),
+    "arsenal.boss.already": ("§cThat boss is already nearby.", "§cそのボスはすでに近くにいます。"),
+    "arsenal.boss.incoming": ("%s approaches!", "%s が来る！"),
+    "arsenal.boss.desc.boss_warlord": ("Raider chieftain. Calls reinforcements and airstrikes as he weakens, then enrages.", "レイダーの首領。弱るほど増援と空爆を呼び、最後は激昂する。"),
+    "arsenal.boss.desc.boss_juggernaut": ("Legion war machine. Destroy its missile pods and chest plating; beware the EMP and stomp.", "レギオンの戦闘機械。ミサイルポッドと胸部装甲を壊せ。EMP と踏みつけに注意。"),
+    # ---- 装備 ----
+    "arsenal.gear.plate_full": ("§cNo room for a plate (wear body armor with free plate slots).", "§cプレートを入れられない（空きのあるボディアーマーを着けること）。"),
+    "arsenal.gear.bleed_stop": ("§aBleeding stopped.", "§a出血が止まった。"),
+    "arsenal.gear.bleeding": ("§cYou are bleeding! Use a bandage or medkit.", "§c出血している！ 包帯かメディキットを使え。"),
+    "arsenal.gear.bleeding_hud": ("BLEEDING", "出血中"),
+    "arsenal.gear.defib_off": ("§7Defibrillators only work when downed rules are on.", "§7除細動器はダウン制が有効なときだけ使えます。"),
+    "arsenal.gear.defib_none": ("§7No downed ally in front of you.", "§7目の前にダウンした味方がいない。"),
+    "arsenal.gear.place_ground": ("§7Place it on the top of a block.", "§7ブロックの上面に向けて使うと置けます。"),
+    "arsenal.gear.place_blocked": ("§cNot enough space here.", "§cここには置けない（空間が足りない）。"),
+    "arsenal.gear.place_limit": ("§cYou can only have %s of these placed.", "§cこれは同時に %s 個までしか置けません。"),
+    "arsenal.gear.resupplied": ("Resupplied", "弾薬補給"),
+    "arsenal.gear.mortar_title": ("Mortar Fire Mission", "迫撃砲の射撃指示"),
+    "arsenal.gear.mortar_x": ("Target X", "目標 X"),
+    "arsenal.gear.mortar_z": ("Target Z", "目標 Z"),
+    "arsenal.gear.mortar_rounds": ("Rounds", "発射数"),
+    "arsenal.gear.mortar_reload": ("§7Reloading - %ss", "§7装填中 - %s 秒"),
+    "arsenal.gear.mortar_noammo": ("§cYou need mortar shells.", "§c迫撃砲弾が必要です。"),
+    "arsenal.gear.mortar_range": ("§cTarget must be %s-%s blocks away.", "§c目標は %s〜%s ブロック先にしてください。"),
+    "arsenal.gear.mortar_fired": ("§e%s round(s) out - distance %s.", "§e%s 発発射 - 距離 %s"),
+    "arsenal.gear.drone_hint": ("§eDrone up: look to steer, it marks enemies it sees. Sneak to recall.", "§eドローン発進：視線の方向へ飛ぶ。見つけた敵をマーキング。スニークで帰還。"),
+    "arsenal.gear.drone_lost": ("§cYour drone was shot down.", "§cドローンが撃墜された。"),
+    # ---- 銃座・乗り物 ----
+    "arsenal.veh.hint_drive": ("Drive with movement keys. Refuel with a Fuel Canister, repair with Steel Ingots.", "移動キーで運転。燃料キャニスターで給油、鋼鉄インゴットで修理。"),
+    "arsenal.veh.hint_gun": ("Aim with your view, hold Jump to fire.", "視点で照準、ジャンプで射撃。"),
+    "arsenal.veh.no_ammo": ("NO AMMO", "弾薬なし"),
+    "arsenal.veh.no_fuel": ("OUT OF FUEL", "燃料切れ"),
+    "arsenal.veh.status": ("Fuel %ss   Hull %s/%s", "燃料 %s 秒   車体 %s/%s"),
+    "arsenal.veh.refueled": ("Refueled - %s seconds of fuel.", "給油しました - 残り %s 秒分"),
+    # ---- キルストリーク ----
+    "arsenal.ks.title": ("Streak Terminal", "ストリーク端末"),
+    "arsenal.ks.body": ("Current streak: %s   PvE points: %s", "連続キル：%s   PvE ポイント：%s"),
+    "arsenal.ks.ready": ("READY", "使用可能"),
+    "arsenal.ks.cost": ("%s kills (PvP) / %s pts (PvE)", "%s キル（PvP）／%s pt（PvE）"),
+    "arsenal.ks.ready_msg": ("Killstreak ready - use the Streak Terminal", "キルストリーク使用可能 - ストリーク端末で使う"),
+    "arsenal.ks.disabled": ("§cKillstreaks are disabled in world settings.", "§cキルストリークはワールド設定で無効です。"),
+    "arsenal.ks.not_now": ("§cKillstreaks can't be used in this mode.", "§cこのモードではキルストリークを使えません。"),
+    "arsenal.ks.locked": ("§cNot earned yet.", "§cまだ使えません。"),
+    "arsenal.ks.no_target": ("§cLook at the ground where it should land (within 160 blocks).", "§c落とす地点（160 ブロック以内の地面）を見てください。"),
+    "arsenal.ks.gunship_hint": ("§eGunship on station: look to aim, hold Jump to fire, Sneak to leave.", "§eガンシップ到着：視線で照準、ジャンプで射撃、スニークで終了。"),
+    # ---- 構造物 ----
+    "arsenal.structure.cleared": ("%s cleared!", "%s を制圧した！"),
+    # ---- 進行 ----
+    "arsenal.prog.title": ("Service Record", "戦績"),
+    "arsenal.prog.rank": ("Rank %s", "階級 %s"),
+    "arsenal.prog.xp": ("XP %s / %s", "経験値 %s / %s"),
+    "arsenal.prog.daily": ("Daily challenges", "デイリーチャレンジ"),
+    "arsenal.prog.weekly": ("Weekly challenges", "ウィークリーチャレンジ"),
+    "arsenal.prog.stats": ("Statistics", "統計"),
+    "arsenal.prog.stat_line1": ("Kills %s  Deaths %s  K/D %s  Headshot kills %s", "キル %s　デス %s　K/D %s　ヘッドショット %s"),
+    "arsenal.prog.stat_line2": ("Accuracy %s  Longest %sm  Melee %s  Explosive %s", "命中率 %s　最長 %sm　近接 %s　爆発物 %s"),
+    "arsenal.prog.stat_line3": ("Structures %s  Waves %s  Match wins %s  Bosses %s", "制圧 %s　ウェーブ %s　勝利 %s　ボス %s"),
+    "arsenal.prog.top_weapons": ("Most used weapons", "よく使う武器"),
+    "arsenal.prog.weapon_level": ("reached level %s!", "が Lv %s に上がった！"),
+    "arsenal.prog.camo_unlocked": ("Camo unlocked: %s", "迷彩を解放：%s"),
+    "arsenal.prog.challenge_done": ("Challenge complete!", "チャレンジ達成！"),
+    "arsenal.prog.rank_up": ("RANK UP - %s", "昇進 - 階級 %s"),
+    "arsenal.prog.rank_up_all": ("was promoted to rank %s.", "が階級 %s に昇進した。"),
+    # ---- 経済 ----
+    "arsenal.shop.title": ("Quartermaster", "補給係"),
+    "arsenal.shop.balance": ("Credits:", "所持クレジット："),
+    "arsenal.shop.disabled": ("§cThe economy is disabled in world settings.", "§c経済はワールド設定で無効です。"),
+    "arsenal.shop.black_market": ("Black Market", "闇市"),
+    "arsenal.shop.bm_locked": ("§cThe black market deals only with rank %s or higher.", "§c闇市は階級 %s 以上でないと利用できません。"),
+    "arsenal.shop.bm_body": ("New stock every in-game day. One of each, first come first served.", "ゲーム内の日ごとに入れ替わる。各品 1 点限り、早い者勝ち。"),
+    "arsenal.shop.sold_out": ("SOLD OUT", "売り切れ"),
+    "arsenal.shop.buy_n": ("Buy x%s", "%s 個買う"),
+    "arsenal.shop.bought": ("Bought %s x%s for %s.", "%s を %s 個購入（%s）"),
+    "arsenal.shop.no_money": ("§cNot enough credits.", "§cクレジットが足りない。"),
+    "arsenal.shop.sell_body": ("Items sell for %s%% of their price (weapons by condition).", "売値は買値の %s%%（武器は耐久に比例）。"),
+    "arsenal.shop.sell_yes": ("Sell", "売る"),
+    # ---- 図鑑 ----
+    "arsenal.codex.body": ("%s firearms, %s attachments and %s enemy types.", "銃 %s 種・アタッチメント %s 種・敵 %s 種を収録。"),
+    "arsenal.codex.lv": ("Your weapon level:", "あなたの武器レベル："),
+    "arsenal.codex.melee_stats": ("Damage %s   Backstab %s   Move %s", "ダメージ %s　背後 %s　移動 %s"),
+    "arsenal.codex.armor_prot": ("Protection %s", "防御 %s"),
+    "arsenal.codex.armor_head": ("Headshot damage reduced by %s", "ヘッドショットの被ダメージ -%s"),
+    "arsenal.codex.armor_plates": ("Plate slots %s (each soaks %s damage)", "プレート %s 枚（1 枚でダメージ %s を受け止める）"),
+    "arsenal.codex.armor_move": ("Movement %s", "移動速度 %s"),
+    "arsenal.codex.special.nvg": ("Night vision in the dark", "暗所で暗視"),
+    "arsenal.codex.special.gasmask": ("Immune to gas", "ガスを無効化"),
+    "arsenal.codex.special.ghillie": ("Hard to spot while crouching still", "スニークで静止すると見つかりにくい"),
+    "arsenal.codex.enemy_hp": ("Health %s   Armor %s", "体力 %s　装甲 %s"),
+    "arsenal.codex.enemy_weapon": ("Weapon:", "武器："),
+    "arsenal.codex.enemy_melee": ("Attacks in melee", "近接攻撃"),
+    "arsenal.codex.enemy_range": ("Engages at %s blocks, spots you at %s", "交戦距離 %s・発見距離 %s"),
+    "arsenal.codex.boss_phases": ("%s phases", "%s 段階"),
+    "arsenal.codex.boss_summon": ("Summon with: %s", "呼び出し：%s"),
+    "arsenal.codex.boss_reward": ("Reward: %s, %s XP and a legendary weapon", "報酬：%s・経験値 %s・レジェンダリー武器"),
+    "arsenal.codex.boss_parts": ("Breakable parts:", "部位破壊："),
+    "arsenal.codex.struct_chests": ("Chests: %s", "宝箱：%s"),
+    "arsenal.codex.struct_garrison": ("Garrison: %s", "守備隊：%s 体"),
+    # ---- ゲームモード ----
+    "arsenal.mode.none": ("No match is running. An operator can start one with the Arena Tool.", "開催中の試合はありません。OP がアリーナツールで開始できます。"),
+    "arsenal.mode.join": ("Join", "参加する"),
+    "arsenal.mode.leave": ("Leave", "参加をやめる"),
+    "arsenal.mode.left": ("You left the lobby.", "ロビーから抜けました。"),
+    "arsenal.mode.loadout": ("Choose Loadout", "装備セットを選ぶ"),
+    "arsenal.mode.loadout_set": ("Loadout: %s", "装備セット：%s"),
+    "arsenal.mode.players": ("Players: %s", "参加者：%s 人"),
+    "arsenal.mode.full": ("§cThe match is full.", "§c定員に達しています。"),
+    "arsenal.mode.joined": ("%s joined the match (%s).", "%s が参加した（%s 人）"),
+    "arsenal.mode.lobby_open": ("%s on %s - open the Field Manual > Game Modes to join (%ss).", "%s（%s）- 野戦マニュアル「ゲームモード」から参加（%s 秒）"),
+    "arsenal.mode.starting": ("Starting in %s", "開始まで %s"),
+    "arsenal.mode.not_enough": ("Match cancelled - needs at least %s players.", "試合を中止 - %s 人以上必要です。"),
+    "arsenal.mode.go": ("GO!", "開始！"),
+    "arsenal.mode.err_storage": ("Match cancelled - could not create storage.", "試合を中止 - 保管庫を作れませんでした。"),
+    "arsenal.mode.err_restore_pending": ("§cYour items from the last match haven't been returned yet.", "§c前の試合の持ち物がまだ戻っていません。"),
+    "arsenal.mode.dead_respawn": ("ELIMINATED - respawn in %ss", "撃破された - %s 秒後に復帰"),
+    "arsenal.mode.dead_wave": ("DOWN - you'll return after this wave", "倒れた - ウェーブ終了後に復帰"),
+    "arsenal.mode.gg_demoted": ("Knifed! Demoted one weapon.", "ナイフで倒された！ 1 段階戻る。"),
+    "arsenal.mode.gg_next": ("Weapon %s/%s:", "武器 %s/%s："),
+    "arsenal.mode.wave": ("WAVE %s / %s", "ウェーブ %s / %s"),
+    "arsenal.mode.wave_clear": ("Wave %s cleared - %ss to resupply", "ウェーブ %s 突破 - 補給時間 %s 秒"),
+    "arsenal.mode.horde_clear": ("All waves survived!", "全ウェーブを生き延びた！"),
+    "arsenal.mode.horde_wiped": ("The squad was wiped out.", "部隊が全滅した。"),
+    "arsenal.mode.hill_moved": ("The hill has moved!", "丘が移動した！"),
+    "arsenal.mode.out_of_bounds": ("Out of bounds!", "場外！"),
+    "arsenal.mode.time_up": ("Time's up.", "時間切れ。"),
+    "arsenal.mode.stopped": ("The match was stopped.", "試合は中止されました。"),
+    "arsenal.mode.victory": ("VICTORY", "勝利"),
+    "arsenal.mode.defeat": ("MATCH OVER", "試合終了"),
+    "arsenal.mode.winners": ("Winner: %s", "勝者：%s"),
+    "arsenal.mode.restored": ("§aYour items and position were restored.", "§a持ち物と位置を元に戻しました。"),
+    "arsenal.mode.restore_failed": ("§cCouldn't reach your stored items yet - they will be returned next time you join.", "§c保管した持ち物にまだ届きません - 次に参加したときに戻します。"),
+    "arsenal.mode.pick_mode": ("Mode", "モード"),
+    "arsenal.mode.pick_arena": ("Arena", "アリーナ"),
+    "arsenal.mode.tool_title": ("Arena Tool", "アリーナツール"),
+    "arsenal.mode.tool_none": ("No arena selected. Create one where you stand.", "アリーナが選ばれていません。立っている場所に作れます。"),
+    "arsenal.mode.tool_editing": ("Editing: %s", "編集中：%s"),
+    "arsenal.mode.tool_info": ("Spawns %s  Hills %s  Corners %s", "スポーン %s　丘 %s　範囲 %s"),
+    "arsenal.mode.tool_new": ("New arena (corner A here)", "新しいアリーナ（ここを隅 A に）"),
+    "arsenal.mode.tool_pick": ("Select arena", "アリーナを選ぶ"),
+    "arsenal.mode.tool_name": ("Arena name", "アリーナの名前"),
+    "arsenal.mode.tool_created": ("Arena %s created. Now set corner B, spawns and (for King of the Hill) hills.", "アリーナ %s を作成。次に隅 B・スポーン・（陣取りなら）丘を登録してください。"),
+    "arsenal.mode.tool_corner_a": ("Set corner A here", "ここを隅 A に"),
+    "arsenal.mode.tool_corner_b": ("Set corner B here", "ここを隅 B に"),
+    "arsenal.mode.tool_set": ("Corner %s set: %s", "隅 %s を設定：%s"),
+    "arsenal.mode.tool_spawn": ("Add spawn point here", "ここをスポーン地点に追加"),
+    "arsenal.mode.tool_spawn_added": ("Spawn point #%s added.", "スポーン地点 #%s を追加。"),
+    "arsenal.mode.tool_hill": ("Add hill (flag) here", "ここを丘（旗）に追加"),
+    "arsenal.mode.tool_hill_added": ("Hill #%s added.", "丘 #%s を追加。"),
+    "arsenal.mode.tool_clear": ("Clear spawns and hills", "スポーンと丘を消す"),
+    "arsenal.mode.tool_cleared": ("Spawns and hills cleared.", "スポーンと丘を消しました。"),
+    "arsenal.mode.tool_delete": ("Delete this arena", "このアリーナを削除"),
+    "arsenal.mode.tool_deleted": ("Arena deleted.", "アリーナを削除しました。"),
+    "arsenal.mode.tool_start": ("Start a match", "試合を始める"),
+    "arsenal.mode.tool_stop": ("Stop the current match", "試合を中止する"),
+    "arsenal.mode.err_corners": ("Set both corners first.", "先に 2 つの隅を設定してください。"),
+    "arsenal.mode.err_big": ("The arena is too large.", "アリーナが大きすぎます。"),
+    "arsenal.mode.err_small": ("The arena is too small.", "アリーナが小さすぎます。"),
+    "arsenal.mode.err_spawns": ("Add more spawn points.", "スポーン地点が足りません。"),
+    "arsenal.mode.err_hill": ("King of the Hill needs at least one hill.", "陣取りには丘が 1 つ以上必要です。"),
+    "arsenal.mode.err_max": ("You can have at most %s arenas.", "アリーナは %s 個までです。"),
+    "arsenal.mode.err_spawn_max": ("At most %s spawn points.", "スポーン地点は %s 個までです。"),
+    "arsenal.mode.err_running": ("A match is already running.", "すでに試合が進行中です。"),
+    "arsenal.mode.err_no_arena": ("Create an arena first.", "先にアリーナを作ってください。"),
+}
+
+# 操作ガイド（章ごと）
+GUIDE = {
+    "basics": (("Basics", "基本"), [
+        ("Use (right-click / tap) fires. Hold for full-auto.", "使用（右クリック／タップ）で撃つ。長押しで連射。"),
+        ("Sneak aims down sights (toggle in settings). Double-tap Sneak reloads.", "スニークで照準（設定で切替式に）。スニーク 2 回でリロード。"),
+        ("Look straight up and Use to open the weapon menu: attachments, ammo, fire mode, camo.", "真上を向いて使用すると武器メニュー：アタッチメント・弾種・射撃モード・迷彩。"),
+        ("Jump + Sneak in mid-air switches fire mode. Jump while scoped holds your breath.", "空中でジャンプ＋スニークで射撃モード切替。スコープ中のジャンプで息止め。"),
+        ("Hit something with a gun in hand for a buttstroke.", "銃を持って殴ると銃床打撃。"),
+        ("HUD 2.0 shows ammo, plates, health, compass and scores. Switch to classic in HUD settings.", "HUD 2.0 に弾数・プレート・体力・方位・得点を表示。HUD 設定で従来型に戻せる。"),
+        ("Weapons are crafted at the Weapon Bench; ammo at the Ammo Press.", "武器は兵器作業台、弾薬は弾薬製造機で作る。"),
+        ("Run /scriptevent arsenal:calib to fine-tune where the gun sits in first person.", "/scriptevent arsenal:calib で一人称の銃の位置を調整できる。"),
+    ]),
+    "combat": (("Combat", "戦闘"), [
+        ("Headshots deal extra damage; helmets reduce it. Legs take less.", "頭は大ダメージ（ヘルメットで軽減）。脚は少なめ。"),
+        ("Bullets pierce thin blocks. Sniper fire at long range drifts with the wind.", "弾は薄いブロックを貫通する。遠距離の狙撃は風で流れる。"),
+        ("Near misses suppress you: the screen edges darken and your spread grows.", "至近弾を浴びると制圧され、画面の端が暗くなり拡散が増える。"),
+        ("Melee weapons: backstabs deal huge damage. Hold Use then release for a heavy lunge.", "近接武器：背後からは大ダメージ。使用を長押しして離すと踏み込みの強攻撃。"),
+        ("Sneak + Use throws the combat knife or fires the spring knife's blade.", "スニーク＋使用でナイフを投げる／スプリングナイフの刃を射出。"),
+        ("The Breaching Axe smashes doors, trapdoors and fences in one hit.", "ブリーチングアックスはドア・トラップドア・柵を一撃で壊す。"),
+        ("Energy weapons, drones and turrets stop working under EMP.", "EMP を受けるとエネルギー兵器・ドローン・砲台が止まる。"),
+        ("Grenades: frag, smoke, flash, gas, EMP, cluster, decoy, snap - check the codex.", "手榴弾：破片・煙・閃光・ガス・EMP・クラスター・デコイ・スナップ。図鑑で確認。"),
+    ]),
+    "gear": (("Armor & Gear", "防具と装備"), [
+        ("Body armor holds armor plates. Each plate soaks 10 damage before your health.", "ボディアーマーにはプレートを入れられる。1 枚で 10 ダメージを受け止める。"),
+        ("Use an Armor Plate item to insert one (takes a moment).", "アーマープレートを使うと差し込める（少し時間がかかる）。"),
+        ("Bandages and medkits stop bleeding; medkits heal over time. Adrenaline speeds you up.", "包帯とメディキットで止血。メディキットは持続回復。アドレナリンで加速。"),
+        ("Place turrets, shields, claymores and stations on the top face of a block.", "砲台・シールド・クレイモア・ステーションはブロックの上面に向けて使って設置。"),
+        ("Sneak-interact with your own deployable to pick it up.", "自分の設置物にスニークで触ると回収。"),
+        ("Mount emplacements and aim with your view; hold Jump to fire.", "銃座に乗って視点で狙い、ジャンプで撃つ。"),
+        ("The buggy needs fuel canisters; steel ingots repair vehicles.", "バギーは燃料キャニスターで給油、鋼鉄インゴットで修理。"),
+        ("Night vision goggles switch on in the dark (toggle in the Field Manual).", "暗視ゴーグルは暗所で自動オン（野戦マニュアルで切替）。"),
+    ]),
+    "enemies": (("Enemies", "敵"), [
+        ("Raiders roam plains and deserts at night. Iron Legion machines guard the mountains. The Hollow lurk underground.", "レイダーは夜の平原・砂漠、アイアン・レギオンは山岳、ホロウは地下に出る。"),
+        ("Enemies take cover, flank, heal each other and throw grenades.", "敵は遮蔽に隠れ、回り込み、回復し合い、手榴弾を投げる。"),
+        ("Drones spot you for their squad - shoot them down or use EMP.", "ドローンは仲間にこちらの位置を知らせる。撃ち落とすか EMP で止める。"),
+        ("Shield troopers block bullets from the front: flank or aim at their legs.", "シールド兵は正面の弾を止める。回り込むか脚を狙え。"),
+        ("Bloaters swell up and explode when close. Keep your distance.", "ブローターは近づくと膨らんで爆発する。距離をとれ。"),
+        ("Decoy grenades lure enemies away from your position.", "デコイで敵をおびき寄せられる。"),
+        ("Enemy AI difficulty can be changed in World Settings (2.0).", "敵 AI の難易度はワールド設定（2.0）で変えられる。"),
+    ]),
+    "world": (("World", "ワールド"), [
+        ("Camps, outposts, bunkers, labs, crash sites, ports and nests appear as you explore.", "探索すると野営地・前哨基地・バンカー・研究所・墜落機・廃港・巣が現れる。"),
+        ("Clear a structure's garrison for a bonus; its chests hold loot by tier.", "守備隊を全滅させるとボーナス。宝箱にはティアに応じた戦利品。"),
+        ("Quartermasters sell weapons, ammo and gear for credits.", "補給係はクレジットで武器・弾薬・装備を売ってくれる。"),
+        ("Bosses are summoned with the Warlord's Banner and the Legion Core.", "ボスはウォーロードの軍旗・レギオン中枢核で呼び出す。"),
+        ("Bosses telegraph big attacks - watch for markers and warnings.", "ボスの大技には予兆がある。印と警告に注意。"),
+        ("Structure density can be set to off, low, normal or high.", "構造物の密度はなし・少なめ・標準・多めから選べる。"),
+        ("Hollow nests spawn mutants at night.", "変異体の巣は夜になると変異体を生む。"),
+    ]),
+    "progress": (("Progression", "進行"), [
+        ("Weapons gain XP from hits and kills and level up to 30.", "武器は命中とキルで経験値を得て Lv30 まで上がる。"),
+        ("Weapon levels unlock camos; attachment tiers need weapon levels (world setting).", "武器レベルで迷彩が解放。アタッチメントのティアも武器レベルで解放（ワールド設定）。"),
+        ("Your rank (1-50) rises with every kill, challenge and match.", "階級（1〜50）はキル・チャレンジ・試合で上がる。"),
+        ("Three daily and three weekly challenges rotate automatically.", "デイリー 3・ウィークリー 3 のチャレンジが自動で入れ替わる。"),
+        ("Credits come from kills, clears, waves and challenges.", "クレジットはキル・制圧・ウェーブ・チャレンジで貯まる。"),
+        ("The black market (rank 5+) sells legendary gear that changes daily.", "闇市（階級 5 以上）は日替わりでレジェンダリー品を売る。"),
+        ("Killstreaks: open the Streak Terminal to call in recon, supply drops, airstrikes and more.", "キルストリーク：ストリーク端末から偵察・補給投下・空爆などを呼ぶ。"),
+    ]),
+    "modes": (("Game Modes", "ゲームモード"), [
+        ("Operators build arenas with the Arena Tool: two corners, spawns, and hills for King of the Hill.", "OP はアリーナツールでアリーナを作る：2 つの隅・スポーン・（陣取りなら）丘。"),
+        ("Free-for-All, Team Deathmatch, Gun Game, Horde and King of the Hill are available.", "フリー・フォー・オール、チームデスマッチ、ガンゲーム、ホード、陣取りが遊べる。"),
+        ("Join from the Field Manual > Game Modes during the lobby countdown.", "ロビーの間に野戦マニュアル「ゲームモード」から参加。"),
+        ("Your inventory and position are stored and returned after the match - even after a restart.", "持ち物と位置は保管され、試合後に戻る（再起動があっても戻る）。"),
+        ("You can't die in a match: you respawn after a few seconds.", "試合中は死なない。数秒後に復活する。"),
+        ("Horde: survive 15 waves of Hollow together, with bosses every 5 waves.", "ホード：協力して 15 ウェーブを生き延びる。5 ウェーブごとにボス。"),
+        ("Gun Game: every kill swaps your gun; win with the knife.", "ガンゲーム：キルごとに武器が変わり、最後はナイフで倒して勝ち。"),
+    ]),
+    "mobile": (("Phones & Tablets", "スマホ・タブレット"), [
+        ("Set Trigger to 'tap' so one tap starts full-auto and the next stops it.", "射撃の操作を「タップ」にすると、タップで連射開始・もう一度で停止。"),
+        ("HUD position 'Auto' raises the ammo panel above the touch buttons.", "HUD の配置「自動」で弾数パネルが操作ボタンの上に上がる。"),
+        ("Aim assist and auto-fire help against mobs (off by default).", "エイムアシストと自動射撃で対モブ戦が楽になる（初期はオフ）。"),
+        ("Look straight up and tap Use to open the weapon menu.", "真上を向いて使用で武器メニュー。"),
+        ("Emplacement fire uses the Jump button; in tap mode each press toggles fire.", "銃座の射撃はジャンプボタン。タップ式なら押すたびに撃ち始め／止め。"),
+        ("Lower 'Effects quality' if the game stutters.", "カクつくときは演出品質を下げる。"),
+        ("Scope overlays and HUD 2.0 need the resource pack enabled.", "スコープ表示と HUD 2.0 にはリソースパックが必要。"),
+    ]),
+    "trouble": (("Troubleshooting", "困ったとき"), [
+        ("No HUD panels? Make sure both packs are active, or switch HUD style to Classic.", "HUD が出ない：両方のパックが有効か確認するか、HUD を従来型に。"),
+        ("Gun sits oddly in first person? Run /scriptevent arsenal:calib.", "一人称の銃の位置がおかしい：/scriptevent arsenal:calib"),
+        ("Before removing the add-on, run /scriptevent arsenal:normalize to restore weapon IDs.", "アドオンを外す前に /scriptevent arsenal:normalize で武器の ID を戻す。"),
+        ("Run /scriptevent arsenal:report and share the result when reporting a bug.", "不具合報告には /scriptevent arsenal:report の結果を添える。"),
+        ("Items from a match not returned? Rejoin near the arena; they come back automatically.", "試合の持ち物が戻らない：アリーナの近くで入り直すと自動で戻る。"),
+        ("Too many enemies? Turn factions off or lower structure density in World Settings (2.0).", "敵が多すぎる：ワールド設定（2.0）で勢力をオフ、構造物を少なめに。"),
+        ("Performance: enemy thinking is budgeted; reduce view distance if needed.", "負荷：敵の思考は予算制。必要なら描画距離を下げる。"),
+    ]),
+}
+
+ROLE_DESC = {
+    "rifle": ("Trades fire, takes cover when hurt and flanks with its squad.", "撃ち合い、弱ると遮蔽へ。分隊で回り込む。"),
+    "sniper": ("Holds back and picks you off; retreats if you close in.", "遠くから狙撃。近づくと下がる。"),
+    "heavy": ("Suppresses with long bursts.", "長い連射で制圧する。"),
+    "leader": ("Directs the squad and shares your position.", "分隊を指揮し、こちらの位置を共有する。"),
+    "medic": ("Heals wounded allies.", "負傷した味方を回復する。"),
+    "demo": ("Lobs grenades and 40mm rounds.", "手榴弾と 40mm 弾を放り込む。"),
+    "melee": ("Rushes you down.", "突進してくる。"),
+    "shield": ("Advances behind a bullet-proof shield.", "防弾盾を構えて前進する。"),
+    "mortar": ("Shells you from a distance.", "遠くから砲撃してくる。"),
+    "drone": ("Flies overhead and spots targets for its squad.", "上空から偵察し、仲間に知らせる。"),
+    "bomber": ("Swells up and explodes next to you.", "近づいて膨らみ、爆発する。"),
+}
+ROLE_NAME = {
+    "rifle": ("Rifleman", "小銃兵"), "sniper": ("Sniper", "狙撃兵"), "heavy": ("Heavy", "重火器兵"), "leader": ("Leader", "隊長"),
+    "medic": ("Medic", "衛生兵"), "demo": ("Demolitions", "爆破兵"), "melee": ("Brawler", "近接"), "shield": ("Shield", "盾兵"),
+    "mortar": ("Artillery", "砲兵"), "drone": ("Scout Drone", "偵察ドローン"), "bomber": ("Bomber", "自爆"),
+}
+CODEX_CATS = {
+    "weapons": ("Firearms", "銃"), "melee": ("Melee", "近接武器"), "attachments": ("Attachments", "アタッチメント"), "armor": ("Armor", "防具"),
+    "gear": ("Gear", "装備"), "enemies": ("Enemies", "敵"), "bosses": ("Bosses", "ボス"), "killstreaks": ("Killstreaks", "キルストリーク"), "structures": ("Structures", "構造物"),
+}
+
+
+def dynamic(d):
+    """データから作るキー"""
+    out = {}
+    for fid, f in d["FACTIONS"].items():
+        out[f"arsenal.faction.{fid}"] = (f["name"]["en"], f["name"]["ja"])
+    for r, v in ROLE_NAME.items():
+        out[f"arsenal.role.{r}"] = v
+    for r, v in ROLE_DESC.items():
+        out[f"arsenal.role_desc.{r}"] = v
+    for k, v in d["STRUCTURE_DENSITY"].items():
+        out[f"arsenal.density.{k}"] = (v["name"]["en"], v["name"]["ja"])
+    for k, v in d["AI_DIFFICULTY"].items():
+        out[f"arsenal.difficulty.{k}"] = (v["name"]["en"], v["name"]["ja"])
+    for k, v in d["MODES"].items():
+        out[f"arsenal.mode_name.{k}"] = (v["name"]["en"], v["name"]["ja"])
+        out[f"arsenal.mode_desc.{k}"] = (v["desc"]["en"], v["desc"]["ja"])
+    for k, v in d["LOADOUTS"].items():
+        out[f"arsenal.loadout.{k}"] = (v["name"]["en"], v["name"]["ja"])
+    for i, r in enumerate(d["RANK_TITLES"]):
+        out[f"arsenal.rank.{i}"] = (r["name"]["en"], r["name"]["ja"])
+    for c in d["CHALLENGES"]["daily"] + d["CHALLENGES"]["weekly"]:
+        out[f"arsenal.ch.{c['id']}"] = (c["name"]["en"].replace("{n}", "%s"), c["name"]["ja"].replace("{n}", "%s"))
+    for k, v in d["STRUCTURES"].items():
+        out[f"arsenal.structure_desc.{k}"] = (v["desc"]["en"], v["desc"]["ja"])
+    for k, v in CODEX_CATS.items():
+        out[f"arsenal.codex.cat.{k}"] = v
+    for k, v in d["SHOP"].items():
+        out[f"arsenal.shop.cat.{k}"] = (v["name"]["en"], v["name"]["ja"])
+    for c, (title, lines) in GUIDE.items():
+        out[f"arsenal.guide.{c}"] = title
+        for i, ln in enumerate(lines, 1):
+            out[f"arsenal.guide.{c}.{i}"] = ln
+    return out
+
+
+def guide_counts():
+    return {c: len(lines) for c, (_, lines) in GUIDE.items()}

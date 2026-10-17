@@ -1,0 +1,32 @@
+{
+  "format_version": "1.20.10",
+  "minecraft:recipe_shapeless": {
+    "description": {
+      "identifier": "arsenal:target_kit"
+    },
+    "tags": [
+      "crafting_table"
+    ],
+    "ingredients": [
+      {
+        "item": "minecraft:hay_block"
+      },
+      {
+        "item": "minecraft:stick",
+        "count": 3
+      },
+      {
+        "item": "minecraft:target"
+      }
+    ],
+    "result": {
+      "item": "arsenal:target_kit",
+      "count": 1
+    },
+    "unlock": [
+      {
+        "item": "minecraft:hay_block"
+      }
+    ]
+  }
+}

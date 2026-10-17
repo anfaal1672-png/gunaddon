@@ -1,0 +1,89 @@
+{
+  "format_version": "1.26.10",
+  "particle_effect": {
+    "description": {
+      "identifier": "arsenal:fire_patch",
+      "basic_render_parameters": {
+        "material": "particles_blend",
+        "texture": "textures/particle/arsenal_particles"
+      }
+    },
+    "components": {
+      "minecraft:emitter_rate_steady": {
+        "spawn_rate": 30,
+        "max_particles": 120
+      },
+      "minecraft:emitter_lifetime_once": {
+        "active_time": "v.duration ?? 8"
+      },
+      "minecraft:emitter_shape_disc": {
+        "radius": "v.radius ?? 2.5",
+        "plane_normal": "y",
+        "direction": [
+          0,
+          1,
+          0
+        ]
+      },
+      "minecraft:particle_lifetime_expression": {
+        "max_lifetime": "math.random(0.4, 0.9)"
+      },
+      "minecraft:particle_initial_speed": "math.random(0.5, 1.5)",
+      "minecraft:particle_motion_dynamic": {
+        "linear_acceleration": [
+          0,
+          1.5,
+          0
+        ]
+      },
+      "minecraft:particle_appearance_billboard": {
+        "size": [
+          "0.25 * (1.0 - v.particle_age / v.particle_lifetime * 0.6)",
+          "0.3 * (1.0 - v.particle_age / v.particle_lifetime * 0.6)"
+        ],
+        "facing_camera_mode": "lookat_y",
+        "uv": {
+          "texture_width": 64,
+          "texture_height": 64,
+          "flipbook": {
+            "base_UV": [
+              0,
+              16
+            ],
+            "size_UV": [
+              8,
+              8
+            ],
+            "step_UV": [
+              8,
+              0
+            ],
+            "frames_per_second": 8,
+            "max_frame": 4,
+            "stretch_to_lifetime": true,
+            "loop": false
+          }
+        }
+      },
+      "minecraft:particle_appearance_tinting": {
+        "color": {
+          "gradient": {
+            "0.0": [
+              1.0,
+              0.8,
+              0.4,
+              1.0
+            ],
+            "1.0": [
+              0.8,
+              0.2,
+              0.05,
+              0.0
+            ]
+          },
+          "interpolant": "v.particle_age / v.particle_lifetime"
+        }
+      }
+    }
+  }
+}

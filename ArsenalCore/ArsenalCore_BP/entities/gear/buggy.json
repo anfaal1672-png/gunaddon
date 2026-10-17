@@ -1,0 +1,92 @@
+{
+  "format_version": "1.26.20",
+  "minecraft:entity": {
+    "description": {
+      "identifier": "arsenal:buggy",
+      "is_spawnable": false,
+      "is_summonable": true,
+      "is_experimental": false,
+      "properties": {
+        "arsenal:pitch": {
+          "type": "int",
+          "range": [
+            -60,
+            80
+          ],
+          "default": 0,
+          "client_sync": true
+        }
+      }
+    },
+    "components": {
+      "minecraft:type_family": {
+        "family": [
+          "arsenal_deployable",
+          "arsenal_player_deployable",
+          "arsenal_vehicle",
+          "arsenal_buggy"
+        ]
+      },
+      "minecraft:collision_box": {
+        "width": 2.4,
+        "height": 1.8
+      },
+      "minecraft:health": {
+        "value": 120,
+        "max": 120
+      },
+      "minecraft:physics": {},
+      "minecraft:knockback_resistance": {
+        "value": 1.0
+      },
+      "minecraft:persistent": {},
+      "minecraft:fire_immune": {},
+      "minecraft:is_collidable": {},
+      "minecraft:rideable": {
+        "seat_count": 2,
+        "family_types": [
+          "player"
+        ],
+        "interact_text": "action.interact.mount",
+        "pull_in_entities": false,
+        "crouching_skip_interact": true,
+        "seats": [
+          {
+            "position": [
+              0.0,
+              0.75,
+              -0.1
+            ],
+            "min_rider_count": 0,
+            "max_rider_count": 2
+          },
+          {
+            "position": [
+              0.0,
+              1.35,
+              0.95
+            ],
+            "min_rider_count": 1,
+            "max_rider_count": 2,
+            "lock_rider_rotation": 0
+          }
+        ],
+        "controlling_seat": 0
+      },
+      "minecraft:conditional_bandwidth_optimization": {},
+      "minecraft:input_ground_controlled": {},
+      "minecraft:movement": {
+        "value": 0.34
+      },
+      "minecraft:movement.basic": {},
+      "minecraft:jump.static": {},
+      "minecraft:navigation.walk": {
+        "avoid_water": true
+      },
+      "minecraft:variable_max_auto_step": {
+        "base_value": 1.0625,
+        "jump_prevented_value": 1.0625
+      }
+    }
+  }
+}

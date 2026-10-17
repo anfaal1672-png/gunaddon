@@ -1,0 +1,30 @@
+{
+  "format_version": "1.26.30",
+  "minecraft:item": {
+    "description": {
+      "identifier": "arsenal:recon_drone",
+      "menu_category": {
+        "category": "equipment"
+      }
+    },
+    "components": {
+      "minecraft:icon": "arsenal_recon_drone",
+      "minecraft:display_name": {
+        "value": "item.arsenal.recon_drone.name"
+      },
+      "minecraft:max_stack_size": 1,
+      "minecraft:tags": {
+        "tags": [
+          "arsenal:deployable"
+        ]
+      },
+      "minecraft:rarity": "rare",
+      "arsenal:gear": {},
+      "minecraft:use_modifiers": {
+        "use_duration": 3600,
+        "movement_modifier": 1.0,
+        "emit_vibrations": false
+      }
+    }
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "format_version": "1.26.30",
+  "minecraft:item": {
+    "description": {
+      "identifier": "arsenal:cinder",
+      "menu_category": {
+        "category": "equipment"
+      }
+    },
+    "components": {
+      "minecraft:icon": "arsenal_cinder",
+      "minecraft:display_name": {
+        "value": "item.arsenal.cinder.name"
+      },
+      "minecraft:max_stack_size": 1,
+      "minecraft:hand_equipped": true,
+      "minecraft:tags": {
+        "tags": [
+          "arsenal:firearm",
+          "arsenal:w_cinder",
+          "arsenal:cat_machine_pistol"
+        ]
+      },
+      "minecraft:rarity": "rare",
+      "minecraft:durability": {
+        "max_durability": 2000,
+        "damage_chance": {
+          "min": 0,
+          "max": 0
+        }
+      },
+      "minecraft:use_modifiers": {
+        "use_duration": 3600,
+        "movement_modifier": 1.0,
+        "emit_vibrations": false
+      },
+      "minecraft:allow_off_hand": false,
+      "minecraft:can_destroy_in_creative": false
+    }
+  }
+}

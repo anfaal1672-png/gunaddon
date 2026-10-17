@@ -1,0 +1,6403 @@
+{
+  "namespace": "hud",
+  "arsenal_black": {
+    "type": "image",
+    "texture": "textures/ui/arsenal/black",
+    "size": [
+      "fill",
+      "100%"
+    ]
+  },
+  "arsenal_view_2x": {
+    "type": "stack_panel",
+    "orientation": "horizontal",
+    "size": [
+      "100%",
+      "100%"
+    ],
+    "anchor_from": "center",
+    "anchor_to": "center",
+    "controls": [
+      {
+        "left@hud.arsenal_black": {}
+      },
+      {
+        "lens": {
+          "type": "image",
+          "texture": "textures/ui/arsenal/scope_2x",
+          "size": [
+            "100%y",
+            "100%"
+          ]
+        }
+      },
+      {
+        "right@hud.arsenal_black": {}
+      }
+    ],
+    "bindings": [
+      {
+        "binding_name": "#hud_title_text_string",
+        "binding_name_override": "#arsenal_t",
+        "binding_type": "global"
+      },
+      {
+        "binding_type": "view",
+        "source_property_name": "(not ((#arsenal_t - '§a§r§s§n§1') = #arsenal_t))",
+        "target_property_name": "#visible"
+      }
+    ]
+  },
+  "arsenal_view_4x": {
+    "type": "stack_panel",
+    "orientation": "horizontal",
+    "size": [
+      "100%",
+      "100%"
+    ],
+    "anchor_from": "center",
+    "anchor_to": "center",
+    "controls": [
+      {
+        "left@hud.arsenal_black": {}
+      },
+      {
+        "lens": {
+          "type": "image",
+          "texture": "textures/ui/arsenal/scope_4x",
+          "size": [
+            "100%y",
+            "100%"
+          ]
+        }
+      },
+      {
+        "right@hud.arsenal_black": {}
+      }
+    ],
+    "bindings": [
+      {
+        "binding_name": "#hud_title_text_string",
+        "binding_name_override": "#arsenal_t",
+        "binding_type": "global"
+      },
+      {
+        "binding_type": "view",
+        "source_property_name": "(not ((#arsenal_t - '§a§r§s§n§2') = #arsenal_t))",
+        "target_property_name": "#visible"
+      }
+    ]
+  },
+  "arsenal_view_8x": {
+    "type": "stack_panel",
+    "orientation": "horizontal",
+    "size": [
+      "100%",
+      "100%"
+    ],
+    "anchor_from": "center",
+    "anchor_to": "center",
+    "controls": [
+      {
+        "left@hud.arsenal_black": {}
+      },
+      {
+        "lens": {
+          "type": "image",
+          "texture": "textures/ui/arsenal/scope_8x",
+          "size": [
+            "100%y",
+            "100%"
+          ]
+        }
+      },
+      {
+        "right@hud.arsenal_black": {}
+      }
+    ],
+    "bindings": [
+      {
+        "binding_name": "#hud_title_text_string",
+        "binding_name_override": "#arsenal_t",
+        "binding_type": "global"
+      },
+      {
+        "binding_type": "view",
+        "source_property_name": "(not ((#arsenal_t - '§a§r§s§n§3') = #arsenal_t))",
+        "target_property_name": "#visible"
+      }
+    ]
+  },
+  "arsenal_view_thermal": {
+    "type": "stack_panel",
+    "orientation": "horizontal",
+    "size": [
+      "100%",
+      "100%"
+    ],
+    "anchor_from": "center",
+    "anchor_to": "center",
+    "controls": [
+      {
+        "left@hud.arsenal_black": {}
+      },
+      {
+        "lens": {
+          "type": "image",
+          "texture": "textures/ui/arsenal/scope_thermal",
+          "size": [
+            "100%y",
+            "100%"
+          ]
+        }
+      },
+      {
+        "right@hud.arsenal_black": {}
+      }
+    ],
+    "bindings": [
+      {
+        "binding_name": "#hud_title_text_string",
+        "binding_name_override": "#arsenal_t",
+        "binding_type": "global"
+      },
+      {
+        "binding_type": "view",
+        "source_property_name": "(not ((#arsenal_t - '§a§r§s§n§4') = #arsenal_t))",
+        "target_property_name": "#visible"
+      }
+    ]
+  },
+  "arsenal_view_dot": {
+    "type": "image",
+    "texture": "textures/ui/arsenal/reticle_dot",
+    "size": [
+      14,
+      14
+    ],
+    "anchor_from": "center",
+    "anchor_to": "center",
+    "bindings": [
+      {
+        "binding_name": "#hud_title_text_string",
+        "binding_name_override": "#arsenal_t",
+        "binding_type": "global"
+      },
+      {
+        "binding_type": "view",
+        "source_property_name": "(not ((#arsenal_t - '§a§r§s§n§5') = #arsenal_t))",
+        "target_property_name": "#visible"
+      }
+    ]
+  },
+  "arsenal_view_holo": {
+    "type": "image",
+    "texture": "textures/ui/arsenal/reticle_holo",
+    "size": [
+      40,
+      40
+    ],
+    "anchor_from": "center",
+    "anchor_to": "center",
+    "bindings": [
+      {
+        "binding_name": "#hud_title_text_string",
+        "binding_name_override": "#arsenal_t",
+        "binding_type": "global"
+      },
+      {
+        "binding_type": "view",
+        "source_property_name": "(not ((#arsenal_t - '§a§r§s§n§6') = #arsenal_t))",
+        "target_property_name": "#visible"
+      }
+    ]
+  },
+  "arsenal_scope_root": {
+    "type": "panel",
+    "size": [
+      "100% + 48px",
+      "100% + 48px"
+    ],
+    "anchor_from": "center",
+    "anchor_to": "center",
+    "layer": 0,
+    "controls": [
+      {
+        "2x@hud.arsenal_view_2x": {}
+      },
+      {
+        "4x@hud.arsenal_view_4x": {}
+      },
+      {
+        "8x@hud.arsenal_view_8x": {}
+      },
+      {
+        "thermal@hud.arsenal_view_thermal": {}
+      },
+      {
+        "dot@hud.arsenal_view_dot": {}
+      },
+      {
+        "holo@hud.arsenal_view_holo": {}
+      }
+    ]
+  },
+  "arsenal_hud2_root": {
+    "type": "panel",
+    "size": [
+      "100%",
+      "100%"
+    ],
+    "anchor_from": "center",
+    "anchor_to": "center",
+    "layer": 1,
+    "controls": [
+      {
+        "nvg": {
+          "type": "image",
+          "texture": "textures/ui/arsenal/hud2/nvg",
+          "size": [
+            "100%",
+            "100%"
+          ],
+          "anchor_from": "center",
+          "anchor_to": "center",
+          "offset": [
+            0,
+            0
+          ],
+          "layer": 0,
+          "bindings": [
+            {
+              "binding_name": "#hud_title_text_string",
+              "binding_name_override": "#t",
+              "binding_type": "global"
+            },
+            {
+              "binding_type": "view",
+              "source_property_name": "((('%.24s' * #t) - ('%.23s' * #t)) = '1')",
+              "target_property_name": "#visible"
+            }
+          ]
+        }
+      },
+      {
+        "sup1": {
+          "type": "image",
+          "texture": "textures/ui/arsenal/hud2/sup_1",
+          "size": [
+            "100%",
+            "100%"
+          ],
+          "anchor_from": "center",
+          "anchor_to": "center",
+          "offset": [
+            0,
+            0
+          ],
+          "layer": 0,
+          "bindings": [
+            {
+              "binding_name": "#hud_title_text_string",
+              "binding_name_override": "#t",
+              "binding_type": "global"
+            },
+            {
+              "binding_type": "view",
+              "source_property_name": "((('%.23s' * #t) - ('%.22s' * #t)) = '1')",
+              "target_property_name": "#visible"
+            }
+          ]
+        }
+      },
+      {
+        "sup2": {
+          "type": "image",
+          "texture": "textures/ui/arsenal/hud2/sup_2",
+          "size": [
+            "100%",
+            "100%"
+          ],
+          "anchor_from": "center",
+          "anchor_to": "center",
+          "offset": [
+            0,
+            0
+          ],
+          "layer": 0,
+          "bindings": [
+            {
+              "binding_name": "#hud_title_text_string",
+              "binding_name_override": "#t",
+              "binding_type": "global"
+            },
+            {
+              "binding_type": "view",
+              "source_property_name": "((('%.23s' * #t) - ('%.22s' * #t)) = '2')",
+              "target_property_name": "#visible"
+            }
+          ]
+        }
+      },
+      {
+        "sup3": {
+          "type": "image",
+          "texture": "textures/ui/arsenal/hud2/sup_3",
+          "size": [
+            "100%",
+            "100%"
+          ],
+          "anchor_from": "center",
+          "anchor_to": "center",
+          "offset": [
+            0,
+            0
+          ],
+          "layer": 0,
+          "bindings": [
+            {
+              "binding_name": "#hud_title_text_string",
+              "binding_name_override": "#t",
+              "binding_type": "global"
+            },
+            {
+              "binding_type": "view",
+              "source_property_name": "((('%.23s' * #t) - ('%.22s' * #t)) = '3')",
+              "target_property_name": "#visible"
+            }
+          ]
+        }
+      },
+      {
+        "xh0": {
+          "type": "image",
+          "texture": "textures/ui/arsenal/hud2/xh_0",
+          "size": [
+            48,
+            48
+          ],
+          "anchor_from": "center",
+          "anchor_to": "center",
+          "offset": [
+            0,
+            0
+          ],
+          "layer": 2,
+          "bindings": [
+            {
+              "binding_name": "#hud_title_text_string",
+              "binding_name_override": "#t",
+              "binding_type": "global"
+            },
+            {
+              "binding_type": "view",
+              "source_property_name": "((('%.7s' * #t) - ('%.6s' * #t)) = '0')",
+              "target_property_name": "#visible"
+            }
+          ]
+        }
+      },
+      {
+        "xh1": {
+          "type": "image",
+          "texture": "textures/ui/arsenal/hud2/xh_1",
+          "size": [
+            48,
+            48
+          ],
+          "anchor_from": "center",
+          "anchor_to": "center",
+          "offset": [
+            0,
+            0
+          ],
+          "layer": 2,
+          "bindings": [
+            {
+              "binding_name": "#hud_title_text_string",
+              "binding_name_override": "#t",
+              "binding_type": "global"
+            },
+            {
+              "binding_type": "view",
+              "source_property_name": "((('%.7s' * #t) - ('%.6s' * #t)) = '1')",
+              "target_property_name": "#visible"
+            }
+          ]
+        }
+      },
+      {
+        "xh2": {
+          "type": "image",
+          "texture": "textures/ui/arsenal/hud2/xh_2",
+          "size": [
+            48,
+            48
+          ],
+          "anchor_from": "center",
+          "anchor_to": "center",
+          "offset": [
+            0,
+            0
+          ],
+          "layer": 2,
+          "bindings": [
+            {
+              "binding_name": "#hud_title_text_string",
+              "binding_name_override": "#t",
+              "binding_type": "global"
+            },
+            {
+              "binding_type": "view",
+              "source_property_name": "((('%.7s' * #t) - ('%.6s' * #t)) = '2')",
+              "target_property_name": "#visible"
+            }
+          ]
+        }
+      },
+      {
+        "xh3": {
+          "type": "image",
+          "texture": "textures/ui/arsenal/hud2/xh_3",
+          "size": [
+            48,
+            48
+          ],
+          "anchor_from": "center",
+          "anchor_to": "center",
+          "offset": [
+            0,
+            0
+          ],
+          "layer": 2,
+          "bindings": [
+            {
+              "binding_name": "#hud_title_text_string",
+              "binding_name_override": "#t",
+              "binding_type": "global"
+            },
+            {
+              "binding_type": "view",
+              "source_property_name": "((('%.7s' * #t) - ('%.6s' * #t)) = '3')",
+              "target_property_name": "#visible"
+            }
+          ]
+        }
+      },
+      {
+        "xh4": {
+          "type": "image",
+          "texture": "textures/ui/arsenal/hud2/xh_4",
+          "size": [
+            48,
+            48
+          ],
+          "anchor_from": "center",
+          "anchor_to": "center",
+          "offset": [
+            0,
+            0
+          ],
+          "layer": 2,
+          "bindings": [
+            {
+              "binding_name": "#hud_title_text_string",
+              "binding_name_override": "#t",
+              "binding_type": "global"
+            },
+            {
+              "binding_type": "view",
+              "source_property_name": "((('%.7s' * #t) - ('%.6s' * #t)) = '4')",
+              "target_property_name": "#visible"
+            }
+          ]
+        }
+      },
+      {
+        "xh5": {
+          "type": "image",
+          "texture": "textures/ui/arsenal/hud2/xh_5",
+          "size": [
+            48,
+            48
+          ],
+          "anchor_from": "center",
+          "anchor_to": "center",
+          "offset": [
+            0,
+            0
+          ],
+          "layer": 2,
+          "bindings": [
+            {
+              "binding_name": "#hud_title_text_string",
+              "binding_name_override": "#t",
+              "binding_type": "global"
+            },
+            {
+              "binding_type": "view",
+              "source_property_name": "((('%.7s' * #t) - ('%.6s' * #t)) = '5')",
+              "target_property_name": "#visible"
+            }
+          ]
+        }
+      },
+      {
+        "xh6": {
+          "type": "image",
+          "texture": "textures/ui/arsenal/hud2/xh_6",
+          "size": [
+            48,
+            48
+          ],
+          "anchor_from": "center",
+          "anchor_to": "center",
+          "offset": [
+            0,
+            0
+          ],
+          "layer": 2,
+          "bindings": [
+            {
+              "binding_name": "#hud_title_text_string",
+              "binding_name_override": "#t",
+              "binding_type": "global"
+            },
+            {
+              "binding_type": "view",
+              "source_property_name": "((('%.7s' * #t) - ('%.6s' * #t)) = '6')",
+              "target_property_name": "#visible"
+            }
+          ]
+        }
+      },
+      {
+        "xh7": {
+          "type": "image",
+          "texture": "textures/ui/arsenal/hud2/xh_7",
+          "size": [
+            48,
+            48
+          ],
+          "anchor_from": "center",
+          "anchor_to": "center",
+          "offset": [
+            0,
+            0
+          ],
+          "layer": 2,
+          "bindings": [
+            {
+              "binding_name": "#hud_title_text_string",
+              "binding_name_override": "#t",
+              "binding_type": "global"
+            },
+            {
+              "binding_type": "view",
+              "source_property_name": "((('%.7s' * #t) - ('%.6s' * #t)) = '7')",
+              "target_property_name": "#visible"
+            }
+          ]
+        }
+      },
+      {
+        "xh8": {
+          "type": "image",
+          "texture": "textures/ui/arsenal/hud2/xh_8",
+          "size": [
+            48,
+            48
+          ],
+          "anchor_from": "center",
+          "anchor_to": "center",
+          "offset": [
+            0,
+            0
+          ],
+          "layer": 2,
+          "bindings": [
+            {
+              "binding_name": "#hud_title_text_string",
+              "binding_name_override": "#t",
+              "binding_type": "global"
+            },
+            {
+              "binding_type": "view",
+              "source_property_name": "((('%.7s' * #t) - ('%.6s' * #t)) = '8')",
+              "target_property_name": "#visible"
+            }
+          ]
+        }
+      },
+      {
+        "xh9": {
+          "type": "image",
+          "texture": "textures/ui/arsenal/hud2/xh_9",
+          "size": [
+            48,
+            48
+          ],
+          "anchor_from": "center",
+          "anchor_to": "center",
+          "offset": [
+            0,
+            0
+          ],
+          "layer": 2,
+          "bindings": [
+            {
+              "binding_name": "#hud_title_text_string",
+              "binding_name_override": "#t",
+              "binding_type": "global"
+            },
+            {
+              "binding_type": "view",
+              "source_property_name": "((('%.7s' * #t) - ('%.6s' * #t)) = '9')",
+              "target_property_name": "#visible"
+            }
+          ]
+        }
+      },
+      {
+        "hm_hit": {
+          "type": "image",
+          "texture": "textures/ui/arsenal/hud2/hm_hit",
+          "size": [
+            32,
+            32
+          ],
+          "anchor_from": "center",
+          "anchor_to": "center",
+          "offset": [
+            0,
+            0
+          ],
+          "layer": 4,
+          "bindings": [
+            {
+              "binding_name": "#hud_title_text_string",
+              "binding_name_override": "#t",
+              "binding_type": "global"
+            },
+            {
+              "binding_type": "view",
+              "source_property_name": "((('%.5s' * #t) - ('%.4s' * #t)) = '1')",
+              "target_property_name": "#visible"
+            }
+          ]
+        }
+      },
+      {
+        "hm_head": {
+          "type": "image",
+          "texture": "textures/ui/arsenal/hud2/hm_head",
+          "size": [
+            32,
+            32
+          ],
+          "anchor_from": "center",
+          "anchor_to": "center",
+          "offset": [
+            0,
+            0
+          ],
+          "layer": 4,
+          "bindings": [
+            {
+              "binding_name": "#hud_title_text_string",
+              "binding_name_override": "#t",
+              "binding_type": "global"
+            },
+            {
+              "binding_type": "view",
+              "source_property_name": "((('%.5s' * #t) - ('%.4s' * #t)) = '2')",
+              "target_property_name": "#visible"
+            }
+          ]
+        }
+      },
+      {
+        "hm_kill": {
+          "type": "image",
+          "texture": "textures/ui/arsenal/hud2/hm_kill",
+          "size": [
+            32,
+            32
+          ],
+          "anchor_from": "center",
+          "anchor_to": "center",
+          "offset": [
+            0,
+            0
+          ],
+          "layer": 4,
+          "bindings": [
+            {
+              "binding_name": "#hud_title_text_string",
+              "binding_name_override": "#t",
+              "binding_type": "global"
+            },
+            {
+              "binding_type": "view",
+              "source_property_name": "((('%.5s' * #t) - ('%.4s' * #t)) = '3')",
+              "target_property_name": "#visible"
+            }
+          ]
+        }
+      },
+      {
+        "dmg0": {
+          "type": "image",
+          "texture": "textures/ui/arsenal/hud2/dmg_0",
+          "size": [
+            140,
+            140
+          ],
+          "anchor_from": "center",
+          "anchor_to": "center",
+          "offset": [
+            0,
+            0
+          ],
+          "layer": 4,
+          "bindings": [
+            {
+              "binding_name": "#hud_title_text_string",
+              "binding_name_override": "#t",
+              "binding_type": "global"
+            },
+            {
+              "binding_type": "view",
+              "source_property_name": "((('%.6s' * #t) - ('%.5s' * #t)) = '1')",
+              "target_property_name": "#visible"
+            }
+          ]
+        }
+      },
+      {
+        "dmg1": {
+          "type": "image",
+          "texture": "textures/ui/arsenal/hud2/dmg_1",
+          "size": [
+            140,
+            140
+          ],
+          "anchor_from": "center",
+          "anchor_to": "center",
+          "offset": [
+            0,
+            0
+          ],
+          "layer": 4,
+          "bindings": [
+            {
+              "binding_name": "#hud_title_text_string",
+              "binding_name_override": "#t",
+              "binding_type": "global"
+            },
+            {
+              "binding_type": "view",
+              "source_property_name": "((('%.6s' * #t) - ('%.5s' * #t)) = '2')",
+              "target_property_name": "#visible"
+            }
+          ]
+        }
+      },
+      {
+        "dmg2": {
+          "type": "image",
+          "texture": "textures/ui/arsenal/hud2/dmg_2",
+          "size": [
+            140,
+            140
+          ],
+          "anchor_from": "center",
+          "anchor_to": "center",
+          "offset": [
+            0,
+            0
+          ],
+          "layer": 4,
+          "bindings": [
+            {
+              "binding_name": "#hud_title_text_string",
+              "binding_name_override": "#t",
+              "binding_type": "global"
+            },
+            {
+              "binding_type": "view",
+              "source_property_name": "((('%.6s' * #t) - ('%.5s' * #t)) = '3')",
+              "target_property_name": "#visible"
+            }
+          ]
+        }
+      },
+      {
+        "dmg3": {
+          "type": "image",
+          "texture": "textures/ui/arsenal/hud2/dmg_3",
+          "size": [
+            140,
+            140
+          ],
+          "anchor_from": "center",
+          "anchor_to": "center",
+          "offset": [
+            0,
+            0
+          ],
+          "layer": 4,
+          "bindings": [
+            {
+              "binding_name": "#hud_title_text_string",
+              "binding_name_override": "#t",
+              "binding_type": "global"
+            },
+            {
+              "binding_type": "view",
+              "source_property_name": "((('%.6s' * #t) - ('%.5s' * #t)) = '4')",
+              "target_property_name": "#visible"
+            }
+          ]
+        }
+      },
+      {
+        "dmg4": {
+          "type": "image",
+          "texture": "textures/ui/arsenal/hud2/dmg_4",
+          "size": [
+            140,
+            140
+          ],
+          "anchor_from": "center",
+          "anchor_to": "center",
+          "offset": [
+            0,
+            0
+          ],
+          "layer": 4,
+          "bindings": [
+            {
+              "binding_name": "#hud_title_text_string",
+              "binding_name_override": "#t",
+              "binding_type": "global"
+            },
+            {
+              "binding_type": "view",
+              "source_property_name": "((('%.6s' * #t) - ('%.5s' * #t)) = '5')",
+              "target_property_name": "#visible"
+            }
+          ]
+        }
+      },
+      {
+        "dmg5": {
+          "type": "image",
+          "texture": "textures/ui/arsenal/hud2/dmg_5",
+          "size": [
+            140,
+            140
+          ],
+          "anchor_from": "center",
+          "anchor_to": "center",
+          "offset": [
+            0,
+            0
+          ],
+          "layer": 4,
+          "bindings": [
+            {
+              "binding_name": "#hud_title_text_string",
+              "binding_name_override": "#t",
+              "binding_type": "global"
+            },
+            {
+              "binding_type": "view",
+              "source_property_name": "((('%.6s' * #t) - ('%.5s' * #t)) = '6')",
+              "target_property_name": "#visible"
+            }
+          ]
+        }
+      },
+      {
+        "dmg6": {
+          "type": "image",
+          "texture": "textures/ui/arsenal/hud2/dmg_6",
+          "size": [
+            140,
+            140
+          ],
+          "anchor_from": "center",
+          "anchor_to": "center",
+          "offset": [
+            0,
+            0
+          ],
+          "layer": 4,
+          "bindings": [
+            {
+              "binding_name": "#hud_title_text_string",
+              "binding_name_override": "#t",
+              "binding_type": "global"
+            },
+            {
+              "binding_type": "view",
+              "source_property_name": "((('%.6s' * #t) - ('%.5s' * #t)) = '7')",
+              "target_property_name": "#visible"
+            }
+          ]
+        }
+      },
+      {
+        "dmg7": {
+          "type": "image",
+          "texture": "textures/ui/arsenal/hud2/dmg_7",
+          "size": [
+            140,
+            140
+          ],
+          "anchor_from": "center",
+          "anchor_to": "center",
+          "offset": [
+            0,
+            0
+          ],
+          "layer": 4,
+          "bindings": [
+            {
+              "binding_name": "#hud_title_text_string",
+              "binding_name_override": "#t",
+              "binding_type": "global"
+            },
+            {
+              "binding_type": "view",
+              "source_property_name": "((('%.6s' * #t) - ('%.5s' * #t)) = '8')",
+              "target_property_name": "#visible"
+            }
+          ]
+        }
+      },
+      {
+        "rng": {
+          "type": "label",
+          "anchor_from": "center",
+          "anchor_to": "center",
+          "offset": [
+            0,
+            34
+          ],
+          "layer": 3,
+          "color": [
+            1,
+            0.9,
+            0.5
+          ],
+          "shadow": true,
+          "font_scale_factor": 1.0,
+          "text_alignment": "center",
+          "size": [
+            "default",
+            "default"
+          ],
+          "bindings": [
+            {
+              "binding_name": "#hud_title_text_string",
+              "binding_name_override": "#t",
+              "binding_type": "global"
+            },
+            {
+              "binding_type": "view",
+              "source_property_name": "(not ((('%.50s' * #t) - ('%.46s' * #t)) = '----'))",
+              "target_property_name": "#visible"
+            },
+            {
+              "binding_type": "view",
+              "source_property_name": "((('%.50s' * #t) - ('%.46s' * #t)) + 'm')",
+              "target_property_name": "#text"
+            }
+          ],
+          "text": "#text",
+          "localize": false
+        }
+      },
+      {
+        "wind0": {
+          "type": "image",
+          "texture": "textures/ui/arsenal/hud2/wind_0",
+          "size": [
+            20,
+            20
+          ],
+          "anchor_from": "center",
+          "anchor_to": "center",
+          "offset": [
+            70,
+            34
+          ],
+          "layer": 2,
+          "bindings": [
+            {
+              "binding_name": "#hud_title_text_string",
+              "binding_name_override": "#t",
+              "binding_type": "global"
+            },
+            {
+              "binding_type": "view",
+              "source_property_name": "((('%.51s' * #t) - ('%.50s' * #t)) = '0')",
+              "target_property_name": "#visible"
+            }
+          ]
+        }
+      },
+      {
+        "wind1": {
+          "type": "image",
+          "texture": "textures/ui/arsenal/hud2/wind_1",
+          "size": [
+            20,
+            20
+          ],
+          "anchor_from": "center",
+          "anchor_to": "center",
+          "offset": [
+            70,
+            34
+          ],
+          "layer": 2,
+          "bindings": [
+            {
+              "binding_name": "#hud_title_text_string",
+              "binding_name_override": "#t",
+              "binding_type": "global"
+            },
+            {
+              "binding_type": "view",
+              "source_property_name": "((('%.51s' * #t) - ('%.50s' * #t)) = '1')",
+              "target_property_name": "#visible"
+            }
+          ]
+        }
+      },
+      {
+        "wind2": {
+          "type": "image",
+          "texture": "textures/ui/arsenal/hud2/wind_2",
+          "size": [
+            20,
+            20
+          ],
+          "anchor_from": "center",
+          "anchor_to": "center",
+          "offset": [
+            70,
+            34
+          ],
+          "layer": 2,
+          "bindings": [
+            {
+              "binding_name": "#hud_title_text_string",
+              "binding_name_override": "#t",
+              "binding_type": "global"
+            },
+            {
+              "binding_type": "view",
+              "source_property_name": "((('%.51s' * #t) - ('%.50s' * #t)) = '2')",
+              "target_property_name": "#visible"
+            }
+          ]
+        }
+      },
+      {
+        "wind3": {
+          "type": "image",
+          "texture": "textures/ui/arsenal/hud2/wind_3",
+          "size": [
+            20,
+            20
+          ],
+          "anchor_from": "center",
+          "anchor_to": "center",
+          "offset": [
+            70,
+            34
+          ],
+          "layer": 2,
+          "bindings": [
+            {
+              "binding_name": "#hud_title_text_string",
+              "binding_name_override": "#t",
+              "binding_type": "global"
+            },
+            {
+              "binding_type": "view",
+              "source_property_name": "((('%.51s' * #t) - ('%.50s' * #t)) = '3')",
+              "target_property_name": "#visible"
+            }
+          ]
+        }
+      },
+      {
+        "wind4": {
+          "type": "image",
+          "texture": "textures/ui/arsenal/hud2/wind_4",
+          "size": [
+            20,
+            20
+          ],
+          "anchor_from": "center",
+          "anchor_to": "center",
+          "offset": [
+            70,
+            34
+          ],
+          "layer": 2,
+          "bindings": [
+            {
+              "binding_name": "#hud_title_text_string",
+              "binding_name_override": "#t",
+              "binding_type": "global"
+            },
+            {
+              "binding_type": "view",
+              "source_property_name": "((('%.51s' * #t) - ('%.50s' * #t)) = '4')",
+              "target_property_name": "#visible"
+            }
+          ]
+        }
+      },
+      {
+        "wind5": {
+          "type": "image",
+          "texture": "textures/ui/arsenal/hud2/wind_5",
+          "size": [
+            20,
+            20
+          ],
+          "anchor_from": "center",
+          "anchor_to": "center",
+          "offset": [
+            70,
+            34
+          ],
+          "layer": 2,
+          "bindings": [
+            {
+              "binding_name": "#hud_title_text_string",
+              "binding_name_override": "#t",
+              "binding_type": "global"
+            },
+            {
+              "binding_type": "view",
+              "source_property_name": "((('%.51s' * #t) - ('%.50s' * #t)) = '5')",
+              "target_property_name": "#visible"
+            }
+          ]
+        }
+      },
+      {
+        "wind6": {
+          "type": "image",
+          "texture": "textures/ui/arsenal/hud2/wind_6",
+          "size": [
+            20,
+            20
+          ],
+          "anchor_from": "center",
+          "anchor_to": "center",
+          "offset": [
+            70,
+            34
+          ],
+          "layer": 2,
+          "bindings": [
+            {
+              "binding_name": "#hud_title_text_string",
+              "binding_name_override": "#t",
+              "binding_type": "global"
+            },
+            {
+              "binding_type": "view",
+              "source_property_name": "((('%.51s' * #t) - ('%.50s' * #t)) = '6')",
+              "target_property_name": "#visible"
+            }
+          ]
+        }
+      },
+      {
+        "wind7": {
+          "type": "image",
+          "texture": "textures/ui/arsenal/hud2/wind_7",
+          "size": [
+            20,
+            20
+          ],
+          "anchor_from": "center",
+          "anchor_to": "center",
+          "offset": [
+            70,
+            34
+          ],
+          "layer": 2,
+          "bindings": [
+            {
+              "binding_name": "#hud_title_text_string",
+              "binding_name_override": "#t",
+              "binding_type": "global"
+            },
+            {
+              "binding_type": "view",
+              "source_property_name": "((('%.51s' * #t) - ('%.50s' * #t)) = '7')",
+              "target_property_name": "#visible"
+            }
+          ]
+        }
+      },
+      {
+        "wstr": {
+          "type": "label",
+          "anchor_from": "center",
+          "anchor_to": "center",
+          "offset": [
+            88,
+            34
+          ],
+          "layer": 3,
+          "color": [
+            0.7,
+            0.9,
+            1.0
+          ],
+          "shadow": true,
+          "font_scale_factor": 0.8,
+          "text_alignment": "left",
+          "size": [
+            "default",
+            "default"
+          ],
+          "bindings": [
+            {
+              "binding_name": "#hud_title_text_string",
+              "binding_name_override": "#t",
+              "binding_type": "global"
+            },
+            {
+              "binding_type": "view",
+              "source_property_name": "(not ((('%.52s' * #t) - ('%.51s' * #t)) = '-'))",
+              "target_property_name": "#visible"
+            },
+            {
+              "binding_type": "view",
+              "source_property_name": "('x' + (('%.52s' * #t) - ('%.51s' * #t)))",
+              "target_property_name": "#text"
+            }
+          ],
+          "text": "#text",
+          "localize": false
+        }
+      },
+      {
+        "cmp0": {
+          "type": "image",
+          "texture": "textures/ui/arsenal/hud2/compass_0",
+          "size": [
+            192,
+            18
+          ],
+          "anchor_from": "top_middle",
+          "anchor_to": "top_middle",
+          "offset": [
+            0,
+            2
+          ],
+          "layer": 2,
+          "bindings": [
+            {
+              "binding_name": "#hud_title_text_string",
+              "binding_name_override": "#t",
+              "binding_type": "global"
+            },
+            {
+              "binding_type": "view",
+              "source_property_name": "((('%.22s' * #t) - ('%.20s' * #t)) = '00')",
+              "target_property_name": "#visible"
+            }
+          ]
+        }
+      },
+      {
+        "cmp1": {
+          "type": "image",
+          "texture": "textures/ui/arsenal/hud2/compass_1",
+          "size": [
+            192,
+            18
+          ],
+          "anchor_from": "top_middle",
+          "anchor_to": "top_middle",
+          "offset": [
+            0,
+            2
+          ],
+          "layer": 2,
+          "bindings": [
+            {
+              "binding_name": "#hud_title_text_string",
+              "binding_name_override": "#t",
+              "binding_type": "global"
+            },
+            {
+              "binding_type": "view",
+              "source_property_name": "((('%.22s' * #t) - ('%.20s' * #t)) = '01')",
+              "target_property_name": "#visible"
+            }
+          ]
+        }
+      },
+      {
+        "cmp2": {
+          "type": "image",
+          "texture": "textures/ui/arsenal/hud2/compass_2",
+          "size": [
+            192,
+            18
+          ],
+          "anchor_from": "top_middle",
+          "anchor_to": "top_middle",
+          "offset": [
+            0,
+            2
+          ],
+          "layer": 2,
+          "bindings": [
+            {
+              "binding_name": "#hud_title_text_string",
+              "binding_name_override": "#t",
+              "binding_type": "global"
+            },
+            {
+              "binding_type": "view",
+              "source_property_name": "((('%.22s' * #t) - ('%.20s' * #t)) = '02')",
+              "target_property_name": "#visible"
+            }
+          ]
+        }
+      },
+      {
+        "cmp3": {
+          "type": "image",
+          "texture": "textures/ui/arsenal/hud2/compass_3",
+          "size": [
+            192,
+            18
+          ],
+          "anchor_from": "top_middle",
+          "anchor_to": "top_middle",
+          "offset": [
+            0,
+            2
+          ],
+          "layer": 2,
+          "bindings": [
+            {
+              "binding_name": "#hud_title_text_string",
+              "binding_name_override": "#t",
+              "binding_type": "global"
+            },
+            {
+              "binding_type": "view",
+              "source_property_name": "((('%.22s' * #t) - ('%.20s' * #t)) = '03')",
+              "target_property_name": "#visible"
+            }
+          ]
+        }
+      },
+      {
+        "cmp4": {
+          "type": "image",
+          "texture": "textures/ui/arsenal/hud2/compass_4",
+          "size": [
+            192,
+            18
+          ],
+          "anchor_from": "top_middle",
+          "anchor_to": "top_middle",
+          "offset": [
+            0,
+            2
+          ],
+          "layer": 2,
+          "bindings": [
+            {
+              "binding_name": "#hud_title_text_string",
+              "binding_name_override": "#t",
+              "binding_type": "global"
+            },
+            {
+              "binding_type": "view",
+              "source_property_name": "((('%.22s' * #t) - ('%.20s' * #t)) = '04')",
+              "target_property_name": "#visible"
+            }
+          ]
+        }
+      },
+      {
+        "cmp5": {
+          "type": "image",
+          "texture": "textures/ui/arsenal/hud2/compass_5",
+          "size": [
+            192,
+            18
+          ],
+          "anchor_from": "top_middle",
+          "anchor_to": "top_middle",
+          "offset": [
+            0,
+            2
+          ],
+          "layer": 2,
+          "bindings": [
+            {
+              "binding_name": "#hud_title_text_string",
+              "binding_name_override": "#t",
+              "binding_type": "global"
+            },
+            {
+              "binding_type": "view",
+              "source_property_name": "((('%.22s' * #t) - ('%.20s' * #t)) = '05')",
+              "target_property_name": "#visible"
+            }
+          ]
+        }
+      },
+      {
+        "cmp6": {
+          "type": "image",
+          "texture": "textures/ui/arsenal/hud2/compass_6",
+          "size": [
+            192,
+            18
+          ],
+          "anchor_from": "top_middle",
+          "anchor_to": "top_middle",
+          "offset": [
+            0,
+            2
+          ],
+          "layer": 2,
+          "bindings": [
+            {
+              "binding_name": "#hud_title_text_string",
+              "binding_name_override": "#t",
+              "binding_type": "global"
+            },
+            {
+              "binding_type": "view",
+              "source_property_name": "((('%.22s' * #t) - ('%.20s' * #t)) = '06')",
+              "target_property_name": "#visible"
+            }
+          ]
+        }
+      },
+      {
+        "cmp7": {
+          "type": "image",
+          "texture": "textures/ui/arsenal/hud2/compass_7",
+          "size": [
+            192,
+            18
+          ],
+          "anchor_from": "top_middle",
+          "anchor_to": "top_middle",
+          "offset": [
+            0,
+            2
+          ],
+          "layer": 2,
+          "bindings": [
+            {
+              "binding_name": "#hud_title_text_string",
+              "binding_name_override": "#t",
+              "binding_type": "global"
+            },
+            {
+              "binding_type": "view",
+              "source_property_name": "((('%.22s' * #t) - ('%.20s' * #t)) = '07')",
+              "target_property_name": "#visible"
+            }
+          ]
+        }
+      },
+      {
+        "cmp8": {
+          "type": "image",
+          "texture": "textures/ui/arsenal/hud2/compass_8",
+          "size": [
+            192,
+            18
+          ],
+          "anchor_from": "top_middle",
+          "anchor_to": "top_middle",
+          "offset": [
+            0,
+            2
+          ],
+          "layer": 2,
+          "bindings": [
+            {
+              "binding_name": "#hud_title_text_string",
+              "binding_name_override": "#t",
+              "binding_type": "global"
+            },
+            {
+              "binding_type": "view",
+              "source_property_name": "((('%.22s' * #t) - ('%.20s' * #t)) = '08')",
+              "target_property_name": "#visible"
+            }
+          ]
+        }
+      },
+      {
+        "cmp9": {
+          "type": "image",
+          "texture": "textures/ui/arsenal/hud2/compass_9",
+          "size": [
+            192,
+            18
+          ],
+          "anchor_from": "top_middle",
+          "anchor_to": "top_middle",
+          "offset": [
+            0,
+            2
+          ],
+          "layer": 2,
+          "bindings": [
+            {
+              "binding_name": "#hud_title_text_string",
+              "binding_name_override": "#t",
+              "binding_type": "global"
+            },
+            {
+              "binding_type": "view",
+              "source_property_name": "((('%.22s' * #t) - ('%.20s' * #t)) = '09')",
+              "target_property_name": "#visible"
+            }
+          ]
+        }
+      },
+      {
+        "cmp10": {
+          "type": "image",
+          "texture": "textures/ui/arsenal/hud2/compass_10",
+          "size": [
+            192,
+            18
+          ],
+          "anchor_from": "top_middle",
+          "anchor_to": "top_middle",
+          "offset": [
+            0,
+            2
+          ],
+          "layer": 2,
+          "bindings": [
+            {
+              "binding_name": "#hud_title_text_string",
+              "binding_name_override": "#t",
+              "binding_type": "global"
+            },
+            {
+              "binding_type": "view",
+              "source_property_name": "((('%.22s' * #t) - ('%.20s' * #t)) = '10')",
+              "target_property_name": "#visible"
+            }
+          ]
+        }
+      },
+      {
+        "cmp11": {
+          "type": "image",
+          "texture": "textures/ui/arsenal/hud2/compass_11",
+          "size": [
+            192,
+            18
+          ],
+          "anchor_from": "top_middle",
+          "anchor_to": "top_middle",
+          "offset": [
+            0,
+            2
+          ],
+          "layer": 2,
+          "bindings": [
+            {
+              "binding_name": "#hud_title_text_string",
+              "binding_name_override": "#t",
+              "binding_type": "global"
+            },
+            {
+              "binding_type": "view",
+              "source_property_name": "((('%.22s' * #t) - ('%.20s' * #t)) = '11')",
+              "target_property_name": "#visible"
+            }
+          ]
+        }
+      },
+      {
+        "cmp12": {
+          "type": "image",
+          "texture": "textures/ui/arsenal/hud2/compass_12",
+          "size": [
+            192,
+            18
+          ],
+          "anchor_from": "top_middle",
+          "anchor_to": "top_middle",
+          "offset": [
+            0,
+            2
+          ],
+          "layer": 2,
+          "bindings": [
+            {
+              "binding_name": "#hud_title_text_string",
+              "binding_name_override": "#t",
+              "binding_type": "global"
+            },
+            {
+              "binding_type": "view",
+              "source_property_name": "((('%.22s' * #t) - ('%.20s' * #t)) = '12')",
+              "target_property_name": "#visible"
+            }
+          ]
+        }
+      },
+      {
+        "cmp13": {
+          "type": "image",
+          "texture": "textures/ui/arsenal/hud2/compass_13",
+          "size": [
+            192,
+            18
+          ],
+          "anchor_from": "top_middle",
+          "anchor_to": "top_middle",
+          "offset": [
+            0,
+            2
+          ],
+          "layer": 2,
+          "bindings": [
+            {
+              "binding_name": "#hud_title_text_string",
+              "binding_name_override": "#t",
+              "binding_type": "global"
+            },
+            {
+              "binding_type": "view",
+              "source_property_name": "((('%.22s' * #t) - ('%.20s' * #t)) = '13')",
+              "target_property_name": "#visible"
+            }
+          ]
+        }
+      },
+      {
+        "cmp14": {
+          "type": "image",
+          "texture": "textures/ui/arsenal/hud2/compass_14",
+          "size": [
+            192,
+            18
+          ],
+          "anchor_from": "top_middle",
+          "anchor_to": "top_middle",
+          "offset": [
+            0,
+            2
+          ],
+          "layer": 2,
+          "bindings": [
+            {
+              "binding_name": "#hud_title_text_string",
+              "binding_name_override": "#t",
+              "binding_type": "global"
+            },
+            {
+              "binding_type": "view",
+              "source_property_name": "((('%.22s' * #t) - ('%.20s' * #t)) = '14')",
+              "target_property_name": "#visible"
+            }
+          ]
+        }
+      },
+      {
+        "cmp15": {
+          "type": "image",
+          "texture": "textures/ui/arsenal/hud2/compass_15",
+          "size": [
+            192,
+            18
+          ],
+          "anchor_from": "top_middle",
+          "anchor_to": "top_middle",
+          "offset": [
+            0,
+            2
+          ],
+          "layer": 2,
+          "bindings": [
+            {
+              "binding_name": "#hud_title_text_string",
+              "binding_name_override": "#t",
+              "binding_type": "global"
+            },
+            {
+              "binding_type": "view",
+              "source_property_name": "((('%.22s' * #t) - ('%.20s' * #t)) = '15')",
+              "target_property_name": "#visible"
+            }
+          ]
+        }
+      },
+      {
+        "gm_panel": {
+          "type": "image",
+          "texture": "textures/ui/arsenal/hud2/panel",
+          "size": [
+            150,
+            30
+          ],
+          "anchor_from": "top_middle",
+          "anchor_to": "top_middle",
+          "offset": [
+            0,
+            22
+          ],
+          "layer": 2,
+          "bindings": [
+            {
+              "binding_name": "#hud_title_text_string",
+              "binding_name_override": "#t",
+              "binding_type": "global"
+            },
+            {
+              "binding_type": "view",
+              "source_property_name": "(not ((('%.25s' * #t) - ('%.24s' * #t)) = '0'))",
+              "target_property_name": "#visible"
+            }
+          ]
+        }
+      },
+      {
+        "gm1": {
+          "type": "label",
+          "anchor_from": "top_middle",
+          "anchor_to": "top_middle",
+          "offset": [
+            0,
+            23
+          ],
+          "layer": 3,
+          "color": [
+            1,
+            0.85,
+            0.4
+          ],
+          "shadow": true,
+          "font_scale_factor": 0.8,
+          "text_alignment": "center",
+          "size": [
+            "default",
+            "default"
+          ],
+          "bindings": [
+            {
+              "binding_name": "#hud_title_text_string",
+              "binding_name_override": "#t",
+              "binding_type": "global"
+            },
+            {
+              "binding_type": "view",
+              "source_property_name": "((('%.25s' * #t) - ('%.24s' * #t)) = '1')",
+              "target_property_name": "#visible"
+            }
+          ],
+          "text": "arsenal.mode_name.ffa",
+          "localize": true
+        }
+      },
+      {
+        "gm2": {
+          "type": "label",
+          "anchor_from": "top_middle",
+          "anchor_to": "top_middle",
+          "offset": [
+            0,
+            23
+          ],
+          "layer": 3,
+          "color": [
+            1,
+            0.85,
+            0.4
+          ],
+          "shadow": true,
+          "font_scale_factor": 0.8,
+          "text_alignment": "center",
+          "size": [
+            "default",
+            "default"
+          ],
+          "bindings": [
+            {
+              "binding_name": "#hud_title_text_string",
+              "binding_name_override": "#t",
+              "binding_type": "global"
+            },
+            {
+              "binding_type": "view",
+              "source_property_name": "((('%.25s' * #t) - ('%.24s' * #t)) = '2')",
+              "target_property_name": "#visible"
+            }
+          ],
+          "text": "arsenal.mode_name.tdm",
+          "localize": true
+        }
+      },
+      {
+        "gm3": {
+          "type": "label",
+          "anchor_from": "top_middle",
+          "anchor_to": "top_middle",
+          "offset": [
+            0,
+            23
+          ],
+          "layer": 3,
+          "color": [
+            1,
+            0.85,
+            0.4
+          ],
+          "shadow": true,
+          "font_scale_factor": 0.8,
+          "text_alignment": "center",
+          "size": [
+            "default",
+            "default"
+          ],
+          "bindings": [
+            {
+              "binding_name": "#hud_title_text_string",
+              "binding_name_override": "#t",
+              "binding_type": "global"
+            },
+            {
+              "binding_type": "view",
+              "source_property_name": "((('%.25s' * #t) - ('%.24s' * #t)) = '3')",
+              "target_property_name": "#visible"
+            }
+          ],
+          "text": "arsenal.mode_name.gungame",
+          "localize": true
+        }
+      },
+      {
+        "gm4": {
+          "type": "label",
+          "anchor_from": "top_middle",
+          "anchor_to": "top_middle",
+          "offset": [
+            0,
+            23
+          ],
+          "layer": 3,
+          "color": [
+            1,
+            0.85,
+            0.4
+          ],
+          "shadow": true,
+          "font_scale_factor": 0.8,
+          "text_alignment": "center",
+          "size": [
+            "default",
+            "default"
+          ],
+          "bindings": [
+            {
+              "binding_name": "#hud_title_text_string",
+              "binding_name_override": "#t",
+              "binding_type": "global"
+            },
+            {
+              "binding_type": "view",
+              "source_property_name": "((('%.25s' * #t) - ('%.24s' * #t)) = '4')",
+              "target_property_name": "#visible"
+            }
+          ],
+          "text": "arsenal.mode_name.horde",
+          "localize": true
+        }
+      },
+      {
+        "gm5": {
+          "type": "label",
+          "anchor_from": "top_middle",
+          "anchor_to": "top_middle",
+          "offset": [
+            0,
+            23
+          ],
+          "layer": 3,
+          "color": [
+            1,
+            0.85,
+            0.4
+          ],
+          "shadow": true,
+          "font_scale_factor": 0.8,
+          "text_alignment": "center",
+          "size": [
+            "default",
+            "default"
+          ],
+          "bindings": [
+            {
+              "binding_name": "#hud_title_text_string",
+              "binding_name_override": "#t",
+              "binding_type": "global"
+            },
+            {
+              "binding_type": "view",
+              "source_property_name": "((('%.25s' * #t) - ('%.24s' * #t)) = '5')",
+              "target_property_name": "#visible"
+            }
+          ],
+          "text": "arsenal.mode_name.koth",
+          "localize": true
+        }
+      },
+      {
+        "gm_sa": {
+          "type": "label",
+          "anchor_from": "top_middle",
+          "anchor_to": "top_middle",
+          "offset": [
+            -44,
+            35
+          ],
+          "layer": 3,
+          "color": [
+            0.5,
+            0.8,
+            1.0
+          ],
+          "shadow": true,
+          "font_scale_factor": 1.0,
+          "text_alignment": "left",
+          "size": [
+            "default",
+            "default"
+          ],
+          "bindings": [
+            {
+              "binding_name": "#hud_title_text_string",
+              "binding_name_override": "#t",
+              "binding_type": "global"
+            },
+            {
+              "binding_type": "view",
+              "source_property_name": "(not ((('%.25s' * #t) - ('%.24s' * #t)) = '0'))",
+              "target_property_name": "#visible"
+            },
+            {
+              "binding_type": "view",
+              "source_property_name": "(('%.29s' * #t) - ('%.25s' * #t))",
+              "target_property_name": "#text"
+            }
+          ],
+          "text": "#text",
+          "localize": false
+        }
+      },
+      {
+        "gm_tm": {
+          "type": "label",
+          "anchor_from": "top_middle",
+          "anchor_to": "top_middle",
+          "offset": [
+            0,
+            35
+          ],
+          "layer": 3,
+          "color": [
+            1,
+            1,
+            1
+          ],
+          "shadow": true,
+          "font_scale_factor": 1.0,
+          "text_alignment": "center",
+          "size": [
+            "default",
+            "default"
+          ],
+          "bindings": [
+            {
+              "binding_name": "#hud_title_text_string",
+              "binding_name_override": "#t",
+              "binding_type": "global"
+            },
+            {
+              "binding_type": "view",
+              "source_property_name": "(not ((('%.25s' * #t) - ('%.24s' * #t)) = '0'))",
+              "target_property_name": "#visible"
+            },
+            {
+              "binding_type": "view",
+              "source_property_name": "(('%.37s' * #t) - ('%.33s' * #t))",
+              "target_property_name": "#text"
+            }
+          ],
+          "text": "#text",
+          "localize": false
+        }
+      },
+      {
+        "gm_sb": {
+          "type": "label",
+          "anchor_from": "top_middle",
+          "anchor_to": "top_middle",
+          "offset": [
+            44,
+            35
+          ],
+          "layer": 3,
+          "color": [
+            1.0,
+            0.5,
+            0.45
+          ],
+          "shadow": true,
+          "font_scale_factor": 1.0,
+          "text_alignment": "left",
+          "size": [
+            "default",
+            "default"
+          ],
+          "bindings": [
+            {
+              "binding_name": "#hud_title_text_string",
+              "binding_name_override": "#t",
+              "binding_type": "global"
+            },
+            {
+              "binding_type": "view",
+              "source_property_name": "(not ((('%.25s' * #t) - ('%.24s' * #t)) = '0'))",
+              "target_property_name": "#visible"
+            },
+            {
+              "binding_type": "view",
+              "source_property_name": "(('%.33s' * #t) - ('%.29s' * #t))",
+              "target_property_name": "#text"
+            }
+          ],
+          "text": "#text",
+          "localize": false
+        }
+      },
+      {
+        "cr": {
+          "type": "label",
+          "anchor_from": "top_left",
+          "anchor_to": "top_left",
+          "offset": [
+            6,
+            6
+          ],
+          "layer": 3,
+          "color": [
+            1,
+            0.85,
+            0.35
+          ],
+          "shadow": true,
+          "font_scale_factor": 0.9,
+          "text_alignment": "left",
+          "size": [
+            "default",
+            "default"
+          ],
+          "bindings": [
+            {
+              "binding_name": "#hud_title_text_string",
+              "binding_name_override": "#t",
+              "binding_type": "global"
+            },
+            {
+              "binding_type": "view",
+              "source_property_name": "(' ' + (('%.45s' * #t) - ('%.39s' * #t)))",
+              "target_property_name": "#text"
+            }
+          ],
+          "text": "#text",
+          "localize": false
+        }
+      },
+      {
+        "stk": {
+          "type": "label",
+          "anchor_from": "top_left",
+          "anchor_to": "top_left",
+          "offset": [
+            6,
+            18
+          ],
+          "layer": 3,
+          "color": [
+            1,
+            0.6,
+            0.3
+          ],
+          "shadow": true,
+          "font_scale_factor": 0.9,
+          "text_alignment": "left",
+          "size": [
+            "default",
+            "default"
+          ],
+          "bindings": [
+            {
+              "binding_name": "#hud_title_text_string",
+              "binding_name_override": "#t",
+              "binding_type": "global"
+            },
+            {
+              "binding_type": "view",
+              "source_property_name": "(not ((('%.39s' * #t) - ('%.37s' * #t)) = ' 0'))",
+              "target_property_name": "#visible"
+            },
+            {
+              "binding_type": "view",
+              "source_property_name": "(' ' + (('%.39s' * #t) - ('%.37s' * #t)))",
+              "target_property_name": "#text"
+            }
+          ],
+          "text": "#text",
+          "localize": false
+        }
+      },
+      {
+        "ks": {
+          "type": "label",
+          "anchor_from": "top_left",
+          "anchor_to": "top_left",
+          "offset": [
+            40,
+            18
+          ],
+          "layer": 3,
+          "color": [
+            0.5,
+            1,
+            0.5
+          ],
+          "shadow": true,
+          "font_scale_factor": 0.8,
+          "text_alignment": "left",
+          "size": [
+            "default",
+            "default"
+          ],
+          "bindings": [
+            {
+              "binding_name": "#hud_title_text_string",
+              "binding_name_override": "#t",
+              "binding_type": "global"
+            },
+            {
+              "binding_type": "view",
+              "source_property_name": "((('%.46s' * #t) - ('%.45s' * #t)) = '1')",
+              "target_property_name": "#visible"
+            }
+          ],
+          "text": "arsenal.ui.ks_ready",
+          "localize": true
+        }
+      },
+      {
+        "lay0": {
+          "type": "panel",
+          "size": [
+            "100%",
+            "100%"
+          ],
+          "anchor_from": "center",
+          "anchor_to": "center",
+          "layer": 1,
+          "controls": [
+            {
+              "l0_panel": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/panel",
+                "size": [
+                  104,
+                  48
+                ],
+                "anchor_from": "bottom_right",
+                "anchor_to": "bottom_right",
+                "offset": [
+                  -6,
+                  -38
+                ],
+                "layer": 1,
+                "bindings": []
+              }
+            },
+            {
+              "l0_ammo0": {
+                "type": "label",
+                "anchor_from": "bottom_right",
+                "anchor_to": "bottom_right",
+                "offset": [
+                  -56,
+                  -60
+                ],
+                "layer": 3,
+                "color": [
+                  1,
+                  1,
+                  1
+                ],
+                "shadow": true,
+                "font_scale_factor": 1.5,
+                "text_alignment": "right",
+                "size": [
+                  "default",
+                  "default"
+                ],
+                "bindings": [
+                  {
+                    "binding_name": "#hud_title_text_string",
+                    "binding_name_override": "#t",
+                    "binding_type": "global"
+                  },
+                  {
+                    "binding_type": "view",
+                    "source_property_name": "(((('%.53s' * #t) - ('%.52s' * #t)) = '0') and (not ((('%.10s' * #t) - ('%.7s' * #t)) = '---')))",
+                    "target_property_name": "#visible"
+                  },
+                  {
+                    "binding_type": "view",
+                    "source_property_name": "(('%.10s' * #t) - ('%.7s' * #t))",
+                    "target_property_name": "#text"
+                  }
+                ],
+                "text": "#text",
+                "localize": false
+              }
+            },
+            {
+              "l0_ammo1": {
+                "type": "label",
+                "anchor_from": "bottom_right",
+                "anchor_to": "bottom_right",
+                "offset": [
+                  -56,
+                  -60
+                ],
+                "layer": 3,
+                "color": [
+                  1,
+                  1,
+                  1
+                ],
+                "shadow": true,
+                "font_scale_factor": 2.0,
+                "text_alignment": "right",
+                "size": [
+                  "default",
+                  "default"
+                ],
+                "bindings": [
+                  {
+                    "binding_name": "#hud_title_text_string",
+                    "binding_name_override": "#t",
+                    "binding_type": "global"
+                  },
+                  {
+                    "binding_type": "view",
+                    "source_property_name": "(((('%.53s' * #t) - ('%.52s' * #t)) = '1') and (not ((('%.10s' * #t) - ('%.7s' * #t)) = '---')))",
+                    "target_property_name": "#visible"
+                  },
+                  {
+                    "binding_type": "view",
+                    "source_property_name": "(('%.10s' * #t) - ('%.7s' * #t))",
+                    "target_property_name": "#text"
+                  }
+                ],
+                "text": "#text",
+                "localize": false
+              }
+            },
+            {
+              "l0_ammo2": {
+                "type": "label",
+                "anchor_from": "bottom_right",
+                "anchor_to": "bottom_right",
+                "offset": [
+                  -56,
+                  -60
+                ],
+                "layer": 3,
+                "color": [
+                  1,
+                  1,
+                  1
+                ],
+                "shadow": true,
+                "font_scale_factor": 2.6,
+                "text_alignment": "right",
+                "size": [
+                  "default",
+                  "default"
+                ],
+                "bindings": [
+                  {
+                    "binding_name": "#hud_title_text_string",
+                    "binding_name_override": "#t",
+                    "binding_type": "global"
+                  },
+                  {
+                    "binding_type": "view",
+                    "source_property_name": "(((('%.53s' * #t) - ('%.52s' * #t)) = '2') and (not ((('%.10s' * #t) - ('%.7s' * #t)) = '---')))",
+                    "target_property_name": "#visible"
+                  },
+                  {
+                    "binding_type": "view",
+                    "source_property_name": "(('%.10s' * #t) - ('%.7s' * #t))",
+                    "target_property_name": "#text"
+                  }
+                ],
+                "text": "#text",
+                "localize": false
+              }
+            },
+            {
+              "l0_res": {
+                "type": "label",
+                "anchor_from": "bottom_right",
+                "anchor_to": "bottom_right",
+                "offset": [
+                  -10,
+                  -56
+                ],
+                "layer": 3,
+                "color": [
+                  0.75,
+                  0.75,
+                  0.78
+                ],
+                "shadow": true,
+                "font_scale_factor": 1.0,
+                "text_alignment": "right",
+                "size": [
+                  "default",
+                  "default"
+                ],
+                "bindings": [
+                  {
+                    "binding_name": "#hud_title_text_string",
+                    "binding_name_override": "#t",
+                    "binding_type": "global"
+                  },
+                  {
+                    "binding_type": "view",
+                    "source_property_name": "(not ((('%.10s' * #t) - ('%.7s' * #t)) = '---'))",
+                    "target_property_name": "#visible"
+                  },
+                  {
+                    "binding_type": "view",
+                    "source_property_name": "('/' + (('%.14s' * #t) - ('%.10s' * #t)))",
+                    "target_property_name": "#text"
+                  }
+                ],
+                "text": "#text",
+                "localize": false
+              }
+            },
+            {
+              "l0_modeS": {
+                "type": "label",
+                "anchor_from": "bottom_right",
+                "anchor_to": "bottom_right",
+                "offset": [
+                  -10,
+                  -44
+                ],
+                "layer": 3,
+                "color": [
+                  0.9,
+                  0.9,
+                  0.6
+                ],
+                "shadow": true,
+                "font_scale_factor": 0.8,
+                "text_alignment": "right",
+                "size": [
+                  "default",
+                  "default"
+                ],
+                "bindings": [
+                  {
+                    "binding_name": "#hud_title_text_string",
+                    "binding_name_override": "#t",
+                    "binding_type": "global"
+                  },
+                  {
+                    "binding_type": "view",
+                    "source_property_name": "((('%.15s' * #t) - ('%.14s' * #t)) = 'S')",
+                    "target_property_name": "#visible"
+                  }
+                ],
+                "text": "arsenal.mode.semi",
+                "localize": true
+              }
+            },
+            {
+              "l0_modeA": {
+                "type": "label",
+                "anchor_from": "bottom_right",
+                "anchor_to": "bottom_right",
+                "offset": [
+                  -10,
+                  -44
+                ],
+                "layer": 3,
+                "color": [
+                  0.9,
+                  0.9,
+                  0.6
+                ],
+                "shadow": true,
+                "font_scale_factor": 0.8,
+                "text_alignment": "right",
+                "size": [
+                  "default",
+                  "default"
+                ],
+                "bindings": [
+                  {
+                    "binding_name": "#hud_title_text_string",
+                    "binding_name_override": "#t",
+                    "binding_type": "global"
+                  },
+                  {
+                    "binding_type": "view",
+                    "source_property_name": "((('%.15s' * #t) - ('%.14s' * #t)) = 'A')",
+                    "target_property_name": "#visible"
+                  }
+                ],
+                "text": "arsenal.mode.auto",
+                "localize": true
+              }
+            },
+            {
+              "l0_modeB": {
+                "type": "label",
+                "anchor_from": "bottom_right",
+                "anchor_to": "bottom_right",
+                "offset": [
+                  -10,
+                  -44
+                ],
+                "layer": 3,
+                "color": [
+                  0.9,
+                  0.9,
+                  0.6
+                ],
+                "shadow": true,
+                "font_scale_factor": 0.8,
+                "text_alignment": "right",
+                "size": [
+                  "default",
+                  "default"
+                ],
+                "bindings": [
+                  {
+                    "binding_name": "#hud_title_text_string",
+                    "binding_name_override": "#t",
+                    "binding_type": "global"
+                  },
+                  {
+                    "binding_type": "view",
+                    "source_property_name": "((('%.15s' * #t) - ('%.14s' * #t)) = 'B')",
+                    "target_property_name": "#visible"
+                  }
+                ],
+                "text": "arsenal.mode.burst",
+                "localize": true
+              }
+            },
+            {
+              "l0_modeC": {
+                "type": "label",
+                "anchor_from": "bottom_right",
+                "anchor_to": "bottom_right",
+                "offset": [
+                  -10,
+                  -44
+                ],
+                "layer": 3,
+                "color": [
+                  0.9,
+                  0.9,
+                  0.6
+                ],
+                "shadow": true,
+                "font_scale_factor": 0.8,
+                "text_alignment": "right",
+                "size": [
+                  "default",
+                  "default"
+                ],
+                "bindings": [
+                  {
+                    "binding_name": "#hud_title_text_string",
+                    "binding_name_override": "#t",
+                    "binding_type": "global"
+                  },
+                  {
+                    "binding_type": "view",
+                    "source_property_name": "((('%.15s' * #t) - ('%.14s' * #t)) = 'C')",
+                    "target_property_name": "#visible"
+                  }
+                ],
+                "text": "arsenal.mode.charge",
+                "localize": true
+              }
+            },
+            {
+              "l0_modeD": {
+                "type": "label",
+                "anchor_from": "bottom_right",
+                "anchor_to": "bottom_right",
+                "offset": [
+                  -10,
+                  -44
+                ],
+                "layer": 3,
+                "color": [
+                  0.9,
+                  0.9,
+                  0.6
+                ],
+                "shadow": true,
+                "font_scale_factor": 0.8,
+                "text_alignment": "right",
+                "size": [
+                  "default",
+                  "default"
+                ],
+                "bindings": [
+                  {
+                    "binding_name": "#hud_title_text_string",
+                    "binding_name_override": "#t",
+                    "binding_type": "global"
+                  },
+                  {
+                    "binding_type": "view",
+                    "source_property_name": "((('%.15s' * #t) - ('%.14s' * #t)) = 'D')",
+                    "target_property_name": "#visible"
+                  }
+                ],
+                "text": "arsenal.mode.double",
+                "localize": true
+              }
+            },
+            {
+              "l0_modeU": {
+                "type": "label",
+                "anchor_from": "bottom_right",
+                "anchor_to": "bottom_right",
+                "offset": [
+                  -10,
+                  -44
+                ],
+                "layer": 3,
+                "color": [
+                  0.9,
+                  0.9,
+                  0.6
+                ],
+                "shadow": true,
+                "font_scale_factor": 0.8,
+                "text_alignment": "right",
+                "size": [
+                  "default",
+                  "default"
+                ],
+                "bindings": [
+                  {
+                    "binding_name": "#hud_title_text_string",
+                    "binding_name_override": "#t",
+                    "binding_type": "global"
+                  },
+                  {
+                    "binding_type": "view",
+                    "source_property_name": "((('%.15s' * #t) - ('%.14s' * #t)) = 'U')",
+                    "target_property_name": "#visible"
+                  }
+                ],
+                "text": "arsenal.mode.ub",
+                "localize": true
+              }
+            },
+            {
+              "l0_modeM": {
+                "type": "label",
+                "anchor_from": "bottom_right",
+                "anchor_to": "bottom_right",
+                "offset": [
+                  -10,
+                  -44
+                ],
+                "layer": 3,
+                "color": [
+                  0.9,
+                  0.9,
+                  0.6
+                ],
+                "shadow": true,
+                "font_scale_factor": 0.8,
+                "text_alignment": "right",
+                "size": [
+                  "default",
+                  "default"
+                ],
+                "bindings": [
+                  {
+                    "binding_name": "#hud_title_text_string",
+                    "binding_name_override": "#t",
+                    "binding_type": "global"
+                  },
+                  {
+                    "binding_type": "view",
+                    "source_property_name": "((('%.15s' * #t) - ('%.14s' * #t)) = 'M')",
+                    "target_property_name": "#visible"
+                  }
+                ],
+                "text": "arsenal.ui.melee",
+                "localize": true
+              }
+            },
+            {
+              "l0_stR": {
+                "type": "label",
+                "anchor_from": "bottom_right",
+                "anchor_to": "bottom_right",
+                "offset": [
+                  -10,
+                  -102
+                ],
+                "layer": 3,
+                "color": [
+                  0.5,
+                  0.8,
+                  1.0
+                ],
+                "shadow": true,
+                "font_scale_factor": 0.8,
+                "text_alignment": "right",
+                "size": [
+                  "default",
+                  "default"
+                ],
+                "bindings": [
+                  {
+                    "binding_name": "#hud_title_text_string",
+                    "binding_name_override": "#t",
+                    "binding_type": "global"
+                  },
+                  {
+                    "binding_type": "view",
+                    "source_property_name": "((('%.16s' * #t) - ('%.15s' * #t)) = 'R')",
+                    "target_property_name": "#visible"
+                  }
+                ],
+                "text": "arsenal.ui.reloading",
+                "localize": true
+              }
+            },
+            {
+              "l0_stJ": {
+                "type": "label",
+                "anchor_from": "bottom_right",
+                "anchor_to": "bottom_right",
+                "offset": [
+                  -10,
+                  -102
+                ],
+                "layer": 3,
+                "color": [
+                  1,
+                  0.4,
+                  0.3
+                ],
+                "shadow": true,
+                "font_scale_factor": 0.8,
+                "text_alignment": "right",
+                "size": [
+                  "default",
+                  "default"
+                ],
+                "bindings": [
+                  {
+                    "binding_name": "#hud_title_text_string",
+                    "binding_name_override": "#t",
+                    "binding_type": "global"
+                  },
+                  {
+                    "binding_type": "view",
+                    "source_property_name": "((('%.16s' * #t) - ('%.15s' * #t)) = 'J')",
+                    "target_property_name": "#visible"
+                  }
+                ],
+                "text": "arsenal.ui.jammed",
+                "localize": true
+              }
+            },
+            {
+              "l0_stH": {
+                "type": "label",
+                "anchor_from": "bottom_right",
+                "anchor_to": "bottom_right",
+                "offset": [
+                  -10,
+                  -102
+                ],
+                "layer": 3,
+                "color": [
+                  1,
+                  0.5,
+                  0.2
+                ],
+                "shadow": true,
+                "font_scale_factor": 0.8,
+                "text_alignment": "right",
+                "size": [
+                  "default",
+                  "default"
+                ],
+                "bindings": [
+                  {
+                    "binding_name": "#hud_title_text_string",
+                    "binding_name_override": "#t",
+                    "binding_type": "global"
+                  },
+                  {
+                    "binding_type": "view",
+                    "source_property_name": "((('%.16s' * #t) - ('%.15s' * #t)) = 'H')",
+                    "target_property_name": "#visible"
+                  }
+                ],
+                "text": "arsenal.ui.overheated",
+                "localize": true
+              }
+            },
+            {
+              "l0_stL": {
+                "type": "label",
+                "anchor_from": "bottom_right",
+                "anchor_to": "bottom_right",
+                "offset": [
+                  -10,
+                  -102
+                ],
+                "layer": 3,
+                "color": [
+                  1,
+                  0.9,
+                  0.3
+                ],
+                "shadow": true,
+                "font_scale_factor": 0.8,
+                "text_alignment": "right",
+                "size": [
+                  "default",
+                  "default"
+                ],
+                "bindings": [
+                  {
+                    "binding_name": "#hud_title_text_string",
+                    "binding_name_override": "#t",
+                    "binding_type": "global"
+                  },
+                  {
+                    "binding_type": "view",
+                    "source_property_name": "((('%.16s' * #t) - ('%.15s' * #t)) = 'L')",
+                    "target_property_name": "#visible"
+                  }
+                ],
+                "text": "arsenal.ui.locking",
+                "localize": true
+              }
+            },
+            {
+              "l0_stK": {
+                "type": "label",
+                "anchor_from": "bottom_right",
+                "anchor_to": "bottom_right",
+                "offset": [
+                  -10,
+                  -102
+                ],
+                "layer": 3,
+                "color": [
+                  1,
+                  0.3,
+                  0.3
+                ],
+                "shadow": true,
+                "font_scale_factor": 0.8,
+                "text_alignment": "right",
+                "size": [
+                  "default",
+                  "default"
+                ],
+                "bindings": [
+                  {
+                    "binding_name": "#hud_title_text_string",
+                    "binding_name_override": "#t",
+                    "binding_type": "global"
+                  },
+                  {
+                    "binding_type": "view",
+                    "source_property_name": "((('%.16s' * #t) - ('%.15s' * #t)) = 'K')",
+                    "target_property_name": "#visible"
+                  }
+                ],
+                "text": "arsenal.ui.locked",
+                "localize": true
+              }
+            },
+            {
+              "l0_stB": {
+                "type": "label",
+                "anchor_from": "bottom_right",
+                "anchor_to": "bottom_right",
+                "offset": [
+                  -10,
+                  -102
+                ],
+                "layer": 3,
+                "color": [
+                  0.5,
+                  0.9,
+                  1.0
+                ],
+                "shadow": true,
+                "font_scale_factor": 0.8,
+                "text_alignment": "right",
+                "size": [
+                  "default",
+                  "default"
+                ],
+                "bindings": [
+                  {
+                    "binding_name": "#hud_title_text_string",
+                    "binding_name_override": "#t",
+                    "binding_type": "global"
+                  },
+                  {
+                    "binding_type": "view",
+                    "source_property_name": "((('%.16s' * #t) - ('%.15s' * #t)) = 'B')",
+                    "target_property_name": "#visible"
+                  }
+                ],
+                "text": "arsenal.ui.breath",
+                "localize": true
+              }
+            },
+            {
+              "l0_stE": {
+                "type": "label",
+                "anchor_from": "bottom_right",
+                "anchor_to": "bottom_right",
+                "offset": [
+                  -10,
+                  -102
+                ],
+                "layer": 3,
+                "color": [
+                  1,
+                  0.3,
+                  0.3
+                ],
+                "shadow": true,
+                "font_scale_factor": 0.8,
+                "text_alignment": "right",
+                "size": [
+                  "default",
+                  "default"
+                ],
+                "bindings": [
+                  {
+                    "binding_name": "#hud_title_text_string",
+                    "binding_name_override": "#t",
+                    "binding_type": "global"
+                  },
+                  {
+                    "binding_type": "view",
+                    "source_property_name": "((('%.16s' * #t) - ('%.15s' * #t)) = 'E')",
+                    "target_property_name": "#visible"
+                  }
+                ],
+                "text": "arsenal.ui.empty",
+                "localize": true
+              }
+            },
+            {
+              "l0_stP": {
+                "type": "label",
+                "anchor_from": "bottom_right",
+                "anchor_to": "bottom_right",
+                "offset": [
+                  -10,
+                  -102
+                ],
+                "layer": 3,
+                "color": [
+                  1,
+                  0.8,
+                  0.3
+                ],
+                "shadow": true,
+                "font_scale_factor": 0.8,
+                "text_alignment": "right",
+                "size": [
+                  "default",
+                  "default"
+                ],
+                "bindings": [
+                  {
+                    "binding_name": "#hud_title_text_string",
+                    "binding_name_override": "#t",
+                    "binding_type": "global"
+                  },
+                  {
+                    "binding_type": "view",
+                    "source_property_name": "((('%.16s' * #t) - ('%.15s' * #t)) = 'P')",
+                    "target_property_name": "#visible"
+                  }
+                ],
+                "text": "arsenal.ui.spawn_protect",
+                "localize": true
+              }
+            },
+            {
+              "l0_stX": {
+                "type": "label",
+                "anchor_from": "bottom_right",
+                "anchor_to": "bottom_right",
+                "offset": [
+                  -10,
+                  -102
+                ],
+                "layer": 3,
+                "color": [
+                  1,
+                  0.3,
+                  0.3
+                ],
+                "shadow": true,
+                "font_scale_factor": 0.8,
+                "text_alignment": "right",
+                "size": [
+                  "default",
+                  "default"
+                ],
+                "bindings": [
+                  {
+                    "binding_name": "#hud_title_text_string",
+                    "binding_name_override": "#t",
+                    "binding_type": "global"
+                  },
+                  {
+                    "binding_type": "view",
+                    "source_property_name": "((('%.16s' * #t) - ('%.15s' * #t)) = 'X')",
+                    "target_property_name": "#visible"
+                  }
+                ],
+                "text": "arsenal.ui.broken",
+                "localize": true
+              }
+            },
+            {
+              "l0_bar1": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/bar_1",
+                "size": [
+                  60,
+                  4
+                ],
+                "anchor_from": "bottom_right",
+                "anchor_to": "bottom_right",
+                "offset": [
+                  -10,
+                  -94
+                ],
+                "layer": 2,
+                "bindings": [
+                  {
+                    "binding_name": "#hud_title_text_string",
+                    "binding_name_override": "#t",
+                    "binding_type": "global"
+                  },
+                  {
+                    "binding_type": "view",
+                    "source_property_name": "((('%.17s' * #t) - ('%.16s' * #t)) = '1')",
+                    "target_property_name": "#visible"
+                  }
+                ]
+              }
+            },
+            {
+              "l0_bar2": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/bar_2",
+                "size": [
+                  60,
+                  4
+                ],
+                "anchor_from": "bottom_right",
+                "anchor_to": "bottom_right",
+                "offset": [
+                  -10,
+                  -94
+                ],
+                "layer": 2,
+                "bindings": [
+                  {
+                    "binding_name": "#hud_title_text_string",
+                    "binding_name_override": "#t",
+                    "binding_type": "global"
+                  },
+                  {
+                    "binding_type": "view",
+                    "source_property_name": "((('%.17s' * #t) - ('%.16s' * #t)) = '2')",
+                    "target_property_name": "#visible"
+                  }
+                ]
+              }
+            },
+            {
+              "l0_bar3": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/bar_3",
+                "size": [
+                  60,
+                  4
+                ],
+                "anchor_from": "bottom_right",
+                "anchor_to": "bottom_right",
+                "offset": [
+                  -10,
+                  -94
+                ],
+                "layer": 2,
+                "bindings": [
+                  {
+                    "binding_name": "#hud_title_text_string",
+                    "binding_name_override": "#t",
+                    "binding_type": "global"
+                  },
+                  {
+                    "binding_type": "view",
+                    "source_property_name": "((('%.17s' * #t) - ('%.16s' * #t)) = '3')",
+                    "target_property_name": "#visible"
+                  }
+                ]
+              }
+            },
+            {
+              "l0_bar4": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/bar_4",
+                "size": [
+                  60,
+                  4
+                ],
+                "anchor_from": "bottom_right",
+                "anchor_to": "bottom_right",
+                "offset": [
+                  -10,
+                  -94
+                ],
+                "layer": 2,
+                "bindings": [
+                  {
+                    "binding_name": "#hud_title_text_string",
+                    "binding_name_override": "#t",
+                    "binding_type": "global"
+                  },
+                  {
+                    "binding_type": "view",
+                    "source_property_name": "((('%.17s' * #t) - ('%.16s' * #t)) = '4')",
+                    "target_property_name": "#visible"
+                  }
+                ]
+              }
+            },
+            {
+              "l0_bar5": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/bar_5",
+                "size": [
+                  60,
+                  4
+                ],
+                "anchor_from": "bottom_right",
+                "anchor_to": "bottom_right",
+                "offset": [
+                  -10,
+                  -94
+                ],
+                "layer": 2,
+                "bindings": [
+                  {
+                    "binding_name": "#hud_title_text_string",
+                    "binding_name_override": "#t",
+                    "binding_type": "global"
+                  },
+                  {
+                    "binding_type": "view",
+                    "source_property_name": "((('%.17s' * #t) - ('%.16s' * #t)) = '5')",
+                    "target_property_name": "#visible"
+                  }
+                ]
+              }
+            },
+            {
+              "l0_bar6": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/bar_6",
+                "size": [
+                  60,
+                  4
+                ],
+                "anchor_from": "bottom_right",
+                "anchor_to": "bottom_right",
+                "offset": [
+                  -10,
+                  -94
+                ],
+                "layer": 2,
+                "bindings": [
+                  {
+                    "binding_name": "#hud_title_text_string",
+                    "binding_name_override": "#t",
+                    "binding_type": "global"
+                  },
+                  {
+                    "binding_type": "view",
+                    "source_property_name": "((('%.17s' * #t) - ('%.16s' * #t)) = '6')",
+                    "target_property_name": "#visible"
+                  }
+                ]
+              }
+            },
+            {
+              "l0_bar7": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/bar_7",
+                "size": [
+                  60,
+                  4
+                ],
+                "anchor_from": "bottom_right",
+                "anchor_to": "bottom_right",
+                "offset": [
+                  -10,
+                  -94
+                ],
+                "layer": 2,
+                "bindings": [
+                  {
+                    "binding_name": "#hud_title_text_string",
+                    "binding_name_override": "#t",
+                    "binding_type": "global"
+                  },
+                  {
+                    "binding_type": "view",
+                    "source_property_name": "((('%.17s' * #t) - ('%.16s' * #t)) = '7')",
+                    "target_property_name": "#visible"
+                  }
+                ]
+              }
+            },
+            {
+              "l0_bar8": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/bar_8",
+                "size": [
+                  60,
+                  4
+                ],
+                "anchor_from": "bottom_right",
+                "anchor_to": "bottom_right",
+                "offset": [
+                  -10,
+                  -94
+                ],
+                "layer": 2,
+                "bindings": [
+                  {
+                    "binding_name": "#hud_title_text_string",
+                    "binding_name_override": "#t",
+                    "binding_type": "global"
+                  },
+                  {
+                    "binding_type": "view",
+                    "source_property_name": "((('%.17s' * #t) - ('%.16s' * #t)) = '8')",
+                    "target_property_name": "#visible"
+                  }
+                ]
+              }
+            },
+            {
+              "l0_bar9": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/bar_9",
+                "size": [
+                  60,
+                  4
+                ],
+                "anchor_from": "bottom_right",
+                "anchor_to": "bottom_right",
+                "offset": [
+                  -10,
+                  -94
+                ],
+                "layer": 2,
+                "bindings": [
+                  {
+                    "binding_name": "#hud_title_text_string",
+                    "binding_name_override": "#t",
+                    "binding_type": "global"
+                  },
+                  {
+                    "binding_type": "view",
+                    "source_property_name": "((('%.17s' * #t) - ('%.16s' * #t)) = '9')",
+                    "target_property_name": "#visible"
+                  }
+                ]
+              }
+            },
+            {
+              "l0_pl1on": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/plate_on",
+                "size": [
+                  10,
+                  10
+                ],
+                "anchor_from": "bottom_right",
+                "anchor_to": "bottom_right",
+                "offset": [
+                  -88,
+                  -34
+                ],
+                "layer": 2,
+                "bindings": [
+                  {
+                    "binding_name": "#hud_title_text_string",
+                    "binding_name_override": "#t",
+                    "binding_type": "global"
+                  },
+                  {
+                    "binding_type": "view",
+                    "source_property_name": "(((('%.18s' * #t) - ('%.17s' * #t)) = '1') or ((('%.18s' * #t) - ('%.17s' * #t)) = '2') or ((('%.18s' * #t) - ('%.17s' * #t)) = '3') or ((('%.18s' * #t) - ('%.17s' * #t)) = '4'))",
+                    "target_property_name": "#visible"
+                  }
+                ]
+              }
+            },
+            {
+              "l0_pl1off": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/plate_off",
+                "size": [
+                  10,
+                  10
+                ],
+                "anchor_from": "bottom_right",
+                "anchor_to": "bottom_right",
+                "offset": [
+                  -88,
+                  -34
+                ],
+                "layer": 2,
+                "bindings": [
+                  {
+                    "binding_name": "#hud_title_text_string",
+                    "binding_name_override": "#t",
+                    "binding_type": "global"
+                  },
+                  {
+                    "binding_type": "view",
+                    "source_property_name": "(((('%.18s' * #t) - ('%.17s' * #t)) = '0'))",
+                    "target_property_name": "#visible"
+                  }
+                ]
+              }
+            },
+            {
+              "l0_pl2on": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/plate_on",
+                "size": [
+                  10,
+                  10
+                ],
+                "anchor_from": "bottom_right",
+                "anchor_to": "bottom_right",
+                "offset": [
+                  -76,
+                  -34
+                ],
+                "layer": 2,
+                "bindings": [
+                  {
+                    "binding_name": "#hud_title_text_string",
+                    "binding_name_override": "#t",
+                    "binding_type": "global"
+                  },
+                  {
+                    "binding_type": "view",
+                    "source_property_name": "(((('%.18s' * #t) - ('%.17s' * #t)) = '2') or ((('%.18s' * #t) - ('%.17s' * #t)) = '3') or ((('%.18s' * #t) - ('%.17s' * #t)) = '4'))",
+                    "target_property_name": "#visible"
+                  }
+                ]
+              }
+            },
+            {
+              "l0_pl2off": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/plate_off",
+                "size": [
+                  10,
+                  10
+                ],
+                "anchor_from": "bottom_right",
+                "anchor_to": "bottom_right",
+                "offset": [
+                  -76,
+                  -34
+                ],
+                "layer": 2,
+                "bindings": [
+                  {
+                    "binding_name": "#hud_title_text_string",
+                    "binding_name_override": "#t",
+                    "binding_type": "global"
+                  },
+                  {
+                    "binding_type": "view",
+                    "source_property_name": "(((('%.18s' * #t) - ('%.17s' * #t)) = '0') or ((('%.18s' * #t) - ('%.17s' * #t)) = '1'))",
+                    "target_property_name": "#visible"
+                  }
+                ]
+              }
+            },
+            {
+              "l0_pl3on": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/plate_on",
+                "size": [
+                  10,
+                  10
+                ],
+                "anchor_from": "bottom_right",
+                "anchor_to": "bottom_right",
+                "offset": [
+                  -64,
+                  -34
+                ],
+                "layer": 2,
+                "bindings": [
+                  {
+                    "binding_name": "#hud_title_text_string",
+                    "binding_name_override": "#t",
+                    "binding_type": "global"
+                  },
+                  {
+                    "binding_type": "view",
+                    "source_property_name": "(((('%.18s' * #t) - ('%.17s' * #t)) = '3') or ((('%.18s' * #t) - ('%.17s' * #t)) = '4'))",
+                    "target_property_name": "#visible"
+                  }
+                ]
+              }
+            },
+            {
+              "l0_pl3off": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/plate_off",
+                "size": [
+                  10,
+                  10
+                ],
+                "anchor_from": "bottom_right",
+                "anchor_to": "bottom_right",
+                "offset": [
+                  -64,
+                  -34
+                ],
+                "layer": 2,
+                "bindings": [
+                  {
+                    "binding_name": "#hud_title_text_string",
+                    "binding_name_override": "#t",
+                    "binding_type": "global"
+                  },
+                  {
+                    "binding_type": "view",
+                    "source_property_name": "(((('%.18s' * #t) - ('%.17s' * #t)) = '0') or ((('%.18s' * #t) - ('%.17s' * #t)) = '1') or ((('%.18s' * #t) - ('%.17s' * #t)) = '2'))",
+                    "target_property_name": "#visible"
+                  }
+                ]
+              }
+            },
+            {
+              "l0_pl4on": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/plate_on",
+                "size": [
+                  10,
+                  10
+                ],
+                "anchor_from": "bottom_right",
+                "anchor_to": "bottom_right",
+                "offset": [
+                  -52,
+                  -34
+                ],
+                "layer": 2,
+                "bindings": [
+                  {
+                    "binding_name": "#hud_title_text_string",
+                    "binding_name_override": "#t",
+                    "binding_type": "global"
+                  },
+                  {
+                    "binding_type": "view",
+                    "source_property_name": "(((('%.18s' * #t) - ('%.17s' * #t)) = '4'))",
+                    "target_property_name": "#visible"
+                  }
+                ]
+              }
+            },
+            {
+              "l0_pl4off": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/plate_off",
+                "size": [
+                  10,
+                  10
+                ],
+                "anchor_from": "bottom_right",
+                "anchor_to": "bottom_right",
+                "offset": [
+                  -52,
+                  -34
+                ],
+                "layer": 2,
+                "bindings": [
+                  {
+                    "binding_name": "#hud_title_text_string",
+                    "binding_name_override": "#t",
+                    "binding_type": "global"
+                  },
+                  {
+                    "binding_type": "view",
+                    "source_property_name": "(((('%.18s' * #t) - ('%.17s' * #t)) = '0') or ((('%.18s' * #t) - ('%.17s' * #t)) = '1') or ((('%.18s' * #t) - ('%.17s' * #t)) = '2') or ((('%.18s' * #t) - ('%.17s' * #t)) = '3'))",
+                    "target_property_name": "#visible"
+                  }
+                ]
+              }
+            },
+            {
+              "l0_hp": {
+                "type": "label",
+                "anchor_from": "bottom_right",
+                "anchor_to": "bottom_right",
+                "offset": [
+                  -10,
+                  -34
+                ],
+                "layer": 3,
+                "color": [
+                  1,
+                  0.5,
+                  0.5
+                ],
+                "shadow": true,
+                "font_scale_factor": 0.9,
+                "text_alignment": "right",
+                "size": [
+                  "default",
+                  "default"
+                ],
+                "bindings": [
+                  {
+                    "binding_name": "#hud_title_text_string",
+                    "binding_name_override": "#t",
+                    "binding_type": "global"
+                  },
+                  {
+                    "binding_type": "view",
+                    "source_property_name": "(' ' + (('%.20s' * #t) - ('%.18s' * #t)))",
+                    "target_property_name": "#text"
+                  }
+                ],
+                "text": "#text",
+                "localize": false
+              }
+            }
+          ],
+          "bindings": [
+            {
+              "binding_name": "#hud_title_text_string",
+              "binding_name_override": "#t",
+              "binding_type": "global"
+            },
+            {
+              "binding_type": "view",
+              "source_property_name": "((('%.54s' * #t) - ('%.53s' * #t)) = '0')",
+              "target_property_name": "#visible"
+            }
+          ]
+        }
+      },
+      {
+        "lay1": {
+          "type": "panel",
+          "size": [
+            "100%",
+            "100%"
+          ],
+          "anchor_from": "center",
+          "anchor_to": "center",
+          "layer": 1,
+          "controls": [
+            {
+              "l1_panel": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/panel",
+                "size": [
+                  104,
+                  48
+                ],
+                "anchor_from": "bottom_right",
+                "anchor_to": "bottom_right",
+                "offset": [
+                  -6,
+                  -114
+                ],
+                "layer": 1,
+                "bindings": []
+              }
+            },
+            {
+              "l1_ammo0": {
+                "type": "label",
+                "anchor_from": "bottom_right",
+                "anchor_to": "bottom_right",
+                "offset": [
+                  -56,
+                  -136
+                ],
+                "layer": 3,
+                "color": [
+                  1,
+                  1,
+                  1
+                ],
+                "shadow": true,
+                "font_scale_factor": 1.5,
+                "text_alignment": "right",
+                "size": [
+                  "default",
+                  "default"
+                ],
+                "bindings": [
+                  {
+                    "binding_name": "#hud_title_text_string",
+                    "binding_name_override": "#t",
+                    "binding_type": "global"
+                  },
+                  {
+                    "binding_type": "view",
+                    "source_property_name": "(((('%.53s' * #t) - ('%.52s' * #t)) = '0') and (not ((('%.10s' * #t) - ('%.7s' * #t)) = '---')))",
+                    "target_property_name": "#visible"
+                  },
+                  {
+                    "binding_type": "view",
+                    "source_property_name": "(('%.10s' * #t) - ('%.7s' * #t))",
+                    "target_property_name": "#text"
+                  }
+                ],
+                "text": "#text",
+                "localize": false
+              }
+            },
+            {
+              "l1_ammo1": {
+                "type": "label",
+                "anchor_from": "bottom_right",
+                "anchor_to": "bottom_right",
+                "offset": [
+                  -56,
+                  -136
+                ],
+                "layer": 3,
+                "color": [
+                  1,
+                  1,
+                  1
+                ],
+                "shadow": true,
+                "font_scale_factor": 2.0,
+                "text_alignment": "right",
+                "size": [
+                  "default",
+                  "default"
+                ],
+                "bindings": [
+                  {
+                    "binding_name": "#hud_title_text_string",
+                    "binding_name_override": "#t",
+                    "binding_type": "global"
+                  },
+                  {
+                    "binding_type": "view",
+                    "source_property_name": "(((('%.53s' * #t) - ('%.52s' * #t)) = '1') and (not ((('%.10s' * #t) - ('%.7s' * #t)) = '---')))",
+                    "target_property_name": "#visible"
+                  },
+                  {
+                    "binding_type": "view",
+                    "source_property_name": "(('%.10s' * #t) - ('%.7s' * #t))",
+                    "target_property_name": "#text"
+                  }
+                ],
+                "text": "#text",
+                "localize": false
+              }
+            },
+            {
+              "l1_ammo2": {
+                "type": "label",
+                "anchor_from": "bottom_right",
+                "anchor_to": "bottom_right",
+                "offset": [
+                  -56,
+                  -136
+                ],
+                "layer": 3,
+                "color": [
+                  1,
+                  1,
+                  1
+                ],
+                "shadow": true,
+                "font_scale_factor": 2.6,
+                "text_alignment": "right",
+                "size": [
+                  "default",
+                  "default"
+                ],
+                "bindings": [
+                  {
+                    "binding_name": "#hud_title_text_string",
+                    "binding_name_override": "#t",
+                    "binding_type": "global"
+                  },
+                  {
+                    "binding_type": "view",
+                    "source_property_name": "(((('%.53s' * #t) - ('%.52s' * #t)) = '2') and (not ((('%.10s' * #t) - ('%.7s' * #t)) = '---')))",
+                    "target_property_name": "#visible"
+                  },
+                  {
+                    "binding_type": "view",
+                    "source_property_name": "(('%.10s' * #t) - ('%.7s' * #t))",
+                    "target_property_name": "#text"
+                  }
+                ],
+                "text": "#text",
+                "localize": false
+              }
+            },
+            {
+              "l1_res": {
+                "type": "label",
+                "anchor_from": "bottom_right",
+                "anchor_to": "bottom_right",
+                "offset": [
+                  -10,
+                  -132
+                ],
+                "layer": 3,
+                "color": [
+                  0.75,
+                  0.75,
+                  0.78
+                ],
+                "shadow": true,
+                "font_scale_factor": 1.0,
+                "text_alignment": "right",
+                "size": [
+                  "default",
+                  "default"
+                ],
+                "bindings": [
+                  {
+                    "binding_name": "#hud_title_text_string",
+                    "binding_name_override": "#t",
+                    "binding_type": "global"
+                  },
+                  {
+                    "binding_type": "view",
+                    "source_property_name": "(not ((('%.10s' * #t) - ('%.7s' * #t)) = '---'))",
+                    "target_property_name": "#visible"
+                  },
+                  {
+                    "binding_type": "view",
+                    "source_property_name": "('/' + (('%.14s' * #t) - ('%.10s' * #t)))",
+                    "target_property_name": "#text"
+                  }
+                ],
+                "text": "#text",
+                "localize": false
+              }
+            },
+            {
+              "l1_modeS": {
+                "type": "label",
+                "anchor_from": "bottom_right",
+                "anchor_to": "bottom_right",
+                "offset": [
+                  -10,
+                  -120
+                ],
+                "layer": 3,
+                "color": [
+                  0.9,
+                  0.9,
+                  0.6
+                ],
+                "shadow": true,
+                "font_scale_factor": 0.8,
+                "text_alignment": "right",
+                "size": [
+                  "default",
+                  "default"
+                ],
+                "bindings": [
+                  {
+                    "binding_name": "#hud_title_text_string",
+                    "binding_name_override": "#t",
+                    "binding_type": "global"
+                  },
+                  {
+                    "binding_type": "view",
+                    "source_property_name": "((('%.15s' * #t) - ('%.14s' * #t)) = 'S')",
+                    "target_property_name": "#visible"
+                  }
+                ],
+                "text": "arsenal.mode.semi",
+                "localize": true
+              }
+            },
+            {
+              "l1_modeA": {
+                "type": "label",
+                "anchor_from": "bottom_right",
+                "anchor_to": "bottom_right",
+                "offset": [
+                  -10,
+                  -120
+                ],
+                "layer": 3,
+                "color": [
+                  0.9,
+                  0.9,
+                  0.6
+                ],
+                "shadow": true,
+                "font_scale_factor": 0.8,
+                "text_alignment": "right",
+                "size": [
+                  "default",
+                  "default"
+                ],
+                "bindings": [
+                  {
+                    "binding_name": "#hud_title_text_string",
+                    "binding_name_override": "#t",
+                    "binding_type": "global"
+                  },
+                  {
+                    "binding_type": "view",
+                    "source_property_name": "((('%.15s' * #t) - ('%.14s' * #t)) = 'A')",
+                    "target_property_name": "#visible"
+                  }
+                ],
+                "text": "arsenal.mode.auto",
+                "localize": true
+              }
+            },
+            {
+              "l1_modeB": {
+                "type": "label",
+                "anchor_from": "bottom_right",
+                "anchor_to": "bottom_right",
+                "offset": [
+                  -10,
+                  -120
+                ],
+                "layer": 3,
+                "color": [
+                  0.9,
+                  0.9,
+                  0.6
+                ],
+                "shadow": true,
+                "font_scale_factor": 0.8,
+                "text_alignment": "right",
+                "size": [
+                  "default",
+                  "default"
+                ],
+                "bindings": [
+                  {
+                    "binding_name": "#hud_title_text_string",
+                    "binding_name_override": "#t",
+                    "binding_type": "global"
+                  },
+                  {
+                    "binding_type": "view",
+                    "source_property_name": "((('%.15s' * #t) - ('%.14s' * #t)) = 'B')",
+                    "target_property_name": "#visible"
+                  }
+                ],
+                "text": "arsenal.mode.burst",
+                "localize": true
+              }
+            },
+            {
+              "l1_modeC": {
+                "type": "label",
+                "anchor_from": "bottom_right",
+                "anchor_to": "bottom_right",
+                "offset": [
+                  -10,
+                  -120
+                ],
+                "layer": 3,
+                "color": [
+                  0.9,
+                  0.9,
+                  0.6
+                ],
+                "shadow": true,
+                "font_scale_factor": 0.8,
+                "text_alignment": "right",
+                "size": [
+                  "default",
+                  "default"
+                ],
+                "bindings": [
+                  {
+                    "binding_name": "#hud_title_text_string",
+                    "binding_name_override": "#t",
+                    "binding_type": "global"
+                  },
+                  {
+                    "binding_type": "view",
+                    "source_property_name": "((('%.15s' * #t) - ('%.14s' * #t)) = 'C')",
+                    "target_property_name": "#visible"
+                  }
+                ],
+                "text": "arsenal.mode.charge",
+                "localize": true
+              }
+            },
+            {
+              "l1_modeD": {
+                "type": "label",
+                "anchor_from": "bottom_right",
+                "anchor_to": "bottom_right",
+                "offset": [
+                  -10,
+                  -120
+                ],
+                "layer": 3,
+                "color": [
+                  0.9,
+                  0.9,
+                  0.6
+                ],
+                "shadow": true,
+                "font_scale_factor": 0.8,
+                "text_alignment": "right",
+                "size": [
+                  "default",
+                  "default"
+                ],
+                "bindings": [
+                  {
+                    "binding_name": "#hud_title_text_string",
+                    "binding_name_override": "#t",
+                    "binding_type": "global"
+                  },
+                  {
+                    "binding_type": "view",
+                    "source_property_name": "((('%.15s' * #t) - ('%.14s' * #t)) = 'D')",
+                    "target_property_name": "#visible"
+                  }
+                ],
+                "text": "arsenal.mode.double",
+                "localize": true
+              }
+            },
+            {
+              "l1_modeU": {
+                "type": "label",
+                "anchor_from": "bottom_right",
+                "anchor_to": "bottom_right",
+                "offset": [
+                  -10,
+                  -120
+                ],
+                "layer": 3,
+                "color": [
+                  0.9,
+                  0.9,
+                  0.6
+                ],
+                "shadow": true,
+                "font_scale_factor": 0.8,
+                "text_alignment": "right",
+                "size": [
+                  "default",
+                  "default"
+                ],
+                "bindings": [
+                  {
+                    "binding_name": "#hud_title_text_string",
+                    "binding_name_override": "#t",
+                    "binding_type": "global"
+                  },
+                  {
+                    "binding_type": "view",
+                    "source_property_name": "((('%.15s' * #t) - ('%.14s' * #t)) = 'U')",
+                    "target_property_name": "#visible"
+                  }
+                ],
+                "text": "arsenal.mode.ub",
+                "localize": true
+              }
+            },
+            {
+              "l1_modeM": {
+                "type": "label",
+                "anchor_from": "bottom_right",
+                "anchor_to": "bottom_right",
+                "offset": [
+                  -10,
+                  -120
+                ],
+                "layer": 3,
+                "color": [
+                  0.9,
+                  0.9,
+                  0.6
+                ],
+                "shadow": true,
+                "font_scale_factor": 0.8,
+                "text_alignment": "right",
+                "size": [
+                  "default",
+                  "default"
+                ],
+                "bindings": [
+                  {
+                    "binding_name": "#hud_title_text_string",
+                    "binding_name_override": "#t",
+                    "binding_type": "global"
+                  },
+                  {
+                    "binding_type": "view",
+                    "source_property_name": "((('%.15s' * #t) - ('%.14s' * #t)) = 'M')",
+                    "target_property_name": "#visible"
+                  }
+                ],
+                "text": "arsenal.ui.melee",
+                "localize": true
+              }
+            },
+            {
+              "l1_stR": {
+                "type": "label",
+                "anchor_from": "bottom_right",
+                "anchor_to": "bottom_right",
+                "offset": [
+                  -10,
+                  -178
+                ],
+                "layer": 3,
+                "color": [
+                  0.5,
+                  0.8,
+                  1.0
+                ],
+                "shadow": true,
+                "font_scale_factor": 0.8,
+                "text_alignment": "right",
+                "size": [
+                  "default",
+                  "default"
+                ],
+                "bindings": [
+                  {
+                    "binding_name": "#hud_title_text_string",
+                    "binding_name_override": "#t",
+                    "binding_type": "global"
+                  },
+                  {
+                    "binding_type": "view",
+                    "source_property_name": "((('%.16s' * #t) - ('%.15s' * #t)) = 'R')",
+                    "target_property_name": "#visible"
+                  }
+                ],
+                "text": "arsenal.ui.reloading",
+                "localize": true
+              }
+            },
+            {
+              "l1_stJ": {
+                "type": "label",
+                "anchor_from": "bottom_right",
+                "anchor_to": "bottom_right",
+                "offset": [
+                  -10,
+                  -178
+                ],
+                "layer": 3,
+                "color": [
+                  1,
+                  0.4,
+                  0.3
+                ],
+                "shadow": true,
+                "font_scale_factor": 0.8,
+                "text_alignment": "right",
+                "size": [
+                  "default",
+                  "default"
+                ],
+                "bindings": [
+                  {
+                    "binding_name": "#hud_title_text_string",
+                    "binding_name_override": "#t",
+                    "binding_type": "global"
+                  },
+                  {
+                    "binding_type": "view",
+                    "source_property_name": "((('%.16s' * #t) - ('%.15s' * #t)) = 'J')",
+                    "target_property_name": "#visible"
+                  }
+                ],
+                "text": "arsenal.ui.jammed",
+                "localize": true
+              }
+            },
+            {
+              "l1_stH": {
+                "type": "label",
+                "anchor_from": "bottom_right",
+                "anchor_to": "bottom_right",
+                "offset": [
+                  -10,
+                  -178
+                ],
+                "layer": 3,
+                "color": [
+                  1,
+                  0.5,
+                  0.2
+                ],
+                "shadow": true,
+                "font_scale_factor": 0.8,
+                "text_alignment": "right",
+                "size": [
+                  "default",
+                  "default"
+                ],
+                "bindings": [
+                  {
+                    "binding_name": "#hud_title_text_string",
+                    "binding_name_override": "#t",
+                    "binding_type": "global"
+                  },
+                  {
+                    "binding_type": "view",
+                    "source_property_name": "((('%.16s' * #t) - ('%.15s' * #t)) = 'H')",
+                    "target_property_name": "#visible"
+                  }
+                ],
+                "text": "arsenal.ui.overheated",
+                "localize": true
+              }
+            },
+            {
+              "l1_stL": {
+                "type": "label",
+                "anchor_from": "bottom_right",
+                "anchor_to": "bottom_right",
+                "offset": [
+                  -10,
+                  -178
+                ],
+                "layer": 3,
+                "color": [
+                  1,
+                  0.9,
+                  0.3
+                ],
+                "shadow": true,
+                "font_scale_factor": 0.8,
+                "text_alignment": "right",
+                "size": [
+                  "default",
+                  "default"
+                ],
+                "bindings": [
+                  {
+                    "binding_name": "#hud_title_text_string",
+                    "binding_name_override": "#t",
+                    "binding_type": "global"
+                  },
+                  {
+                    "binding_type": "view",
+                    "source_property_name": "((('%.16s' * #t) - ('%.15s' * #t)) = 'L')",
+                    "target_property_name": "#visible"
+                  }
+                ],
+                "text": "arsenal.ui.locking",
+                "localize": true
+              }
+            },
+            {
+              "l1_stK": {
+                "type": "label",
+                "anchor_from": "bottom_right",
+                "anchor_to": "bottom_right",
+                "offset": [
+                  -10,
+                  -178
+                ],
+                "layer": 3,
+                "color": [
+                  1,
+                  0.3,
+                  0.3
+                ],
+                "shadow": true,
+                "font_scale_factor": 0.8,
+                "text_alignment": "right",
+                "size": [
+                  "default",
+                  "default"
+                ],
+                "bindings": [
+                  {
+                    "binding_name": "#hud_title_text_string",
+                    "binding_name_override": "#t",
+                    "binding_type": "global"
+                  },
+                  {
+                    "binding_type": "view",
+                    "source_property_name": "((('%.16s' * #t) - ('%.15s' * #t)) = 'K')",
+                    "target_property_name": "#visible"
+                  }
+                ],
+                "text": "arsenal.ui.locked",
+                "localize": true
+              }
+            },
+            {
+              "l1_stB": {
+                "type": "label",
+                "anchor_from": "bottom_right",
+                "anchor_to": "bottom_right",
+                "offset": [
+                  -10,
+                  -178
+                ],
+                "layer": 3,
+                "color": [
+                  0.5,
+                  0.9,
+                  1.0
+                ],
+                "shadow": true,
+                "font_scale_factor": 0.8,
+                "text_alignment": "right",
+                "size": [
+                  "default",
+                  "default"
+                ],
+                "bindings": [
+                  {
+                    "binding_name": "#hud_title_text_string",
+                    "binding_name_override": "#t",
+                    "binding_type": "global"
+                  },
+                  {
+                    "binding_type": "view",
+                    "source_property_name": "((('%.16s' * #t) - ('%.15s' * #t)) = 'B')",
+                    "target_property_name": "#visible"
+                  }
+                ],
+                "text": "arsenal.ui.breath",
+                "localize": true
+              }
+            },
+            {
+              "l1_stE": {
+                "type": "label",
+                "anchor_from": "bottom_right",
+                "anchor_to": "bottom_right",
+                "offset": [
+                  -10,
+                  -178
+                ],
+                "layer": 3,
+                "color": [
+                  1,
+                  0.3,
+                  0.3
+                ],
+                "shadow": true,
+                "font_scale_factor": 0.8,
+                "text_alignment": "right",
+                "size": [
+                  "default",
+                  "default"
+                ],
+                "bindings": [
+                  {
+                    "binding_name": "#hud_title_text_string",
+                    "binding_name_override": "#t",
+                    "binding_type": "global"
+                  },
+                  {
+                    "binding_type": "view",
+                    "source_property_name": "((('%.16s' * #t) - ('%.15s' * #t)) = 'E')",
+                    "target_property_name": "#visible"
+                  }
+                ],
+                "text": "arsenal.ui.empty",
+                "localize": true
+              }
+            },
+            {
+              "l1_stP": {
+                "type": "label",
+                "anchor_from": "bottom_right",
+                "anchor_to": "bottom_right",
+                "offset": [
+                  -10,
+                  -178
+                ],
+                "layer": 3,
+                "color": [
+                  1,
+                  0.8,
+                  0.3
+                ],
+                "shadow": true,
+                "font_scale_factor": 0.8,
+                "text_alignment": "right",
+                "size": [
+                  "default",
+                  "default"
+                ],
+                "bindings": [
+                  {
+                    "binding_name": "#hud_title_text_string",
+                    "binding_name_override": "#t",
+                    "binding_type": "global"
+                  },
+                  {
+                    "binding_type": "view",
+                    "source_property_name": "((('%.16s' * #t) - ('%.15s' * #t)) = 'P')",
+                    "target_property_name": "#visible"
+                  }
+                ],
+                "text": "arsenal.ui.spawn_protect",
+                "localize": true
+              }
+            },
+            {
+              "l1_stX": {
+                "type": "label",
+                "anchor_from": "bottom_right",
+                "anchor_to": "bottom_right",
+                "offset": [
+                  -10,
+                  -178
+                ],
+                "layer": 3,
+                "color": [
+                  1,
+                  0.3,
+                  0.3
+                ],
+                "shadow": true,
+                "font_scale_factor": 0.8,
+                "text_alignment": "right",
+                "size": [
+                  "default",
+                  "default"
+                ],
+                "bindings": [
+                  {
+                    "binding_name": "#hud_title_text_string",
+                    "binding_name_override": "#t",
+                    "binding_type": "global"
+                  },
+                  {
+                    "binding_type": "view",
+                    "source_property_name": "((('%.16s' * #t) - ('%.15s' * #t)) = 'X')",
+                    "target_property_name": "#visible"
+                  }
+                ],
+                "text": "arsenal.ui.broken",
+                "localize": true
+              }
+            },
+            {
+              "l1_bar1": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/bar_1",
+                "size": [
+                  60,
+                  4
+                ],
+                "anchor_from": "bottom_right",
+                "anchor_to": "bottom_right",
+                "offset": [
+                  -10,
+                  -170
+                ],
+                "layer": 2,
+                "bindings": [
+                  {
+                    "binding_name": "#hud_title_text_string",
+                    "binding_name_override": "#t",
+                    "binding_type": "global"
+                  },
+                  {
+                    "binding_type": "view",
+                    "source_property_name": "((('%.17s' * #t) - ('%.16s' * #t)) = '1')",
+                    "target_property_name": "#visible"
+                  }
+                ]
+              }
+            },
+            {
+              "l1_bar2": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/bar_2",
+                "size": [
+                  60,
+                  4
+                ],
+                "anchor_from": "bottom_right",
+                "anchor_to": "bottom_right",
+                "offset": [
+                  -10,
+                  -170
+                ],
+                "layer": 2,
+                "bindings": [
+                  {
+                    "binding_name": "#hud_title_text_string",
+                    "binding_name_override": "#t",
+                    "binding_type": "global"
+                  },
+                  {
+                    "binding_type": "view",
+                    "source_property_name": "((('%.17s' * #t) - ('%.16s' * #t)) = '2')",
+                    "target_property_name": "#visible"
+                  }
+                ]
+              }
+            },
+            {
+              "l1_bar3": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/bar_3",
+                "size": [
+                  60,
+                  4
+                ],
+                "anchor_from": "bottom_right",
+                "anchor_to": "bottom_right",
+                "offset": [
+                  -10,
+                  -170
+                ],
+                "layer": 2,
+                "bindings": [
+                  {
+                    "binding_name": "#hud_title_text_string",
+                    "binding_name_override": "#t",
+                    "binding_type": "global"
+                  },
+                  {
+                    "binding_type": "view",
+                    "source_property_name": "((('%.17s' * #t) - ('%.16s' * #t)) = '3')",
+                    "target_property_name": "#visible"
+                  }
+                ]
+              }
+            },
+            {
+              "l1_bar4": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/bar_4",
+                "size": [
+                  60,
+                  4
+                ],
+                "anchor_from": "bottom_right",
+                "anchor_to": "bottom_right",
+                "offset": [
+                  -10,
+                  -170
+                ],
+                "layer": 2,
+                "bindings": [
+                  {
+                    "binding_name": "#hud_title_text_string",
+                    "binding_name_override": "#t",
+                    "binding_type": "global"
+                  },
+                  {
+                    "binding_type": "view",
+                    "source_property_name": "((('%.17s' * #t) - ('%.16s' * #t)) = '4')",
+                    "target_property_name": "#visible"
+                  }
+                ]
+              }
+            },
+            {
+              "l1_bar5": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/bar_5",
+                "size": [
+                  60,
+                  4
+                ],
+                "anchor_from": "bottom_right",
+                "anchor_to": "bottom_right",
+                "offset": [
+                  -10,
+                  -170
+                ],
+                "layer": 2,
+                "bindings": [
+                  {
+                    "binding_name": "#hud_title_text_string",
+                    "binding_name_override": "#t",
+                    "binding_type": "global"
+                  },
+                  {
+                    "binding_type": "view",
+                    "source_property_name": "((('%.17s' * #t) - ('%.16s' * #t)) = '5')",
+                    "target_property_name": "#visible"
+                  }
+                ]
+              }
+            },
+            {
+              "l1_bar6": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/bar_6",
+                "size": [
+                  60,
+                  4
+                ],
+                "anchor_from": "bottom_right",
+                "anchor_to": "bottom_right",
+                "offset": [
+                  -10,
+                  -170
+                ],
+                "layer": 2,
+                "bindings": [
+                  {
+                    "binding_name": "#hud_title_text_string",
+                    "binding_name_override": "#t",
+                    "binding_type": "global"
+                  },
+                  {
+                    "binding_type": "view",
+                    "source_property_name": "((('%.17s' * #t) - ('%.16s' * #t)) = '6')",
+                    "target_property_name": "#visible"
+                  }
+                ]
+              }
+            },
+            {
+              "l1_bar7": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/bar_7",
+                "size": [
+                  60,
+                  4
+                ],
+                "anchor_from": "bottom_right",
+                "anchor_to": "bottom_right",
+                "offset": [
+                  -10,
+                  -170
+                ],
+                "layer": 2,
+                "bindings": [
+                  {
+                    "binding_name": "#hud_title_text_string",
+                    "binding_name_override": "#t",
+                    "binding_type": "global"
+                  },
+                  {
+                    "binding_type": "view",
+                    "source_property_name": "((('%.17s' * #t) - ('%.16s' * #t)) = '7')",
+                    "target_property_name": "#visible"
+                  }
+                ]
+              }
+            },
+            {
+              "l1_bar8": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/bar_8",
+                "size": [
+                  60,
+                  4
+                ],
+                "anchor_from": "bottom_right",
+                "anchor_to": "bottom_right",
+                "offset": [
+                  -10,
+                  -170
+                ],
+                "layer": 2,
+                "bindings": [
+                  {
+                    "binding_name": "#hud_title_text_string",
+                    "binding_name_override": "#t",
+                    "binding_type": "global"
+                  },
+                  {
+                    "binding_type": "view",
+                    "source_property_name": "((('%.17s' * #t) - ('%.16s' * #t)) = '8')",
+                    "target_property_name": "#visible"
+                  }
+                ]
+              }
+            },
+            {
+              "l1_bar9": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/bar_9",
+                "size": [
+                  60,
+                  4
+                ],
+                "anchor_from": "bottom_right",
+                "anchor_to": "bottom_right",
+                "offset": [
+                  -10,
+                  -170
+                ],
+                "layer": 2,
+                "bindings": [
+                  {
+                    "binding_name": "#hud_title_text_string",
+                    "binding_name_override": "#t",
+                    "binding_type": "global"
+                  },
+                  {
+                    "binding_type": "view",
+                    "source_property_name": "((('%.17s' * #t) - ('%.16s' * #t)) = '9')",
+                    "target_property_name": "#visible"
+                  }
+                ]
+              }
+            },
+            {
+              "l1_pl1on": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/plate_on",
+                "size": [
+                  10,
+                  10
+                ],
+                "anchor_from": "bottom_right",
+                "anchor_to": "bottom_right",
+                "offset": [
+                  -88,
+                  -110
+                ],
+                "layer": 2,
+                "bindings": [
+                  {
+                    "binding_name": "#hud_title_text_string",
+                    "binding_name_override": "#t",
+                    "binding_type": "global"
+                  },
+                  {
+                    "binding_type": "view",
+                    "source_property_name": "(((('%.18s' * #t) - ('%.17s' * #t)) = '1') or ((('%.18s' * #t) - ('%.17s' * #t)) = '2') or ((('%.18s' * #t) - ('%.17s' * #t)) = '3') or ((('%.18s' * #t) - ('%.17s' * #t)) = '4'))",
+                    "target_property_name": "#visible"
+                  }
+                ]
+              }
+            },
+            {
+              "l1_pl1off": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/plate_off",
+                "size": [
+                  10,
+                  10
+                ],
+                "anchor_from": "bottom_right",
+                "anchor_to": "bottom_right",
+                "offset": [
+                  -88,
+                  -110
+                ],
+                "layer": 2,
+                "bindings": [
+                  {
+                    "binding_name": "#hud_title_text_string",
+                    "binding_name_override": "#t",
+                    "binding_type": "global"
+                  },
+                  {
+                    "binding_type": "view",
+                    "source_property_name": "(((('%.18s' * #t) - ('%.17s' * #t)) = '0'))",
+                    "target_property_name": "#visible"
+                  }
+                ]
+              }
+            },
+            {
+              "l1_pl2on": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/plate_on",
+                "size": [
+                  10,
+                  10
+                ],
+                "anchor_from": "bottom_right",
+                "anchor_to": "bottom_right",
+                "offset": [
+                  -76,
+                  -110
+                ],
+                "layer": 2,
+                "bindings": [
+                  {
+                    "binding_name": "#hud_title_text_string",
+                    "binding_name_override": "#t",
+                    "binding_type": "global"
+                  },
+                  {
+                    "binding_type": "view",
+                    "source_property_name": "(((('%.18s' * #t) - ('%.17s' * #t)) = '2') or ((('%.18s' * #t) - ('%.17s' * #t)) = '3') or ((('%.18s' * #t) - ('%.17s' * #t)) = '4'))",
+                    "target_property_name": "#visible"
+                  }
+                ]
+              }
+            },
+            {
+              "l1_pl2off": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/plate_off",
+                "size": [
+                  10,
+                  10
+                ],
+                "anchor_from": "bottom_right",
+                "anchor_to": "bottom_right",
+                "offset": [
+                  -76,
+                  -110
+                ],
+                "layer": 2,
+                "bindings": [
+                  {
+                    "binding_name": "#hud_title_text_string",
+                    "binding_name_override": "#t",
+                    "binding_type": "global"
+                  },
+                  {
+                    "binding_type": "view",
+                    "source_property_name": "(((('%.18s' * #t) - ('%.17s' * #t)) = '0') or ((('%.18s' * #t) - ('%.17s' * #t)) = '1'))",
+                    "target_property_name": "#visible"
+                  }
+                ]
+              }
+            },
+            {
+              "l1_pl3on": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/plate_on",
+                "size": [
+                  10,
+                  10
+                ],
+                "anchor_from": "bottom_right",
+                "anchor_to": "bottom_right",
+                "offset": [
+                  -64,
+                  -110
+                ],
+                "layer": 2,
+                "bindings": [
+                  {
+                    "binding_name": "#hud_title_text_string",
+                    "binding_name_override": "#t",
+                    "binding_type": "global"
+                  },
+                  {
+                    "binding_type": "view",
+                    "source_property_name": "(((('%.18s' * #t) - ('%.17s' * #t)) = '3') or ((('%.18s' * #t) - ('%.17s' * #t)) = '4'))",
+                    "target_property_name": "#visible"
+                  }
+                ]
+              }
+            },
+            {
+              "l1_pl3off": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/plate_off",
+                "size": [
+                  10,
+                  10
+                ],
+                "anchor_from": "bottom_right",
+                "anchor_to": "bottom_right",
+                "offset": [
+                  -64,
+                  -110
+                ],
+                "layer": 2,
+                "bindings": [
+                  {
+                    "binding_name": "#hud_title_text_string",
+                    "binding_name_override": "#t",
+                    "binding_type": "global"
+                  },
+                  {
+                    "binding_type": "view",
+                    "source_property_name": "(((('%.18s' * #t) - ('%.17s' * #t)) = '0') or ((('%.18s' * #t) - ('%.17s' * #t)) = '1') or ((('%.18s' * #t) - ('%.17s' * #t)) = '2'))",
+                    "target_property_name": "#visible"
+                  }
+                ]
+              }
+            },
+            {
+              "l1_pl4on": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/plate_on",
+                "size": [
+                  10,
+                  10
+                ],
+                "anchor_from": "bottom_right",
+                "anchor_to": "bottom_right",
+                "offset": [
+                  -52,
+                  -110
+                ],
+                "layer": 2,
+                "bindings": [
+                  {
+                    "binding_name": "#hud_title_text_string",
+                    "binding_name_override": "#t",
+                    "binding_type": "global"
+                  },
+                  {
+                    "binding_type": "view",
+                    "source_property_name": "(((('%.18s' * #t) - ('%.17s' * #t)) = '4'))",
+                    "target_property_name": "#visible"
+                  }
+                ]
+              }
+            },
+            {
+              "l1_pl4off": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/plate_off",
+                "size": [
+                  10,
+                  10
+                ],
+                "anchor_from": "bottom_right",
+                "anchor_to": "bottom_right",
+                "offset": [
+                  -52,
+                  -110
+                ],
+                "layer": 2,
+                "bindings": [
+                  {
+                    "binding_name": "#hud_title_text_string",
+                    "binding_name_override": "#t",
+                    "binding_type": "global"
+                  },
+                  {
+                    "binding_type": "view",
+                    "source_property_name": "(((('%.18s' * #t) - ('%.17s' * #t)) = '0') or ((('%.18s' * #t) - ('%.17s' * #t)) = '1') or ((('%.18s' * #t) - ('%.17s' * #t)) = '2') or ((('%.18s' * #t) - ('%.17s' * #t)) = '3'))",
+                    "target_property_name": "#visible"
+                  }
+                ]
+              }
+            },
+            {
+              "l1_hp": {
+                "type": "label",
+                "anchor_from": "bottom_right",
+                "anchor_to": "bottom_right",
+                "offset": [
+                  -10,
+                  -110
+                ],
+                "layer": 3,
+                "color": [
+                  1,
+                  0.5,
+                  0.5
+                ],
+                "shadow": true,
+                "font_scale_factor": 0.9,
+                "text_alignment": "right",
+                "size": [
+                  "default",
+                  "default"
+                ],
+                "bindings": [
+                  {
+                    "binding_name": "#hud_title_text_string",
+                    "binding_name_override": "#t",
+                    "binding_type": "global"
+                  },
+                  {
+                    "binding_type": "view",
+                    "source_property_name": "(' ' + (('%.20s' * #t) - ('%.18s' * #t)))",
+                    "target_property_name": "#text"
+                  }
+                ],
+                "text": "#text",
+                "localize": false
+              }
+            }
+          ],
+          "bindings": [
+            {
+              "binding_name": "#hud_title_text_string",
+              "binding_name_override": "#t",
+              "binding_type": "global"
+            },
+            {
+              "binding_type": "view",
+              "source_property_name": "((('%.54s' * #t) - ('%.53s' * #t)) = '1')",
+              "target_property_name": "#visible"
+            }
+          ]
+        }
+      },
+      {
+        "lay2": {
+          "type": "panel",
+          "size": [
+            "100%",
+            "100%"
+          ],
+          "anchor_from": "center",
+          "anchor_to": "center",
+          "layer": 1,
+          "controls": [
+            {
+              "l2_panel": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/panel",
+                "size": [
+                  104,
+                  48
+                ],
+                "anchor_from": "bottom_left",
+                "anchor_to": "bottom_left",
+                "offset": [
+                  6,
+                  -56
+                ],
+                "layer": 1,
+                "bindings": []
+              }
+            },
+            {
+              "l2_ammo0": {
+                "type": "label",
+                "anchor_from": "bottom_left",
+                "anchor_to": "bottom_left",
+                "offset": [
+                  56,
+                  -78
+                ],
+                "layer": 3,
+                "color": [
+                  1,
+                  1,
+                  1
+                ],
+                "shadow": true,
+                "font_scale_factor": 1.5,
+                "text_alignment": "left",
+                "size": [
+                  "default",
+                  "default"
+                ],
+                "bindings": [
+                  {
+                    "binding_name": "#hud_title_text_string",
+                    "binding_name_override": "#t",
+                    "binding_type": "global"
+                  },
+                  {
+                    "binding_type": "view",
+                    "source_property_name": "(((('%.53s' * #t) - ('%.52s' * #t)) = '0') and (not ((('%.10s' * #t) - ('%.7s' * #t)) = '---')))",
+                    "target_property_name": "#visible"
+                  },
+                  {
+                    "binding_type": "view",
+                    "source_property_name": "(('%.10s' * #t) - ('%.7s' * #t))",
+                    "target_property_name": "#text"
+                  }
+                ],
+                "text": "#text",
+                "localize": false
+              }
+            },
+            {
+              "l2_ammo1": {
+                "type": "label",
+                "anchor_from": "bottom_left",
+                "anchor_to": "bottom_left",
+                "offset": [
+                  56,
+                  -78
+                ],
+                "layer": 3,
+                "color": [
+                  1,
+                  1,
+                  1
+                ],
+                "shadow": true,
+                "font_scale_factor": 2.0,
+                "text_alignment": "left",
+                "size": [
+                  "default",
+                  "default"
+                ],
+                "bindings": [
+                  {
+                    "binding_name": "#hud_title_text_string",
+                    "binding_name_override": "#t",
+                    "binding_type": "global"
+                  },
+                  {
+                    "binding_type": "view",
+                    "source_property_name": "(((('%.53s' * #t) - ('%.52s' * #t)) = '1') and (not ((('%.10s' * #t) - ('%.7s' * #t)) = '---')))",
+                    "target_property_name": "#visible"
+                  },
+                  {
+                    "binding_type": "view",
+                    "source_property_name": "(('%.10s' * #t) - ('%.7s' * #t))",
+                    "target_property_name": "#text"
+                  }
+                ],
+                "text": "#text",
+                "localize": false
+              }
+            },
+            {
+              "l2_ammo2": {
+                "type": "label",
+                "anchor_from": "bottom_left",
+                "anchor_to": "bottom_left",
+                "offset": [
+                  56,
+                  -78
+                ],
+                "layer": 3,
+                "color": [
+                  1,
+                  1,
+                  1
+                ],
+                "shadow": true,
+                "font_scale_factor": 2.6,
+                "text_alignment": "left",
+                "size": [
+                  "default",
+                  "default"
+                ],
+                "bindings": [
+                  {
+                    "binding_name": "#hud_title_text_string",
+                    "binding_name_override": "#t",
+                    "binding_type": "global"
+                  },
+                  {
+                    "binding_type": "view",
+                    "source_property_name": "(((('%.53s' * #t) - ('%.52s' * #t)) = '2') and (not ((('%.10s' * #t) - ('%.7s' * #t)) = '---')))",
+                    "target_property_name": "#visible"
+                  },
+                  {
+                    "binding_type": "view",
+                    "source_property_name": "(('%.10s' * #t) - ('%.7s' * #t))",
+                    "target_property_name": "#text"
+                  }
+                ],
+                "text": "#text",
+                "localize": false
+              }
+            },
+            {
+              "l2_res": {
+                "type": "label",
+                "anchor_from": "bottom_left",
+                "anchor_to": "bottom_left",
+                "offset": [
+                  10,
+                  -74
+                ],
+                "layer": 3,
+                "color": [
+                  0.75,
+                  0.75,
+                  0.78
+                ],
+                "shadow": true,
+                "font_scale_factor": 1.0,
+                "text_alignment": "left",
+                "size": [
+                  "default",
+                  "default"
+                ],
+                "bindings": [
+                  {
+                    "binding_name": "#hud_title_text_string",
+                    "binding_name_override": "#t",
+                    "binding_type": "global"
+                  },
+                  {
+                    "binding_type": "view",
+                    "source_property_name": "(not ((('%.10s' * #t) - ('%.7s' * #t)) = '---'))",
+                    "target_property_name": "#visible"
+                  },
+                  {
+                    "binding_type": "view",
+                    "source_property_name": "('/' + (('%.14s' * #t) - ('%.10s' * #t)))",
+                    "target_property_name": "#text"
+                  }
+                ],
+                "text": "#text",
+                "localize": false
+              }
+            },
+            {
+              "l2_modeS": {
+                "type": "label",
+                "anchor_from": "bottom_left",
+                "anchor_to": "bottom_left",
+                "offset": [
+                  10,
+                  -62
+                ],
+                "layer": 3,
+                "color": [
+                  0.9,
+                  0.9,
+                  0.6
+                ],
+                "shadow": true,
+                "font_scale_factor": 0.8,
+                "text_alignment": "left",
+                "size": [
+                  "default",
+                  "default"
+                ],
+                "bindings": [
+                  {
+                    "binding_name": "#hud_title_text_string",
+                    "binding_name_override": "#t",
+                    "binding_type": "global"
+                  },
+                  {
+                    "binding_type": "view",
+                    "source_property_name": "((('%.15s' * #t) - ('%.14s' * #t)) = 'S')",
+                    "target_property_name": "#visible"
+                  }
+                ],
+                "text": "arsenal.mode.semi",
+                "localize": true
+              }
+            },
+            {
+              "l2_modeA": {
+                "type": "label",
+                "anchor_from": "bottom_left",
+                "anchor_to": "bottom_left",
+                "offset": [
+                  10,
+                  -62
+                ],
+                "layer": 3,
+                "color": [
+                  0.9,
+                  0.9,
+                  0.6
+                ],
+                "shadow": true,
+                "font_scale_factor": 0.8,
+                "text_alignment": "left",
+                "size": [
+                  "default",
+                  "default"
+                ],
+                "bindings": [
+                  {
+                    "binding_name": "#hud_title_text_string",
+                    "binding_name_override": "#t",
+                    "binding_type": "global"
+                  },
+                  {
+                    "binding_type": "view",
+                    "source_property_name": "((('%.15s' * #t) - ('%.14s' * #t)) = 'A')",
+                    "target_property_name": "#visible"
+                  }
+                ],
+                "text": "arsenal.mode.auto",
+                "localize": true
+              }
+            },
+            {
+              "l2_modeB": {
+                "type": "label",
+                "anchor_from": "bottom_left",
+                "anchor_to": "bottom_left",
+                "offset": [
+                  10,
+                  -62
+                ],
+                "layer": 3,
+                "color": [
+                  0.9,
+                  0.9,
+                  0.6
+                ],
+                "shadow": true,
+                "font_scale_factor": 0.8,
+                "text_alignment": "left",
+                "size": [
+                  "default",
+                  "default"
+                ],
+                "bindings": [
+                  {
+                    "binding_name": "#hud_title_text_string",
+                    "binding_name_override": "#t",
+                    "binding_type": "global"
+                  },
+                  {
+                    "binding_type": "view",
+                    "source_property_name": "((('%.15s' * #t) - ('%.14s' * #t)) = 'B')",
+                    "target_property_name": "#visible"
+                  }
+                ],
+                "text": "arsenal.mode.burst",
+                "localize": true
+              }
+            },
+            {
+              "l2_modeC": {
+                "type": "label",
+                "anchor_from": "bottom_left",
+                "anchor_to": "bottom_left",
+                "offset": [
+                  10,
+                  -62
+                ],
+                "layer": 3,
+                "color": [
+                  0.9,
+                  0.9,
+                  0.6
+                ],
+                "shadow": true,
+                "font_scale_factor": 0.8,
+                "text_alignment": "left",
+                "size": [
+                  "default",
+                  "default"
+                ],
+                "bindings": [
+                  {
+                    "binding_name": "#hud_title_text_string",
+                    "binding_name_override": "#t",
+                    "binding_type": "global"
+                  },
+                  {
+                    "binding_type": "view",
+                    "source_property_name": "((('%.15s' * #t) - ('%.14s' * #t)) = 'C')",
+                    "target_property_name": "#visible"
+                  }
+                ],
+                "text": "arsenal.mode.charge",
+                "localize": true
+              }
+            },
+            {
+              "l2_modeD": {
+                "type": "label",
+                "anchor_from": "bottom_left",
+                "anchor_to": "bottom_left",
+                "offset": [
+                  10,
+                  -62
+                ],
+                "layer": 3,
+                "color": [
+                  0.9,
+                  0.9,
+                  0.6
+                ],
+                "shadow": true,
+                "font_scale_factor": 0.8,
+                "text_alignment": "left",
+                "size": [
+                  "default",
+                  "default"
+                ],
+                "bindings": [
+                  {
+                    "binding_name": "#hud_title_text_string",
+                    "binding_name_override": "#t",
+                    "binding_type": "global"
+                  },
+                  {
+                    "binding_type": "view",
+                    "source_property_name": "((('%.15s' * #t) - ('%.14s' * #t)) = 'D')",
+                    "target_property_name": "#visible"
+                  }
+                ],
+                "text": "arsenal.mode.double",
+                "localize": true
+              }
+            },
+            {
+              "l2_modeU": {
+                "type": "label",
+                "anchor_from": "bottom_left",
+                "anchor_to": "bottom_left",
+                "offset": [
+                  10,
+                  -62
+                ],
+                "layer": 3,
+                "color": [
+                  0.9,
+                  0.9,
+                  0.6
+                ],
+                "shadow": true,
+                "font_scale_factor": 0.8,
+                "text_alignment": "left",
+                "size": [
+                  "default",
+                  "default"
+                ],
+                "bindings": [
+                  {
+                    "binding_name": "#hud_title_text_string",
+                    "binding_name_override": "#t",
+                    "binding_type": "global"
+                  },
+                  {
+                    "binding_type": "view",
+                    "source_property_name": "((('%.15s' * #t) - ('%.14s' * #t)) = 'U')",
+                    "target_property_name": "#visible"
+                  }
+                ],
+                "text": "arsenal.mode.ub",
+                "localize": true
+              }
+            },
+            {
+              "l2_modeM": {
+                "type": "label",
+                "anchor_from": "bottom_left",
+                "anchor_to": "bottom_left",
+                "offset": [
+                  10,
+                  -62
+                ],
+                "layer": 3,
+                "color": [
+                  0.9,
+                  0.9,
+                  0.6
+                ],
+                "shadow": true,
+                "font_scale_factor": 0.8,
+                "text_alignment": "left",
+                "size": [
+                  "default",
+                  "default"
+                ],
+                "bindings": [
+                  {
+                    "binding_name": "#hud_title_text_string",
+                    "binding_name_override": "#t",
+                    "binding_type": "global"
+                  },
+                  {
+                    "binding_type": "view",
+                    "source_property_name": "((('%.15s' * #t) - ('%.14s' * #t)) = 'M')",
+                    "target_property_name": "#visible"
+                  }
+                ],
+                "text": "arsenal.ui.melee",
+                "localize": true
+              }
+            },
+            {
+              "l2_stR": {
+                "type": "label",
+                "anchor_from": "bottom_left",
+                "anchor_to": "bottom_left",
+                "offset": [
+                  10,
+                  -120
+                ],
+                "layer": 3,
+                "color": [
+                  0.5,
+                  0.8,
+                  1.0
+                ],
+                "shadow": true,
+                "font_scale_factor": 0.8,
+                "text_alignment": "left",
+                "size": [
+                  "default",
+                  "default"
+                ],
+                "bindings": [
+                  {
+                    "binding_name": "#hud_title_text_string",
+                    "binding_name_override": "#t",
+                    "binding_type": "global"
+                  },
+                  {
+                    "binding_type": "view",
+                    "source_property_name": "((('%.16s' * #t) - ('%.15s' * #t)) = 'R')",
+                    "target_property_name": "#visible"
+                  }
+                ],
+                "text": "arsenal.ui.reloading",
+                "localize": true
+              }
+            },
+            {
+              "l2_stJ": {
+                "type": "label",
+                "anchor_from": "bottom_left",
+                "anchor_to": "bottom_left",
+                "offset": [
+                  10,
+                  -120
+                ],
+                "layer": 3,
+                "color": [
+                  1,
+                  0.4,
+                  0.3
+                ],
+                "shadow": true,
+                "font_scale_factor": 0.8,
+                "text_alignment": "left",
+                "size": [
+                  "default",
+                  "default"
+                ],
+                "bindings": [
+                  {
+                    "binding_name": "#hud_title_text_string",
+                    "binding_name_override": "#t",
+                    "binding_type": "global"
+                  },
+                  {
+                    "binding_type": "view",
+                    "source_property_name": "((('%.16s' * #t) - ('%.15s' * #t)) = 'J')",
+                    "target_property_name": "#visible"
+                  }
+                ],
+                "text": "arsenal.ui.jammed",
+                "localize": true
+              }
+            },
+            {
+              "l2_stH": {
+                "type": "label",
+                "anchor_from": "bottom_left",
+                "anchor_to": "bottom_left",
+                "offset": [
+                  10,
+                  -120
+                ],
+                "layer": 3,
+                "color": [
+                  1,
+                  0.5,
+                  0.2
+                ],
+                "shadow": true,
+                "font_scale_factor": 0.8,
+                "text_alignment": "left",
+                "size": [
+                  "default",
+                  "default"
+                ],
+                "bindings": [
+                  {
+                    "binding_name": "#hud_title_text_string",
+                    "binding_name_override": "#t",
+                    "binding_type": "global"
+                  },
+                  {
+                    "binding_type": "view",
+                    "source_property_name": "((('%.16s' * #t) - ('%.15s' * #t)) = 'H')",
+                    "target_property_name": "#visible"
+                  }
+                ],
+                "text": "arsenal.ui.overheated",
+                "localize": true
+              }
+            },
+            {
+              "l2_stL": {
+                "type": "label",
+                "anchor_from": "bottom_left",
+                "anchor_to": "bottom_left",
+                "offset": [
+                  10,
+                  -120
+                ],
+                "layer": 3,
+                "color": [
+                  1,
+                  0.9,
+                  0.3
+                ],
+                "shadow": true,
+                "font_scale_factor": 0.8,
+                "text_alignment": "left",
+                "size": [
+                  "default",
+                  "default"
+                ],
+                "bindings": [
+                  {
+                    "binding_name": "#hud_title_text_string",
+                    "binding_name_override": "#t",
+                    "binding_type": "global"
+                  },
+                  {
+                    "binding_type": "view",
+                    "source_property_name": "((('%.16s' * #t) - ('%.15s' * #t)) = 'L')",
+                    "target_property_name": "#visible"
+                  }
+                ],
+                "text": "arsenal.ui.locking",
+                "localize": true
+              }
+            },
+            {
+              "l2_stK": {
+                "type": "label",
+                "anchor_from": "bottom_left",
+                "anchor_to": "bottom_left",
+                "offset": [
+                  10,
+                  -120
+                ],
+                "layer": 3,
+                "color": [
+                  1,
+                  0.3,
+                  0.3
+                ],
+                "shadow": true,
+                "font_scale_factor": 0.8,
+                "text_alignment": "left",
+                "size": [
+                  "default",
+                  "default"
+                ],
+                "bindings": [
+                  {
+                    "binding_name": "#hud_title_text_string",
+                    "binding_name_override": "#t",
+                    "binding_type": "global"
+                  },
+                  {
+                    "binding_type": "view",
+                    "source_property_name": "((('%.16s' * #t) - ('%.15s' * #t)) = 'K')",
+                    "target_property_name": "#visible"
+                  }
+                ],
+                "text": "arsenal.ui.locked",
+                "localize": true
+              }
+            },
+            {
+              "l2_stB": {
+                "type": "label",
+                "anchor_from": "bottom_left",
+                "anchor_to": "bottom_left",
+                "offset": [
+                  10,
+                  -120
+                ],
+                "layer": 3,
+                "color": [
+                  0.5,
+                  0.9,
+                  1.0
+                ],
+                "shadow": true,
+                "font_scale_factor": 0.8,
+                "text_alignment": "left",
+                "size": [
+                  "default",
+                  "default"
+                ],
+                "bindings": [
+                  {
+                    "binding_name": "#hud_title_text_string",
+                    "binding_name_override": "#t",
+                    "binding_type": "global"
+                  },
+                  {
+                    "binding_type": "view",
+                    "source_property_name": "((('%.16s' * #t) - ('%.15s' * #t)) = 'B')",
+                    "target_property_name": "#visible"
+                  }
+                ],
+                "text": "arsenal.ui.breath",
+                "localize": true
+              }
+            },
+            {
+              "l2_stE": {
+                "type": "label",
+                "anchor_from": "bottom_left",
+                "anchor_to": "bottom_left",
+                "offset": [
+                  10,
+                  -120
+                ],
+                "layer": 3,
+                "color": [
+                  1,
+                  0.3,
+                  0.3
+                ],
+                "shadow": true,
+                "font_scale_factor": 0.8,
+                "text_alignment": "left",
+                "size": [
+                  "default",
+                  "default"
+                ],
+                "bindings": [
+                  {
+                    "binding_name": "#hud_title_text_string",
+                    "binding_name_override": "#t",
+                    "binding_type": "global"
+                  },
+                  {
+                    "binding_type": "view",
+                    "source_property_name": "((('%.16s' * #t) - ('%.15s' * #t)) = 'E')",
+                    "target_property_name": "#visible"
+                  }
+                ],
+                "text": "arsenal.ui.empty",
+                "localize": true
+              }
+            },
+            {
+              "l2_stP": {
+                "type": "label",
+                "anchor_from": "bottom_left",
+                "anchor_to": "bottom_left",
+                "offset": [
+                  10,
+                  -120
+                ],
+                "layer": 3,
+                "color": [
+                  1,
+                  0.8,
+                  0.3
+                ],
+                "shadow": true,
+                "font_scale_factor": 0.8,
+                "text_alignment": "left",
+                "size": [
+                  "default",
+                  "default"
+                ],
+                "bindings": [
+                  {
+                    "binding_name": "#hud_title_text_string",
+                    "binding_name_override": "#t",
+                    "binding_type": "global"
+                  },
+                  {
+                    "binding_type": "view",
+                    "source_property_name": "((('%.16s' * #t) - ('%.15s' * #t)) = 'P')",
+                    "target_property_name": "#visible"
+                  }
+                ],
+                "text": "arsenal.ui.spawn_protect",
+                "localize": true
+              }
+            },
+            {
+              "l2_stX": {
+                "type": "label",
+                "anchor_from": "bottom_left",
+                "anchor_to": "bottom_left",
+                "offset": [
+                  10,
+                  -120
+                ],
+                "layer": 3,
+                "color": [
+                  1,
+                  0.3,
+                  0.3
+                ],
+                "shadow": true,
+                "font_scale_factor": 0.8,
+                "text_alignment": "left",
+                "size": [
+                  "default",
+                  "default"
+                ],
+                "bindings": [
+                  {
+                    "binding_name": "#hud_title_text_string",
+                    "binding_name_override": "#t",
+                    "binding_type": "global"
+                  },
+                  {
+                    "binding_type": "view",
+                    "source_property_name": "((('%.16s' * #t) - ('%.15s' * #t)) = 'X')",
+                    "target_property_name": "#visible"
+                  }
+                ],
+                "text": "arsenal.ui.broken",
+                "localize": true
+              }
+            },
+            {
+              "l2_bar1": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/bar_1",
+                "size": [
+                  60,
+                  4
+                ],
+                "anchor_from": "bottom_left",
+                "anchor_to": "bottom_left",
+                "offset": [
+                  10,
+                  -112
+                ],
+                "layer": 2,
+                "bindings": [
+                  {
+                    "binding_name": "#hud_title_text_string",
+                    "binding_name_override": "#t",
+                    "binding_type": "global"
+                  },
+                  {
+                    "binding_type": "view",
+                    "source_property_name": "((('%.17s' * #t) - ('%.16s' * #t)) = '1')",
+                    "target_property_name": "#visible"
+                  }
+                ]
+              }
+            },
+            {
+              "l2_bar2": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/bar_2",
+                "size": [
+                  60,
+                  4
+                ],
+                "anchor_from": "bottom_left",
+                "anchor_to": "bottom_left",
+                "offset": [
+                  10,
+                  -112
+                ],
+                "layer": 2,
+                "bindings": [
+                  {
+                    "binding_name": "#hud_title_text_string",
+                    "binding_name_override": "#t",
+                    "binding_type": "global"
+                  },
+                  {
+                    "binding_type": "view",
+                    "source_property_name": "((('%.17s' * #t) - ('%.16s' * #t)) = '2')",
+                    "target_property_name": "#visible"
+                  }
+                ]
+              }
+            },
+            {
+              "l2_bar3": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/bar_3",
+                "size": [
+                  60,
+                  4
+                ],
+                "anchor_from": "bottom_left",
+                "anchor_to": "bottom_left",
+                "offset": [
+                  10,
+                  -112
+                ],
+                "layer": 2,
+                "bindings": [
+                  {
+                    "binding_name": "#hud_title_text_string",
+                    "binding_name_override": "#t",
+                    "binding_type": "global"
+                  },
+                  {
+                    "binding_type": "view",
+                    "source_property_name": "((('%.17s' * #t) - ('%.16s' * #t)) = '3')",
+                    "target_property_name": "#visible"
+                  }
+                ]
+              }
+            },
+            {
+              "l2_bar4": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/bar_4",
+                "size": [
+                  60,
+                  4
+                ],
+                "anchor_from": "bottom_left",
+                "anchor_to": "bottom_left",
+                "offset": [
+                  10,
+                  -112
+                ],
+                "layer": 2,
+                "bindings": [
+                  {
+                    "binding_name": "#hud_title_text_string",
+                    "binding_name_override": "#t",
+                    "binding_type": "global"
+                  },
+                  {
+                    "binding_type": "view",
+                    "source_property_name": "((('%.17s' * #t) - ('%.16s' * #t)) = '4')",
+                    "target_property_name": "#visible"
+                  }
+                ]
+              }
+            },
+            {
+              "l2_bar5": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/bar_5",
+                "size": [
+                  60,
+                  4
+                ],
+                "anchor_from": "bottom_left",
+                "anchor_to": "bottom_left",
+                "offset": [
+                  10,
+                  -112
+                ],
+                "layer": 2,
+                "bindings": [
+                  {
+                    "binding_name": "#hud_title_text_string",
+                    "binding_name_override": "#t",
+                    "binding_type": "global"
+                  },
+                  {
+                    "binding_type": "view",
+                    "source_property_name": "((('%.17s' * #t) - ('%.16s' * #t)) = '5')",
+                    "target_property_name": "#visible"
+                  }
+                ]
+              }
+            },
+            {
+              "l2_bar6": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/bar_6",
+                "size": [
+                  60,
+                  4
+                ],
+                "anchor_from": "bottom_left",
+                "anchor_to": "bottom_left",
+                "offset": [
+                  10,
+                  -112
+                ],
+                "layer": 2,
+                "bindings": [
+                  {
+                    "binding_name": "#hud_title_text_string",
+                    "binding_name_override": "#t",
+                    "binding_type": "global"
+                  },
+                  {
+                    "binding_type": "view",
+                    "source_property_name": "((('%.17s' * #t) - ('%.16s' * #t)) = '6')",
+                    "target_property_name": "#visible"
+                  }
+                ]
+              }
+            },
+            {
+              "l2_bar7": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/bar_7",
+                "size": [
+                  60,
+                  4
+                ],
+                "anchor_from": "bottom_left",
+                "anchor_to": "bottom_left",
+                "offset": [
+                  10,
+                  -112
+                ],
+                "layer": 2,
+                "bindings": [
+                  {
+                    "binding_name": "#hud_title_text_string",
+                    "binding_name_override": "#t",
+                    "binding_type": "global"
+                  },
+                  {
+                    "binding_type": "view",
+                    "source_property_name": "((('%.17s' * #t) - ('%.16s' * #t)) = '7')",
+                    "target_property_name": "#visible"
+                  }
+                ]
+              }
+            },
+            {
+              "l2_bar8": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/bar_8",
+                "size": [
+                  60,
+                  4
+                ],
+                "anchor_from": "bottom_left",
+                "anchor_to": "bottom_left",
+                "offset": [
+                  10,
+                  -112
+                ],
+                "layer": 2,
+                "bindings": [
+                  {
+                    "binding_name": "#hud_title_text_string",
+                    "binding_name_override": "#t",
+                    "binding_type": "global"
+                  },
+                  {
+                    "binding_type": "view",
+                    "source_property_name": "((('%.17s' * #t) - ('%.16s' * #t)) = '8')",
+                    "target_property_name": "#visible"
+                  }
+                ]
+              }
+            },
+            {
+              "l2_bar9": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/bar_9",
+                "size": [
+                  60,
+                  4
+                ],
+                "anchor_from": "bottom_left",
+                "anchor_to": "bottom_left",
+                "offset": [
+                  10,
+                  -112
+                ],
+                "layer": 2,
+                "bindings": [
+                  {
+                    "binding_name": "#hud_title_text_string",
+                    "binding_name_override": "#t",
+                    "binding_type": "global"
+                  },
+                  {
+                    "binding_type": "view",
+                    "source_property_name": "((('%.17s' * #t) - ('%.16s' * #t)) = '9')",
+                    "target_property_name": "#visible"
+                  }
+                ]
+              }
+            },
+            {
+              "l2_pl1on": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/plate_on",
+                "size": [
+                  10,
+                  10
+                ],
+                "anchor_from": "bottom_left",
+                "anchor_to": "bottom_left",
+                "offset": [
+                  88,
+                  -52
+                ],
+                "layer": 2,
+                "bindings": [
+                  {
+                    "binding_name": "#hud_title_text_string",
+                    "binding_name_override": "#t",
+                    "binding_type": "global"
+                  },
+                  {
+                    "binding_type": "view",
+                    "source_property_name": "(((('%.18s' * #t) - ('%.17s' * #t)) = '1') or ((('%.18s' * #t) - ('%.17s' * #t)) = '2') or ((('%.18s' * #t) - ('%.17s' * #t)) = '3') or ((('%.18s' * #t) - ('%.17s' * #t)) = '4'))",
+                    "target_property_name": "#visible"
+                  }
+                ]
+              }
+            },
+            {
+              "l2_pl1off": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/plate_off",
+                "size": [
+                  10,
+                  10
+                ],
+                "anchor_from": "bottom_left",
+                "anchor_to": "bottom_left",
+                "offset": [
+                  88,
+                  -52
+                ],
+                "layer": 2,
+                "bindings": [
+                  {
+                    "binding_name": "#hud_title_text_string",
+                    "binding_name_override": "#t",
+                    "binding_type": "global"
+                  },
+                  {
+                    "binding_type": "view",
+                    "source_property_name": "(((('%.18s' * #t) - ('%.17s' * #t)) = '0'))",
+                    "target_property_name": "#visible"
+                  }
+                ]
+              }
+            },
+            {
+              "l2_pl2on": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/plate_on",
+                "size": [
+                  10,
+                  10
+                ],
+                "anchor_from": "bottom_left",
+                "anchor_to": "bottom_left",
+                "offset": [
+                  76,
+                  -52
+                ],
+                "layer": 2,
+                "bindings": [
+                  {
+                    "binding_name": "#hud_title_text_string",
+                    "binding_name_override": "#t",
+                    "binding_type": "global"
+                  },
+                  {
+                    "binding_type": "view",
+                    "source_property_name": "(((('%.18s' * #t) - ('%.17s' * #t)) = '2') or ((('%.18s' * #t) - ('%.17s' * #t)) = '3') or ((('%.18s' * #t) - ('%.17s' * #t)) = '4'))",
+                    "target_property_name": "#visible"
+                  }
+                ]
+              }
+            },
+            {
+              "l2_pl2off": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/plate_off",
+                "size": [
+                  10,
+                  10
+                ],
+                "anchor_from": "bottom_left",
+                "anchor_to": "bottom_left",
+                "offset": [
+                  76,
+                  -52
+                ],
+                "layer": 2,
+                "bindings": [
+                  {
+                    "binding_name": "#hud_title_text_string",
+                    "binding_name_override": "#t",
+                    "binding_type": "global"
+                  },
+                  {
+                    "binding_type": "view",
+                    "source_property_name": "(((('%.18s' * #t) - ('%.17s' * #t)) = '0') or ((('%.18s' * #t) - ('%.17s' * #t)) = '1'))",
+                    "target_property_name": "#visible"
+                  }
+                ]
+              }
+            },
+            {
+              "l2_pl3on": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/plate_on",
+                "size": [
+                  10,
+                  10
+                ],
+                "anchor_from": "bottom_left",
+                "anchor_to": "bottom_left",
+                "offset": [
+                  64,
+                  -52
+                ],
+                "layer": 2,
+                "bindings": [
+                  {
+                    "binding_name": "#hud_title_text_string",
+                    "binding_name_override": "#t",
+                    "binding_type": "global"
+                  },
+                  {
+                    "binding_type": "view",
+                    "source_property_name": "(((('%.18s' * #t) - ('%.17s' * #t)) = '3') or ((('%.18s' * #t) - ('%.17s' * #t)) = '4'))",
+                    "target_property_name": "#visible"
+                  }
+                ]
+              }
+            },
+            {
+              "l2_pl3off": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/plate_off",
+                "size": [
+                  10,
+                  10
+                ],
+                "anchor_from": "bottom_left",
+                "anchor_to": "bottom_left",
+                "offset": [
+                  64,
+                  -52
+                ],
+                "layer": 2,
+                "bindings": [
+                  {
+                    "binding_name": "#hud_title_text_string",
+                    "binding_name_override": "#t",
+                    "binding_type": "global"
+                  },
+                  {
+                    "binding_type": "view",
+                    "source_property_name": "(((('%.18s' * #t) - ('%.17s' * #t)) = '0') or ((('%.18s' * #t) - ('%.17s' * #t)) = '1') or ((('%.18s' * #t) - ('%.17s' * #t)) = '2'))",
+                    "target_property_name": "#visible"
+                  }
+                ]
+              }
+            },
+            {
+              "l2_pl4on": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/plate_on",
+                "size": [
+                  10,
+                  10
+                ],
+                "anchor_from": "bottom_left",
+                "anchor_to": "bottom_left",
+                "offset": [
+                  52,
+                  -52
+                ],
+                "layer": 2,
+                "bindings": [
+                  {
+                    "binding_name": "#hud_title_text_string",
+                    "binding_name_override": "#t",
+                    "binding_type": "global"
+                  },
+                  {
+                    "binding_type": "view",
+                    "source_property_name": "(((('%.18s' * #t) - ('%.17s' * #t)) = '4'))",
+                    "target_property_name": "#visible"
+                  }
+                ]
+              }
+            },
+            {
+              "l2_pl4off": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/plate_off",
+                "size": [
+                  10,
+                  10
+                ],
+                "anchor_from": "bottom_left",
+                "anchor_to": "bottom_left",
+                "offset": [
+                  52,
+                  -52
+                ],
+                "layer": 2,
+                "bindings": [
+                  {
+                    "binding_name": "#hud_title_text_string",
+                    "binding_name_override": "#t",
+                    "binding_type": "global"
+                  },
+                  {
+                    "binding_type": "view",
+                    "source_property_name": "(((('%.18s' * #t) - ('%.17s' * #t)) = '0') or ((('%.18s' * #t) - ('%.17s' * #t)) = '1') or ((('%.18s' * #t) - ('%.17s' * #t)) = '2') or ((('%.18s' * #t) - ('%.17s' * #t)) = '3'))",
+                    "target_property_name": "#visible"
+                  }
+                ]
+              }
+            },
+            {
+              "l2_hp": {
+                "type": "label",
+                "anchor_from": "bottom_left",
+                "anchor_to": "bottom_left",
+                "offset": [
+                  10,
+                  -52
+                ],
+                "layer": 3,
+                "color": [
+                  1,
+                  0.5,
+                  0.5
+                ],
+                "shadow": true,
+                "font_scale_factor": 0.9,
+                "text_alignment": "left",
+                "size": [
+                  "default",
+                  "default"
+                ],
+                "bindings": [
+                  {
+                    "binding_name": "#hud_title_text_string",
+                    "binding_name_override": "#t",
+                    "binding_type": "global"
+                  },
+                  {
+                    "binding_type": "view",
+                    "source_property_name": "(' ' + (('%.20s' * #t) - ('%.18s' * #t)))",
+                    "target_property_name": "#text"
+                  }
+                ],
+                "text": "#text",
+                "localize": false
+              }
+            }
+          ],
+          "bindings": [
+            {
+              "binding_name": "#hud_title_text_string",
+              "binding_name_override": "#t",
+              "binding_type": "global"
+            },
+            {
+              "binding_type": "view",
+              "source_property_name": "((('%.54s' * #t) - ('%.53s' * #t)) = '2')",
+              "target_property_name": "#visible"
+            }
+          ]
+        }
+      }
+    ],
+    "bindings": [
+      {
+        "binding_name": "#hud_title_text_string",
+        "binding_name_override": "#t",
+        "binding_type": "global"
+      },
+      {
+        "binding_type": "view",
+        "source_property_name": "(not ((#t - 'AC2|') = #t))",
+        "target_property_name": "#visible"
+      }
+    ]
+  },
+  "root_panel": {
+    "modifications": [
+      {
+        "array_name": "controls",
+        "operation": "insert_front",
+        "value": [
+          {
+            "arsenal_scope_root@hud.arsenal_scope_root": {}
+          },
+          {
+            "arsenal_hud2_root@hud.arsenal_hud2_root": {}
+          }
+        ]
+      }
+    ]
+  },
+  "hud_title_text": {
+    "modifications": [
+      {
+        "array_name": "controls",
+        "operation": "replace",
+        "control_name": "title_frame",
+        "value": {
+          "title_frame": {
+            "type": "panel",
+            "size": [
+              "100%",
+              "100%cm"
+            ],
+            "controls": [
+              {
+                "title_background": {
+                  "type": "image",
+                  "size": [
+                    "100%sm + 30px",
+                    "100%sm + 6px"
+                  ],
+                  "texture": "textures/ui/hud_tip_text_background",
+                  "alpha": "@hud.anim_title_background_alpha_in"
+                }
+              },
+              {
+                "title": {
+                  "type": "label",
+                  "anchor_from": "top_middle",
+                  "anchor_to": "top_middle",
+                  "color": "$title_command_text_color",
+                  "enable_profanity_filter": true,
+                  "text": "#text",
+                  "layer": 31,
+                  "localize": false,
+                  "font_size": "extra_large",
+                  "variables": [
+                    {
+                      "requires": "(not $title_shadow)",
+                      "$show_shadow": false
+                    },
+                    {
+                      "requires": "$title_shadow",
+                      "$show_shadow": true
+                    }
+                  ],
+                  "shadow": "$show_shadow",
+                  "text_alignment": "center",
+                  "offset": [
+                    0,
+                    6
+                  ],
+                  "bindings": [
+                    {
+                      "binding_name": "#hud_title_text_string",
+                      "binding_name_override": "#text",
+                      "binding_type": "global"
+                    }
+                  ]
+                }
+              }
+            ],
+            "bindings": [
+              {
+                "binding_name": "#hud_title_text_string",
+                "binding_name_override": "#arsenal_t",
+                "binding_type": "global"
+              },
+              {
+                "binding_type": "view",
+                "source_property_name": "((#arsenal_t - '§a§r§s§n') = #arsenal_t)",
+                "target_property_name": "#visible"
+              }
+            ]
+          }
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "format_version": "1.20.10",
+  "minecraft:recipe_shaped": {
+    "description": {
+      "identifier": "arsenal:weapon_bench"
+    },
+    "tags": [
+      "crafting_table"
+    ],
+    "pattern": [
+      "SPS",
+      "SCS",
+      "III"
+    ],
+    "key": {
+      "S": {
+        "item": "arsenal:steel_ingot"
+      },
+      "P": {
+        "item": "arsenal:precision_parts"
+      },
+      "C": {
+        "item": "minecraft:crafting_table"
+      },
+      "I": {
+        "item": "minecraft:iron_ingot"
+      }
+    },
+    "result": {
+      "item": "arsenal:weapon_bench",
+      "count": 1
+    },
+    "unlock": [
+      {
+        "item": "minecraft:crafting_table"
+      }
+    ]
+  }
+}

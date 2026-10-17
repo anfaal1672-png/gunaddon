@@ -1,0 +1,32 @@
+{
+  "format_version": "1.20.10",
+  "minecraft:recipe_shapeless": {
+    "description": {
+      "identifier": "arsenal:streak_terminal"
+    },
+    "tags": [
+      "crafting_table"
+    ],
+    "ingredients": [
+      {
+        "item": "minecraft:redstone",
+        "count": 4
+      },
+      {
+        "item": "arsenal:precision_parts"
+      },
+      {
+        "item": "minecraft:glass_pane"
+      }
+    ],
+    "result": {
+      "item": "arsenal:streak_terminal",
+      "count": 1
+    },
+    "unlock": [
+      {
+        "item": "minecraft:redstone"
+      }
+    ]
+  }
+}

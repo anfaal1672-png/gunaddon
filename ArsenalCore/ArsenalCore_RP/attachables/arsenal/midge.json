@@ -1,0 +1,36 @@
+{
+  "format_version": "1.10.0",
+  "minecraft:attachable": {
+    "description": {
+      "identifier": "arsenal:midge",
+      "materials": {
+        "default": "entity_alphatest",
+        "enchanted": "entity_alphatest_glint"
+      },
+      "textures": {
+        "default": "textures/entity/arsenal/weapons/midge",
+        "enchanted": "textures/misc/enchanted_item_glint"
+      },
+      "geometry": {
+        "default": "geometry.arsenal.midge"
+      },
+      "animations": {
+        "tp": "animation.arsenal.midge.tp",
+        "fp": "animation.arsenal.midge.fp"
+      },
+      "scripts": {
+        "animate": [
+          {
+            "tp": "c.is_first_person == 0.0"
+          },
+          {
+            "fp": "c.is_first_person == 1.0"
+          }
+        ]
+      },
+      "render_controllers": [
+        "controller.render.item_default"
+      ]
+    }
+  }
+}

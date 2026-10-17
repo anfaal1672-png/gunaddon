@@ -1,0 +1,25 @@
+{
+  "format_version": "1.26.30",
+  "minecraft:item": {
+    "description": {
+      "identifier": "arsenal:stock_folding",
+      "menu_category": {
+        "category": "equipment"
+      }
+    },
+    "components": {
+      "minecraft:icon": "arsenal_stock_folding",
+      "minecraft:display_name": {
+        "value": "item.arsenal.stock_folding.name"
+      },
+      "minecraft:max_stack_size": 16,
+      "minecraft:tags": {
+        "tags": [
+          "arsenal:attachment",
+          "arsenal:slot_stock"
+        ]
+      },
+      "minecraft:rarity": "common"
+    }
+  }
+}

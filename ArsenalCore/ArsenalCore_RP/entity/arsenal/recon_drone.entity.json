@@ -1,0 +1,28 @@
+{
+  "format_version": "1.10.0",
+  "minecraft:client_entity": {
+    "description": {
+      "identifier": "arsenal:recon_drone",
+      "materials": {
+        "default": "entity_alphatest"
+      },
+      "textures": {
+        "default": "textures/entity/arsenal/gear/recon_drone"
+      },
+      "geometry": {
+        "default": "geometry.arsenal.recon_drone"
+      },
+      "render_controllers": [
+        "controller.render.arsenal.simple"
+      ],
+      "animations": {
+        "spin": "animation.arsenal.drone.spin"
+      },
+      "scripts": {
+        "animate": [
+          "spin"
+        ]
+      }
+    }
+  }
+}

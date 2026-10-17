@@ -1,0 +1,28 @@
+{
+  "format_version": "1.10.0",
+  "minecraft:client_entity": {
+    "description": {
+      "identifier": "arsenal:ai_shot",
+      "materials": {
+        "default": "entity_alphatest"
+      },
+      "textures": {
+        "default": "textures/entity/arsenal/projectiles"
+      },
+      "geometry": {
+        "default": "geometry.arsenal.proj_flare"
+      },
+      "render_controllers": [
+        "controller.render.arsenal.simple"
+      ],
+      "animations": {
+        "scale": "animation.arsenal.bullet.scale"
+      },
+      "scripts": {
+        "animate": [
+          "scale"
+        ]
+      }
+    }
+  }
+}

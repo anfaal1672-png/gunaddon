@@ -1,0 +1,295 @@
+{
+  "format_version": "1.10.0",
+  "animations": {
+    "animation.arsenal.robot.shield_aim": {
+      "loop": true,
+      "bones": {
+        "rightArm": {
+          "rotation": [
+            "-90.0 + q.target_x_rotation",
+            "math.clamp(q.target_y_rotation, -60.0, 45.0)",
+            0
+          ]
+        },
+        "leftArm": {
+          "rotation": [
+            -60.0,
+            20.0,
+            0
+          ]
+        }
+      }
+    },
+    "animation.arsenal.hollow.reach": {
+      "loop": true,
+      "bones": {
+        "rightArm": {
+          "rotation": [
+            "-80.0 + math.sin(q.life_time * 400.0) * 6.0",
+            0,
+            0
+          ]
+        },
+        "leftArm": {
+          "rotation": [
+            "-80.0 - math.sin(q.life_time * 400.0) * 6.0",
+            0,
+            0
+          ]
+        }
+      }
+    },
+    "animation.arsenal.hollow.swell": {
+      "loop": true,
+      "bones": {
+        "body": {
+          "scale": [
+            "1.0 + math.sin(q.life_time * 1400.0) * 0.08",
+            "1.0 + math.sin(q.life_time * 1400.0) * 0.05",
+            "1.0 + math.sin(q.life_time * 1400.0) * 0.08"
+          ]
+        }
+      }
+    },
+    "animation.arsenal.dog.walk": {
+      "loop": true,
+      "bones": {
+        "legFL": {
+          "rotation": [
+            "math.cos(q.anim_time * 800.0) * 40.0 * math.min(1.0, q.modified_move_speed * 3.0)",
+            0,
+            0
+          ]
+        },
+        "legBR": {
+          "rotation": [
+            "math.cos(q.anim_time * 800.0) * 40.0 * math.min(1.0, q.modified_move_speed * 3.0)",
+            0,
+            0
+          ]
+        },
+        "legFR": {
+          "rotation": [
+            "-math.cos(q.anim_time * 800.0) * 40.0 * math.min(1.0, q.modified_move_speed * 3.0)",
+            0,
+            0
+          ]
+        },
+        "legBL": {
+          "rotation": [
+            "-math.cos(q.anim_time * 800.0) * 40.0 * math.min(1.0, q.modified_move_speed * 3.0)",
+            0,
+            0
+          ]
+        },
+        "tail": {
+          "rotation": [
+            0,
+            "math.sin(q.life_time * 600.0) * 20.0",
+            0
+          ]
+        }
+      }
+    },
+    "animation.arsenal.dog.look": {
+      "loop": true,
+      "bones": {
+        "head": {
+          "rotation": [
+            "q.target_x_rotation",
+            "q.target_y_rotation",
+            0
+          ]
+        }
+      }
+    },
+    "animation.arsenal.drone.spin": {
+      "loop": true,
+      "bones": {
+        "rotor0": {
+          "rotation": [
+            0,
+            "q.life_time * 1440.0",
+            0
+          ]
+        },
+        "rotor1": {
+          "rotation": [
+            0,
+            "q.life_time * 1440.0",
+            0
+          ]
+        },
+        "rotor2": {
+          "rotation": [
+            0,
+            "q.life_time * 1440.0",
+            0
+          ]
+        },
+        "rotor3": {
+          "rotation": [
+            0,
+            "q.life_time * 1440.0",
+            0
+          ]
+        }
+      }
+    },
+    "animation.arsenal.drone.tilt": {
+      "loop": true,
+      "bones": {
+        "body": {
+          "rotation": [
+            "math.min(15.0, q.modified_move_speed * 60.0)",
+            0,
+            0
+          ],
+          "position": [
+            0,
+            "math.sin(q.life_time * 180.0) * 0.6",
+            0
+          ]
+        }
+      }
+    },
+    "animation.arsenal.walker.walk": {
+      "loop": true,
+      "bones": {
+        "leg0": {
+          "rotation": [
+            "math.cos(q.anim_time * 500.0) * 25.0 * math.min(1.0, q.modified_move_speed * 3.0)",
+            0,
+            0
+          ]
+        },
+        "leg3": {
+          "rotation": [
+            "math.cos(q.anim_time * 500.0) * 25.0 * math.min(1.0, q.modified_move_speed * 3.0)",
+            0,
+            0
+          ]
+        },
+        "leg1": {
+          "rotation": [
+            "-math.cos(q.anim_time * 500.0) * 25.0 * math.min(1.0, q.modified_move_speed * 3.0)",
+            0,
+            0
+          ]
+        },
+        "leg2": {
+          "rotation": [
+            "-math.cos(q.anim_time * 500.0) * 25.0 * math.min(1.0, q.modified_move_speed * 3.0)",
+            0,
+            0
+          ]
+        }
+      }
+    },
+    "animation.arsenal.walker.look": {
+      "loop": true,
+      "bones": {
+        "head": {
+          "rotation": [
+            "q.target_x_rotation * 0.5",
+            "q.target_y_rotation",
+            0
+          ]
+        }
+      }
+    },
+    "animation.arsenal.sentry.aim": {
+      "loop": true,
+      "bones": {
+        "head": {
+          "rotation": [
+            "-q.property('arsenal:pitch')",
+            0,
+            0
+          ]
+        }
+      }
+    },
+    "animation.arsenal.buggy.wheels": {
+      "loop": true,
+      "bones": {
+        "wheel_fl": {
+          "rotation": [
+            "q.modified_distance_moved * -90.0",
+            0,
+            0
+          ]
+        },
+        "wheel_fr": {
+          "rotation": [
+            "q.modified_distance_moved * -90.0",
+            0,
+            0
+          ]
+        },
+        "wheel_bl": {
+          "rotation": [
+            "q.modified_distance_moved * -90.0",
+            0,
+            0
+          ]
+        },
+        "wheel_br": {
+          "rotation": [
+            "q.modified_distance_moved * -90.0",
+            0,
+            0
+          ]
+        }
+      }
+    },
+    "animation.arsenal.hmg_nest.aim": {
+      "loop": true,
+      "bones": {
+        "gun": {
+          "rotation": [
+            "-q.property('arsenal:pitch')",
+            0,
+            0
+          ]
+        }
+      }
+    },
+    "animation.arsenal.aa_gun.aim": {
+      "loop": true,
+      "bones": {
+        "guns": {
+          "rotation": [
+            "-q.property('arsenal:pitch')",
+            0,
+            0
+          ]
+        }
+      }
+    },
+    "animation.arsenal.at_post.aim": {
+      "loop": true,
+      "bones": {
+        "tube": {
+          "rotation": [
+            "-q.property('arsenal:pitch')",
+            0,
+            0
+          ]
+        }
+      }
+    },
+    "animation.arsenal.buggy.aim": {
+      "loop": true,
+      "bones": {
+        "gun": {
+          "rotation": [
+            "-q.property('arsenal:pitch')",
+            0,
+            0
+          ]
+        }
+      }
+    }
+  }
+}

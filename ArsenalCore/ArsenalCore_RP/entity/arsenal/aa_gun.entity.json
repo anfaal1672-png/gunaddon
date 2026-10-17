@@ -1,0 +1,28 @@
+{
+  "format_version": "1.10.0",
+  "minecraft:client_entity": {
+    "description": {
+      "identifier": "arsenal:aa_gun",
+      "materials": {
+        "default": "entity_alphatest"
+      },
+      "textures": {
+        "default": "textures/entity/arsenal/gear/aa_gun"
+      },
+      "geometry": {
+        "default": "geometry.arsenal.aa_gun"
+      },
+      "render_controllers": [
+        "controller.render.arsenal.simple"
+      ],
+      "animations": {
+        "aim": "animation.arsenal.aa_gun.aim"
+      },
+      "scripts": {
+        "animate": [
+          "aim"
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,51 @@
+{
+  "format_version": "1.26.30",
+  "minecraft:item": {
+    "description": {
+      "identifier": "arsenal:riot_baton",
+      "menu_category": {
+        "category": "equipment"
+      }
+    },
+    "components": {
+      "minecraft:icon": "arsenal_riot_baton",
+      "minecraft:display_name": {
+        "value": "item.arsenal.riot_baton.name"
+      },
+      "minecraft:max_stack_size": 1,
+      "minecraft:hand_equipped": true,
+      "minecraft:tags": {
+        "tags": [
+          "arsenal:melee",
+          "arsenal:m_riot_baton",
+          "minecraft:is_sword"
+        ]
+      },
+      "minecraft:rarity": "uncommon",
+      "minecraft:damage": {
+        "value": 5
+      },
+      "minecraft:durability": {
+        "max_durability": 800,
+        "damage_chance": {
+          "min": 60,
+          "max": 100
+        }
+      },
+      "minecraft:can_destroy_in_creative": false,
+      "minecraft:use_modifiers": {
+        "use_duration": 3600,
+        "movement_modifier": 1.0,
+        "emit_vibrations": false
+      },
+      "minecraft:swing_duration": {
+        "value": 0.25
+      },
+      "minecraft:enchantable": {
+        "slot": "sword",
+        "value": 10
+      },
+      "arsenal:melee": {}
+    }
+  }
+}

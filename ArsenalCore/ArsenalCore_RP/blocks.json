@@ -1,0 +1,18 @@
+{
+  "format_version": "1.21.40",
+  "arsenal:weapon_bench": {
+    "sound": "metal"
+  },
+  "arsenal:ammo_press": {
+    "sound": "metal"
+  },
+  "arsenal:ammo_crate": {
+    "sound": "wood"
+  },
+  "arsenal:site_marker": {
+    "sound": "stone"
+  },
+  "arsenal:spawn_marker": {
+    "sound": "stone"
+  }
+}

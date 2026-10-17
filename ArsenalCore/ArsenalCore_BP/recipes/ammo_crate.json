@@ -1,0 +1,39 @@
+{
+  "format_version": "1.20.10",
+  "minecraft:recipe_shaped": {
+    "description": {
+      "identifier": "arsenal:ammo_crate"
+    },
+    "tags": [
+      "crafting_table"
+    ],
+    "pattern": [
+      "WSW",
+      "PCP",
+      "WSW"
+    ],
+    "key": {
+      "W": {
+        "tag": "minecraft:planks"
+      },
+      "S": {
+        "item": "arsenal:steel_ingot"
+      },
+      "P": {
+        "item": "arsenal:polymer"
+      },
+      "C": {
+        "item": "minecraft:chest"
+      }
+    },
+    "result": {
+      "item": "arsenal:ammo_crate",
+      "count": 1
+    },
+    "unlock": [
+      {
+        "item": "minecraft:chest"
+      }
+    ]
+  }
+}

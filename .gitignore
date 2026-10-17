@@ -1,0 +1,7 @@
+# ArsenalCore のビルド生成物・作業フォルダ
+ArsenalCore/ArsenalCore.mcaddon
+ArsenalCore/dist/
+ArsenalCore/tools/node_modules/
+ArsenalCore/tools/.audio_cache/
+ArsenalCore/tools/test/.run*/
+__pycache__/

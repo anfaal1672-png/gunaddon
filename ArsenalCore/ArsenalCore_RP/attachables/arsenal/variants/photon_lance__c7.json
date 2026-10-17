@@ -1,0 +1,36 @@
+{
+  "format_version": "1.10.0",
+  "minecraft:attachable": {
+    "description": {
+      "identifier": "arsenal:photon_lance__c7",
+      "materials": {
+        "default": "entity_alphatest",
+        "enchanted": "entity_alphatest_glint"
+      },
+      "textures": {
+        "default": "textures/entity/arsenal/camo/c7",
+        "enchanted": "textures/misc/enchanted_item_glint"
+      },
+      "geometry": {
+        "default": "geometry.arsenal.photon_lance"
+      },
+      "animations": {
+        "tp": "animation.arsenal.photon_lance.tp",
+        "fp": "animation.arsenal.photon_lance.fp"
+      },
+      "scripts": {
+        "animate": [
+          {
+            "tp": "c.is_first_person == 0.0"
+          },
+          {
+            "fp": "c.is_first_person == 1.0"
+          }
+        ]
+      },
+      "render_controllers": [
+        "controller.render.item_default"
+      ]
+    }
+  }
+}

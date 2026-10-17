@@ -1,0 +1,37 @@
+{
+  "format_version": "1.20.10",
+  "minecraft:recipe_shapeless": {
+    "description": {
+      "identifier": "arsenal:warlord_banner"
+    },
+    "tags": [
+      "crafting_table"
+    ],
+    "ingredients": [
+      {
+        "item": "minecraft:banner"
+      },
+      {
+        "item": "minecraft:emerald",
+        "count": 8
+      },
+      {
+        "item": "arsenal:steel_ingot",
+        "count": 6
+      },
+      {
+        "item": "minecraft:gold_ingot",
+        "count": 4
+      }
+    ],
+    "result": {
+      "item": "arsenal:warlord_banner",
+      "count": 1
+    },
+    "unlock": [
+      {
+        "item": "minecraft:banner"
+      }
+    ]
+  }
+}

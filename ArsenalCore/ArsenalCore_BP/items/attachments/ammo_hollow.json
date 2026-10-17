@@ -1,0 +1,25 @@
+{
+  "format_version": "1.26.30",
+  "minecraft:item": {
+    "description": {
+      "identifier": "arsenal:ammo_hollow",
+      "menu_category": {
+        "category": "equipment"
+      }
+    },
+    "components": {
+      "minecraft:icon": "arsenal_ammo_hollow",
+      "minecraft:display_name": {
+        "value": "item.arsenal.ammo_hollow.name"
+      },
+      "minecraft:max_stack_size": 16,
+      "minecraft:tags": {
+        "tags": [
+          "arsenal:attachment",
+          "arsenal:slot_ammo"
+        ]
+      },
+      "minecraft:rarity": "common"
+    }
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "format_version": "1.10.0",
+  "minecraft:client_entity": {
+    "description": {
+      "identifier": "arsenal:hmg_nest",
+      "materials": {
+        "default": "entity_alphatest"
+      },
+      "textures": {
+        "default": "textures/entity/arsenal/gear/hmg_nest"
+      },
+      "geometry": {
+        "default": "geometry.arsenal.hmg_nest"
+      },
+      "render_controllers": [
+        "controller.render.arsenal.simple"
+      ],
+      "animations": {
+        "aim": "animation.arsenal.hmg_nest.aim"
+      },
+      "scripts": {
+        "animate": [
+          "aim"
+        ]
+      }
+    }
+  }
+}

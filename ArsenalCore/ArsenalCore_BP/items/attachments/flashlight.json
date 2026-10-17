@@ -1,0 +1,25 @@
+{
+  "format_version": "1.26.30",
+  "minecraft:item": {
+    "description": {
+      "identifier": "arsenal:flashlight",
+      "menu_category": {
+        "category": "equipment"
+      }
+    },
+    "components": {
+      "minecraft:icon": "arsenal_flashlight",
+      "minecraft:display_name": {
+        "value": "item.arsenal.flashlight.name"
+      },
+      "minecraft:max_stack_size": 16,
+      "minecraft:tags": {
+        "tags": [
+          "arsenal:attachment",
+          "arsenal:slot_laser"
+        ]
+      },
+      "minecraft:rarity": "common"
+    }
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "format_version": "1.10.0",
+  "minecraft:client_entity": {
+    "description": {
+      "identifier": "arsenal:sentry",
+      "materials": {
+        "default": "entity_alphatest"
+      },
+      "textures": {
+        "default": "textures/entity/arsenal/gear/sentry"
+      },
+      "geometry": {
+        "default": "geometry.arsenal.sentry"
+      },
+      "render_controllers": [
+        "controller.render.arsenal.simple"
+      ],
+      "animations": {
+        "aim": "animation.arsenal.sentry.aim"
+      },
+      "scripts": {
+        "animate": [
+          "aim"
+        ]
+      }
+    }
+  }
+}

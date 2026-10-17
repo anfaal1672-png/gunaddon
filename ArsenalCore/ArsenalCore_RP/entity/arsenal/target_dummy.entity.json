@@ -1,0 +1,24 @@
+{
+  "format_version": "1.10.0",
+  "minecraft:client_entity": {
+    "description": {
+      "identifier": "arsenal:target_dummy",
+      "materials": {
+        "default": "entity_alphatest"
+      },
+      "textures": {
+        "default": "textures/entity/arsenal/target_dummy"
+      },
+      "geometry": {
+        "default": "geometry.arsenal.target_dummy"
+      },
+      "render_controllers": [
+        "controller.render.arsenal.simple"
+      ],
+      "spawn_egg": {
+        "base_color": "#e6e2d4",
+        "overlay_color": "#c02828"
+      }
+    }
+  }
+}

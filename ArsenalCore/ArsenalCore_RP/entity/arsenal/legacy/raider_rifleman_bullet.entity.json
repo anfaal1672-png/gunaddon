@@ -1,0 +1,28 @@
+{
+  "format_version": "1.10.0",
+  "minecraft:client_entity": {
+    "description": {
+      "identifier": "arsenal:raider_rifleman_bullet",
+      "materials": {
+        "default": "entity_alphatest"
+      },
+      "textures": {
+        "default": "textures/entity/arsenal/projectiles"
+      },
+      "geometry": {
+        "default": "geometry.arsenal.proj_flare"
+      },
+      "animations": {
+        "scale": "animation.arsenal.bullet.scale"
+      },
+      "scripts": {
+        "animate": [
+          "scale"
+        ]
+      },
+      "render_controllers": [
+        "controller.render.arsenal.simple"
+      ]
+    }
+  }
+}

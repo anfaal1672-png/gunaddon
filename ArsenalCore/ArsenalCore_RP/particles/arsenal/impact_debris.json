@@ -1,0 +1,72 @@
+{
+  "format_version": "1.26.10",
+  "particle_effect": {
+    "description": {
+      "identifier": "arsenal:impact_debris",
+      "basic_render_parameters": {
+        "material": "particles_alpha",
+        "texture": "textures/particle/arsenal_particles"
+      }
+    },
+    "components": {
+      "minecraft:emitter_rate_instant": {
+        "num_particles": "v.count ?? 6"
+      },
+      "minecraft:emitter_lifetime_once": {
+        "active_time": 0.05
+      },
+      "minecraft:emitter_shape_point": {
+        "direction": [
+          "v.normal.x + math.random(-0.6,0.6)",
+          "v.normal.y + math.random(-0.2,0.8)",
+          "v.normal.z + math.random(-0.6,0.6)"
+        ]
+      },
+      "minecraft:particle_lifetime_expression": {
+        "max_lifetime": "math.random(0.4, 0.9)"
+      },
+      "minecraft:particle_initial_speed": "math.random(2.5, 5.5)",
+      "minecraft:particle_motion_dynamic": {
+        "linear_acceleration": [
+          0,
+          -18,
+          0
+        ],
+        "linear_drag_coefficient": 1.0
+      },
+      "minecraft:particle_motion_collision": {
+        "coefficient_of_restitution": 0.2,
+        "collision_radius": 0.04,
+        "collision_drag": 4.0
+      },
+      "minecraft:particle_appearance_billboard": {
+        "size": [
+          0.045,
+          0.045
+        ],
+        "facing_camera_mode": "rotate_xyz",
+        "uv": {
+          "texture_width": 64,
+          "texture_height": 64,
+          "uv": [
+            40,
+            16
+          ],
+          "uv_size": [
+            8,
+            8
+          ]
+        }
+      },
+      "minecraft:particle_appearance_tinting": {
+        "color": [
+          "v.color.r",
+          "v.color.g",
+          "v.color.b",
+          1.0
+        ]
+      },
+      "minecraft:particle_appearance_lighting": {}
+    }
+  }
+}

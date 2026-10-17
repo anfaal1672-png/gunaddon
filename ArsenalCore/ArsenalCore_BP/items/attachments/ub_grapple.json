@@ -1,0 +1,25 @@
+{
+  "format_version": "1.26.30",
+  "minecraft:item": {
+    "description": {
+      "identifier": "arsenal:ub_grapple",
+      "menu_category": {
+        "category": "equipment"
+      }
+    },
+    "components": {
+      "minecraft:icon": "arsenal_ub_grapple",
+      "minecraft:display_name": {
+        "value": "item.arsenal.ub_grapple.name"
+      },
+      "minecraft:max_stack_size": 16,
+      "minecraft:tags": {
+        "tags": [
+          "arsenal:attachment",
+          "arsenal:slot_underbarrel"
+        ]
+      },
+      "minecraft:rarity": "uncommon"
+    }
+  }
+}

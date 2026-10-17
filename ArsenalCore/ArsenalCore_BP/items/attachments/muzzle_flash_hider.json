@@ -1,0 +1,25 @@
+{
+  "format_version": "1.26.30",
+  "minecraft:item": {
+    "description": {
+      "identifier": "arsenal:muzzle_flash_hider",
+      "menu_category": {
+        "category": "equipment"
+      }
+    },
+    "components": {
+      "minecraft:icon": "arsenal_muzzle_flash_hider",
+      "minecraft:display_name": {
+        "value": "item.arsenal.muzzle_flash_hider.name"
+      },
+      "minecraft:max_stack_size": 16,
+      "minecraft:tags": {
+        "tags": [
+          "arsenal:attachment",
+          "arsenal:slot_muzzle"
+        ]
+      },
+      "minecraft:rarity": "common"
+    }
+  }
+}

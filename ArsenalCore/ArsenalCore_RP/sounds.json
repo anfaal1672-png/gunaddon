@@ -1,0 +1,222 @@
+{
+  "entity_sounds": {
+    "entities": {
+      "arsenal:raider_gunner": {
+        "volume": 1.0,
+        "pitch": [
+          0.9,
+          1.1
+        ],
+        "events": {
+          "ambient": "mob.pillager.idle",
+          "hurt": "mob.pillager.hurt",
+          "death": "mob.pillager.death"
+        }
+      },
+      "arsenal:raider_rifleman": {
+        "volume": 1.0,
+        "pitch": [
+          0.9,
+          1.1
+        ],
+        "events": {
+          "ambient": "mob.pillager.idle",
+          "hurt": "mob.pillager.hurt",
+          "death": "mob.pillager.death"
+        }
+      },
+      "arsenal:raider_sniper": {
+        "volume": 1.0,
+        "pitch": [
+          0.9,
+          1.1
+        ],
+        "events": {
+          "ambient": "mob.pillager.idle",
+          "hurt": "mob.pillager.hurt",
+          "death": "mob.pillager.death"
+        }
+      },
+      "arsenal:raider_heavy": {
+        "volume": 1.0,
+        "pitch": [
+          0.9,
+          1.1
+        ],
+        "events": {
+          "ambient": "mob.pillager.idle",
+          "hurt": "mob.pillager.hurt",
+          "death": "mob.pillager.death"
+        }
+      },
+      "arsenal:raider_captain": {
+        "volume": 1.0,
+        "pitch": [
+          0.9,
+          1.1
+        ],
+        "events": {
+          "ambient": "mob.pillager.idle",
+          "hurt": "mob.pillager.hurt",
+          "death": "mob.pillager.death"
+        }
+      },
+      "arsenal:raider_medic": {
+        "volume": 1.0,
+        "pitch": [
+          0.9,
+          1.1
+        ],
+        "events": {
+          "ambient": "mob.pillager.idle",
+          "hurt": "mob.pillager.hurt",
+          "death": "mob.pillager.death"
+        }
+      },
+      "arsenal:raider_demo": {
+        "volume": 1.0,
+        "pitch": [
+          0.9,
+          1.1
+        ],
+        "events": {
+          "ambient": "mob.pillager.idle",
+          "hurt": "mob.pillager.hurt",
+          "death": "mob.pillager.death"
+        }
+      },
+      "arsenal:raider_dog": {
+        "volume": 1.0,
+        "pitch": [
+          0.9,
+          1.1
+        ],
+        "events": {
+          "ambient": "mob.wolf.growl",
+          "hurt": "mob.wolf.hurt",
+          "death": "mob.wolf.death"
+        }
+      },
+      "arsenal:legion_drone": {
+        "volume": 1.0,
+        "pitch": [
+          0.9,
+          1.1
+        ],
+        "events": {
+          "hurt": "mob.irongolem.hit",
+          "death": "mob.irongolem.death",
+          "step": "mob.irongolem.walk"
+        }
+      },
+      "arsenal:legion_trooper": {
+        "volume": 1.0,
+        "pitch": [
+          0.9,
+          1.1
+        ],
+        "events": {
+          "hurt": "mob.irongolem.hit",
+          "death": "mob.irongolem.death",
+          "step": "mob.irongolem.walk"
+        }
+      },
+      "arsenal:legion_shield": {
+        "volume": 1.0,
+        "pitch": [
+          0.9,
+          1.1
+        ],
+        "events": {
+          "hurt": "mob.irongolem.hit",
+          "death": "mob.irongolem.death",
+          "step": "mob.irongolem.walk"
+        }
+      },
+      "arsenal:legion_mortar": {
+        "volume": 1.0,
+        "pitch": [
+          0.9,
+          1.1
+        ],
+        "events": {
+          "hurt": "mob.irongolem.hit",
+          "death": "mob.irongolem.death",
+          "step": "mob.irongolem.walk"
+        }
+      },
+      "arsenal:hollow_runner": {
+        "volume": 1.0,
+        "pitch": [
+          0.6,
+          0.8
+        ],
+        "events": {
+          "ambient": "mob.zombie.say",
+          "hurt": "mob.zombie.hurt",
+          "death": "mob.zombie.death"
+        }
+      },
+      "arsenal:hollow_bloater": {
+        "volume": 1.0,
+        "pitch": [
+          0.6,
+          0.8
+        ],
+        "events": {
+          "ambient": "mob.zombie.say",
+          "hurt": "mob.zombie.hurt",
+          "death": "mob.zombie.death"
+        }
+      },
+      "arsenal:hollow_brute": {
+        "volume": 1.0,
+        "pitch": [
+          0.6,
+          0.8
+        ],
+        "events": {
+          "ambient": "mob.zombie.say",
+          "hurt": "mob.zombie.hurt",
+          "death": "mob.zombie.death"
+        }
+      },
+      "arsenal:boss_warlord": {
+        "volume": 1.0,
+        "pitch": [
+          0.8,
+          0.9
+        ],
+        "events": {
+          "ambient": "mob.pillager.idle",
+          "hurt": "mob.pillager.hurt",
+          "death": "mob.ravager.death"
+        }
+      },
+      "arsenal:boss_juggernaut": {
+        "volume": 1.2,
+        "pitch": [
+          0.6,
+          0.7
+        ],
+        "events": {
+          "hurt": "mob.irongolem.hit",
+          "death": "mob.irongolem.death",
+          "step": "mob.irongolem.walk"
+        }
+      },
+      "arsenal:quartermaster": {
+        "volume": 1.0,
+        "pitch": [
+          0.9,
+          1.0
+        ],
+        "events": {
+          "ambient": "mob.villager.idle",
+          "hurt": "mob.villager.hit",
+          "death": "mob.villager.death"
+        }
+      }
+    }
+  }
+}

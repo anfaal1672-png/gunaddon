@@ -1,0 +1,58 @@
+{
+  "format_version": "1.10.0",
+  "render_controllers": {
+    "controller.render.arsenal.projectile": {
+      "arrays": {
+        "geometries": {
+          "Array.geos": [
+            "Geometry.frag",
+            "Geometry.impact",
+            "Geometry.smoke",
+            "Geometry.flash",
+            "Geometry.molotov",
+            "Geometry.sticky",
+            "Geometry.c4",
+            "Geometry.mine",
+            "Geometry.gl40",
+            "Geometry.rocket",
+            "Geometry.flare",
+            "Geometry.hook",
+            "Geometry.seeker",
+            "Geometry.knife",
+            "Geometry.gas",
+            "Geometry.emp",
+            "Geometry.cluster",
+            "Geometry.decoy",
+            "Geometry.snap",
+            "Geometry.mortar",
+            "Geometry.plasma",
+            "Geometry.needle",
+            "Geometry.bomblet",
+            "Geometry.blade",
+            "Geometry.missile"
+          ]
+        }
+      },
+      "geometry": "Array.geos[q.property('arsenal:kind')]",
+      "materials": [
+        {
+          "*": "Material.default"
+        }
+      ],
+      "textures": [
+        "Texture.default"
+      ]
+    },
+    "controller.render.arsenal.simple": {
+      "geometry": "Geometry.default",
+      "materials": [
+        {
+          "*": "Material.default"
+        }
+      ],
+      "textures": [
+        "Texture.default"
+      ]
+    }
+  }
+}

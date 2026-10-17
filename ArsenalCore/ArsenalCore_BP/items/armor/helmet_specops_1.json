@@ -1,0 +1,47 @@
+{
+  "format_version": "1.26.30",
+  "minecraft:item": {
+    "description": {
+      "identifier": "arsenal:helmet_specops_1",
+      "menu_category": {
+        "category": "equipment"
+      }
+    },
+    "components": {
+      "minecraft:icon": "arsenal_helmet_specops_1",
+      "minecraft:display_name": {
+        "value": "item.arsenal.helmet_specops_1.name"
+      },
+      "minecraft:max_stack_size": 1,
+      "minecraft:tags": {
+        "tags": [
+          "arsenal:armor",
+          "arsenal:armor_specops",
+          "minecraft:is_armor"
+        ]
+      },
+      "minecraft:rarity": "common",
+      "minecraft:wearable": {
+        "slot": "slot.armor.head",
+        "protection": 2
+      },
+      "minecraft:durability": {
+        "max_durability": 320
+      },
+      "minecraft:enchantable": {
+        "slot": "armor_head",
+        "value": 10
+      },
+      "minecraft:repairable": {
+        "repair_items": [
+          {
+            "items": [
+              "arsenal:steel_ingot"
+            ],
+            "repair_amount": "context.other->q.remaining_durability + 0.25 * context.other->q.max_durability"
+          }
+        ]
+      }
+    }
+  }
+}

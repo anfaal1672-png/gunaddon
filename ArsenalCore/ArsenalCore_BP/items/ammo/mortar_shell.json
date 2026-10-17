@@ -1,0 +1,24 @@
+{
+  "format_version": "1.26.30",
+  "minecraft:item": {
+    "description": {
+      "identifier": "arsenal:mortar_shell",
+      "menu_category": {
+        "category": "items"
+      }
+    },
+    "components": {
+      "minecraft:icon": "arsenal_mortar_shell",
+      "minecraft:display_name": {
+        "value": "item.arsenal.mortar_shell.name"
+      },
+      "minecraft:max_stack_size": 64,
+      "minecraft:tags": {
+        "tags": [
+          "arsenal:ammo",
+          "arsenal:ammo_mortar"
+        ]
+      }
+    }
+  }
+}

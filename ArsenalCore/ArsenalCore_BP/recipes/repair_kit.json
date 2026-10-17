@@ -1,0 +1,32 @@
+{
+  "format_version": "1.20.10",
+  "minecraft:recipe_shapeless": {
+    "description": {
+      "identifier": "arsenal:repair_kit"
+    },
+    "tags": [
+      "crafting_table"
+    ],
+    "ingredients": [
+      {
+        "item": "arsenal:steel_ingot",
+        "count": 2
+      },
+      {
+        "item": "arsenal:precision_parts"
+      },
+      {
+        "item": "minecraft:slime_ball"
+      }
+    ],
+    "result": {
+      "item": "arsenal:repair_kit",
+      "count": 1
+    },
+    "unlock": [
+      {
+        "item": "arsenal:steel_ingot"
+      }
+    ]
+  }
+}

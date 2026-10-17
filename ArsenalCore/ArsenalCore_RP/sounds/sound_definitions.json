@@ -1,0 +1,2149 @@
+{
+  "format_version": "1.20.20",
+  "sound_definitions": {
+    "arsenal.fire.pistol": {
+      "category": "player",
+      "min_distance": 2.0,
+      "max_distance": 64.0,
+      "sounds": [
+        {
+          "name": "sounds/arsenal/fire/pistol_1",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        },
+        {
+          "name": "sounds/arsenal/fire/pistol_2",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        },
+        {
+          "name": "sounds/arsenal/fire/pistol_3",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "arsenal.far.pistol": {
+      "category": "player",
+      "min_distance": 16.0,
+      "max_distance": 256.0,
+      "sounds": [
+        {
+          "name": "sounds/arsenal/fire/pistol_far",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "arsenal.fire.magnum": {
+      "category": "player",
+      "min_distance": 2.0,
+      "max_distance": 64.0,
+      "sounds": [
+        {
+          "name": "sounds/arsenal/fire/magnum_1",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        },
+        {
+          "name": "sounds/arsenal/fire/magnum_2",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        },
+        {
+          "name": "sounds/arsenal/fire/magnum_3",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "arsenal.far.magnum": {
+      "category": "player",
+      "min_distance": 16.0,
+      "max_distance": 256.0,
+      "sounds": [
+        {
+          "name": "sounds/arsenal/fire/magnum_far",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "arsenal.fire.smg": {
+      "category": "player",
+      "min_distance": 2.0,
+      "max_distance": 64.0,
+      "sounds": [
+        {
+          "name": "sounds/arsenal/fire/smg_1",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        },
+        {
+          "name": "sounds/arsenal/fire/smg_2",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        },
+        {
+          "name": "sounds/arsenal/fire/smg_3",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "arsenal.far.smg": {
+      "category": "player",
+      "min_distance": 16.0,
+      "max_distance": 256.0,
+      "sounds": [
+        {
+          "name": "sounds/arsenal/fire/smg_far",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "arsenal.fire.smg_heavy": {
+      "category": "player",
+      "min_distance": 2.0,
+      "max_distance": 64.0,
+      "sounds": [
+        {
+          "name": "sounds/arsenal/fire/smg_heavy_1",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        },
+        {
+          "name": "sounds/arsenal/fire/smg_heavy_2",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        },
+        {
+          "name": "sounds/arsenal/fire/smg_heavy_3",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "arsenal.far.smg_heavy": {
+      "category": "player",
+      "min_distance": 16.0,
+      "max_distance": 256.0,
+      "sounds": [
+        {
+          "name": "sounds/arsenal/fire/smg_heavy_far",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "arsenal.fire.rifle": {
+      "category": "player",
+      "min_distance": 2.0,
+      "max_distance": 64.0,
+      "sounds": [
+        {
+          "name": "sounds/arsenal/fire/rifle_1",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        },
+        {
+          "name": "sounds/arsenal/fire/rifle_2",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        },
+        {
+          "name": "sounds/arsenal/fire/rifle_3",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "arsenal.far.rifle": {
+      "category": "player",
+      "min_distance": 16.0,
+      "max_distance": 256.0,
+      "sounds": [
+        {
+          "name": "sounds/arsenal/fire/rifle_far",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "arsenal.fire.rifle_heavy": {
+      "category": "player",
+      "min_distance": 2.0,
+      "max_distance": 64.0,
+      "sounds": [
+        {
+          "name": "sounds/arsenal/fire/rifle_heavy_1",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        },
+        {
+          "name": "sounds/arsenal/fire/rifle_heavy_2",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        },
+        {
+          "name": "sounds/arsenal/fire/rifle_heavy_3",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "arsenal.far.rifle_heavy": {
+      "category": "player",
+      "min_distance": 16.0,
+      "max_distance": 256.0,
+      "sounds": [
+        {
+          "name": "sounds/arsenal/fire/rifle_heavy_far",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "arsenal.fire.battle": {
+      "category": "player",
+      "min_distance": 2.0,
+      "max_distance": 64.0,
+      "sounds": [
+        {
+          "name": "sounds/arsenal/fire/battle_1",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        },
+        {
+          "name": "sounds/arsenal/fire/battle_2",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        },
+        {
+          "name": "sounds/arsenal/fire/battle_3",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "arsenal.far.battle": {
+      "category": "player",
+      "min_distance": 16.0,
+      "max_distance": 256.0,
+      "sounds": [
+        {
+          "name": "sounds/arsenal/fire/battle_far",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "arsenal.fire.sniper": {
+      "category": "player",
+      "min_distance": 2.0,
+      "max_distance": 64.0,
+      "sounds": [
+        {
+          "name": "sounds/arsenal/fire/sniper_1",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        },
+        {
+          "name": "sounds/arsenal/fire/sniper_2",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        },
+        {
+          "name": "sounds/arsenal/fire/sniper_3",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "arsenal.far.sniper": {
+      "category": "player",
+      "min_distance": 16.0,
+      "max_distance": 256.0,
+      "sounds": [
+        {
+          "name": "sounds/arsenal/fire/sniper_far",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "arsenal.fire.antimat": {
+      "category": "player",
+      "min_distance": 2.0,
+      "max_distance": 64.0,
+      "sounds": [
+        {
+          "name": "sounds/arsenal/fire/antimat_1",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        },
+        {
+          "name": "sounds/arsenal/fire/antimat_2",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        },
+        {
+          "name": "sounds/arsenal/fire/antimat_3",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "arsenal.far.antimat": {
+      "category": "player",
+      "min_distance": 16.0,
+      "max_distance": 256.0,
+      "sounds": [
+        {
+          "name": "sounds/arsenal/fire/antimat_far",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "arsenal.fire.shotgun": {
+      "category": "player",
+      "min_distance": 2.0,
+      "max_distance": 64.0,
+      "sounds": [
+        {
+          "name": "sounds/arsenal/fire/shotgun_1",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        },
+        {
+          "name": "sounds/arsenal/fire/shotgun_2",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        },
+        {
+          "name": "sounds/arsenal/fire/shotgun_3",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "arsenal.far.shotgun": {
+      "category": "player",
+      "min_distance": 16.0,
+      "max_distance": 256.0,
+      "sounds": [
+        {
+          "name": "sounds/arsenal/fire/shotgun_far",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "arsenal.fire.lmg": {
+      "category": "player",
+      "min_distance": 2.0,
+      "max_distance": 64.0,
+      "sounds": [
+        {
+          "name": "sounds/arsenal/fire/lmg_1",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        },
+        {
+          "name": "sounds/arsenal/fire/lmg_2",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        },
+        {
+          "name": "sounds/arsenal/fire/lmg_3",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "arsenal.far.lmg": {
+      "category": "player",
+      "min_distance": 16.0,
+      "max_distance": 256.0,
+      "sounds": [
+        {
+          "name": "sounds/arsenal/fire/lmg_far",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "arsenal.fire.lmg_heavy": {
+      "category": "player",
+      "min_distance": 2.0,
+      "max_distance": 64.0,
+      "sounds": [
+        {
+          "name": "sounds/arsenal/fire/lmg_heavy_1",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        },
+        {
+          "name": "sounds/arsenal/fire/lmg_heavy_2",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        },
+        {
+          "name": "sounds/arsenal/fire/lmg_heavy_3",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "arsenal.far.lmg_heavy": {
+      "category": "player",
+      "min_distance": 16.0,
+      "max_distance": 256.0,
+      "sounds": [
+        {
+          "name": "sounds/arsenal/fire/lmg_heavy_far",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "arsenal.fire.rotary": {
+      "category": "player",
+      "min_distance": 2.0,
+      "max_distance": 64.0,
+      "sounds": [
+        {
+          "name": "sounds/arsenal/fire/rotary_1",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        },
+        {
+          "name": "sounds/arsenal/fire/rotary_2",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        },
+        {
+          "name": "sounds/arsenal/fire/rotary_3",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "arsenal.far.rotary": {
+      "category": "player",
+      "min_distance": 16.0,
+      "max_distance": 256.0,
+      "sounds": [
+        {
+          "name": "sounds/arsenal/fire/rotary_far",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "arsenal.fire.hmg": {
+      "category": "player",
+      "min_distance": 2.0,
+      "max_distance": 64.0,
+      "sounds": [
+        {
+          "name": "sounds/arsenal/fire/hmg_1",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        },
+        {
+          "name": "sounds/arsenal/fire/hmg_2",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        },
+        {
+          "name": "sounds/arsenal/fire/hmg_3",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "arsenal.far.hmg": {
+      "category": "player",
+      "min_distance": 16.0,
+      "max_distance": 256.0,
+      "sounds": [
+        {
+          "name": "sounds/arsenal/fire/hmg_far",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "arsenal.fire.suppressed": {
+      "category": "player",
+      "min_distance": 2.0,
+      "max_distance": 40.0,
+      "sounds": [
+        {
+          "name": "sounds/arsenal/fire/suppressed_1",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        },
+        {
+          "name": "sounds/arsenal/fire/suppressed_2",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        },
+        {
+          "name": "sounds/arsenal/fire/suppressed_3",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "arsenal.fire.suppressed_heavy": {
+      "category": "player",
+      "min_distance": 2.0,
+      "max_distance": 40.0,
+      "sounds": [
+        {
+          "name": "sounds/arsenal/fire/suppressed_heavy_1",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        },
+        {
+          "name": "sounds/arsenal/fire/suppressed_heavy_2",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        },
+        {
+          "name": "sounds/arsenal/fire/suppressed_heavy_3",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "arsenal.fire.launcher": {
+      "category": "player",
+      "min_distance": 2.0,
+      "max_distance": 64.0,
+      "sounds": [
+        {
+          "name": "sounds/arsenal/fire/launcher_1",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        },
+        {
+          "name": "sounds/arsenal/fire/launcher_2",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "arsenal.fire.rocket": {
+      "category": "player",
+      "min_distance": 2.0,
+      "max_distance": 64.0,
+      "sounds": [
+        {
+          "name": "sounds/arsenal/fire/rocket_1",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        },
+        {
+          "name": "sounds/arsenal/fire/rocket_2",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "arsenal.fire.energy": {
+      "category": "player",
+      "min_distance": 2.0,
+      "max_distance": 64.0,
+      "sounds": [
+        {
+          "name": "sounds/arsenal/fire/energy_1",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        },
+        {
+          "name": "sounds/arsenal/fire/energy_2",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "arsenal.fire.arc": {
+      "category": "player",
+      "min_distance": 2.0,
+      "max_distance": 64.0,
+      "sounds": [
+        {
+          "name": "sounds/arsenal/fire/arc_1",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        },
+        {
+          "name": "sounds/arsenal/fire/arc_2",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "arsenal.fire.cryo": {
+      "category": "player",
+      "min_distance": 2.0,
+      "max_distance": 64.0,
+      "sounds": [
+        {
+          "name": "sounds/arsenal/fire/cryo_1",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        },
+        {
+          "name": "sounds/arsenal/fire/cryo_2",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "arsenal.fire.rail": {
+      "category": "player",
+      "min_distance": 2.0,
+      "max_distance": 64.0,
+      "sounds": [
+        {
+          "name": "sounds/arsenal/fire/rail_1",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "arsenal.fire.grapple": {
+      "category": "player",
+      "min_distance": 2.0,
+      "max_distance": 64.0,
+      "sounds": [
+        {
+          "name": "sounds/arsenal/fire/grapple_1",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "arsenal.fire.flare": {
+      "category": "player",
+      "min_distance": 2.0,
+      "max_distance": 64.0,
+      "sounds": [
+        {
+          "name": "sounds/arsenal/fire/flare_1",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "arsenal.mech.mag_out": {
+      "category": "player",
+      "min_distance": 2.0,
+      "max_distance": 16.0,
+      "sounds": [
+        {
+          "name": "sounds/arsenal/mech/mag_out_1",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        },
+        {
+          "name": "sounds/arsenal/mech/mag_out_2",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "arsenal.mech.mag_in": {
+      "category": "player",
+      "min_distance": 2.0,
+      "max_distance": 16.0,
+      "sounds": [
+        {
+          "name": "sounds/arsenal/mech/mag_in_1",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        },
+        {
+          "name": "sounds/arsenal/mech/mag_in_2",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "arsenal.mech.bolt_back": {
+      "category": "player",
+      "min_distance": 2.0,
+      "max_distance": 16.0,
+      "sounds": [
+        {
+          "name": "sounds/arsenal/mech/bolt_back_1",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        },
+        {
+          "name": "sounds/arsenal/mech/bolt_back_2",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "arsenal.mech.bolt_forward": {
+      "category": "player",
+      "min_distance": 2.0,
+      "max_distance": 16.0,
+      "sounds": [
+        {
+          "name": "sounds/arsenal/mech/bolt_forward_1",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        },
+        {
+          "name": "sounds/arsenal/mech/bolt_forward_2",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "arsenal.mech.shell_insert": {
+      "category": "player",
+      "min_distance": 2.0,
+      "max_distance": 16.0,
+      "sounds": [
+        {
+          "name": "sounds/arsenal/mech/shell_insert_1",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        },
+        {
+          "name": "sounds/arsenal/mech/shell_insert_2",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "arsenal.mech.pump": {
+      "category": "player",
+      "min_distance": 2.0,
+      "max_distance": 16.0,
+      "sounds": [
+        {
+          "name": "sounds/arsenal/mech/pump_1",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        },
+        {
+          "name": "sounds/arsenal/mech/pump_2",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "arsenal.mech.break_open": {
+      "category": "player",
+      "min_distance": 2.0,
+      "max_distance": 16.0,
+      "sounds": [
+        {
+          "name": "sounds/arsenal/mech/break_open_1",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        },
+        {
+          "name": "sounds/arsenal/mech/break_open_2",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "arsenal.mech.break_close": {
+      "category": "player",
+      "min_distance": 2.0,
+      "max_distance": 16.0,
+      "sounds": [
+        {
+          "name": "sounds/arsenal/mech/break_close_1",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        },
+        {
+          "name": "sounds/arsenal/mech/break_close_2",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "arsenal.mech.belt": {
+      "category": "player",
+      "min_distance": 2.0,
+      "max_distance": 16.0,
+      "sounds": [
+        {
+          "name": "sounds/arsenal/mech/belt_1",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        },
+        {
+          "name": "sounds/arsenal/mech/belt_2",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "arsenal.mech.heavy_load": {
+      "category": "player",
+      "min_distance": 2.0,
+      "max_distance": 16.0,
+      "sounds": [
+        {
+          "name": "sounds/arsenal/mech/heavy_load_1",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        },
+        {
+          "name": "sounds/arsenal/mech/heavy_load_2",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "arsenal.mech.revolver_spin": {
+      "category": "player",
+      "min_distance": 2.0,
+      "max_distance": 16.0,
+      "sounds": [
+        {
+          "name": "sounds/arsenal/mech/revolver_spin_1",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        },
+        {
+          "name": "sounds/arsenal/mech/revolver_spin_2",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "arsenal.mech.dry_fire": {
+      "category": "player",
+      "min_distance": 2.0,
+      "max_distance": 16.0,
+      "sounds": [
+        {
+          "name": "sounds/arsenal/mech/dry_fire_1",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        },
+        {
+          "name": "sounds/arsenal/mech/dry_fire_2",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "arsenal.mech.mode_switch": {
+      "category": "player",
+      "min_distance": 2.0,
+      "max_distance": 16.0,
+      "sounds": [
+        {
+          "name": "sounds/arsenal/mech/mode_switch_1",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        },
+        {
+          "name": "sounds/arsenal/mech/mode_switch_2",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "arsenal.mech.equip": {
+      "category": "player",
+      "min_distance": 2.0,
+      "max_distance": 16.0,
+      "sounds": [
+        {
+          "name": "sounds/arsenal/mech/equip_1",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        },
+        {
+          "name": "sounds/arsenal/mech/equip_2",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "arsenal.mech.jam": {
+      "category": "player",
+      "min_distance": 2.0,
+      "max_distance": 16.0,
+      "sounds": [
+        {
+          "name": "sounds/arsenal/mech/jam_1",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        },
+        {
+          "name": "sounds/arsenal/mech/jam_2",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "arsenal.mech.cell_out": {
+      "category": "player",
+      "min_distance": 2.0,
+      "max_distance": 16.0,
+      "sounds": [
+        {
+          "name": "sounds/arsenal/mech/cell_out_1",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "arsenal.mech.cell_in": {
+      "category": "player",
+      "min_distance": 2.0,
+      "max_distance": 16.0,
+      "sounds": [
+        {
+          "name": "sounds/arsenal/mech/cell_in_1",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "arsenal.fx.hit": {
+      "category": "ui",
+      "min_distance": 2.0,
+      "max_distance": 16.0,
+      "sounds": [
+        {
+          "name": "sounds/arsenal/fx/hit_1",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        },
+        {
+          "name": "sounds/arsenal/fx/hit_2",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "arsenal.fx.headshot": {
+      "category": "ui",
+      "min_distance": 2.0,
+      "max_distance": 16.0,
+      "sounds": [
+        {
+          "name": "sounds/arsenal/fx/headshot_1",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "arsenal.fx.kill": {
+      "category": "ui",
+      "min_distance": 2.0,
+      "max_distance": 16.0,
+      "sounds": [
+        {
+          "name": "sounds/arsenal/fx/kill_1",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "arsenal.fx.lock_beep": {
+      "category": "ui",
+      "min_distance": 2.0,
+      "max_distance": 16.0,
+      "sounds": [
+        {
+          "name": "sounds/arsenal/fx/lock_beep_1",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "arsenal.fx.lock_on": {
+      "category": "ui",
+      "min_distance": 2.0,
+      "max_distance": 16.0,
+      "sounds": [
+        {
+          "name": "sounds/arsenal/fx/lock_on_1",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "arsenal.fx.charge": {
+      "category": "player",
+      "min_distance": 2.0,
+      "max_distance": 16.0,
+      "sounds": [
+        {
+          "name": "sounds/arsenal/fx/charge_1",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "arsenal.fx.heat_vent": {
+      "category": "player",
+      "min_distance": 2.0,
+      "max_distance": 16.0,
+      "sounds": [
+        {
+          "name": "sounds/arsenal/fx/heat_vent_1",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "arsenal.fx.overheat": {
+      "category": "player",
+      "min_distance": 2.0,
+      "max_distance": 16.0,
+      "sounds": [
+        {
+          "name": "sounds/arsenal/fx/overheat_1",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "arsenal.fx.grenade_pin": {
+      "category": "player",
+      "min_distance": 2.0,
+      "max_distance": 16.0,
+      "sounds": [
+        {
+          "name": "sounds/arsenal/fx/grenade_pin_1",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "arsenal.fx.bounce": {
+      "category": "player",
+      "min_distance": 2.0,
+      "max_distance": 16.0,
+      "sounds": [
+        {
+          "name": "sounds/arsenal/fx/bounce_1",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        },
+        {
+          "name": "sounds/arsenal/fx/bounce_2",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "arsenal.fx.flash_ring": {
+      "category": "player",
+      "min_distance": 2.0,
+      "max_distance": 16.0,
+      "sounds": [
+        {
+          "name": "sounds/arsenal/fx/flash_ring_1",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "arsenal.fx.breath_in": {
+      "category": "player",
+      "min_distance": 2.0,
+      "max_distance": 16.0,
+      "sounds": [
+        {
+          "name": "sounds/arsenal/fx/breath_in_1",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "arsenal.fx.breath_out": {
+      "category": "player",
+      "min_distance": 2.0,
+      "max_distance": 16.0,
+      "sounds": [
+        {
+          "name": "sounds/arsenal/fx/breath_out_1",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "arsenal.fx.craft": {
+      "category": "player",
+      "min_distance": 2.0,
+      "max_distance": 16.0,
+      "sounds": [
+        {
+          "name": "sounds/arsenal/fx/craft_1",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "arsenal.fx.repair": {
+      "category": "player",
+      "min_distance": 2.0,
+      "max_distance": 16.0,
+      "sounds": [
+        {
+          "name": "sounds/arsenal/fx/repair_1",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "arsenal.fx.c4_beep": {
+      "category": "player",
+      "min_distance": 2.0,
+      "max_distance": 16.0,
+      "sounds": [
+        {
+          "name": "sounds/arsenal/fx/c4_beep_1",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "arsenal.fx.mine_arm": {
+      "category": "player",
+      "min_distance": 2.0,
+      "max_distance": 16.0,
+      "sounds": [
+        {
+          "name": "sounds/arsenal/fx/mine_arm_1",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "arsenal.fx.spin_up": {
+      "category": "player",
+      "min_distance": 2.0,
+      "max_distance": 16.0,
+      "sounds": [
+        {
+          "name": "sounds/arsenal/fx/spin_up_1",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "arsenal.fx.spin_down": {
+      "category": "player",
+      "min_distance": 2.0,
+      "max_distance": 16.0,
+      "sounds": [
+        {
+          "name": "sounds/arsenal/fx/spin_down_1",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "arsenal.fx.casing": {
+      "category": "player",
+      "min_distance": 2.0,
+      "max_distance": 16.0,
+      "sounds": [
+        {
+          "name": "sounds/arsenal/fx/casing_1",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        },
+        {
+          "name": "sounds/arsenal/fx/casing_2",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        },
+        {
+          "name": "sounds/arsenal/fx/casing_3",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "arsenal.fx.explosion": {
+      "category": "player",
+      "min_distance": 4.0,
+      "max_distance": 96.0,
+      "sounds": [
+        {
+          "name": "sounds/arsenal/fx/explosion_1",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        },
+        {
+          "name": "sounds/arsenal/fx/explosion_2",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "arsenal.fx.explosion_far": {
+      "category": "player",
+      "min_distance": 4.0,
+      "max_distance": 320.0,
+      "sounds": [
+        {
+          "name": "sounds/arsenal/fx/explosion_far_1",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "arsenal.fx.flash_bang": {
+      "category": "player",
+      "min_distance": 4.0,
+      "max_distance": 64.0,
+      "sounds": [
+        {
+          "name": "sounds/arsenal/fx/flash_bang_1",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "arsenal.fx.smoke": {
+      "category": "player",
+      "min_distance": 1.0,
+      "max_distance": 24.0,
+      "sounds": [
+        {
+          "name": "sounds/arsenal/fx/smoke_1",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "arsenal.fx.glass": {
+      "category": "player",
+      "min_distance": 1.0,
+      "max_distance": 24.0,
+      "sounds": [
+        {
+          "name": "sounds/arsenal/fx/glass_1",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "arsenal.fx.fire": {
+      "category": "player",
+      "min_distance": 1.0,
+      "max_distance": 24.0,
+      "sounds": [
+        {
+          "name": "sounds/arsenal/fx/fire_1",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "arsenal.fx.impact_block": {
+      "category": "neutral",
+      "min_distance": 1.0,
+      "max_distance": 24.0,
+      "sounds": [
+        {
+          "name": "sounds/arsenal/fx/impact_block_1",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        },
+        {
+          "name": "sounds/arsenal/fx/impact_block_2",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        },
+        {
+          "name": "sounds/arsenal/fx/impact_block_3",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "arsenal.fx.impact_flesh": {
+      "category": "neutral",
+      "min_distance": 1.0,
+      "max_distance": 24.0,
+      "sounds": [
+        {
+          "name": "sounds/arsenal/fx/impact_flesh_1",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        },
+        {
+          "name": "sounds/arsenal/fx/impact_flesh_2",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "arsenal.fx.ricochet": {
+      "category": "player",
+      "min_distance": 1.0,
+      "max_distance": 24.0,
+      "sounds": [
+        {
+          "name": "sounds/arsenal/fx/ricochet_1",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        },
+        {
+          "name": "sounds/arsenal/fx/ricochet_2",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        },
+        {
+          "name": "sounds/arsenal/fx/ricochet_3",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "arsenal.fx.whizz": {
+      "category": "player",
+      "min_distance": 1.0,
+      "max_distance": 24.0,
+      "sounds": [
+        {
+          "name": "sounds/arsenal/fx/whizz_1",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        },
+        {
+          "name": "sounds/arsenal/fx/whizz_2",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "arsenal.in.pistol": {
+      "category": "player",
+      "min_distance": 2.0,
+      "max_distance": 48.0,
+      "sounds": [
+        {
+          "name": "sounds/arsenal/fire/pistol_in_1",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "arsenal.in.magnum": {
+      "category": "player",
+      "min_distance": 2.0,
+      "max_distance": 48.0,
+      "sounds": [
+        {
+          "name": "sounds/arsenal/fire/magnum_in_1",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "arsenal.in.smg": {
+      "category": "player",
+      "min_distance": 2.0,
+      "max_distance": 48.0,
+      "sounds": [
+        {
+          "name": "sounds/arsenal/fire/smg_in_1",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "arsenal.in.smg_heavy": {
+      "category": "player",
+      "min_distance": 2.0,
+      "max_distance": 48.0,
+      "sounds": [
+        {
+          "name": "sounds/arsenal/fire/smg_heavy_in_1",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "arsenal.in.rifle": {
+      "category": "player",
+      "min_distance": 2.0,
+      "max_distance": 48.0,
+      "sounds": [
+        {
+          "name": "sounds/arsenal/fire/rifle_in_1",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "arsenal.in.rifle_heavy": {
+      "category": "player",
+      "min_distance": 2.0,
+      "max_distance": 48.0,
+      "sounds": [
+        {
+          "name": "sounds/arsenal/fire/rifle_heavy_in_1",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "arsenal.in.battle": {
+      "category": "player",
+      "min_distance": 2.0,
+      "max_distance": 48.0,
+      "sounds": [
+        {
+          "name": "sounds/arsenal/fire/battle_in_1",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "arsenal.in.sniper": {
+      "category": "player",
+      "min_distance": 2.0,
+      "max_distance": 48.0,
+      "sounds": [
+        {
+          "name": "sounds/arsenal/fire/sniper_in_1",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "arsenal.in.antimat": {
+      "category": "player",
+      "min_distance": 2.0,
+      "max_distance": 48.0,
+      "sounds": [
+        {
+          "name": "sounds/arsenal/fire/antimat_in_1",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "arsenal.in.shotgun": {
+      "category": "player",
+      "min_distance": 2.0,
+      "max_distance": 48.0,
+      "sounds": [
+        {
+          "name": "sounds/arsenal/fire/shotgun_in_1",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "arsenal.in.lmg": {
+      "category": "player",
+      "min_distance": 2.0,
+      "max_distance": 48.0,
+      "sounds": [
+        {
+          "name": "sounds/arsenal/fire/lmg_in_1",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "arsenal.in.lmg_heavy": {
+      "category": "player",
+      "min_distance": 2.0,
+      "max_distance": 48.0,
+      "sounds": [
+        {
+          "name": "sounds/arsenal/fire/lmg_heavy_in_1",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "arsenal.in.rotary": {
+      "category": "player",
+      "min_distance": 2.0,
+      "max_distance": 48.0,
+      "sounds": [
+        {
+          "name": "sounds/arsenal/fire/rotary_in_1",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "arsenal.in.hmg": {
+      "category": "player",
+      "min_distance": 2.0,
+      "max_distance": 48.0,
+      "sounds": [
+        {
+          "name": "sounds/arsenal/fire/hmg_in_1",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "arsenal.fire.flamer": {
+      "category": "player",
+      "min_distance": 2.0,
+      "max_distance": 48.0,
+      "sounds": [
+        {
+          "name": "sounds/arsenal/fire/flamer_1",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        },
+        {
+          "name": "sounds/arsenal/fire/flamer_2",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "arsenal.fire.beam": {
+      "category": "player",
+      "min_distance": 2.0,
+      "max_distance": 48.0,
+      "sounds": [
+        {
+          "name": "sounds/arsenal/fire/beam_1",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        },
+        {
+          "name": "sounds/arsenal/fire/beam_2",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "arsenal.fire.gravity": {
+      "category": "player",
+      "min_distance": 2.0,
+      "max_distance": 48.0,
+      "sounds": [
+        {
+          "name": "sounds/arsenal/fire/gravity_1",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        },
+        {
+          "name": "sounds/arsenal/fire/gravity_2",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "arsenal.fire.plasma": {
+      "category": "player",
+      "min_distance": 2.0,
+      "max_distance": 48.0,
+      "sounds": [
+        {
+          "name": "sounds/arsenal/fire/plasma_1",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        },
+        {
+          "name": "sounds/arsenal/fire/plasma_2",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "arsenal.fire.needle": {
+      "category": "player",
+      "min_distance": 2.0,
+      "max_distance": 48.0,
+      "sounds": [
+        {
+          "name": "sounds/arsenal/fire/needle_1",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        },
+        {
+          "name": "sounds/arsenal/fire/needle_2",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "arsenal.fire.sonic": {
+      "category": "player",
+      "min_distance": 2.0,
+      "max_distance": 48.0,
+      "sounds": [
+        {
+          "name": "sounds/arsenal/fire/sonic_1",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        },
+        {
+          "name": "sounds/arsenal/fire/sonic_2",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "arsenal.fire.mortar": {
+      "category": "player",
+      "min_distance": 2.0,
+      "max_distance": 48.0,
+      "sounds": [
+        {
+          "name": "sounds/arsenal/fire/mortar_1",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        },
+        {
+          "name": "sounds/arsenal/fire/mortar_2",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "arsenal.melee.swing": {
+      "category": "player",
+      "min_distance": 1.0,
+      "max_distance": 24.0,
+      "sounds": [
+        {
+          "name": "sounds/arsenal/melee/swing_1",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        },
+        {
+          "name": "sounds/arsenal/melee/swing_2",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "arsenal.melee.swing_heavy": {
+      "category": "player",
+      "min_distance": 1.0,
+      "max_distance": 24.0,
+      "sounds": [
+        {
+          "name": "sounds/arsenal/melee/swing_heavy_1",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "arsenal.melee.hit": {
+      "category": "player",
+      "min_distance": 1.0,
+      "max_distance": 24.0,
+      "sounds": [
+        {
+          "name": "sounds/arsenal/melee/hit_1",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        },
+        {
+          "name": "sounds/arsenal/melee/hit_2",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "arsenal.melee.hit_metal": {
+      "category": "player",
+      "min_distance": 1.0,
+      "max_distance": 24.0,
+      "sounds": [
+        {
+          "name": "sounds/arsenal/melee/hit_metal_1",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "arsenal.melee.zap": {
+      "category": "player",
+      "min_distance": 1.0,
+      "max_distance": 24.0,
+      "sounds": [
+        {
+          "name": "sounds/arsenal/melee/zap_1",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "arsenal.melee.throw": {
+      "category": "player",
+      "min_distance": 1.0,
+      "max_distance": 24.0,
+      "sounds": [
+        {
+          "name": "sounds/arsenal/melee/throw_1",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "arsenal.armor.plate_hit": {
+      "category": "player",
+      "min_distance": 1.0,
+      "max_distance": 24.0,
+      "sounds": [
+        {
+          "name": "sounds/arsenal/armor/plate_hit_1",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        },
+        {
+          "name": "sounds/arsenal/armor/plate_hit_2",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "arsenal.armor.plate_break": {
+      "category": "player",
+      "min_distance": 1.0,
+      "max_distance": 24.0,
+      "sounds": [
+        {
+          "name": "sounds/arsenal/armor/plate_break_1",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "arsenal.armor.plate_insert": {
+      "category": "player",
+      "min_distance": 1.0,
+      "max_distance": 24.0,
+      "sounds": [
+        {
+          "name": "sounds/arsenal/armor/plate_insert_1",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "arsenal.armor.helmet_ping": {
+      "category": "player",
+      "min_distance": 1.0,
+      "max_distance": 24.0,
+      "sounds": [
+        {
+          "name": "sounds/arsenal/armor/helmet_ping_1",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "arsenal.vehicle.engine": {
+      "category": "player",
+      "min_distance": 1.0,
+      "max_distance": 24.0,
+      "sounds": [
+        {
+          "name": "sounds/arsenal/vehicle/engine_1",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "arsenal.vehicle.engine_rev": {
+      "category": "player",
+      "min_distance": 1.0,
+      "max_distance": 24.0,
+      "sounds": [
+        {
+          "name": "sounds/arsenal/vehicle/engine_rev_1",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "arsenal.vehicle.horn": {
+      "category": "player",
+      "min_distance": 1.0,
+      "max_distance": 24.0,
+      "sounds": [
+        {
+          "name": "sounds/arsenal/vehicle/horn_1",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "arsenal.boss.warlord_roar": {
+      "category": "hostile",
+      "min_distance": 4.0,
+      "max_distance": 64.0,
+      "sounds": [
+        {
+          "name": "sounds/arsenal/boss/warlord_roar_1",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        },
+        {
+          "name": "sounds/arsenal/boss/warlord_roar_2",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "arsenal.boss.juggernaut_roar": {
+      "category": "hostile",
+      "min_distance": 4.0,
+      "max_distance": 64.0,
+      "sounds": [
+        {
+          "name": "sounds/arsenal/boss/juggernaut_roar_1",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "arsenal.boss.servo": {
+      "category": "hostile",
+      "min_distance": 4.0,
+      "max_distance": 64.0,
+      "sounds": [
+        {
+          "name": "sounds/arsenal/boss/servo_1",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        },
+        {
+          "name": "sounds/arsenal/boss/servo_2",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "arsenal.boss.stomp": {
+      "category": "hostile",
+      "min_distance": 4.0,
+      "max_distance": 64.0,
+      "sounds": [
+        {
+          "name": "sounds/arsenal/boss/stomp_1",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "arsenal.boss.emp_charge": {
+      "category": "hostile",
+      "min_distance": 4.0,
+      "max_distance": 64.0,
+      "sounds": [
+        {
+          "name": "sounds/arsenal/boss/emp_charge_1",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "arsenal.boss.emp_blast": {
+      "category": "hostile",
+      "min_distance": 4.0,
+      "max_distance": 64.0,
+      "sounds": [
+        {
+          "name": "sounds/arsenal/boss/emp_blast_1",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "arsenal.ui.buy": {
+      "category": "ui",
+      "min_distance": 1.0,
+      "max_distance": 24.0,
+      "sounds": [
+        {
+          "name": "sounds/arsenal/ui/buy_1",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "arsenal.ui.sell": {
+      "category": "ui",
+      "min_distance": 1.0,
+      "max_distance": 24.0,
+      "sounds": [
+        {
+          "name": "sounds/arsenal/ui/sell_1",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "arsenal.ui.levelup": {
+      "category": "ui",
+      "min_distance": 1.0,
+      "max_distance": 24.0,
+      "sounds": [
+        {
+          "name": "sounds/arsenal/ui/levelup_1",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "arsenal.ui.rankup": {
+      "category": "ui",
+      "min_distance": 1.0,
+      "max_distance": 24.0,
+      "sounds": [
+        {
+          "name": "sounds/arsenal/ui/rankup_1",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "arsenal.ui.challenge": {
+      "category": "ui",
+      "min_distance": 1.0,
+      "max_distance": 24.0,
+      "sounds": [
+        {
+          "name": "sounds/arsenal/ui/challenge_1",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "arsenal.ui.streak_ready": {
+      "category": "ui",
+      "min_distance": 1.0,
+      "max_distance": 24.0,
+      "sounds": [
+        {
+          "name": "sounds/arsenal/ui/streak_ready_1",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "arsenal.ui.radio": {
+      "category": "ui",
+      "min_distance": 1.0,
+      "max_distance": 24.0,
+      "sounds": [
+        {
+          "name": "sounds/arsenal/ui/radio_1",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        },
+        {
+          "name": "sounds/arsenal/ui/radio_2",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "arsenal.ui.error": {
+      "category": "ui",
+      "min_distance": 1.0,
+      "max_distance": 24.0,
+      "sounds": [
+        {
+          "name": "sounds/arsenal/ui/error_1",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "arsenal.world.jet": {
+      "category": "player",
+      "min_distance": 4.0,
+      "max_distance": 160.0,
+      "sounds": [
+        {
+          "name": "sounds/arsenal/world/jet_1",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "arsenal.world.drop_whistle": {
+      "category": "player",
+      "min_distance": 4.0,
+      "max_distance": 64.0,
+      "sounds": [
+        {
+          "name": "sounds/arsenal/world/drop_whistle_1",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "arsenal.world.klaxon": {
+      "category": "player",
+      "min_distance": 4.0,
+      "max_distance": 160.0,
+      "sounds": [
+        {
+          "name": "sounds/arsenal/world/klaxon_1",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "arsenal.world.wave_horn": {
+      "category": "player",
+      "min_distance": 4.0,
+      "max_distance": 160.0,
+      "sounds": [
+        {
+          "name": "sounds/arsenal/world/wave_horn_1",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "arsenal.world.gunship": {
+      "category": "player",
+      "min_distance": 4.0,
+      "max_distance": 160.0,
+      "sounds": [
+        {
+          "name": "sounds/arsenal/world/gunship_1",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "arsenal.world.drone": {
+      "category": "player",
+      "min_distance": 4.0,
+      "max_distance": 64.0,
+      "sounds": [
+        {
+          "name": "sounds/arsenal/world/drone_1",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "arsenal.world.sonar": {
+      "category": "player",
+      "min_distance": 4.0,
+      "max_distance": 64.0,
+      "sounds": [
+        {
+          "name": "sounds/arsenal/world/sonar_1",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "arsenal.gear.heal": {
+      "category": "player",
+      "min_distance": 1.0,
+      "max_distance": 24.0,
+      "sounds": [
+        {
+          "name": "sounds/arsenal/gear/heal_1",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "arsenal.gear.adrenaline": {
+      "category": "player",
+      "min_distance": 1.0,
+      "max_distance": 24.0,
+      "sounds": [
+        {
+          "name": "sounds/arsenal/gear/adrenaline_1",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "arsenal.gear.defib": {
+      "category": "player",
+      "min_distance": 1.0,
+      "max_distance": 24.0,
+      "sounds": [
+        {
+          "name": "sounds/arsenal/gear/defib_1",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "arsenal.gear.emp": {
+      "category": "player",
+      "min_distance": 1.0,
+      "max_distance": 24.0,
+      "sounds": [
+        {
+          "name": "sounds/arsenal/gear/emp_1",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "arsenal.gear.deploy": {
+      "category": "player",
+      "min_distance": 1.0,
+      "max_distance": 24.0,
+      "sounds": [
+        {
+          "name": "sounds/arsenal/gear/deploy_1",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "arsenal.gear.beep": {
+      "category": "player",
+      "min_distance": 1.0,
+      "max_distance": 24.0,
+      "sounds": [
+        {
+          "name": "sounds/arsenal/gear/beep_1",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "arsenal.gear.claymore": {
+      "category": "player",
+      "min_distance": 1.0,
+      "max_distance": 24.0,
+      "sounds": [
+        {
+          "name": "sounds/arsenal/gear/claymore_1",
+          "volume": 1.0,
+          "load_on_low_memory": true
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "format_version": "1.10.0",
+  "minecraft:client_entity": {
+    "description": {
+      "identifier": "arsenal:shield_wall",
+      "materials": {
+        "default": "entity_alphatest"
+      },
+      "textures": {
+        "default": "textures/entity/arsenal/gear/shield_wall"
+      },
+      "geometry": {
+        "default": "geometry.arsenal.shield_wall"
+      },
+      "render_controllers": [
+        "controller.render.arsenal.simple"
+      ]
+    }
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "format_version": "1.26.30",
+  "minecraft:item": {
+    "description": {
+      "identifier": "arsenal:optic_prism3",
+      "menu_category": {
+        "category": "equipment"
+      }
+    },
+    "components": {
+      "minecraft:icon": "arsenal_optic_prism3",
+      "minecraft:display_name": {
+        "value": "item.arsenal.optic_prism3.name"
+      },
+      "minecraft:max_stack_size": 16,
+      "minecraft:tags": {
+        "tags": [
+          "arsenal:attachment",
+          "arsenal:slot_optic"
+        ]
+      },
+      "minecraft:rarity": "uncommon"
+    }
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "format_version": "1.10.0",
+  "minecraft:client_entity": {
+    "description": {
+      "identifier": "arsenal:quartermaster",
+      "materials": {
+        "default": "entity_alphatest"
+      },
+      "textures": {
+        "default": "textures/entity/arsenal/gear/quartermaster"
+      },
+      "geometry": {
+        "default": "geometry.arsenal.quartermaster"
+      },
+      "render_controllers": [
+        "controller.render.arsenal.simple"
+      ],
+      "animations": {
+        "look": "animation.arsenal.raider.look",
+        "walk": "animation.arsenal.raider.walk",
+        "idle": "animation.arsenal.raider.idle"
+      },
+      "scripts": {
+        "animate": [
+          "look",
+          "walk",
+          "idle"
+        ]
+      },
+      "spawn_egg": {
+        "base_color": "#5c6446",
+        "overlay_color": "#e6aa1e"
+      }
+    }
+  }
+}

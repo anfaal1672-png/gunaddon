@@ -1,0 +1,958 @@
+{
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "item",
+          "name": "minecraft:golden_apple",
+          "weight": 20
+        },
+        {
+          "type": "item",
+          "name": "minecraft:appleEnchanted",
+          "weight": 1
+        },
+        {
+          "type": "item",
+          "name": "minecraft:name_tag",
+          "weight": 30
+        },
+        {
+          "type": "item",
+          "name": "minecraft:book",
+          "weight": 10,
+          "functions": [
+            {
+              "function": "enchant_randomly"
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "minecraft:iron_pickaxe",
+          "weight": 5
+        },
+        {
+          "type": "empty",
+          "weight": 5
+        }
+      ]
+    },
+    {
+      "rolls": {
+        "min": 2,
+        "max": 4
+      },
+      "entries": [
+        {
+          "type": "item",
+          "name": "minecraft:iron_ingot",
+          "functions": [
+            {
+              "function": "set_count",
+              "count": {
+                "min": 1,
+                "max": 5
+              }
+            }
+          ],
+          "weight": 10
+        },
+        {
+          "type": "item",
+          "name": "minecraft:gold_ingot",
+          "functions": [
+            {
+              "function": "set_count",
+              "count": {
+                "min": 1,
+                "max": 3
+              }
+            }
+          ],
+          "weight": 5
+        },
+        {
+          "type": "item",
+          "name": "minecraft:redstone",
+          "functions": [
+            {
+              "function": "set_count",
+              "count": {
+                "min": 4,
+                "max": 9
+              }
+            }
+          ],
+          "weight": 5
+        },
+        {
+          "type": "item",
+          "name": "minecraft:dye",
+          "functions": [
+            {
+              "function": "set_data",
+              "data": 4
+            },
+            {
+              "function": "set_count",
+              "count": {
+                "min": 4,
+                "max": 9
+              }
+            }
+          ],
+          "weight": 5
+        },
+        {
+          "type": "item",
+          "name": "minecraft:diamond",
+          "functions": [
+            {
+              "function": "set_count",
+              "count": {
+                "min": 1,
+                "max": 2
+              }
+            }
+          ],
+          "weight": 3
+        },
+        {
+          "type": "item",
+          "name": "minecraft:coal",
+          "functions": [
+            {
+              "function": "set_count",
+              "count": {
+                "min": 3,
+                "max": 8
+              }
+            }
+          ],
+          "weight": 10
+        },
+        {
+          "type": "item",
+          "name": "minecraft:bread",
+          "functions": [
+            {
+              "function": "set_count",
+              "count": {
+                "min": 1,
+                "max": 3
+              }
+            }
+          ],
+          "weight": 15
+        },
+        {
+          "type": "item",
+          "name": "minecraft:melon_seeds",
+          "functions": [
+            {
+              "function": "set_count",
+              "count": {
+                "min": 2,
+                "max": 4
+              }
+            }
+          ],
+          "weight": 10
+        },
+        {
+          "type": "item",
+          "name": "minecraft:pumpkin_seeds",
+          "functions": [
+            {
+              "function": "set_count",
+              "count": {
+                "min": 2,
+                "max": 4
+              }
+            }
+          ],
+          "weight": 10
+        },
+        {
+          "type": "item",
+          "name": "minecraft:beetroot_seeds",
+          "functions": [
+            {
+              "function": "set_count",
+              "count": {
+                "min": 2,
+                "max": 4
+              }
+            }
+          ],
+          "weight": 10
+        },
+        {
+          "type": "item",
+          "name": "minecraft:glow_berries",
+          "functions": [
+            {
+              "function": "set_count",
+              "count": {
+                "min": 3,
+                "max": 6
+              }
+            }
+          ],
+          "weight": 15
+        }
+      ]
+    },
+    {
+      "rolls": 3,
+      "entries": [
+        {
+          "type": "item",
+          "name": "minecraft:music_disc_bounce",
+          "conditions": [
+            {
+              "condition": "biome_has_tag",
+              "tag": "sulfur_caves"
+            }
+          ],
+          "functions": [
+            {
+              "function": "set_count",
+              "count": {
+                "min": 1,
+                "max": 1
+              }
+            }
+          ],
+          "weight": 10
+        },
+        {
+          "type": "item",
+          "name": "minecraft:rail",
+          "functions": [
+            {
+              "function": "set_count",
+              "count": {
+                "min": 4,
+                "max": 8
+              }
+            }
+          ],
+          "weight": 20
+        },
+        {
+          "type": "item",
+          "name": "minecraft:golden_rail",
+          "functions": [
+            {
+              "function": "set_count",
+              "count": {
+                "min": 1,
+                "max": 4
+              }
+            }
+          ],
+          "weight": 5
+        },
+        {
+          "type": "item",
+          "name": "minecraft:detector_rail",
+          "functions": [
+            {
+              "function": "set_count",
+              "count": {
+                "min": 1,
+                "max": 4
+              }
+            }
+          ],
+          "weight": 5
+        },
+        {
+          "type": "item",
+          "name": "minecraft:activator_rail",
+          "functions": [
+            {
+              "function": "set_count",
+              "count": {
+                "min": 1,
+                "max": 4
+              }
+            }
+          ],
+          "weight": 5
+        },
+        {
+          "type": "item",
+          "name": "minecraft:torch",
+          "functions": [
+            {
+              "function": "set_count",
+              "count": {
+                "min": 1,
+                "max": 16
+              }
+            }
+          ],
+          "weight": 15
+        }
+      ]
+    },
+    {
+      "rolls": {
+        "min": 0,
+        "max": 1
+      },
+      "entries": [
+        {
+          "type": "item",
+          "name": "arsenal:vx9",
+          "weight": 3,
+          "functions": [
+            {
+              "function": "set_damage",
+              "damage": {
+                "min": 0.35,
+                "max": 0.9
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "arsenal:flare_pistol",
+          "weight": 3,
+          "functions": [
+            {
+              "function": "set_damage",
+              "damage": {
+                "min": 0.35,
+                "max": 0.9
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "arsenal:mako",
+          "weight": 3,
+          "functions": [
+            {
+              "function": "set_damage",
+              "damage": {
+                "min": 0.35,
+                "max": 0.9
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "arsenal:drifter",
+          "weight": 3,
+          "functions": [
+            {
+              "function": "set_damage",
+              "damage": {
+                "min": 0.35,
+                "max": 0.9
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "arsenal:sentinel",
+          "weight": 3,
+          "functions": [
+            {
+              "function": "set_damage",
+              "damage": {
+                "min": 0.35,
+                "max": 0.9
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "arsenal:zephyr",
+          "weight": 3,
+          "functions": [
+            {
+              "function": "set_damage",
+              "damage": {
+                "min": 0.35,
+                "max": 0.9
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "arsenal:breacher",
+          "weight": 3,
+          "functions": [
+            {
+              "function": "set_damage",
+              "damage": {
+                "min": 0.35,
+                "max": 0.9
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "arsenal:wasp",
+          "weight": 1,
+          "functions": [
+            {
+              "function": "set_damage",
+              "damage": {
+                "min": 0.35,
+                "max": 0.9
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "arsenal:ironclad45",
+          "weight": 1,
+          "functions": [
+            {
+              "function": "set_damage",
+              "damage": {
+                "min": 0.35,
+                "max": 0.9
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "arsenal:midge",
+          "weight": 1,
+          "functions": [
+            {
+              "function": "set_damage",
+              "damage": {
+                "min": 0.35,
+                "max": 0.9
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "arsenal:clawstrike",
+          "weight": 1,
+          "functions": [
+            {
+              "function": "set_damage",
+              "damage": {
+                "min": 0.35,
+                "max": 0.9
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "arsenal:wisp",
+          "weight": 1,
+          "functions": [
+            {
+              "function": "set_damage",
+              "damage": {
+                "min": 0.35,
+                "max": 0.9
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "arsenal:hornet",
+          "weight": 1,
+          "functions": [
+            {
+              "function": "set_damage",
+              "damage": {
+                "min": 0.35,
+                "max": 0.9
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "arsenal:rattler",
+          "weight": 1,
+          "functions": [
+            {
+              "function": "set_damage",
+              "damage": {
+                "min": 0.35,
+                "max": 0.9
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "arsenal:stinger",
+          "weight": 1,
+          "functions": [
+            {
+              "function": "set_damage",
+              "damage": {
+                "min": 0.35,
+                "max": 0.9
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "arsenal:pathfinder",
+          "weight": 1,
+          "functions": [
+            {
+              "function": "set_damage",
+              "damage": {
+                "min": 0.35,
+                "max": 0.9
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "arsenal:quillback",
+          "weight": 1,
+          "functions": [
+            {
+              "function": "set_damage",
+              "damage": {
+                "min": 0.35,
+                "max": 0.9
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "arsenal:tempest",
+          "weight": 1,
+          "functions": [
+            {
+              "function": "set_damage",
+              "damage": {
+                "min": 0.35,
+                "max": 0.9
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "arsenal:echo3",
+          "weight": 1,
+          "functions": [
+            {
+              "function": "set_damage",
+              "damage": {
+                "min": 0.35,
+                "max": 0.9
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "arsenal:nomad",
+          "weight": 1,
+          "functions": [
+            {
+              "function": "set_damage",
+              "damage": {
+                "min": 0.35,
+                "max": 0.9
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "arsenal:garrison",
+          "weight": 1,
+          "functions": [
+            {
+              "function": "set_damage",
+              "damage": {
+                "min": 0.35,
+                "max": 0.9
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "arsenal:ironbark",
+          "weight": 1,
+          "functions": [
+            {
+              "function": "set_damage",
+              "damage": {
+                "min": 0.35,
+                "max": 0.9
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "arsenal:longbow",
+          "weight": 1,
+          "functions": [
+            {
+              "function": "set_damage",
+              "damage": {
+                "min": 0.35,
+                "max": 0.9
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "arsenal:marksman12",
+          "weight": 1,
+          "functions": [
+            {
+              "function": "set_damage",
+              "damage": {
+                "min": 0.35,
+                "max": 0.9
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "arsenal:kitehawk",
+          "weight": 1,
+          "functions": [
+            {
+              "function": "set_damage",
+              "damage": {
+                "min": 0.35,
+                "max": 0.9
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "arsenal:nightjar",
+          "weight": 1,
+          "functions": [
+            {
+              "function": "set_damage",
+              "damage": {
+                "min": 0.35,
+                "max": 0.9
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "arsenal:stillwater",
+          "weight": 1,
+          "functions": [
+            {
+              "function": "set_damage",
+              "damage": {
+                "min": 0.35,
+                "max": 0.9
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "arsenal:coachman",
+          "weight": 1,
+          "functions": [
+            {
+              "function": "set_damage",
+              "damage": {
+                "min": 0.35,
+                "max": 0.9
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "arsenal:slugger",
+          "weight": 1,
+          "functions": [
+            {
+              "function": "set_damage",
+              "damage": {
+                "min": 0.35,
+                "max": 0.9
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "arsenal:lever12",
+          "weight": 1,
+          "functions": [
+            {
+              "function": "set_damage",
+              "damage": {
+                "min": 0.35,
+                "max": 0.9
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "arsenal:mauler",
+          "weight": 1,
+          "functions": [
+            {
+              "function": "set_damage",
+              "damage": {
+                "min": 0.35,
+                "max": 0.9
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "arsenal:juggernaut",
+          "weight": 1,
+          "functions": [
+            {
+              "function": "set_damage",
+              "damage": {
+                "min": 0.35,
+                "max": 0.9
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "arsenal:rampart",
+          "weight": 1,
+          "functions": [
+            {
+              "function": "set_damage",
+              "damage": {
+                "min": 0.35,
+                "max": 0.9
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "arsenal:thumper",
+          "weight": 1,
+          "functions": [
+            {
+              "function": "set_damage",
+              "damage": {
+                "min": 0.35,
+                "max": 0.9
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "arsenal:bouncer",
+          "weight": 1,
+          "functions": [
+            {
+              "function": "set_damage",
+              "damage": {
+                "min": 0.35,
+                "max": 0.9
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "arsenal:grapple",
+          "weight": 1,
+          "functions": [
+            {
+              "function": "set_damage",
+              "damage": {
+                "min": 0.35,
+                "max": 0.9
+              }
+            }
+          ]
+        },
+        {
+          "type": "empty",
+          "weight": 40
+        }
+      ]
+    },
+    {
+      "rolls": {
+        "min": 1,
+        "max": 2
+      },
+      "entries": [
+        {
+          "type": "item",
+          "name": "arsenal:ammo_light",
+          "weight": 6,
+          "functions": [
+            {
+              "function": "set_count",
+              "count": {
+                "min": 6,
+                "max": 20
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "arsenal:ammo_medium",
+          "weight": 6,
+          "functions": [
+            {
+              "function": "set_count",
+              "count": {
+                "min": 6,
+                "max": 20
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "arsenal:ammo_heavy",
+          "weight": 6,
+          "functions": [
+            {
+              "function": "set_count",
+              "count": {
+                "min": 6,
+                "max": 20
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "arsenal:ammo_magnum",
+          "weight": 6,
+          "functions": [
+            {
+              "function": "set_count",
+              "count": {
+                "min": 6,
+                "max": 20
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "arsenal:shell_buck",
+          "weight": 4,
+          "functions": [
+            {
+              "function": "set_count",
+              "count": {
+                "min": 4,
+                "max": 10
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "arsenal:ammo_precision",
+          "weight": 2,
+          "functions": [
+            {
+              "function": "set_count",
+              "count": {
+                "min": 2,
+                "max": 6
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "arsenal:steel_ingot",
+          "weight": 8,
+          "functions": [
+            {
+              "function": "set_count",
+              "count": {
+                "min": 1,
+                "max": 4
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "arsenal:precision_parts",
+          "weight": 5,
+          "functions": [
+            {
+              "function": "set_count",
+              "count": {
+                "min": 1,
+                "max": 3
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "arsenal:polymer",
+          "weight": 5,
+          "functions": [
+            {
+              "function": "set_count",
+              "count": {
+                "min": 1,
+                "max": 3
+              }
+            }
+          ]
+        },
+        {
+          "type": "empty",
+          "weight": 20
+        }
+      ]
+    }
+  ]
+}
