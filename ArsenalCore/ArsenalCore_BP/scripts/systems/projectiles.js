@@ -6,7 +6,7 @@
  * エンジンの投射物を使わず、毎 tick レイで衝突判定して跳ね返り・貼り付き・起爆を制御する。
  * 撃ち手はプレイヤーに限らない（敵 AI・砲台・銃座も同じ弾を使う）。
  */
-import { world, system, MolangVariableMap, Player, LiquidType, ItemStack } from "@minecraft/server";
+import { world, system, MolangVariableMap, Player, ItemStack } from "@minecraft/server";
 import { ENTITY, PROJ_KIND, DATA } from "../config/constants.js";
 import { explosionBreaksBlocks, W as WS } from "../core/settings.js";
 import { traceHitscan, drawTracer, whizzBy, isSupersonic } from "../core/ballistics.js";
@@ -15,6 +15,7 @@ import { isGasImmune } from "../core/armor.js";
 import { emit, playNear, explosionFx, playTo } from "../fx/effects.js";
 import { add, sub, mul, len, norm, dist, dot, faceNormal, rotFromDir, clamp, isLoaded, loadedReach, rand } from "../util/math.js";
 import { safe } from "../util/log.js";
+import { isSolidBlock, startSearch, cancelSearch, segOk, invalidateCell } from "./pathfind.js";
 
 /** 風（ワールド全体でゆっくり変わる。ブロック/tick²） */
 const wind = { x: 0, z: 0, tx: 0, tz: 0 };
@@ -256,21 +257,6 @@ export function countC4(ownerId) {
 //  シミュレーション
 // ---------------------------------------------------------------------------
 
-/**
- * 弾が止まるブロックか（草花・たいまつ・光源ブロック・液体などはすり抜ける）
- * @param {import("@minecraft/server").Block|undefined} b
- */
-function isSolidBlock(b) {
-  if (!b || b.isAir || b.isLiquid) return false;
-  const id = b.typeId;
-  if (id.startsWith("minecraft:light_block") || id === "minecraft:fire" || id === "minecraft:soul_fire" || id === "minecraft:structure_void") return false;
-  try {
-    if (b.canBeDestroyedByLiquidSpread(LiquidType.Water)) return false;
-  } catch {
-    /* 判定できないときは固体扱い */
-  }
-  return true;
-}
 
 /**
  * レイ判定の取りこぼし（ブロックの面上・内部から始まるレイ）を補う：終点がブロックの中なら、進入点を探す
@@ -541,7 +527,7 @@ function tickOne(p) {
   if (!isLoaded(p.dim, p.pos, system.currentTick)) return removeProj(p);
   if (p.age > p.maxAge) {
     if (p.type === "throw" && p.data.t.kind !== "c4" && p.data.t.kind !== "sticky" && p.data.t.kind !== "knife") detonate(p);
-    else if (p.type === "rocket" || p.type === "seeker" || p.type === "mortar") detonate(p);
+    else if (p.type === "rocket" || p.type === "seeker" || p.type === "pathfinder" || p.type === "mortar") detonate(p);
     else {
       if (p.type === "knife") dropKnife(p, p.pos);
       removeProj(p);
@@ -554,6 +540,7 @@ function tickOne(p) {
     case "gl40": return tickGl40(p);
     case "rocket":
     case "seeker": return tickRocket(p);
+    case "pathfinder": return tickPathMissile(p);
     case "flare": return tickFlare(p);
     case "hook": return tickHook(p);
     case "throw": return tickThrow(p, now);
@@ -700,21 +687,152 @@ function tickRocket(p) {
   const h = sweep(p, p.pos, p.vel);
   if (h.kind === "void") return removeProj(p);
   if (h.kind !== "none") {
-    // 直撃：装甲目標には追加ダメージ（対物・対装甲）
-    if (h.kind === "entity") {
-      const src = owner(p.ownerId);
-      const st = p.data.st;
-      if (src && canDamage(src, h.entity) && h.entity.getComponent("minecraft:health")) {
-        const bonus = isArmored(h.entity) ? st.armorBonus ?? 1 : 1;
-        const r = dealDamage(src, h.entity, (st.dmg ?? 6) * bonus * WS().damageMul, { weaponId: p.data.weaponId, kind: "explosive" });
-        hitFeedback(src, r.killed ? "kill" : "hit", r.dealt);
-      }
-    }
+    if (h.kind === "entity") rocketDirectHit(p, h.entity);
     p.pos = add(h.point, mul(dir, -0.3));
     return detonate(p);
   }
   p.pos = add(p.pos, p.vel);
   emit(p.dim, "arsenal:rocket_trail", add(p.pos, mul(dir, -0.4)), undefined, { range: 96 });
+  syncVisual(p);
+}
+
+/** ロケットの直撃：装甲目標には追加ダメージ（対物・対装甲） @param {Proj} p @param {import("@minecraft/server").Entity} target */
+function rocketDirectHit(p, target) {
+  const src = owner(p.ownerId);
+  const st = p.data.st;
+  if (src && canDamage(src, target) && target.getComponent("minecraft:health")) {
+    const bonus = isArmored(target) ? st.armorBonus ?? 1 : 1;
+    const r = dealDamage(src, target, (st.dmg ?? 6) * bonus * WS().damageMul, { weaponId: p.data.weaponId, kind: "explosive" });
+    hitFeedback(src, r.killed ? "kill" : "hit", r.dealt);
+  }
+}
+
+// ---------------------------------------------------------------------------
+//  経路探索ミサイル（アリアドネ）
+//  撃つ前に見つけた道（pathfind.js）の上を飛ぶ。ほかのロケットと同じく、毎 tick の移動はすべてレイで衝突判定する
+//  （ブロックをすり抜けない・ワープしない）。目標が動けば道の終点を合わせ、届かなくなったら今いる場所から探し直す。
+//  探し直している間はその場で待つ。合わせて 3 秒待っても道がなければ、その場で起爆する
+// ---------------------------------------------------------------------------
+
+/**
+ * @param {import("@minecraft/server").Entity} shooter @param {import("../util/math.js").Vec3} muzzle @param {import("../util/math.js").Vec3} dir
+ * @param {any} st @param {string} targetId @param {import("../util/math.js").Vec3[]} path 目から目標までの道
+ */
+export function firePathMissile(shooter, muzzle, dir, st, targetId, path) {
+  const pr = st.projectile ?? { speed: 0.7, accel: 0.08, max: 1.5, power: 3.0 };
+  const dim = shooter.dimension;
+  const start = launchPoint(shooter, muzzle);
+  // 道は目から始まる。銃口から道の 2 点目へ直接行けなければ、いったん目の位置（銃口→目は launchPoint が確かめた区間）を通る
+  const rest = path.slice(1);
+  const pts = rest.length && segOk(dim, start, rest[0]) ? [start, ...rest] : [start, shooter.getHeadLocation(), ...rest];
+  addProj({
+    type: "pathfinder", kind: "seeker", dim, pos: start, vel: mul(norm(dir), pr.speed), ownerId: shooter.id, maxAge: 400,
+    data: { st, accel: pr.accel, max: pr.max, speed: pr.speed, power: pr.power, target: targetId, weaponId: st.id, path: pts, idx: 1, search: null, stall: 0 },
+  }, true);
+}
+
+/** @param {Proj} p */
+function tickPathMissile(p) {
+  const d = p.data;
+  const tgt = d.target ? world.getEntity(d.target) : undefined;
+  if (!tgt || !tgt.isValid || tgt.dimension.id !== p.dim.id) {
+    // 目標が消えた：ふつうのロケットとしてまっすぐ飛ぶ
+    cancelSearch(d.search);
+    p.type = "rocket";
+    d.target = null;
+    return tickRocket(p);
+  }
+  const box = tgt.getAABB();
+  const goal = box.center;
+  const bmin = sub(box.center, box.extent);
+  const bmax = add(box.center, box.extent);
+  const replan = () => {
+    if (!d.search) d.search = startSearch(p.dim, p.pos, { min: bmin, max: bmax }, goal);
+  };
+  /** @type {import("../util/math.js").Vec3[]} */
+  let path = d.path;
+  // 道の終点を目標の今の位置へ合わせる（届かなければ探し直す）
+  const end = path[path.length - 1];
+  if (dist(end, goal) > 0.25) {
+    const base = d.idx >= path.length - 1 ? p.pos : path[path.length - 2];
+    if (segOk(p.dim, base, goal)) path[path.length - 1] = goal;
+    else if (segOk(p.dim, end, goal)) path.push(goal);
+    else replan();
+    // 終点まで来ていたなら、動いた終点へ向かい直す
+    if (d.idx >= path.length) d.idx = path.length - 1;
+  }
+  // 次の区間が今も通れるか（ブロックが置かれた・扉が閉まった）
+  let blocked = d.idx < path.length && !segOk(p.dim, p.pos, path[d.idx]);
+  if (blocked) replan();
+  if (d.search && d.search.state !== "run") {
+    if (d.search.state === "ok" && d.search.path) {
+      d.path = path = [p.pos, ...d.search.path.slice(1)];
+      d.idx = 1;
+      d.stall = 0;
+      blocked = false;
+    }
+    d.search = null;
+  }
+  if (blocked || d.search) {
+    // 探し直している間・次の区間がふさがれている間はその場で待つ（すり抜けない。新しい道は今いる場所から始まる）
+    d.stall++;
+    d.speed = Math.min(d.speed, 0.4);
+    if (d.stall > 60) {
+      cancelSearch(d.search);
+      return detonate(p);
+    }
+    emit(p.dim, "arsenal:rocket_trail", p.pos, undefined, { range: 96 });
+    syncVisual(p);
+    return;
+  }
+  d.speed = Math.min(d.max, d.speed + d.accel);
+  // 道に沿って進む。区間ごとにレイで衝突判定（曲がり角をまたぐ tick も、角を切らずに区間をたどる）
+  let remaining = d.speed;
+  let lastDir = norm(p.vel);
+  for (let guard = 0; remaining > 1e-4 && d.idx < path.length && guard < 16; guard++) {
+    const to = path[d.idx];
+    const seg = sub(to, p.pos);
+    const L = len(seg);
+    if (L < 1e-4) {
+      d.idx++;
+      continue;
+    }
+    const dir = mul(seg, 1 / L);
+    const step = Math.min(L, remaining);
+    const h = sweep(p, p.pos, mul(dir, step));
+    if (h.kind === "void") {
+      cancelSearch(d.search);
+      return removeProj(p);
+    }
+    if (h.kind === "block" && (d.bumps ?? 0) < 4) {
+      // 覚えていたマスの判定が古かった（直前にブロックが置かれた）：ぶつかる手前で止まり、そのマスを調べ直して道を探し直す
+      d.bumps = (d.bumps ?? 0) + 1;
+      invalidateCell(p.dim, h.block.location);
+      const back = Math.max(0, dist(p.pos, h.point) - 0.3);
+      p.pos = add(p.pos, mul(dir, back));
+      replan();
+      break;
+    }
+    if (h.kind !== "none") {
+      if (h.kind === "entity") rocketDirectHit(p, h.entity);
+      cancelSearch(d.search);
+      p.pos = add(h.point, mul(dir, -0.3));
+      return detonate(p);
+    }
+    p.pos = add(p.pos, mul(dir, step));
+    remaining -= step;
+    lastDir = dir;
+    if (step >= L - 1e-6) d.idx++;
+  }
+  p.vel = mul(lastDir, d.speed);
+  // 道の終点（目標の中心）まで来たのに体に触れていない（終点の直前で目標が動いた）：近接信管
+  if (d.idx >= path.length && dist(p.pos, goal) < 1.2) {
+    rocketDirectHit(p, tgt);
+    cancelSearch(d.search);
+    return detonate(p);
+  }
+  if (p.age % 4 === 0) playNear(p.dim, p.pos, "arsenal.fx.lock_beep", { range: 24, volume: 0.4, pitch: 1.8 });
+  emit(p.dim, "arsenal:rocket_trail", add(p.pos, mul(lastDir, -0.4)), undefined, { range: 96 });
   syncVisual(p);
 }
 

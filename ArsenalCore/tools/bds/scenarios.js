@@ -7,6 +7,7 @@ import { startReload } from "./core/reload.js";
 import { isIndoor } from "./fx/effects.js";
 import { summonBoss } from "./systems/bosses.js";
 import { spawnEnemy } from "./systems/ai/brain.js";
+import { nearPoint } from "./core/pathlock.js";
 const log = (...a) => console.warn("[DEVTEST] " + a.join(" "));
 const dim = () => world.getDimension("overworld");
 const Y = 120;
@@ -50,6 +51,7 @@ system.afterEvents.scriptEventReceive.subscribe((ev) => {
     if (ev.id === "dev:spawn23") spawn23Test();
     if (ev.id === "dev:mother") motherTest();
     if (ev.id === "dev:despawn") despawnTest(ev.message);
+    if (ev.id === "dev:ariadne") ariadneTest(ev.message || "back");
     if (ev.id === "dev:structure") structureTest(ev.message);
   } catch (e) { log("ERR", e, e.stack); }
 });
@@ -346,4 +348,64 @@ function despawnTest(arg) {
   const viaAi = arg === "ai";
   const es = ids.map((id, i) => viaAi ? spawnEnemy(dim(), { x: 6 + i * 2, y: Y, z: 2 }, id, { tag: "arsenal_minion:x", src: "boss" }) : dim().spawnEntity(`arsenal:${id}`, { x: 6 + i * 2, y: Y, z: 2 }));
   for (const t of [40, 120, 200, 300]) after(t, () => log(`despawn t=${t} ` + es.map((e, i) => `${ids[i]}=${e.isValid ? "ok" : "gone"}`).join(" ") + ` simAt=${p.location.x.toFixed(1)},${p.location.y.toFixed(1)},${p.location.z.toFixed(1)}`));
+}
+
+// 2.4：アリアドネ。石の小屋（x 20..26, z -4..4）の中のゾンビを、壁越しに覗いてロックし撃つ
+//   back   … 裏の壁（x=26）に 1 マスの穴：小屋の外を回って裏から入るか
+//   window … 正面の壁の端（x=20, z=3）に 1 マスの窓
+//   closed … 穴なし：ロックできないか
+//   swap   … 正面と裏の 2 つの穴。ミサイルが近づいた穴をふさぐ：もう一方へ回り道するか
+//   ミサイルの位置を毎 tick 記録し、ブロックの中に入った回数（inside）を数える
+function ariadneTest(mode) {
+  clearMobs();
+  const d = dim();
+  const p = getSim();
+  p.teleport({ x: 0.5, y: Y, z: 0.5 });
+  d.fillBlocks(new BlockVolume({ x: 20, y: Y, z: -4 }, { x: 26, y: Y + 4, z: 4 }), "minecraft:stone");
+  d.fillBlocks(new BlockVolume({ x: 21, y: Y, z: -3 }, { x: 25, y: Y + 3, z: 3 }), "minecraft:air");
+  const holes = mode === "back" ? [{ x: 26, y: Y + 1, z: 0 }] : mode === "window" ? [{ x: 20, y: Y + 2, z: 3 }] : mode === "swap" ? [{ x: 26, y: Y + 1, z: 0 }, { x: 20, y: Y + 2, z: 3 }] : [];
+  for (const h of holes) d.getBlock(h)?.setType("minecraft:air");
+  give(p, "arsenal:ariadne", 1, 0);
+  give(p, "arsenal:ammo_rocket", 8, 1);
+  p.selectedSlotIndex = 0;
+  const z = zombieAt(23.5, 0.5, 20);
+  let hit = false;
+  const hurt = world.afterEvents.entityHurt.subscribe((e) => {
+    if (e.hurtEntity.id === z.id && !hit) { hit = true; log(`ariadne(${mode}) HIT dmg=${e.damage.toFixed(2)} cause=${e.damageSource.cause}`); }
+  });
+  after(20, () => {
+    p.lookAtLocation({ x: 23.5, y: Y + 1, z: 0.5 }); // 壁越しに覗く
+    p.isSneaking = true;
+    after(70, () => {
+      const s = S(p);
+      log(`ariadne(${mode}) lock target=${s.lockTarget === z.id} ticks=${s.lockTicks}`);
+      // レーダーの影絵の置き場所：壁（x=20）より手前の、目とゾンビを結ぶ線の上
+      const eye = p.getHeadLocation();
+      const np = nearPoint(d, eye, z.getAABB().center);
+      log(`ariadne(${mode}) radar eye=${[eye.x, eye.y, eye.z].map((v) => v.toFixed(2)).join(",")} silhouette=${np ? [np.pos.x, np.pos.y, np.pos.z].map((v) => v.toFixed(2)).join(",") + " k=" + np.k.toFixed(3) + " block=" + d.getBlock(np.pos)?.typeId : "visible"}`);
+      p.useItemInSlot(0);
+      after(3, () => p.stopUsingItem());
+      let inside = 0, samples = 0, maxX = 0, closed = "";
+      const mv = system.runInterval(() => {
+        for (const m of d.getEntities({ type: "arsenal:projectile", location: { x: 13, y: Y, z: 0 }, maxDistance: 40 })) {
+          samples++;
+          const b = d.getBlock(m.location);
+          if (b && !b.isAir && !b.isLiquid && !b.typeId.startsWith("minecraft:light_block")) inside++;
+          maxX = Math.max(maxX, m.location.x);
+          if (mode === "swap" && !closed) {
+            for (const h of holes) {
+              const dd = Math.hypot(m.location.x - (h.x + 0.5), m.location.y - (h.y + 0.5), m.location.z - (h.z + 0.5));
+              if (dd < 4.5 && dd > 2) { d.getBlock(h)?.setType("minecraft:stone"); closed = `${h.x},${h.y},${h.z}`; break; }
+            }
+          }
+        }
+      }, 1);
+      after(240, () => {
+        system.clearRun(mv);
+        world.afterEvents.entityHurt.unsubscribe(hurt);
+        p.isSneaking = false;
+        log(`ariadne(${mode}) done hit=${hit} zombieHp=${z.isValid ? z.getComponent("minecraft:health")?.currentValue : "dead"} samples=${samples} inside=${inside} maxX=${maxX.toFixed(1)} closed=${closed || "-"}`);
+      });
+    });
+  });
 }

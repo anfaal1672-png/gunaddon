@@ -134,6 +134,153 @@ export async function suite2(ctx) {
   }
 
   // =====================================================================
+  console.log("2.4 アリアドネ（経路探索ミサイル）");
+  // =====================================================================
+  {
+    const pf = await imp("systems/pathfind.js");
+    // 後の試験（HUD 2.0）は前の試験で持った銃を使うので、持ち物と位置は最後に戻す
+    const savedInv = inv.items.slice();
+    const savedSlot = player.selectedSlotIndex;
+    const savedLoc = { ...player.location };
+    clearInv();
+    reset();
+    // 石の部屋（x -3..3, y 64..68, z 8..16 の殻）。holes の位置だけ空ける
+    const ROOM = [];
+    for (let x = -3; x <= 3; x++) for (let y = 64; y <= 68; y++) for (let z = 8; z <= 16; z++) ROOM.push([x, y, z]);
+    const room = (holes) => {
+      for (const [x, y, z] of ROOM) {
+        const shell = x === -3 || x === 3 || z === 8 || z === 16 || y === 68;
+        dim.blocks.set(`${x},${y},${z}`, shell ? "minecraft:stone" : "minecraft:air");
+      }
+      for (const h of holes) dim.blocks.set(h, "minecraft:air");
+      for (const [x, y, z] of ROOM) pf.invalidateCell(dim, { x, y, z });
+    };
+    const unroom = () => { for (const [x, y, z] of ROOM) dim.blocks.delete(`${x},${y},${z}`); };
+    const solidAt = (p) => { const t = dim.blockAt(p); return t !== "minecraft:air" && !t.startsWith("minecraft:light_block"); };
+    const missiles = () => [...__entities.values()].filter((e) => e.typeId === "arsenal:projectile" && e.isValid);
+    // 道の探索そのもの：穴があれば道が見つかり、道はブロックの中を通らない
+    room(["3,65,12"]);
+    const s0 = pf.startSearch(dim, { x: 0.5, y: 65.6, z: 0.5 }, { min: { x: 0.2, y: 64, z: 12.2 }, max: { x: 0.8, y: 65.9, z: 12.8 } }, { x: 0.5, y: 64.95, z: 12.5 });
+    for (let i = 0; i < 60 && s0.state === "run"; i++) pf.stepSearch(s0, 600);
+    const pathPts = s0.path ? pf.samplePath(s0.path, 0.1, 5000) : [];
+    check("穴 1 マスの部屋の中まで道が見つかる", s0.state === "ok" && pathPts.length > 0, `(state=${s0.state})`);
+    check("道は一度もブロックの中を通らず、東の穴（3,65,12）を通る", pathPts.every((p) => !solidAt(p)) && pathPts.some((p) => Math.floor(p.x) === 3 && Math.floor(p.y) === 65 && Math.floor(p.z) === 12));
+    room([]);
+    const s1 = pf.startSearch(dim, { x: 0.5, y: 65.6, z: 0.5 }, { min: { x: 0.2, y: 64, z: 12.2 }, max: { x: 0.8, y: 65.9, z: 12.8 } }, { x: 0.5, y: 64.95, z: 12.5 });
+    for (let i = 0; i < 200 && s1.state === "run"; i++) pf.stepSearch(s1, 600);
+    check("完全に閉じた部屋には道がない", s1.state === "fail");
+
+    // 実際に覗いてロックし、撃つ
+    room(["3,65,12"]);
+    inv.items[0] = new ItemStack("arsenal:ariadne", 1);
+    player.selectedSlotIndex = 0;
+    player.location = { x: 0.5, y: 64, z: 0.5 };
+    player.setRotation({ x: 0, y: 0 });
+    const z = zombie(0.5, 12.5, 200);
+    __tick(3);
+    const s = S(player);
+    player.isSneaking = true;
+    __tick(60);
+    check("壁の向こう（穴 1 マス）の敵にロックできる", s.lockTarget === z.id && s.lockTicks >= s.stats.lockTicks, `(target=${s.lockTarget === z.id} ticks=${s.lockTicks})`);
+    // レーダー：壁の向こうの mob の影絵は、目と mob を結ぶ線の上の壁より手前に、距離の比で縮めて置く
+    const pl = await imp("core/pathlock.js");
+    const sil0 = LOG.particleIds["arsenal:silhouette"] ?? 0;
+    __tick(5);
+    check("覗いている間、壁の向こうの mob の影絵を出す", (LOG.particleIds["arsenal:silhouette"] ?? 0) > sil0);
+    const eyeP = player.getHeadLocation();
+    const zc = z.getAABB().center;
+    const np = pl.nearPoint(dim, eyeP, zc);
+    const toZ = { x: zc.x - eyeP.x, y: zc.y - eyeP.y, z: zc.z - eyeP.z };
+    const toN = np ? { x: np.pos.x - eyeP.x, y: np.pos.y - eyeP.y, z: np.pos.z - eyeP.z } : null;
+    const Lz = Math.hypot(toZ.x, toZ.y, toZ.z);
+    const Ln = toN ? Math.hypot(toN.x, toN.y, toN.z) : 0;
+    const colinear = toN ? (toZ.x * toN.x + toZ.y * toN.y + toZ.z * toN.z) / (Lz * Ln) > 0.9999 : false;
+    check("影絵は壁（z=8）より手前・同じ線の上・距離の比で縮める", !!np && np.pos.z < 8 && colinear && Math.abs(np.k - Ln / Lz) < 1e-6 && !solidAt(np.pos), JSON.stringify(np));
+    const zv = zombie(0.5, 5.5, 20);
+    check("見えている mob には影絵を出さない", pl.nearPoint(dim, eyeP, zv.getAABB().center) === null);
+    zv.remove();
+    s.ammo = 1;
+    const hp0 = z.health.currentValue;
+    const ex0 = LOG.explosions.length;
+    const ev = { source: player, itemStack: inv.getItem(0), useDuration: 72000 };
+    world.afterEvents.itemStartUse.fire(ev);
+    __tick(2);
+    world.afterEvents.itemStopUse.fire(ev);
+    let inside = 0;
+    let outsideEast = false;
+    const trail = [];
+    for (let t = 0; t < 200 && LOG.explosions.length === ex0; t++) {
+      __tick(1);
+      for (const m of missiles()) {
+        trail.push({ ...m.location });
+        if (solidAt(m.location)) inside++;
+        // 部屋の中は x < 3。x ≥ 3 でブロックの中でなければ、東の穴か部屋の外
+        if (m.location.x >= 3) outsideEast = true;
+      }
+    }
+    check("ミサイルは部屋の外を回って穴から入り、命中する", outsideEast && z.health.currentValue < hp0 && LOG.explosions.length > ex0, `(east=${outsideEast} hp ${hp0}→${z.health.currentValue} trail=${trail.length})`);
+    check("ミサイルは一度もブロックの中に入らない（すり抜けない）", inside === 0 && trail.length > 5, `(inside=${inside})`);
+    player.isSneaking = false;
+    __tick(2);
+    z.remove();
+    killAllArsenal();
+
+    // 閉じた部屋の敵にはロックできない
+    room([]);
+    const z2 = zombie(0.5, 12.5, 200);
+    player.isSneaking = true;
+    __tick(60);
+    check("完全に閉じた部屋の敵にはロックできない", !(s.lockTarget === z2.id && s.lockTicks >= s.stats.lockTicks), `(ticks=${s.lockTicks})`);
+    player.isSneaking = false;
+    __tick(2);
+    z2.remove();
+
+    // 飛んでいる途中で穴をふさぐ：もう一方の穴へ回り道する（ふさいだ穴はすり抜けない）
+    room(["3,65,12", "-3,65,12"]);
+    const z3 = zombie(0.5, 12.5, 200);
+    player.isSneaking = true;
+    __tick(60);
+    check("穴が 2 つの部屋でもロック", s.lockTarget === z3.id && s.lockTicks >= s.stats.lockTicks);
+    s.ammo = 1;
+    const hp3 = z3.health.currentValue;
+    const ex3 = LOG.explosions.length;
+    const ev3 = { source: player, itemStack: inv.getItem(0), useDuration: 72000 };
+    world.afterEvents.itemStartUse.fire(ev3);
+    __tick(2);
+    world.afterEvents.itemStopUse.fire(ev3);
+    let closed = "";
+    let inside3 = 0;
+    for (let t = 0; t < 300 && LOG.explosions.length === ex3; t++) {
+      __tick(1);
+      for (const m of missiles()) {
+        if (solidAt(m.location)) inside3++;
+        if (!closed) {
+          for (const [hk, hx] of [["3,65,12", 3.5], ["-3,65,12", -2.5]]) {
+            const d = Math.hypot(m.location.x - hx, m.location.y - 65.5, m.location.z - 12.5);
+            if (d < 4.5 && d > 2) {
+              dim.blocks.set(hk, "minecraft:stone");
+              pf.invalidateCell(dim, { x: Number(hk.split(",")[0]), y: 65, z: 12 });
+              closed = hk;
+            }
+          }
+        }
+      }
+    }
+    check("途中で穴をふさがれても、もう一方の穴から入って命中", !!closed && z3.health.currentValue < hp3, `(closed=${closed} hp ${hp3}→${z3.health.currentValue})`);
+    check("ふさいだ穴をすり抜けない", inside3 === 0, `(inside=${inside3})`);
+    player.isSneaking = false;
+    __tick(2);
+    z3.remove();
+    killAllArsenal();
+    unroom();
+    clearInv();
+    for (let i = 0; i < savedInv.length; i++) inv.items[i] = savedInv[i];
+    player.selectedSlotIndex = savedSlot;
+    player.location = savedLoc;
+    __tick(3);
+  }
+
+  // =====================================================================
   console.log("HUD 2.0");
   // =====================================================================
   {

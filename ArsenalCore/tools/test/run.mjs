@@ -171,7 +171,7 @@ for (const wid of Object.keys(D.WEAPONS)) {
   world.afterEvents.itemStartUse.fire(e2);
   __tick(w.modes[0] === "charge" ? 34 : w.spinup ? 30 : 6);
   world.afterEvents.itemStopUse.fire(e2);
-  __tick(w.fire === "rocket" || w.fire === "seeker" || w.fire === "gl40" || w.fire === "flare" ? 60 : 20);
+  __tick(w.fire === "rocket" || w.fire === "seeker" || w.fire === "pathfinder" || w.fire === "gl40" || w.fire === "flare" ? 60 : 20);
   const snd1 = Object.entries(LOG.sounds).filter(([k]) => k.startsWith("arsenal.fire.")).reduce((a, [, v]) => a + v, 0);
   const shot = snd1 > snd0;
   if (shot) fired++;
@@ -183,7 +183,7 @@ for (const wid of Object.keys(D.WEAPONS)) {
 }
 const notFired = perWeapon.filter((x) => !x.shot).map((x) => x.wid);
 check(`全武器が発射できる（${fired}/${NW}）`, fired === NW, notFired.join(","));
-const INDIRECT = new Set(["gl40", "rocket", "seeker", "flare", "grapple", "mortar", "gravity", "needle"]);
+const INDIRECT = new Set(["gl40", "rocket", "seeker", "pathfinder", "flare", "grapple", "mortar", "gravity", "needle"]);
 const hitless = perWeapon.filter((x) => x.hp >= 40 && !INDIRECT.has(D.WEAPONS[x.wid].fire ?? "hitscan")).map((x) => x.wid);
 check("直射武器は ADS で 8 ブロック先の標的に命中する", hitless.length === 0, hitless.join(","));
 check("爆発物系（40mm・ロケット）が起爆する", LOG.explosions.length >= 3, `(explosions=${LOG.explosions.length})`);

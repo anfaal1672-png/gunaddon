@@ -287,6 +287,45 @@
     "arsenal_arena_tool": {
       "textures": "textures/items/arsenal/tools/arena_tool"
     },
+    "arsenal_ariadne": {
+      "textures": "textures/items/arsenal/weapons/ariadne"
+    },
+    "arsenal_ariadne__c1": {
+      "textures": "textures/items/arsenal/weapons/ariadne__c1"
+    },
+    "arsenal_ariadne__c10": {
+      "textures": "textures/items/arsenal/weapons/ariadne__c10"
+    },
+    "arsenal_ariadne__c11": {
+      "textures": "textures/items/arsenal/weapons/ariadne__c11"
+    },
+    "arsenal_ariadne__c12": {
+      "textures": "textures/items/arsenal/weapons/ariadne__c12"
+    },
+    "arsenal_ariadne__c2": {
+      "textures": "textures/items/arsenal/weapons/ariadne__c2"
+    },
+    "arsenal_ariadne__c3": {
+      "textures": "textures/items/arsenal/weapons/ariadne__c3"
+    },
+    "arsenal_ariadne__c4": {
+      "textures": "textures/items/arsenal/weapons/ariadne__c4"
+    },
+    "arsenal_ariadne__c5": {
+      "textures": "textures/items/arsenal/weapons/ariadne__c5"
+    },
+    "arsenal_ariadne__c6": {
+      "textures": "textures/items/arsenal/weapons/ariadne__c6"
+    },
+    "arsenal_ariadne__c7": {
+      "textures": "textures/items/arsenal/weapons/ariadne__c7"
+    },
+    "arsenal_ariadne__c8": {
+      "textures": "textures/items/arsenal/weapons/ariadne__c8"
+    },
+    "arsenal_ariadne__c9": {
+      "textures": "textures/items/arsenal/weapons/ariadne__c9"
+    },
     "arsenal_armor_plate": {
       "textures": "textures/items/arsenal/medical/armor_plate"
     },
