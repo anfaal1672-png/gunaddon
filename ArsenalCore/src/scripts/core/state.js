@@ -66,6 +66,7 @@
  * @property {number} hudTick
  * @property {boolean} hudDirty
  * @property {{tick:number, kind:string, dmg:number}|null} hit
+ * @property {{tick:number, kind:"hit"|"head"|"kill", total:number}|null} dmgCombo HUD 2.0 のダメージ表示（続けて当てた合計）
  * @property {string|null} lockTarget
  * @property {number} lockTicks
  * @property {number} lockSeen ロック対象を最後に照準の円錐の中で見た tick
@@ -171,7 +172,7 @@ function create(id) {
     ads: false, adsLevel: 0, adsToggle: false, lastSneakPress: -99, sneakDown: false, jumpDown: false,
     fovApplied: false, fovValue: 0, moveApplied: false, moveValue: 0.1, nvApplied: false, slowApplied: false,
     poseWeapon: null, poseTick: 0,
-    hudTick: 0, hudDirty: true, hit: null,
+    hudTick: 0, hudDirty: true, hit: null, dmgCombo: null,
     lockTarget: null, lockTicks: 0, lockSeen: 0, sprintPose: false, readyAt: 0, mags: [], armHitUntil: 0, legHitUntil: 0,
     lastShotTick: -99, wearPending: 0, lastWearWrite: 0, lastKick: -99,
     breathUntil: 0, breathCooldown: 0, swayTick: 0, cooldownUntil: 0,

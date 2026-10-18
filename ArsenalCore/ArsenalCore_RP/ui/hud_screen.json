@@ -2929,8 +2929,3304 @@
             },
             {
               "binding_type": "view",
-              "source_property_name": "('textures/ui/arsenal/hud2/compass_' + (#arsenal_s - 'AC2L' - '§a§r§s§n' - '.x00' - '.x01' - '.x02' - '.x03' - '.x04' - '.x05' - '.x06' - '.x07' - '.x08' - '.x09' - '.x0x' - '.' - '~'))",
+              "source_property_name": "('textures/ui/arsenal/hud2/compass_' + (#arsenal_s - 'AC2L' - '§a§r§s§n' - '.x00' - '.x01' - '.x02' - '.x03' - '.x04' - '.x05' - '.x06' - '.x07' - '.x08' - '.x09' - '.x0x' - '.' - '~' - '^' - '§f' - '§e' - '§c' - '0' - '1' - '2' - '3' - '4' - '5' - '6' - '7' - '8' - '9'))",
               "target_property_name": "#texture"
+            }
+          ]
+        }
+      },
+      {
+        "cmp_preload": {
+          "type": "panel",
+          "size": [
+            1,
+            1
+          ],
+          "anchor_from": "top_left",
+          "anchor_to": "top_left",
+          "controls": [
+            {
+              "cmp_pre0": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/compass_AA",
+                "size": [
+                  1,
+                  1
+                ],
+                "alpha": 0.01,
+                "anchor_from": "top_left",
+                "anchor_to": "top_left",
+                "offset": [
+                  0,
+                  0
+                ],
+                "layer": 0
+              }
+            },
+            {
+              "cmp_pre1": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/compass_AB",
+                "size": [
+                  1,
+                  1
+                ],
+                "alpha": 0.01,
+                "anchor_from": "top_left",
+                "anchor_to": "top_left",
+                "offset": [
+                  0,
+                  0
+                ],
+                "layer": 0
+              }
+            },
+            {
+              "cmp_pre2": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/compass_AC",
+                "size": [
+                  1,
+                  1
+                ],
+                "alpha": 0.01,
+                "anchor_from": "top_left",
+                "anchor_to": "top_left",
+                "offset": [
+                  0,
+                  0
+                ],
+                "layer": 0
+              }
+            },
+            {
+              "cmp_pre3": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/compass_AD",
+                "size": [
+                  1,
+                  1
+                ],
+                "alpha": 0.01,
+                "anchor_from": "top_left",
+                "anchor_to": "top_left",
+                "offset": [
+                  0,
+                  0
+                ],
+                "layer": 0
+              }
+            },
+            {
+              "cmp_pre4": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/compass_AE",
+                "size": [
+                  1,
+                  1
+                ],
+                "alpha": 0.01,
+                "anchor_from": "top_left",
+                "anchor_to": "top_left",
+                "offset": [
+                  0,
+                  0
+                ],
+                "layer": 0
+              }
+            },
+            {
+              "cmp_pre5": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/compass_AF",
+                "size": [
+                  1,
+                  1
+                ],
+                "alpha": 0.01,
+                "anchor_from": "top_left",
+                "anchor_to": "top_left",
+                "offset": [
+                  0,
+                  0
+                ],
+                "layer": 0
+              }
+            },
+            {
+              "cmp_pre6": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/compass_AG",
+                "size": [
+                  1,
+                  1
+                ],
+                "alpha": 0.01,
+                "anchor_from": "top_left",
+                "anchor_to": "top_left",
+                "offset": [
+                  0,
+                  0
+                ],
+                "layer": 0
+              }
+            },
+            {
+              "cmp_pre7": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/compass_AH",
+                "size": [
+                  1,
+                  1
+                ],
+                "alpha": 0.01,
+                "anchor_from": "top_left",
+                "anchor_to": "top_left",
+                "offset": [
+                  0,
+                  0
+                ],
+                "layer": 0
+              }
+            },
+            {
+              "cmp_pre8": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/compass_AI",
+                "size": [
+                  1,
+                  1
+                ],
+                "alpha": 0.01,
+                "anchor_from": "top_left",
+                "anchor_to": "top_left",
+                "offset": [
+                  0,
+                  0
+                ],
+                "layer": 0
+              }
+            },
+            {
+              "cmp_pre9": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/compass_AJ",
+                "size": [
+                  1,
+                  1
+                ],
+                "alpha": 0.01,
+                "anchor_from": "top_left",
+                "anchor_to": "top_left",
+                "offset": [
+                  0,
+                  0
+                ],
+                "layer": 0
+              }
+            },
+            {
+              "cmp_pre10": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/compass_AK",
+                "size": [
+                  1,
+                  1
+                ],
+                "alpha": 0.01,
+                "anchor_from": "top_left",
+                "anchor_to": "top_left",
+                "offset": [
+                  0,
+                  0
+                ],
+                "layer": 0
+              }
+            },
+            {
+              "cmp_pre11": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/compass_AL",
+                "size": [
+                  1,
+                  1
+                ],
+                "alpha": 0.01,
+                "anchor_from": "top_left",
+                "anchor_to": "top_left",
+                "offset": [
+                  0,
+                  0
+                ],
+                "layer": 0
+              }
+            },
+            {
+              "cmp_pre12": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/compass_AM",
+                "size": [
+                  1,
+                  1
+                ],
+                "alpha": 0.01,
+                "anchor_from": "top_left",
+                "anchor_to": "top_left",
+                "offset": [
+                  0,
+                  0
+                ],
+                "layer": 0
+              }
+            },
+            {
+              "cmp_pre13": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/compass_AN",
+                "size": [
+                  1,
+                  1
+                ],
+                "alpha": 0.01,
+                "anchor_from": "top_left",
+                "anchor_to": "top_left",
+                "offset": [
+                  0,
+                  0
+                ],
+                "layer": 0
+              }
+            },
+            {
+              "cmp_pre14": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/compass_AO",
+                "size": [
+                  1,
+                  1
+                ],
+                "alpha": 0.01,
+                "anchor_from": "top_left",
+                "anchor_to": "top_left",
+                "offset": [
+                  0,
+                  0
+                ],
+                "layer": 0
+              }
+            },
+            {
+              "cmp_pre15": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/compass_AP",
+                "size": [
+                  1,
+                  1
+                ],
+                "alpha": 0.01,
+                "anchor_from": "top_left",
+                "anchor_to": "top_left",
+                "offset": [
+                  0,
+                  0
+                ],
+                "layer": 0
+              }
+            },
+            {
+              "cmp_pre16": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/compass_AQ",
+                "size": [
+                  1,
+                  1
+                ],
+                "alpha": 0.01,
+                "anchor_from": "top_left",
+                "anchor_to": "top_left",
+                "offset": [
+                  0,
+                  0
+                ],
+                "layer": 0
+              }
+            },
+            {
+              "cmp_pre17": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/compass_AR",
+                "size": [
+                  1,
+                  1
+                ],
+                "alpha": 0.01,
+                "anchor_from": "top_left",
+                "anchor_to": "top_left",
+                "offset": [
+                  0,
+                  0
+                ],
+                "layer": 0
+              }
+            },
+            {
+              "cmp_pre18": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/compass_AS",
+                "size": [
+                  1,
+                  1
+                ],
+                "alpha": 0.01,
+                "anchor_from": "top_left",
+                "anchor_to": "top_left",
+                "offset": [
+                  0,
+                  0
+                ],
+                "layer": 0
+              }
+            },
+            {
+              "cmp_pre19": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/compass_AT",
+                "size": [
+                  1,
+                  1
+                ],
+                "alpha": 0.01,
+                "anchor_from": "top_left",
+                "anchor_to": "top_left",
+                "offset": [
+                  0,
+                  0
+                ],
+                "layer": 0
+              }
+            },
+            {
+              "cmp_pre20": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/compass_AU",
+                "size": [
+                  1,
+                  1
+                ],
+                "alpha": 0.01,
+                "anchor_from": "top_left",
+                "anchor_to": "top_left",
+                "offset": [
+                  0,
+                  0
+                ],
+                "layer": 0
+              }
+            },
+            {
+              "cmp_pre21": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/compass_AV",
+                "size": [
+                  1,
+                  1
+                ],
+                "alpha": 0.01,
+                "anchor_from": "top_left",
+                "anchor_to": "top_left",
+                "offset": [
+                  0,
+                  0
+                ],
+                "layer": 0
+              }
+            },
+            {
+              "cmp_pre22": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/compass_AW",
+                "size": [
+                  1,
+                  1
+                ],
+                "alpha": 0.01,
+                "anchor_from": "top_left",
+                "anchor_to": "top_left",
+                "offset": [
+                  0,
+                  0
+                ],
+                "layer": 0
+              }
+            },
+            {
+              "cmp_pre23": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/compass_AX",
+                "size": [
+                  1,
+                  1
+                ],
+                "alpha": 0.01,
+                "anchor_from": "top_left",
+                "anchor_to": "top_left",
+                "offset": [
+                  0,
+                  0
+                ],
+                "layer": 0
+              }
+            },
+            {
+              "cmp_pre24": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/compass_AY",
+                "size": [
+                  1,
+                  1
+                ],
+                "alpha": 0.01,
+                "anchor_from": "top_left",
+                "anchor_to": "top_left",
+                "offset": [
+                  0,
+                  0
+                ],
+                "layer": 0
+              }
+            },
+            {
+              "cmp_pre25": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/compass_AZ",
+                "size": [
+                  1,
+                  1
+                ],
+                "alpha": 0.01,
+                "anchor_from": "top_left",
+                "anchor_to": "top_left",
+                "offset": [
+                  0,
+                  0
+                ],
+                "layer": 0
+              }
+            },
+            {
+              "cmp_pre26": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/compass_BA",
+                "size": [
+                  1,
+                  1
+                ],
+                "alpha": 0.01,
+                "anchor_from": "top_left",
+                "anchor_to": "top_left",
+                "offset": [
+                  0,
+                  0
+                ],
+                "layer": 0
+              }
+            },
+            {
+              "cmp_pre27": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/compass_BB",
+                "size": [
+                  1,
+                  1
+                ],
+                "alpha": 0.01,
+                "anchor_from": "top_left",
+                "anchor_to": "top_left",
+                "offset": [
+                  0,
+                  0
+                ],
+                "layer": 0
+              }
+            },
+            {
+              "cmp_pre28": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/compass_BC",
+                "size": [
+                  1,
+                  1
+                ],
+                "alpha": 0.01,
+                "anchor_from": "top_left",
+                "anchor_to": "top_left",
+                "offset": [
+                  0,
+                  0
+                ],
+                "layer": 0
+              }
+            },
+            {
+              "cmp_pre29": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/compass_BD",
+                "size": [
+                  1,
+                  1
+                ],
+                "alpha": 0.01,
+                "anchor_from": "top_left",
+                "anchor_to": "top_left",
+                "offset": [
+                  0,
+                  0
+                ],
+                "layer": 0
+              }
+            },
+            {
+              "cmp_pre30": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/compass_BE",
+                "size": [
+                  1,
+                  1
+                ],
+                "alpha": 0.01,
+                "anchor_from": "top_left",
+                "anchor_to": "top_left",
+                "offset": [
+                  0,
+                  0
+                ],
+                "layer": 0
+              }
+            },
+            {
+              "cmp_pre31": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/compass_BF",
+                "size": [
+                  1,
+                  1
+                ],
+                "alpha": 0.01,
+                "anchor_from": "top_left",
+                "anchor_to": "top_left",
+                "offset": [
+                  0,
+                  0
+                ],
+                "layer": 0
+              }
+            },
+            {
+              "cmp_pre32": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/compass_BG",
+                "size": [
+                  1,
+                  1
+                ],
+                "alpha": 0.01,
+                "anchor_from": "top_left",
+                "anchor_to": "top_left",
+                "offset": [
+                  0,
+                  0
+                ],
+                "layer": 0
+              }
+            },
+            {
+              "cmp_pre33": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/compass_BH",
+                "size": [
+                  1,
+                  1
+                ],
+                "alpha": 0.01,
+                "anchor_from": "top_left",
+                "anchor_to": "top_left",
+                "offset": [
+                  0,
+                  0
+                ],
+                "layer": 0
+              }
+            },
+            {
+              "cmp_pre34": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/compass_BI",
+                "size": [
+                  1,
+                  1
+                ],
+                "alpha": 0.01,
+                "anchor_from": "top_left",
+                "anchor_to": "top_left",
+                "offset": [
+                  0,
+                  0
+                ],
+                "layer": 0
+              }
+            },
+            {
+              "cmp_pre35": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/compass_BJ",
+                "size": [
+                  1,
+                  1
+                ],
+                "alpha": 0.01,
+                "anchor_from": "top_left",
+                "anchor_to": "top_left",
+                "offset": [
+                  0,
+                  0
+                ],
+                "layer": 0
+              }
+            },
+            {
+              "cmp_pre36": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/compass_BK",
+                "size": [
+                  1,
+                  1
+                ],
+                "alpha": 0.01,
+                "anchor_from": "top_left",
+                "anchor_to": "top_left",
+                "offset": [
+                  0,
+                  0
+                ],
+                "layer": 0
+              }
+            },
+            {
+              "cmp_pre37": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/compass_BL",
+                "size": [
+                  1,
+                  1
+                ],
+                "alpha": 0.01,
+                "anchor_from": "top_left",
+                "anchor_to": "top_left",
+                "offset": [
+                  0,
+                  0
+                ],
+                "layer": 0
+              }
+            },
+            {
+              "cmp_pre38": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/compass_BM",
+                "size": [
+                  1,
+                  1
+                ],
+                "alpha": 0.01,
+                "anchor_from": "top_left",
+                "anchor_to": "top_left",
+                "offset": [
+                  0,
+                  0
+                ],
+                "layer": 0
+              }
+            },
+            {
+              "cmp_pre39": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/compass_BN",
+                "size": [
+                  1,
+                  1
+                ],
+                "alpha": 0.01,
+                "anchor_from": "top_left",
+                "anchor_to": "top_left",
+                "offset": [
+                  0,
+                  0
+                ],
+                "layer": 0
+              }
+            },
+            {
+              "cmp_pre40": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/compass_BO",
+                "size": [
+                  1,
+                  1
+                ],
+                "alpha": 0.01,
+                "anchor_from": "top_left",
+                "anchor_to": "top_left",
+                "offset": [
+                  0,
+                  0
+                ],
+                "layer": 0
+              }
+            },
+            {
+              "cmp_pre41": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/compass_BP",
+                "size": [
+                  1,
+                  1
+                ],
+                "alpha": 0.01,
+                "anchor_from": "top_left",
+                "anchor_to": "top_left",
+                "offset": [
+                  0,
+                  0
+                ],
+                "layer": 0
+              }
+            },
+            {
+              "cmp_pre42": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/compass_BQ",
+                "size": [
+                  1,
+                  1
+                ],
+                "alpha": 0.01,
+                "anchor_from": "top_left",
+                "anchor_to": "top_left",
+                "offset": [
+                  0,
+                  0
+                ],
+                "layer": 0
+              }
+            },
+            {
+              "cmp_pre43": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/compass_BR",
+                "size": [
+                  1,
+                  1
+                ],
+                "alpha": 0.01,
+                "anchor_from": "top_left",
+                "anchor_to": "top_left",
+                "offset": [
+                  0,
+                  0
+                ],
+                "layer": 0
+              }
+            },
+            {
+              "cmp_pre44": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/compass_BS",
+                "size": [
+                  1,
+                  1
+                ],
+                "alpha": 0.01,
+                "anchor_from": "top_left",
+                "anchor_to": "top_left",
+                "offset": [
+                  0,
+                  0
+                ],
+                "layer": 0
+              }
+            },
+            {
+              "cmp_pre45": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/compass_BT",
+                "size": [
+                  1,
+                  1
+                ],
+                "alpha": 0.01,
+                "anchor_from": "top_left",
+                "anchor_to": "top_left",
+                "offset": [
+                  0,
+                  0
+                ],
+                "layer": 0
+              }
+            },
+            {
+              "cmp_pre46": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/compass_BU",
+                "size": [
+                  1,
+                  1
+                ],
+                "alpha": 0.01,
+                "anchor_from": "top_left",
+                "anchor_to": "top_left",
+                "offset": [
+                  0,
+                  0
+                ],
+                "layer": 0
+              }
+            },
+            {
+              "cmp_pre47": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/compass_BV",
+                "size": [
+                  1,
+                  1
+                ],
+                "alpha": 0.01,
+                "anchor_from": "top_left",
+                "anchor_to": "top_left",
+                "offset": [
+                  0,
+                  0
+                ],
+                "layer": 0
+              }
+            },
+            {
+              "cmp_pre48": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/compass_BW",
+                "size": [
+                  1,
+                  1
+                ],
+                "alpha": 0.01,
+                "anchor_from": "top_left",
+                "anchor_to": "top_left",
+                "offset": [
+                  0,
+                  0
+                ],
+                "layer": 0
+              }
+            },
+            {
+              "cmp_pre49": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/compass_BX",
+                "size": [
+                  1,
+                  1
+                ],
+                "alpha": 0.01,
+                "anchor_from": "top_left",
+                "anchor_to": "top_left",
+                "offset": [
+                  0,
+                  0
+                ],
+                "layer": 0
+              }
+            },
+            {
+              "cmp_pre50": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/compass_BY",
+                "size": [
+                  1,
+                  1
+                ],
+                "alpha": 0.01,
+                "anchor_from": "top_left",
+                "anchor_to": "top_left",
+                "offset": [
+                  0,
+                  0
+                ],
+                "layer": 0
+              }
+            },
+            {
+              "cmp_pre51": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/compass_BZ",
+                "size": [
+                  1,
+                  1
+                ],
+                "alpha": 0.01,
+                "anchor_from": "top_left",
+                "anchor_to": "top_left",
+                "offset": [
+                  0,
+                  0
+                ],
+                "layer": 0
+              }
+            },
+            {
+              "cmp_pre52": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/compass_CA",
+                "size": [
+                  1,
+                  1
+                ],
+                "alpha": 0.01,
+                "anchor_from": "top_left",
+                "anchor_to": "top_left",
+                "offset": [
+                  0,
+                  0
+                ],
+                "layer": 0
+              }
+            },
+            {
+              "cmp_pre53": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/compass_CB",
+                "size": [
+                  1,
+                  1
+                ],
+                "alpha": 0.01,
+                "anchor_from": "top_left",
+                "anchor_to": "top_left",
+                "offset": [
+                  0,
+                  0
+                ],
+                "layer": 0
+              }
+            },
+            {
+              "cmp_pre54": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/compass_CC",
+                "size": [
+                  1,
+                  1
+                ],
+                "alpha": 0.01,
+                "anchor_from": "top_left",
+                "anchor_to": "top_left",
+                "offset": [
+                  0,
+                  0
+                ],
+                "layer": 0
+              }
+            },
+            {
+              "cmp_pre55": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/compass_CD",
+                "size": [
+                  1,
+                  1
+                ],
+                "alpha": 0.01,
+                "anchor_from": "top_left",
+                "anchor_to": "top_left",
+                "offset": [
+                  0,
+                  0
+                ],
+                "layer": 0
+              }
+            },
+            {
+              "cmp_pre56": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/compass_CE",
+                "size": [
+                  1,
+                  1
+                ],
+                "alpha": 0.01,
+                "anchor_from": "top_left",
+                "anchor_to": "top_left",
+                "offset": [
+                  0,
+                  0
+                ],
+                "layer": 0
+              }
+            },
+            {
+              "cmp_pre57": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/compass_CF",
+                "size": [
+                  1,
+                  1
+                ],
+                "alpha": 0.01,
+                "anchor_from": "top_left",
+                "anchor_to": "top_left",
+                "offset": [
+                  0,
+                  0
+                ],
+                "layer": 0
+              }
+            },
+            {
+              "cmp_pre58": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/compass_CG",
+                "size": [
+                  1,
+                  1
+                ],
+                "alpha": 0.01,
+                "anchor_from": "top_left",
+                "anchor_to": "top_left",
+                "offset": [
+                  0,
+                  0
+                ],
+                "layer": 0
+              }
+            },
+            {
+              "cmp_pre59": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/compass_CH",
+                "size": [
+                  1,
+                  1
+                ],
+                "alpha": 0.01,
+                "anchor_from": "top_left",
+                "anchor_to": "top_left",
+                "offset": [
+                  0,
+                  0
+                ],
+                "layer": 0
+              }
+            },
+            {
+              "cmp_pre60": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/compass_CI",
+                "size": [
+                  1,
+                  1
+                ],
+                "alpha": 0.01,
+                "anchor_from": "top_left",
+                "anchor_to": "top_left",
+                "offset": [
+                  0,
+                  0
+                ],
+                "layer": 0
+              }
+            },
+            {
+              "cmp_pre61": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/compass_CJ",
+                "size": [
+                  1,
+                  1
+                ],
+                "alpha": 0.01,
+                "anchor_from": "top_left",
+                "anchor_to": "top_left",
+                "offset": [
+                  0,
+                  0
+                ],
+                "layer": 0
+              }
+            },
+            {
+              "cmp_pre62": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/compass_CK",
+                "size": [
+                  1,
+                  1
+                ],
+                "alpha": 0.01,
+                "anchor_from": "top_left",
+                "anchor_to": "top_left",
+                "offset": [
+                  0,
+                  0
+                ],
+                "layer": 0
+              }
+            },
+            {
+              "cmp_pre63": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/compass_CL",
+                "size": [
+                  1,
+                  1
+                ],
+                "alpha": 0.01,
+                "anchor_from": "top_left",
+                "anchor_to": "top_left",
+                "offset": [
+                  0,
+                  0
+                ],
+                "layer": 0
+              }
+            },
+            {
+              "cmp_pre64": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/compass_CM",
+                "size": [
+                  1,
+                  1
+                ],
+                "alpha": 0.01,
+                "anchor_from": "top_left",
+                "anchor_to": "top_left",
+                "offset": [
+                  0,
+                  0
+                ],
+                "layer": 0
+              }
+            },
+            {
+              "cmp_pre65": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/compass_CN",
+                "size": [
+                  1,
+                  1
+                ],
+                "alpha": 0.01,
+                "anchor_from": "top_left",
+                "anchor_to": "top_left",
+                "offset": [
+                  0,
+                  0
+                ],
+                "layer": 0
+              }
+            },
+            {
+              "cmp_pre66": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/compass_CO",
+                "size": [
+                  1,
+                  1
+                ],
+                "alpha": 0.01,
+                "anchor_from": "top_left",
+                "anchor_to": "top_left",
+                "offset": [
+                  0,
+                  0
+                ],
+                "layer": 0
+              }
+            },
+            {
+              "cmp_pre67": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/compass_CP",
+                "size": [
+                  1,
+                  1
+                ],
+                "alpha": 0.01,
+                "anchor_from": "top_left",
+                "anchor_to": "top_left",
+                "offset": [
+                  0,
+                  0
+                ],
+                "layer": 0
+              }
+            },
+            {
+              "cmp_pre68": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/compass_CQ",
+                "size": [
+                  1,
+                  1
+                ],
+                "alpha": 0.01,
+                "anchor_from": "top_left",
+                "anchor_to": "top_left",
+                "offset": [
+                  0,
+                  0
+                ],
+                "layer": 0
+              }
+            },
+            {
+              "cmp_pre69": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/compass_CR",
+                "size": [
+                  1,
+                  1
+                ],
+                "alpha": 0.01,
+                "anchor_from": "top_left",
+                "anchor_to": "top_left",
+                "offset": [
+                  0,
+                  0
+                ],
+                "layer": 0
+              }
+            },
+            {
+              "cmp_pre70": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/compass_CS",
+                "size": [
+                  1,
+                  1
+                ],
+                "alpha": 0.01,
+                "anchor_from": "top_left",
+                "anchor_to": "top_left",
+                "offset": [
+                  0,
+                  0
+                ],
+                "layer": 0
+              }
+            },
+            {
+              "cmp_pre71": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/compass_CT",
+                "size": [
+                  1,
+                  1
+                ],
+                "alpha": 0.01,
+                "anchor_from": "top_left",
+                "anchor_to": "top_left",
+                "offset": [
+                  0,
+                  0
+                ],
+                "layer": 0
+              }
+            },
+            {
+              "cmp_pre72": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/compass_CU",
+                "size": [
+                  1,
+                  1
+                ],
+                "alpha": 0.01,
+                "anchor_from": "top_left",
+                "anchor_to": "top_left",
+                "offset": [
+                  0,
+                  0
+                ],
+                "layer": 0
+              }
+            },
+            {
+              "cmp_pre73": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/compass_CV",
+                "size": [
+                  1,
+                  1
+                ],
+                "alpha": 0.01,
+                "anchor_from": "top_left",
+                "anchor_to": "top_left",
+                "offset": [
+                  0,
+                  0
+                ],
+                "layer": 0
+              }
+            },
+            {
+              "cmp_pre74": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/compass_CW",
+                "size": [
+                  1,
+                  1
+                ],
+                "alpha": 0.01,
+                "anchor_from": "top_left",
+                "anchor_to": "top_left",
+                "offset": [
+                  0,
+                  0
+                ],
+                "layer": 0
+              }
+            },
+            {
+              "cmp_pre75": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/compass_CX",
+                "size": [
+                  1,
+                  1
+                ],
+                "alpha": 0.01,
+                "anchor_from": "top_left",
+                "anchor_to": "top_left",
+                "offset": [
+                  0,
+                  0
+                ],
+                "layer": 0
+              }
+            },
+            {
+              "cmp_pre76": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/compass_CY",
+                "size": [
+                  1,
+                  1
+                ],
+                "alpha": 0.01,
+                "anchor_from": "top_left",
+                "anchor_to": "top_left",
+                "offset": [
+                  0,
+                  0
+                ],
+                "layer": 0
+              }
+            },
+            {
+              "cmp_pre77": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/compass_CZ",
+                "size": [
+                  1,
+                  1
+                ],
+                "alpha": 0.01,
+                "anchor_from": "top_left",
+                "anchor_to": "top_left",
+                "offset": [
+                  0,
+                  0
+                ],
+                "layer": 0
+              }
+            },
+            {
+              "cmp_pre78": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/compass_DA",
+                "size": [
+                  1,
+                  1
+                ],
+                "alpha": 0.01,
+                "anchor_from": "top_left",
+                "anchor_to": "top_left",
+                "offset": [
+                  0,
+                  0
+                ],
+                "layer": 0
+              }
+            },
+            {
+              "cmp_pre79": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/compass_DB",
+                "size": [
+                  1,
+                  1
+                ],
+                "alpha": 0.01,
+                "anchor_from": "top_left",
+                "anchor_to": "top_left",
+                "offset": [
+                  0,
+                  0
+                ],
+                "layer": 0
+              }
+            },
+            {
+              "cmp_pre80": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/compass_DC",
+                "size": [
+                  1,
+                  1
+                ],
+                "alpha": 0.01,
+                "anchor_from": "top_left",
+                "anchor_to": "top_left",
+                "offset": [
+                  0,
+                  0
+                ],
+                "layer": 0
+              }
+            },
+            {
+              "cmp_pre81": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/compass_DD",
+                "size": [
+                  1,
+                  1
+                ],
+                "alpha": 0.01,
+                "anchor_from": "top_left",
+                "anchor_to": "top_left",
+                "offset": [
+                  0,
+                  0
+                ],
+                "layer": 0
+              }
+            },
+            {
+              "cmp_pre82": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/compass_DE",
+                "size": [
+                  1,
+                  1
+                ],
+                "alpha": 0.01,
+                "anchor_from": "top_left",
+                "anchor_to": "top_left",
+                "offset": [
+                  0,
+                  0
+                ],
+                "layer": 0
+              }
+            },
+            {
+              "cmp_pre83": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/compass_DF",
+                "size": [
+                  1,
+                  1
+                ],
+                "alpha": 0.01,
+                "anchor_from": "top_left",
+                "anchor_to": "top_left",
+                "offset": [
+                  0,
+                  0
+                ],
+                "layer": 0
+              }
+            },
+            {
+              "cmp_pre84": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/compass_DG",
+                "size": [
+                  1,
+                  1
+                ],
+                "alpha": 0.01,
+                "anchor_from": "top_left",
+                "anchor_to": "top_left",
+                "offset": [
+                  0,
+                  0
+                ],
+                "layer": 0
+              }
+            },
+            {
+              "cmp_pre85": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/compass_DH",
+                "size": [
+                  1,
+                  1
+                ],
+                "alpha": 0.01,
+                "anchor_from": "top_left",
+                "anchor_to": "top_left",
+                "offset": [
+                  0,
+                  0
+                ],
+                "layer": 0
+              }
+            },
+            {
+              "cmp_pre86": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/compass_DI",
+                "size": [
+                  1,
+                  1
+                ],
+                "alpha": 0.01,
+                "anchor_from": "top_left",
+                "anchor_to": "top_left",
+                "offset": [
+                  0,
+                  0
+                ],
+                "layer": 0
+              }
+            },
+            {
+              "cmp_pre87": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/compass_DJ",
+                "size": [
+                  1,
+                  1
+                ],
+                "alpha": 0.01,
+                "anchor_from": "top_left",
+                "anchor_to": "top_left",
+                "offset": [
+                  0,
+                  0
+                ],
+                "layer": 0
+              }
+            },
+            {
+              "cmp_pre88": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/compass_DK",
+                "size": [
+                  1,
+                  1
+                ],
+                "alpha": 0.01,
+                "anchor_from": "top_left",
+                "anchor_to": "top_left",
+                "offset": [
+                  0,
+                  0
+                ],
+                "layer": 0
+              }
+            },
+            {
+              "cmp_pre89": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/compass_DL",
+                "size": [
+                  1,
+                  1
+                ],
+                "alpha": 0.01,
+                "anchor_from": "top_left",
+                "anchor_to": "top_left",
+                "offset": [
+                  0,
+                  0
+                ],
+                "layer": 0
+              }
+            },
+            {
+              "cmp_pre90": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/compass_DM",
+                "size": [
+                  1,
+                  1
+                ],
+                "alpha": 0.01,
+                "anchor_from": "top_left",
+                "anchor_to": "top_left",
+                "offset": [
+                  0,
+                  0
+                ],
+                "layer": 0
+              }
+            },
+            {
+              "cmp_pre91": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/compass_DN",
+                "size": [
+                  1,
+                  1
+                ],
+                "alpha": 0.01,
+                "anchor_from": "top_left",
+                "anchor_to": "top_left",
+                "offset": [
+                  0,
+                  0
+                ],
+                "layer": 0
+              }
+            },
+            {
+              "cmp_pre92": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/compass_DO",
+                "size": [
+                  1,
+                  1
+                ],
+                "alpha": 0.01,
+                "anchor_from": "top_left",
+                "anchor_to": "top_left",
+                "offset": [
+                  0,
+                  0
+                ],
+                "layer": 0
+              }
+            },
+            {
+              "cmp_pre93": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/compass_DP",
+                "size": [
+                  1,
+                  1
+                ],
+                "alpha": 0.01,
+                "anchor_from": "top_left",
+                "anchor_to": "top_left",
+                "offset": [
+                  0,
+                  0
+                ],
+                "layer": 0
+              }
+            },
+            {
+              "cmp_pre94": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/compass_DQ",
+                "size": [
+                  1,
+                  1
+                ],
+                "alpha": 0.01,
+                "anchor_from": "top_left",
+                "anchor_to": "top_left",
+                "offset": [
+                  0,
+                  0
+                ],
+                "layer": 0
+              }
+            },
+            {
+              "cmp_pre95": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/compass_DR",
+                "size": [
+                  1,
+                  1
+                ],
+                "alpha": 0.01,
+                "anchor_from": "top_left",
+                "anchor_to": "top_left",
+                "offset": [
+                  0,
+                  0
+                ],
+                "layer": 0
+              }
+            },
+            {
+              "cmp_pre96": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/compass_DS",
+                "size": [
+                  1,
+                  1
+                ],
+                "alpha": 0.01,
+                "anchor_from": "top_left",
+                "anchor_to": "top_left",
+                "offset": [
+                  0,
+                  0
+                ],
+                "layer": 0
+              }
+            },
+            {
+              "cmp_pre97": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/compass_DT",
+                "size": [
+                  1,
+                  1
+                ],
+                "alpha": 0.01,
+                "anchor_from": "top_left",
+                "anchor_to": "top_left",
+                "offset": [
+                  0,
+                  0
+                ],
+                "layer": 0
+              }
+            },
+            {
+              "cmp_pre98": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/compass_DU",
+                "size": [
+                  1,
+                  1
+                ],
+                "alpha": 0.01,
+                "anchor_from": "top_left",
+                "anchor_to": "top_left",
+                "offset": [
+                  0,
+                  0
+                ],
+                "layer": 0
+              }
+            },
+            {
+              "cmp_pre99": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/compass_DV",
+                "size": [
+                  1,
+                  1
+                ],
+                "alpha": 0.01,
+                "anchor_from": "top_left",
+                "anchor_to": "top_left",
+                "offset": [
+                  0,
+                  0
+                ],
+                "layer": 0
+              }
+            },
+            {
+              "cmp_pre100": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/compass_DW",
+                "size": [
+                  1,
+                  1
+                ],
+                "alpha": 0.01,
+                "anchor_from": "top_left",
+                "anchor_to": "top_left",
+                "offset": [
+                  0,
+                  0
+                ],
+                "layer": 0
+              }
+            },
+            {
+              "cmp_pre101": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/compass_DX",
+                "size": [
+                  1,
+                  1
+                ],
+                "alpha": 0.01,
+                "anchor_from": "top_left",
+                "anchor_to": "top_left",
+                "offset": [
+                  0,
+                  0
+                ],
+                "layer": 0
+              }
+            },
+            {
+              "cmp_pre102": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/compass_DY",
+                "size": [
+                  1,
+                  1
+                ],
+                "alpha": 0.01,
+                "anchor_from": "top_left",
+                "anchor_to": "top_left",
+                "offset": [
+                  0,
+                  0
+                ],
+                "layer": 0
+              }
+            },
+            {
+              "cmp_pre103": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/compass_DZ",
+                "size": [
+                  1,
+                  1
+                ],
+                "alpha": 0.01,
+                "anchor_from": "top_left",
+                "anchor_to": "top_left",
+                "offset": [
+                  0,
+                  0
+                ],
+                "layer": 0
+              }
+            },
+            {
+              "cmp_pre104": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/compass_EA",
+                "size": [
+                  1,
+                  1
+                ],
+                "alpha": 0.01,
+                "anchor_from": "top_left",
+                "anchor_to": "top_left",
+                "offset": [
+                  0,
+                  0
+                ],
+                "layer": 0
+              }
+            },
+            {
+              "cmp_pre105": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/compass_EB",
+                "size": [
+                  1,
+                  1
+                ],
+                "alpha": 0.01,
+                "anchor_from": "top_left",
+                "anchor_to": "top_left",
+                "offset": [
+                  0,
+                  0
+                ],
+                "layer": 0
+              }
+            },
+            {
+              "cmp_pre106": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/compass_EC",
+                "size": [
+                  1,
+                  1
+                ],
+                "alpha": 0.01,
+                "anchor_from": "top_left",
+                "anchor_to": "top_left",
+                "offset": [
+                  0,
+                  0
+                ],
+                "layer": 0
+              }
+            },
+            {
+              "cmp_pre107": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/compass_ED",
+                "size": [
+                  1,
+                  1
+                ],
+                "alpha": 0.01,
+                "anchor_from": "top_left",
+                "anchor_to": "top_left",
+                "offset": [
+                  0,
+                  0
+                ],
+                "layer": 0
+              }
+            },
+            {
+              "cmp_pre108": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/compass_EE",
+                "size": [
+                  1,
+                  1
+                ],
+                "alpha": 0.01,
+                "anchor_from": "top_left",
+                "anchor_to": "top_left",
+                "offset": [
+                  0,
+                  0
+                ],
+                "layer": 0
+              }
+            },
+            {
+              "cmp_pre109": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/compass_EF",
+                "size": [
+                  1,
+                  1
+                ],
+                "alpha": 0.01,
+                "anchor_from": "top_left",
+                "anchor_to": "top_left",
+                "offset": [
+                  0,
+                  0
+                ],
+                "layer": 0
+              }
+            },
+            {
+              "cmp_pre110": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/compass_EG",
+                "size": [
+                  1,
+                  1
+                ],
+                "alpha": 0.01,
+                "anchor_from": "top_left",
+                "anchor_to": "top_left",
+                "offset": [
+                  0,
+                  0
+                ],
+                "layer": 0
+              }
+            },
+            {
+              "cmp_pre111": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/compass_EH",
+                "size": [
+                  1,
+                  1
+                ],
+                "alpha": 0.01,
+                "anchor_from": "top_left",
+                "anchor_to": "top_left",
+                "offset": [
+                  0,
+                  0
+                ],
+                "layer": 0
+              }
+            },
+            {
+              "cmp_pre112": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/compass_EI",
+                "size": [
+                  1,
+                  1
+                ],
+                "alpha": 0.01,
+                "anchor_from": "top_left",
+                "anchor_to": "top_left",
+                "offset": [
+                  0,
+                  0
+                ],
+                "layer": 0
+              }
+            },
+            {
+              "cmp_pre113": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/compass_EJ",
+                "size": [
+                  1,
+                  1
+                ],
+                "alpha": 0.01,
+                "anchor_from": "top_left",
+                "anchor_to": "top_left",
+                "offset": [
+                  0,
+                  0
+                ],
+                "layer": 0
+              }
+            },
+            {
+              "cmp_pre114": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/compass_EK",
+                "size": [
+                  1,
+                  1
+                ],
+                "alpha": 0.01,
+                "anchor_from": "top_left",
+                "anchor_to": "top_left",
+                "offset": [
+                  0,
+                  0
+                ],
+                "layer": 0
+              }
+            },
+            {
+              "cmp_pre115": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/compass_EL",
+                "size": [
+                  1,
+                  1
+                ],
+                "alpha": 0.01,
+                "anchor_from": "top_left",
+                "anchor_to": "top_left",
+                "offset": [
+                  0,
+                  0
+                ],
+                "layer": 0
+              }
+            },
+            {
+              "cmp_pre116": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/compass_EM",
+                "size": [
+                  1,
+                  1
+                ],
+                "alpha": 0.01,
+                "anchor_from": "top_left",
+                "anchor_to": "top_left",
+                "offset": [
+                  0,
+                  0
+                ],
+                "layer": 0
+              }
+            },
+            {
+              "cmp_pre117": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/compass_EN",
+                "size": [
+                  1,
+                  1
+                ],
+                "alpha": 0.01,
+                "anchor_from": "top_left",
+                "anchor_to": "top_left",
+                "offset": [
+                  0,
+                  0
+                ],
+                "layer": 0
+              }
+            },
+            {
+              "cmp_pre118": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/compass_EO",
+                "size": [
+                  1,
+                  1
+                ],
+                "alpha": 0.01,
+                "anchor_from": "top_left",
+                "anchor_to": "top_left",
+                "offset": [
+                  0,
+                  0
+                ],
+                "layer": 0
+              }
+            },
+            {
+              "cmp_pre119": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/compass_EP",
+                "size": [
+                  1,
+                  1
+                ],
+                "alpha": 0.01,
+                "anchor_from": "top_left",
+                "anchor_to": "top_left",
+                "offset": [
+                  0,
+                  0
+                ],
+                "layer": 0
+              }
+            },
+            {
+              "cmp_pre120": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/compass_EQ",
+                "size": [
+                  1,
+                  1
+                ],
+                "alpha": 0.01,
+                "anchor_from": "top_left",
+                "anchor_to": "top_left",
+                "offset": [
+                  0,
+                  0
+                ],
+                "layer": 0
+              }
+            },
+            {
+              "cmp_pre121": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/compass_ER",
+                "size": [
+                  1,
+                  1
+                ],
+                "alpha": 0.01,
+                "anchor_from": "top_left",
+                "anchor_to": "top_left",
+                "offset": [
+                  0,
+                  0
+                ],
+                "layer": 0
+              }
+            },
+            {
+              "cmp_pre122": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/compass_ES",
+                "size": [
+                  1,
+                  1
+                ],
+                "alpha": 0.01,
+                "anchor_from": "top_left",
+                "anchor_to": "top_left",
+                "offset": [
+                  0,
+                  0
+                ],
+                "layer": 0
+              }
+            },
+            {
+              "cmp_pre123": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/compass_ET",
+                "size": [
+                  1,
+                  1
+                ],
+                "alpha": 0.01,
+                "anchor_from": "top_left",
+                "anchor_to": "top_left",
+                "offset": [
+                  0,
+                  0
+                ],
+                "layer": 0
+              }
+            },
+            {
+              "cmp_pre124": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/compass_EU",
+                "size": [
+                  1,
+                  1
+                ],
+                "alpha": 0.01,
+                "anchor_from": "top_left",
+                "anchor_to": "top_left",
+                "offset": [
+                  0,
+                  0
+                ],
+                "layer": 0
+              }
+            },
+            {
+              "cmp_pre125": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/compass_EV",
+                "size": [
+                  1,
+                  1
+                ],
+                "alpha": 0.01,
+                "anchor_from": "top_left",
+                "anchor_to": "top_left",
+                "offset": [
+                  0,
+                  0
+                ],
+                "layer": 0
+              }
+            },
+            {
+              "cmp_pre126": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/compass_EW",
+                "size": [
+                  1,
+                  1
+                ],
+                "alpha": 0.01,
+                "anchor_from": "top_left",
+                "anchor_to": "top_left",
+                "offset": [
+                  0,
+                  0
+                ],
+                "layer": 0
+              }
+            },
+            {
+              "cmp_pre127": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/compass_EX",
+                "size": [
+                  1,
+                  1
+                ],
+                "alpha": 0.01,
+                "anchor_from": "top_left",
+                "anchor_to": "top_left",
+                "offset": [
+                  0,
+                  0
+                ],
+                "layer": 0
+              }
+            },
+            {
+              "cmp_pre128": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/compass_EY",
+                "size": [
+                  1,
+                  1
+                ],
+                "alpha": 0.01,
+                "anchor_from": "top_left",
+                "anchor_to": "top_left",
+                "offset": [
+                  0,
+                  0
+                ],
+                "layer": 0
+              }
+            },
+            {
+              "cmp_pre129": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/compass_EZ",
+                "size": [
+                  1,
+                  1
+                ],
+                "alpha": 0.01,
+                "anchor_from": "top_left",
+                "anchor_to": "top_left",
+                "offset": [
+                  0,
+                  0
+                ],
+                "layer": 0
+              }
+            },
+            {
+              "cmp_pre130": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/compass_FA",
+                "size": [
+                  1,
+                  1
+                ],
+                "alpha": 0.01,
+                "anchor_from": "top_left",
+                "anchor_to": "top_left",
+                "offset": [
+                  0,
+                  0
+                ],
+                "layer": 0
+              }
+            },
+            {
+              "cmp_pre131": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/compass_FB",
+                "size": [
+                  1,
+                  1
+                ],
+                "alpha": 0.01,
+                "anchor_from": "top_left",
+                "anchor_to": "top_left",
+                "offset": [
+                  0,
+                  0
+                ],
+                "layer": 0
+              }
+            },
+            {
+              "cmp_pre132": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/compass_FC",
+                "size": [
+                  1,
+                  1
+                ],
+                "alpha": 0.01,
+                "anchor_from": "top_left",
+                "anchor_to": "top_left",
+                "offset": [
+                  0,
+                  0
+                ],
+                "layer": 0
+              }
+            },
+            {
+              "cmp_pre133": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/compass_FD",
+                "size": [
+                  1,
+                  1
+                ],
+                "alpha": 0.01,
+                "anchor_from": "top_left",
+                "anchor_to": "top_left",
+                "offset": [
+                  0,
+                  0
+                ],
+                "layer": 0
+              }
+            },
+            {
+              "cmp_pre134": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/compass_FE",
+                "size": [
+                  1,
+                  1
+                ],
+                "alpha": 0.01,
+                "anchor_from": "top_left",
+                "anchor_to": "top_left",
+                "offset": [
+                  0,
+                  0
+                ],
+                "layer": 0
+              }
+            },
+            {
+              "cmp_pre135": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/compass_FF",
+                "size": [
+                  1,
+                  1
+                ],
+                "alpha": 0.01,
+                "anchor_from": "top_left",
+                "anchor_to": "top_left",
+                "offset": [
+                  0,
+                  0
+                ],
+                "layer": 0
+              }
+            },
+            {
+              "cmp_pre136": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/compass_FG",
+                "size": [
+                  1,
+                  1
+                ],
+                "alpha": 0.01,
+                "anchor_from": "top_left",
+                "anchor_to": "top_left",
+                "offset": [
+                  0,
+                  0
+                ],
+                "layer": 0
+              }
+            },
+            {
+              "cmp_pre137": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/compass_FH",
+                "size": [
+                  1,
+                  1
+                ],
+                "alpha": 0.01,
+                "anchor_from": "top_left",
+                "anchor_to": "top_left",
+                "offset": [
+                  0,
+                  0
+                ],
+                "layer": 0
+              }
+            },
+            {
+              "cmp_pre138": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/compass_FI",
+                "size": [
+                  1,
+                  1
+                ],
+                "alpha": 0.01,
+                "anchor_from": "top_left",
+                "anchor_to": "top_left",
+                "offset": [
+                  0,
+                  0
+                ],
+                "layer": 0
+              }
+            },
+            {
+              "cmp_pre139": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/compass_FJ",
+                "size": [
+                  1,
+                  1
+                ],
+                "alpha": 0.01,
+                "anchor_from": "top_left",
+                "anchor_to": "top_left",
+                "offset": [
+                  0,
+                  0
+                ],
+                "layer": 0
+              }
+            },
+            {
+              "cmp_pre140": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/compass_FK",
+                "size": [
+                  1,
+                  1
+                ],
+                "alpha": 0.01,
+                "anchor_from": "top_left",
+                "anchor_to": "top_left",
+                "offset": [
+                  0,
+                  0
+                ],
+                "layer": 0
+              }
+            },
+            {
+              "cmp_pre141": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/compass_FL",
+                "size": [
+                  1,
+                  1
+                ],
+                "alpha": 0.01,
+                "anchor_from": "top_left",
+                "anchor_to": "top_left",
+                "offset": [
+                  0,
+                  0
+                ],
+                "layer": 0
+              }
+            },
+            {
+              "cmp_pre142": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/compass_FM",
+                "size": [
+                  1,
+                  1
+                ],
+                "alpha": 0.01,
+                "anchor_from": "top_left",
+                "anchor_to": "top_left",
+                "offset": [
+                  0,
+                  0
+                ],
+                "layer": 0
+              }
+            },
+            {
+              "cmp_pre143": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/compass_FN",
+                "size": [
+                  1,
+                  1
+                ],
+                "alpha": 0.01,
+                "anchor_from": "top_left",
+                "anchor_to": "top_left",
+                "offset": [
+                  0,
+                  0
+                ],
+                "layer": 0
+              }
+            },
+            {
+              "cmp_pre144": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/compass_FO",
+                "size": [
+                  1,
+                  1
+                ],
+                "alpha": 0.01,
+                "anchor_from": "top_left",
+                "anchor_to": "top_left",
+                "offset": [
+                  0,
+                  0
+                ],
+                "layer": 0
+              }
+            },
+            {
+              "cmp_pre145": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/compass_FP",
+                "size": [
+                  1,
+                  1
+                ],
+                "alpha": 0.01,
+                "anchor_from": "top_left",
+                "anchor_to": "top_left",
+                "offset": [
+                  0,
+                  0
+                ],
+                "layer": 0
+              }
+            },
+            {
+              "cmp_pre146": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/compass_FQ",
+                "size": [
+                  1,
+                  1
+                ],
+                "alpha": 0.01,
+                "anchor_from": "top_left",
+                "anchor_to": "top_left",
+                "offset": [
+                  0,
+                  0
+                ],
+                "layer": 0
+              }
+            },
+            {
+              "cmp_pre147": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/compass_FR",
+                "size": [
+                  1,
+                  1
+                ],
+                "alpha": 0.01,
+                "anchor_from": "top_left",
+                "anchor_to": "top_left",
+                "offset": [
+                  0,
+                  0
+                ],
+                "layer": 0
+              }
+            },
+            {
+              "cmp_pre148": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/compass_FS",
+                "size": [
+                  1,
+                  1
+                ],
+                "alpha": 0.01,
+                "anchor_from": "top_left",
+                "anchor_to": "top_left",
+                "offset": [
+                  0,
+                  0
+                ],
+                "layer": 0
+              }
+            },
+            {
+              "cmp_pre149": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/compass_FT",
+                "size": [
+                  1,
+                  1
+                ],
+                "alpha": 0.01,
+                "anchor_from": "top_left",
+                "anchor_to": "top_left",
+                "offset": [
+                  0,
+                  0
+                ],
+                "layer": 0
+              }
+            },
+            {
+              "cmp_pre150": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/compass_FU",
+                "size": [
+                  1,
+                  1
+                ],
+                "alpha": 0.01,
+                "anchor_from": "top_left",
+                "anchor_to": "top_left",
+                "offset": [
+                  0,
+                  0
+                ],
+                "layer": 0
+              }
+            },
+            {
+              "cmp_pre151": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/compass_FV",
+                "size": [
+                  1,
+                  1
+                ],
+                "alpha": 0.01,
+                "anchor_from": "top_left",
+                "anchor_to": "top_left",
+                "offset": [
+                  0,
+                  0
+                ],
+                "layer": 0
+              }
+            },
+            {
+              "cmp_pre152": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/compass_FW",
+                "size": [
+                  1,
+                  1
+                ],
+                "alpha": 0.01,
+                "anchor_from": "top_left",
+                "anchor_to": "top_left",
+                "offset": [
+                  0,
+                  0
+                ],
+                "layer": 0
+              }
+            },
+            {
+              "cmp_pre153": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/compass_FX",
+                "size": [
+                  1,
+                  1
+                ],
+                "alpha": 0.01,
+                "anchor_from": "top_left",
+                "anchor_to": "top_left",
+                "offset": [
+                  0,
+                  0
+                ],
+                "layer": 0
+              }
+            },
+            {
+              "cmp_pre154": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/compass_FY",
+                "size": [
+                  1,
+                  1
+                ],
+                "alpha": 0.01,
+                "anchor_from": "top_left",
+                "anchor_to": "top_left",
+                "offset": [
+                  0,
+                  0
+                ],
+                "layer": 0
+              }
+            },
+            {
+              "cmp_pre155": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/compass_FZ",
+                "size": [
+                  1,
+                  1
+                ],
+                "alpha": 0.01,
+                "anchor_from": "top_left",
+                "anchor_to": "top_left",
+                "offset": [
+                  0,
+                  0
+                ],
+                "layer": 0
+              }
+            },
+            {
+              "cmp_pre156": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/compass_GA",
+                "size": [
+                  1,
+                  1
+                ],
+                "alpha": 0.01,
+                "anchor_from": "top_left",
+                "anchor_to": "top_left",
+                "offset": [
+                  0,
+                  0
+                ],
+                "layer": 0
+              }
+            },
+            {
+              "cmp_pre157": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/compass_GB",
+                "size": [
+                  1,
+                  1
+                ],
+                "alpha": 0.01,
+                "anchor_from": "top_left",
+                "anchor_to": "top_left",
+                "offset": [
+                  0,
+                  0
+                ],
+                "layer": 0
+              }
+            },
+            {
+              "cmp_pre158": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/compass_GC",
+                "size": [
+                  1,
+                  1
+                ],
+                "alpha": 0.01,
+                "anchor_from": "top_left",
+                "anchor_to": "top_left",
+                "offset": [
+                  0,
+                  0
+                ],
+                "layer": 0
+              }
+            },
+            {
+              "cmp_pre159": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/compass_GD",
+                "size": [
+                  1,
+                  1
+                ],
+                "alpha": 0.01,
+                "anchor_from": "top_left",
+                "anchor_to": "top_left",
+                "offset": [
+                  0,
+                  0
+                ],
+                "layer": 0
+              }
+            },
+            {
+              "cmp_pre160": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/compass_GE",
+                "size": [
+                  1,
+                  1
+                ],
+                "alpha": 0.01,
+                "anchor_from": "top_left",
+                "anchor_to": "top_left",
+                "offset": [
+                  0,
+                  0
+                ],
+                "layer": 0
+              }
+            },
+            {
+              "cmp_pre161": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/compass_GF",
+                "size": [
+                  1,
+                  1
+                ],
+                "alpha": 0.01,
+                "anchor_from": "top_left",
+                "anchor_to": "top_left",
+                "offset": [
+                  0,
+                  0
+                ],
+                "layer": 0
+              }
+            },
+            {
+              "cmp_pre162": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/compass_GG",
+                "size": [
+                  1,
+                  1
+                ],
+                "alpha": 0.01,
+                "anchor_from": "top_left",
+                "anchor_to": "top_left",
+                "offset": [
+                  0,
+                  0
+                ],
+                "layer": 0
+              }
+            },
+            {
+              "cmp_pre163": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/compass_GH",
+                "size": [
+                  1,
+                  1
+                ],
+                "alpha": 0.01,
+                "anchor_from": "top_left",
+                "anchor_to": "top_left",
+                "offset": [
+                  0,
+                  0
+                ],
+                "layer": 0
+              }
+            },
+            {
+              "cmp_pre164": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/compass_GI",
+                "size": [
+                  1,
+                  1
+                ],
+                "alpha": 0.01,
+                "anchor_from": "top_left",
+                "anchor_to": "top_left",
+                "offset": [
+                  0,
+                  0
+                ],
+                "layer": 0
+              }
+            },
+            {
+              "cmp_pre165": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/compass_GJ",
+                "size": [
+                  1,
+                  1
+                ],
+                "alpha": 0.01,
+                "anchor_from": "top_left",
+                "anchor_to": "top_left",
+                "offset": [
+                  0,
+                  0
+                ],
+                "layer": 0
+              }
+            },
+            {
+              "cmp_pre166": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/compass_GK",
+                "size": [
+                  1,
+                  1
+                ],
+                "alpha": 0.01,
+                "anchor_from": "top_left",
+                "anchor_to": "top_left",
+                "offset": [
+                  0,
+                  0
+                ],
+                "layer": 0
+              }
+            },
+            {
+              "cmp_pre167": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/compass_GL",
+                "size": [
+                  1,
+                  1
+                ],
+                "alpha": 0.01,
+                "anchor_from": "top_left",
+                "anchor_to": "top_left",
+                "offset": [
+                  0,
+                  0
+                ],
+                "layer": 0
+              }
+            },
+            {
+              "cmp_pre168": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/compass_GM",
+                "size": [
+                  1,
+                  1
+                ],
+                "alpha": 0.01,
+                "anchor_from": "top_left",
+                "anchor_to": "top_left",
+                "offset": [
+                  0,
+                  0
+                ],
+                "layer": 0
+              }
+            },
+            {
+              "cmp_pre169": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/compass_GN",
+                "size": [
+                  1,
+                  1
+                ],
+                "alpha": 0.01,
+                "anchor_from": "top_left",
+                "anchor_to": "top_left",
+                "offset": [
+                  0,
+                  0
+                ],
+                "layer": 0
+              }
+            },
+            {
+              "cmp_pre170": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/compass_GO",
+                "size": [
+                  1,
+                  1
+                ],
+                "alpha": 0.01,
+                "anchor_from": "top_left",
+                "anchor_to": "top_left",
+                "offset": [
+                  0,
+                  0
+                ],
+                "layer": 0
+              }
+            },
+            {
+              "cmp_pre171": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/compass_GP",
+                "size": [
+                  1,
+                  1
+                ],
+                "alpha": 0.01,
+                "anchor_from": "top_left",
+                "anchor_to": "top_left",
+                "offset": [
+                  0,
+                  0
+                ],
+                "layer": 0
+              }
+            },
+            {
+              "cmp_pre172": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/compass_GQ",
+                "size": [
+                  1,
+                  1
+                ],
+                "alpha": 0.01,
+                "anchor_from": "top_left",
+                "anchor_to": "top_left",
+                "offset": [
+                  0,
+                  0
+                ],
+                "layer": 0
+              }
+            },
+            {
+              "cmp_pre173": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/compass_GR",
+                "size": [
+                  1,
+                  1
+                ],
+                "alpha": 0.01,
+                "anchor_from": "top_left",
+                "anchor_to": "top_left",
+                "offset": [
+                  0,
+                  0
+                ],
+                "layer": 0
+              }
+            },
+            {
+              "cmp_pre174": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/compass_GS",
+                "size": [
+                  1,
+                  1
+                ],
+                "alpha": 0.01,
+                "anchor_from": "top_left",
+                "anchor_to": "top_left",
+                "offset": [
+                  0,
+                  0
+                ],
+                "layer": 0
+              }
+            },
+            {
+              "cmp_pre175": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/compass_GT",
+                "size": [
+                  1,
+                  1
+                ],
+                "alpha": 0.01,
+                "anchor_from": "top_left",
+                "anchor_to": "top_left",
+                "offset": [
+                  0,
+                  0
+                ],
+                "layer": 0
+              }
+            },
+            {
+              "cmp_pre176": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/compass_GU",
+                "size": [
+                  1,
+                  1
+                ],
+                "alpha": 0.01,
+                "anchor_from": "top_left",
+                "anchor_to": "top_left",
+                "offset": [
+                  0,
+                  0
+                ],
+                "layer": 0
+              }
+            },
+            {
+              "cmp_pre177": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/compass_GV",
+                "size": [
+                  1,
+                  1
+                ],
+                "alpha": 0.01,
+                "anchor_from": "top_left",
+                "anchor_to": "top_left",
+                "offset": [
+                  0,
+                  0
+                ],
+                "layer": 0
+              }
+            },
+            {
+              "cmp_pre178": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/compass_GW",
+                "size": [
+                  1,
+                  1
+                ],
+                "alpha": 0.01,
+                "anchor_from": "top_left",
+                "anchor_to": "top_left",
+                "offset": [
+                  0,
+                  0
+                ],
+                "layer": 0
+              }
+            },
+            {
+              "cmp_pre179": {
+                "type": "image",
+                "texture": "textures/ui/arsenal/hud2/compass_GX",
+                "size": [
+                  1,
+                  1
+                ],
+                "alpha": 0.01,
+                "anchor_from": "top_left",
+                "anchor_to": "top_left",
+                "offset": [
+                  0,
+                  0
+                ],
+                "layer": 0
+              }
+            }
+          ]
+        }
+      },
+      {
+        "dmgnum": {
+          "type": "label",
+          "text": "#text",
+          "localize": false,
+          "shadow": true,
+          "font_scale_factor": 1.0,
+          "layer": 5,
+          "color": [
+            1,
+            1,
+            1
+          ],
+          "anchor_from": "center",
+          "anchor_to": "left_middle",
+          "offset": [
+            16,
+            -14
+          ],
+          "size": [
+            "default",
+            "default"
+          ],
+          "text_alignment": "left",
+          "bindings": [
+            {
+              "binding_name": "#hud_subtitle_text_string",
+              "binding_name_override": "#arsenal_s",
+              "binding_type": "global"
+            },
+            {
+              "binding_type": "view",
+              "source_property_name": "((not ((#arsenal_s - 'AC2L.') = #arsenal_s)) and ((not ((#arsenal_s - '^§f') = #arsenal_s)) or (not ((#arsenal_s - '^§e') = #arsenal_s)) or (not ((#arsenal_s - '^§c') = #arsenal_s))))",
+              "target_property_name": "#visible"
+            },
+            {
+              "binding_type": "view",
+              "source_property_name": "(#arsenal_s - 'AC2L' - '§a§r§s§n' - '.x00' - '.x01' - '.x02' - '.x03' - '.x04' - '.x05' - '.x06' - '.x07' - '.x08' - '.x09' - '.x0x' - '.' - '~' - '^' - '---' - 'A' - 'B' - 'C' - 'D' - 'E' - 'F' - 'G' - 'H' - 'I' - 'J' - 'K' - 'L' - 'M' - 'N' - 'O' - 'P' - 'Q' - 'R' - 'S' - 'T' - 'U' - 'V' - 'W' - 'X' - 'Y' - 'Z')",
+              "target_property_name": "#text"
             }
           ]
         }

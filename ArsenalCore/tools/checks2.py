@@ -599,11 +599,25 @@ def _hud2_vectors(vec, controls, cells, E, EL, TITLE_VAR, SUB_VAR, mark, errs, r
             tex_expr = next((b["source_property_name"] for b in cmp_body.get("bindings", []) if b.get("target_property_name") == "#texture"), None)
             if hdg.isdigit():
                 got = ev.run(tex_expr) if tex_expr else None
-                want = f"textures/ui/arsenal/hud2/compass_{hdg}"
+                A = H["hdgLetters"]
+                want = f"textures/ui/arsenal/hud2/compass_{A[int(hdg) // len(A)]}{A[int(hdg) % len(A)]}"
                 if got != want:
                     errs.append(f"方位 {hdg!r} → テクスチャ {got!r}（{want!r} のはず）")
                 elif not os.path.exists(os.path.join(rp, want + ".png")):
                     errs.append(f"方位の画像がない {want}")
+        # 与えたダメージ：ラベル 1 つ。色コード + 数字があれば見え、文字はその色コード + 数字そのもの
+        dmg = str(v["values"].get("dmg", ""))
+        dmg_body = next((b for nm, _, b, _ in controls if nm == "dmgnum"), None)
+        if dmg_body is None:
+            errs.append("ダメージ表示（dmgnum）がない")
+        else:
+            shown = bool(re.fullmatch(r"§[fec]\d{1,4}", dmg))
+            if vis["dmgnum"] != shown:
+                errs.append(f"ダメージ {dmg!r} → 表示 {vis['dmgnum']}")
+            txt_expr = next((b["source_property_name"] for b in dmg_body.get("bindings", []) if b.get("target_property_name") == "#text"), None)
+            got = ev.run(txt_expr) if txt_expr else None
+            if shown and got != dmg:
+                errs.append(f"ダメージ {dmg!r}（方位 {hdg!r}）→ 文字 {got!r}")
         panels = [k for k in vis if re.fullmatch(r"l\d_panel", k) and vis[k]]
         bars = [k for k in vis if re.fullmatch(r"l\d_bar\d", k) and vis[k]]
         want_bar = [] if d["heat"] == "0" else [f"l{d['lay']}_bar{d['heat']}"]

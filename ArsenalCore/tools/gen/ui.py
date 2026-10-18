@@ -70,9 +70,8 @@ class Hud2Expr:
     def active(self):
         return _contains(self.h["header"] + self.h["sep"], self.var)
 
-    def raw_value(self):
-        """サブタイトルから、印の後ろのそのままの値（方位 3 桁）だけを残す式。
-        見出し・目印・ほかの札（決まった文字だけ）・区切り・印を引き算で取り除く（* 演算は使わない）"""
+    def _strip_parts(self):
+        """サブタイトルから、方位とダメージ以外（見出し・目印・ほかの札・区切り・印）を取り除く引き算の並び"""
         H = self.h
         parts = [H["liveHeader"], self.mark]
         for name in H["live"]:
@@ -80,8 +79,16 @@ class Hud2Expr:
                 continue
             f = self.f[name]
             parts += [f"{H['sep']}{f['key']}{i}{ch}" for i in range(f["len"]) for ch in H["liveChars"][name]]
-        parts += [H["sep"], H["rawMark"]]
+        return parts + [H["sep"], H["rawMark"], H["dmgMark"]]
+
+    @staticmethod
+    def _minus(parts):
         return "(" + SUB_VAR + "".join(f" - '{p}'" for p in parts) + ")"
+
+    def raw_value(self):
+        """方位（英字 2 文字）だけを残す式：ほかを引いたあと、ダメージの色コードと数字も引く（* 演算は使わない）"""
+        H = self.h
+        return self._minus(self._strip_parts() + list(H["dmgColors"].values()) + list("0123456789"))
 
     def raw_texture(self, prefix):
         return f"('{prefix}' + {self.raw_value()})"
@@ -90,6 +97,23 @@ class Hud2Expr:
         """生の値があり、隠す印（---）ではない"""
         H = self.h
         return f"({_contains(H['liveHeader'] + H['sep'], SUB_VAR)} and (not {_contains(H['rawMark'] + '---', SUB_VAR)}))"
+
+    def dmg_text(self):
+        """ダメージ（色コード + 数字）だけを残す式：ほかを引いたあと、方位の英字と隠す印も引く"""
+        H = self.h
+        return self._minus(self._strip_parts() + ["---"] + list(H["hdgLetters"]))
+
+    def dmg_shown(self):
+        H = self.h
+        # 印の直後が色コード（目印 "§a§r§s§n" も § で始まるので、色コードまで見る）
+        colors = " or ".join(_contains(H["dmgMark"] + c, SUB_VAR) for c in H["dmgColors"].values())
+        return f"({_contains(H['liveHeader'] + H['sep'], SUB_VAR)} and ({colors}))"
+
+
+def hdg_letters(hud2, i):
+    """方位の番号（0〜179）→ 英字 2 文字"""
+    a = hud2["hdgLetters"]
+    return a[i // len(a)] + a[i % len(a)]
 
 
 class UiMixin:
@@ -225,7 +249,8 @@ class UiMixin:
             wpng(f"{tex}/dmg_{i}.png", ic.damage_arc(i))
             wpng(f"{tex}/wind_{i}.png", ic.wind_arrow(i))
         for i in range(180):
-            wpng(f"{tex}/compass_{i}.png", ic.compass_strip(i * 2))  # 0 埋めしない（実機は式の中で '090' を 90 にする）
+            # 名前は英字 2 文字（compass_AA〜compass_GX。data/hud.js の hdgLetters）
+            wpng(f"{tex}/compass_{hdg_letters(H, i)}.png", ic.compass_strip(i * 2))
         for lv in (1, 2, 3):
             wpng(f"{tex}/sup_{lv}.png", ic.vignette(lv))
         wpng(f"{tex}/nvg.png", ic.nvg_overlay())
@@ -331,12 +356,27 @@ class UiMixin:
         for v in ("1", "2", "3"):
             out.append(label(f"wstr{v}", f"x{v}", offset=(88, 34), cond=E.eq("wstr", v), color=(0.7, 0.9, 1.0), scale=0.8, localize=False))
         # 上：方位バー（2.6）：2° ごとの 180 枚の画像を、1 枚の画像のテクスチャ名で切り替える。
-        # 名前はサブタイトルの方位 3 桁から作る（Hud2Expr.raw_texture）。表示条件は 1 つ
+        # 名前はサブタイトルの方位（英字 2 文字）から作る（Hud2Expr.raw_texture）。表示条件は 1 つ
         n[0] += 1
         out.append({"cmp": {"type": "image", "texture": "#texture", "size": [192, 18], "anchor_from": "top_middle", "anchor_to": "top_middle", "offset": [0, 2], "layer": 2,
                             "bindings": [_bind_sub(),
                                          {"binding_type": "view", "source_property_name": EL.raw_shown(), "target_property_name": "#visible"},
                                          {"binding_type": "view", "source_property_name": EL.raw_texture("textures/ui/arsenal/hud2/compass_"), "target_property_name": "#texture"}]}})
+        # 方位バーの画像を全部、最初から読み込んでおく（2.6.2）。テクスチャ名を切り替えるたびに読み込むと、
+        # 読み込むまでの一瞬だけ何も出ず、向きを変えると点滅した。表示条件のない 1 px・ほぼ透明の画像なので、毎フレームの評価はない
+        pre = []
+        for i in range(180):
+            pre.append({f"cmp_pre{i}": {"type": "image", "texture": f"textures/ui/arsenal/hud2/compass_{hdg_letters(H, i)}", "size": [1, 1], "alpha": 0.01,
+                                        "anchor_from": "top_left", "anchor_to": "top_left", "offset": [0, 0], "layer": 0}})
+            n[0] += 1
+        out.append({"cmp_preload": {"type": "panel", "size": [1, 1], "anchor_from": "top_left", "anchor_to": "top_left", "controls": pre}})
+        # 照準の右上：与えたダメージ（2.6.2）。色コードつきの数字をサブタイトルからそのまま出す（ラベル 1 つ）
+        n[0] += 1
+        out.append({"dmgnum": {"type": "label", "text": "#text", "localize": False, "shadow": True, "font_scale_factor": 1.0, "layer": 5, "color": [1, 1, 1],
+                               "anchor_from": "center", "anchor_to": "left_middle", "offset": [16, -14], "size": ["default", "default"], "text_alignment": "left",
+                               "bindings": [_bind_sub(),
+                                            {"binding_type": "view", "source_property_name": EL.dmg_shown(), "target_property_name": "#visible"},
+                                            {"binding_type": "view", "source_property_name": EL.dmg_text(), "target_property_name": "#text"}]}})
         # 上：ゲームモードの得点（試合中だけ。子はモード名と得点・時間）
         gm_names = {"1": "arsenal.mode_name.ffa", "2": "arsenal.mode_name.tdm", "3": "arsenal.mode_name.gungame", "4": "arsenal.mode_name.horde", "5": "arsenal.mode_name.koth"}
         gm = [img("gm_panel", "panel.png", (150, 30), anchor="top_middle", offset=(0, 22))]

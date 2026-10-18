@@ -68,18 +68,38 @@ export function encodeLive(values) {
     // JSON UI は札を引き算で取り除くので、決まった文字だけを送る（ほかの文字は先頭の文字に置き換える）
     for (let i = 0; i < s.length; i++) out += H.sep + f.key + i + (ok.includes(s[i]) ? s[i] : ok[0]);
   }
-  // 方位は札にせず、印 + そのままの数（0〜179、0 埋めなし。JSON UI が画像のテクスチャ名に使う）
+  // 方位は札にせず、印 + 英字 2 文字（0〜179 → AA〜GX。JSON UI が画像のテクスチャ名に使う）
   const raw = String(values[H.liveRaw] ?? "---");
-  return out + H.sep + H.rawMark + (/^\d{1,3}$/.test(raw) ? raw : "---");
+  const n = /^\d{1,3}$/.test(raw) ? Number(raw) : -1;
+  const A = H.hdgLetters;
+  const hdg = n >= 0 && n < 180 ? A[Math.floor(n / A.length)] + A[n % A.length] : "---";
+  // 与えたダメージ：印 + 色コード + 数字（なければ印だけ）。決まった形だけを送る（JSON UI が英字・札を引いた残りを出す）
+  const dmg = String(values.dmg ?? "");
+  return out + H.sep + H.rawMark + hdg + H.dmgMark + (/^§[fec]\d{1,4}$/.test(dmg) ? dmg : "");
 }
 
 /**
- * サブタイトルの方位（テスト用）
+ * サブタイトルの方位（テスト用。英字 2 文字を 0〜179 に戻す）
  * @param {string} live
  */
 export function liveHeading(live) {
   const i = live.lastIndexOf(H.rawMark);
-  return i < 0 ? null : (/^(?:\d+|---)/.exec(live.slice(i + 1))?.[0] ?? null);
+  if (i < 0) return null;
+  const s = live.slice(i + 1, i + 4);
+  if (s === "---") return s;
+  const A = H.hdgLetters;
+  const a = A.indexOf(s[0]);
+  const b = A.indexOf(s[1]);
+  return a < 0 || b < 0 ? null : String(a * A.length + b);
+}
+
+/**
+ * サブタイトルのダメージ表示（テスト用。"§e124" など、なければ ""）
+ * @param {string} live
+ */
+export function liveDamage(live) {
+  const i = live.lastIndexOf(H.dmgMark);
+  return i < 0 ? null : (/^§[fec]\d{1,4}/.exec(live.slice(i + 1))?.[0] ?? "");
 }
 
 /**
@@ -218,6 +238,9 @@ function liveValues(player, s) {
   // 0 埋めしない：実機の JSON UI は引き算の結果 '090' を数の 90 にしてから画像名につなぐ（compass_90）
   const yaw = ((player.getRotation().y % 360) + 360) % 360;
   v.hdg = P(player).compass ? String(Math.round(yaw / 2) % 180) : "---";
+  // 与えたダメージ（続けて当てた合計。最後に当ててから dmgTicks の間）
+  const c = s.dmgCombo;
+  v.dmg = c && P(player).damageNumbers && system.currentTick - c.tick <= H.dmgTicks ? H.dmgColors[c.kind] + Math.min(9999, Math.max(1, Math.round(c.total))) : "";
   return v;
 }
 
