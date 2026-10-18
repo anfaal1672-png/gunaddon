@@ -68,9 +68,9 @@ export function encodeLive(values) {
     // JSON UI は札を引き算で取り除くので、決まった文字だけを送る（ほかの文字は先頭の文字に置き換える）
     for (let i = 0; i < s.length; i++) out += H.sep + f.key + i + (ok.includes(s[i]) ? s[i] : ok[0]);
   }
-  // 方位は札にせず、印 + そのままの 3 桁（JSON UI が画像のテクスチャ名に使う）
+  // 方位は札にせず、印 + そのままの数（0〜179、0 埋めなし。JSON UI が画像のテクスチャ名に使う）
   const raw = String(values[H.liveRaw] ?? "---");
-  return out + H.sep + H.rawMark + (/^\d{3}$/.test(raw) ? raw : "---");
+  return out + H.sep + H.rawMark + (/^\d{1,3}$/.test(raw) ? raw : "---");
 }
 
 /**
@@ -79,7 +79,7 @@ export function encodeLive(values) {
  */
 export function liveHeading(live) {
   const i = live.lastIndexOf(H.rawMark);
-  return i < 0 ? null : live.slice(i + 1, i + 4);
+  return i < 0 ? null : (/^(?:\d+|---)/.exec(live.slice(i + 1))?.[0] ?? null);
 }
 
 /**
@@ -214,9 +214,10 @@ function liveValues(player, s) {
     v.xh = String(Math.max(0, Math.min(9, Math.round(sp * 1.4))));
   } else if (s.meleeId) v.xh = "0";
   else v.xh = "x";
-  // 方位：2° ごと（000 = 南）。方位バーの画像も 2° ごとにある
+  // 方位：2° ごと（0 = 南、0〜179）。方位バーの画像も 2° ごとにある。
+  // 0 埋めしない：実機の JSON UI は引き算の結果 '090' を数の 90 にしてから画像名につなぐ（compass_90）
   const yaw = ((player.getRotation().y % 360) + 360) % 360;
-  v.hdg = P(player).compass ? String(Math.round(yaw / 2) % 180).padStart(3, "0") : "---";
+  v.hdg = P(player).compass ? String(Math.round(yaw / 2) % 180) : "---";
   return v;
 }
 

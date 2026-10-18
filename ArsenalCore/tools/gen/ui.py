@@ -225,7 +225,7 @@ class UiMixin:
             wpng(f"{tex}/dmg_{i}.png", ic.damage_arc(i))
             wpng(f"{tex}/wind_{i}.png", ic.wind_arrow(i))
         for i in range(180):
-            wpng(f"{tex}/compass_{i:03d}.png", ic.compass_strip(i * 2))
+            wpng(f"{tex}/compass_{i}.png", ic.compass_strip(i * 2))  # 0 埋めしない（実機は式の中で '090' を 90 にする）
         for lv in (1, 2, 3):
             wpng(f"{tex}/sup_{lv}.png", ic.vignette(lv))
         wpng(f"{tex}/nvg.png", ic.nvg_overlay())

@@ -413,7 +413,15 @@ class _Eval:
             if op == "+":
                 v = (v if isinstance(v, str) else str(v)) + (r if isinstance(r, str) else str(r)) if isinstance(v, str) or isinstance(r, str) else v + r
             else:
-                v = v.replace(r, "") if isinstance(v, str) else v - r
+                v = self.numeric(v.replace(r, "")) if isinstance(v, str) else v - r
+        return v
+
+    @staticmethod
+    def numeric(v):
+        """実機では、引き算の結果が数字だけの文字列になると数に変わる（'090' → 90。続けて + で
+        つなぐと 'compass_90' になる。2.6.0 の方位バーが 000〜099 で見つからない画像になった原因）"""
+        if re.fullmatch(r"\d+", v):
+            return int(v)
         return v
 
     def mul(self):
@@ -580,19 +588,20 @@ def _hud2_vectors(vec, controls, cells, E, EL, TITLE_VAR, SUB_VAR, mark, errs, r
         xh = [k for k in vis if re.fullmatch(r"xh\d", k) and vis[k]]
         if (d["xh"].isdigit() and xh != [f"xh{d['xh']}"]) or (not d["xh"].isdigit() and xh):
             errs.append(f"クロスヘア {d['xh']!r} → 表示 {xh}")
-        # 方位バー：1 枚の画像。方位が数字なら見え、テクスチャ名が compass_<3 桁> になり、その画像がある
+        # 方位バー：1 枚の画像。方位が数字なら見え、テクスチャ名が compass_<0〜179> になり、その画像がある
+        hdg = str(v["values"]["hdg"])  # サブタイトルで送ったままの方位（0 埋めなし）
         cmp_body = next((b for nm, _, b, _ in controls if nm == "cmp"), None)
         if cmp_body is None:
             errs.append("方位バー（cmp）がない")
         else:
-            if vis["cmp"] != d["hdg"].isdigit():
-                errs.append(f"方位 {d['hdg']!r} → 表示 {vis['cmp']}")
+            if vis["cmp"] != hdg.isdigit():
+                errs.append(f"方位 {hdg!r} → 表示 {vis['cmp']}")
             tex_expr = next((b["source_property_name"] for b in cmp_body.get("bindings", []) if b.get("target_property_name") == "#texture"), None)
-            if d["hdg"].isdigit():
+            if hdg.isdigit():
                 got = ev.run(tex_expr) if tex_expr else None
-                want = f"textures/ui/arsenal/hud2/compass_{d['hdg']}"
+                want = f"textures/ui/arsenal/hud2/compass_{hdg}"
                 if got != want:
-                    errs.append(f"方位 {d['hdg']!r} → テクスチャ {got!r}（{want!r} のはず）")
+                    errs.append(f"方位 {hdg!r} → テクスチャ {got!r}（{want!r} のはず）")
                 elif not os.path.exists(os.path.join(rp, want + ".png")):
                     errs.append(f"方位の画像がない {want}")
         panels = [k for k in vis if re.fullmatch(r"l\d_panel", k) and vis[k]]
