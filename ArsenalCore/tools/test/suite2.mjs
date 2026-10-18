@@ -1298,8 +1298,11 @@ export async function suite2(ctx) {
     dmg.dealDamage(player, p2, 50, { weaponId: "sentinel" });
     check("TDM：チームの得点", m2.teamScore[m2.parts.get(player.id).team] === 1);
     modes.endMatch(null, "arsenal.mode.stopped");
+    // 2.4.2：結果表示の間（持ち物を戻す前）に別の試合を始めると上書きされ、参加者の持ち物が戻らなくなっていた
+    check("試合の終了処理中は次の試合を始めない", modes.startLobby("ffa", ar, player) === false && modes.currentMatch() === m2 && m2.mode === "tdm");
     __tick(110);
     check("TDM のチームタグは試合後に外す", !player.getTags().some((t) => t.startsWith("arsenal_team:mode_")));
+    check("終了処理のあとは次の試合を始められ、持ち物も戻っている", player.getDynamicProperty("a:msave") === undefined && p2.getDynamicProperty("a:msave") === undefined);
     // ガンゲーム
     modes.startLobby("gungame", ar, player);
     modes.joinMatch(p2);

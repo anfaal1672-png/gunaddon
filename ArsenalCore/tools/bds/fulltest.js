@@ -533,7 +533,8 @@ async function modes() {
     a.stopUsingItem();
     await wait(mode === "horde" ? 300 : 80);
     try { endMatch([]); } catch (err) { fail("modes", mode, `end threw ${err}`); }
-    await wait(80);
+    // 終了後 100 tick は結果を見せる時間（その後に持ち物を戻して試合を消す）
+    await wait(130);
     tough(b);
     if (!currentMatch()) ok++;
     else fail("modes", mode, `match did not end (phase=${currentMatch()?.phase})`);

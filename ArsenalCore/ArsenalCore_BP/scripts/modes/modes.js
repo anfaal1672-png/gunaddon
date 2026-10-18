@@ -328,8 +328,15 @@ function curArena() {
 
 /**
  * @param {string} mode @param {Arena} arena @param {Player} by
+ * @returns {boolean} 始めたか（ほかの試合があれば false）
  */
 export function startLobby(mode, arena, by) {
+  // 試合がある間（結果表示・持ち物を戻す前を含む）は始めない。開始フォームを開いている間に
+  // ほかの人が始めていた場合も、ここで弾く（上書きすると前の参加者の持ち物が戻らなくなる）
+  if (match) {
+    by.sendMessage(t("arsenal.mode.err_running"));
+    return false;
+  }
   const def = MODES[mode];
   const now = system.currentTick;
   match = {
@@ -340,6 +347,7 @@ export function startLobby(mode, arena, by) {
   world.sendMessage(raw("§6[ARSENAL] ", t("arsenal.mode.lobby_open", { translate: `arsenal.mode_name.${mode}` }, arena.name, String(def.lobbySecs))));
   for (const p of world.getAllPlayers()) playTo(p, "arsenal.ui.radio");
   joinMatch(by);
+  return true;
 }
 
 /** @param {Player} p */
