@@ -222,18 +222,24 @@ export function muzzleFx(player, st, muzzle, casing) {
 let tracerSeq = 0;
 
 /**
- * 曳光弾：飛んでいく光の筋（加算合成で光る）＋弾道に一瞬残る細い線
+ * 飛んでいく弾の見た目（2.6.2）
+ *   ball   … 普通弾：細く短い淡い筋が一瞬通り過ぎるだけ（本物の普通弾は飛んでいてもほとんど見えない）
+ *   tracer … 曳光弾：赤く焼けた芯と光のにじみ、弾道に一瞬残る光の線。遠くからでも見える
+ *   energy … エネルギー兵器：色の付いた光の筋（2.6.1 までの見た目）
+ * haze が真なら、大口径の弾道に空気の揺らぎを一瞬残す
  * @param {import("@minecraft/server").Dimension} dim @param {import("../util/math.js").Vec3} from @param {import("../util/math.js").Vec3} to
- * @param {{r:number,g:number,b:number}} color @param {number} [width] @param {string} [except] @param {number} [key] 同じ弾の続きの番号（間引きをそろえる）
+ * @param {{r:number, g:number, b:number}} color @param {number} [width] @param {string} [except] 送らないプレイヤーの id @param {number} [key]
+ * @param {"ball"|"tracer"|"energy"} [style] @param {boolean} [haze]
  */
-export function tracer(dim, from, to, color, width = 0.05, except, key) {
+export function tracer(dim, from, to, color, width = 0.05, except, key, style = "energy", haze = false) {
   const d = dist(from, to);
   if (d < 1.2) return;
-  // 受け手の演出品質で間引く：高はすべて、中は 2 本に 1 本、低は 4 本に 1 本（同じ弾の続きは key でそろえる）
+  // 受け手の演出品質で間引く：高はすべて、中は 2 本に 1 本、低は 4 本に 1 本（同じ弾の続きは key でそろえる）。
+  // 曳光弾は間引かない（光って目立つのが曳光弾の役目）
   const k = key ?? tracerSeq++;
-  const minQ = k % 4 === 0 ? 0 : k % 2 === 0 ? 1 : 2;
-  // 速すぎると 1 フレームで通り過ぎて見えないので、見やすい速さに抑える
-  const speed = Math.min(150, Math.max(70, d * 2.2));
+  const minQ = style === "tracer" ? 0 : k % 4 === 0 ? 0 : k % 2 === 0 ? 1 : 2;
+  // 速すぎると 1 フレームで通り過ぎて見えないので、見やすい速さに抑える（普通弾は速く、一瞬だけ）
+  const speed = style === "ball" ? Math.min(240, Math.max(110, d * 3)) : Math.min(150, Math.max(70, d * 2.2));
   const v = new MolangVariableMap();
   const dir = mul({ x: to.x - from.x, y: to.y - from.y, z: to.z - from.z }, 1 / d);
   v.setSpeedAndDirection("variable.tracer", speed, dir);
@@ -241,10 +247,19 @@ export function tracer(dim, from, to, color, width = 0.05, except, key) {
   v.setFloat("variable.width", width);
   v.setFloat("variable.len", d * 0.5);
   v.setColorRGB("variable.color", { red: color.r, green: color.g, blue: color.b });
-  emit(dim, "arsenal:tracer", from, v, { range: 96, except, minQ });
   const mid = { x: (from.x + to.x) / 2, y: (from.y + to.y) / 2, z: (from.z + to.z) / 2 };
-  // 尾は高品質の受け手で、近いときだけ
-  emit(dim, "arsenal:tracer_trail", mid, v, { range: 64, minQ: 2 });
+  if (style === "ball") {
+    emit(dim, "arsenal:bullet_streak", from, v, { range: 64, except, minQ });
+  } else if (style === "tracer") {
+    emit(dim, "arsenal:tracer_round", from, v, { range: 160, except, minQ });
+    emit(dim, "arsenal:tracer_glow", from, v, { range: 96, except, minQ: 1 });
+    emit(dim, "arsenal:tracer_trail", mid, v, { range: 96, minQ: 1 });
+  } else {
+    emit(dim, "arsenal:tracer", from, v, { range: 96, except, minQ });
+    // 尾は高品質の受け手で、近いときだけ
+    emit(dim, "arsenal:tracer_trail", mid, v, { range: 64, minQ: 2 });
+  }
+  if (haze && d > 6) emit(dim, "arsenal:bullet_haze", mid, v, { range: 48, minQ: 1 });
 }
 
 /** @param {string} typeId */

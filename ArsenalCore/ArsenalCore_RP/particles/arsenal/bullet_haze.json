@@ -1,0 +1,67 @@
+{
+  "format_version": "1.26.10",
+  "particle_effect": {
+    "description": {
+      "identifier": "arsenal:bullet_haze",
+      "basic_render_parameters": {
+        "material": "particles_blend",
+        "texture": "textures/particle/arsenal_particles"
+      }
+    },
+    "components": {
+      "minecraft:emitter_rate_instant": {
+        "num_particles": 1
+      },
+      "minecraft:emitter_lifetime_once": {
+        "active_time": 0.01
+      },
+      "minecraft:emitter_shape_point": {
+        "direction": [
+          "v.tracer.direction_x",
+          "v.tracer.direction_y",
+          "v.tracer.direction_z"
+        ]
+      },
+      "minecraft:particle_lifetime_expression": {
+        "max_lifetime": 0.4
+      },
+      "minecraft:particle_initial_speed": 0.001,
+      "minecraft:particle_motion_dynamic": {},
+      "minecraft:particle_appearance_billboard": {
+        "size": [
+          "0.07 + 0.1 * v.particle_age / v.particle_lifetime",
+          "v.len ?? 1.0"
+        ],
+        "facing_camera_mode": "lookat_direction",
+        "direction": {
+          "mode": "custom",
+          "custom_direction": [
+            "v.tracer.direction_x",
+            "v.tracer.direction_y",
+            "v.tracer.direction_z"
+          ]
+        },
+        "uv": {
+          "texture_width": 64,
+          "texture_height": 64,
+          "uv": [
+            16,
+            24
+          ],
+          "uv_size": [
+            8,
+            8
+          ]
+        }
+      },
+      "minecraft:particle_appearance_tinting": {
+        "color": [
+          0.92,
+          0.94,
+          0.97,
+          "0.14 * (1.0 - v.particle_age / v.particle_lifetime)"
+        ]
+      }
+    }
+  }
+}

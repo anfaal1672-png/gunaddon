@@ -62,7 +62,54 @@ class ParticlesMixin:
                                                         "direction": {"mode": "derive_from_velocity", "min_speed_threshold": 0.01}, "uv": uv("tracer")},
             "minecraft:particle_appearance_tinting": {"color": ["v.color.r", "v.color.g", "v.color.b", 1.0]},
         })
-        # 弾道に一瞬残る細い光の線（射線が分かるように）
+        # 普通弾（2.6.2）：細く短い淡い筋が一瞬通り過ぎる。光らない（本物の普通弾は飛んでいてもほとんど見えない）
+        eff("bullet_streak", "particles_blend", {
+            "minecraft:emitter_rate_instant": {"num_particles": 1},
+            "minecraft:emitter_lifetime_once": {"active_time": 0.01},
+            "minecraft:emitter_shape_point": {"direction": ["v.tracer.direction_x", "v.tracer.direction_y", "v.tracer.direction_z"]},
+            "minecraft:particle_lifetime_expression": {"max_lifetime": "math.max(0.04, v.life ?? 0.15)"},
+            "minecraft:particle_initial_speed": "v.tracer.speed",
+            "minecraft:particle_motion_dynamic": {},
+            "minecraft:particle_appearance_billboard": {"size": ["v.width ?? 0.022", "math.min(0.9, v.tracer.speed * 0.005)"], "facing_camera_mode": "lookat_direction",
+                                                        "direction": {"mode": "derive_from_velocity", "min_speed_threshold": 0.01}, "uv": uv("streak")},
+            "minecraft:particle_appearance_tinting": {"color": ["v.color.r", "v.color.g", "v.color.b", "0.6 * (1.0 - 0.4 * v.particle_age / v.particle_lifetime)"]},
+        })
+        # 曳光弾（2.6.2）：白く焼けた芯 + 色のにじみ。芯は tracer_core、にじみは同じ速さで飛ぶ太い柔らかい板
+        eff("tracer_round", "particles_blend", {
+            "minecraft:emitter_rate_instant": {"num_particles": 1},
+            "minecraft:emitter_lifetime_once": {"active_time": 0.01},
+            "minecraft:emitter_shape_point": {"direction": ["v.tracer.direction_x", "v.tracer.direction_y", "v.tracer.direction_z"]},
+            "minecraft:particle_lifetime_expression": {"max_lifetime": "math.max(0.05, v.life ?? 0.2)"},
+            "minecraft:particle_initial_speed": "v.tracer.speed",
+            "minecraft:particle_motion_dynamic": {},
+            "minecraft:particle_appearance_billboard": {"size": ["v.width ?? 0.06", "math.min(3.0, v.tracer.speed * 0.022)"], "facing_camera_mode": "lookat_direction",
+                                                        "direction": {"mode": "derive_from_velocity", "min_speed_threshold": 0.01}, "uv": uv("tracer_core")},
+            "minecraft:particle_appearance_tinting": {"color": ["math.min(1.0, v.color.r * 0.5 + 0.55)", "math.min(1.0, v.color.g * 0.5 + 0.45)", "math.min(1.0, v.color.b * 0.5 + 0.4)", 1.0]},
+        })
+        eff("tracer_glow", "particles_blend", {
+            "minecraft:emitter_rate_instant": {"num_particles": 1},
+            "minecraft:emitter_lifetime_once": {"active_time": 0.01},
+            "minecraft:emitter_shape_point": {"direction": ["v.tracer.direction_x", "v.tracer.direction_y", "v.tracer.direction_z"]},
+            "minecraft:particle_lifetime_expression": {"max_lifetime": "math.max(0.05, v.life ?? 0.2)"},
+            "minecraft:particle_initial_speed": "v.tracer.speed",
+            "minecraft:particle_motion_dynamic": {},
+            "minecraft:particle_appearance_billboard": {"size": ["(v.width ?? 0.06) * 4.0", "math.min(3.6, v.tracer.speed * 0.026)"], "facing_camera_mode": "lookat_direction",
+                                                        "direction": {"mode": "derive_from_velocity", "min_speed_threshold": 0.01}, "uv": uv("soft")},
+            "minecraft:particle_appearance_tinting": {"color": ["v.color.r", "v.color.g", "v.color.b", 0.4]},
+        })
+        # 大口径の弾道に一瞬残る空気の揺らぎ（狙撃銃・機関銃・バトルライフル。普通弾でも見える、うっすら白い帯）
+        eff("bullet_haze", "particles_blend", {
+            "minecraft:emitter_rate_instant": {"num_particles": 1},
+            "minecraft:emitter_lifetime_once": {"active_time": 0.01},
+            "minecraft:emitter_shape_point": {"direction": ["v.tracer.direction_x", "v.tracer.direction_y", "v.tracer.direction_z"]},
+            "minecraft:particle_lifetime_expression": {"max_lifetime": 0.4},
+            "minecraft:particle_initial_speed": 0.001,
+            "minecraft:particle_motion_dynamic": {},
+            "minecraft:particle_appearance_billboard": {"size": ["0.07 + 0.1 * v.particle_age / v.particle_lifetime", "v.len ?? 1.0"], "facing_camera_mode": "lookat_direction",
+                                                        "direction": {"mode": "custom", "custom_direction": ["v.tracer.direction_x", "v.tracer.direction_y", "v.tracer.direction_z"]}, "uv": uv("haze")},
+            "minecraft:particle_appearance_tinting": {"color": [0.92, 0.94, 0.97, "0.14 * (1.0 - v.particle_age / v.particle_lifetime)"]},
+        })
+        # 弾道に一瞬残る細い光の線（曳光弾とエネルギー兵器だけ。射線が分かるように）
         eff("tracer_trail", "particles_blend", {
             "minecraft:emitter_rate_instant": {"num_particles": 1},
             "minecraft:emitter_lifetime_once": {"active_time": 0.01},
