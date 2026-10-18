@@ -26,7 +26,7 @@ export const HUD2 = {
     { name: "heat", key: "e", len: 1, doc: "熱・充電・リロード進行 0〜9" },
     { name: "plate", key: "p", len: 1, doc: "プレート残り 0〜4 / - ボディアーマーなし" },
     { name: "hp", key: "h", len: 2, doc: "体力（切り上げ、00〜99）" },
-    { name: "hdg", key: "g", len: 3, doc: "方位 000〜179（2° ごと、000 = 南）/ --- 非表示（サブタイトルで送る。タイトルでは固定）" },
+    { name: "hdg", key: "g", len: 3, doc: "方位 0〜179（2° ごと、0 = 南。サブタイトルでは 0 埋めしない）/ --- 非表示（サブタイトルで送る。タイトルでは固定）" },
     { name: "sup", key: "u", len: 1, doc: "制圧 0〜3" },
     { name: "nvg", key: "n", len: 1, doc: "暗視の画面効果 0 / 1" },
     { name: "gm", key: "o", len: 1, doc: "ゲームモード 0 なし / 1 FFA / 2 TDM / 3 ガンゲーム / 4 ホード / 5 陣取り" },
