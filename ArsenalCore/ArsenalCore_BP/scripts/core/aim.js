@@ -350,7 +350,12 @@ function aimAssist(player, s, k) {
  */
 function tickAutoFire(player, s, st) {
   const onTarget = s.ads && s.adsLevel >= 1 && (safe("autoFire", () => {
-    const hits = player.dimension.getEntitiesFromRay(player.getHeadLocation(), player.getViewDirection(), { maxDistance: Math.min(64, st.range1), excludeFamilies: ["inanimate", "arsenal_fx", "player"] });
+    const eye = player.getHeadLocation();
+    const vd = player.getViewDirection();
+    // 読み込まれていないチャンクの先へはレイを撃てない（例外になる）
+    const reach = loadedReach(player.dimension, eye, vd, Math.min(64, st.range1), system.currentTick);
+    if (reach < 0.5) return false;
+    const hits = player.dimension.getEntitiesFromRay(eye, vd, { maxDistance: reach, excludeFamilies: ["inanimate", "arsenal_fx", "player"] });
     return hits.some((h) => h.entity.id !== player.id && h.entity.getComponent("minecraft:health"));
   }) ?? false);
   if (onTarget && !s.autoFiring) {
@@ -405,8 +410,10 @@ function laser(player) {
   safe("laser", () => {
     const eye = player.getHeadLocation();
     const dir = player.getViewDirection();
-    const hit = player.dimension.getBlockFromRay(eye, dir, { maxDistance: 64, includePassableBlocks: false, includeLiquidBlocks: false });
-    const ents = player.dimension.getEntitiesFromRay(eye, dir, { maxDistance: 64, excludeFamilies: ["inanimate", "arsenal_fx"] }).filter((e) => e.entity.id !== player.id);
+    const reach = loadedReach(player.dimension, eye, dir, 64, system.currentTick);
+    if (reach < 0.5) return;
+    const hit = player.dimension.getBlockFromRay(eye, dir, { maxDistance: reach, includePassableBlocks: false, includeLiquidBlocks: false });
+    const ents = player.dimension.getEntitiesFromRay(eye, dir, { maxDistance: reach, excludeFamilies: ["inanimate", "arsenal_fx"] }).filter((e) => e.entity.id !== player.id);
     let d = 64;
     if (hit) d = Math.min(d, Math.hypot(hit.block.location.x + hit.faceLocation.x - eye.x, hit.block.location.y + hit.faceLocation.y - eye.y, hit.block.location.z + hit.faceLocation.z - eye.z));
     if (ents.length) d = Math.min(d, ents[0].distance);
@@ -421,7 +428,8 @@ function flashlight(player, s) {
   safe("flashlight", () => {
     const eye = player.getHeadLocation();
     const dir = player.getViewDirection();
-    const hit = player.dimension.getBlockFromRay(eye, dir, { maxDistance: 28, includePassableBlocks: true, includeLiquidBlocks: true });
+    const reach = loadedReach(player.dimension, eye, dir, 28, system.currentTick);
+    const hit = reach >= 0.5 ? player.dimension.getBlockFromRay(eye, dir, { maxDistance: reach, includePassableBlocks: true, includeLiquidBlocks: true }) : undefined;
     let target = add(eye, mul(dir, 28));
     if (hit) target = add(add(hit.block.location, hit.faceLocation), mul(dir, -0.6));
     const bp = { x: Math.floor(target.x), y: Math.floor(target.y), z: Math.floor(target.z) };

@@ -15,7 +15,7 @@ import { traceHitscan, arcLine } from "./ballistics.js";
 import { bulletHit, canDamage, dealDamage, hitFeedback } from "./damage.js";
 import { firePlasma, fireNeedle, fireMortar } from "../systems/projectiles.js";
 import { emit, playNear } from "../fx/effects.js";
-import { cone, add, mul, sub, norm, dist, dot, len } from "../util/math.js";
+import { cone, add, mul, sub, norm, dist, dot, len, loadedReach } from "../util/math.js";
 import { W as WS, explosionBreaksBlocks } from "./settings.js";
 import { safe } from "../util/log.js";
 
@@ -208,7 +208,8 @@ export function mortarTarget(shooter, st, fixed) {
     if (d >= st.range0 * 0.5 && d <= st.range1) return { x: fixed.x, y: eye.y, z: fixed.z, fixed: true };
   }
   const dir = shooter.getViewDirection();
-  const bh = safe("mortar.ray", () => shooter.dimension.getBlockFromRay(eye, dir, { maxDistance: st.range1, includePassableBlocks: false, includeLiquidBlocks: true }));
+  const reach = loadedReach(shooter.dimension, eye, dir, st.range1, system.currentTick);
+  const bh = reach >= 0.5 ? safe("mortar.ray", () => shooter.dimension.getBlockFromRay(eye, dir, { maxDistance: reach, includePassableBlocks: false, includeLiquidBlocks: true })) : undefined;
   if (bh) return { ...add(bh.block.location, bh.faceLocation), fixed: false };
   const flat = norm({ x: dir.x, y: 0, z: dir.z });
   return { x: eye.x + flat.x * st.range1 * 0.8, y: eye.y, z: eye.z + flat.z * st.range1 * 0.8, fixed: false };

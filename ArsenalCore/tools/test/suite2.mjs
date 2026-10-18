@@ -747,6 +747,33 @@ export async function suite2(ctx) {
   }
 
   // =====================================================================
+  console.log("実機で見つかった不具合（2.4.2）");
+  // =====================================================================
+  {
+    reset();
+    // 爆発の出どころを実機が受け付けない（シミュレートプレイヤーなど）ときも爆発そのものは起こす
+    const orig = dim.createExplosion;
+    dim.createExplosion = function (l, pw, o) {
+      if (o?.source) throw new TypeError("Native optional type conversion failed. Interface property ['source']");
+      return orig.call(this, l, pw, o);
+    };
+    const n0 = LOG.explosions.length;
+    dmg.explode(dim, { x: 2.5, y: 64, z: 2.5 }, 2, player, false, false, "grenade_frag");
+    dim.createExplosion = orig;
+    check("爆発の出どころが拒まれても出どころなしで爆発する", LOG.explosions.length === n0 + 1 && !LOG.explosions[n0].o.source);
+    // 投擲の予測線：読み込まれていないチャンクの手前で線を終える（毎 tick 例外を投げて捕まえていた）
+    const proj = await imp("systems/projectiles.js");
+    const u0 = LOG.unloadedAccess ?? 0;
+    const r0 = dim.loadedRadius;
+    dim.loadedRadius = 15.999; // チャンク 0 だけ読み込み（x = 16 から先は未読み込み）
+    player.setRotation({ x: -35, y: -90 });
+    proj.previewTrajectory(player, "grenade_frag");
+    dim.loadedRadius = r0;
+    check("予測線は読み込み範囲の外へレイを撃たない（例外を出さずに線を終える）", (LOG.unloadedAccess ?? 0) === u0, `(unloaded=${(LOG.unloadedAccess ?? 0) - u0})`);
+    __tick(2);
+  }
+
+  // =====================================================================
   console.log("設置物");
   // =====================================================================
   {
@@ -770,6 +797,9 @@ export async function suite2(ctx) {
     check("砲台が敵を撃つ", z.health.currentValue < 60 || !z.isValid, `(hp=${z.health.currentValue})`);
     check("砲台の弾は持ち主の中口径弾から補充", count("arsenal:ammo_medium") < 64);
     check("砲台は持ち主を撃たない", player.health.currentValue === player.health.effectiveMax);
+    // 2.4.2：rotFromDir の { pitch, yaw } を読む（rot.x / rot.y を読んで砲台が的を向かなかった）
+    const srot = sentry.getRotation();
+    check("砲台が的の方を向く（向きと仰角が数値）", Number.isFinite(srot.y) && Math.abs(srot.y) < 30 && Number.isFinite(sentry.props["arsenal:pitch"]), `(rot=${JSON.stringify(srot)} pitch=${sentry.props["arsenal:pitch"]})`);
     z.remove();
     brain.applyEmp(dim, sentry.location, 4, 60, null);
     check("EMP で砲台が止まる", brain.isEmpd(sentry));
@@ -1268,8 +1298,11 @@ export async function suite2(ctx) {
     dmg.dealDamage(player, p2, 50, { weaponId: "sentinel" });
     check("TDM：チームの得点", m2.teamScore[m2.parts.get(player.id).team] === 1);
     modes.endMatch(null, "arsenal.mode.stopped");
+    // 2.4.2：結果表示の間（持ち物を戻す前）に別の試合を始めると上書きされ、参加者の持ち物が戻らなくなっていた
+    check("試合の終了処理中は次の試合を始めない", modes.startLobby("ffa", ar, player) === false && modes.currentMatch() === m2 && m2.mode === "tdm");
     __tick(110);
     check("TDM のチームタグは試合後に外す", !player.getTags().some((t) => t.startsWith("arsenal_team:mode_")));
+    check("終了処理のあとは次の試合を始められ、持ち物も戻っている", player.getDynamicProperty("a:msave") === undefined && p2.getDynamicProperty("a:msave") === undefined);
     // ガンゲーム
     modes.startLobby("gungame", ar, player);
     modes.joinMatch(p2);

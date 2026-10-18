@@ -26,3 +26,34 @@ JSON UI（画面）以外の挙動は、BDS（Bedrock Dedicated Server、Linux �
 | `dev:ariadne back` / `window` / `closed` / `swap` | アリアドネ：小屋の中のゾンビを壁越しに覗いてロックし撃つ。裏の穴・正面の端の窓・穴なし・飛行中に穴をふさぐ。ミサイルがブロックの中に入った回数（`inside`）も出す |
 
 注意：BDS の試験用コピーだけ `@minecraft/server-gametest`（ベータ）に依存させます。配布するパックは安定版の API だけです。バニラのゾンビは 40 ブロックより遠いと出した直後に消えるので、的は 40 ブロック以内に置きます。
+
+## アドオン全体の通し試験（2.4.2）
+
+`tools/bds/fulltest.js`（`scenarios.js` から読み込む）は、シミュレートプレイヤーでアドオンの中身を全部さわる通し試験です。ステージごとに `scriptevent dev:full <ステージ>` で始め、ログの `[FULL]` 行に `BEGIN` / `FAIL <ステージ> <id> <理由>` / `END fails=<数>` が出ます（`CRASH` は試験そのものの例外）。
+
+| ステージ | 内容 |
+|---|---|
+| `weapons [開始 終了]` | 全武器を 1 挺ずつ持たせ、覗いて 8.5 ブロック先のゾンビを撃つ。撃てたか（`shot` イベント）・当たったか・リロードできるか |
+| `melee` | 近接武器で殴ってダメージが入るか |
+| `throw` | 投擲物を投げる・地雷を置く・C4 を起爆する。アイテムが減るか |
+| `gear` | 医療品を使う、設置物を置く（砲台は撃つか）、ドローンを飛ばす、銃座・乗り物に乗って撃つ |
+| `enemies` | 敵を 1 体ずつ出し、12 秒以内にプレイヤーを攻撃するか、倒せるか |
+| `bosses` | ボスを呼ぶアイテムで呼び、段階を進めて倒し、増援が消えるか |
+| `structures` | 構造物を置き、守備隊がそろうか |
+| `streaks` | キルストリークを全部使う |
+| `modes` | アリーナを作り、全モードで 2 人の試合を始めて撃ち合い、終える |
+| `misc` | 購入・売却、メニューを開くアイテム、ワールド設定（弾が飛ぶ・マガジン単位・部位）を切った状態で撃つ、HUD の切り替え |
+| `diag <武器 id>` | 1 挺を撃ち、1 発ごとに ADS・拡散・視線と的のずれを出す（当たらない武器の調査用） |
+
+例：`BDS_DIR=<展開先> DEV_GAMETEST=1 DEV_DEBUG=out python3 tools/bds/run.py . 3 "time set noon" "gamerule domobspawning false" "sleep:3" "scriptevent dev:full weapons" "sleep:300"`
+
+### デバッガ（Minecraft Bedrock Debugger のプロトコル）
+
+`DEV_DEBUG=<出力ディレクトリ>` を付けると、`tools/bds/debugclient.mjs` が 19144 番で待ち受け、BDS から `script debugger connect localhost 19144` でつなぎます（`server.properties` の `allow-outbound-script-debugging=true`。BDS 側で待ち受ける `listen` は接続がすぐ切られるので使わない）。プロトコルは Mojang の VS Code 拡張「Minecraft Bedrock Debugger」（`Mojang/minecraft-debugger`）と同じもの（長さ 8 桁の 16 進＋改行＋1 行の JSON）。
+
+- `exceptions.json` … 例外のたびにスクリプトを止め、スタック（関数名・行）と一番上のフレームのローカル変数を記録して再開する。`try` で捕まえる例外でも止まるので、「捕まえているが毎回投げている」箇所も見つかる
+- `stats.tsv` … エンジンが送る診断の値（`server_tick_timings/script_tick` など、µs）の最大・平均・最後
+- `debugger.log` … `console.*` の出力と停止の記録
+- `DEV_PROFILE="開始秒,終了秒"` … その間の CPU プロファイル（`capture.cpuprofile`。Chrome DevTools で開ける）。`python3 tools/bds/profsummary.py capture.cpuprofile` で自己時間・累計時間の上位を出す
+
+注意：例外で止まっている間はスクリプトが止まるので、そのあいだの `script_tick` は大きく出る（数百 ms）。負荷を見るときは例外の少ない区間で見る。プロファイルの `World::getAllPlayers` などのネイティブ関数は、待ち時間がそこに数えられていることがある。

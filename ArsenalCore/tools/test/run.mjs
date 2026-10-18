@@ -223,7 +223,7 @@ check("C4 を起爆装置で爆破", LOG.explosions.length === ex0 + 3, `(explos
 put(5, "arsenal:landmine", 2);
 player.selectedSlotIndex = 5;
 __tick(2);
-world.afterEvents.playerInteractWithBlock.fire({ player, block: __overworld.getBlock({ x: 3, y: 63, z: 3 }), blockFace: "Up", isFirstEvent: true, itemStack: inv.getItem(5), faceLocation: { x: 0.5, y: 1, z: 0.5 } });
+comps.item["arsenal:gear"].onUseOn({ source: player, block: __overworld.getBlock({ x: 3, y: 63, z: 3 }), blockFace: "Up", itemStack: inv.getItem(5), faceLocation: { x: 0.5, y: 1, z: 0.5 } });
 __tick(50);
 const zm = new Entity("minecraft:zombie", { x: 3.5, y: 64, z: 3.5 }, __overworld, 20);
 __tick(15);

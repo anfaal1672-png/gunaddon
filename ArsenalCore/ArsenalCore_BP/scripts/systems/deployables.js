@@ -179,9 +179,10 @@ function sentryTick(d, now) {
   const aim = tg.getAABB().center;
   const dir = norm(sub(aim, eye));
   const rot = rotFromDir(dir);
+  // rotFromDir は { pitch, yaw }（2.4.1 まで rot.x / rot.y を読んでいて undefined になり、砲台が的の方を向かなかった）
   safe("sentry.rot", () => {
-    e.setRotation({ x: 0, y: rot.y });
-    e.setProperty(`${NS}:pitch`, Math.max(-60, Math.min(80, Math.round(-rot.x))));
+    e.setRotation({ x: 0, y: rot.yaw });
+    e.setProperty(`${NS}:pitch`, Math.max(-60, Math.min(80, Math.round(-rot.pitch))));
   });
   if (d.ammo <= 0) {
     refill(d);
