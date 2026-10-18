@@ -3,7 +3,7 @@
 //  ARSENAL CORE — データ（自動生成。tools/data/ から tools/build.py が出力する。直接編集しないこと）
 // ============================================================================
 
-export const ADDON_VERSION = [2,4,2];
+export const ADDON_VERSION = [2,5,0];
 /** @type {any} */
 export const AI_BUDGET = {"thinkPerTick":8,"thinkIntervalMin":5,"thinkIntervalMax":10,"coverSearchRadius":7,"coverSamples":10,"maxActive":60,"squadRadius":16,"suppressBurst":6};
 /** @type {any} */

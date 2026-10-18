@@ -159,8 +159,9 @@ def readme(data, tpl, trademarks):
             if w["cat"] != cid:
                 continue
             d = _ttk_shots(w)
-            n = max(1, math.ceil(20 / d)) if d > 0 else 99
-            wrows.append([NAME(w), c["name"]["ja"], T[w["tier"]]["name"]["ja"], fam(w["ammo"]), w["mag"], w["rpm"], f"{_fire_time(w, n):.2f}"])
+            n = max(1, math.ceil(20 / d)) if d > 0 else 0
+            # 直接のダメージがない武器（瞬間移動・粘着弾・クラスター弾）は「—」
+            wrows.append([NAME(w), c["name"]["ja"], T[w["tier"]]["name"]["ja"], fam(w["ammo"]), w["mag"], w["rpm"], f"{_fire_time(w, n):.2f}" if n else "—"])
     mrows = [[NAME(m), T[m["tier"]]["name"]["ja"], m["dmg"], f"×{m['backstab']}", m["desc"]["ja"]] for m in data["MELEE"].values()]
     arows = []
     for slot, sd in data["ATTACHMENT_SLOTS"].items():

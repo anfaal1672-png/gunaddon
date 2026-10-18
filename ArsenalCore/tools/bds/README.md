@@ -57,3 +57,5 @@ JSON UI（画面）以外の挙動は、BDS（Bedrock Dedicated Server、Linux �
 - `DEV_PROFILE="開始秒,終了秒"` … その間の CPU プロファイル（`capture.cpuprofile`。Chrome DevTools で開ける）。`python3 tools/bds/profsummary.py capture.cpuprofile` で自己時間・累計時間の上位を出す
 
 注意：例外で止まっている間はスクリプトが止まるので、そのあいだの `script_tick` は大きく出る（数百 ms）。負荷を見るときは例外の少ない区間で見る。プロファイルの `World::getAllPlayers` などのネイティブ関数は、待ち時間がそこに数えられていることがある。
+
+`specials`（2.5）… 特殊武器の実機でしか確かめられない動き：ブリンクで壁の手前へ移る、スマートピストルで照準の外の 2 体に当たる、メディックビームで味方（PvP なし）を回復、網と麻酔で動けなくなる、シンギュラリティで近くのゾンビが中心へ寄る、銛で手前へ引き寄せる、衛星砲が 2 秒後に落ちる
