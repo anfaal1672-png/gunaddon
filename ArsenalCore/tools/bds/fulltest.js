@@ -421,13 +421,17 @@ async function structures() {
     const sid = sids[i];
     const at = { x: 100 + i * 48, y: Y, z: 100 };
     p.teleport({ x: at.x - 6, y: Y + 4, z: at.z - 6 });
-    await wait(40);
+    // シムが移っただけでは周りのチャンクがすぐには読み込まれないので、ティッキングエリアにして待つ
+    dim().runCommand(`tickingarea add ${at.x - 8} 0 ${at.z - 8} ${at.x + 40} 0 ${at.z + 40} qa_site`);
+    const corners = [{ x: at.x - 4, y: Y, z: at.z - 4 }, { x: at.x + 30, y: Y, z: at.z + 30 }, { x: at.x + 30, y: Y, z: at.z - 4 }, { x: at.x - 4, y: Y, z: at.z + 30 }];
+    for (let t = 0; t < 30 && !corners.every((c) => dim().isChunkLoaded(c)); t++) await wait(10);
     dim().fillBlocks(new BlockVolume({ x: at.x - 4, y: Y - 1, z: at.z - 4 }, { x: at.x + 30, y: Y - 1, z: at.z + 30 }), "minecraft:stone");
     let r;
     try {
       r = expand(dim(), sid, at, undefined);
     } catch (err) {
       fail("structures", sid, `expand threw ${err}`);
+      dim().runCommand("tickingarea remove qa_site");
       continue;
     }
     await wait(20);
@@ -435,6 +439,7 @@ async function structures() {
     const got = dim().getEntities({ location: at, maxDistance: 40 }).filter((e) => e.getTags().some((t) => t.startsWith("arsenal_site:"))).length;
     if (got >= want) ok++;
     else fail("structures", sid, `garrison ${got}/${want} expand=${JSON.stringify(r)}`);
+    dim().runCommand("tickingarea remove qa_site");
   }
   p.teleport({ x: 0.5, y: Y, z: 0.5 });
   log(`structures: n=${sids.length} ok=${ok}`);
