@@ -9,7 +9,7 @@
       }
     },
     "components": {
-      "minecraft:icon": "arsenal_falcon__c8",
+      "minecraft:icon": "arsenal_falcon",
       "minecraft:display_name": {
         "value": "item.arsenal.falcon.name"
       },

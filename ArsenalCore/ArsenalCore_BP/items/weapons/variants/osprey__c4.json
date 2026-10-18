@@ -9,7 +9,7 @@
       }
     },
     "components": {
-      "minecraft:icon": "arsenal_osprey__c4",
+      "minecraft:icon": "arsenal_osprey",
       "minecraft:display_name": {
         "value": "item.arsenal.osprey.name"
       },

@@ -9,7 +9,7 @@
       }
     },
     "components": {
-      "minecraft:icon": "arsenal_rhino__c2",
+      "minecraft:icon": "arsenal_rhino",
       "minecraft:display_name": {
         "value": "item.arsenal.rhino.name"
       },

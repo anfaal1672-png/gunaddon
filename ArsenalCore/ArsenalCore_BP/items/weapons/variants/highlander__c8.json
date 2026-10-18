@@ -9,7 +9,7 @@
       }
     },
     "components": {
-      "minecraft:icon": "arsenal_highlander__c8",
+      "minecraft:icon": "arsenal_highlander",
       "minecraft:display_name": {
         "value": "item.arsenal.highlander.name"
       },

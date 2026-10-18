@@ -9,7 +9,7 @@
       }
     },
     "components": {
-      "minecraft:icon": "arsenal_singularity__c7",
+      "minecraft:icon": "arsenal_singularity",
       "minecraft:display_name": {
         "value": "item.arsenal.singularity.name"
       },

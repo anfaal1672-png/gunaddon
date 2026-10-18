@@ -9,7 +9,7 @@
       }
     },
     "components": {
-      "minecraft:icon": "arsenal_acid_sprayer__c4",
+      "minecraft:icon": "arsenal_acid_sprayer",
       "minecraft:display_name": {
         "value": "item.arsenal.acid_sprayer.name"
       },

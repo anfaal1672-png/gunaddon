@@ -248,9 +248,9 @@ class UiMixin:
         for i in range(8):
             wpng(f"{tex}/dmg_{i}.png", ic.damage_arc(i))
             wpng(f"{tex}/wind_{i}.png", ic.wind_arrow(i))
-        for i in range(180):
-            # 名前は英字 2 文字（compass_AA〜compass_GX。data/hud.js の hdgLetters）
-            wpng(f"{tex}/compass_{hdg_letters(H, i)}.png", ic.compass_strip(i * 2))
+        for i in range(H["hdgSteps"]):
+            # 名前は英字 2 文字（compass_AA〜。data/hud.js の hdgLetters・hdgSteps）
+            wpng(f"{tex}/compass_{hdg_letters(H, i)}.png", ic.compass_strip(i * 360 / H["hdgSteps"]))
         for lv in (1, 2, 3):
             wpng(f"{tex}/sup_{lv}.png", ic.vignette(lv))
         wpng(f"{tex}/nvg.png", ic.nvg_overlay())
@@ -307,8 +307,9 @@ class UiMixin:
             return ox + (k - (count - 1) / 2) * cw
 
         def text_cells(name, parts, anchor, offset, cond=None, color=(1, 1, 1), scale=1.0, layer=3):
-            # cond はグループのパネルではなく各ラベルに付ける（cond かつ札）。表示条件付きのパネルの子は、
-            # パネルが現れた直後にタイトルが変わらないと古い表示のまま残ることがある（実機で測距の数字が出ず "m" だけ出た）
+            # 表示条件付きのパネルの子は、パネルが現れた直後にタイトルが変わらないと古い表示のまま残ることがある
+            # （実機で測距の数字が出ず "m" だけ出た）。2.6.5 からはパネルで隠し（隠れた子は評価されない＝軽い）、
+            # パネルを開け閉めする値が変わったら、スクリプトが次の tick にもう一度送って子を評価し直させる（ui/hud2.js の GATES）
             """数字などの文字列を 1 文字ずつのラベルで表示する。
             parts の要素：("f", フィールド名, 桁, 使う文字) → その桁の文字ごとに 1 枚（札を含むものだけ見える）
                           ("c", 文字)                     → 常に見える固定の文字
@@ -349,12 +350,11 @@ class UiMixin:
             out.append(img(f"hm_{k}", f"hm_{k}.png", (32, 32), cond=E.eq("hit", code), layer=4))
         for i in range(8):
             out.append(img(f"dmg{i}", f"dmg_{i}.png", (140, 140), cond=E.eq("dir", str(i + 1)), layer=4))
-        # 測距・風
-        out.append(text_cells("rng", digits("rng") + [("c", "m")], "center", (0, 34), cond=not_(E.eq("rng", "----")), color=(1, 0.9, 0.5)))
-        for i in range(8):
-            out.append(img(f"wind{i}", f"wind_{i}.png", (20, 20), offset=(70, 34), cond=E.eq("wdir", str(i))))
-        for v in ("1", "2", "3"):
-            out.append(label(f"wstr{v}", f"x{v}", offset=(88, 34), cond=E.eq("wstr", v), color=(0.7, 0.9, 1.0), scale=0.8, localize=False))
+        # 測距・風：出ていないときは子を評価しないように、パネルでまとめて隠す（軽量化 2.6.5）
+        out.append(group("rngg", [text_cells("rng", digits("rng") + [("c", "m")], "center", (0, 34), color=(1, 0.9, 0.5))], not_(E.eq("rng", "----"))))
+        wind = [img(f"wind{i}", f"wind_{i}.png", (20, 20), offset=(70, 34), cond=E.eq("wdir", str(i))) for i in range(8)]
+        wind += [label(f"wstr{v}", f"x{v}", offset=(88, 34), cond=E.eq("wstr", v), color=(0.7, 0.9, 1.0), scale=0.8, localize=False) for v in ("1", "2", "3")]
+        out.append(group("windg", wind, not_(E.eq("wdir", "-"))))
         # 上：方位バー（2.6）：2° ごとの 180 枚の画像を、1 枚の画像のテクスチャ名で切り替える。
         # 名前はサブタイトルの方位（英字 2 文字）から作る（Hud2Expr.raw_texture）。表示条件は 1 つ
         n[0] += 1
@@ -365,11 +365,13 @@ class UiMixin:
         # 方位バーの画像を全部、最初から読み込んでおく（2.6.2）。テクスチャ名を切り替えるたびに読み込むと、
         # 読み込むまでの一瞬だけ何も出ず、向きを変えると点滅した。表示条件のない 1 px・ほぼ透明の画像なので、毎フレームの評価はない
         pre = []
-        for i in range(180):
+        for i in range(H["hdgSteps"]):
             pre.append({f"cmp_pre{i}": {"type": "image", "texture": f"textures/ui/arsenal/hud2/compass_{hdg_letters(H, i)}", "size": [1, 1], "alpha": 0.01,
                                         "anchor_from": "top_left", "anchor_to": "top_left", "offset": [0, 0], "layer": 0}})
             n[0] += 1
-        out.append({"cmp_preload": {"type": "panel", "size": [1, 1], "anchor_from": "top_left", "anchor_to": "top_left", "controls": pre}})
+        # 方位バーを出している間だけ（出していなければ描かない）
+        out.append({"cmp_preload": {"type": "panel", "size": [1, 1], "anchor_from": "top_left", "anchor_to": "top_left", "controls": pre,
+                                    "bindings": [_bind_sub(), {"binding_type": "view", "source_property_name": EL.raw_shown(), "target_property_name": "#visible"}]}})
         # 照準の右上：与えたダメージ（2.6.2）。色コードつきの数字をサブタイトルからそのまま出す（ラベル 1 つ）
         n[0] += 1
         out.append({"dmgnum": {"type": "label", "text": "#text", "localize": False, "shadow": True, "font_scale_factor": 1.0, "layer": 5, "color": [1, 1, 1],
@@ -387,8 +389,9 @@ class UiMixin:
         gm.append(text_cells("gm_sb", digits("sb"), "top_middle", (44, 35), color=(1.0, 0.5, 0.45)))
         out.append(group("gm", gm, not_(E.eq("gm", "0"))))
         # 左上：クレジット・連続キル・ストリーク
-        out.append(text_cells("cr", [None] + digits("cr"), "top_left", (6, 6), color=(1, 0.85, 0.35), scale=0.9))
-        out.append(text_cells("stk", [None] + digits("stk"), "top_left", (6, 18), cond=not_(E.eq("stk", " 0")), color=(1, 0.6, 0.3), scale=0.9))
+        # クレジットは変わってから 5 秒だけ（スクリプトが空にする）。隠れている間は子を評価しない
+        out.append(group("crg", [text_cells("cr", [None] + digits("cr"), "top_left", (6, 6), color=(1, 0.85, 0.35), scale=0.9)], not_(E.eq("cr", " " * 6))))
+        out.append(group("stkg", [text_cells("stk", [None] + digits("stk"), "top_left", (6, 18), color=(1, 0.6, 0.3), scale=0.9)], not_(E.eq("stk", " 0"))))
         out.append(label("ks", "arsenal.ui.ks_ready", anchor="top_left", offset=(40, 18), cond=E.eq("ks", "1"), color=(0.5, 1, 0.5), scale=0.8))
         # 右下（配置 3 通り）：弾数・モード・状態・プレート・体力
         places = {"0": ("bottom_right", (-10, -42)), "1": ("bottom_right", (-10, -118)), "2": ("bottom_left", (10, -60))}
@@ -400,26 +403,27 @@ class UiMixin:
             def at(dx, dy):
                 return (ox + sgn * dx, oy + dy)
             g.append(img(f"l{lay}_panel", "panel.png", (104, 48), anchor=anchor, offset=at(-4, 4), layer=1))
+            # 弾数は大きさ 3 通りをパネルで分け、出ている 1 つだけを評価する（軽量化 2.6.5）
             for sz, scale in (("0", 1.5), ("1", 2.0), ("2", 2.6)):
-                g.append(text_cells(f"l{lay}_ammo{sz}", digits("ammo"), anchor, at(46, -18), cond=f"({E.eq('sz', sz)} and {has_ammo})", scale=scale))
+                g.append(group(f"l{lay}_ammo{sz}g", [text_cells(f"l{lay}_ammo{sz}", digits("ammo"), anchor, at(46, -18), scale=scale)], f"({E.eq('sz', sz)} and {has_ammo})"))
             # 予備弾："/" ＋ 4 桁。無限は "INF"
             res_parts = [("c", "/")] + digits("res")
             res_at = at(0, -14)
-            g.append(text_cells(f"l{lay}_res", res_parts, anchor, res_at, cond=has_ammo, color=(0.75, 0.75, 0.78)))
             inf_x = cell_x(anchor, res_at[0], len(res_parts) - 1 if sgn < 0 else 1, len(res_parts), 6)
-            g.append(label(f"l{lay}_inf", "INF", anchor=anchor, offset=(inf_x, res_at[1]), cond=f"({has_ammo} and {E.eq('res', 'INF ')})",
-                           color=(0.75, 0.75, 0.78), localize=False))
+            g.append(group(f"l{lay}_resg", [text_cells(f"l{lay}_res", res_parts, anchor, res_at, color=(0.75, 0.75, 0.78)),
+                                            label(f"l{lay}_inf", "INF", anchor=anchor, offset=(inf_x, res_at[1]), cond=E.eq("res", "INF "), color=(0.75, 0.75, 0.78), localize=False)],
+                           has_ammo))
             modes = {"S": "arsenal.mode.semi", "A": "arsenal.mode.auto", "B": "arsenal.mode.burst", "C": "arsenal.mode.charge", "D": "arsenal.mode.double", "U": "arsenal.mode.ub", "M": "arsenal.ui.melee"}
             for code, key in modes.items():
                 g.append(label(f"l{lay}_mode{code}", key, anchor=anchor, offset=at(0, -2), cond=E.eq("mode", code), color=(0.9, 0.9, 0.6), scale=0.8))
             states = {"R": ("arsenal.ui.reloading", (0.5, 0.8, 1.0)), "J": ("arsenal.ui.jammed", (1, 0.4, 0.3)), "H": ("arsenal.ui.overheated", (1, 0.5, 0.2)),
                       "L": ("arsenal.ui.locking", (1, 0.9, 0.3)), "K": ("arsenal.ui.locked", (1, 0.3, 0.3)), "B": ("arsenal.ui.breath", (0.5, 0.9, 1.0)),
                       "E": ("arsenal.ui.empty", (1, 0.3, 0.3)), "P": ("arsenal.ui.spawn_protect", (1, 0.8, 0.3)), "X": ("arsenal.ui.broken", (1, 0.3, 0.3))}
-            for code, (key, col) in states.items():
-                g.append(label(f"l{lay}_st{code}", key, anchor=anchor, offset=at(0, -60), cond=E.eq("st", code), color=col, scale=0.8))
+            g.append(group(f"l{lay}_stg", [label(f"l{lay}_st{code}", key, anchor=anchor, offset=at(0, -60), cond=E.eq("st", code), color=col, scale=0.8)
+                                           for code, (key, col) in states.items()], not_(E.eq("st", "0"))))
             # 熱・充電・リロードの進み具合（0 のときは出さない）
-            for i in range(1, 10):
-                g.append(img(f"l{lay}_bar{i}", f"bar_{i}.png", (60, 4), anchor=anchor, offset=at(0, -52), cond=E.eq("heat", str(i))))
+            g.append(group(f"l{lay}_barg", [img(f"l{lay}_bar{i}", f"bar_{i}.png", (60, 4), anchor=anchor, offset=at(0, -52), cond=E.eq("heat", str(i))) for i in range(1, 10)],
+                           not_(E.eq("heat", "0"))))
             for k in range(1, 5):
                 full = [str(v) for v in range(k, 5)]
                 g.append(img(f"l{lay}_pl{k}on", "plate_on.png", (10, 10), anchor=anchor, offset=at(90 - k * 12, 8), cond=E.any_of("plate", full)))

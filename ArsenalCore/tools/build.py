@@ -526,6 +526,21 @@ def validate(data, sound_files):
     return c
 
 
+def _pack_file(z, p, arc):
+    """パックに 1 ファイル入れる。JSON は空白を取り除いて入れる（端末が読み込む量を減らす。軽量化 2.6.5）。
+    リポジトリの JSON は読みやすいまま（インデント付き）"""
+    if p.endswith(".json"):
+        try:
+            with open(p, encoding="utf-8") as fh:
+                obj = json.load(fh)
+        except ValueError:
+            z.write(p, arc)
+            return
+        z.writestr(arc, json.dumps(obj, ensure_ascii=False, separators=(",", ":")))
+        return
+    z.write(p, arc)
+
+
 def package():
     out = os.path.join(ROOT, "ArsenalCore.mcaddon")
     if os.path.exists(out):
@@ -536,7 +551,7 @@ def package():
             for d, _, fs in os.walk(base):
                 for f in sorted(fs):
                     p = os.path.join(d, f)
-                    z.write(p, os.path.join(name, os.path.relpath(p, base)))
+                    _pack_file(z, p, os.path.join(name, os.path.relpath(p, base)))
     for base, fn in ((BP, "ArsenalCore_BP.mcpack"), (RP, "ArsenalCore_RP.mcpack")):
         p2 = os.path.join(ROOT, "dist", fn)
         os.makedirs(os.path.dirname(p2), exist_ok=True)
@@ -544,7 +559,7 @@ def package():
             for d, _, fs in os.walk(base):
                 for f in sorted(fs):
                     p = os.path.join(d, f)
-                    z.write(p, os.path.relpath(p, base))
+                    _pack_file(z, p, os.path.relpath(p, base))
     # ソース一式（tools・BP・RP・src・docs とドキュメント。依存パッケージ・キャッシュ・テストの作業フォルダは除く）
     ver = ".".join(str(x) for x in json.load(open(os.path.join(BP, "manifest.json")))["header"]["version"])
     src_zip = os.path.join(ROOT, "dist", f"ArsenalCore-{ver}-source.zip")

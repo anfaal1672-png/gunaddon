@@ -9,7 +9,7 @@
       }
     },
     "components": {
-      "minecraft:icon": "arsenal_prism_scatter__c5",
+      "minecraft:icon": "arsenal_prism_scatter",
       "minecraft:display_name": {
         "value": "item.arsenal.prism_scatter.name"
       },

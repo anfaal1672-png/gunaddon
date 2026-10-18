@@ -9,7 +9,7 @@
       }
     },
     "components": {
-      "minecraft:icon": "arsenal_plasma_cannon__c8",
+      "minecraft:icon": "arsenal_plasma_cannon",
       "minecraft:display_name": {
         "value": "item.arsenal.plasma_cannon.name"
       },

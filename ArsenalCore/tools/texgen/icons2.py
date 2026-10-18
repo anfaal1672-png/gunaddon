@@ -617,7 +617,7 @@ def damage_arc(i, size=256):
 
 
 def compass_strip(center_deg, w=256, h=24):
-    """方位バー：center_deg（度、0 = 南を向いている＝マイクラの yaw 0）を中央にした帯。2° ごとに 1 枚作る"""
+    """方位バー：center_deg（度、0 = 南を向いている＝マイクラの yaw 0）を中央にした帯。data/hud.js の hdgSteps 枚（2.6.5 から 4° ごと）作る"""
     img = Image.new("RGBA", (w, h), (0, 0, 0, 0))
     d = ImageDraw.Draw(img)
     d.rectangle([0, 0, w - 1, h - 1], fill=(0, 0, 0, 90))

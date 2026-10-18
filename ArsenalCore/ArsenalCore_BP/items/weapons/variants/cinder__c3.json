@@ -9,7 +9,7 @@
       }
     },
     "components": {
-      "minecraft:icon": "arsenal_cinder__c3",
+      "minecraft:icon": "arsenal_cinder",
       "minecraft:display_name": {
         "value": "item.arsenal.cinder.name"
       },

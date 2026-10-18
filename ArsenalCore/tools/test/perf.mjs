@@ -70,7 +70,8 @@ __tick(2);
 // ---- 負荷試験：プレイヤー 20 人（全員フルオート射撃）＋敵 60 体（3 勢力）を 600 tick ----
 const { spawnEnemy, aiStats, allAI } = await import(pathToFileURL(path.join(run, "scripts", "systems", "ai", "brain.js")).href);
 const players = [player];
-for (let i = 1; i < 20; i++) {
+const NPL = Number(process.env.PERF_PLAYERS ?? 20);
+for (let i = 1; i < NPL; i++) {
   const p = new Player(__overworld);
   p.name = `P${i}`;
   // PERF_MOBILE=1：全員スマホ（演出品質「自動」が中になる）
@@ -91,7 +92,8 @@ players.forEach((p, i) => {
   p.gm = "Creative"; // 敵に倒されないように（射撃・AI・HUD の負荷はそのまま）
 });
 const kinds = Object.keys(D.ENEMIES);
-for (let i = 0; i < 60; i++) {
+const NAI = Number(process.env.PERF_AI ?? 60);
+for (let i = 0; i < NAI; i++) {
   const p = players[i % players.length];
   spawnEnemy(__overworld, { x: p.location.x + ((i * 7) % 11) - 5, y: 64, z: p.location.z + 8 + (i % 3) * 3 }, kinds[i % kinds.length], { persist: true });
 }

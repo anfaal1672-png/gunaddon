@@ -9,7 +9,7 @@
       }
     },
     "components": {
-      "minecraft:icon": "arsenal_garrison__c4",
+      "minecraft:icon": "arsenal_garrison",
       "minecraft:display_name": {
         "value": "item.arsenal.garrison.name"
       },

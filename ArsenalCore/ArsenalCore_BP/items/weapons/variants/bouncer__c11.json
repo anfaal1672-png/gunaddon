@@ -9,7 +9,7 @@
       }
     },
     "components": {
-      "minecraft:icon": "arsenal_bouncer__c11",
+      "minecraft:icon": "arsenal_bouncer",
       "minecraft:display_name": {
         "value": "item.arsenal.bouncer.name"
       },

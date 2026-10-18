@@ -9,7 +9,7 @@
       }
     },
     "components": {
-      "minecraft:icon": "arsenal_mako__c8",
+      "minecraft:icon": "arsenal_mako",
       "minecraft:display_name": {
         "value": "item.arsenal.mako.name"
       },

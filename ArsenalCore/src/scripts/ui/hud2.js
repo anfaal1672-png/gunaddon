@@ -72,7 +72,7 @@ export function encodeLive(values) {
   const raw = String(values[H.liveRaw] ?? "---");
   const n = /^\d{1,3}$/.test(raw) ? Number(raw) : -1;
   const A = H.hdgLetters;
-  const hdg = n >= 0 && n < 180 ? A[Math.floor(n / A.length)] + A[n % A.length] : "---";
+  const hdg = n >= 0 && n < H.hdgSteps ? A[Math.floor(n / A.length)] + A[n % A.length] : "---";
   // 与えたダメージ：印 + 色コード + 数字（なければ印だけ）。決まった形だけを送る（JSON UI が英字・札を引いた残りを出す）
   const dmg = String(values.dmg ?? "");
   return out + H.sep + H.rawMark + hdg + H.dmgMark + (/^§[fec]\d{1,4}$/.test(dmg) ? dmg : "");
@@ -213,6 +213,13 @@ export function hud2Values(player, s) {
     const extra = safe("hud2.provider", () => fn(player));
     if (extra) Object.assign(v, extra);
   }
+  // クレジットは変わってから 5 秒だけ出す（出ていない間は 60 個の数字の表示条件を評価しない。軽量化 2.6.5）
+  const cr = Number(v.cr) || 0;
+  if (s.crSeen !== cr) {
+    s.crSeen = cr;
+    s.crUntil = now + 100;
+  }
+  if (now > s.crUntil) v.cr = "";
   v.sz = prefs.hudScale === "small" ? "0" : prefs.hudScale === "large" ? "2" : "1";
   v.lay = layoutCode(player, prefs.hudLayout);
   // 毎 tick 変わる値はサブタイトルで送るので、タイトルでは固定（向きを変えてもタイトルが変わらない）
@@ -237,7 +244,8 @@ function liveValues(player, s) {
   // 方位：2° ごと（0 = 南、0〜179）。方位バーの画像も 2° ごとにある。
   // 0 埋めしない：実機の JSON UI は引き算の結果 '090' を数の 90 にしてから画像名につなぐ（compass_90）
   const yaw = ((player.getRotation().y % 360) + 360) % 360;
-  v.hdg = P(player).compass ? String(Math.round(yaw / 2) % 180) : "---";
+  const step = 360 / H.hdgSteps;
+  v.hdg = P(player).compass ? String(Math.round(yaw / step) % H.hdgSteps) : "---";
   // 与えたダメージ（続けて当てた合計。最後に当ててから dmgTicks の間）
   const c = s.dmgCombo;
   v.dmg = c && P(player).damageNumbers && system.currentTick - c.tick <= H.dmgTicks ? H.dmgColors[c.kind] + Math.min(9999, Math.max(1, Math.round(c.total))) : "";
@@ -281,11 +289,19 @@ export function announce(player, msg, stay = 40) {
  */
 export function renderHud2(player, s, force) {
   const now = system.currentTick;
+  // パネルを開け閉めした直後の 1 回（パネルの子を評価し直させる）
+  if (s.hud2Follow && now >= s.hud2Follow) {
+    s.hud2Follow = 0;
+    force = true;
+  }
   // 方位と照準は毎 tick 見て、サブタイトルで送る（向きを変えたら次の tick で方位バーが動く）。
   // ほかの値は変化時と再送時だけ集め直してタイトルで送る。向きを変えただけではタイトルは変わらない
   const live = encodeLive(liveValues(player, s)) + SCOPE_MARK;
   const full = force || s.hudDirty || !s.hud2Vals || now - s.hud2Tick >= H.resendTicks;
   if (!full) return sendLive(player, s, live);
+  // タイトルは minTitleTicks に 1 回まで（連射中、1 発ごとに約 850 個の表示条件を評価し直させない。軽量化 2.6.5）。
+  // hudDirty は残るので、間隔が空いた次の tick に送る
+  if (!force && s.hud2Vals && now - s.hud2Tick < H.minTitleTicks) return sendLive(player, s, live);
   const v = hud2Values(player, s);
   s.hud2Vals = v;
   v.seq = "0";
@@ -303,6 +319,21 @@ export function renderHud2(player, s, force) {
   const text = key.replace(seqTok + "0" + H.sep, seqTok + s.hud2Seq + H.sep);
   s.hud2Live = live;
   safe("hud2.send", () => player.onScreenDisplay.setTitle(text, { subtitle: live, fadeInDuration: 0, stayDuration: H.stayTicks, fadeOutDuration: 0 }));
+  // パネルの開け閉めが変わったら、次の tick にもう一度送る（隠れている間の子は評価されず、古いまま現れるため）
+  const gate = gateKey(v);
+  if (gate !== s.hud2Gate) {
+    s.hud2Gate = gate;
+    s.hud2Follow = now + 1;
+  }
+}
+
+/**
+ * パネルを開け閉めする値（tools/gen/ui.py で group に条件を付けたもの）。どれかが変わったら送り直す
+ * @param {Record<string, string|number>} v
+ */
+function gateKey(v) {
+  const f = (/** @type {string} */ n) => fit(n, v[n] ?? "");
+  return [f("lay"), f("sz"), f("ammo") === "---", f("st") === "0", f("heat") === "0", f("rng") === "----", f("wdir") === "-", f("stk") === " 0", f("cr").trim() === "", f("gm")].join("|");
 }
 
 /**

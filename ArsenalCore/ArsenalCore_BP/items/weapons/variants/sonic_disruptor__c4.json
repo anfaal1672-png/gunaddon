@@ -9,7 +9,7 @@
       }
     },
     "components": {
-      "minecraft:icon": "arsenal_sonic_disruptor__c4",
+      "minecraft:icon": "arsenal_sonic_disruptor",
       "minecraft:display_name": {
         "value": "item.arsenal.sonic_disruptor.name"
       },

@@ -9,7 +9,7 @@
       }
     },
     "components": {
-      "minecraft:icon": "arsenal_pulse_rifle__c5",
+      "minecraft:icon": "arsenal_pulse_rifle",
       "minecraft:display_name": {
         "value": "item.arsenal.pulse_rifle.name"
       },

@@ -9,7 +9,7 @@
       }
     },
     "components": {
-      "minecraft:icon": "arsenal_regent__c4",
+      "minecraft:icon": "arsenal_regent",
       "minecraft:display_name": {
         "value": "item.arsenal.regent.name"
       },

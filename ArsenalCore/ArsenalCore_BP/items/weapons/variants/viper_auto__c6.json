@@ -9,7 +9,7 @@
       }
     },
     "components": {
-      "minecraft:icon": "arsenal_viper_auto__c6",
+      "minecraft:icon": "arsenal_viper_auto",
       "minecraft:display_name": {
         "value": "item.arsenal.viper_auto.name"
       },

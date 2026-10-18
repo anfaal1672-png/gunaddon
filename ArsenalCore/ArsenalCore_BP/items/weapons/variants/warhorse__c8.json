@@ -9,7 +9,7 @@
       }
     },
     "components": {
-      "minecraft:icon": "arsenal_warhorse__c8",
+      "minecraft:icon": "arsenal_warhorse",
       "minecraft:display_name": {
         "value": "item.arsenal.warhorse.name"
       },

@@ -9,7 +9,7 @@
       }
     },
     "components": {
-      "minecraft:icon": "arsenal_ironbark__c6",
+      "minecraft:icon": "arsenal_ironbark",
       "minecraft:display_name": {
         "value": "item.arsenal.ironbark.name"
       },

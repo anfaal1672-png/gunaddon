@@ -9,7 +9,7 @@
       }
     },
     "components": {
-      "minecraft:icon": "arsenal_shrike__c5",
+      "minecraft:icon": "arsenal_shrike",
       "minecraft:display_name": {
         "value": "item.arsenal.shrike.name"
       },

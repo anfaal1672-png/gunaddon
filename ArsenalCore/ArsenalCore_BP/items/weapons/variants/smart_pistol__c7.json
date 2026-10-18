@@ -9,7 +9,7 @@
       }
     },
     "components": {
-      "minecraft:icon": "arsenal_smart_pistol__c7",
+      "minecraft:icon": "arsenal_smart_pistol",
       "minecraft:display_name": {
         "value": "item.arsenal.smart_pistol.name"
       },

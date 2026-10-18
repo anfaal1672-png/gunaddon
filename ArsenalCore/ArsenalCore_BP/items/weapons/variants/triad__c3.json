@@ -9,7 +9,7 @@
       }
     },
     "components": {
-      "minecraft:icon": "arsenal_triad__c3",
+      "minecraft:icon": "arsenal_triad",
       "minecraft:display_name": {
         "value": "item.arsenal.triad.name"
       },

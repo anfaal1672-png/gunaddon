@@ -9,7 +9,7 @@
       }
     },
     "components": {
-      "minecraft:icon": "arsenal_tempest__c10",
+      "minecraft:icon": "arsenal_tempest",
       "minecraft:display_name": {
         "value": "item.arsenal.tempest.name"
       },

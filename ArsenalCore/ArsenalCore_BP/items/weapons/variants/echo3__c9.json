@@ -9,7 +9,7 @@
       }
     },
     "components": {
-      "minecraft:icon": "arsenal_echo3__c9",
+      "minecraft:icon": "arsenal_echo3",
       "minecraft:display_name": {
         "value": "item.arsenal.echo3.name"
       },

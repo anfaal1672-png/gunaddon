@@ -9,7 +9,7 @@
       }
     },
     "components": {
-      "minecraft:icon": "arsenal_warden__c8",
+      "minecraft:icon": "arsenal_warden",
       "minecraft:display_name": {
         "value": "item.arsenal.warden.name"
       },

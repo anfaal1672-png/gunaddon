@@ -592,7 +592,8 @@ function tickBullet(p) {
   const L = len(p.vel);
   const dir = mul(p.vel, 1 / L);
   const r = traceHitscan(shooter, from, dir, st, { maxRange: L, pen: p.data.pen, hitSet: p.hitSet, distOffset: p.traveled, mulDmg: p.data.mulDmg, silent: !!p.data.silent });
-  if (p.data.tracer !== false) drawTracer(shooter, p.data.first ? p.data.muzzle : from, r.end, st, true, p.id);
+  // 曳光は最初の区間と 2 tick に 1 回（毎 tick 出すと 1 発で 4〜5 本になっていた。軽量化 2.6.5）
+  if (p.data.tracer !== false && (p.data.first || p.age % 2 === 0)) drawTracer(shooter, p.data.first ? p.data.muzzle : from, r.end, st, true, p.id);
   if (p.data.first && p.data.whizz !== false) whizzBy(shooter, from, add(from, mul(dir, Math.min(200, st.range1))), isSupersonic(st));
   if (st.explosive && (r.stopped || r.hitEntity)) miniBlast(shooter, r.end, 1.4, 3.0, st.id);
   p.data.first = false;

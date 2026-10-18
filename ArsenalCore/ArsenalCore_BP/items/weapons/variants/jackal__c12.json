@@ -9,7 +9,7 @@
       }
     },
     "components": {
-      "minecraft:icon": "arsenal_jackal__c12",
+      "minecraft:icon": "arsenal_jackal",
       "minecraft:display_name": {
         "value": "item.arsenal.jackal.name"
       },

@@ -9,7 +9,7 @@
       }
     },
     "components": {
-      "minecraft:icon": "arsenal_wasp__c2",
+      "minecraft:icon": "arsenal_wasp",
       "minecraft:display_name": {
         "value": "item.arsenal.wasp.name"
       },

@@ -9,7 +9,7 @@
       }
     },
     "components": {
-      "minecraft:icon": "arsenal_reaper_auto__c10",
+      "minecraft:icon": "arsenal_reaper_auto",
       "minecraft:display_name": {
         "value": "item.arsenal.reaper_auto.name"
       },

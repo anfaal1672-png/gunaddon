@@ -9,7 +9,7 @@
       }
     },
     "components": {
-      "minecraft:icon": "arsenal_wren__c5",
+      "minecraft:icon": "arsenal_wren",
       "minecraft:display_name": {
         "value": "item.arsenal.wren.name"
       },

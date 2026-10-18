@@ -9,7 +9,7 @@
       }
     },
     "components": {
-      "minecraft:icon": "arsenal_kestrel_pdw__c9",
+      "minecraft:icon": "arsenal_kestrel_pdw",
       "minecraft:display_name": {
         "value": "item.arsenal.kestrel_pdw.name"
       },

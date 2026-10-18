@@ -9,7 +9,7 @@
       }
     },
     "components": {
-      "minecraft:icon": "arsenal_net_launcher__c7",
+      "minecraft:icon": "arsenal_net_launcher",
       "minecraft:display_name": {
         "value": "item.arsenal.net_launcher.name"
       },

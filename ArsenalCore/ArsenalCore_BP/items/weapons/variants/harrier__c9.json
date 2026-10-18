@@ -9,7 +9,7 @@
       }
     },
     "components": {
-      "minecraft:icon": "arsenal_harrier__c9",
+      "minecraft:icon": "arsenal_harrier",
       "minecraft:display_name": {
         "value": "item.arsenal.harrier.name"
       },

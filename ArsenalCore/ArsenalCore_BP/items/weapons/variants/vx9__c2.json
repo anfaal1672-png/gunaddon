@@ -9,7 +9,7 @@
       }
     },
     "components": {
-      "minecraft:icon": "arsenal_vx9__c2",
+      "minecraft:icon": "arsenal_vx9",
       "minecraft:display_name": {
         "value": "item.arsenal.vx9.name"
       },

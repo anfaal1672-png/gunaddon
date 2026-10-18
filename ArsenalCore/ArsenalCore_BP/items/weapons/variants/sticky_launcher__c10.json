@@ -9,7 +9,7 @@
       }
     },
     "components": {
-      "minecraft:icon": "arsenal_sticky_launcher__c10",
+      "minecraft:icon": "arsenal_sticky_launcher",
       "minecraft:display_name": {
         "value": "item.arsenal.sticky_launcher.name"
       },

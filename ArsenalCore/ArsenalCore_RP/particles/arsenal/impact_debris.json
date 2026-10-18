@@ -10,7 +10,7 @@
     },
     "components": {
       "minecraft:emitter_rate_instant": {
-        "num_particles": "v.count ?? 6"
+        "num_particles": "v.count ?? 3"
       },
       "minecraft:emitter_lifetime_once": {
         "active_time": 0.05
@@ -23,7 +23,7 @@
         ]
       },
       "minecraft:particle_lifetime_expression": {
-        "max_lifetime": "math.random(0.4, 0.9)"
+        "max_lifetime": "math.random(0.3, 0.55)"
       },
       "minecraft:particle_initial_speed": "math.random(2.5, 5.5)",
       "minecraft:particle_motion_dynamic": {
@@ -33,11 +33,6 @@
           0
         ],
         "linear_drag_coefficient": 1.0
-      },
-      "minecraft:particle_motion_collision": {
-        "coefficient_of_restitution": 0.2,
-        "collision_radius": 0.04,
-        "collision_drag": 4.0
       },
       "minecraft:particle_appearance_billboard": {
         "size": [

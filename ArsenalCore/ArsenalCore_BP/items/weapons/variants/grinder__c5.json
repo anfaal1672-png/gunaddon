@@ -9,7 +9,7 @@
       }
     },
     "components": {
-      "minecraft:icon": "arsenal_grinder__c5",
+      "minecraft:icon": "arsenal_grinder",
       "minecraft:display_name": {
         "value": "item.arsenal.grinder.name"
       },

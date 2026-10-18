@@ -9,7 +9,7 @@
       }
     },
     "components": {
-      "minecraft:icon": "arsenal_vortex_cannon__c3",
+      "minecraft:icon": "arsenal_vortex_cannon",
       "minecraft:display_name": {
         "value": "item.arsenal.vortex_cannon.name"
       },

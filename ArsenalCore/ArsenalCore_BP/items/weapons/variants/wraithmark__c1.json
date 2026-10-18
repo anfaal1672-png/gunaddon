@@ -9,7 +9,7 @@
       }
     },
     "components": {
-      "minecraft:icon": "arsenal_wraithmark__c1",
+      "minecraft:icon": "arsenal_wraithmark",
       "minecraft:display_name": {
         "value": "item.arsenal.wraithmark.name"
       },

@@ -9,7 +9,7 @@
       }
     },
     "components": {
-      "minecraft:icon": "arsenal_titan__c7",
+      "minecraft:icon": "arsenal_titan",
       "minecraft:display_name": {
         "value": "item.arsenal.titan.name"
       },

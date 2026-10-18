@@ -9,7 +9,7 @@
       }
     },
     "components": {
-      "minecraft:icon": "arsenal_lynx__c7",
+      "minecraft:icon": "arsenal_lynx",
       "minecraft:display_name": {
         "value": "item.arsenal.lynx.name"
       },

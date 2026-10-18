@@ -9,7 +9,7 @@
       }
     },
     "components": {
-      "minecraft:icon": "arsenal_sawtooth__c3",
+      "minecraft:icon": "arsenal_sawtooth",
       "minecraft:display_name": {
         "value": "item.arsenal.sawtooth.name"
       },

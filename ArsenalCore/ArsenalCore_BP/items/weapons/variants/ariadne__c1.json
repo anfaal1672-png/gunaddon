@@ -9,7 +9,7 @@
       }
     },
     "components": {
-      "minecraft:icon": "arsenal_ariadne__c1",
+      "minecraft:icon": "arsenal_ariadne",
       "minecraft:display_name": {
         "value": "item.arsenal.ariadne.name"
       },

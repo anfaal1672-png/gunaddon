@@ -9,7 +9,7 @@
       }
     },
     "components": {
-      "minecraft:icon": "arsenal_behemoth__c12",
+      "minecraft:icon": "arsenal_behemoth",
       "minecraft:display_name": {
         "value": "item.arsenal.behemoth.name"
       },

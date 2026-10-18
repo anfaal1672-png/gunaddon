@@ -9,7 +9,7 @@
       }
     },
     "components": {
-      "minecraft:icon": "arsenal_longwatch__c10",
+      "minecraft:icon": "arsenal_longwatch",
       "minecraft:display_name": {
         "value": "item.arsenal.longwatch.name"
       },

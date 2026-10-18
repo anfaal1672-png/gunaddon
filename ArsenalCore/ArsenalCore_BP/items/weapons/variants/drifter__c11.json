@@ -9,7 +9,7 @@
       }
     },
     "components": {
-      "minecraft:icon": "arsenal_drifter__c11",
+      "minecraft:icon": "arsenal_drifter",
       "minecraft:display_name": {
         "value": "item.arsenal.drifter.name"
       },

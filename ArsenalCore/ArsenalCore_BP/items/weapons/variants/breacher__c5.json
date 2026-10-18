@@ -9,7 +9,7 @@
       }
     },
     "components": {
-      "minecraft:icon": "arsenal_breacher__c5",
+      "minecraft:icon": "arsenal_breacher",
       "minecraft:display_name": {
         "value": "item.arsenal.breacher.name"
       },

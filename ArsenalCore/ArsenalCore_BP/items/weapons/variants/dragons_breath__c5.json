@@ -9,7 +9,7 @@
       }
     },
     "components": {
-      "minecraft:icon": "arsenal_dragons_breath__c5",
+      "minecraft:icon": "arsenal_dragons_breath",
       "minecraft:display_name": {
         "value": "item.arsenal.dragons_breath.name"
       },
