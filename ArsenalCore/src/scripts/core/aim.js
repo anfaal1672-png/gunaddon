@@ -14,6 +14,7 @@ import { fp_step } from "../util/fpstep.js";
 import { safe } from "../util/log.js";
 import { tickPathLock, clearPathLock } from "./pathlock.js";
 import { tickSmart, clearSmart } from "./fire3.js";
+import { canDamage } from "./damage.js";
 
 const BASE_SPEED = 0.1;
 
@@ -227,9 +228,9 @@ export function tickAim(player, s, st) {
     }
     const scoped = SCOPED_OPTICS.has(effectiveOptic(s, st));
     if (st.rangefinder && s.adsLevel >= 1 && now % 5 === 0) rangefind(player, s);
-    if (prefs.aimAssist !== "off" && now - s.assistTick >= 2) {
+    if (prefs.aimAssist !== "off" && s.adsLevel >= 0.5) {
       s.assistTick = now;
-      aimAssist(player, s, prefs.aimAssist === "strong" ? 0.35 : 0.18);
+      aimAssist(player, s, st, prefs.aimAssist === "strong" ? ASSIST.strong : ASSIST.light);
     }
     if (scoped && s.adsLevel >= 1) {
       // 以前はカメラシェイクで「揺れ」を出していたが、高倍率では視点が激しく震えて狙えないため廃止。
@@ -318,33 +319,91 @@ function rangefind(player, s) {
   });
 }
 
+/** エイムアシストの強さ：引き寄せる円錐の半角・保つ円錐の半角（度）・1 tick に詰める割合・1 tick の最大の回転（度） */
+const ASSIST = {
+  light: { cone: 8, keep: 13, k: 0.22, max: 1.8 },
+  strong: { cone: 12, keep: 18, k: 0.4, max: 3.5 },
+};
+/** これより小さいずれは直さない（細かく揺れないように。度） */
+const ASSIST_DEADZONE = 0.35;
+
+/** 照準と目標のなす角（度） @param {import("../util/math.js").Vec3} dir @param {import("../util/math.js").Vec3} v 正規化済み */
+function angleTo(dir, v) {
+  return (Math.acos(Math.max(-1, Math.min(1, dot(dir, v)))) * 180) / Math.PI;
+}
+
 /**
- * エイムアシスト（スマホ向け・個人設定。PvP ではワールド設定で禁止できる）：照準の近くの敵へ弱く吸い付く
- * @param {import("@minecraft/server").Player} player @param {import("./state.js").PlayerState} s @param {number} k
+ * エイムアシストの狙う点：体の中心。弾が飛ぶ銃では、弾が届くまでに動くぶん先を狙う
+ * @param {import("@minecraft/server").Entity} e @param {import("../util/math.js").Vec3} eye @param {any} st
  */
-function aimAssist(player, s, k) {
+function assistPoint(e, eye, st) {
+  const c = e.getAABB().center;
+  if (!st.travel || !(st.travel.speed > 0)) return c;
+  const v = safe("assist.vel", () => e.getVelocity()) ?? { x: 0, y: 0, z: 0 };
+  const t = dist(eye, c) / st.travel.speed;
+  return { x: c.x + v.x * t, y: c.y + Math.max(-0.5, Math.min(0.5, v.y * t)), z: c.z + v.z * t };
+}
+
+/**
+ * エイムアシスト（ADS 中、毎 tick）：照準の近くの見えている敵へ、照準を少しずつ寄せる。
+ * 撃てる相手だけ（敵対 mob・アドオンの敵、PvP の設定でプレイヤー）。壁の向こうの相手には寄せない。
+ * いったん選んだ相手は、少し外れても（keep の円錐の中なら）追い続ける
+ * @param {import("@minecraft/server").Player} player @param {import("./state.js").PlayerState} s @param {any} st @param {{cone:number, keep:number, k:number, max:number}} cfg
+ */
+function aimAssist(player, s, st, cfg) {
   safe("aimAssist", () => {
     const eye = player.getHeadLocation();
     const dir = player.getViewDirection();
+    const range = Math.min(64, st.range1 ?? 48);
+    /** 見えているか @param {import("@minecraft/server").Entity} e @param {import("../util/math.js").Vec3} p */
+    const visible = (e, p) => {
+      const v = sub(p, eye);
+      const L = len(v);
+      if (L < 0.5) return true;
+      const reach = loadedReach(player.dimension, eye, mul(v, 1 / L), L, system.currentTick);
+      if (reach < L - 0.01) return false;
+      return !player.dimension.getBlockFromRay(eye, mul(v, 1 / L), { maxDistance: Math.max(0.1, L - 0.3), includePassableBlocks: false, includeLiquidBlocks: false });
+    };
+    /** 狙える相手か @param {import("@minecraft/server").Entity} e */
+    const ok = (e) => e.isValid && e.id !== player.id && !!e.getComponent("minecraft:health") && canDamage(player, e);
+    /** @type {{e:import("@minecraft/server").Entity, p:import("../util/math.js").Vec3, a:number}|null} */
     let best = null;
-    let bestDot = Math.cos((6 * Math.PI) / 180);
-    for (const e of player.dimension.getEntities({ location: eye, maxDistance: 48, families: ["monster"], excludeFamilies: ["inanimate", "arsenal_fx"] })) {
-      if (e.typeId === "minecraft:player" && !WS().aimAssistPvp) continue;
-      const c = e.getAABB().center;
-      const v = norm(sub(c, eye));
-      const dd = dot(v, dir);
-      if (dd > bestDot) {
-        bestDot = dd;
-        best = v;
-      }
+    // 選んでいる相手を優先（少し外れても追い続ける）
+    const cur = s.assistTarget ? world.getEntity(s.assistTarget) : undefined;
+    if (cur && ok(cur)) {
+      const p = assistPoint(cur, eye, st);
+      const a = angleTo(dir, norm(sub(p, eye)));
+      if (a <= cfg.keep && dist(eye, p) <= range && visible(cur, p)) best = { e: cur, p, a };
     }
-    if (!best) return;
+    if (!best) {
+      s.assistTarget = null;
+      const cands = player.dimension.getEntities({ location: eye, maxDistance: range, families: ["monster"], excludeFamilies: ["inanimate", "arsenal_fx"] });
+      if (WS().aimAssistPvp) cands.push(...player.dimension.getPlayers({ location: eye, maxDistance: range }));
+      let bestScore = Infinity;
+      for (const e of cands) {
+        if (!ok(e)) continue;
+        const p = assistPoint(e, eye, st);
+        const a = angleTo(dir, norm(sub(p, eye)));
+        // 近い相手を少し優先する（同じ角度なら近い方）
+        const score = a + dist(eye, p) * 0.02;
+        if (a <= cfg.cone && score < bestScore && visible(e, p)) {
+          best = { e, p, a };
+          bestScore = score;
+        }
+      }
+      if (best) s.assistTarget = best.e.id;
+    }
+    if (!best || best.a < ASSIST_DEADZONE) return;
+    const v = norm(sub(best.p, eye));
     const r = player.getRotation();
-    const want = { x: (-Math.asin(best.y) * 180) / Math.PI, y: (Math.atan2(-best.x, best.z) * 180) / Math.PI };
+    const want = { x: (-Math.asin(v.y) * 180) / Math.PI, y: (Math.atan2(-v.x, v.z) * 180) / Math.PI };
     let dy = want.y - r.y;
     while (dy > 180) dy -= 360;
     while (dy < -180) dy += 360;
-    player.setRotation({ x: r.x + (want.x - r.x) * k, y: r.y + dy * k });
+    const dx = want.x - r.x;
+    // ずれの k 割を詰める。ただし 1 tick に max 度まで（急に首が回らないように）
+    const step = Math.min(1, cfg.max / Math.max(1e-6, Math.hypot(dx * cfg.k, dy * cfg.k)));
+    player.setRotation({ x: r.x + dx * cfg.k * step, y: r.y + dy * cfg.k * step });
   });
 }
 

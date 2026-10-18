@@ -546,6 +546,92 @@ export async function suite2(ctx) {
   }
 
   // =====================================================================
+  console.log("2.6 エイムアシスト");
+  // =====================================================================
+  {
+    const savedInv = inv.items.slice();
+    const savedSlot = player.selectedSlotIndex;
+    const savedLoc = { ...player.location };
+    clearInv();
+    reset();
+    const rifle = Object.keys(D.WEAPONS).find((w) => D.WEAPONS[w].cat === "assault");
+    inv.items[0] = new ItemStack(`arsenal:${rifle}`, 1);
+    player.selectedSlotIndex = 0;
+    __tick(3);
+    // 照準の中心から角度 a（度）の向き
+    const angTo = (e) => {
+      const eye = player.getHeadLocation();
+      const c = e.getAABB().center;
+      const v = { x: c.x - eye.x, y: c.y - eye.y, z: c.z - eye.z };
+      const L = Math.hypot(v.x, v.y, v.z);
+      const d = player.getViewDirection();
+      return (Math.acos(Math.min(1, (v.x * d.x + v.y * d.y + v.z * d.z) / L)) * 180) / Math.PI;
+    };
+    const adsFor = (ticks) => {
+      player.isSneaking = true;
+      __tick(ticks);
+      player.isSneaking = false;
+      __tick(4);
+    };
+    settings.setPrefs(player, { aimAssist: "light" });
+    const z = zombie(1.5, 10.5, 200);
+    player.setRotation({ x: 0, y: 0 });
+    const a0 = angTo(z);
+    adsFor(30);
+    check("エイムアシスト：覗くと照準の近くの敵へ寄る", a0 > 3 && angTo(z) < 1.0, `(${a0.toFixed(2)}° → ${angTo(z).toFixed(2)}°)`);
+    // 1 tick に回る量には上限がある（急に首が回らない）
+    player.setRotation({ x: 0, y: 0 });
+    player.isSneaking = true;
+    const rs = [];
+    for (let i = 0; i < 12; i++) {
+      __tick(1);
+      rs.push(player.getRotation().y);
+    }
+    player.isSneaking = false;
+    __tick(4);
+    let maxStep = 0;
+    for (let i = 1; i < rs.length; i++) maxStep = Math.max(maxStep, Math.abs(rs[i] - rs[i - 1]));
+    check("エイムアシスト：1 tick の回転は 1.8° まで", maxStep <= 1.81, `(max=${maxStep.toFixed(2)}°)`);
+    // 壁の向こうの敵には寄せない
+    const placed = [];
+    for (let x = -3; x <= 4; x++) for (let y = 64; y <= 66; y++) { dim.blocks.set(`${x},${y},6`, "minecraft:stone"); placed.push(`${x},${y},6`); }
+    player.setRotation({ x: 0, y: 0 });
+    adsFor(30);
+    check("エイムアシスト：壁の向こうの敵には寄せない", Math.abs(player.getRotation().y) < 0.01 && Math.abs(player.getRotation().x) < 0.01, JSON.stringify(player.getRotation()));
+    for (const k of placed) dim.blocks.delete(k);
+    // 敵対しない mob には寄せない
+    z.remove();
+    const cow = new Entity("minecraft:cow", { x: 1.5, y: 64, z: 10.5 }, dim, 10);
+    player.setRotation({ x: 0, y: 0 });
+    adsFor(30);
+    check("エイムアシスト：敵対しない mob には寄せない", Math.abs(player.getRotation().y) < 0.01);
+    cow.remove();
+    // 照準から遠い（円錐の外の）敵には寄せない。「強」は円錐が広い
+    const zf = zombie(2.2, 10.5, 200);
+    player.setRotation({ x: 0, y: 0 });
+    adsFor(20);
+    const lightMoved = Math.abs(player.getRotation().y) > 0.01;
+    settings.setPrefs(player, { aimAssist: "strong" });
+    player.setRotation({ x: 0, y: 0 });
+    adsFor(30);
+    check("エイムアシスト：「弱」は 8° の外の敵に寄せず、「強」は 12° まで寄せる", angTo(zf) < 1.0 && !lightMoved, `(light moved=${lightMoved}, strong → ${angTo(zf).toFixed(2)}°)`);
+    zf.remove();
+    // 「なし」では寄せない
+    settings.setPrefs(player, { aimAssist: "off" });
+    const zo = zombie(1.5, 10.5, 200);
+    player.setRotation({ x: 0, y: 0 });
+    adsFor(30);
+    check("エイムアシスト：「なし」では寄せない", Math.abs(player.getRotation().y) < 0.01);
+    zo.remove();
+    clearInv();
+    for (let i = 0; i < savedInv.length; i++) inv.items[i] = savedInv[i];
+    player.selectedSlotIndex = savedSlot;
+    player.location = savedLoc;
+    player.setRotation({ x: 0, y: 0 });
+    __tick(3);
+  }
+
+  // =====================================================================
   console.log("HUD 2.0");
   // =====================================================================
   {
