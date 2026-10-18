@@ -21,6 +21,8 @@ const ARMOR_PRICE = { 1: 220, 2: 480, 3: 900 };
 
 /** 個別の価格（算出式より優先） */
 export const PRICE_OVERRIDE = {
+  // 戦術核（2.6）：ほかの装備の値段表（ティアで 40〜260）では安すぎる
+  "arsenal:tactical_nuke": 6000,
   "arsenal:steel_ingot": 12,
   "arsenal:polymer": 10,
   "arsenal:precision_parts": 30,

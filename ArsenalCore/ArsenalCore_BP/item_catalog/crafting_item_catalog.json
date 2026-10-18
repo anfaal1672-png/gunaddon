@@ -131,7 +131,6 @@
               "arsenal:whisper",
               "arsenal:falcon",
               "arsenal:railspike",
-              "arsenal:albatross",
               "arsenal:stillwater",
               "arsenal:behemoth",
               "arsenal:wraithmark",
@@ -189,10 +188,11 @@
           },
           {
             "group_identifier": {
-              "icon": "arsenal:thumper",
+              "icon": "arsenal:albatross",
               "name": "arsenal:itemGroup.name.launcher"
             },
             "items": [
+              "arsenal:albatross",
               "arsenal:thumper",
               "arsenal:hailstorm",
               "arsenal:kraken",
@@ -357,6 +357,7 @@
               "arsenal:molotov",
               "arsenal:sticky_bomb",
               "arsenal:c4",
+              "arsenal:tactical_nuke",
               "arsenal:landmine",
               "arsenal:grenade_gas",
               "arsenal:grenade_emp",

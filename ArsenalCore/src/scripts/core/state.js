@@ -110,6 +110,7 @@
  * @property {boolean} variableHigh 可変倍率スコープが高倍率側
  * @property {boolean} cantedOn キャンテッドアイアンに持ち替え中
  * @property {number} assistTick
+ * @property {string|null} assistTarget エイムアシストが追っている相手
  * @property {boolean} autoFiring 自動射撃で押している
  * @property {number} streak 連続キル
  * @property {number} streakPts PvE のストリークポイント
@@ -179,7 +180,7 @@ function create(id) {
     grappleUntil: 0, grapplePoint: null, statusMsgUntil: 0, statusMsg: null,
     loopSoundTick: -99, empUntil: 0, mortarTarget: null, sup: 0, supTick: 0, dmgDir: null,
     meleeCd: 0, meleeStart: -1, meleeId: null, lastButt: -99, variableHigh: false, cantedOn: false,
-    assistTick: 0, autoFiring: false, streak: 0, streakPts: 0, hud2Last: "", hud2Tick: -99, hud2Seq: 0, hud2Live: "", hud2Vals: null, fpoffAnim: "",
+    assistTick: 0, assistTarget: null, autoFiring: false, streak: 0, streakPts: 0, hud2Last: "", hud2Tick: -99, hud2Seq: 0, hud2Live: "", hud2Vals: null, fpoffAnim: "",
     nvgOn: true, nvgTick: 0, indoor: false, indoorTick: -99, rangeDist: -1, droneId: null, gunshipUntil: 0, gunshipShot: 0,
     jumpHeld: false, jumpToggle: false, vehShot: 0, ridingId: null, calib: 0, lastHurtTick: -99, medUntil: 0, bleedUntil: 0,
     hintMask: 0, lastWeaponXp: 0, magHits: 0, shieldHp: 0, look: 0, nvgActive: false, statusShownAt: -1,

@@ -18,12 +18,12 @@
         "tags": [
           "arsenal:firearm",
           "arsenal:w_albatross",
-          "arsenal:cat_sniper"
+          "arsenal:cat_launcher"
         ]
       },
-      "minecraft:rarity": "rare",
+      "minecraft:rarity": "epic",
       "minecraft:durability": {
-        "max_durability": 900,
+        "max_durability": 260,
         "damage_chance": {
           "min": 0,
           "max": 0

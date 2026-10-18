@@ -3,7 +3,7 @@
  * HUD 2.0：JSON UI（RP の ui/hud_screen.json）へのデータ受け渡し
  *
  * タイトルの文字列 = "AC2" + 1 文字ごとの札（".a12" ＝ 弾数の 1 桁目が 2）の並び + "." + 目印 "§a§r§s§n" + "§" + スコープ表示の番号
- * サブタイトルの文字列 = "AC2L" + 毎 tick 変わる値（照準の広がり・方位）の札 + "." + 目印（data/hud.js の live）
+ * サブタイトルの文字列 = "AC2L" + 照準の広がりの札 + "." + "~" + 方位 3 桁 + 目印（data/hud.js の live・liveRaw）
  *   ・フィールドのキーと長さは data/hud.js（HUD2）。JSON UI 側は札を含むかだけを見る（文字列の * 演算は使わない）
  *   ・目印を含むので、バニラのタイトル枠は表示されない（1.0.2 と同じ仕組み）
  *   ・送信は変化したときと、10 tick ごと（タイトルの表示時間より短い間隔）
@@ -61,11 +61,25 @@ export function encodeHud2(values) {
 export function encodeLive(values) {
   let out = H.liveHeader;
   for (const name of H.live) {
+    if (name === H.liveRaw) continue;
     const f = L.fields[name];
+    const ok = H.liveChars[name];
     const s = fit(name, values[name] ?? (f.len === 1 ? "0" : ""));
-    for (let i = 0; i < s.length; i++) out += H.sep + f.key + i + (s[i] === " " ? H.blank : s[i]);
+    // JSON UI は札を引き算で取り除くので、決まった文字だけを送る（ほかの文字は先頭の文字に置き換える）
+    for (let i = 0; i < s.length; i++) out += H.sep + f.key + i + (ok.includes(s[i]) ? s[i] : ok[0]);
   }
-  return out + H.sep;
+  // 方位は札にせず、印 + そのままの 3 桁（JSON UI が画像のテクスチャ名に使う）
+  const raw = String(values[H.liveRaw] ?? "---");
+  return out + H.sep + H.rawMark + (/^\d{3}$/.test(raw) ? raw : "---");
+}
+
+/**
+ * サブタイトルの方位（テスト用）
+ * @param {string} live
+ */
+export function liveHeading(live) {
+  const i = live.lastIndexOf(H.rawMark);
+  return i < 0 ? null : live.slice(i + 1, i + 4);
 }
 
 /**

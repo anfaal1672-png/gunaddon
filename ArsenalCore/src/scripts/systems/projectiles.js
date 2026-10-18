@@ -18,6 +18,7 @@ import { add, sub, mul, len, norm, dist, dot, faceNormal, rotFromDir, clamp, isL
 import { safe } from "../util/log.js";
 import { isSolidBlock, startSearch, cancelSearch, segOk, invalidateCell } from "./pathfind.js";
 import { addSingularity, addStasis, castNet, tranquilize, pin } from "./fields.js";
+import { detonateNuke, nukeCountdown, nukeSpec } from "./nuke.js";
 
 /** 風（ワールド全体でゆっくり変わる。ブロック/tick²） */
 const wind = { x: 0, z: 0, tx: 0, tz: 0 };
@@ -237,6 +238,18 @@ export function placeMine(player, loc) {
   playNear(player.dimension, loc, "arsenal.fx.mine_arm", { range: 12, volume: 0.8 });
 }
 
+/**
+ * 戦術核を置く（地面の上。15 秒後に爆発）
+ * @param {Player} player @param {import("../util/math.js").Vec3} loc
+ */
+export function placeNuke(player, loc) {
+  const t = nukeSpec();
+  const pr = addProj({ type: "throw", kind: "nuke", dim: player.dimension, pos: loc, vel: { x: 0, y: 0, z: 0 }, ownerId: player.id, maxAge: t.fuse + 40, fuse: t.fuse, data: { t, tid: "tactical_nuke" } }, true);
+  pr.stuck = { entityId: null, offset: null };
+  syncVisual(pr);
+  return pr;
+}
+
 /** 起爆装置 @param {Player} player */
 export function detonateC4(player) {
   let n = 0;
@@ -372,6 +385,11 @@ function detonate(p) {
   const t = p.data.t;
   const kind = t ? t.kind : p.type;
   const loc = p.pos;
+  if (kind === "nuke" || p.data.nuke) {
+    removeProj(p);
+    detonateNuke(p.dim, loc, p.ownerId, p.data.tid ?? "tactical_nuke");
+    return;
+  }
   if (kind === "smoke") {
     const v = new MolangVariableMap();
     v.setFloat("variable.duration", t.duration / 20);
@@ -531,6 +549,8 @@ function tickOne(p) {
     if (p.type === "throw" && p.data.t.kind !== "c4" && p.data.t.kind !== "sticky" && p.data.t.kind !== "knife") detonate(p);
     else if (p.type === "rocket" || p.type === "seeker" || p.type === "pathfinder" || p.type === "mortar") detonate(p);
     else if (p.type === "spec" && p.data.mode === "clustershell") clusterBurst(p);
+    else if (p.type === "ballistic" || p.type === "cruise") detonate(p);
+    else if (p.type === "guided") guidedEnd(p, true);
     else {
       if (p.type === "knife") dropKnife(p, p.pos);
       removeProj(p);
@@ -553,6 +573,9 @@ function tickOne(p) {
     case "mortar": return tickMortar(p);
     case "knife": return tickKnife(p);
     case "spec": return tickSpec(p);
+    case "ballistic": return tickBallistic(p);
+    case "cruise": return tickCruise(p);
+    case "guided": return tickGuided(p);
   }
 }
 
@@ -569,7 +592,7 @@ function tickBullet(p) {
   const L = len(p.vel);
   const dir = mul(p.vel, 1 / L);
   const r = traceHitscan(shooter, from, dir, st, { maxRange: L, pen: p.data.pen, hitSet: p.hitSet, distOffset: p.traveled, mulDmg: p.data.mulDmg, silent: !!p.data.silent });
-  if (p.data.tracer !== false) drawTracer(shooter, p.data.first ? p.data.muzzle : from, r.end, st, true);
+  if (p.data.tracer !== false) drawTracer(shooter, p.data.first ? p.data.muzzle : from, r.end, st, true, p.id);
   if (p.data.first && p.data.whizz !== false) whizzBy(shooter, from, add(from, mul(dir, Math.min(200, st.range1))), isSupersonic(st));
   if (st.explosive && (r.stopped || r.hitEntity)) miniBlast(shooter, r.end, 1.4, 3.0, st.id);
   p.data.first = false;
@@ -652,7 +675,7 @@ function tickGl40(p) {
     p.traveled += len(p.vel);
     p.pos = add(p.pos, p.vel);
   }
-  emit(p.dim, "arsenal:shell_trail", p.pos, undefined, { range: 96 });
+  if (p.age % 2 === 0) emit(p.dim, "arsenal:shell_trail", p.pos, undefined, { range: 96, minQ: 1 });
   syncVisual(p);
 }
 
@@ -1172,6 +1195,165 @@ function tickSpec(p) {
 }
 
 // ---------------------------------------------------------------------------
+//  2.6：ミサイル（弾道ミサイル・巡航ミサイル・誘導ミサイル）
+// ---------------------------------------------------------------------------
+
+/**
+ * 弾道ミサイル：目標の真上の高いところから落ちてくる（核ミサイルの弾頭）
+ * @param {import("@minecraft/server").Dimension} dim @param {import("../util/math.js").Vec3} target @param {string} ownerId
+ * @param {{height?:number, ticks?:number, power?:number, nuke?:boolean, weaponId?:string}} [o]
+ */
+export function launchBallistic(dim, target, ownerId, o = {}) {
+  const h = o.height ?? 120;
+  const ticks = o.ticks ?? 60;
+  // 真上から少し斜めに落とす（見上げたときに筋が見える）
+  const from = { x: target.x + h * 0.15, y: Math.min(dim.heightRange.max - 2, target.y + h), z: target.z };
+  const vel = mul(sub(target, from), 1 / ticks);
+  return addProj({ type: "ballistic", kind: "missile", dim, pos: from, vel, ownerId, maxAge: ticks + 40, data: { power: o.power ?? 4, nuke: !!o.nuke, weaponId: o.weaponId ?? "missile", tid: o.weaponId } }, true);
+}
+
+/** @param {Proj} p */
+function tickBallistic(p) {
+  const h = sweep(p, p.pos, p.vel);
+  // 読み込まれていない上空からでも落ちてくる（レイが撃てないときはそのまま進める）
+  if (h.kind === "void") {
+    p.pos = add(p.pos, p.vel);
+    syncVisual(p);
+    return;
+  }
+  if (h.kind !== "none") {
+    p.pos = h.kind === "block" ? add(h.point, mul(h.normal, 0.5)) : h.point;
+    return detonate(p);
+  }
+  p.pos = add(p.pos, p.vel);
+  if (p.age % 2 === 0 && isLoaded(p.dim, p.pos, system.currentTick)) emit(p.dim, "arsenal:rocket_trail", p.pos, undefined, { range: 192 });
+  if (p.age % 10 === 0) playNear(p.dim, p.pos, "arsenal.world.jet", { range: 160, pitch: 1.4, volume: 0.6 });
+  syncVisual(p);
+}
+
+/**
+ * 巡航ミサイル：上昇し、目標の上空まで巡航高度で飛び、目標の手前で急降下する
+ * @param {import("@minecraft/server").Entity} shooter @param {import("../util/math.js").Vec3} muzzle @param {import("../util/math.js").Vec3} dir @param {any} st
+ */
+export function fireCruise(shooter, muzzle, dir, st) {
+  const pr = st.projectile ?? {};
+  const from = launchPoint(shooter, muzzle);
+  // 目標：目の視線が当たる点（なければ射程の端）
+  const eye = shooter.getHeadLocation();
+  const reach = loadedReach(shooter.dimension, eye, dir, st.range1, system.currentTick);
+  const bh = reach > 1 ? safe("cruise.aim", () => shooter.dimension.getBlockFromRay(eye, dir, { maxDistance: reach, includeLiquidBlocks: true, includePassableBlocks: false })) : undefined;
+  const target = bh ? hitPoint(bh) : add(eye, mul(dir, Math.max(8, reach)));
+  const cruiseY = Math.max(from.y, target.y) + (pr.alt ?? 22);
+  const up = norm({ x: dir.x * 0.3, y: 1, z: dir.z * 0.3 });
+  addProj({
+    type: "cruise", kind: "missile", dim: shooter.dimension, pos: from, vel: mul(up, pr.speed ?? 0.8), ownerId: shooter.id,
+    maxAge: Math.ceil((st.range1 * 1.6) / (pr.max ?? 2.4)) + 80,
+    data: { st, target, cruiseY, phase: 0, accel: pr.accel ?? 0.06, max: pr.max ?? 2.4, power: pr.power ?? 4.8, weaponId: st.id },
+  }, true);
+  emit(shooter.dimension, "arsenal:target_marker", add(target, { x: 0, y: 0.2, z: 0 }), undefined, { range: 96 });
+}
+
+/** @param {Proj} p */
+function tickCruise(p) {
+  const d = p.data;
+  const sp = Math.min(d.max, len(p.vel) + d.accel);
+  let dir = norm(p.vel);
+  const hd = Math.hypot(d.target.x - p.pos.x, d.target.z - p.pos.z);
+  // 0：上昇（巡航高度へ）／1：巡航（高度を保って目標の上空へ）／2：急降下
+  if (d.phase === 0 && p.pos.y >= d.cruiseY - 1) d.phase = 1;
+  if (d.phase < 2 && hd < Math.max(6, (p.pos.y - d.target.y) * 0.9)) d.phase = 2;
+  const aim = d.phase === 2 ? d.target : { x: d.target.x, y: d.cruiseY, z: d.target.z };
+  const want = norm(sub(aim, p.pos));
+  const turn = d.phase === 2 ? 0.35 : d.phase === 1 ? 0.12 : 0.08;
+  dir = norm(add(mul(dir, 1 - turn), mul(want, turn)));
+  p.vel = mul(dir, sp);
+  const h = sweep(p, p.pos, p.vel);
+  if (h.kind === "void") return removeProj(p);
+  if (h.kind !== "none") {
+    if (h.kind === "entity") rocketDirectHit(p, h.entity);
+    p.pos = add(h.point, mul(dir, -0.3));
+    return detonate(p);
+  }
+  p.pos = add(p.pos, p.vel);
+  emit(p.dim, "arsenal:rocket_trail", add(p.pos, mul(dir, -0.4)), undefined, { range: 128 });
+  if (p.age % 10 === 0) emit(p.dim, "arsenal:target_marker", add(d.target, { x: 0, y: 0.2, z: 0 }), undefined, { range: 96, minQ: 1 });
+  syncVisual(p);
+}
+
+/** 誘導ミサイルを操縦しているプレイヤー → 弾の ID @type {Map<string, number>} */
+const guidedBy = new Map();
+
+/**
+ * 誘導ミサイル（キルストリーク）：上空から落ちるミサイルを、プレイヤーが向いた方へ曲げて操縦する
+ * @param {Player} player @param {{height:number, power:number, seconds:number}} d
+ */
+export function launchGuided(player, d) {
+  if (guidedBy.has(player.id)) return false;
+  const view = player.getViewDirection();
+  const flat = norm({ x: view.x, y: 0, z: view.z });
+  const from = add(player.location, { x: -flat.x * 20, y: d.height, z: -flat.z * 20 });
+  if (!isLoaded(player.dimension, from, system.currentTick)) return false;
+  const dir = norm({ x: flat.x, y: -0.7, z: flat.z });
+  // st は直撃のダメージ（rocketDirectHit が読む）
+  const st = { id: "ks_missile_strike", dmg: 16, armorBonus: 1.5, cat: "launcher" };
+  const p = addProj({ type: "guided", kind: "missile", dim: player.dimension, pos: from, vel: mul(dir, 1.0), ownerId: player.id, maxAge: d.seconds * 20, data: { st, power: d.power, weaponId: st.id } }, true);
+  guidedBy.set(player.id, p.id);
+  safe("guided.guard", () => {
+    player.addEffect("resistance", d.seconds * 20 + 20, { amplifier: 3, showParticles: false });
+    player.addEffect("slowness", d.seconds * 20 + 20, { amplifier: 5, showParticles: false });
+  });
+  safe("guided.cam", () => player.camera.setCamera("minecraft:free", { location: add(from, mul(dir, -3)), rotation: player.getRotation() }));
+  return true;
+}
+
+/** 操縦中か @param {string} playerId */
+export function isGuiding(playerId) {
+  return guidedBy.has(playerId);
+}
+
+/** @param {Proj} p @param {boolean} boom */
+function guidedEnd(p, boom) {
+  guidedBy.delete(p.ownerId);
+  const pl = owner(p.ownerId);
+  if (pl instanceof Player) {
+    safe("guided.clear", () => pl.camera.clear());
+    safe("guided.fx", () => {
+      pl.removeEffect("slowness");
+      pl.removeEffect("resistance");
+    });
+  }
+  if (boom) detonate(p);
+  else removeProj(p);
+}
+
+/** @param {Proj} p */
+function tickGuided(p) {
+  const pl = owner(p.ownerId);
+  if (!(pl instanceof Player)) return guidedEnd(p, true);
+  // スニークで空中爆発
+  if (pl.isSneaking && p.age > 10) return guidedEnd(p, true);
+  const sp = Math.min(3.2, len(p.vel) + 0.06);
+  const want = pl.getViewDirection();
+  let dir = norm(p.vel);
+  dir = norm(add(mul(dir, 0.8), mul(want, 0.2)));
+  p.vel = mul(dir, sp);
+  const h = sweep(p, p.pos, p.vel);
+  if (h.kind === "void") {
+    p.pos = add(p.pos, p.vel);
+  } else if (h.kind !== "none") {
+    if (h.kind === "entity") rocketDirectHit(p, h.entity);
+    p.pos = add(h.point, mul(dir, -0.3));
+    return guidedEnd(p, true);
+  } else {
+    p.pos = add(p.pos, p.vel);
+  }
+  if (isLoaded(p.dim, p.pos, system.currentTick)) emit(p.dim, "arsenal:rocket_trail", add(p.pos, mul(dir, -0.4)), undefined, { range: 160 });
+  // カメラは弾の少し後ろから、プレイヤーの向きで見る
+  safe("guided.cam2", () => pl.camera.setCamera("minecraft:free", { location: add(p.pos, mul(dir, -3)), rotation: pl.getRotation(), easeOptions: { easeTime: 0.05 } }));
+  syncVisual(p);
+}
+
+// ---------------------------------------------------------------------------
 //  2.0：投げナイフ・近接武器の投擲・スプリングナイフの刃
 // ---------------------------------------------------------------------------
 
@@ -1397,6 +1579,7 @@ function tickThrow(p, now) {
     }
     return tickKnife(p);
   }
+  if (t.kind === "nuke") nukeCountdown(p);
   if (p.fuse > 0) {
     p.fuse--;
     if (t.kind === "c4" || t.kind === "sticky") {
@@ -1600,7 +1783,7 @@ export function sweepOrphans() {
  */
 export function previewTrajectory(player, tid) {
   const t = /** @type {any} */ (DATA.THROWABLES)[tid];
-  if (!t || t.kind === "mine") return;
+  if (!t || t.kind === "mine" || t.kind === "nuke") return;
   const eye = player.getHeadLocation();
   const dir = player.getViewDirection();
   const aim = norm(add(dir, { x: 0, y: 0.12, z: 0 }));

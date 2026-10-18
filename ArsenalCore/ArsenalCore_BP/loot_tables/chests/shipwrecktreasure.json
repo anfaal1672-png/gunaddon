@@ -1066,20 +1066,6 @@
         },
         {
           "type": "item",
-          "name": "arsenal:albatross",
-          "weight": 1,
-          "functions": [
-            {
-              "function": "set_damage",
-              "damage": {
-                "min": 0.35,
-                "max": 0.9
-              }
-            }
-          ]
-        },
-        {
-          "type": "item",
           "name": "arsenal:wraithmark",
           "weight": 1,
           "functions": [

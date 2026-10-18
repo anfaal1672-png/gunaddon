@@ -42,6 +42,17 @@ export const LAUNCHER = {
     slots: [],
     model: { type: "tube", body: 27, h: 6, finish: "arctic", accent: "tier", seeker: true },
   },
+  // ---- 2.6 で追加 ----
+  albatross: {
+    cat: "launcher", tier: "legendary", name: { ja: "アルバトロス", en: "Albatross" },
+    desc: { ja: "巡航ミサイル。撃つと上昇し、狙った地点の上空まで飛んでから急降下する。射程 250", en: "Cruise missile: climbs, flies to the marked spot and dives on it. 250-block range" },
+    ammo: "rocket", mag: 1, rpm: 20, modes: ["semi"], dmg: 14.0, head: 1.0, range: [250, 300], falloff: 1.0,
+    spread: R(1.6, 0.2, 1.2, 0, 0, 0.4), recoil: { v: 3.6, h: 0.6, shake: 0.14 },
+    reload: { tac: 100, empty: 110 }, ads: 7, move: 0.82, pen: 0, sound: "rocket", pitch: 0.78, optic: "scope4",
+    fire: "cruise", projectile: { speed: 0.8, accel: 0.06, max: 2.4, power: 4.8, alt: 22 },
+    slots: [],
+    model: { type: "tube", body: 30, h: 7, finish: "od", accent: "tier", seeker: true },
+  },
   // ---- 2.0 で追加 ----
   stormcaller: {
     cat: "launcher", tier: "legendary", name: { ja: "ストームコーラー", en: "Stormcaller" },

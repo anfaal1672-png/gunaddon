@@ -202,13 +202,13 @@ export function setSuppressHook(fn) {
 
 /**
  * 曳光弾の描画
- * @param {import("@minecraft/server").Entity} shooter @param {import("../util/math.js").Vec3} from @param {import("../util/math.js").Vec3} to @param {any} st @param {boolean} force
+ * @param {import("@minecraft/server").Entity} shooter @param {import("../util/math.js").Vec3} from @param {import("../util/math.js").Vec3} to @param {any} st @param {boolean} force @param {number} [key] 同じ弾の続きの番号
  */
-export function drawTracer(shooter, from, to, st, force) {
+export function drawTracer(shooter, from, to, st, force, key) {
   if (!force && !st.tracer) return;
   const color = st.tracerAlways ? { r: 1.0, g: 0.3, b: 0.18 } : st.ammoFamily === "cell" ? { r: 0.35, g: 0.9, b: 1.0 } : { r: 1.0, g: 0.78, b: 0.35 };
   const heavy = st.cat === "sniper" || st.cat === "lmg" || st.cat === "battle";
-  tracer(shooter.dimension, from, to, color, st.tracerAlways ? 0.085 : heavy ? 0.065 : 0.05);
+  tracer(shooter.dimension, from, to, color, st.tracerAlways ? 0.085 : heavy ? 0.065 : 0.05, undefined, key);
 }
 
 /**

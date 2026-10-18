@@ -108,7 +108,7 @@ function hpOf(e) {
 // ---------------------------------------------------------------------------
 //  武器
 // ---------------------------------------------------------------------------
-const INDIRECT = new Set(["gl40", "rocket", "seeker", "pathfinder", "flare", "grapple", "mortar", "gravity", "needle", "blink", "orbital", "stickybomb", "singularity"]);
+const INDIRECT = new Set(["gl40", "rocket", "seeker", "pathfinder", "flare", "grapple", "mortar", "gravity", "needle", "blink", "orbital", "stickybomb", "singularity", "cruise"]);
 async function weapons(from, to) {
   const p = sim();
   tough(p);
@@ -197,6 +197,7 @@ async function throwables() {
   let ok = 0;
   for (const tid of Object.keys(DATA.THROWABLES)) {
     const t = DATA.THROWABLES[tid];
+    if (t.kind === "nuke") continue; // 投げずに置く。nukes の段階で確かめる
     clearMobs();
     clearInv(p);
     p.teleport({ x: 0.5, y: Y, z: 0.5 });
@@ -830,7 +831,156 @@ async function facetest() {
   }
 }
 
-const STAGES = { diag, weapons, melee, throw: throwables, gear, enemies, bosses, structures, streaks, modes, misc, specials, facetest };
+// ---------------------------------------------------------------------------
+//  2.6 エイムアシスト・ミサイル・核（試験場の天井を抜いて空を開け、ブロックは壊さない設定で）
+// ---------------------------------------------------------------------------
+async function nukes() {
+  const p = sim();
+  tough(p);
+  const origin = { x: 0.5, y: Y, z: 0.5 };
+  setWorld({ explosionGrief: "off", nukes: true, killstreaks: true });
+  // 試験場は山の中なので、射線の上の空を開ける（巡航ミサイルは上昇してから飛ぶ）
+  dim().fillBlocks(new BlockVolume({ x: -6, y: Y + 18, z: -20 }, { x: 6, y: Y + 46, z: 22 }), "minecraft:air");
+  dim().fillBlocks(new BlockVolume({ x: -12, y: Y + 15, z: -20 }, { x: 44, y: Y + 17, z: 20 }), "minecraft:air");
+  let ok = 0, n = 0;
+  const expect = (what, cond, why) => {
+    n++;
+    if (cond) ok++;
+    else fail("nukes", what, why);
+  };
+  const give = async (id, ammo) => {
+    clearInv(p);
+    inv(p).setItem(0, new ItemStack(`arsenal:${id}`, 1));
+    if (ammo) inv(p).setItem(1, new ItemStack(ammo, 16));
+    p.selectedSlotIndex = 0;
+    await wait(16);
+  };
+  const free = (x, z, hp = 20) => {
+    const e = dim().spawnEntity("minecraft:zombie", { x, y: Y, z });
+    e.addEffect("slowness", 20000, { amplifier: 255, showParticles: false });
+    e.addEffect("fire_resistance", 20000, { amplifier: 0, showParticles: false }); // 昼の日光で燃えて減らないように
+    e.nameTag = "qa_nuke"; // 名前付きの mob は離れても消えない
+    try { e.getComponent("minecraft:health").setCurrentValue(hp); } catch { /* */ }
+    return e;
+  };
+  // 自分の爆発で倒れたら起こす（倒れたままだと向きが変わらず、狙いが足元になる）
+  const revive = async () => {
+    if ((p.getComponent("minecraft:health")?.currentValue ?? 0) <= 0) {
+      p.respawn();
+      await wait(10);
+    }
+    p.getComponent("minecraft:health")?.resetToMaxValue();
+  };
+  // エイムアシスト：覗くと照準の外 5° の敵へ寄る
+  clearMobs();
+  p.teleport(origin);
+  setPrefs(p, { aimAssist: "light" });
+  await give(Object.keys(DATA.WEAPONS).find((w) => DATA.WEAPONS[w].cat === "assault"), ammoItemId("medium", "std"));
+  const za = target(1.5, 12.5);
+  p.lookAtLocation({ x: 0.5, y: Y + 1.6, z: 30 });
+  await wait(4);
+  const y0 = p.getRotation().y;
+  p.isSneaking = true;
+  await wait(30);
+  const y1 = p.getRotation().y;
+  p.isSneaking = false;
+  const want = (Math.atan2(-(za.location.x - 0.5), za.location.z - 0.5) * 180) / Math.PI;
+  expect("aim_assist", Math.abs(y1 - want) < 1.5 && Math.abs(y0 - want) > 3, `yaw ${y0.toFixed(2)} → ${y1.toFixed(2)} (want ${want.toFixed(2)})`);
+  setPrefs(p, { aimAssist: "off" });
+  await wait(6);
+
+  // 巡航ミサイル：上昇して 36 ブロック先の地面へ
+  clearMobs();
+  p.teleport(origin);
+  await give("albatross", ammoItemId("rocket", "std"));
+  const zc = free(0.5, 18.5);
+  p.teleport({ x: 0.5, y: Y, z: -18.5 });
+  await wait(4);
+  p.lookAtLocation({ x: 0.5, y: Y, z: 18.5 });
+  p.isSneaking = true;
+  await wait(14);
+  const hc = hpOf(zc);
+  let maxY = 0;
+  p.useItemInSlot(0);
+  await wait(3);
+  p.stopUsingItem();
+  for (let i = 0; i < 160; i++) {
+    for (const e of dim().getEntities({ type: "arsenal:projectile" })) maxY = Math.max(maxY, e.location.y);
+    await wait(1);
+    if (!zc.isValid || hpOf(zc) < hc) break;
+  }
+  p.isSneaking = false;
+  expect("cruise", maxY > Y + 14 && (!zc.isValid || hpOf(zc) < hc), `maxY=${(maxY - Y).toFixed(1)} hp ${hc}→${hpOf(zc)}`);
+
+  // 誘導ミサイル：真下を向いて操縦し、足元の敵に当てる
+  clearMobs();
+  p.teleport(origin);
+  clearInv(p);
+  addStreakPoints(p, 9999);
+  const zg = free(0.5, 6.5);
+  p.lookAtLocation({ x: 0.5, y: Y, z: 6.5 });
+  await wait(4);
+  const hg = hpOf(zg);
+  let used = false;
+  try { used = useStreak(p, "missile_strike"); } catch (err) { fail("nukes", "missile_strike", `threw ${err}`); }
+  for (let i = 0; i < 260; i++) {
+    // 弾の位置から敵の方を見る（操縦）
+    const m = dim().getEntities({ type: "arsenal:projectile" })[0];
+    if (m && zg.isValid) {
+      const c = zg.getAABB().center;
+      const dx = c.x - m.location.x, dy = c.y - m.location.y, dz = c.z - m.location.z;
+      p.lookAtLocation({ x: p.getHeadLocation().x + dx, y: p.getHeadLocation().y + dy, z: p.getHeadLocation().z + dz });
+    }
+    await wait(1);
+    if (!zg.isValid || hpOf(zg) < hg) break;
+  }
+  expect("missile_strike", used && (!zg.isValid || hpOf(zg) < hg), `used=${used} hp ${hg}→${hpOf(zg)}`);
+  await wait(20);
+
+  // 核ミサイル：10 秒後に落ちて、近くの敵を倒す
+  log(`nukes: owner hp after guided missile ${p.getComponent("minecraft:health")?.currentValue}`);
+  await revive();
+  clearMobs();
+  // 闘技場は山の中（空がない）。斜めに落ちてくる経路の岩を抜いておく
+  try {
+    dim().fillBlocks(new BlockVolume({ x: -3, y: Y + 47, z: 15 }, { x: 22, y: Math.min(dim().heightRange.max - 1, Y + 124), z: 20 }), "minecraft:air");
+  } catch (err) { log(`nukes: sky fill failed ${err}`); }
+  p.teleport({ x: 0.5, y: Y, z: -14.5 });
+  addStreakPoints(p, 9999);
+  const zn = free(0.5, 17.5);
+  p.lookAtLocation({ x: 0.5, y: Y - 1, z: 17.5 });
+  await wait(20); // 誘導ミサイルの操縦で真下を向いていたので、向き直るまで待つ
+  let usedN = false;
+  try { usedN = useStreak(p, "nuke"); } catch (err) { fail("nukes", "nuke", `threw ${err}`); }
+  const t0 = Date.now();
+  await wait(230);
+  log(`nukes: owner hp after nuke missile ${p.getComponent("minecraft:health")?.currentValue}`);
+  expect("nuke_missile", usedN && !zn.isValid, `used=${usedN} hp=${hpOf(zn)} secs=${((Date.now() - t0) / 1000).toFixed(1)}`);
+  await wait(40);
+
+  // 置く戦術核：15 秒後に爆発
+  await revive();
+  clearMobs();
+  p.teleport({ x: 0.5, y: Y, z: -14.5 });
+  await give("tactical_nuke");
+  const zt = free(0.5, 10.5);
+  const zfar = free(36.5, -11.5, 20); // 核から 36 ブロック（爆風 34 の外、吹き飛ばし 52 の内。闘技場の中）
+  p.lookAtLocation({ x: 0.5, y: Y - 0.5, z: -11.5 });
+  const nb = dim().getBlock({ x: 0, y: Y - 1, z: -12 });
+  log(`nukes: place on ${nb?.typeId} above=${nb?.above()?.typeId}`);
+  p.useItemInSlotOnBlock(0, { x: 0, y: Y - 1, z: -12 }, Direction.Up, { x: 0.5, y: 1, z: 0.5 });
+  await wait(6);
+  const placed = (inv(p).getItem(0)?.amount ?? 0) === 0;
+  if (!placed) log(`nukes: not placed item=${inv(p).getItem(0)?.typeId} proj=${dim().getEntities({ type: "arsenal:projectile" }).length}`);
+  p.teleport({ x: 40.5, y: Y, z: 15.5 });
+  await wait(320);
+  expect("tactical_nuke", placed && !zt.isValid && zfar.isValid, `placed=${placed} near=${zt.isValid} far=${zfar.isValid}`);
+  log(`nukes: ok=${ok}/${n}`);
+  setWorld({ explosionGrief: "gamerule" });
+  await wait(1300); // 降下物が消えるまで（次の段階に残さない）
+}
+
+const STAGES = { diag, weapons, melee, throw: throwables, gear, enemies, bosses, structures, streaks, modes, misc, specials, facetest, nukes };
 
 system.afterEvents.scriptEventReceive.subscribe((ev) => {
   if (ev.id !== "dev:full") return;

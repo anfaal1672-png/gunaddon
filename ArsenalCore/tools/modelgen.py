@@ -960,7 +960,9 @@ def weapon_geometry(wid, g):
 # ---------------------------------------------------------------------------
 PROJECTILE_KINDS = ["frag", "impact", "smoke", "flash", "molotov", "sticky", "c4", "mine", "gl40", "rocket", "flare", "hook", "seeker",
                     # 2.0 で追加（番号は既存の後ろに足すだけ。既存の番号は変えない）
-                    "knife", "gas", "emp", "cluster", "decoy", "snap", "mortar", "plasma", "needle", "bomblet", "blade", "missile"]
+                    "knife", "gas", "emp", "cluster", "decoy", "snap", "mortar", "plasma", "needle", "bomblet", "blade", "missile",
+                    # 2.6
+                    "nuke"]
 # 飛ぶ向きに合わせて回す種類（それ以外の投擲物はくるくる回る）
 PROJECTILE_ORIENT = ["gl40", "rocket", "flare", "hook", "seeker", "knife", "mortar", "plasma", "needle", "blade", "missile"]
 PROJECTILE_SPIN = ["frag", "impact", "smoke", "flash", "molotov", "sticky", "gas", "emp", "cluster", "decoy", "snap", "bomblet"]
@@ -1062,6 +1064,17 @@ def projectile_geometry():
             _pbox(cubes, -2.0, -0.2, 3.0, 4.0, 0.4, 1.5, "main_dark", k(2))
             _pbox(cubes, -0.2, -2.0, 3.0, 0.4, 4.0, 1.5, "main_dark", k(3))
             _pbox(cubes, -0.8, -0.8, 4.5, 1.6, 1.6, 0.5, "glow", k(4))
+        elif kind == "nuke":
+            # 戦術核：立てた太い円筒（段で丸みを出す）に黄色の帯と、上の起爆装置
+            _pbox(cubes, -3.5, 0, -2.5, 7, 9, 5, "main", k(0))
+            _pbox(cubes, -2.5, 0, -3.5, 5, 9, 7, "main", k(1))
+            _pbox(cubes, -3.6, 3, -2.6, 7.2, 1.4, 5.2, "warning", k(2))
+            _pbox(cubes, -2.6, 3, -3.6, 5.2, 1.4, 7.2, "warning", k(3))
+            _pbox(cubes, -2.0, 9, -2.0, 4, 2, 4, "main_dark", k(4))
+            _pbox(cubes, -1.2, 11, -1.2, 2.4, 1.2, 2.4, "metal_dark", k(5))
+            _pbox(cubes, -0.4, 12.2, -0.4, 0.8, 0.8, 0.8, "glow", k(6))
+            _pbox(cubes, -4.0, 0, -0.5, 8, 1.2, 1, "metal_dark", k(7))
+            _pbox(cubes, -0.5, 0, -4.0, 1, 1.2, 8, "metal_dark", k(8))
         geos.append({
             "description": {
                 "identifier": f"geometry.arsenal.proj_{kind}",

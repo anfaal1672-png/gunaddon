@@ -186,7 +186,7 @@ for (const wid of Object.keys(D.WEAPONS)) {
 const notFired = perWeapon.filter((x) => !x.shot).map((x) => x.wid);
 check(`全武器が発射できる（${fired}/${NW}）`, fired === NW, notFired.join(","));
 // 直接は当たらないもの（曲射・誘導・時間差・移動）。ブリンク・衛星砲・粘着弾は suite2 で別に確かめる
-const INDIRECT = new Set(["gl40", "rocket", "seeker", "pathfinder", "flare", "grapple", "mortar", "gravity", "needle", "blink", "orbital", "stickybomb"]);
+const INDIRECT = new Set(["gl40", "rocket", "seeker", "pathfinder", "flare", "grapple", "mortar", "gravity", "needle", "blink", "orbital", "stickybomb", "cruise"]);
 const hitless = perWeapon.filter((x) => x.hp >= 40 && !INDIRECT.has(D.WEAPONS[x.wid].fire ?? "hitscan")).map((x) => x.wid);
 check("直射武器は ADS で 8 ブロック先の標的に命中する", hitless.length === 0, hitless.join(","));
 check("爆発物系（40mm・ロケット）が起爆する", LOG.explosions.length >= 3, `(explosions=${LOG.explosions.length})`);

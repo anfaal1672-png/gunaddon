@@ -45,6 +45,8 @@ export const PROJ_KIND = {
   gl40: 8, rocket: 9, flare: 10, hook: 11, seeker: 12,
   // 2.0（番号は既存の後ろに足すだけ）
   knife: 13, gas: 14, emp: 15, cluster: 16, decoy: 17, snap: 18, mortar: 19, plasma: 20, needle: 21, bomblet: 22, blade: 23, missile: 24,
+  // 2.6
+  nuke: 25,
 };
 
 /** 武器 ID の集合 */

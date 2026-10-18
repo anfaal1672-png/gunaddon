@@ -12,6 +12,14 @@ export const THROWABLES = {
   molotov: { kind: "molotov", tier: "common", name: { ja: "火炎瓶", en: "Molotov" }, desc: { ja: "着弾地点を炎上させる", en: "Sets the impact area ablaze" }, radius: 2.6, duration: 160, speed: 1.0, cost: { "minecraft:glass_bottle": 1, "minecraft:blaze_powder": 1, "minecraft:paper": 1 }, out: 1 },
   sticky_bomb: { kind: "sticky", tier: "uncommon", name: { ja: "スティッキー爆弾", en: "Sticky Bomb" }, desc: { ja: "壁や敵に張り付き 2 秒後に爆発", en: "Sticks to anything, explodes after 2s" }, fuse: 40, power: 3.0, speed: 1.05, cost: { "minecraft:slime_ball": 1, "minecraft:gunpowder": 2, "arsenal:steel_ingot": 1 }, out: 2 },
   c4: { kind: "c4", tier: "rare", name: { ja: "C4 爆薬", en: "C4 Charge" }, desc: { ja: "投げて貼り付け、起爆装置で爆破", en: "Throw it, then use the detonator" }, power: 4.6, speed: 0.8, cost: { "minecraft:tnt": 1, "arsenal:polymer": 2, "minecraft:redstone": 2 }, out: 1 },
+  // ---- 2.6 ----
+  // 戦術核：地面に置くと 15 秒後に爆発（ワールド設定「核兵器」で禁止できる）。値は systems/nuke.js が読む
+  tactical_nuke: {
+    kind: "nuke", tier: "legendary", name: { ja: "戦術核", en: "Tactical Nuke" },
+    desc: { ja: "地面に置くと 15 秒後に核爆発。閃光・爆風・火・きのこ雲・放射性降下物（ガスマスクで防げる）", en: "Place it; 15s later a nuclear blast: flash, shockwave, fire, mushroom cloud, fallout (gas masks protect)" },
+    fuse: 300, kill: 14, blast: 34, knock: 52, flash: 160, hear: 400, lethal: 200, power: 9, ringPower: 5, ringRadius: 9, ring: 6, fallout: 26, falloutSecs: 60, burnSecs: 8,
+    cost: { "minecraft:nether_star": 1, "minecraft:tnt": 16, "arsenal:energy_core": 4, "arsenal:precision_parts": 4 }, out: 1,
+  },
   landmine: { kind: "mine", tier: "uncommon", name: { ja: "地雷", en: "Landmine" }, desc: { ja: "地面に設置。敵が踏むと爆発", en: "Place on ground. Triggers on enemies" }, power: 3.2, triggerRadius: 1.3, cost: { "arsenal:steel_ingot": 2, "minecraft:gunpowder": 2, "minecraft:stone_pressure_plate": 1 }, out: 2 },
   // ---- 2.0 で追加 ----
   grenade_gas: { kind: "gas", tier: "uncommon", name: { ja: "ガスグレネード", en: "Gas Grenade" }, desc: { ja: "12 秒間の毒ガス。ガスマスクで防げる", en: "12s toxic cloud. Gas masks block it" }, fuse: 30, duration: 240, radius: 4.5, speed: 1.1, cost: { "minecraft:iron_nugget": 4, "minecraft:spider_eye": 1, "minecraft:gunpowder": 1 }, out: 2 },

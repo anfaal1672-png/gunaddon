@@ -19,14 +19,15 @@ import { armorMove, riotShieldMove, tickNvg, forgetArmor } from "./core/armor.js
 import { migrateWorld, migratePlayer, syncLook, normalizeVariants } from "./core/migrate.js";
 import { onMeleeHit, onMeleeStartUse, onMeleeStopUse, tryBreach, buttStroke, meleeMove } from "./core/melee.js";
 import { renderWeaponHud, SCOPE_OFF } from "./ui/hud.js";
-import { renderHud2, addHud2Provider, usesHud2 } from "./ui/hud2.js";
+import { renderHud2, addHud2Provider, usesHud2, announce } from "./ui/hud2.js";
 import { openWeaponMenu, openManual, openBench, openPress, useCrate, useRepairKit, setMode } from "./ui/menus.js";
 import { toggleCalib, calibNext, calibSave, calibHud, openReport } from "./ui/codex.js";
 import { tickProjectiles, sweepOrphans } from "./systems/projectiles.js";
 import { tickFields } from "./systems/fields.js";
 import { tickPathfinding, attachPathfinding } from "./systems/pathfind.js";
 import { forgetPathLock } from "./core/pathlock.js";
-import { beginThrow, releaseThrow, tickThrowable, useDetonator, tryPlaceMine } from "./systems/throwables.js";
+import { beginThrow, releaseThrow, tickThrowable, useDetonator, tryPlaceMine, tryPlaceNuke } from "./systems/throwables.js";
+import { setNukeAnnouncer } from "./systems/nuke.js";
 import { tickDummies, attachDummyPickup } from "./systems/dummy.js";
 import { attachLoot } from "./systems/loot.js";
 import { attachBrain, tickBrain, scanForAI, spawnEnemy } from "./systems/ai/brain.js";
@@ -109,6 +110,7 @@ system.beforeEvents.startup.subscribe((ev) => {
       const face = String(e.blockFace);
       // 地雷もここで置く（2.4.1 まで playerInteractWithBlock で置いていたが、何も起きないアイテムでは発火しないことがあった）
       if (typeId === `${NS}:landmine`) system.run(() => safe("gear.mine", () => tryPlaceMine(p, block, face)));
+      else if (typeId === `${NS}:tactical_nuke`) system.run(() => safe("gear.nuke", () => tryPlaceNuke(p, block, face)));
       else system.run(() => safe("gear.deploy", () => tryDeploy(p, block, face, typeId)));
     },
     onUse(e) {
@@ -466,6 +468,7 @@ attachBosses();
 attachBleeding();
 attachDeployables();
 attachVehicles();
+setNukeAnnouncer(announce);
 attachPathfinding();
 attachStreaks();
 attachStructures();

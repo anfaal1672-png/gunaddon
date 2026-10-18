@@ -2,7 +2,7 @@
 // 基本定数・ティア・カテゴリ・素材・道具・既定設定・着弾と貫通
 
 export const NS = "arsenal";
-export const ADDON_VERSION = [2, 5, 0];
+export const ADDON_VERSION = [2, 6, 0];
 /** アイテムに書く形式のバージョン（a:v）。1.0 系のアイテムは 1 とみなして移行する */
 export const ITEM_FORMAT = 2;
 export const MIN_ENGINE = [1, 26, 50];
@@ -105,6 +105,8 @@ export const DEFAULT_WORLD_SETTINGS = {
   // ---- 2.2 ----
   magRealism: true,
   limbDamage: true,
+  // ---- 2.6 ----
+  nukes: true,
 };
 
 export const DEFAULT_PLAYER_SETTINGS = {
@@ -119,7 +121,7 @@ export const DEFAULT_PLAYER_SETTINGS = {
   aimKick: "light",
   cameraShake: true,
   fovZoom: true,
-  fxQuality: "high",
+  fxQuality: "auto",
   volume: 1.0,
   trajectory: true,
   // ---- 2.0 で追加 ----

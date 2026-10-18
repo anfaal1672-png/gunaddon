@@ -34,7 +34,8 @@
         "needle": "geometry.arsenal.proj_needle",
         "bomblet": "geometry.arsenal.proj_bomblet",
         "blade": "geometry.arsenal.proj_blade",
-        "missile": "geometry.arsenal.proj_missile"
+        "missile": "geometry.arsenal.proj_missile",
+        "nuke": "geometry.arsenal.proj_nuke"
       },
       "animations": {
         "orient": "animation.arsenal.proj.orient",
