@@ -200,32 +200,15 @@ export function setSuppressHook(fn) {
   suppressHook = fn;
 }
 
-/** 機関銃の弾帯の何発目か（撃ち手ごと。5 発に 1 発が曳光弾） @type {Map<string, number>} */
-const beltSeq = new Map();
-
 /**
- * 弾の見た目を描く（2.6.2）。曳光弾の弾薬は全弾、機関銃は 5 発に 1 発が曳光弾。ほかは普通弾の淡い筋。
- * エネルギー弾薬は光の筋。狙撃銃・機関銃・バトルライフルは弾道に空気の揺らぎを残す
- * @param {import("@minecraft/server").Entity} shooter @param {import("../util/math.js").Vec3} from @param {import("../util/math.js").Vec3} to
- * @param {any} st @param {boolean} [force] @param {number} [key] 飛んでいく弾の番号（同じ弾の続きは同じ見た目にする）
+ * 曳光弾の描画
+ * @param {import("@minecraft/server").Entity} shooter @param {import("../util/math.js").Vec3} from @param {import("../util/math.js").Vec3} to @param {any} st @param {boolean} force @param {number} [key] 同じ弾の続きの番号
  */
 export function drawTracer(shooter, from, to, st, force, key) {
   if (!force && !st.tracer) return;
-  const energy = st.ammoFamily === "cell";
+  const color = st.tracerAlways ? { r: 1.0, g: 0.3, b: 0.18 } : st.ammoFamily === "cell" ? { r: 0.35, g: 0.9, b: 1.0 } : { r: 1.0, g: 0.78, b: 0.35 };
   const heavy = st.cat === "sniper" || st.cat === "lmg" || st.cat === "battle";
-  let belt = false;
-  if (st.cat === "lmg" && !energy && !st.tracerAlways) {
-    if (key !== undefined) belt = key % 5 === 0;
-    else {
-      const n = ((beltSeq.get(shooter.id) ?? 0) + 1) % 5;
-      beltSeq.set(shooter.id, n);
-      belt = n === 1;
-    }
-  }
-  const style = energy ? "energy" : st.tracerAlways || belt ? "tracer" : "ball";
-  const color = style === "energy" ? { r: 0.35, g: 0.9, b: 1.0 } : style === "tracer" ? { r: 1.0, g: 0.28, b: 0.12 } : { r: 1.0, g: 0.93, b: 0.78 };
-  const width = style === "tracer" ? (heavy ? 0.075 : 0.06) : style === "ball" ? (heavy ? 0.03 : 0.022) : heavy ? 0.065 : 0.05;
-  tracer(shooter.dimension, from, to, color, width, undefined, key, style, heavy && !energy);
+  tracer(shooter.dimension, from, to, color, st.tracerAlways ? 0.085 : heavy ? 0.065 : 0.05, undefined, key);
 }
 
 /**

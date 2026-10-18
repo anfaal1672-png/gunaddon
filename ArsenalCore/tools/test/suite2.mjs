@@ -632,38 +632,6 @@ export async function suite2(ctx) {
   }
 
   // =====================================================================
-  console.log("2.6.2 弾の見た目");
-  // =====================================================================
-  {
-    const bal = await imp("core/ballistics.js");
-    const fx0 = settings.P(player).fxQuality;
-    settings.setPrefs(player, { fxQuality: "high" });
-    const cnt = (id) => LOG.particleIds[id] ?? 0;
-    const shot = (st, key) => {
-      const ids = ["arsenal:bullet_streak", "arsenal:tracer_round", "arsenal:tracer", "arsenal:bullet_haze"];
-      const before = Object.fromEntries(ids.map((id) => [id, cnt(id)]));
-      __tick(1); // 届け先の一覧を新しくする
-      bal.drawTracer(player, { x: player.location.x, y: player.location.y + 1.5, z: player.location.z }, { x: player.location.x, y: player.location.y + 1.5, z: player.location.z + 30 }, st, true, key);
-      return Object.fromEntries(ids.map((id) => [id.replace("arsenal:", ""), cnt(id) - before[id]]));
-    };
-    const ball = shot({ cat: "assault", ammoFamily: "medium" }, 0);
-    check("普通弾は淡い筋だけ（光る曳光ではない）", ball.bullet_streak === 1 && ball.tracer_round === 0 && ball.tracer === 0, JSON.stringify(ball));
-    const tr = shot({ cat: "assault", ammoFamily: "medium", tracerAlways: true }, 1);
-    check("曳光弾の弾薬は光る曳光弾", tr.tracer_round === 1 && tr.bullet_streak === 0, JSON.stringify(tr));
-    const cell = shot({ cat: "assault", ammoFamily: "cell" }, 0);
-    check("エネルギー弾薬は光の筋", cell.tracer === 1 && cell.bullet_streak === 0, JSON.stringify(cell));
-    let belt = 0;
-    for (let i = 0; i < 10; i++) belt += shot({ cat: "lmg", ammoFamily: "medium" }).tracer_round;
-    check("機関銃は 5 発に 1 発が曳光弾", belt === 2, `(${belt}/10)`);
-    const sn = shot({ cat: "sniper", ammoFamily: "heavy" }, 0);
-    check("狙撃銃は弾道に空気の揺らぎを残す", sn.bullet_haze === 1 && sn.bullet_streak === 1, JSON.stringify(sn));
-    settings.setPrefs(player, { fxQuality: "low" });
-    const low = shot({ cat: "sniper", ammoFamily: "heavy" }, 0);
-    check("演出品質「低」では揺らぎを出さない（弾の筋は出す）", low.bullet_haze === 0 && low.bullet_streak === 1, JSON.stringify(low));
-    settings.setPrefs(player, { fxQuality: fx0 });
-  }
-
-  // =====================================================================
   console.log("2.6 核爆弾・ミサイル");
   // =====================================================================
   {
