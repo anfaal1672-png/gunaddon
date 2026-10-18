@@ -2,6 +2,9 @@
 
   BDS_DIR=<bedrock_server のあるフォルダ> python3 tools/bds/run.py <ArsenalCore ルート> <待ち秒> [コマンド... | sleep:秒]
 
+  DEV_DEBUG=<出力ディレクトリ> … tools/bds/debugclient.mjs を待ち受けで起動し、BDS から script debugger connect でつなぐ。
+                   例外のたびに止めてスタックと変数を記録し（exceptions.json）、診断の値（stats.tsv）を集める。
+                   DEV_PROFILE="開始秒,終了秒" で CPU プロファイル（capture.cpuprofile）も取る
   DEV_GAMETEST=1 … BDS に置くコピーだけ @minecraft/server-gametest に依存させ、tools/bds/scenarios.js を読み込む
                    （ワールドの「ベータ API」も有効にする）。シミュレートプレイヤーで撃つ・投げる・ロックオンを再現できる。
                    例：scriptevent dev:setup → dev:bullet 10 / dev:lead 1 / dev:c4 / dev:lock
@@ -18,6 +21,8 @@ props = open(os.path.join(SRV, "server.properties")).read().splitlines()
 want = {"content-log-console-output-enabled": "true", "content-log-level": "verbose", "allow-cheats": "true",
         "level-name": "arsenal_test", "online-mode": "false", "allow-list": "false", "enable-lan-visibility": "false",
         "level-seed": "12345", "view-distance": "10", "tick-distance": "4"}
+if os.environ.get("DEV_DEBUG"):
+    want["allow-outbound-script-debugging"] = "true"
 out = []
 for line in props:
     k = line.split("=", 1)[0]
@@ -37,6 +42,8 @@ for kind, src, dstdir in (("bp", "ArsenalCore_BP", "behavior_packs"), ("rp", "Ar
         inj = os.environ.get("DEV_INJECT") or os.path.join(HERE, "scenarios.js")
         if inj:
             shutil.copy(inj, os.path.join(dst, "scripts", "devtest.js"))
+            # 通し試験（tools/bds/fulltest.js）も一緒に置き、devtest から読み込む
+            shutil.copy(os.path.join(HERE, "fulltest.js"), os.path.join(dst, "scripts", "fulltest.js"))
             with open(os.path.join(dst, "scripts", "main.js"), "a") as f:
                 f.write('\nimport "./devtest.js";\n')
     packs.append((kind, m["header"]["uuid"], m["header"]["version"]))
@@ -69,11 +76,25 @@ def reader():
 threading.Thread(target=reader, daemon=True).start()
 started.wait(120)
 time.sleep(2)
+client = None
+if os.environ.get("DEV_DEBUG"):
+    uuid = next(m["uuid"] for m in json.load(open(os.path.join(root, "ArsenalCore_BP", "manifest.json")))["modules"] if m["type"] == "script")
+    total = wait + sum(float(c[6:]) if c.startswith("sleep:") else 0.5 for c in cmds) + 2
+    prof = (os.environ.get("DEV_PROFILE") or "").split(",") if os.environ.get("DEV_PROFILE") else []
+    client = subprocess.Popen(["node", os.path.join(HERE, "debugclient.mjs"), "19144", uuid, os.environ["DEV_DEBUG"], str(total), *prof])
+    time.sleep(1.5)
+    p.stdin.write("script debugger connect localhost 19144\n"); p.stdin.flush()
+    time.sleep(3)
 for c in cmds:
     if c.startswith("sleep:"):
         time.sleep(float(c[6:])); continue
     p.stdin.write(c + "\n"); p.stdin.flush(); time.sleep(0.5)
 time.sleep(wait)
+if client:
+    try:
+        client.wait(30)
+    except subprocess.TimeoutExpired:
+        client.kill()
 p.stdin.write("stop\n"); p.stdin.flush()
 try:
     p.wait(60)

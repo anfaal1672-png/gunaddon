@@ -662,7 +662,8 @@ function tickRocket(p) {
     if (rider && rider.isValid) {
       const eye = rider.getHeadLocation();
       const vd = rider.getViewDirection();
-      const bh = safe("wire.ray", () => rider.dimension.getBlockFromRay(eye, vd, { maxDistance: 160, includePassableBlocks: false, includeLiquidBlocks: false }));
+      const reach = loadedReach(rider.dimension, eye, vd, 160, system.currentTick);
+      const bh = reach >= 0.5 ? safe("wire.ray", () => rider.dimension.getBlockFromRay(eye, vd, { maxDistance: reach, includePassableBlocks: false, includeLiquidBlocks: false })) : undefined;
       const aim = bh ? add(bh.block.location, bh.faceLocation) : add(eye, mul(vd, 160));
       dir = norm(add(mul(dir, 0.78), mul(norm(sub(aim, p.pos)), 0.22)));
     }
@@ -1411,6 +1412,8 @@ export function previewTrajectory(player, tid) {
     for (let i = 0; i < 80; i++) {
       vel = knife ? add(vel, { x: 0, y: -0.02, z: 0 }) : add(mul(vel, 0.985), { x: 0, y: -0.05, z: 0 });
       const L = len(vel);
+      // 読み込まれていない先はレイを撃てない（例外になり、線が途中で切れていた）。そこで線を終える
+      if (loadedReach(dim, pos, mul(vel, 1 / L), L, system.currentTick) < L) return;
       const bh = dim.getBlockFromRay(pos, mul(vel, 1 / L), { maxDistance: L, includePassableBlocks: false, includeLiquidBlocks: false });
       if (bh) {
         const nrm = faceNormal(bh.face);

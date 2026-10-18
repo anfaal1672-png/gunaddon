@@ -12,7 +12,7 @@
  *   lethal guard が true を返すと、その致死ダメージは与えない（guard 側でダウン・復活を処理する）。
  *   スクリプト経由（dealDamage）とエンジン経由（beforeEvents.entityHurt）の両方で同じ guard を使う。
  */
-import { world, system, EntityDamageCause, GameMode, Player } from "@minecraft/server";
+import { world, system, Entity, EntityDamageCause, GameMode, Player } from "@minecraft/server";
 import { W as WS } from "./settings.js";
 import { S } from "./state.js";
 import { playTo, impactEntity, playNear, emit, explosionFx } from "../fx/effects.js";
@@ -634,7 +634,16 @@ export function explode(dim, loc, power, source, breaks, fire, weaponId) {
     for (const e of dim.getEntities({ location: loc, maxDistance: radius + 1.5, type: ENTITY.dummy })) near.push(e);
   });
   safe("explode", () => {
-    dim.createExplosion(loc, power, { breaksBlocks: breaks, causesFire: fire, source: source && source.isValid ? source : undefined, allowUnderwater: true });
+    // 発生源にできない実体（別のモジュールの Entity。BDS のシミュレートプレイヤーなど）を渡すと、爆発そのものが起きない。
+    // そのときは発生源なしで爆発させる（撃った者の記録は lastAttacker と次の tick の爆風ダメージで残る）
+    const src = source && source.isValid && source instanceof Entity ? source : undefined;
+    const opts = { breaksBlocks: breaks, causesFire: fire, source: src, allowUnderwater: true };
+    try {
+      dim.createExplosion(loc, power, opts);
+    } catch (e) {
+      if (!src) throw e;
+      dim.createExplosion(loc, power, { ...opts, source: undefined });
+    }
   });
   const shooter = source && source.isValid ? source : undefined;
   system.runTimeout(() => safe("explode.fallback", () => {

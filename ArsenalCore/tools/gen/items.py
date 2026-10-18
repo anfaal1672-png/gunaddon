@@ -61,7 +61,7 @@ class ItemsMixin:
             self.item_textures[f"arsenal_{tid}"] = f"textures/items/arsenal/throwables/{tid}"
             extra = {"minecraft:use_modifiers": {"use_duration": 60, "movement_modifier": 1.0, "emit_vibrations": False}}
             if t["kind"] == "mine":
-                extra = {}
+                extra = {f"{NS}:gear": {}}  # ブロックの上面に使うと置く（onUseOn）
             item = item_json(f"{NS}:{tid}", f"arsenal_{tid}", f"item.arsenal.{tid}.name", "equipment", 16,
                              extra=extra, tags=[f"{NS}:throwable"], rarity=T[t["tier"]]["rarity"])
             wjson(f"{self.bp}/items/throwables/{tid}.json", item)

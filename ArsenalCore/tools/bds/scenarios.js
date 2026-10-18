@@ -9,6 +9,7 @@ import { summonBoss } from "./systems/bosses.js";
 import { spawnEnemy } from "./systems/ai/brain.js";
 import { nearPoint } from "./core/pathlock.js";
 import { setPrefs } from "./core/settings.js";
+import "./fulltest.js";
 const log = (...a) => console.warn("[DEVTEST] " + a.join(" "));
 const dim = () => world.getDimension("overworld");
 const Y = 120;

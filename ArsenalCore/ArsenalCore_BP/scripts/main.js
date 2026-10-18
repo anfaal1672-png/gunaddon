@@ -106,7 +106,9 @@ system.beforeEvents.startup.subscribe((ev) => {
       const typeId = e.itemStack.typeId;
       const block = e.block;
       const face = String(e.blockFace);
-      system.run(() => safe("gear.deploy", () => tryDeploy(p, block, face, typeId)));
+      // 地雷もここで置く（2.4.1 まで playerInteractWithBlock で置いていたが、何も起きないアイテムでは発火しないことがあった）
+      if (typeId === `${NS}:landmine`) system.run(() => safe("gear.mine", () => tryPlaceMine(p, block, face)));
+      else system.run(() => safe("gear.deploy", () => tryDeploy(p, block, face, typeId)));
     },
     onUse(e) {
       const p = e.source;
@@ -354,13 +356,6 @@ world.afterEvents.playerButtonInput.subscribe((ev) => {
     } else if (ev.button === InputButton.Jump && ev.newButtonState === ButtonState.Pressed) {
       if (s.ads && !s.ridingId) holdBreath(player, s);
     }
-  });
-});
-
-world.afterEvents.playerInteractWithBlock.subscribe((ev) => {
-  safe("interactBlock", () => {
-    if (!ev.isFirstEvent) return;
-    if (ev.itemStack?.typeId === `${NS}:landmine`) tryPlaceMine(ev.player, ev.block, ev.blockFace);
   });
 });
 

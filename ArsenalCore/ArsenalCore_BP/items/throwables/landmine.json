@@ -18,7 +18,8 @@
           "arsenal:throwable"
         ]
       },
-      "minecraft:rarity": "uncommon"
+      "minecraft:rarity": "uncommon",
+      "arsenal:gear": {}
     }
   }
 }
