@@ -9,7 +9,7 @@
       }
     },
     "components": {
-      "minecraft:icon": "arsenal_kodiak__c9",
+      "minecraft:icon": "arsenal_kodiak",
       "minecraft:display_name": {
         "value": "item.arsenal.kodiak.name"
       },

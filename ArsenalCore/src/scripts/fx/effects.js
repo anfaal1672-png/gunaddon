@@ -266,7 +266,7 @@ export function impactBlock(dim, point, normal, blockType, metalSpark = false) {
   const v = new MolangVariableMap();
   v.setColorRGB("variable.color", { red: c[0] / 255, green: c[1] / 255, blue: c[2] / 255 });
   v.setVector3("variable.normal", normal);
-  v.setFloat("variable.count", 6);
+  v.setFloat("variable.count", 3);
   const p = add(point, mul(normal, 0.03));
   emit(dim, "arsenal:impact_debris", p, v, { range: 48 });
   emit(dim, "arsenal:impact_dust", p, v, { range: 48, minQ: 1 });

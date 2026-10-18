@@ -9,7 +9,7 @@
       }
     },
     "components": {
-      "minecraft:icon": "arsenal_clawstrike__c3",
+      "minecraft:icon": "arsenal_clawstrike",
       "minecraft:display_name": {
         "value": "item.arsenal.clawstrike.name"
       },

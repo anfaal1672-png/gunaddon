@@ -9,7 +9,7 @@
       }
     },
     "components": {
-      "minecraft:icon": "arsenal_slugger__c6",
+      "minecraft:icon": "arsenal_slugger",
       "minecraft:display_name": {
         "value": "item.arsenal.slugger.name"
       },

@@ -9,7 +9,7 @@
       }
     },
     "components": {
-      "minecraft:icon": "arsenal_lightning_gun__c9",
+      "minecraft:icon": "arsenal_lightning_gun",
       "minecraft:display_name": {
         "value": "item.arsenal.lightning_gun.name"
       },

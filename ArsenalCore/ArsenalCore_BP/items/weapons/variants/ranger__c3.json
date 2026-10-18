@@ -9,7 +9,7 @@
       }
     },
     "components": {
-      "minecraft:icon": "arsenal_ranger__c3",
+      "minecraft:icon": "arsenal_ranger",
       "minecraft:display_name": {
         "value": "item.arsenal.ranger.name"
       },

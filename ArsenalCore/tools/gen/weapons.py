@@ -96,12 +96,12 @@ class WeaponsMixin:
                 anims_player.update(riggen.ads_animation(f"{wid}.o{grp}", riggen.ads_arm_offset(gv, w["cat"], False), w.get("ads", 4) / 20.0))
                 self.variant_count += 1
             # ---- 迷彩（__c<n>。光学の見た目は既定のまま）----
+            # アイコンは元の武器のものを使う（軽量化 2.6.5：迷彩ごとのアイコン約 1,700 枚をやめ、読み込む画像を 2,209 → 約 550 枚に。
+            # 手に持った 3D モデルと説明文には迷彩が出る）
             for cid in CAMOS:
                 vid = f"{wid}__{cid}"
-                wpng(f"{self.rp}/textures/items/arsenal/weapons/{vid}.png", tx.render_side_icon(g, camo_tiles[cid]))
-                self.item_textures[f"arsenal_{vid}"] = f"textures/items/arsenal/weapons/{vid}"
                 wjson(f"{self.rp}/attachables/arsenal/variants/{vid}.json", self._attachable(f"{NS}:{vid}", wid, f"geometry.arsenal.{wid}", f"textures/entity/arsenal/camo/{cid}"))
-                wjson(f"{self.bp}/items/weapons/variants/{vid}.json", self._gun_item(f"{NS}:{vid}", f"arsenal_{vid}", wid, w, tier, dur, hidden=True, extra_tags=(f"{NS}:variant", f"{NS}:camo")))
+                wjson(f"{self.bp}/items/weapons/variants/{vid}.json", self._gun_item(f"{NS}:{vid}", f"arsenal_{wid}", wid, w, tier, dur, hidden=True, extra_tags=(f"{NS}:variant", f"{NS}:camo")))
                 self.variant_count += 1
         wjson(f"{self.rp}/animations/arsenal_weapons.animation.json", {"format_version": "1.10.0", "animations": anims_attach})
         for cid, c in C.items():

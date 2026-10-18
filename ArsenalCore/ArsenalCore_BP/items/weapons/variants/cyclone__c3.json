@@ -9,7 +9,7 @@
       }
     },
     "components": {
-      "minecraft:icon": "arsenal_cyclone__c3",
+      "minecraft:icon": "arsenal_cyclone",
       "minecraft:display_name": {
         "value": "item.arsenal.cyclone.name"
       },

@@ -9,7 +9,7 @@
       }
     },
     "components": {
-      "minecraft:icon": "arsenal_arc_caster__c9",
+      "minecraft:icon": "arsenal_arc_caster",
       "minecraft:display_name": {
         "value": "item.arsenal.arc_caster.name"
       },

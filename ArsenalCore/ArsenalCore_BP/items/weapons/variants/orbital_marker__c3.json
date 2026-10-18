@@ -9,7 +9,7 @@
       }
     },
     "components": {
-      "minecraft:icon": "arsenal_orbital_marker__c3",
+      "minecraft:icon": "arsenal_orbital_marker",
       "minecraft:display_name": {
         "value": "item.arsenal.orbital_marker.name"
       },

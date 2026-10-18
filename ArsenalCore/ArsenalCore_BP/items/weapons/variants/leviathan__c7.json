@@ -9,7 +9,7 @@
       }
     },
     "components": {
-      "minecraft:icon": "arsenal_leviathan__c7",
+      "minecraft:icon": "arsenal_leviathan",
       "minecraft:display_name": {
         "value": "item.arsenal.leviathan.name"
       },

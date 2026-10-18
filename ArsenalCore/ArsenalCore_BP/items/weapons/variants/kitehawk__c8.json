@@ -9,7 +9,7 @@
       }
     },
     "components": {
-      "minecraft:icon": "arsenal_kitehawk__c8",
+      "minecraft:icon": "arsenal_kitehawk",
       "minecraft:display_name": {
         "value": "item.arsenal.kitehawk.name"
       },

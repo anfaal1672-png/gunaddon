@@ -9,7 +9,7 @@
       }
     },
     "components": {
-      "minecraft:icon": "arsenal_ricochet_disc__c10",
+      "minecraft:icon": "arsenal_ricochet_disc",
       "minecraft:display_name": {
         "value": "item.arsenal.ricochet_disc.name"
       },

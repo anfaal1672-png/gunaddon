@@ -9,7 +9,7 @@
       }
     },
     "components": {
-      "minecraft:icon": "arsenal_reflector__c6",
+      "minecraft:icon": "arsenal_reflector",
       "minecraft:display_name": {
         "value": "item.arsenal.reflector.name"
       },

@@ -9,7 +9,7 @@
       }
     },
     "components": {
-      "minecraft:icon": "arsenal_valkyrie__c3",
+      "minecraft:icon": "arsenal_valkyrie",
       "minecraft:display_name": {
         "value": "item.arsenal.valkyrie.name"
       },

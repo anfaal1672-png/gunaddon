@@ -9,7 +9,7 @@
       }
     },
     "components": {
-      "minecraft:icon": "arsenal_railspike__c9",
+      "minecraft:icon": "arsenal_railspike",
       "minecraft:display_name": {
         "value": "item.arsenal.railspike.name"
       },

@@ -9,7 +9,7 @@
       }
     },
     "components": {
-      "minecraft:icon": "arsenal_stinger__c9",
+      "minecraft:icon": "arsenal_stinger",
       "minecraft:display_name": {
         "value": "item.arsenal.stinger.name"
       },

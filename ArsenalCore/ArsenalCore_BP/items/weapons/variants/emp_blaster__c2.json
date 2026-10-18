@@ -9,7 +9,7 @@
       }
     },
     "components": {
-      "minecraft:icon": "arsenal_emp_blaster__c2",
+      "minecraft:icon": "arsenal_emp_blaster",
       "minecraft:display_name": {
         "value": "item.arsenal.emp_blaster.name"
       },

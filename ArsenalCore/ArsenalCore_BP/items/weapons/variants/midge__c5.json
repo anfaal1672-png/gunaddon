@@ -9,7 +9,7 @@
       }
     },
     "components": {
-      "minecraft:icon": "arsenal_midge__c5",
+      "minecraft:icon": "arsenal_midge",
       "minecraft:display_name": {
         "value": "item.arsenal.midge.name"
       },

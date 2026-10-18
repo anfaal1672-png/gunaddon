@@ -9,7 +9,7 @@
       }
     },
     "components": {
-      "minecraft:icon": "arsenal_condor__c6",
+      "minecraft:icon": "arsenal_condor",
       "minecraft:display_name": {
         "value": "item.arsenal.condor.name"
       },

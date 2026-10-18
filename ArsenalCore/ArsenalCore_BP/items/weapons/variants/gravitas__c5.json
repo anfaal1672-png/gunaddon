@@ -9,7 +9,7 @@
       }
     },
     "components": {
-      "minecraft:icon": "arsenal_gravitas__c5",
+      "minecraft:icon": "arsenal_gravitas",
       "minecraft:display_name": {
         "value": "item.arsenal.gravitas.name"
       },

@@ -9,7 +9,7 @@
       }
     },
     "components": {
-      "minecraft:icon": "arsenal_cryo_beam__c11",
+      "minecraft:icon": "arsenal_cryo_beam",
       "minecraft:display_name": {
         "value": "item.arsenal.cryo_beam.name"
       },

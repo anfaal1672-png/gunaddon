@@ -9,7 +9,7 @@
       }
     },
     "components": {
-      "minecraft:icon": "arsenal_bulldog__c5",
+      "minecraft:icon": "arsenal_bulldog",
       "minecraft:display_name": {
         "value": "item.arsenal.bulldog.name"
       },

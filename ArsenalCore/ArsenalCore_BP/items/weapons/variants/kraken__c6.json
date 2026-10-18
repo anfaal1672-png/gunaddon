@@ -9,7 +9,7 @@
       }
     },
     "components": {
-      "minecraft:icon": "arsenal_kraken__c6",
+      "minecraft:icon": "arsenal_kraken",
       "minecraft:display_name": {
         "value": "item.arsenal.kraken.name"
       },

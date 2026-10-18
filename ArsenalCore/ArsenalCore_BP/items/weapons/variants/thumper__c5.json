@@ -9,7 +9,7 @@
       }
     },
     "components": {
-      "minecraft:icon": "arsenal_thumper__c5",
+      "minecraft:icon": "arsenal_thumper",
       "minecraft:display_name": {
         "value": "item.arsenal.thumper.name"
       },

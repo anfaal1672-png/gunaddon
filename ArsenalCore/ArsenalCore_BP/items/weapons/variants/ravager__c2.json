@@ -9,7 +9,7 @@
       }
     },
     "components": {
-      "minecraft:icon": "arsenal_ravager__c2",
+      "minecraft:icon": "arsenal_ravager",
       "minecraft:display_name": {
         "value": "item.arsenal.ravager.name"
       },

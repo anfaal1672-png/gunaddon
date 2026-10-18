@@ -9,7 +9,7 @@
       }
     },
     "components": {
-      "minecraft:icon": "arsenal_storm_needler__c8",
+      "minecraft:icon": "arsenal_storm_needler",
       "minecraft:display_name": {
         "value": "item.arsenal.storm_needler.name"
       },

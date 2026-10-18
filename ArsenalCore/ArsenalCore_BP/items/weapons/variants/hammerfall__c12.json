@@ -9,7 +9,7 @@
       }
     },
     "components": {
-      "minecraft:icon": "arsenal_hammerfall__c12",
+      "minecraft:icon": "arsenal_hammerfall",
       "minecraft:display_name": {
         "value": "item.arsenal.hammerfall.name"
       },

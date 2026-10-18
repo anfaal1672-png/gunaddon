@@ -9,7 +9,7 @@
       }
     },
     "components": {
-      "minecraft:icon": "arsenal_specter__c7",
+      "minecraft:icon": "arsenal_specter",
       "minecraft:display_name": {
         "value": "item.arsenal.specter.name"
       },

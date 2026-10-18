@@ -9,7 +9,7 @@
       }
     },
     "components": {
-      "minecraft:icon": "arsenal_stasis_projector__c9",
+      "minecraft:icon": "arsenal_stasis_projector",
       "minecraft:display_name": {
         "value": "item.arsenal.stasis_projector.name"
       },

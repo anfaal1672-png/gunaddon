@@ -9,7 +9,7 @@
       }
     },
     "components": {
-      "minecraft:icon": "arsenal_flare_pistol__c6",
+      "minecraft:icon": "arsenal_flare_pistol",
       "minecraft:display_name": {
         "value": "item.arsenal.flare_pistol.name"
       },

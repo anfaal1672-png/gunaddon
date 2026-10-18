@@ -9,7 +9,7 @@
       }
     },
     "components": {
-      "minecraft:icon": "arsenal_avalanche__c8",
+      "minecraft:icon": "arsenal_avalanche",
       "minecraft:display_name": {
         "value": "item.arsenal.avalanche.name"
       },

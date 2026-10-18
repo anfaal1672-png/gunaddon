@@ -9,7 +9,7 @@
       }
     },
     "components": {
-      "minecraft:icon": "arsenal_phantom_lr__c7",
+      "minecraft:icon": "arsenal_phantom_lr",
       "minecraft:display_name": {
         "value": "item.arsenal.phantom_lr.name"
       },

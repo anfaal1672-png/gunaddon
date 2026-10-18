@@ -9,7 +9,7 @@
       }
     },
     "components": {
-      "minecraft:icon": "arsenal_cluster_cannon__c6",
+      "minecraft:icon": "arsenal_cluster_cannon",
       "minecraft:display_name": {
         "value": "item.arsenal.cluster_cannon.name"
       },

@@ -9,7 +9,7 @@
       }
     },
     "components": {
-      "minecraft:icon": "arsenal_skypiercer__c5",
+      "minecraft:icon": "arsenal_skypiercer",
       "minecraft:display_name": {
         "value": "item.arsenal.skypiercer.name"
       },

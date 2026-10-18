@@ -28,8 +28,9 @@ class ParticlesMixin:
                 "description": {"identifier": f"{NS}:{pid}", "basic_render_parameters": {"material": material, "texture": TEX}},
                 "components": comps}}
 
+        # 軽量化（2.6.5）：1 発あたりの粒子を減らす（閃光 3→2・硝煙 4→2・着弾の破片 6→3 で当たり判定なし・薬莢は短く）
         eff("muzzle_flash", "particles_blend", {
-            "minecraft:emitter_rate_instant": {"num_particles": 3},
+            "minecraft:emitter_rate_instant": {"num_particles": 2},
             "minecraft:emitter_lifetime_once": {"active_time": 0.05},
             "minecraft:emitter_shape_point": {"direction": ["math.random(-1,1)", "math.random(-1,1)", "math.random(-1,1)"]},
             "minecraft:particle_lifetime_expression": {"max_lifetime": 0.07},
@@ -40,10 +41,10 @@ class ParticlesMixin:
             "minecraft:particle_appearance_tinting": {"color": [1.0, "math.random(0.75, 0.9)", "math.random(0.35, 0.5)", 1.0]},
         })
         eff("muzzle_smoke", "particles_blend", {
-            "minecraft:emitter_rate_instant": {"num_particles": 4},
+            "minecraft:emitter_rate_instant": {"num_particles": 2},
             "minecraft:emitter_lifetime_once": {"active_time": 0.05},
             "minecraft:emitter_shape_sphere": {"radius": 0.05, "direction": "outwards"},
-            "minecraft:particle_lifetime_expression": {"max_lifetime": "math.random(0.4, 0.8)"},
+            "minecraft:particle_lifetime_expression": {"max_lifetime": "math.random(0.3, 0.6)"},
             "minecraft:particle_initial_speed": "math.random(0.2, 0.6)",
             "minecraft:particle_motion_dynamic": {"linear_acceleration": [0, 0.35, 0], "linear_drag_coefficient": 2.2},
             "minecraft:particle_appearance_billboard": {"size": ["0.06 + v.particle_age * 0.25", "0.06 + v.particle_age * 0.25"], "facing_camera_mode": "rotate_xyz", "uv": uv("smoke0", (4, 6))},
@@ -75,19 +76,18 @@ class ParticlesMixin:
             "minecraft:particle_appearance_tinting": {"color": ["v.color.r", "v.color.g", "v.color.b", "0.55 * (1.0 - v.particle_age / v.particle_lifetime)"]},
         })
         eff("impact_debris", "particles_alpha", {
-            "minecraft:emitter_rate_instant": {"num_particles": "v.count ?? 6"},
+            "minecraft:emitter_rate_instant": {"num_particles": "v.count ?? 3"},
             "minecraft:emitter_lifetime_once": {"active_time": 0.05},
             "minecraft:emitter_shape_point": {"direction": ["v.normal.x + math.random(-0.6,0.6)", "v.normal.y + math.random(-0.2,0.8)", "v.normal.z + math.random(-0.6,0.6)"]},
-            "minecraft:particle_lifetime_expression": {"max_lifetime": "math.random(0.4, 0.9)"},
+            "minecraft:particle_lifetime_expression": {"max_lifetime": "math.random(0.3, 0.55)"},
             "minecraft:particle_initial_speed": "math.random(2.5, 5.5)",
             "minecraft:particle_motion_dynamic": {"linear_acceleration": [0, -18, 0], "linear_drag_coefficient": 1.0},
-            "minecraft:particle_motion_collision": {"coefficient_of_restitution": 0.2, "collision_radius": 0.04, "collision_drag": 4.0},
             "minecraft:particle_appearance_billboard": {"size": [0.045, 0.045], "facing_camera_mode": "rotate_xyz", "uv": uv("debris")},
             "minecraft:particle_appearance_tinting": {"color": ["v.color.r", "v.color.g", "v.color.b", 1.0]},
             "minecraft:particle_appearance_lighting": {},
         })
         eff("impact_dust", "particles_blend", {
-            "minecraft:emitter_rate_instant": {"num_particles": 3},
+            "minecraft:emitter_rate_instant": {"num_particles": 2},
             "minecraft:emitter_lifetime_once": {"active_time": 0.05},
             "minecraft:emitter_shape_point": {"direction": ["v.normal.x + math.random(-0.5,0.5)", "v.normal.y + math.random(-0.5,0.5)", "v.normal.z + math.random(-0.5,0.5)"]},
             "minecraft:particle_lifetime_expression": {"max_lifetime": "math.random(0.5, 1.0)"},
@@ -98,7 +98,7 @@ class ParticlesMixin:
             "minecraft:particle_appearance_lighting": {},
         })
         eff("impact_spark", "particles_blend", {
-            "minecraft:emitter_rate_instant": {"num_particles": "math.random_integer(3, 6)"},
+            "minecraft:emitter_rate_instant": {"num_particles": "math.random_integer(2, 4)"},
             "minecraft:emitter_lifetime_once": {"active_time": 0.05},
             "minecraft:emitter_shape_point": {"direction": ["math.random(-1,1)", "math.random(-0.2,1)", "math.random(-1,1)"]},
             "minecraft:particle_lifetime_expression": {"max_lifetime": "math.random(0.1, 0.3)"},
@@ -108,7 +108,7 @@ class ParticlesMixin:
             "minecraft:particle_appearance_tinting": {"color": [1.0, 0.85, 0.45, 1.0]},
         })
         eff("blood", "particles_alpha", {
-            "minecraft:emitter_rate_instant": {"num_particles": "math.random_integer(5, 9)"},
+            "minecraft:emitter_rate_instant": {"num_particles": "math.random_integer(3, 5)"},
             "minecraft:emitter_lifetime_once": {"active_time": 0.05},
             "minecraft:emitter_shape_sphere": {"radius": 0.1, "direction": "outwards"},
             "minecraft:particle_lifetime_expression": {"max_lifetime": "math.random(0.3, 0.7)"},
@@ -123,7 +123,7 @@ class ParticlesMixin:
             "minecraft:emitter_rate_instant": {"num_particles": 1},
             "minecraft:emitter_lifetime_once": {"active_time": 0.01},
             "minecraft:emitter_shape_point": {"direction": ["v.eject.direction_x", "v.eject.direction_y", "v.eject.direction_z"]},
-            "minecraft:particle_lifetime_expression": {"max_lifetime": 1.2},
+            "minecraft:particle_lifetime_expression": {"max_lifetime": 0.7},
             "minecraft:particle_initial_speed": "v.eject.speed",
             "minecraft:particle_initial_spin": {"rotation": "math.random(0,360)", "rotation_rate": 900},
             "minecraft:particle_motion_dynamic": {"linear_acceleration": [0, -16, 0], "rotation_drag_coefficient": 1.0},
@@ -135,7 +135,7 @@ class ParticlesMixin:
             "minecraft:emitter_rate_instant": {"num_particles": 1},
             "minecraft:emitter_lifetime_once": {"active_time": 0.01},
             "minecraft:emitter_shape_point": {"direction": ["v.eject.direction_x", "v.eject.direction_y", "v.eject.direction_z"]},
-            "minecraft:particle_lifetime_expression": {"max_lifetime": 1.5},
+            "minecraft:particle_lifetime_expression": {"max_lifetime": 0.9},
             "minecraft:particle_initial_speed": "v.eject.speed",
             "minecraft:particle_initial_spin": {"rotation": "math.random(0,360)", "rotation_rate": 600},
             "minecraft:particle_motion_dynamic": {"linear_acceleration": [0, -16, 0]},

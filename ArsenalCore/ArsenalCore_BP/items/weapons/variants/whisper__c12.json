@@ -9,7 +9,7 @@
       }
     },
     "components": {
-      "minecraft:icon": "arsenal_whisper__c12",
+      "minecraft:icon": "arsenal_whisper",
       "minecraft:display_name": {
         "value": "item.arsenal.whisper.name"
       },

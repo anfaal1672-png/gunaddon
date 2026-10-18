@@ -9,7 +9,7 @@
       }
     },
     "components": {
-      "minecraft:icon": "arsenal_seeker__c8",
+      "minecraft:icon": "arsenal_seeker",
       "minecraft:display_name": {
         "value": "item.arsenal.seeker.name"
       },

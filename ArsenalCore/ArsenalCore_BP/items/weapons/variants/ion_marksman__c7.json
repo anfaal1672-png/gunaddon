@@ -9,7 +9,7 @@
       }
     },
     "components": {
-      "minecraft:icon": "arsenal_ion_marksman__c7",
+      "minecraft:icon": "arsenal_ion_marksman",
       "minecraft:display_name": {
         "value": "item.arsenal.ion_marksman.name"
       },

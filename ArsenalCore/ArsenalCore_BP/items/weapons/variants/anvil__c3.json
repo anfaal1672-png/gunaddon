@@ -9,7 +9,7 @@
       }
     },
     "components": {
-      "minecraft:icon": "arsenal_anvil__c3",
+      "minecraft:icon": "arsenal_anvil",
       "minecraft:display_name": {
         "value": "item.arsenal.anvil.name"
       },

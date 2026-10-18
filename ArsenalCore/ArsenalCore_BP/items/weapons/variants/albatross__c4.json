@@ -9,7 +9,7 @@
       }
     },
     "components": {
-      "minecraft:icon": "arsenal_albatross__c4",
+      "minecraft:icon": "arsenal_albatross",
       "minecraft:display_name": {
         "value": "item.arsenal.albatross.name"
       },

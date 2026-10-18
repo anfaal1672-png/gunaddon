@@ -9,7 +9,7 @@
       }
     },
     "components": {
-      "minecraft:icon": "arsenal_plasma_repeater__c5",
+      "minecraft:icon": "arsenal_plasma_repeater",
       "minecraft:display_name": {
         "value": "item.arsenal.plasma_repeater.name"
       },

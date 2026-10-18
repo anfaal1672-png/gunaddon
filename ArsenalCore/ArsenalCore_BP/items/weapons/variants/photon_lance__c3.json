@@ -9,7 +9,7 @@
       }
     },
     "components": {
-      "minecraft:icon": "arsenal_photon_lance__c3",
+      "minecraft:icon": "arsenal_photon_lance",
       "minecraft:display_name": {
         "value": "item.arsenal.photon_lance.name"
       },

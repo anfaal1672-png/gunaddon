@@ -9,7 +9,7 @@
       }
     },
     "components": {
-      "minecraft:icon": "arsenal_tranq_rifle__c5",
+      "minecraft:icon": "arsenal_tranq_rifle",
       "minecraft:display_name": {
         "value": "item.arsenal.tranq_rifle.name"
       },

@@ -9,7 +9,7 @@
       }
     },
     "components": {
-      "minecraft:icon": "arsenal_halberd__c9",
+      "minecraft:icon": "arsenal_halberd",
       "minecraft:display_name": {
         "value": "item.arsenal.halberd.name"
       },

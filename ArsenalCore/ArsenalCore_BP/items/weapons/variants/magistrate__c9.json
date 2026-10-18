@@ -9,7 +9,7 @@
       }
     },
     "components": {
-      "minecraft:icon": "arsenal_magistrate__c9",
+      "minecraft:icon": "arsenal_magistrate",
       "minecraft:display_name": {
         "value": "item.arsenal.magistrate.name"
       },

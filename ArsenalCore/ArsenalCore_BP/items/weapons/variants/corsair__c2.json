@@ -9,7 +9,7 @@
       }
     },
     "components": {
-      "minecraft:icon": "arsenal_corsair__c2",
+      "minecraft:icon": "arsenal_corsair",
       "minecraft:display_name": {
         "value": "item.arsenal.corsair.name"
       },

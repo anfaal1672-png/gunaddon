@@ -9,7 +9,7 @@
       }
     },
     "components": {
-      "minecraft:icon": "arsenal_void_needle__c4",
+      "minecraft:icon": "arsenal_void_needle",
       "minecraft:display_name": {
         "value": "item.arsenal.void_needle.name"
       },

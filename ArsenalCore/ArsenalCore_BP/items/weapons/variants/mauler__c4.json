@@ -9,7 +9,7 @@
       }
     },
     "components": {
-      "minecraft:icon": "arsenal_mauler__c4",
+      "minecraft:icon": "arsenal_mauler",
       "minecraft:display_name": {
         "value": "item.arsenal.mauler.name"
       },

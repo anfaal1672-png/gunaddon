@@ -9,7 +9,7 @@
       }
     },
     "components": {
-      "minecraft:icon": "arsenal_ridgeback__c3",
+      "minecraft:icon": "arsenal_ridgeback",
       "minecraft:display_name": {
         "value": "item.arsenal.ridgeback.name"
       },

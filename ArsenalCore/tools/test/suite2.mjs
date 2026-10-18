@@ -833,10 +833,10 @@ export async function suite2(ctx) {
     __tick(1);
     check("HUD 2.0：向きが変わらなければサブタイトルも送らない", LOG.subtitles.length === sc + 2);
     // 方位は英字 2 文字（数字で送ると実機の JSON UI が '090' を 90 にする。ダメージの数字とも分けられない）
-    check("HUD 2.0：方位は英字 2 文字（120° → 60 → CI）", hud2.liveHeading(LOG.subtitles.at(-1)) === "60" && LOG.subtitles.at(-1).includes("~CI^"), JSON.stringify(LOG.subtitles.at(-1)));
-    player.setRotation({ x: 0, y: 10 });
+    check("HUD 2.0：方位は英字 2 文字（4° ごと：120° → 30 → BE）", hud2.liveHeading(LOG.subtitles.at(-1)) === "30" && LOG.subtitles.at(-1).includes("~BE^"), JSON.stringify(LOG.subtitles.at(-1)));
+    player.setRotation({ x: 0, y: 20 });
     __tick(1);
-    check("HUD 2.0：方位 10° → 5 → AF", hud2.liveHeading(LOG.subtitles.at(-1)) === "5" && LOG.subtitles.at(-1).includes("~AF^"), JSON.stringify(LOG.subtitles.at(-1)));
+    check("HUD 2.0：方位 20° → 5 → AF", hud2.liveHeading(LOG.subtitles.at(-1)) === "5" && LOG.subtitles.at(-1).includes("~AF^"), JSON.stringify(LOG.subtitles.at(-1)));
     // 与えたダメージ：続けて当てると足し、頭は黄、倒すと赤。1.5 秒空くと消える
     const dmgMod = await imp("core/damage.js");
     const dmgPref = settings.P(player).damageNumbers;
@@ -861,6 +861,25 @@ export async function suite2(ctx) {
     __tick(1);
     check("HUD 2.0：ダメージ数字の設定を切ると出さない", hud2.liveDamage(s.hud2Live) === "", JSON.stringify(s.hud2Live));
     settings.setPrefs(player, { damageNumbers: dmgPref });
+    // 軽量化（2.6.5）：連射中のタイトルは 3 tick に 1 回まで。パネルを開け閉めする値が変わったら次の tick にもう一度送る
+    __tick(5);
+    const tt0 = LOG.titles.length;
+    for (let i = 0; i < 12; i++) {
+      s.hudDirty = true;
+      s.ammo = Math.max(1, s.ammo - 1);
+      __tick(1);
+    }
+    const sent = LOG.titles.length - tt0;
+    check("HUD 2.0：連射中のタイトルは 3 tick に 1 回まで（12 tick で 4〜5 回）", sent >= 3 && sent <= 5, `(${sent})`);
+    __tick(5);
+    const tg0 = LOG.titles.length;
+    settings.setPrefs(player, { hudScale: "large" });
+    s.hudDirty = true;
+    __tick(1);
+    const afterChange = LOG.titles.length - tg0;
+    __tick(1);
+    check("HUD 2.0：大きさを変えたら、次の tick にもう一度送る（隠れていたパネルの子を評価し直させる）", afterChange === 1 && LOG.titles.length - tg0 === 2, `(${afterChange}, ${LOG.titles.length - tg0})`);
+    settings.setPrefs(player, { hudScale: "normal" });
     player.setRotation({ x: 0, y: 0 });
     const a0 = LOG.actionbar.length;
     hud2.announce(player, "hello", 20);

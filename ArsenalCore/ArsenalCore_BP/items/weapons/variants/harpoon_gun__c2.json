@@ -9,7 +9,7 @@
       }
     },
     "components": {
-      "minecraft:icon": "arsenal_harpoon_gun__c2",
+      "minecraft:icon": "arsenal_harpoon_gun",
       "minecraft:display_name": {
         "value": "item.arsenal.harpoon_gun.name"
       },

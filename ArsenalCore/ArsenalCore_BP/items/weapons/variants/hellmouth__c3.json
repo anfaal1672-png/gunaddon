@@ -9,7 +9,7 @@
       }
     },
     "components": {
-      "minecraft:icon": "arsenal_hellmouth__c3",
+      "minecraft:icon": "arsenal_hellmouth",
       "minecraft:display_name": {
         "value": "item.arsenal.hellmouth.name"
       },

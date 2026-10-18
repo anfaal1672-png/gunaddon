@@ -9,7 +9,7 @@
       }
     },
     "components": {
-      "minecraft:icon": "arsenal_longbow__c8",
+      "minecraft:icon": "arsenal_longbow",
       "minecraft:display_name": {
         "value": "item.arsenal.longbow.name"
       },
