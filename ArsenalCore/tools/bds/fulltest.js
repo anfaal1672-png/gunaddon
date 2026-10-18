@@ -862,6 +862,14 @@ async function nukes() {
     try { e.getComponent("minecraft:health").setCurrentValue(hp); } catch { /* */ }
     return e;
   };
+  // 自分の爆発で倒れたら起こす（倒れたままだと向きが変わらず、狙いが足元になる）
+  const revive = async () => {
+    if ((p.getComponent("minecraft:health")?.currentValue ?? 0) <= 0) {
+      p.respawn();
+      await wait(10);
+    }
+    p.getComponent("minecraft:health")?.resetToMaxValue();
+  };
   // エイムアシスト：覗くと照準の外 5° の敵へ寄る
   clearMobs();
   p.teleport(origin);
@@ -929,30 +937,41 @@ async function nukes() {
   await wait(20);
 
   // 核ミサイル：10 秒後に落ちて、近くの敵を倒す
+  log(`nukes: owner hp after guided missile ${p.getComponent("minecraft:health")?.currentValue}`);
+  await revive();
   clearMobs();
+  // 闘技場は山の中（空がない）。斜めに落ちてくる経路の岩を抜いておく
+  try {
+    dim().fillBlocks(new BlockVolume({ x: -3, y: Y + 47, z: 15 }, { x: 22, y: Math.min(dim().heightRange.max - 1, Y + 124), z: 20 }), "minecraft:air");
+  } catch (err) { log(`nukes: sky fill failed ${err}`); }
   p.teleport({ x: 0.5, y: Y, z: -14.5 });
   addStreakPoints(p, 9999);
-  const zn = free(0.5, 20.5);
-  p.lookAtLocation({ x: 0.5, y: Y - 1, z: 20.5 });
-  await wait(4);
+  const zn = free(0.5, 17.5);
+  p.lookAtLocation({ x: 0.5, y: Y - 1, z: 17.5 });
+  await wait(20); // 誘導ミサイルの操縦で真下を向いていたので、向き直るまで待つ
   let usedN = false;
   try { usedN = useStreak(p, "nuke"); } catch (err) { fail("nukes", "nuke", `threw ${err}`); }
   const t0 = Date.now();
   await wait(230);
+  log(`nukes: owner hp after nuke missile ${p.getComponent("minecraft:health")?.currentValue}`);
   expect("nuke_missile", usedN && !zn.isValid, `used=${usedN} hp=${hpOf(zn)} secs=${((Date.now() - t0) / 1000).toFixed(1)}`);
   await wait(40);
 
   // 置く戦術核：15 秒後に爆発
+  await revive();
   clearMobs();
   p.teleport({ x: 0.5, y: Y, z: -14.5 });
   await give("tactical_nuke");
   const zt = free(0.5, 10.5);
-  const zfar = free(0.5, 26.5, 20); // 核から 39 ブロック（爆風 34 の外、吹き飛ばし 52 の内）
-  p.lookAtLocation({ x: 0.5, y: Y - 0.5, z: -12.5 });
+  const zfar = free(36.5, -11.5, 20); // 核から 36 ブロック（爆風 34 の外、吹き飛ばし 52 の内。闘技場の中）
+  p.lookAtLocation({ x: 0.5, y: Y - 0.5, z: -11.5 });
+  const nb = dim().getBlock({ x: 0, y: Y - 1, z: -12 });
+  log(`nukes: place on ${nb?.typeId} above=${nb?.above()?.typeId}`);
   p.useItemInSlotOnBlock(0, { x: 0, y: Y - 1, z: -12 }, Direction.Up, { x: 0.5, y: 1, z: 0.5 });
-  await wait(4);
+  await wait(6);
   const placed = (inv(p).getItem(0)?.amount ?? 0) === 0;
-  p.teleport({ x: 0.5, y: Y, z: 30.5 });
+  if (!placed) log(`nukes: not placed item=${inv(p).getItem(0)?.typeId} proj=${dim().getEntities({ type: "arsenal:projectile" }).length}`);
+  p.teleport({ x: 40.5, y: Y, z: 15.5 });
   await wait(320);
   expect("tactical_nuke", placed && !zt.isValid && zfar.isValid, `placed=${placed} near=${zt.isValid} far=${zfar.isValid}`);
   log(`nukes: ok=${ok}/${n}`);

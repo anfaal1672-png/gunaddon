@@ -3,8 +3,8 @@
  * 核爆発（2.6）：戦術核（置いて 15 秒）と核ミサイル（キルストリーク）の弾頭が使う
  *   1. 閃光：見える範囲のプレイヤーの画面を白く飛ばす（近いほど長く）
  *   2. 音：遠いほど遅れて届く（1 tick に約 17 ブロック）
- *   3. 爆発：中心で大きな爆発。ブロックを壊す設定なら、少し遅れて周りに 6 つの爆発でクレーターを広げる
- *   4. 爆風：kill 以内は致死、blast 以内は距離で減るダメージと火、knock 以内は外へ吹き飛ばす
+ *   3. 爆風：kill 以内は致死、blast 以内は距離で減るダメージと火、knock 以内は外へ吹き飛ばす
+ *   4. 爆発：中心で大きな爆発。ブロックを壊す設定なら、少し遅れて周りに 6 つの爆発でクレーターを広げる
  *   5. きのこ雲：3 秒かけて柱が立ち、上に傘が開く
  *   6. 放射性降下物：fallout の範囲に 60 秒、毒と衰弱（ガスマスク・機械には効かない。systems/fields.js）
  * ワールド設定「核兵器」（nukes）が切ってあれば置けず、撃てない。
@@ -88,17 +88,7 @@ export function detonateNuke(dim, pos, ownerId, weaponId = "tactical_nuke") {
     if (delay <= 0) play();
     else system.runTimeout(() => safe("nuke.sound", play), delay);
   }
-  // 3. 爆発（中心）と、ブロックを壊す設定ならクレーターを広げる周りの爆発
-  const breaks = explosionBreaksBlocks();
-  explode(dim, pos, N.power, srcOk ? src : undefined, breaks, true, weaponId);
-  if (breaks) {
-    for (let i = 0; i < N.ring; i++) {
-      const a = (i / N.ring) * Math.PI * 2;
-      const at = { x: pos.x + Math.cos(a) * N.ringRadius, y: pos.y, z: pos.z + Math.sin(a) * N.ringRadius };
-      system.runTimeout(() => safe("nuke.ring", () => explode(dim, at, N.ringPower, undefined, true, true, weaponId)), 2 + i * 2);
-    }
-  }
-  // 4. 爆風
+  // 3. 爆風（エンジンの爆発より先に。爆発で無敵時間に入ると、致死のダメージが通らない）
   safe("nuke.blast", () => {
     for (const e of dim.getEntities({ location: pos, maxDistance: N.knock, excludeFamilies: ["inanimate", "arsenal_fx"], excludeTypes: ["minecraft:item", "minecraft:xp_orb"] })) {
       // 補給係・保管庫・補給箱・目印は壊さない（canDamage と同じ）
@@ -126,6 +116,16 @@ export function detonateNuke(dim, pos, ownerId, weaponId = "tactical_nuke") {
       }
     }
   });
+  // 4. 爆発（中心）と、ブロックを壊す設定ならクレーターを広げる周りの爆発
+  const breaks = explosionBreaksBlocks();
+  explode(dim, pos, N.power, srcOk ? src : undefined, breaks, true, weaponId);
+  if (breaks) {
+    for (let i = 0; i < N.ring; i++) {
+      const a = (i / N.ring) * Math.PI * 2;
+      const at = { x: pos.x + Math.cos(a) * N.ringRadius, y: pos.y, z: pos.z + Math.sin(a) * N.ringRadius };
+      system.runTimeout(() => safe("nuke.ring", () => explode(dim, at, N.ringPower, undefined, true, true, weaponId)), 2 + i * 2);
+    }
+  }
   // 5. きのこ雲（柱が立ってから傘が開く）
   mushroom(dim, pos);
   // 6. 放射性降下物
