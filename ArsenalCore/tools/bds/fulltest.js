@@ -37,8 +37,13 @@ on("shot", () => shots++);
 
 /** 試験場：x -12..44, z -20..20 の石の床、上は空気（シミュレートプレイヤーの周りが読み込まれてから） */
 async function arena() {
-  sim();
+  const p = sim();
+  // 前の段階で遠くへ移っていたら戻し、試験場のチャンクが全部読み込まれるまで待つ
+  if (Math.abs(p.location.x) > 40 || Math.abs(p.location.z) > 40) p.teleport({ x: 0.5, y: Y, z: 0.5 });
+  const cells = [];
+  for (let x = -12; x <= 44; x += 8) for (let z = -20; z <= 20; z += 8) cells.push({ x, y: Y, z });
   await wait(20);
+  for (let t = 0; t < 60 && !cells.every((c) => dim().isChunkLoaded(c)); t++) await wait(10);
   const d = dim();
   d.fillBlocks(new BlockVolume({ x: -12, y: Y - 1, z: -20 }, { x: 44, y: Y - 1, z: 20 }), "minecraft:stone");
   for (let y = Y; y <= Y + 14; y += 5) d.fillBlocks(new BlockVolume({ x: -12, y, z: -20 }, { x: 44, y: Math.min(Y + 18, y + 4), z: 20 }), "minecraft:air");
