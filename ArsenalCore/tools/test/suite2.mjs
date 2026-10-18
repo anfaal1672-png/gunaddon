@@ -409,6 +409,9 @@ export async function suite2(ctx) {
     wall(-3, 3, 64, 66, 12, 12);
     shoot("blink_pistol", { ads: false, after: 4 });
     check("ブリンクピストル：壁の手前へ瞬間移動", player.location.z > 9 && player.location.z < 12, `(z=${player.location.z.toFixed(2)})`);
+    // 実機で見つかった：視線がわずかに下向きだと、足の位置が床にめり込んで移れなかった
+    shoot("blink_pistol", { ads: false, after: 4, rot: { x: 0.5, y: 0 } });
+    check("ブリンクピストル：少し下向きに撃っても床の上に移る", player.location.z > 9 && player.location.z < 12 && player.location.y === 64, `(y=${player.location.y.toFixed(2)} z=${player.location.z.toFixed(2)})`);
     unwall();
     wall(-3, 3, 64, 66, 1, 1);
     const sb = shoot("blink_pistol", { ads: false, after: 4 });

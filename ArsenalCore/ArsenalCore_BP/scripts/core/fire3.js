@@ -17,7 +17,7 @@ import { entitiesInCone } from "./fire2.js";
 import { addOrbital } from "../systems/fields.js";
 import { isSolidBlock } from "../systems/pathfind.js";
 import { emit, playNear, playTo } from "../fx/effects.js";
-import { add, sub, mul, norm, dist, dot, len, loadedReach, faceNormal } from "../util/math.js";
+import { add, sub, mul, norm, dist, dot, len, loadedReach, faceNormal, hitPoint } from "../util/math.js";
 import { W as WS } from "./settings.js";
 import { safe } from "../util/log.js";
 
@@ -64,7 +64,7 @@ export function fireReflect(shooter, eye, dir, st, muzzle) {
     const reach = loadedReach(dim, pos, d, left, system.currentTick);
     if (reach <= 0.05) break;
     const bh = safe("reflect.ray", () => dim.getBlockFromRay(pos, d, { maxDistance: reach, includePassableBlocks: false, includeLiquidBlocks: false }));
-    const wallAt = bh ? add(bh.block.location, bh.faceLocation) : null;
+    const wallAt = bh ? hitPoint(bh) : null;
     const segLen = wallAt ? Math.max(0.05, dist(pos, wallAt) - 0.02) : reach;
     const r = traceHitscan(shooter, pos, d, st, { maxRange: segLen, pen: st.pen, hitSet, mulDmg, silent: seg > 0, noImpact: true });
     beamLine(dim, drawFrom, r.end, color);
@@ -206,7 +206,7 @@ export function fireBlink(player, eye, dir, st) {
   const reach = loadedReach(dim, eye, dir, st.range1, system.currentTick);
   if (reach < 1) return false;
   const bh = safe("blink.ray", () => dim.getBlockFromRay(eye, dir, { maxDistance: reach, includePassableBlocks: false, includeLiquidBlocks: true }));
-  const hit = bh ? add(bh.block.location, bh.faceLocation) : add(eye, mul(dir, reach));
+  const hit = bh ? hitPoint(bh) : add(eye, mul(dir, reach));
   // 床に向けて撃ったら床の上に立つ。壁なら手前に下がりながら立てる場所を探す
   const onFloor = bh && bh.face === "Up";
   /** @type {import("../util/math.js").Vec3|null} */
@@ -217,8 +217,15 @@ export function fireBlink(player, eye, dir, st) {
   }
   for (let back = 0.6; !feet && back < Math.min(6, dist(eye, hit)); back += 0.5) {
     const p = add(hit, mul(dir, -back));
-    const f = { x: p.x, y: p.y - 1.62, z: p.z };
-    if (standable(dim, f)) feet = f;
+    // 足の高さはブロックの上面にそろえる（視線が少しでも下向きだと、目の高さから引いた足が床にめり込む）
+    const base = Math.floor(p.y - 1.62 + 0.5);
+    for (const y of [base, base + 1, base - 1]) {
+      const f = { x: p.x, y, z: p.z };
+      if (standable(dim, f)) {
+        feet = f;
+        break;
+      }
+    }
   }
   if (!feet) return false;
   const from = player.location;
@@ -252,7 +259,7 @@ export function fireHeal(shooter, eye, dir, st, muzzle) {
   const reach = loadedReach(dim, eye, dir, st.range1, system.currentTick);
   if (reach <= 0.1) return "none";
   const bh = safe("heal.ray", () => dim.getBlockFromRay(eye, dir, { maxDistance: reach, includePassableBlocks: false, includeLiquidBlocks: false }));
-  const wall = bh ? dist(eye, add(bh.block.location, bh.faceLocation)) : reach;
+  const wall = bh ? dist(eye, hitPoint(bh)) : reach;
   const hits = safe("heal.ents", () => dim.getEntitiesFromRay(eye, dir, { maxDistance: Math.max(0.1, wall), excludeFamilies: EXCLUDE, excludeTypes: EXCLUDE_T, ignoreBlockCollision: true })) ?? [];
   const h = hits.filter((x) => x.entity.id !== shooter.id).sort((a, b) => a.distance - b.distance)[0];
   const end = h ? add(eye, mul(dir, h.distance)) : add(eye, mul(dir, wall));
@@ -308,7 +315,7 @@ export function fireOrbital(player, eye, dir, st) {
   if (reach < 1) return false;
   const bh = safe("orbital.ray", () => dim.getBlockFromRay(eye, dir, { maxDistance: reach, includePassableBlocks: false, includeLiquidBlocks: true }));
   if (!bh) return false;
-  const at = add(add(bh.block.location, bh.faceLocation), mul(faceNormal(bh.face), 0.1));
+  const at = add(hitPoint(bh), mul(faceNormal(bh.face), 0.1));
   // 空が見えるか（真上に 40 ブロックのあいだ、ふさぐブロックがない）
   const up = loadedReach(dim, at, { x: 0, y: 1, z: 0 }, 40, system.currentTick);
   const roof = up > 0 ? safe("orbital.sky", () => dim.getBlockFromRay(add(at, { x: 0, y: 0.2, z: 0 }), { x: 0, y: 1, z: 0 }, { maxDistance: up, includePassableBlocks: false, includeLiquidBlocks: false })) : undefined;

@@ -11,6 +11,7 @@ import { world, system, ItemStack, BlockVolume, GameMode, Direction } from "@min
 import { spawnSimulatedPlayer } from "@minecraft/server-gametest";
 import { DATA, ammoItemId } from "./config/constants.js";
 import { S } from "./core/state.js";
+import { activeFields } from "./systems/fields.js";
 import { on } from "./core/events.js";
 import { setWorld, setPrefs } from "./core/settings.js";
 import { startReload } from "./core/reload.js";
@@ -766,7 +767,8 @@ async function specials() {
   clearMobs();
   p.teleport(origin);
   const center = target(0.5, 9.5);
-  const zs = free(5.5, 10.5);
+  // 引き寄せるのは歩かない的（ゾンビがプレイヤーへ歩くと吸い込みと打ち消し合う）
+  const zs = target(5.5, 10.5);
   await give("singularity", cell);
   p.lookAtLocation(center.getAABB().center);
   await wait(4);
@@ -794,12 +796,16 @@ async function specials() {
   clearMobs();
   p.teleport(origin);
   const zo = target(0.5, 9.5);
+  // 試験場は山を掘った中にあるので、的の真上の空を開ける（屋根の下には呼べない）
+  fill({ x: -2, y: Y + 15, z: 7 }, { x: 3, y: Y + 45, z: 12 }, "minecraft:air");
   await give("orbital_marker", cell);
   p.lookAtLocation({ x: 0.5, y: Y, z: 9.5 });
   await wait(4);
   const ho = hpOf(zo);
   await fire();
-  await wait(55);
+  await wait(4);
+  log(`orbital: ammo ${S(p).ammo} fields=${activeFields()}`);
+  await wait(51);
   expect("orbital_marker", hpOf(zo) < ho, `hp ${ho} → ${hpOf(zo)}`);
 
   clearMobs();
@@ -807,7 +813,24 @@ async function specials() {
   log(`specials: ok=${ok}/${n}`);
 }
 
-const STAGES = { diag, weapons, melee, throw: throwables, gear, enemies, bosses, structures, streaks, modes, misc, specials };
+/** レイが当たった面の位置（faceLocation）が実機でどう返るか：6 方向から石 1 個に撃つ */
+async function facetest() {
+  const d = dim();
+  const b = { x: 8, y: Y + 4, z: 8 };
+  d.fillBlocks(new BlockVolume({ x: 4, y: Y + 1, z: 4 }, { x: 12, y: Y + 8, z: 12 }), "minecraft:air");
+  d.getBlock(b).setType("minecraft:stone");
+  const c = { x: b.x + 0.5, y: b.y + 0.5, z: b.z + 0.5 };
+  for (const [name, dir] of [["down(Up face)", { x: 0, y: -1, z: 0 }], ["up(Down face)", { x: 0, y: 1, z: 0 }], ["+x(West face)", { x: 1, y: 0, z: 0 }], ["-x(East face)", { x: -1, y: 0, z: 0 }], ["+z(North face)", { x: 0, y: 0, z: 1 }], ["-z(South face)", { x: 0, y: 0, z: -1 }]]) {
+    const o = { x: c.x - dir.x * 3 + 0.13, y: c.y - dir.y * 3 + 0.21, z: c.z - dir.z * 3 + 0.17 };
+    if (dir.x) o.x = c.x - dir.x * 3;
+    if (dir.y) o.y = c.y - dir.y * 3;
+    if (dir.z) o.z = c.z - dir.z * 3;
+    const h = d.getBlockFromRay(o, dir, { maxDistance: 6, includePassableBlocks: false, includeLiquidBlocks: false });
+    log(`face ${name}: face=${h?.face} block=${JSON.stringify(h?.block.location)} fl=${JSON.stringify(h?.faceLocation)}`);
+  }
+}
+
+const STAGES = { diag, weapons, melee, throw: throwables, gear, enemies, bosses, structures, streaks, modes, misc, specials, facetest };
 
 system.afterEvents.scriptEventReceive.subscribe((ev) => {
   if (ev.id !== "dev:full") return;

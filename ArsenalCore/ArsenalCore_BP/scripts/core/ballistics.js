@@ -6,7 +6,7 @@ import { DATA } from "../config/constants.js";
 import { W as WS } from "./settings.js";
 import { bulletHit } from "./damage.js";
 import { impactBlock, playNear, tracer, emit } from "../fx/effects.js";
-import { add, mul, sub, dist, rayExitBlock, faceNormal, norm, dot, loadedReach } from "../util/math.js";
+import { add, mul, sub, dist, rayExitBlock, faceNormal, norm, dot, loadedReach, hitPoint } from "../util/math.js";
 import { safe } from "../util/log.js";
 import { Player, system } from "@minecraft/server";
 
@@ -70,7 +70,7 @@ export function traceHitscan(shooter, origin, dir, st, o = {}) {
       let bpoint = null;
       let bdist = remaining;
       if (bh) {
-        bpoint = add(bh.block.location, bh.faceLocation);
+        bpoint = hitPoint(bh);
         bdist = dist(pos, bpoint);
       }
       const ents = dim.getEntitiesFromRay(pos, dir, {

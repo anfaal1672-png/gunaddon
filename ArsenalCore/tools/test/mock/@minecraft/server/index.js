@@ -294,7 +294,12 @@ export class Dimension {
         const fx = p.x - b.x, fy = p.y - b.y, fz = p.z - b.z;
         const dists = { West: fx, East: 1 - fx, Down: fy, Up: 1 - fy, North: fz, South: 1 - fz };
         const face = Object.entries(dists).sort((a, b2) => a[1] - b2[1])[0][0];
-        return { block: b, face, faceLocation: { x: fx, y: fy, z: fz } };
+        // 実機（BDS 1.26.52）と同じく、面に垂直な軸の値は 0 にする（上・東・南の面でも 1 にならない）
+        const fl = { x: fx, y: fy, z: fz };
+        if (face === "Up" || face === "Down") fl.y = 0;
+        else if (face === "East" || face === "West") fl.x = 0;
+        else fl.z = 0;
+        return { block: b, face, faceLocation: fl };
       }
     }
     return undefined;

@@ -14,7 +14,7 @@ import { traceHitscan, drawTracer, whizzBy, isSupersonic } from "../core/ballist
 import { explode, canDamage, dealDamage, hitFeedback, miniBlast, bulletHit, isArmored, meleeDamage, hitZone } from "../core/damage.js";
 import { isGasImmune } from "../core/armor.js";
 import { emit, playNear, explosionFx, playTo } from "../fx/effects.js";
-import { add, sub, mul, len, norm, dist, dot, faceNormal, rotFromDir, clamp, isLoaded, loadedReach, rand } from "../util/math.js";
+import { add, sub, mul, len, norm, dist, dot, faceNormal, rotFromDir, clamp, isLoaded, loadedReach, rand, hitPoint } from "../util/math.js";
 import { safe } from "../util/log.js";
 import { isSolidBlock, startSearch, cancelSearch, segOk, invalidateCell } from "./pathfind.js";
 import { addSingularity, addStasis, castNet, tranquilize, pin } from "./fields.js";
@@ -129,7 +129,7 @@ function launchPoint(shooter, muzzle) {
   const d = mul(v, 1 / L);
   const hit = safe("proj.launch", () => shooter.dimension.getBlockFromRay(eye, d, { maxDistance: L, includeLiquidBlocks: false, includePassableBlocks: false }));
   if (!hit) return muzzle;
-  const pt = add(hit.block.location, hit.faceLocation);
+  const pt = hitPoint(hit);
   return add(pt, mul(d, -Math.min(0.15, dist(eye, pt) * 0.5)));
 }
 
@@ -323,7 +323,7 @@ function sweep(p, from, step, entities = true) {
     const bh = p.dim.getBlockFromRay(from, d, { maxDistance: L + 0.05, includeLiquidBlocks: false, includePassableBlocks: false });
     let bd = L + 1;
     if (bh) {
-      const pt = add(bh.block.location, bh.faceLocation);
+      const pt = hitPoint(bh);
       bd = dist(from, pt);
       result = { kind: "block", point: pt, normal: faceNormal(bh.face), block: bh.block };
     } else {
@@ -668,7 +668,7 @@ function tickRocket(p) {
       const vd = rider.getViewDirection();
       const reach = loadedReach(rider.dimension, eye, vd, 160, system.currentTick);
       const bh = reach >= 0.5 ? safe("wire.ray", () => rider.dimension.getBlockFromRay(eye, vd, { maxDistance: reach, includePassableBlocks: false, includeLiquidBlocks: false })) : undefined;
-      const aim = bh ? add(bh.block.location, bh.faceLocation) : add(eye, mul(vd, 160));
+      const aim = bh ? hitPoint(bh) : add(eye, mul(vd, 160));
       dir = norm(add(mul(dir, 0.78), mul(norm(sub(aim, p.pos)), 0.22)));
     }
   } else if (p.type === "seeker" && p.data.target) {
@@ -990,13 +990,15 @@ const SPEC_COLOR = {
 
 /**
  * 特殊武器の実体弾を撃つ（射撃方式は st.fire）
- * @param {import("@minecraft/server").Entity} shooter @param {import("../util/math.js").Vec3} muzzle @param {import("../util/math.js").Vec3} dir @param {any} st
+ * @param {import("@minecraft/server").Entity} shooter @param {import("../util/math.js").Vec3} muzzle @param {import("../util/math.js").Vec3} dir0 目からの向き（拡散込み） @param {any} st
  */
-export function fireSpecial(shooter, muzzle, dir, st) {
+export function fireSpecial(shooter, muzzle, dir0, st) {
   const pr = st.projectile ?? {};
   const mode = st.fire;
   const from = launchPoint(shooter, muzzle);
-  if (mode === "swarm") return fireSwarm(shooter, muzzle, dir, st);
+  if (mode === "swarm") return fireSwarm(shooter, muzzle, dir0, st);
+  // 銃口は目の横にあるので、目の視線が当たる点へ向けて撃つ（平行に飛ぶと細い的の端をかすめて外れた）
+  const dir = converge(shooter, from, dir0, st.range1);
   if (mode === "stickybomb") {
     // 投げる粘着爆弾と同じ弾（張り付いてから fuse tick で爆発）
     addProj({ type: "throw", kind: "sticky", dim: shooter.dimension, pos: from, vel: mul(dir, pr.speed ?? 1.4), ownerId: shooter.id, maxAge: 400, fuse: pr.fuse ?? 30, data: { t: { kind: "sticky", power: pr.power ?? 2.4 }, tid: st.id } }, true);
@@ -1009,6 +1011,24 @@ export function fireSpecial(shooter, muzzle, dir, st) {
     maxAge: Math.ceil((st.range1 * (1 + bounces * 0.5)) / speed) + 4,
     data: { st, mode, gravity: pr.gravity ?? 0, bounces, pierce: pr.pierce ?? 0, weaponId: st.id },
   }, true);
+}
+
+/**
+ * 目の視線が最初に当たるもの（相手・ブロック、なければ射程の端）へ、from から向かう向き
+ * @param {import("@minecraft/server").Entity} shooter @param {import("../util/math.js").Vec3} from @param {import("../util/math.js").Vec3} dir @param {number} range
+ */
+function converge(shooter, from, dir, range) {
+  const eye = shooter.getHeadLocation();
+  const reach = loadedReach(shooter.dimension, eye, dir, range, system.currentTick);
+  if (reach < 2) return dir;
+  let d = reach;
+  const bh = safe("conv.block", () => shooter.dimension.getBlockFromRay(eye, dir, { maxDistance: reach, includeLiquidBlocks: false, includePassableBlocks: false }));
+  if (bh) d = Math.min(d, dist(eye, hitPoint(bh)));
+  const hits = safe("conv.ents", () => shooter.dimension.getEntitiesFromRay(eye, dir, { maxDistance: Math.max(0.1, d), ignoreBlockCollision: true, excludeFamilies: ["inanimate", "arsenal_fx", "projectile"], excludeTypes: ["minecraft:item", "minecraft:xp_orb"] })) ?? [];
+  for (const h of hits) if (h.entity.id !== shooter.id && h.distance < d) d = h.distance;
+  const to = sub(add(eye, mul(dir, Math.max(2, d))), from);
+  const L = len(to);
+  return L > 0.5 ? mul(to, 1 / L) : dir;
 }
 
 /**
@@ -1597,7 +1617,7 @@ export function previewTrajectory(player, tid) {
       const bh = dim.getBlockFromRay(pos, mul(vel, 1 / L), { maxDistance: L, includePassableBlocks: false, includeLiquidBlocks: false });
       if (bh) {
         const nrm = faceNormal(bh.face);
-        const pt = add(add(bh.block.location, bh.faceLocation), mul(nrm, 0.05));
+        const pt = add(hitPoint(bh), mul(nrm, 0.05));
         const v = new MolangVariableMap();
         v.setFloat("variable.locked", 0.2);
         player.spawnParticle("arsenal:lock_marker", pt, v);
