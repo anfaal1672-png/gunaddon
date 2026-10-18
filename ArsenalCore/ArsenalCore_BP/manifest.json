@@ -7,7 +7,7 @@
     "version": [
       2,
       6,
-      1
+      2
     ],
     "min_engine_version": [
       1,
@@ -22,7 +22,7 @@
       "version": [
         2,
         6,
-        1
+        2
       ]
     },
     {
@@ -33,7 +33,7 @@
       "version": [
         2,
         6,
-        1
+        2
       ]
     }
   ],
@@ -43,7 +43,7 @@
       "version": [
         2,
         6,
-        1
+        2
       ]
     },
     {
@@ -63,7 +63,7 @@
     "product_type": "addon",
     "generated_with": {
       "arsenal_core_build": [
-        "2.6.1"
+        "2.6.2"
       ]
     }
   }

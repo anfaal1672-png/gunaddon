@@ -632,6 +632,38 @@ export async function suite2(ctx) {
   }
 
   // =====================================================================
+  console.log("2.6.2 弾の見た目");
+  // =====================================================================
+  {
+    const bal = await imp("core/ballistics.js");
+    const fx0 = settings.P(player).fxQuality;
+    settings.setPrefs(player, { fxQuality: "high" });
+    const cnt = (id) => LOG.particleIds[id] ?? 0;
+    const shot = (st, key) => {
+      const ids = ["arsenal:bullet_streak", "arsenal:tracer_round", "arsenal:tracer", "arsenal:bullet_haze"];
+      const before = Object.fromEntries(ids.map((id) => [id, cnt(id)]));
+      __tick(1); // 届け先の一覧を新しくする
+      bal.drawTracer(player, { x: player.location.x, y: player.location.y + 1.5, z: player.location.z }, { x: player.location.x, y: player.location.y + 1.5, z: player.location.z + 30 }, st, true, key);
+      return Object.fromEntries(ids.map((id) => [id.replace("arsenal:", ""), cnt(id) - before[id]]));
+    };
+    const ball = shot({ cat: "assault", ammoFamily: "medium" }, 0);
+    check("普通弾は淡い筋だけ（光る曳光ではない）", ball.bullet_streak === 1 && ball.tracer_round === 0 && ball.tracer === 0, JSON.stringify(ball));
+    const tr = shot({ cat: "assault", ammoFamily: "medium", tracerAlways: true }, 1);
+    check("曳光弾の弾薬は光る曳光弾", tr.tracer_round === 1 && tr.bullet_streak === 0, JSON.stringify(tr));
+    const cell = shot({ cat: "assault", ammoFamily: "cell" }, 0);
+    check("エネルギー弾薬は光の筋", cell.tracer === 1 && cell.bullet_streak === 0, JSON.stringify(cell));
+    let belt = 0;
+    for (let i = 0; i < 10; i++) belt += shot({ cat: "lmg", ammoFamily: "medium" }).tracer_round;
+    check("機関銃は 5 発に 1 発が曳光弾", belt === 2, `(${belt}/10)`);
+    const sn = shot({ cat: "sniper", ammoFamily: "heavy" }, 0);
+    check("狙撃銃は弾道に空気の揺らぎを残す", sn.bullet_haze === 1 && sn.bullet_streak === 1, JSON.stringify(sn));
+    settings.setPrefs(player, { fxQuality: "low" });
+    const low = shot({ cat: "sniper", ammoFamily: "heavy" }, 0);
+    check("演出品質「低」では揺らぎを出さない（弾の筋は出す）", low.bullet_haze === 0 && low.bullet_streak === 1, JSON.stringify(low));
+    settings.setPrefs(player, { fxQuality: fx0 });
+  }
+
+  // =====================================================================
   console.log("2.6 核爆弾・ミサイル");
   // =====================================================================
   {
@@ -819,7 +851,7 @@ export async function suite2(ctx) {
     check("HUD 2.0：タイトルに AC2. と目印を付けて送る", tt.some((x) => x.startsWith("AC2.") && x.includes("§a§r§s§n")), JSON.stringify(tt.slice(0, 1)));
     // 毎 tick 変わる値（照準の広がり・方位）はサブタイトル。タイトルでは固定なので、向きを変えてもタイトルは送らない
     const lastT = LOG.titles.at(-1);
-    check("HUD 2.0：照準と方位はサブタイトルで送る（AC2L・目印付き）", typeof lastT?.o?.subtitle === "string" && lastT.o.subtitle.startsWith("AC2L.") && /~\d{1,3}(?!\d)/.test(lastT.o.subtitle) && lastT.o.subtitle.includes("§a§r§s§n"), JSON.stringify(lastT?.o?.subtitle));
+    check("HUD 2.0：照準と方位はサブタイトルで送る（AC2L・目印付き）", typeof lastT?.o?.subtitle === "string" && lastT.o.subtitle.startsWith("AC2L.") && /~[A-Z]{2}\^/.test(lastT.o.subtitle) && lastT.o.subtitle.includes("§a§r§s§n"), JSON.stringify(lastT?.o?.subtitle));
     const decT = hud2.decodeHud2(lastT.t);
     check("HUD 2.0：タイトルの照準・方位は固定", decT.hdg === "---" && decT.xh === "-", JSON.stringify({ hdg: decT.hdg, xh: decT.xh }));
     s.hud2Tick = system.currentTick;
@@ -832,11 +864,35 @@ export async function suite2(ctx) {
     check("HUD 2.0：向きを変えただけならタイトルは送らず、サブタイトルだけ差し替える", LOG.titles.length === tc && LOG.subtitles.length >= sc + 2 && LOG.subtitles.at(-1).startsWith("AC2L."), `(titles +${LOG.titles.length - tc}, subtitles +${LOG.subtitles.length - sc})`);
     __tick(1);
     check("HUD 2.0：向きが変わらなければサブタイトルも送らない", LOG.subtitles.length === sc + 2);
-    // 実機の JSON UI は '090' を 90 にしてから画像名につなぐので、方位は 0 埋めしない（2.6.0 で 0〜99 が見つからない画像になった）
-    check("HUD 2.0：方位は 0 埋めしない（120° → 60、画像 compass_60）", hud2.liveHeading(LOG.subtitles.at(-1)) === "60", JSON.stringify(LOG.subtitles.at(-1)));
+    // 方位は英字 2 文字（数字で送ると実機の JSON UI が '090' を 90 にする。ダメージの数字とも分けられない）
+    check("HUD 2.0：方位は英字 2 文字（120° → 60 → CI）", hud2.liveHeading(LOG.subtitles.at(-1)) === "60" && LOG.subtitles.at(-1).includes("~CI^"), JSON.stringify(LOG.subtitles.at(-1)));
     player.setRotation({ x: 0, y: 10 });
     __tick(1);
-    check("HUD 2.0：方位 10° → 5（005 ではない）", hud2.liveHeading(LOG.subtitles.at(-1)) === "5", JSON.stringify(LOG.subtitles.at(-1)));
+    check("HUD 2.0：方位 10° → 5 → AF", hud2.liveHeading(LOG.subtitles.at(-1)) === "5" && LOG.subtitles.at(-1).includes("~AF^"), JSON.stringify(LOG.subtitles.at(-1)));
+    // 与えたダメージ：続けて当てると足し、頭は黄、倒すと赤。1.5 秒空くと消える
+    const dmgMod = await imp("core/damage.js");
+    const dmgPref = settings.P(player).damageNumbers;
+    settings.setPrefs(player, { damageNumbers: true });
+    check("HUD 2.0：当てる前はダメージ表示なし", hud2.liveDamage(s.hud2Live) === "", JSON.stringify(s.hud2Live));
+    dmgMod.hitFeedback(player, "hit", 7.4);
+    __tick(1);
+    check("HUD 2.0：当てるとダメージ（白）", hud2.liveDamage(s.hud2Live) === "§f7", JSON.stringify(s.hud2Live));
+    dmgMod.hitFeedback(player, "head", 15.2);
+    __tick(1);
+    check("HUD 2.0：続けて当てると足す。頭なら黄", hud2.liveDamage(s.hud2Live) === "§e23", JSON.stringify(s.hud2Live));
+    dmgMod.hitFeedback(player, "kill", 30);
+    __tick(1);
+    check("HUD 2.0：倒すと赤", hud2.liveDamage(s.hud2Live) === "§c53", JSON.stringify(s.hud2Live));
+    dmgMod.hitFeedback(player, "hit", 5);
+    __tick(1);
+    check("HUD 2.0：倒した後は次の相手から数え直す", hud2.liveDamage(s.hud2Live) === "§f5", JSON.stringify(s.hud2Live));
+    __tick(32);
+    check("HUD 2.0：1.5 秒空くとダメージ表示が消える", hud2.liveDamage(s.hud2Live) === "", JSON.stringify(s.hud2Live));
+    settings.setPrefs(player, { damageNumbers: false });
+    dmgMod.hitFeedback(player, "hit", 9);
+    __tick(1);
+    check("HUD 2.0：ダメージ数字の設定を切ると出さない", hud2.liveDamage(s.hud2Live) === "", JSON.stringify(s.hud2Live));
+    settings.setPrefs(player, { damageNumbers: dmgPref });
     player.setRotation({ x: 0, y: 0 });
     const a0 = LOG.actionbar.length;
     hud2.announce(player, "hello", 20);

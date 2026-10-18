@@ -655,6 +655,7 @@ PARTICLE_CELLS = {
     "soft": (0, 0), "flash": (1, 0), "spark": (2, 0), "smoke0": (3, 0), "smoke1": (4, 0), "smoke2": (5, 0), "smoke3": (6, 0), "ring": (7, 0),
     "casing": (0, 1), "shell": (1, 1), "square": (2, 1), "tracer": (3, 1), "star": (4, 1), "flake": (5, 1), "bolt": (6, 1), "dot": (7, 1),
     "flame0": (0, 2), "flame1": (1, 2), "flame2": (2, 2), "flame3": (3, 2), "drop": (4, 2), "debris": (5, 2), "hex": (6, 2), "cross": (7, 2),
+    "streak": (0, 3), "tracer_core": (1, 3), "haze": (2, 3),
 }
 
 
@@ -807,6 +808,28 @@ def particle_atlas():
     for i in range(8):
         px[ox + i, oy + i] = (255, 255, 255, 255)
         px[ox + 7 - i, oy + i] = (255, 255, 255, 255)
+    # 弾の筋（2.6.2）：x が太さ方向、y が進む方向（lookat_direction の板）。
+    # 普通弾：芯は 2 px、縦は端ほど薄い（一瞬だけ見える熱い筋）
+    ox, oy = cell("streak")
+    for y in range(8):
+        along = max(0.0, 1 - abs(y - 3.5) / 4.0) ** 0.6
+        for x in range(8):
+            across = max(0.0, 1 - abs(x - 3.5) / 1.6)
+            px[ox + x, oy + y] = (255, 255, 255, _clamp(255 * across * along))
+    # 曳光弾の芯：白く焼けた芯（太さ 2 px）と、縦に長い明るさ（端だけ落とす）
+    ox, oy = cell("tracer_core")
+    for y in range(8):
+        along = 1.0 if 1 <= y <= 6 else 0.45
+        for x in range(8):
+            d = abs(x - 3.5)
+            a = 1.0 if d < 1 else max(0.0, 1 - (d - 1) / 2.2) * 0.6
+            px[ox + x, oy + y] = (255, 255, 255, _clamp(255 * a * along))
+    # 空気の揺らぎ：太さ方向にだけぼかした薄い帯（縦は一様）
+    ox, oy = cell("haze")
+    for y in range(8):
+        for x in range(8):
+            a = max(0.0, 1 - abs(x - 3.5) / 3.8) ** 1.5
+            px[ox + x, oy + y] = (255, 255, 255, _clamp(255 * a))
     return img
 
 

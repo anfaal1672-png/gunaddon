@@ -16,7 +16,7 @@ import { world, system, Entity, EntityDamageCause, GameMode, Player } from "@min
 import { W as WS } from "./settings.js";
 import { S } from "./state.js";
 import { playTo, impactEntity, playNear, emit, explosionFx } from "../fx/effects.js";
-import { ENTITY, NS, enemyIdOf, enemyDef } from "../config/constants.js";
+import { DATA, ENTITY, NS, enemyIdOf, enemyDef } from "../config/constants.js";
 import { safe } from "../util/log.js";
 import { t, raw, itemName } from "../util/i18n.js";
 import { clamp, isLoaded, dist, sub, norm, dot } from "../util/math.js";
@@ -444,6 +444,9 @@ export function hitFeedback(shooter, kind, dmg) {
   const now = system.currentTick;
   const prev = s.hit && now - s.hit.tick < 6 ? s.hit.dmg : 0;
   s.hit = { tick: now, kind: s.hit && s.hit.kind === "kill" && now - s.hit.tick < 12 ? "kill" : kind, dmg: prev + dmg };
+  // HUD 2.0 のダメージ表示：続けて当てた分を足す（1.5 秒空くか、倒したら次の相手から数え直す）。色は頭・キルを優先
+  const c = s.dmgCombo && now - s.dmgCombo.tick <= DATA.HUD2.dmgTicks && s.dmgCombo.kind !== "kill" ? s.dmgCombo : null;
+  s.dmgCombo = { tick: now, total: (c ? c.total : 0) + dmg, kind: kind === "kill" ? "kill" : kind === "head" || c?.kind === "head" ? "head" : "hit" };
   s.hudDirty = true;
   const snd = kind === "kill" ? "arsenal.fx.kill" : kind === "head" ? "arsenal.fx.headshot" : "arsenal.fx.hit";
   playTo(shooter, snd, { volume: kind === "hit" ? 0.55 : 0.8 });
