@@ -423,8 +423,9 @@ async function structures() {
     p.teleport({ x: at.x - 6, y: Y + 4, z: at.z - 6 });
     // シムが移っただけでは周りのチャンクがすぐには読み込まれないので、ティッキングエリアにして待つ
     dim().runCommand(`tickingarea add ${at.x - 8} 0 ${at.z - 8} ${at.x + 40} 0 ${at.z + 40} qa_site`);
-    const corners = [{ x: at.x - 4, y: Y, z: at.z - 4 }, { x: at.x + 30, y: Y, z: at.z + 30 }, { x: at.x + 30, y: Y, z: at.z - 4 }, { x: at.x - 4, y: Y, z: at.z + 30 }];
-    for (let t = 0; t < 30 && !corners.every((c) => dim().isChunkLoaded(c)); t++) await wait(10);
+    const cells = [];
+    for (let x = at.x - 4; x <= at.x + 46; x += 8) for (let z = at.z - 4; z <= at.z + 46; z += 8) cells.push({ x, y: Y, z });
+    for (let t = 0; t < 60 && !cells.every((c) => dim().isChunkLoaded(c)); t++) await wait(10);
     dim().fillBlocks(new BlockVolume({ x: at.x - 4, y: Y - 1, z: at.z - 4 }, { x: at.x + 30, y: Y - 1, z: at.z + 30 }), "minecraft:stone");
     let r;
     try {
