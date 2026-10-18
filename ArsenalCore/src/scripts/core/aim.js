@@ -13,6 +13,7 @@ import { DATA } from "../config/constants.js";
 import { fp_step } from "../util/fpstep.js";
 import { safe } from "../util/log.js";
 import { tickPathLock, clearPathLock } from "./pathlock.js";
+import { tickSmart, clearSmart } from "./fire3.js";
 
 const BASE_SPEED = 0.1;
 
@@ -195,6 +196,7 @@ export function tickAim(player, s, st) {
       s.lockTarget = null;
       s.lockTicks = 0;
       clearPathLock(player);
+      clearSmart(player.id);
       playAds(player, s, st);
     } else {
       stopAds(player, s);
@@ -208,6 +210,7 @@ export function tickAim(player, s, st) {
       s.lockTarget = null;
       s.lockTicks = 0;
       clearPathLock(player);
+      clearSmart(player.id);
       safe("stopShake", () => player.camera.stopShaking());
     }
   } else if (want && s.fovApplied && s.fovValue !== fov && prefs.fovZoom) {
@@ -243,6 +246,7 @@ export function tickAim(player, s, st) {
       }
     }
     if (st.fire === "pathfinder") tickPathLock(player, s, st);
+    else if (st.fire === "smart") safe("smart", () => tickSmart(player, st));
     else if (st.lockTicks > 0) tickLock(player, s, st);
   }
   if (!s.ads && s.rangeDist >= 0) s.rangeDist = -1;

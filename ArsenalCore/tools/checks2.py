@@ -248,7 +248,8 @@ def check_role_overlap(data):
 #  22. 容量
 # ---------------------------------------------------------------------------
 # 2.3 で武器 114・迷彩 12 に増やしたため items / attachables を引き上げ（DESIGN_DECISIONS.md 2.15）
-BUDGET = {"mcaddon_mb": 40.0, "textures_mb": 24.0, "sound_files": 450, "items": 2200, "attachables": 2000, "entities": 120, "files": 9000}
+# 2.5 で特殊武器を 24 種（1 挺あたりアイテム・アタッチャブル 15 ずつ）増やしたため、もう一度引き上げ（DESIGN_DECISIONS.md 2.19）
+BUDGET = {"mcaddon_mb": 40.0, "textures_mb": 24.0, "sound_files": 450, "items": 2400, "attachables": 2200, "entities": 120, "files": 9000}
 
 
 def check_capacity(bp, rp, pack_fn):

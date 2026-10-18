@@ -281,6 +281,268 @@ export async function suite2(ctx) {
   }
 
   // =====================================================================
+  console.log("2.5 特殊武器");
+  // =====================================================================
+  {
+    const fields = await imp("systems/fields.js");
+    const fire3 = await imp("core/fire3.js");
+    const fire2 = await imp("core/fire2.js");
+    const savedInv = inv.items.slice();
+    const savedSlot = player.selectedSlotIndex;
+    const savedLoc = { ...player.location };
+    const placed = [];
+    const wall = (x0, x1, y0, y1, z0, z1) => {
+      for (let x = x0; x <= x1; x++) for (let y = y0; y <= y1; y++) for (let z = z0; z <= z1; z++) {
+        dim.blocks.set(`${x},${y},${z}`, "minecraft:stone");
+        placed.push(`${x},${y},${z}`);
+      }
+    };
+    const unwall = () => { for (const k of placed.splice(0)) dim.blocks.delete(k); };
+    // 1 挺持たせて、覗いて（ads）撃つ。弾は満タン
+    const shoot = (wid, { ads = true, hold = 2, after = 20, rot = { x: 0, y: 0 } } = {}) => {
+      clearInv();
+      reset();
+      inv.items[0] = new ItemStack(`arsenal:${wid}`, 1);
+      inv.items[9] = new ItemStack("arsenal:energy_cell", 64);
+      player.selectedSlotIndex = 0;
+      player.setRotation(rot);
+      __tick(3);
+      const s = S(player);
+      s.ammo = s.stats.mag;
+      s.overheatUntil = 0;
+      s.heat = 0;
+      s.cooldownUntil = 0;
+      player.isSneaking = ads;
+      // 持ち替えてから構え終わるまで待つ（覗かない場合も）
+      __tick(ads ? (s.stats.adsTime ?? 4) + 4 : 10);
+      const ev = { source: player, itemStack: inv.getItem(0), useDuration: 72000 };
+      world.afterEvents.itemStartUse.fire(ev);
+      __tick(hold);
+      world.afterEvents.itemStopUse.fire(ev);
+      __tick(after);
+      player.isSneaking = false;
+      return s;
+    };
+    const hp = (e) => (e.isValid ? e.health.currentValue : 0);
+    const eff = (e, id) => e.getEffect(id)?.amplifier ?? -1;
+
+    // リコシェディスク：正面の壁で跳ね返り、後ろの敵に当たる
+    wall(-3, 3, 64, 66, 6, 6);
+    const zb = zombie(0.5, -5.5, 40);
+    const ric0 = LOG.sounds["arsenal.fx.ricochet"] ?? 0;
+    shoot("ricochet_disc", { after: 30 });
+    check("リコシェディスク：壁で跳ね返って後ろの敵に当たる", hp(zb) < 40 && (LOG.sounds["arsenal.fx.ricochet"] ?? 0) > ric0, `(hp=${hp(zb)})`);
+    zb.remove();
+    unwall();
+    const za = zombie(0.5, 4.5, 40), zc = zombie(0.5, 8.5, 40);
+    shoot("ricochet_disc");
+    check("リコシェディスク：一直線の 2 体を貫く", hp(za) < 40 && hp(zc) < 40, `(hp=${hp(za)},${hp(zc)})`);
+    za.remove(); zc.remove();
+
+    // シンギュラリティ：着弾点のまわりを吸い込み、3 秒後に押しつぶす
+    const zs = zombie(0.5, 6.5, 200), zn = zombie(3.5, 7.5, 200);
+    shoot("singularity", { after: 12 });
+    check("シンギュラリティ：着弾点に重力井戸ができる", fields.activeFields() >= 1);
+    const kn = (zn.knocks ?? []).slice(-1)[0];
+    check("シンギュラリティ：近くの敵を中心へ引き寄せる（-x 向き）", !!kn && kn.x < 0, JSON.stringify(kn));
+    const hpn = hp(zn);
+    __tick(60);
+    check("シンギュラリティ：最後に押しつぶして周りにもダメージ", hp(zn) < hpn && fields.activeFields() === 0, `(hp ${hpn} → ${hp(zn)})`);
+    zs.remove(); zn.remove();
+
+    // スウォームランチャー：前方の 3 体へ 1 発ずつ
+    const sw = [zombie(-4.5, 12.5, 60), zombie(0.5, 14.5, 60), zombie(5.5, 12.5, 60)];
+    inv.items[9] = undefined;
+    shoot("swarm_launcher", { after: 2 });
+    inv.items[9] = new ItemStack("arsenal:ammo_rocket", 8);
+    __tick(80);
+    check("スウォームランチャー：前方の 3 体それぞれに当たる", sw.every((z) => hp(z) < 60), sw.map(hp).join(","));
+    for (const z of sw) z.remove();
+
+    // スマートピストル：覗くと照準の外の 2 体をロックし、撃つとそれぞれに当たる
+    const sm = [zombie(-3.5, 10.5, 40), zombie(4.5, 10.5, 40)];
+    clearInv(); reset();
+    inv.items[0] = new ItemStack("arsenal:smart_pistol", 1);
+    inv.items[9] = new ItemStack("arsenal:ammo_light", 64);
+    player.selectedSlotIndex = 0;
+    __tick(3);
+    const ss = S(player);
+    ss.ammo = ss.stats.mag;
+    player.isSneaking = true;
+    __tick(16);
+    check("スマートピストル：視界の 2 体をロック", fire3.smartLocked(player.id, ss.stats) === 2, `(${fire3.smartLocked(player.id, ss.stats)})`);
+    for (let i = 0; i < 2; i++) {
+      const ev = { source: player, itemStack: inv.getItem(0), useDuration: 72000 };
+      world.afterEvents.itemStartUse.fire(ev);
+      __tick(2);
+      world.afterEvents.itemStopUse.fire(ev);
+      __tick(6);
+    }
+    check("スマートピストル：撃つとロックした 2 体に順に当たる（照準の中心は空）", sm.every((z) => hp(z) < 40), sm.map(hp).join(","));
+    // 壁の向こうはロックしない
+    wall(-6, -1, 64, 66, 7, 7);
+    __tick(12);
+    check("スマートピストル：壁に隠れた敵はロックしない", fire3.smartLocked(player.id, ss.stats) === 1, `(${fire3.smartLocked(player.id, ss.stats)})`);
+    player.isSneaking = false;
+    __tick(3);
+    check("スマートピストル：覗くのをやめるとロックを外す", fire3.smartLocked(player.id, ss.stats) === 0);
+    unwall();
+    for (const z of sm) z.remove();
+
+    // リフレクター：正面の壁で反射して後ろの敵に当たり、反射ぶん威力が上がる
+    wall(-3, 3, 64, 66, 6, 6);
+    const zr = zombie(0.5, -4.5, 100);
+    const rs = shoot("reflector", { after: 4 });
+    const lost = 100 - hp(zr);
+    check("リフレクター：壁で反射して後ろの敵に当たる", lost > 0, `(dealt=${lost})`);
+    check("リフレクター：反射したぶん威力が上がる（6 × 1.25 以上）", lost >= rs.stats.dmg * 1.25 - 0.01, `(dealt=${lost.toFixed(2)})`);
+    zr.remove();
+    unwall();
+
+    // プリズムスキャッター：近い敵には何本も当たる
+    const zp = zombie(0.5, 3.5, 100);
+    shoot("prism_scatter", { after: 4 });
+    check("プリズムスキャッター：近い敵に複数本当たる（1 本ぶんより多い）", 100 - hp(zp) > 3.2 * 1.5, `(dealt=${(100 - hp(zp)).toFixed(2)})`);
+    zp.remove();
+
+    // ブリンクピストル：撃った先（壁の手前）へ移る。壁が目の前なら移らず弾も減らない
+    wall(-3, 3, 64, 66, 12, 12);
+    shoot("blink_pistol", { ads: false, after: 4 });
+    check("ブリンクピストル：壁の手前へ瞬間移動", player.location.z > 9 && player.location.z < 12, `(z=${player.location.z.toFixed(2)})`);
+    unwall();
+    wall(-3, 3, 64, 66, 1, 1);
+    const sb = shoot("blink_pistol", { ads: false, after: 4 });
+    check("ブリンクピストル：移れる場所がなければ移らず弾を戻す", player.location.z < 1 && sb.ammo === sb.stats.mag, `(z=${player.location.z.toFixed(2)} ammo=${sb.ammo})`);
+    unwall();
+
+    // メディックビーム：味方を回復し、自分の設置物を直し、敵には熱線
+    const mate = new Player(dim);
+    mate.name = "Mate";
+    world.players.push(mate);
+    mate.location = { x: 0.5, y: 64, z: 6.5 };
+    mate.health.currentValue = 6;
+    const pvp0 = world.gameRules.pvp;
+    world.gameRules.pvp = false;
+    shoot("medic_beam", { hold: 20, after: 2 });
+    world.gameRules.pvp = pvp0;
+    check("メディックビーム：味方の体力を回復", mate.health.currentValue > 6, `(hp=${mate.health.currentValue})`);
+    mate.remove();
+    world.players.splice(world.players.indexOf(mate), 1);
+    const zm = zombie(0.5, 6.5, 40);
+    shoot("medic_beam", { hold: 10, after: 2 });
+    check("メディックビーム：敵には熱線（弱いダメージ）", hp(zm) < 40);
+    zm.remove();
+
+    // ネットランチャー：着弾点のまわりを動けなくする
+    const z1 = zombie(0.5, 8.5, 40), z2 = zombie(2.0, 8.5, 40);
+    shoot("net_launcher", { after: 16 });
+    check("ネットランチャー：当たった敵と隣の敵が動けない（鈍足 7）", eff(z1, "slowness") >= 6 && eff(z2, "slowness") >= 6, `(${eff(z1, "slowness")},${eff(z2, "slowness")})`);
+    z1.remove(); z2.remove();
+
+    // ステイシス：フィールドの中の敵はほとんど動けない
+    const zt = zombie(0.5, 8.5, 60), zt2 = zombie(3.0, 9.5, 60);
+    shoot("stasis_projector", { after: 16 });
+    check("ステイシス：フィールドの中の敵を強く減速（鈍足 6）", eff(zt2, "slowness") >= 5, `(${eff(zt2, "slowness")})`);
+    __tick(130);
+    check("ステイシス：6 秒で消える", fields.activeFields() === 0);
+    zt.remove(); zt2.remove();
+
+    // アシッドスプレー：毒と腐食（受けるダメージ 1.25 倍）
+    const zx = zombie(0.5, 4.5, 100);
+    shoot("acid_sprayer", { hold: 4, after: 2 });
+    check("アシッドスプレー：毒と腐食", eff(zx, "poison") >= 0 && dmg.isCorroded(zx.id));
+    const h0 = hp(zx);
+    dmg.dealDamage(player, zx, 4, {});
+    check("腐食中は受けるダメージが 1.25 倍", Math.abs(h0 - hp(zx) - 4 * dmg.CORRODE_MUL) < 0.01, `(dealt=${(h0 - hp(zx)).toFixed(2)})`);
+    zx.remove();
+
+    // オービタルマーカー：空の見える地面に 2 秒後に落ちる。屋根の下には呼べない
+    const zo = zombie(0.5, 6.5, 100);
+    shoot("orbital_marker", { ads: false, after: 2, rot: { x: 14, y: 0 } });
+    check("オービタルマーカー：地面に印を付ける", fields.activeFields() === 1, `(fields=${fields.activeFields()})`);
+    const ho = hp(zo);
+    __tick(45);
+    check("オービタルマーカー：2 秒後に光の柱でダメージ", hp(zo) < ho, `(hp ${ho} → ${hp(zo)})`);
+    zo.remove();
+    wall(-8, 8, 70, 70, -2, 16);
+    const so = shoot("orbital_marker", { ads: false, after: 2, rot: { x: 14, y: 0 } });
+    check("オービタルマーカー：屋根の下には呼べず、弾を戻す", fields.activeFields() === 0 && so.ammo === so.stats.mag);
+    unwall();
+
+    // EMP ブラスター：着弾点で EMP
+    const emp0 = LOG.particleIds["arsenal:emp_wave"] ?? 0;
+    const ze = zombie(0.5, 8.5, 40);
+    shoot("emp_blaster", { after: 12 });
+    check("EMP ブラスター：着弾点で EMP が起きる", (LOG.particleIds["arsenal:emp_wave"] ?? 0) > emp0 && hp(ze) < 40);
+    ze.remove();
+
+    // トランキライザー：当たって 2 秒後に眠らせる
+    const zq = zombie(0.5, 10.5, 40);
+    shoot("tranq_rifle", { after: 10 });
+    check("トランキライザー：当たった直後はまだ眠らない", eff(zq, "slowness") < 6 && hp(zq) < 40);
+    __tick(45);
+    check("トランキライザー：2 秒後に眠る（動けない）", eff(zq, "slowness") >= 6);
+    zq.remove();
+
+    // スティッキーランチャー：壁に張り付いて 1.5 秒後に爆発
+    wall(-3, 3, 64, 66, 8, 8);
+    inv.items[9] = undefined;
+    const ex0 = LOG.explosions.length;
+    clearInv();
+    inv.items[8] = new ItemStack("arsenal:ammo_40mm", 16);
+    shoot("sticky_launcher", { after: 10 });
+    check("スティッキーランチャー：張り付いてすぐには爆発しない", LOG.explosions.length === ex0);
+    __tick(40);
+    check("スティッキーランチャー：1.5 秒後に爆発", LOG.explosions.length > ex0);
+    unwall();
+
+    // クラスターキャノン：着弾で炸裂し、子弾も爆発する
+    const ex1 = LOG.explosions.length;
+    shoot("cluster_cannon", { after: 30, rot: { x: 20, y: 0 } });
+    __tick(60);
+    check("クラスターキャノン：炸裂して子弾も爆発（2 回以上）", LOG.explosions.length - ex1 >= 2, `(${LOG.explosions.length - ex1})`);
+
+    // ハープーンガン：後ろに壁があれば縫い付け、なければ引き寄せる
+    wall(-3, 3, 64, 66, 10, 10);
+    const zh = zombie(0.5, 8.6, 60);
+    shoot("harpoon_gun", { ads: false, after: 10 });
+    check("ハープーンガン：後ろに壁があれば縫い付ける（動けない）", hp(zh) < 60 && eff(zh, "slowness") >= 6);
+    zh.remove();
+    unwall();
+    const zh2 = zombie(0.5, 8.6, 60);
+    shoot("harpoon_gun", { ads: false, after: 10 });
+    const kh = (zh2.knocks ?? []).slice(-1)[0];
+    check("ハープーンガン：壁がなければ手前へ引き寄せる", !!kh && kh.z < 0 && eff(zh2, "slowness") < 6, JSON.stringify(kh));
+    zh2.remove();
+
+    // ライトニングガン：照射した敵から隣の敵へ連鎖
+    const zl1 = zombie(0.5, 8.5, 60), zl2 = zombie(3.0, 9.5, 60);
+    shoot("lightning_gun", { hold: 10, after: 2 });
+    check("ライトニングガン：隣の敵へ連鎖する", hp(zl1) < 60 && hp(zl2) < 60, `(${hp(zl1)},${hp(zl2)})`);
+    zl1.remove(); zl2.remove();
+
+    // クライオビーム：当て続けると凍る
+    const zf = zombie(0.5, 8.5, 200);
+    shoot("cryo_beam", { hold: 40, after: 1 });
+    check("クライオビーム：当て続けると凍る（鈍足 5・採掘速度低下）", fire2.chillLevel(zf.id) === 4 && eff(zf, "slowness") >= 4 && eff(zf, "mining_fatigue") >= 0, `(lv=${fire2.chillLevel(zf.id)})`);
+    zf.remove();
+
+    // ボルテックスキャノン：細く遠く（20 ブロック先まで届き、横の敵には当たらない）
+    const zv1 = zombie(0.5, 20.5, 60), zv2 = zombie(6.5, 8.5, 60);
+    shoot("vortex_cannon", { after: 4 });
+    check("ボルテックスキャノン：20 ブロック先まで届き、横の敵には当たらない", hp(zv1) < 60 && hp(zv2) === 60, `(${hp(zv1)},${hp(zv2)})`);
+    zv1.remove(); zv2.remove();
+
+    killAllArsenal();
+    clearInv();
+    for (let i = 0; i < savedInv.length; i++) inv.items[i] = savedInv[i];
+    player.selectedSlotIndex = savedSlot;
+    player.location = savedLoc;
+    player.setRotation({ x: 0, y: 0 });
+    __tick(3);
+  }
+
+  // =====================================================================
   console.log("HUD 2.0");
   // =====================================================================
   {

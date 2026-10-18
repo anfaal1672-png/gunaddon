@@ -28,6 +28,8 @@ UI = {
     "arsenal.ui.jammed": ("JAMMED!", "ジャム発生！"),
     "arsenal.ui.jammed_hint": ("JAM - double-tap sneak to clear", "ジャム - スニーク2回で排莢"),
     "arsenal.ui.overheated": ("OVERHEATED", "オーバーヒート"),
+    "arsenal.ui.no_sky": ("No open sky above the target", "目標の真上に空が見えない"),
+    "arsenal.ui.blink_blocked": ("Nowhere to land", "移れる場所がない"),
     "arsenal.ui.broken": ("Weapon broken - repair it", "武器が壊れている - 修理が必要"),
     "arsenal.ui.empty": ("EMPTY", "弾切れ"),
     "arsenal.ui.no_ammo": ("No ammo", "弾薬がない"),

@@ -2,6 +2,7 @@
 /**
  * スクリプト駆動の実体弾：弾道落下する狙撃弾、40mm（跳ねるグレネード）、ロケット、誘導ロケット（上から落ちる型）、
  * 照明弾、グラップル、プラズマ、追尾ニードル、迫撃砲弾、有線誘導ミサイル、
+ * 2.5 の特殊武器の弾（跳ね返る刃・重力井戸・時間減速・網・EMP 弾・麻酔ダーツ・銛・粘着弾・クラスター弾・小型ミサイルの群れ）、
  * 投擲物（手榴弾・スモーク・フラッシュ・火炎瓶・粘着・C4・ガス・EMP・クラスター・デコイ・スナップ・投げナイフ）と設置物（地雷）。
  * エンジンの投射物を使わず、毎 tick レイで衝突判定して跳ね返り・貼り付き・起爆を制御する。
  * 撃ち手はプレイヤーに限らない（敵 AI・砲台・銃座も同じ弾を使う）。
@@ -16,6 +17,7 @@ import { emit, playNear, explosionFx, playTo } from "../fx/effects.js";
 import { add, sub, mul, len, norm, dist, dot, faceNormal, rotFromDir, clamp, isLoaded, loadedReach, rand } from "../util/math.js";
 import { safe } from "../util/log.js";
 import { isSolidBlock, startSearch, cancelSearch, segOk, invalidateCell } from "./pathfind.js";
+import { addSingularity, addStasis, castNet, tranquilize, pin } from "./fields.js";
 
 /** 風（ワールド全体でゆっくり変わる。ブロック/tick²） */
 const wind = { x: 0, z: 0, tx: 0, tz: 0 };
@@ -528,6 +530,7 @@ function tickOne(p) {
   if (p.age > p.maxAge) {
     if (p.type === "throw" && p.data.t.kind !== "c4" && p.data.t.kind !== "sticky" && p.data.t.kind !== "knife") detonate(p);
     else if (p.type === "rocket" || p.type === "seeker" || p.type === "pathfinder" || p.type === "mortar") detonate(p);
+    else if (p.type === "spec" && p.data.mode === "clustershell") clusterBurst(p);
     else {
       if (p.type === "knife") dropKnife(p, p.pos);
       removeProj(p);
@@ -549,6 +552,7 @@ function tickOne(p) {
     case "needle": return tickNeedle(p);
     case "mortar": return tickMortar(p);
     case "knife": return tickKnife(p);
+    case "spec": return tickSpec(p);
   }
 }
 
@@ -969,6 +973,182 @@ function tickMortar(p) {
   p.pos = add(p.pos, p.vel);
   emit(p.dim, "arsenal:shell_trail", p.pos, undefined, { range: 96, minQ: 1 });
   syncVisual(p);
+}
+
+// ---------------------------------------------------------------------------
+//  2.5：特殊武器の実体弾
+// ---------------------------------------------------------------------------
+
+/** 射撃方式 → 見た目の弾 */
+const SPEC_VIS = { disc: "blade", singularity: "plasma", net: "hook", stasis: "plasma", empshot: "emp", tranq: "needle", harpoon: "hook", clustershell: "cluster" };
+/** 飛んでいる間の光の色 */
+const SPEC_COLOR = {
+  disc: { red: 1.0, green: 0.8, blue: 0.3 }, singularity: { red: 0.65, green: 0.3, blue: 1.0 }, net: { red: 0.9, green: 0.9, blue: 0.5 },
+  stasis: { red: 0.5, green: 1.0, blue: 0.95 }, empshot: { red: 0.5, green: 0.7, blue: 1.0 }, tranq: { red: 1.0, green: 0.85, blue: 0.5 },
+  harpoon: { red: 0.8, green: 0.85, blue: 0.9 }, clustershell: { red: 1.0, green: 0.65, blue: 0.25 },
+};
+
+/**
+ * 特殊武器の実体弾を撃つ（射撃方式は st.fire）
+ * @param {import("@minecraft/server").Entity} shooter @param {import("../util/math.js").Vec3} muzzle @param {import("../util/math.js").Vec3} dir @param {any} st
+ */
+export function fireSpecial(shooter, muzzle, dir, st) {
+  const pr = st.projectile ?? {};
+  const mode = st.fire;
+  const from = launchPoint(shooter, muzzle);
+  if (mode === "swarm") return fireSwarm(shooter, muzzle, dir, st);
+  if (mode === "stickybomb") {
+    // 投げる粘着爆弾と同じ弾（張り付いてから fuse tick で爆発）
+    addProj({ type: "throw", kind: "sticky", dim: shooter.dimension, pos: from, vel: mul(dir, pr.speed ?? 1.4), ownerId: shooter.id, maxAge: 400, fuse: pr.fuse ?? 30, data: { t: { kind: "sticky", power: pr.power ?? 2.4 }, tid: st.id } }, true);
+    return;
+  }
+  const speed = pr.speed ?? 1.5;
+  const bounces = pr.bounces ?? 0;
+  addProj({
+    type: "spec", kind: /** @type {any} */ (SPEC_VIS)[mode] ?? "plasma", dim: shooter.dimension, pos: from, vel: mul(dir, speed), ownerId: shooter.id,
+    maxAge: Math.ceil((st.range1 * (1 + bounces * 0.5)) / speed) + 4,
+    data: { st, mode, gravity: pr.gravity ?? 0, bounces, pierce: pr.pierce ?? 0, weaponId: st.id },
+  }, true);
+}
+
+/**
+ * 小型ミサイルの群れ：前方の近い敵に 1 発ずつ割り振る（足りなければ同じ敵へ）。敵がいなければまっすぐ
+ * @param {import("@minecraft/server").Entity} shooter @param {import("../util/math.js").Vec3} muzzle @param {import("../util/math.js").Vec3} dir @param {any} st
+ */
+function fireSwarm(shooter, muzzle, dir, st) {
+  const pr = st.projectile ?? {};
+  const n = pr.count ?? 6;
+  /** @type {string[]} */
+  const targets = [];
+  safe("swarm.seek", () => {
+    const eye = shooter.getHeadLocation();
+    const found = [];
+    for (const e of shooter.dimension.getEntities({ location: eye, maxDistance: pr.seek ?? 32, excludeFamilies: ["inanimate", "arsenal_fx", "projectile"], excludeTypes: ["minecraft:item", "minecraft:xp_orb"] })) {
+      if (e.id === shooter.id || !e.getComponent("minecraft:health") || !canDamage(shooter, e)) continue;
+      const v = sub(e.getAABB().center, eye);
+      const d = len(v);
+      if (d < 1 || dot(mul(v, 1 / d), dir) < 0.5) continue;
+      found.push({ id: e.id, d });
+    }
+    found.sort((a, b) => a.d - b.d);
+    for (const f of found) targets.push(f.id);
+  });
+  const rocketSt = { ...st, projectile: { speed: pr.speed ?? 0.9, accel: pr.accel ?? 0.08, max: pr.max ?? 2.2, power: pr.power ?? 1.4, turn: pr.turn ?? 0.22 } };
+  for (let i = 0; i < n; i++) {
+    // 扇状に広がって出てから、それぞれの目標へ曲がる
+    const a = ((i - (n - 1) / 2) / Math.max(1, n - 1)) * 0.9;
+    const side = norm({ x: -dir.z, y: 0, z: dir.x });
+    const d = norm(add(add(dir, mul(side, a)), { x: 0, y: 0.18 + 0.06 * (i % 2), z: 0 }));
+    const tgt = targets.length ? targets[i % targets.length] : null;
+    fireRocket(shooter, muzzle, d, rocketSt, tgt, { kind: "missile", maxAge: 90 });
+  }
+}
+
+/** クラスター弾の炸裂 @param {Proj} p */
+function clusterBurst(p) {
+  const pr = p.data.st.projectile ?? {};
+  p.data.t = { kind: "cluster", power: pr.power ?? 2.0, bomblets: pr.bomblets ?? 6, bombletPower: pr.bombletPower ?? 1.4 };
+  p.data.tid = p.data.weaponId;
+  detonate(p);
+}
+
+/** @param {Proj} p */
+function tickSpec(p) {
+  const d = p.data;
+  if (d.gravity) p.vel = add(p.vel, { x: 0, y: -d.gravity, z: 0 });
+  const h = sweep(p, p.pos, p.vel);
+  if (h.kind === "void") return removeProj(p);
+  if (p.age % 2 === 0 || d.mode === "singularity") {
+    const v = new MolangVariableMap();
+    v.setColorRGB("variable.color", /** @type {any} */ (SPEC_COLOR)[d.mode] ?? { red: 1, green: 1, blue: 1 });
+    emit(p.dim, "arsenal:plasma_glow", p.pos, v, { range: 96, minQ: p.age % 4 === 0 ? 0 : 1 });
+  }
+  if (h.kind === "none") {
+    p.traveled += len(p.vel);
+    p.pos = add(p.pos, p.vel);
+    syncVisual(p);
+    return;
+  }
+  const src = owner(p.ownerId);
+  const st = d.st;
+  const dir = norm(p.vel);
+  const ent = h.kind === "entity" ? h.entity : null;
+  // 着弾点（ブロックなら面の少し手前、相手なら体の中心）
+  const at = h.kind === "block" ? add(h.point, mul(h.normal, 0.5)) : ent ? ent.getAABB().center : h.point;
+  /** 直撃のダメージ */
+  const direct = () => (ent && src && st.dmg > 0 ? bulletHit(src, ent, h.point, dir, p.traveled, st, 1) : "pass");
+  switch (d.mode) {
+    case "disc": {
+      if (ent) {
+        direct();
+        p.hitSet.add(ent.id);
+        d.pierce--;
+        if (d.pierce < 0) return removeProj(p);
+        p.pos = add(h.point, mul(dir, 0.05));
+        syncVisual(p);
+        return;
+      }
+      if (h.kind !== "block" || d.bounces <= 0) {
+        emit(p.dim, "arsenal:impact_spark", h.point, undefined, { range: 48 });
+        return removeProj(p);
+      }
+      // 壁で跳ね返る（入った角度と同じ角度で出る）
+      d.bounces--;
+      p.pos = add(h.point, mul(h.normal, 0.08));
+      p.vel = reflect(p.vel, h.normal);
+      emit(p.dim, "arsenal:impact_spark", h.point, undefined, { range: 48 });
+      playNear(p.dim, h.point, "arsenal.fx.ricochet", { range: 24, pitch: 1.3 });
+      syncVisual(p);
+      return;
+    }
+    case "singularity":
+      direct();
+      addSingularity(p.dim, at, p.ownerId, st);
+      return removeProj(p);
+    case "stasis":
+      direct();
+      addStasis(p.dim, at, p.ownerId, st);
+      return removeProj(p);
+    case "net":
+      direct();
+      castNet(p.dim, at, p.ownerId, st);
+      return removeProj(p);
+    case "empshot": {
+      direct();
+      const sp = st.spec ?? {};
+      empHandler(p.dim, at, sp.radius ?? 4, (sp.secs ?? 8) * 20, p.ownerId);
+      return removeProj(p);
+    }
+    case "tranq": {
+      const r = direct();
+      if (r === "hit" && ent && ent.isValid) tranquilize(ent, st);
+      return removeProj(p);
+    }
+    case "harpoon": {
+      const r = direct();
+      if (r === "hit" && ent && ent.isValid && src) {
+        const sp = st.spec ?? {};
+        // 後ろに壁があれば縫い付け、なければ撃ち手の方へ引き寄せる
+        const c = ent.getAABB().center;
+        const reach = loadedReach(p.dim, c, dir, sp.wall ?? 3, system.currentTick);
+        const wall = reach > 0 ? safe("harpoon.wall", () => p.dim.getBlockFromRay(c, dir, { maxDistance: reach, includePassableBlocks: false, includeLiquidBlocks: false })) : undefined;
+        if (wall) pin(ent, sp.pin ?? 60);
+        else {
+          const to = norm(sub(src.location, ent.location));
+          const k = sp.pull ?? 1.3;
+          safe("harpoon.pull", () => ent.applyKnockback({ x: to.x * k, z: to.z * k }, 0.35));
+        }
+        playNear(p.dim, h.point, "arsenal.melee.hit_metal", { range: 24 });
+      } else if (h.kind === "block") {
+        emit(p.dim, "arsenal:impact_spark", h.point, undefined, { range: 48 });
+      }
+      return removeProj(p);
+    }
+    case "clustershell":
+      p.pos = h.kind === "block" ? add(h.point, mul(h.normal, 0.3)) : h.point;
+      return clusterBurst(p);
+  }
+  return removeProj(p);
 }
 
 // ---------------------------------------------------------------------------

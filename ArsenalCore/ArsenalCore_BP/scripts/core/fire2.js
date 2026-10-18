@@ -83,16 +83,81 @@ export function fireFlame(shooter, eye, dir, st, muzzle) {
  * @param {import("@minecraft/server").Entity} shooter @param {import("../util/math.js").Vec3} eye @param {import("../util/math.js").Vec3} dir @param {any} st @param {import("../util/math.js").Vec3} muzzle
  */
 export function fireBeam(shooter, eye, dir, st, muzzle) {
-  const r = traceHitscan(shooter, eye, dir, st, { pen: 0, silent: true });
+  /** @type {import("@minecraft/server").Entity|null} */
+  let first = null;
+  const r = traceHitscan(shooter, eye, dir, st, { pen: 0, silent: true, onEntity: (e) => { if (!first) first = e; } });
   const v = new MolangVariableMap();
   const L = dist(muzzle, r.end);
   const dn = norm(sub(r.end, muzzle));
   v.setSpeedAndDirection("variable.tracer", 0.01, dn);
-  v.setColorRGB("variable.color", { red: 1.0, green: 0.55, blue: 0.25 });
+  v.setColorRGB("variable.color", BEAM_COLOR[st.element ?? ""] ?? BEAM_COLOR[""]);
   const step = L > 20 ? 1.0 : 0.6;
-  for (let i = 0; i < L; i += step) emit(shooter.dimension, "arsenal:rail_beam", add(muzzle, mul(dn, i)), v, { range: 96, minQ: i % 2 === 0 ? 0 : 1 });
+  if (st.element === "arc") arcLine(shooter.dimension, muzzle, r.end, v);
+  else for (let i = 0; i < L; i += step) emit(shooter.dimension, "arsenal:rail_beam", add(muzzle, mul(dn, i)), v, { range: 96, minQ: i % 2 === 0 ? 0 : 1 });
   emit(shooter.dimension, "arsenal:impact_spark", r.end, undefined, { range: 48 });
+  if (first) {
+    if (st.element === "arc" && st.chain) chainFrom(shooter, eye, /** @type {any} */ (first), st, st.dmg, v);
+    else if (st.element === "cryo") chill(/** @type {any} */ (first));
+  }
   return r;
+}
+
+/** 照射ビームの色（属性ごと） @type {Record<string, {red:number, green:number, blue:number}>} */
+const BEAM_COLOR = { "": { red: 1.0, green: 0.55, blue: 0.25 }, arc: { red: 0.7, green: 0.55, blue: 1.0 }, cryo: { red: 0.6, green: 0.9, blue: 1.0 } };
+
+/**
+ * 当たった相手から近くの相手へ電撃を連鎖させる
+ * @param {import("@minecraft/server").Entity} shooter @param {import("../util/math.js").Vec3} eye @param {import("@minecraft/server").Entity} first @param {any} st @param {number} dmg0 @param {MolangVariableMap} v
+ */
+function chainFrom(shooter, eye, first, st, dmg0, v) {
+  let cur = first;
+  const hit = new Set([shooter.id, cur.id]);
+  let dmg = dmg0;
+  for (let j = 0; j < st.chain.jumps; j++) {
+    dmg *= st.chain.falloff;
+    if (!cur.isValid) break;
+    const from = cur.getAABB().center;
+    const next = cur.dimension.getEntities({ location: from, maxDistance: st.chain.radius, excludeFamilies: EXCLUDE, excludeTypes: EXCLUDE_T })
+      .filter((e) => !hit.has(e.id) && e.getComponent("minecraft:health") && canDamage(shooter, e))
+      .sort((a, b) => dist(a.location, from) - dist(b.location, from))[0];
+    if (!next) break;
+    hit.add(next.id);
+    const to = next.getAABB().center;
+    arcLine(shooter.dimension, from, to, v);
+    bulletHit(shooter, next, to, norm(sub(to, from)), dist(eye, to), st, 1, { baseDmg: dmg, noZones: true, silent: true });
+    cur = next;
+  }
+}
+
+/** 冷気を当て続けた回数（相手ごと。1 秒当てないと戻る） @type {Map<string, {n:number, tick:number}>} */
+const chilled = new Map();
+
+/**
+ * 冷気：当て続けるほど鈍足が強まり、最後は凍らせる
+ * @param {import("@minecraft/server").Entity} e
+ */
+function chill(e) {
+  const now = system.currentTick;
+  const cur = chilled.get(e.id);
+  const n = cur && now - cur.tick <= 20 ? cur.n + 1 : 1;
+  chilled.set(e.id, { n, tick: now });
+  if (chilled.size > 64) for (const [k, c] of chilled) if (now - c.tick > 40) chilled.delete(k);
+  const amp = Math.min(4, Math.floor(n / 5));
+  safe("chill", () => {
+    e.addEffect("slowness", 30, { amplifier: amp, showParticles: false });
+    if (amp >= 4) {
+      e.addEffect("mining_fatigue", 30, { amplifier: 2, showParticles: false });
+      e.addEffect("weakness", 30, { amplifier: 1, showParticles: false });
+      e.extinguishFire(false);
+    }
+  });
+  if (n % 4 === 0) emit(e.dimension, "arsenal:frost", e.getAABB().center, undefined, { range: 48, minQ: 1 });
+}
+
+/** 冷気の段階（テスト用） @param {string} id */
+export function chillLevel(id) {
+  const c = chilled.get(id);
+  return c ? Math.min(4, Math.floor(c.n / 5)) : 0;
 }
 
 /**
@@ -172,7 +237,9 @@ export function fireSonic(shooter, eye, dir, st, muzzle) {
   v.setSpeedAndDirection("variable.tracer", 16, dir);
   emit(shooter.dimension, "arsenal:sonic_ring", muzzle, v, { range: 64 });
   system.runTimeout(() => emit(shooter.dimension, "arsenal:sonic_ring", add(muzzle, mul(dir, 0.5)), v, { range: 64 }), 2);
-  for (const h of entitiesInCone(shooter, eye, dir, st.range1, Math.cos((30 * Math.PI) / 180))) {
+  // 扇の半角（ボルテックスキャノンは細く遠くまで）
+  const half = st.spec?.cone ?? 30;
+  for (const h of entitiesInCone(shooter, eye, dir, st.range1, Math.cos((half * Math.PI) / 180))) {
     if (!canDamage(shooter, h.e)) continue;
     const k = (st.knock || 2) * (1 - (h.d / (st.range1 + 1)) * 0.5);
     const to = norm(sub(h.p, eye));

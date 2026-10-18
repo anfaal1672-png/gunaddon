@@ -690,6 +690,55 @@ def build_energy(m):
             g.box(df + i * 0.8, df + i * 0.8 + 0.8, by - hh / 2, by + hh / 2, w, "main" if i % 2 == 0 else "main_dark")
         g.box(df + 0.4, df + 2.8, by - 0.6, by + 0.6, 1.2, "glow")
         end = df + 3.2
+    # ---- 2.5 ----
+    elif m.get("disc"):
+        # ディスク：銃身の上に回転刃（八角形に近い板）を載せる
+        g.box(front, front + barrel, by - 0.6, by + 0.6, 1.2, "metal_dark")
+        cx = front + barrel * 0.5
+        for w, hh in ((5.0, 1.6), (3.6, 3.0), (1.6, 4.4)):
+            g.box(cx - w / 2, cx + w / 2, by + 0.6 + (4.4 - hh) / 2, by + 0.6 + (4.4 - hh) / 2 + hh, 0.5, "metal_light")
+        g.box(cx - 0.6, cx + 0.6, by + 2.2, by + 3.4, 0.7, "glow")
+        g.box(front + barrel - 0.6, front + barrel + 0.6, by - 1.0, by + 1.0, 2.0, "glow")
+        end = front + barrel + 0.6
+    elif m.get("orb"):
+        # 球：銃口の先に光る核と、それを抱える 3 本の爪
+        g.box(front, front + barrel, by - 0.9, by + 0.9, 1.8, "main_dark")
+        of = front + barrel
+        g.box(of + 0.4, of + 3.2, by - 1.4, by + 1.4, 2.8, "glow")
+        g.box(of, of + 3.6, by + 1.6, by + 2.2, 0.8, "main")
+        g.box(of, of + 3.6, by - 2.2, by - 1.6, 0.8, "main")
+        g.box(of, of + 3.6, by - 0.4, by + 0.4, 0.6, "main", xc=1.9)
+        end = of + 3.6
+    elif m.get("pods"):
+        # ミサイルポッド：前面に 2×3 の発射口
+        pf = front + barrel
+        g.box(front, pf, by - 2.4, by + 2.4, 4.2, "main")
+        for i in range(3):
+            for j in (-1, 1):
+                g.box(pf - 0.2, pf + 0.4, by - 1.9 + i * 1.4, by - 0.9 + i * 1.4, 1.0, "metal_dark", xc=j * 1.0)
+        g.box(pf - 0.4, pf, by - 2.5, by + 2.5, 4.4, "glow")
+        end = pf + 0.4
+    elif m.get("antenna"):
+        # アンテナ：細い銃身と、上に立つ受信アンテナ
+        g.box(front, front + barrel, by - 0.6, by + 0.6, 1.2, "metal_dark")
+        g.box(front + barrel - 0.6, front + barrel + 0.6, by - 0.8, by + 0.8, 1.6, "glow")
+        g.box(front - 2.0, front - 1.4, y0 + h + 0.6, y0 + h + 6.0, 0.6, "metal_light")
+        g.box(front - 2.2, front - 1.2, y0 + h + 5.6, y0 + h + 6.4, 0.8, "glow")
+        end = front + barrel + 0.6
+    elif m.get("prism"):
+        # プリズム：先端の三角柱（段々に細くなる板）
+        g.box(front, front + barrel, by - 0.7, by + 0.7, 1.4, "metal_dark")
+        pf = front + barrel
+        for i, w in enumerate((3.0, 2.2, 1.4, 0.6)):
+            g.box(pf + i * 0.7, pf + i * 0.7 + 0.7, by - w / 2, by + w / 2, w, "glow" if i % 2 == 0 else "metal_light")
+        end = pf + 2.8
+    elif m.get("tank"):
+        # タンク：銃身の下に円筒のタンク
+        g.box(front, front + barrel, by - 0.7, by + 0.7, 1.4, "metal_dark")
+        g.box(front - 3.0, front + barrel - 1.0, by - 3.6, by - 1.2, 2.4, "main")
+        g.box(front - 2.6, front + barrel - 1.4, by - 3.2, by - 1.6, 2.6, "glow")
+        g.box(front + barrel - 0.6, front + barrel + 0.8, by - 1.0, by + 1.0, 2.0, "main_dark")
+        end = front + barrel + 0.8
     else:
         g.box(front, front + barrel, by - 0.8, by + 0.8, 1.6, "main_dark")
         g.box(front + 0.5, front + barrel - 0.5, by - 0.9, by + 0.9, 1.0, "glow")

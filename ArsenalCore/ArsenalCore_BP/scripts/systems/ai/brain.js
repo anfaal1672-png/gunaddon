@@ -22,6 +22,7 @@ import { traceHitscan, whizzBy, drawTracer, isSupersonic } from "../../core/ball
 import { setEnemyDamageMul, explode, canDamage, onLimbHit } from "../../core/damage.js";
 import { stealthFactor } from "../../core/armor.js";
 import { fireGrenade40, fireMortar, throwAt, setEmpHandler, getDecoys } from "../projectiles.js";
+import { setStunHandler } from "../fields.js";
 import { gunshot, muzzleFx, emit, playNear, playTo } from "../../fx/effects.js";
 import { add, sub, mul, norm, dist, dot, cone, basis, isLoaded, rand, len } from "../../util/math.js";
 import { safe } from "../../util/log.js";
@@ -788,6 +789,7 @@ export function isEmpd(e) {
 
 export function attachBrain() {
   setEmpHandler(applyEmp);
+  setStunHandler(stun);
   onLimbHit((e, zone, until) => {
     const ai = registry.get(e.id);
     if (ai && zone === "arm") /** @type {any} */ (ai).armHitUntil = until;
