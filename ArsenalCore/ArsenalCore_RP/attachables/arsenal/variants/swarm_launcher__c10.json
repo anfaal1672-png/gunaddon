@@ -1,0 +1,36 @@
+{
+  "format_version": "1.10.0",
+  "minecraft:attachable": {
+    "description": {
+      "identifier": "arsenal:swarm_launcher__c10",
+      "materials": {
+        "default": "entity_alphatest",
+        "enchanted": "entity_alphatest_glint"
+      },
+      "textures": {
+        "default": "textures/entity/arsenal/camo/c10",
+        "enchanted": "textures/misc/enchanted_item_glint"
+      },
+      "geometry": {
+        "default": "geometry.arsenal.swarm_launcher"
+      },
+      "animations": {
+        "tp": "animation.arsenal.swarm_launcher.tp",
+        "fp": "animation.arsenal.swarm_launcher.fp"
+      },
+      "scripts": {
+        "animate": [
+          {
+            "tp": "c.is_first_person == 0.0"
+          },
+          {
+            "fp": "c.is_first_person == 1.0"
+          }
+        ]
+      },
+      "render_controllers": [
+        "controller.render.item_default"
+      ]
+    }
+  }
+}

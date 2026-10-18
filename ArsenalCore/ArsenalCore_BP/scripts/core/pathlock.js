@@ -11,7 +11,7 @@
 import { world, system, MolangVariableMap } from "@minecraft/server";
 import { startSearch, cancelSearch, segOk, samplePath } from "../systems/pathfind.js";
 import { playTo } from "../fx/effects.js";
-import { sub, len, dot, dist, add } from "../util/math.js";
+import { sub, len, dot, dist, add, hitPoint } from "../util/math.js";
 import { safe } from "../util/log.js";
 
 const ACQ_COS = Math.cos((10 * Math.PI) / 180);
@@ -216,7 +216,7 @@ export function nearPoint(dim, eye, c) {
   const dir = { x: v.x / d, y: v.y / d, z: v.z / d };
   const hit = dim.getBlockFromRay(eye, dir, { maxDistance: d, includePassableBlocks: false, includeLiquidBlocks: false });
   if (!hit) return null;
-  const bd = dist(eye, add(hit.block.location, hit.faceLocation));
+  const bd = dist(eye, hitPoint(hit));
   const dn = Math.max(0.35, Math.min(NEAR, bd - 0.2));
   return { pos: add(eye, { x: dir.x * dn, y: dir.y * dn, z: dir.z * dn }), k: dn / d };
 }

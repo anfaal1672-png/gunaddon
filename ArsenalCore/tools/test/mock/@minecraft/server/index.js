@@ -161,12 +161,20 @@ export class Entity {
     if (this.health.currentValue <= 0) { this._valid = false; world.afterEvents.entityDie.fire({ deadEntity: this, damageSource: { cause: opt?.cause, damagingEntity: opt?.damagingEntity } }); }
     return true;
   }
-  applyKnockback() {}
+  // 吹き飛ばし・引き寄せの向きを記録する（移動は行わない）
+  applyKnockback(h, v) { (this.knocks ??= []).push({ x: h?.x ?? 0, z: h?.z ?? 0, v }); }
   applyImpulse() {}
   setOnFire() { return true; }
   extinguishFire() { return true; }
-  getEffect(id) { return this.effects[id]; }
-  addEffect(id, d, o) { this.effects[id] = { duration: d, amplifier: o?.amplifier ?? 0 }; return this.effects[id]; }
+  getEffect(id) { const e = this.effects[id]; return e && (e.until === undefined || e.until > system.currentTick) ? e : undefined; }
+  // 実機と同じく、効いている間はレベルの低い効果で上書きされない（同じかより高いレベルだけ置き換わる）
+  addEffect(id, d, o) {
+    const amp = o?.amplifier ?? 0;
+    const cur = this.getEffect(id);
+    if (cur && cur.amplifier > amp) return cur;
+    this.effects[id] = { duration: d, amplifier: amp, until: system.currentTick + d };
+    return this.effects[id];
+  }
   removeEffect(id) { delete this.effects[id]; return true; }
   setProperty(k, v) { this.props[k] = v; }
   getProperty(k) { return this.props[k]; }
@@ -286,7 +294,12 @@ export class Dimension {
         const fx = p.x - b.x, fy = p.y - b.y, fz = p.z - b.z;
         const dists = { West: fx, East: 1 - fx, Down: fy, Up: 1 - fy, North: fz, South: 1 - fz };
         const face = Object.entries(dists).sort((a, b2) => a[1] - b2[1])[0][0];
-        return { block: b, face, faceLocation: { x: fx, y: fy, z: fz } };
+        // 実機（BDS 1.26.52）と同じく、面に垂直な軸の値は 0 にする（上・東・南の面でも 1 にならない）
+        const fl = { x: fx, y: fy, z: fz };
+        if (face === "Up" || face === "Down") fl.y = 0;
+        else if (face === "East" || face === "West") fl.x = 0;
+        else fl.z = 0;
+        return { block: b, face, faceLocation: fl };
       }
     }
     return undefined;

@@ -211,6 +211,9 @@ export function computeStats(weaponId, att, ammoType) {
     armorBonus: w.armorBonus ?? 1,
     mark: w.mark ?? 0,
     knock: w.knock ?? 0,
+    // ---- 2.5 ----
+    spec: w.spec ?? null,
+    element: w.element ?? null,
     ammoPerItemFam: w.ammoPerItem ?? 1,
   };
   statCache.set(key, st);

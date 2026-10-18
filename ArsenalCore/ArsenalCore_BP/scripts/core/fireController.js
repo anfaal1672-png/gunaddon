@@ -10,9 +10,10 @@ import { spreadNow, applyRecoil } from "./recoil.js";
 import { startReload, reserveRounds, status, isInfinite } from "./reload.js";
 import { traceHitscan, drawTracer, whizzBy, arcLine, isSupersonic } from "./ballistics.js";
 import { canDamage, dealDamage, hitFeedback, bulletHit } from "./damage.js";
-import { fireBallistic, fireBullet, fireGrenade40, fireRocket, fireFlare, fireHook, firePathMissile } from "../systems/projectiles.js";
+import { fireBallistic, fireBullet, fireGrenade40, fireRocket, fireFlare, fireHook, firePathMissile, fireSpecial } from "../systems/projectiles.js";
 import { takePathLock } from "./pathlock.js";
 import { fireFlame, fireBeam, fireGravity, fireCoil, fireSonic, fireProjectile2, mortarTarget } from "./fire2.js";
+import { fireReflect, firePrism, smartDir, fireBlink, fireHeal, fireAcid, fireOrbital } from "./fire3.js";
 import { miniBlast } from "./damage.js";
 import { emitEvent } from "./events.js";
 import { isDowned } from "./downed.js";
@@ -269,6 +270,42 @@ export function shoot(player, s, count = 1, charge = 1) {
       case "plasma": fireProjectile2(player, muzzle, cone(view, spread), st); break;
       case "needle": fireProjectile2(player, muzzle, cone(view, spread), st, null, s.lockTarget); break;
       case "mortar": fireProjectile2(player, muzzle, view, st, mortarTarget(player, st, s.mortarTarget)); break;
+      // ---- 2.5 ----
+      case "disc":
+      case "singularity":
+      case "swarm":
+      case "net":
+      case "stasis":
+      case "empshot":
+      case "tranq":
+      case "stickybomb":
+      case "clustershell":
+      case "harpoon":
+        fireSpecial(player, muzzle, cone(view, spread), st);
+        if (st.cooldown) s.cooldownUntil = now + st.cooldown;
+        break;
+      case "reflect": fireReflect(player, eye, cone(view, spread), st, muzzle); break;
+      case "prism": firePrism(player, eye, cone(view, spread), st, muzzle); break;
+      case "smart": {
+        // ロック済みの敵がいればそちらへ（拡散なし）。いなければ普通の弾
+        const d = smartDir(player, eye, st);
+        fireHitscan(player, s, eye, d ?? view, d ? 0 : spread, st, muzzle);
+        break;
+      }
+      case "heal": fireHeal(player, eye, cone(view, spread), st, muzzle); break;
+      case "acid": fireAcid(player, eye, cone(view, spread), st, muzzle); break;
+      case "blink":
+      case "orbital": {
+        const ok = st.fire === "blink" ? fireBlink(player, eye, view, st) : fireOrbital(player, eye, view, st);
+        if (st.cooldown) s.cooldownUntil = now + st.cooldown;
+        if (!ok) {
+          // 移れない・呼べないときは弾を戻す
+          if (!noAmmo) s.ammo++;
+          status(s, t(st.fire === "blink" ? "arsenal.ui.blink_blocked" : "arsenal.ui.no_sky"));
+          playTo(player, "arsenal.ui.error", { volume: 0.5 });
+        }
+        break;
+      }
       default: fireHitscan(player, s, eye, view, spread, st, muzzle);
     }
   }
@@ -285,7 +322,7 @@ export function shoot(player, s, count = 1, charge = 1) {
     }
   }
   // 演出（照射系は音を間引く）
-  const looping = st.fire === "flame" || st.fire === "beam";
+  const looping = st.fire === "flame" || st.fire === "beam" || st.fire === "heal" || st.fire === "acid";
   if (!looping || now - s.loopSoundTick >= 6) {
     s.loopSoundTick = now;
     gunshot(player, st, muzzle);

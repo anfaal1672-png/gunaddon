@@ -170,6 +170,28 @@ export function faceNormal(face) {
   }
 }
 
+/**
+ * レイが当たったブロックの面の上の点（getBlockFromRay の結果から）。
+ * 実機（BDS 1.26.52 で確認）の faceLocation は、面に垂直な軸の値がいつも 0 になり、上・東・南の面でも 1 にならない。
+ * block.location にそのまま足すと上・東・南の面では 1 ブロック奥（ブロックの反対側の面）になるので、垂直な軸は面から決める
+ * @param {{block:{location:Vec3}, face:string, faceLocation:Vec3}} hit
+ * @returns {Vec3}
+ */
+export function hitPoint(hit) {
+  const b = hit.block.location;
+  const f = hit.faceLocation;
+  const p = { x: b.x + f.x, y: b.y + f.y, z: b.z + f.z };
+  switch (String(hit.face)) {
+    case "Up": p.y = b.y + 1; break;
+    case "Down": p.y = b.y; break;
+    case "East": p.x = b.x + 1; break;
+    case "West": p.x = b.x; break;
+    case "South": p.z = b.z + 1; break;
+    case "North": p.z = b.z; break;
+  }
+  return p;
+}
+
 /** @template T @param {T[]} arr @returns {T} */
 export function pick(arr) {
   return arr[Math.floor(Math.random() * arr.length)];

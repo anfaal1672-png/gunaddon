@@ -7,12 +7,13 @@ import { system, world, EasingType, MolangVariableMap } from "@minecraft/server"
 import { P, W as WS } from "./settings.js";
 import { emit, playTo } from "../fx/effects.js";
 import { SCOPED_OPTICS, resetScopeMark, effectiveOptic } from "../ui/hud.js";
-import { add, mul, len, sub, norm, dot, loadedReach } from "../util/math.js";
+import { add, mul, len, sub, norm, dot, loadedReach, hitPoint, dist } from "../util/math.js";
 import { armorMove, riotShieldMove } from "./armor.js";
 import { DATA } from "../config/constants.js";
 import { fp_step } from "../util/fpstep.js";
 import { safe } from "../util/log.js";
 import { tickPathLock, clearPathLock } from "./pathlock.js";
+import { tickSmart, clearSmart } from "./fire3.js";
 
 const BASE_SPEED = 0.1;
 
@@ -195,6 +196,7 @@ export function tickAim(player, s, st) {
       s.lockTarget = null;
       s.lockTicks = 0;
       clearPathLock(player);
+      clearSmart(player.id);
       playAds(player, s, st);
     } else {
       stopAds(player, s);
@@ -208,6 +210,7 @@ export function tickAim(player, s, st) {
       s.lockTarget = null;
       s.lockTicks = 0;
       clearPathLock(player);
+      clearSmart(player.id);
       safe("stopShake", () => player.camera.stopShaking());
     }
   } else if (want && s.fovApplied && s.fovValue !== fov && prefs.fovZoom) {
@@ -243,6 +246,7 @@ export function tickAim(player, s, st) {
       }
     }
     if (st.fire === "pathfinder") tickPathLock(player, s, st);
+    else if (st.fire === "smart") safe("smart", () => tickSmart(player, st));
     else if (st.lockTicks > 0) tickLock(player, s, st);
   }
   if (!s.ads && s.rangeDist >= 0) s.rangeDist = -1;
@@ -305,7 +309,7 @@ function rangefind(player, s) {
     if (reach <= 0) return;
     const bh = player.dimension.getBlockFromRay(eye, dir, { maxDistance: reach, includePassableBlocks: false, includeLiquidBlocks: true });
     const ents = player.dimension.getEntitiesFromRay(eye, dir, { maxDistance: reach, excludeFamilies: ["inanimate", "arsenal_fx"] }).filter((e) => e.entity.id !== player.id);
-    let d = bh ? len(sub(add(bh.block.location, bh.faceLocation), eye)) : -1;
+    let d = bh ? len(sub(hitPoint(bh), eye)) : -1;
     if (ents.length && (d < 0 || ents[0].distance < d)) d = ents[0].distance;
     if (Math.round(d) !== s.rangeDist) {
       s.rangeDist = d < 0 ? -1 : Math.round(d);
@@ -415,7 +419,7 @@ function laser(player) {
     const hit = player.dimension.getBlockFromRay(eye, dir, { maxDistance: reach, includePassableBlocks: false, includeLiquidBlocks: false });
     const ents = player.dimension.getEntitiesFromRay(eye, dir, { maxDistance: reach, excludeFamilies: ["inanimate", "arsenal_fx"] }).filter((e) => e.entity.id !== player.id);
     let d = 64;
-    if (hit) d = Math.min(d, Math.hypot(hit.block.location.x + hit.faceLocation.x - eye.x, hit.block.location.y + hit.faceLocation.y - eye.y, hit.block.location.z + hit.faceLocation.z - eye.z));
+    if (hit) d = Math.min(d, dist(hitPoint(hit), eye));
     if (ents.length) d = Math.min(d, ents[0].distance);
     if (d < 63.9) emit(player.dimension, "arsenal:laser_dot", add(eye, mul(dir, d - 0.05)), undefined, { range: 72 });
   });
@@ -431,7 +435,7 @@ function flashlight(player, s) {
     const reach = loadedReach(player.dimension, eye, dir, 28, system.currentTick);
     const hit = reach >= 0.5 ? player.dimension.getBlockFromRay(eye, dir, { maxDistance: reach, includePassableBlocks: true, includeLiquidBlocks: true }) : undefined;
     let target = add(eye, mul(dir, 28));
-    if (hit) target = add(add(hit.block.location, hit.faceLocation), mul(dir, -0.6));
+    if (hit) target = add(hitPoint(hit), mul(dir, -0.6));
     const bp = { x: Math.floor(target.x), y: Math.floor(target.y), z: Math.floor(target.z) };
     if (s.lightPos && s.lightPos.x === bp.x && s.lightPos.y === bp.y && s.lightPos.z === bp.z) return;
     clearLight(player, s);

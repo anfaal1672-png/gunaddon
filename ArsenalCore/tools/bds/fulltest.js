@@ -11,6 +11,7 @@ import { world, system, ItemStack, BlockVolume, GameMode, Direction } from "@min
 import { spawnSimulatedPlayer } from "@minecraft/server-gametest";
 import { DATA, ammoItemId } from "./config/constants.js";
 import { S } from "./core/state.js";
+import { activeFields } from "./systems/fields.js";
 import { on } from "./core/events.js";
 import { setWorld, setPrefs } from "./core/settings.js";
 import { startReload } from "./core/reload.js";
@@ -42,11 +43,21 @@ async function arena() {
   if (Math.abs(p.location.x) > 40 || Math.abs(p.location.z) > 40) p.teleport({ x: 0.5, y: Y, z: 0.5 });
   const cells = [];
   for (let x = -12; x <= 44; x += 8) for (let z = -20; z <= 20; z += 8) cells.push({ x, y: Y, z });
+  // 起動直後は「読み込み済み」でもまだ動いていないチャンクがあり、fillBlocks が失敗する。ティッキングエリアにして、成功するまでやり直す
+  try { dim().runCommand("tickingarea add -12 0 -20 44 0 20 qa_arena"); } catch { /* もうある */ }
   await wait(20);
   for (let t = 0; t < 60 && !cells.every((c) => dim().isChunkLoaded(c)); t++) await wait(10);
-  const d = dim();
-  d.fillBlocks(new BlockVolume({ x: -12, y: Y - 1, z: -20 }, { x: 44, y: Y - 1, z: 20 }), "minecraft:stone");
-  for (let y = Y; y <= Y + 14; y += 5) d.fillBlocks(new BlockVolume({ x: -12, y, z: -20 }, { x: 44, y: Math.min(Y + 18, y + 4), z: 20 }), "minecraft:air");
+  for (let t = 0; ; t++) {
+    try {
+      const d = dim();
+      d.fillBlocks(new BlockVolume({ x: -12, y: Y - 1, z: -20 }, { x: 44, y: Y - 1, z: 20 }), "minecraft:stone");
+      for (let y = Y; y <= Y + 14; y += 5) d.fillBlocks(new BlockVolume({ x: -12, y, z: -20 }, { x: 44, y: Math.min(Y + 18, y + 4), z: 20 }), "minecraft:air");
+      return;
+    } catch (err) {
+      if (t >= 30) throw err;
+      await wait(20);
+    }
+  }
 }
 /** 射線の床を直す（前の武器の爆発で穴が開くと、的が沈んで床の縁に弾が当たる） */
 function repairLane() {
@@ -97,7 +108,7 @@ function hpOf(e) {
 // ---------------------------------------------------------------------------
 //  武器
 // ---------------------------------------------------------------------------
-const INDIRECT = new Set(["gl40", "rocket", "seeker", "pathfinder", "flare", "grapple", "mortar", "gravity", "needle"]);
+const INDIRECT = new Set(["gl40", "rocket", "seeker", "pathfinder", "flare", "grapple", "mortar", "gravity", "needle", "blink", "orbital", "stickybomb", "singularity"]);
 async function weapons(from, to) {
   const p = sim();
   tough(p);
@@ -419,7 +430,7 @@ async function bosses() {
 const dropArea = (name) => { try { dim().runCommand(`tickingarea remove ${name}`); } catch { /* ない */ } };
 async function structures() {
   // 前の回が途中で止まって残ったエリアを消す（ティッキングエリアは 10 個まで）
-  try { dim().runCommand("tickingarea remove_all"); } catch { /* ない */ }
+  for (let i = 0; i < 12; i++) dropArea(`qa_site_${i}`);
   const p = sim();
   tough(p);
   setWorld({ structures: "high" });
@@ -640,7 +651,186 @@ async function diag(wid) {
   p.isSneaking = false;
 }
 
-const STAGES = { diag, weapons, melee, throw: throwables, gear, enemies, bosses, structures, streaks, modes, misc };
+// ---------------------------------------------------------------------------
+//  2.5 特殊武器（実機でしか確かめられない動き：瞬間移動・自動ロック・回復・網・麻酔・吸い込み・引き寄せ・衛星砲）
+// ---------------------------------------------------------------------------
+async function specials() {
+  const p = sim();
+  tough(p);
+  const cell = ammoItemId("cell", "std");
+  const origin = { x: 0.5, y: Y, z: 0.5 };
+  const give = async (wid, ammo) => {
+    clearInv(p);
+    inv(p).setItem(0, new ItemStack(`arsenal:${wid}`, 1));
+    if (ammo) inv(p).setItem(1, new ItemStack(ammo, 64));
+    p.selectedSlotIndex = 0;
+    await wait(16);
+  };
+  const fire = async (hold = 4) => {
+    p.useItemInSlot(0);
+    await wait(hold);
+    p.stopUsingItem();
+  };
+  // 自由に動くゾンビ（的と違って鈍足なし）
+  const free = (x, z) => {
+    const e = dim().spawnEntity("minecraft:zombie", { x, y: Y, z });
+    e.addEffect("fire_resistance", 20000, { amplifier: 0, showParticles: false });
+    e.nameTag = "qa_free";
+    return e;
+  };
+  const amp = (e, id) => (e && e.isValid ? e.getEffect(id)?.amplifier ?? -1 : -1);
+  const fill = (a, b, block) => dim().fillBlocks(new BlockVolume(a, b), block);
+  let ok = 0, n = 0;
+  const expect = (what, cond, why) => {
+    n++;
+    if (cond) ok++;
+    else fail("specials", what, why);
+  };
+
+  // ブリンクピストル：正面の壁（z=10）の手前へ移る
+  clearMobs();
+  repairLane();
+  p.teleport(origin);
+  fill({ x: -2, y: Y, z: 10 }, { x: 2, y: Y + 3, z: 10 }, "minecraft:stone");
+  await give("blink_pistol", cell);
+  p.lookAtLocation({ x: 0.5, y: Y + 1.6, z: 20 });
+  await wait(4);
+  await fire();
+  await wait(10);
+  expect("blink", p.location.z > 7 && p.location.z < 10, `z=${p.location.z.toFixed(2)}`);
+  fill({ x: -2, y: Y, z: 10 }, { x: 2, y: Y + 3, z: 10 }, "minecraft:air");
+
+  // スマートピストル：照準の外の 2 体をロックし、2 発でそれぞれに当たる
+  clearMobs();
+  p.teleport(origin);
+  const a = target(-3.5, 10.5), b = target(4.5, 10.5);
+  await give("smart_pistol", ammoItemId("light", "std"));
+  p.lookAtLocation({ x: 0.5, y: Y + 1.6, z: 14 });
+  p.isSneaking = true;
+  await wait(24);
+  const ha = hpOf(a), hb = hpOf(b);
+  for (let i = 0; i < 2; i++) {
+    await fire(2);
+    await wait(8);
+  }
+  p.isSneaking = false;
+  expect("smart_pistol", hpOf(a) < ha && hpOf(b) < hb, `hp ${ha}→${hpOf(a)}, ${hb}→${hpOf(b)}`);
+
+  // メディックビーム：味方（PvP なし）の体力を回復する
+  clearMobs();
+  p.teleport(origin);
+  dim().runCommand("gamerule pvp false");
+  const q = sim(1);
+  q.teleport({ x: 0.5, y: Y, z: 6.5 });
+  q.removeEffect("regeneration");
+  await wait(4);
+  q.getComponent("minecraft:health").setCurrentValue(8);
+  await give("medic_beam", cell);
+  p.lookAtLocation(q.getAABB().center);
+  await fire(30);
+  await wait(4);
+  expect("medic_beam", hpOf(q) > 8, `hp=${hpOf(q)}`);
+  dim().runCommand("gamerule pvp true");
+  tough(q);
+  q.teleport({ x: -8.5, y: Y, z: -12.5 });
+
+  // ネットランチャー：当たったゾンビが 4 秒動けない（鈍足 7）
+  clearMobs();
+  p.teleport(origin);
+  const zn = free(0.5, 9.5);
+  await give("net_launcher", cell);
+  p.lookAtLocation(zn.getAABB().center);
+  await wait(4);
+  await fire();
+  await wait(14);
+  const pn = zn.isValid ? { ...zn.location } : null;
+  await wait(30);
+  const moved = pn && zn.isValid ? Math.hypot(zn.location.x - pn.x, zn.location.z - pn.z) : -1;
+  expect("net_launcher", amp(zn, "slowness") >= 6 && moved >= 0 && moved < 0.5, `slowness=${amp(zn, "slowness")} moved=${moved.toFixed(2)}`);
+
+  // トランキライザー：当たって 2 秒後に眠る
+  clearMobs();
+  p.teleport(origin);
+  const zq = free(0.5, 10.5);
+  await give("tranq_rifle", cell);
+  p.lookAtLocation(zq.getAABB().center);
+  p.isSneaking = true;
+  await wait(12);
+  await fire(2);
+  p.isSneaking = false;
+  await wait(10);
+  const early = amp(zq, "slowness");
+  await wait(45);
+  expect("tranq_rifle", early < 6 && amp(zq, "slowness") >= 6, `early=${early} later=${amp(zq, "slowness")}`);
+
+  // シンギュラリティ：着弾点の近くのゾンビが中心へ寄っていく
+  clearMobs();
+  p.teleport(origin);
+  const center = target(0.5, 9.5);
+  // 引き寄せるのは歩かない的（ゾンビがプレイヤーへ歩くと吸い込みと打ち消し合う）
+  const zs = target(5.5, 10.5);
+  await give("singularity", cell);
+  p.lookAtLocation(center.getAABB().center);
+  await wait(4);
+  await fire();
+  await wait(8);
+  const d0 = zs.isValid ? Math.hypot(zs.location.x - 0.5, zs.location.z - 9.5) : -1;
+  await wait(30);
+  const d1 = zs.isValid ? Math.hypot(zs.location.x - 0.5, zs.location.z - 9.5) : -1;
+  expect("singularity", d0 > 0 && d1 >= 0 && d1 < d0 - 1, `dist ${d0.toFixed(2)} → ${d1.toFixed(2)}`);
+  await wait(40);
+
+  // ハープーンガン：壁のないところでは手前へ引き寄せる
+  clearMobs();
+  p.teleport(origin);
+  const zh = target(0.5, 12.5);
+  await give("harpoon_gun");
+  p.lookAtLocation(zh.getAABB().center);
+  await wait(4);
+  const hz = zh.location.z;
+  await fire();
+  await wait(14);
+  expect("harpoon_gun", zh.isValid && zh.location.z < hz - 0.8, `z ${hz.toFixed(2)} → ${zh.isValid ? zh.location.z.toFixed(2) : "dead"}`);
+
+  // オービタルマーカー：空の見える地面へ 2 秒後に落ちる
+  clearMobs();
+  p.teleport(origin);
+  const zo = target(0.5, 9.5);
+  // 試験場は山を掘った中にあるので、的の真上の空を開ける（屋根の下には呼べない）
+  fill({ x: -2, y: Y + 15, z: 7 }, { x: 3, y: Y + 45, z: 12 }, "minecraft:air");
+  await give("orbital_marker", cell);
+  p.lookAtLocation({ x: 0.5, y: Y, z: 9.5 });
+  await wait(4);
+  const ho = hpOf(zo);
+  await fire();
+  await wait(4);
+  log(`orbital: ammo ${S(p).ammo} fields=${activeFields()}`);
+  await wait(51);
+  expect("orbital_marker", hpOf(zo) < ho, `hp ${ho} → ${hpOf(zo)}`);
+
+  clearMobs();
+  p.teleport(origin);
+  log(`specials: ok=${ok}/${n}`);
+}
+
+/** レイが当たった面の位置（faceLocation）が実機でどう返るか：6 方向から石 1 個に撃つ */
+async function facetest() {
+  const d = dim();
+  const b = { x: 8, y: Y + 4, z: 8 };
+  d.fillBlocks(new BlockVolume({ x: 4, y: Y + 1, z: 4 }, { x: 12, y: Y + 8, z: 12 }), "minecraft:air");
+  d.getBlock(b).setType("minecraft:stone");
+  const c = { x: b.x + 0.5, y: b.y + 0.5, z: b.z + 0.5 };
+  for (const [name, dir] of [["down(Up face)", { x: 0, y: -1, z: 0 }], ["up(Down face)", { x: 0, y: 1, z: 0 }], ["+x(West face)", { x: 1, y: 0, z: 0 }], ["-x(East face)", { x: -1, y: 0, z: 0 }], ["+z(North face)", { x: 0, y: 0, z: 1 }], ["-z(South face)", { x: 0, y: 0, z: -1 }]]) {
+    const o = { x: c.x - dir.x * 3 + 0.13, y: c.y - dir.y * 3 + 0.21, z: c.z - dir.z * 3 + 0.17 };
+    if (dir.x) o.x = c.x - dir.x * 3;
+    if (dir.y) o.y = c.y - dir.y * 3;
+    if (dir.z) o.z = c.z - dir.z * 3;
+    const h = d.getBlockFromRay(o, dir, { maxDistance: 6, includePassableBlocks: false, includeLiquidBlocks: false });
+    log(`face ${name}: face=${h?.face} block=${JSON.stringify(h?.block.location)} fl=${JSON.stringify(h?.faceLocation)}`);
+  }
+}
+
+const STAGES = { diag, weapons, melee, throw: throwables, gear, enemies, bosses, structures, streaks, modes, misc, specials, facetest };
 
 system.afterEvents.scriptEventReceive.subscribe((ev) => {
   if (ev.id !== "dev:full") return;

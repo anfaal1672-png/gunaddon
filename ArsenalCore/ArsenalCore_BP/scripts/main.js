@@ -23,6 +23,7 @@ import { renderHud2, addHud2Provider, usesHud2 } from "./ui/hud2.js";
 import { openWeaponMenu, openManual, openBench, openPress, useCrate, useRepairKit, setMode } from "./ui/menus.js";
 import { toggleCalib, calibNext, calibSave, calibHud, openReport } from "./ui/codex.js";
 import { tickProjectiles, sweepOrphans } from "./systems/projectiles.js";
+import { tickFields } from "./systems/fields.js";
 import { tickPathfinding, attachPathfinding } from "./systems/pathfind.js";
 import { forgetPathLock } from "./core/pathlock.js";
 import { beginThrow, releaseThrow, tickThrowable, useDetonator, tryPlaceMine } from "./systems/throwables.js";
@@ -584,6 +585,7 @@ system.runInterval(() => {
   }
   safe("tickPathfinding", () => tickPathfinding());
   safe("tickProjectiles", () => tickProjectiles());
+  safe("tickFields", () => tickFields());
   safe("tickBrain", () => tickBrain());
   safe("tickBosses", () => tickBosses());
   safe("tickDeployables", () => tickDeployables());

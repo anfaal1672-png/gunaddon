@@ -2,7 +2,7 @@
 // 基本定数・ティア・カテゴリ・素材・道具・既定設定・着弾と貫通
 
 export const NS = "arsenal";
-export const ADDON_VERSION = [2, 4, 2];
+export const ADDON_VERSION = [2, 5, 0];
 /** アイテムに書く形式のバージョン（a:v）。1.0 系のアイテムは 1 とみなして移行する */
 export const ITEM_FORMAT = 2;
 export const MIN_ENGINE = [1, 26, 50];

@@ -19,7 +19,7 @@ import { dropSentry, markFor } from "./deployables.js";
 import { rollLoot } from "./lootgen.js";
 import { emit, playNear, playTo } from "../fx/effects.js";
 import { announce } from "../ui/hud2.js";
-import { add, mul, norm, isLoaded, rand, loadedReach } from "../util/math.js";
+import { add, mul, norm, isLoaded, rand, loadedReach, hitPoint } from "../util/math.js";
 import { t, raw } from "../util/i18n.js";
 import { safe } from "../util/log.js";
 
@@ -404,7 +404,7 @@ function tickGunships() {
     if (!isLoaded(dim, eye, now)) continue;
     const reach = loadedReach(dim, eye, v, 120, now);
     const hit = reach > 0 ? safe("gunship.ray", () => dim.getBlockFromRay(eye, v, { maxDistance: reach, includeLiquidBlocks: true, includePassableBlocks: false })) : undefined;
-    const at = hit ? add(hit.block.location, hit.faceLocation) : add(eye, mul(v, 80));
+    const at = hit ? hitPoint(hit) : add(eye, mul(v, 80));
     const jitter = { x: rand(-0.8, 0.8), y: 0, z: rand(-0.8, 0.8) };
     const pt = add(at, jitter);
     emit(dim, "arsenal:tracer_trail", pt, undefined, { range: 96 });

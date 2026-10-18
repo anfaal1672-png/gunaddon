@@ -37,6 +37,8 @@ const contributors = new Map();
 const scriptLethal = new Set();
 /** マーキング（命中した相手が一定時間、被ダメージ増） @type {Map<string, number>} */
 const marked = new Map();
+/** 腐食（酸を浴びた相手は一定時間、被ダメージ 1.25 倍） @type {Map<string, number>} */
+const corroded = new Map();
 
 const NON_FLESH = new Set(["minecraft:skeleton", "minecraft:stray", "minecraft:wither_skeleton", "minecraft:bogged", "minecraft:iron_golem", "minecraft:snow_golem", "minecraft:shulker", "minecraft:blaze", "minecraft:breeze", "minecraft:creaking", "minecraft:magma_cube", "minecraft:slime", "minecraft:vex", "minecraft:allay", "minecraft:armor_stand"]);
 
@@ -216,6 +218,11 @@ export function dealDamage(shooter, target, dmg, o = {}) {
     if (mk !== undefined) {
       if (mk > now) dmg *= 1.15;
       else marked.delete(target.id);
+    }
+    const cr = corroded.get(target.id);
+    if (cr !== undefined) {
+      if (cr > now) dmg *= CORRODE_MUL;
+      else corroded.delete(target.id);
     }
     const health = target.getComponent("minecraft:health");
     if (!health) {
@@ -727,10 +734,26 @@ export function isMarked(id) {
   return m !== undefined && m > system.currentTick;
 }
 
+/** 腐食で受けるダメージの倍率 */
+export const CORRODE_MUL = 1.25;
+
+/** 腐食させる（酸） @param {string} id @param {number} ticks */
+export function corrode(id, ticks) {
+  const until = system.currentTick + ticks;
+  if ((corroded.get(id) ?? 0) < until) corroded.set(id, until);
+}
+
+/** 腐食中か @param {string} id */
+export function isCorroded(id) {
+  const c = corroded.get(id);
+  return c !== undefined && c > system.currentTick;
+}
+
 /** @param {string} id */
 export function forgetEntity(id) {
   lastEngineHit.delete(id);
   lastAttacker.delete(id);
   contributors.delete(id);
   marked.delete(id);
+  corroded.delete(id);
 }

@@ -5,6 +5,45 @@
     "arsenal_aa_gun": {
       "textures": "textures/items/arsenal/gear/aa_gun"
     },
+    "arsenal_acid_sprayer": {
+      "textures": "textures/items/arsenal/weapons/acid_sprayer"
+    },
+    "arsenal_acid_sprayer__c1": {
+      "textures": "textures/items/arsenal/weapons/acid_sprayer__c1"
+    },
+    "arsenal_acid_sprayer__c10": {
+      "textures": "textures/items/arsenal/weapons/acid_sprayer__c10"
+    },
+    "arsenal_acid_sprayer__c11": {
+      "textures": "textures/items/arsenal/weapons/acid_sprayer__c11"
+    },
+    "arsenal_acid_sprayer__c12": {
+      "textures": "textures/items/arsenal/weapons/acid_sprayer__c12"
+    },
+    "arsenal_acid_sprayer__c2": {
+      "textures": "textures/items/arsenal/weapons/acid_sprayer__c2"
+    },
+    "arsenal_acid_sprayer__c3": {
+      "textures": "textures/items/arsenal/weapons/acid_sprayer__c3"
+    },
+    "arsenal_acid_sprayer__c4": {
+      "textures": "textures/items/arsenal/weapons/acid_sprayer__c4"
+    },
+    "arsenal_acid_sprayer__c5": {
+      "textures": "textures/items/arsenal/weapons/acid_sprayer__c5"
+    },
+    "arsenal_acid_sprayer__c6": {
+      "textures": "textures/items/arsenal/weapons/acid_sprayer__c6"
+    },
+    "arsenal_acid_sprayer__c7": {
+      "textures": "textures/items/arsenal/weapons/acid_sprayer__c7"
+    },
+    "arsenal_acid_sprayer__c8": {
+      "textures": "textures/items/arsenal/weapons/acid_sprayer__c8"
+    },
+    "arsenal_acid_sprayer__c9": {
+      "textures": "textures/items/arsenal/weapons/acid_sprayer__c9"
+    },
     "arsenal_adrenaline": {
       "textures": "textures/items/arsenal/medical/adrenaline"
     },
@@ -530,6 +569,45 @@
     "arsenal_bipod": {
       "textures": "textures/items/arsenal/attachments/bipod"
     },
+    "arsenal_blink_pistol": {
+      "textures": "textures/items/arsenal/weapons/blink_pistol"
+    },
+    "arsenal_blink_pistol__c1": {
+      "textures": "textures/items/arsenal/weapons/blink_pistol__c1"
+    },
+    "arsenal_blink_pistol__c10": {
+      "textures": "textures/items/arsenal/weapons/blink_pistol__c10"
+    },
+    "arsenal_blink_pistol__c11": {
+      "textures": "textures/items/arsenal/weapons/blink_pistol__c11"
+    },
+    "arsenal_blink_pistol__c12": {
+      "textures": "textures/items/arsenal/weapons/blink_pistol__c12"
+    },
+    "arsenal_blink_pistol__c2": {
+      "textures": "textures/items/arsenal/weapons/blink_pistol__c2"
+    },
+    "arsenal_blink_pistol__c3": {
+      "textures": "textures/items/arsenal/weapons/blink_pistol__c3"
+    },
+    "arsenal_blink_pistol__c4": {
+      "textures": "textures/items/arsenal/weapons/blink_pistol__c4"
+    },
+    "arsenal_blink_pistol__c5": {
+      "textures": "textures/items/arsenal/weapons/blink_pistol__c5"
+    },
+    "arsenal_blink_pistol__c6": {
+      "textures": "textures/items/arsenal/weapons/blink_pistol__c6"
+    },
+    "arsenal_blink_pistol__c7": {
+      "textures": "textures/items/arsenal/weapons/blink_pistol__c7"
+    },
+    "arsenal_blink_pistol__c8": {
+      "textures": "textures/items/arsenal/weapons/blink_pistol__c8"
+    },
+    "arsenal_blink_pistol__c9": {
+      "textures": "textures/items/arsenal/weapons/blink_pistol__c9"
+    },
     "arsenal_bouncer": {
       "textures": "textures/items/arsenal/weapons/bouncer"
     },
@@ -806,6 +884,51 @@
     "arsenal_claymore": {
       "textures": "textures/items/arsenal/gear/claymore"
     },
+    "arsenal_cluster_cannon": {
+      "textures": "textures/items/arsenal/weapons/cluster_cannon"
+    },
+    "arsenal_cluster_cannon__c1": {
+      "textures": "textures/items/arsenal/weapons/cluster_cannon__c1"
+    },
+    "arsenal_cluster_cannon__c10": {
+      "textures": "textures/items/arsenal/weapons/cluster_cannon__c10"
+    },
+    "arsenal_cluster_cannon__c11": {
+      "textures": "textures/items/arsenal/weapons/cluster_cannon__c11"
+    },
+    "arsenal_cluster_cannon__c12": {
+      "textures": "textures/items/arsenal/weapons/cluster_cannon__c12"
+    },
+    "arsenal_cluster_cannon__c2": {
+      "textures": "textures/items/arsenal/weapons/cluster_cannon__c2"
+    },
+    "arsenal_cluster_cannon__c3": {
+      "textures": "textures/items/arsenal/weapons/cluster_cannon__c3"
+    },
+    "arsenal_cluster_cannon__c4": {
+      "textures": "textures/items/arsenal/weapons/cluster_cannon__c4"
+    },
+    "arsenal_cluster_cannon__c5": {
+      "textures": "textures/items/arsenal/weapons/cluster_cannon__c5"
+    },
+    "arsenal_cluster_cannon__c6": {
+      "textures": "textures/items/arsenal/weapons/cluster_cannon__c6"
+    },
+    "arsenal_cluster_cannon__c7": {
+      "textures": "textures/items/arsenal/weapons/cluster_cannon__c7"
+    },
+    "arsenal_cluster_cannon__c8": {
+      "textures": "textures/items/arsenal/weapons/cluster_cannon__c8"
+    },
+    "arsenal_cluster_cannon__c9": {
+      "textures": "textures/items/arsenal/weapons/cluster_cannon__c9"
+    },
+    "arsenal_cluster_cannon__o0": {
+      "textures": "textures/items/arsenal/weapons/cluster_cannon__o0"
+    },
+    "arsenal_cluster_cannon__o2": {
+      "textures": "textures/items/arsenal/weapons/cluster_cannon__o2"
+    },
     "arsenal_coachman": {
       "textures": "textures/items/arsenal/weapons/coachman"
     },
@@ -937,6 +1060,45 @@
     },
     "arsenal_corsair__o2": {
       "textures": "textures/items/arsenal/weapons/corsair__o2"
+    },
+    "arsenal_cryo_beam": {
+      "textures": "textures/items/arsenal/weapons/cryo_beam"
+    },
+    "arsenal_cryo_beam__c1": {
+      "textures": "textures/items/arsenal/weapons/cryo_beam__c1"
+    },
+    "arsenal_cryo_beam__c10": {
+      "textures": "textures/items/arsenal/weapons/cryo_beam__c10"
+    },
+    "arsenal_cryo_beam__c11": {
+      "textures": "textures/items/arsenal/weapons/cryo_beam__c11"
+    },
+    "arsenal_cryo_beam__c12": {
+      "textures": "textures/items/arsenal/weapons/cryo_beam__c12"
+    },
+    "arsenal_cryo_beam__c2": {
+      "textures": "textures/items/arsenal/weapons/cryo_beam__c2"
+    },
+    "arsenal_cryo_beam__c3": {
+      "textures": "textures/items/arsenal/weapons/cryo_beam__c3"
+    },
+    "arsenal_cryo_beam__c4": {
+      "textures": "textures/items/arsenal/weapons/cryo_beam__c4"
+    },
+    "arsenal_cryo_beam__c5": {
+      "textures": "textures/items/arsenal/weapons/cryo_beam__c5"
+    },
+    "arsenal_cryo_beam__c6": {
+      "textures": "textures/items/arsenal/weapons/cryo_beam__c6"
+    },
+    "arsenal_cryo_beam__c7": {
+      "textures": "textures/items/arsenal/weapons/cryo_beam__c7"
+    },
+    "arsenal_cryo_beam__c8": {
+      "textures": "textures/items/arsenal/weapons/cryo_beam__c8"
+    },
+    "arsenal_cryo_beam__c9": {
+      "textures": "textures/items/arsenal/weapons/cryo_beam__c9"
     },
     "arsenal_cryo_lance": {
       "textures": "textures/items/arsenal/weapons/cryo_lance"
@@ -1171,6 +1333,51 @@
     },
     "arsenal_echo3__o2": {
       "textures": "textures/items/arsenal/weapons/echo3__o2"
+    },
+    "arsenal_emp_blaster": {
+      "textures": "textures/items/arsenal/weapons/emp_blaster"
+    },
+    "arsenal_emp_blaster__c1": {
+      "textures": "textures/items/arsenal/weapons/emp_blaster__c1"
+    },
+    "arsenal_emp_blaster__c10": {
+      "textures": "textures/items/arsenal/weapons/emp_blaster__c10"
+    },
+    "arsenal_emp_blaster__c11": {
+      "textures": "textures/items/arsenal/weapons/emp_blaster__c11"
+    },
+    "arsenal_emp_blaster__c12": {
+      "textures": "textures/items/arsenal/weapons/emp_blaster__c12"
+    },
+    "arsenal_emp_blaster__c2": {
+      "textures": "textures/items/arsenal/weapons/emp_blaster__c2"
+    },
+    "arsenal_emp_blaster__c3": {
+      "textures": "textures/items/arsenal/weapons/emp_blaster__c3"
+    },
+    "arsenal_emp_blaster__c4": {
+      "textures": "textures/items/arsenal/weapons/emp_blaster__c4"
+    },
+    "arsenal_emp_blaster__c5": {
+      "textures": "textures/items/arsenal/weapons/emp_blaster__c5"
+    },
+    "arsenal_emp_blaster__c6": {
+      "textures": "textures/items/arsenal/weapons/emp_blaster__c6"
+    },
+    "arsenal_emp_blaster__c7": {
+      "textures": "textures/items/arsenal/weapons/emp_blaster__c7"
+    },
+    "arsenal_emp_blaster__c8": {
+      "textures": "textures/items/arsenal/weapons/emp_blaster__c8"
+    },
+    "arsenal_emp_blaster__c9": {
+      "textures": "textures/items/arsenal/weapons/emp_blaster__c9"
+    },
+    "arsenal_emp_blaster__o0": {
+      "textures": "textures/items/arsenal/weapons/emp_blaster__o0"
+    },
+    "arsenal_emp_blaster__o2": {
+      "textures": "textures/items/arsenal/weapons/emp_blaster__o2"
     },
     "arsenal_energy_cell": {
       "textures": "textures/items/arsenal/ammo/energy_cell"
@@ -1745,6 +1952,45 @@
     "arsenal_hammerhead__c9": {
       "textures": "textures/items/arsenal/weapons/hammerhead__c9"
     },
+    "arsenal_harpoon_gun": {
+      "textures": "textures/items/arsenal/weapons/harpoon_gun"
+    },
+    "arsenal_harpoon_gun__c1": {
+      "textures": "textures/items/arsenal/weapons/harpoon_gun__c1"
+    },
+    "arsenal_harpoon_gun__c10": {
+      "textures": "textures/items/arsenal/weapons/harpoon_gun__c10"
+    },
+    "arsenal_harpoon_gun__c11": {
+      "textures": "textures/items/arsenal/weapons/harpoon_gun__c11"
+    },
+    "arsenal_harpoon_gun__c12": {
+      "textures": "textures/items/arsenal/weapons/harpoon_gun__c12"
+    },
+    "arsenal_harpoon_gun__c2": {
+      "textures": "textures/items/arsenal/weapons/harpoon_gun__c2"
+    },
+    "arsenal_harpoon_gun__c3": {
+      "textures": "textures/items/arsenal/weapons/harpoon_gun__c3"
+    },
+    "arsenal_harpoon_gun__c4": {
+      "textures": "textures/items/arsenal/weapons/harpoon_gun__c4"
+    },
+    "arsenal_harpoon_gun__c5": {
+      "textures": "textures/items/arsenal/weapons/harpoon_gun__c5"
+    },
+    "arsenal_harpoon_gun__c6": {
+      "textures": "textures/items/arsenal/weapons/harpoon_gun__c6"
+    },
+    "arsenal_harpoon_gun__c7": {
+      "textures": "textures/items/arsenal/weapons/harpoon_gun__c7"
+    },
+    "arsenal_harpoon_gun__c8": {
+      "textures": "textures/items/arsenal/weapons/harpoon_gun__c8"
+    },
+    "arsenal_harpoon_gun__c9": {
+      "textures": "textures/items/arsenal/weapons/harpoon_gun__c9"
+    },
     "arsenal_harrier": {
       "textures": "textures/items/arsenal/weapons/harrier"
     },
@@ -2140,6 +2386,51 @@
     },
     "arsenal_ion_carbine__o2": {
       "textures": "textures/items/arsenal/weapons/ion_carbine__o2"
+    },
+    "arsenal_ion_marksman": {
+      "textures": "textures/items/arsenal/weapons/ion_marksman"
+    },
+    "arsenal_ion_marksman__c1": {
+      "textures": "textures/items/arsenal/weapons/ion_marksman__c1"
+    },
+    "arsenal_ion_marksman__c10": {
+      "textures": "textures/items/arsenal/weapons/ion_marksman__c10"
+    },
+    "arsenal_ion_marksman__c11": {
+      "textures": "textures/items/arsenal/weapons/ion_marksman__c11"
+    },
+    "arsenal_ion_marksman__c12": {
+      "textures": "textures/items/arsenal/weapons/ion_marksman__c12"
+    },
+    "arsenal_ion_marksman__c2": {
+      "textures": "textures/items/arsenal/weapons/ion_marksman__c2"
+    },
+    "arsenal_ion_marksman__c3": {
+      "textures": "textures/items/arsenal/weapons/ion_marksman__c3"
+    },
+    "arsenal_ion_marksman__c4": {
+      "textures": "textures/items/arsenal/weapons/ion_marksman__c4"
+    },
+    "arsenal_ion_marksman__c5": {
+      "textures": "textures/items/arsenal/weapons/ion_marksman__c5"
+    },
+    "arsenal_ion_marksman__c6": {
+      "textures": "textures/items/arsenal/weapons/ion_marksman__c6"
+    },
+    "arsenal_ion_marksman__c7": {
+      "textures": "textures/items/arsenal/weapons/ion_marksman__c7"
+    },
+    "arsenal_ion_marksman__c8": {
+      "textures": "textures/items/arsenal/weapons/ion_marksman__c8"
+    },
+    "arsenal_ion_marksman__c9": {
+      "textures": "textures/items/arsenal/weapons/ion_marksman__c9"
+    },
+    "arsenal_ion_marksman__o0": {
+      "textures": "textures/items/arsenal/weapons/ion_marksman__o0"
+    },
+    "arsenal_ion_marksman__o1": {
+      "textures": "textures/items/arsenal/weapons/ion_marksman__o1"
     },
     "arsenal_ironbark": {
       "textures": "textures/items/arsenal/weapons/ironbark"
@@ -2651,6 +2942,45 @@
     "arsenal_leviathan__o1": {
       "textures": "textures/items/arsenal/weapons/leviathan__o1"
     },
+    "arsenal_lightning_gun": {
+      "textures": "textures/items/arsenal/weapons/lightning_gun"
+    },
+    "arsenal_lightning_gun__c1": {
+      "textures": "textures/items/arsenal/weapons/lightning_gun__c1"
+    },
+    "arsenal_lightning_gun__c10": {
+      "textures": "textures/items/arsenal/weapons/lightning_gun__c10"
+    },
+    "arsenal_lightning_gun__c11": {
+      "textures": "textures/items/arsenal/weapons/lightning_gun__c11"
+    },
+    "arsenal_lightning_gun__c12": {
+      "textures": "textures/items/arsenal/weapons/lightning_gun__c12"
+    },
+    "arsenal_lightning_gun__c2": {
+      "textures": "textures/items/arsenal/weapons/lightning_gun__c2"
+    },
+    "arsenal_lightning_gun__c3": {
+      "textures": "textures/items/arsenal/weapons/lightning_gun__c3"
+    },
+    "arsenal_lightning_gun__c4": {
+      "textures": "textures/items/arsenal/weapons/lightning_gun__c4"
+    },
+    "arsenal_lightning_gun__c5": {
+      "textures": "textures/items/arsenal/weapons/lightning_gun__c5"
+    },
+    "arsenal_lightning_gun__c6": {
+      "textures": "textures/items/arsenal/weapons/lightning_gun__c6"
+    },
+    "arsenal_lightning_gun__c7": {
+      "textures": "textures/items/arsenal/weapons/lightning_gun__c7"
+    },
+    "arsenal_lightning_gun__c8": {
+      "textures": "textures/items/arsenal/weapons/lightning_gun__c8"
+    },
+    "arsenal_lightning_gun__c9": {
+      "textures": "textures/items/arsenal/weapons/lightning_gun__c9"
+    },
     "arsenal_longbow": {
       "textures": "textures/items/arsenal/weapons/longbow"
     },
@@ -2993,6 +3323,45 @@
     "arsenal_med_station": {
       "textures": "textures/items/arsenal/gear/med_station"
     },
+    "arsenal_medic_beam": {
+      "textures": "textures/items/arsenal/weapons/medic_beam"
+    },
+    "arsenal_medic_beam__c1": {
+      "textures": "textures/items/arsenal/weapons/medic_beam__c1"
+    },
+    "arsenal_medic_beam__c10": {
+      "textures": "textures/items/arsenal/weapons/medic_beam__c10"
+    },
+    "arsenal_medic_beam__c11": {
+      "textures": "textures/items/arsenal/weapons/medic_beam__c11"
+    },
+    "arsenal_medic_beam__c12": {
+      "textures": "textures/items/arsenal/weapons/medic_beam__c12"
+    },
+    "arsenal_medic_beam__c2": {
+      "textures": "textures/items/arsenal/weapons/medic_beam__c2"
+    },
+    "arsenal_medic_beam__c3": {
+      "textures": "textures/items/arsenal/weapons/medic_beam__c3"
+    },
+    "arsenal_medic_beam__c4": {
+      "textures": "textures/items/arsenal/weapons/medic_beam__c4"
+    },
+    "arsenal_medic_beam__c5": {
+      "textures": "textures/items/arsenal/weapons/medic_beam__c5"
+    },
+    "arsenal_medic_beam__c6": {
+      "textures": "textures/items/arsenal/weapons/medic_beam__c6"
+    },
+    "arsenal_medic_beam__c7": {
+      "textures": "textures/items/arsenal/weapons/medic_beam__c7"
+    },
+    "arsenal_medic_beam__c8": {
+      "textures": "textures/items/arsenal/weapons/medic_beam__c8"
+    },
+    "arsenal_medic_beam__c9": {
+      "textures": "textures/items/arsenal/weapons/medic_beam__c9"
+    },
     "arsenal_medkit": {
       "textures": "textures/items/arsenal/medical/medkit"
     },
@@ -3170,6 +3539,51 @@
     "arsenal_muzzle_tank_brake": {
       "textures": "textures/items/arsenal/attachments/muzzle_tank_brake"
     },
+    "arsenal_net_launcher": {
+      "textures": "textures/items/arsenal/weapons/net_launcher"
+    },
+    "arsenal_net_launcher__c1": {
+      "textures": "textures/items/arsenal/weapons/net_launcher__c1"
+    },
+    "arsenal_net_launcher__c10": {
+      "textures": "textures/items/arsenal/weapons/net_launcher__c10"
+    },
+    "arsenal_net_launcher__c11": {
+      "textures": "textures/items/arsenal/weapons/net_launcher__c11"
+    },
+    "arsenal_net_launcher__c12": {
+      "textures": "textures/items/arsenal/weapons/net_launcher__c12"
+    },
+    "arsenal_net_launcher__c2": {
+      "textures": "textures/items/arsenal/weapons/net_launcher__c2"
+    },
+    "arsenal_net_launcher__c3": {
+      "textures": "textures/items/arsenal/weapons/net_launcher__c3"
+    },
+    "arsenal_net_launcher__c4": {
+      "textures": "textures/items/arsenal/weapons/net_launcher__c4"
+    },
+    "arsenal_net_launcher__c5": {
+      "textures": "textures/items/arsenal/weapons/net_launcher__c5"
+    },
+    "arsenal_net_launcher__c6": {
+      "textures": "textures/items/arsenal/weapons/net_launcher__c6"
+    },
+    "arsenal_net_launcher__c7": {
+      "textures": "textures/items/arsenal/weapons/net_launcher__c7"
+    },
+    "arsenal_net_launcher__c8": {
+      "textures": "textures/items/arsenal/weapons/net_launcher__c8"
+    },
+    "arsenal_net_launcher__c9": {
+      "textures": "textures/items/arsenal/weapons/net_launcher__c9"
+    },
+    "arsenal_net_launcher__o1": {
+      "textures": "textures/items/arsenal/weapons/net_launcher__o1"
+    },
+    "arsenal_net_launcher__o2": {
+      "textures": "textures/items/arsenal/weapons/net_launcher__o2"
+    },
     "arsenal_nightjar": {
       "textures": "textures/items/arsenal/weapons/nightjar"
     },
@@ -3346,6 +3760,45 @@
     },
     "arsenal_optic_variable": {
       "textures": "textures/items/arsenal/attachments/optic_variable"
+    },
+    "arsenal_orbital_marker": {
+      "textures": "textures/items/arsenal/weapons/orbital_marker"
+    },
+    "arsenal_orbital_marker__c1": {
+      "textures": "textures/items/arsenal/weapons/orbital_marker__c1"
+    },
+    "arsenal_orbital_marker__c10": {
+      "textures": "textures/items/arsenal/weapons/orbital_marker__c10"
+    },
+    "arsenal_orbital_marker__c11": {
+      "textures": "textures/items/arsenal/weapons/orbital_marker__c11"
+    },
+    "arsenal_orbital_marker__c12": {
+      "textures": "textures/items/arsenal/weapons/orbital_marker__c12"
+    },
+    "arsenal_orbital_marker__c2": {
+      "textures": "textures/items/arsenal/weapons/orbital_marker__c2"
+    },
+    "arsenal_orbital_marker__c3": {
+      "textures": "textures/items/arsenal/weapons/orbital_marker__c3"
+    },
+    "arsenal_orbital_marker__c4": {
+      "textures": "textures/items/arsenal/weapons/orbital_marker__c4"
+    },
+    "arsenal_orbital_marker__c5": {
+      "textures": "textures/items/arsenal/weapons/orbital_marker__c5"
+    },
+    "arsenal_orbital_marker__c6": {
+      "textures": "textures/items/arsenal/weapons/orbital_marker__c6"
+    },
+    "arsenal_orbital_marker__c7": {
+      "textures": "textures/items/arsenal/weapons/orbital_marker__c7"
+    },
+    "arsenal_orbital_marker__c8": {
+      "textures": "textures/items/arsenal/weapons/orbital_marker__c8"
+    },
+    "arsenal_orbital_marker__c9": {
+      "textures": "textures/items/arsenal/weapons/orbital_marker__c9"
     },
     "arsenal_osprey": {
       "textures": "textures/items/arsenal/weapons/osprey"
@@ -3611,6 +4064,51 @@
     "arsenal_photon_lance__o2": {
       "textures": "textures/items/arsenal/weapons/photon_lance__o2"
     },
+    "arsenal_plasma_cannon": {
+      "textures": "textures/items/arsenal/weapons/plasma_cannon"
+    },
+    "arsenal_plasma_cannon__c1": {
+      "textures": "textures/items/arsenal/weapons/plasma_cannon__c1"
+    },
+    "arsenal_plasma_cannon__c10": {
+      "textures": "textures/items/arsenal/weapons/plasma_cannon__c10"
+    },
+    "arsenal_plasma_cannon__c11": {
+      "textures": "textures/items/arsenal/weapons/plasma_cannon__c11"
+    },
+    "arsenal_plasma_cannon__c12": {
+      "textures": "textures/items/arsenal/weapons/plasma_cannon__c12"
+    },
+    "arsenal_plasma_cannon__c2": {
+      "textures": "textures/items/arsenal/weapons/plasma_cannon__c2"
+    },
+    "arsenal_plasma_cannon__c3": {
+      "textures": "textures/items/arsenal/weapons/plasma_cannon__c3"
+    },
+    "arsenal_plasma_cannon__c4": {
+      "textures": "textures/items/arsenal/weapons/plasma_cannon__c4"
+    },
+    "arsenal_plasma_cannon__c5": {
+      "textures": "textures/items/arsenal/weapons/plasma_cannon__c5"
+    },
+    "arsenal_plasma_cannon__c6": {
+      "textures": "textures/items/arsenal/weapons/plasma_cannon__c6"
+    },
+    "arsenal_plasma_cannon__c7": {
+      "textures": "textures/items/arsenal/weapons/plasma_cannon__c7"
+    },
+    "arsenal_plasma_cannon__c8": {
+      "textures": "textures/items/arsenal/weapons/plasma_cannon__c8"
+    },
+    "arsenal_plasma_cannon__c9": {
+      "textures": "textures/items/arsenal/weapons/plasma_cannon__c9"
+    },
+    "arsenal_plasma_cannon__o0": {
+      "textures": "textures/items/arsenal/weapons/plasma_cannon__o0"
+    },
+    "arsenal_plasma_cannon__o2": {
+      "textures": "textures/items/arsenal/weapons/plasma_cannon__o2"
+    },
     "arsenal_plasma_repeater": {
       "textures": "textures/items/arsenal/weapons/plasma_repeater"
     },
@@ -3661,6 +4159,51 @@
     },
     "arsenal_precision_parts": {
       "textures": "textures/items/arsenal/materials/precision_parts"
+    },
+    "arsenal_prism_scatter": {
+      "textures": "textures/items/arsenal/weapons/prism_scatter"
+    },
+    "arsenal_prism_scatter__c1": {
+      "textures": "textures/items/arsenal/weapons/prism_scatter__c1"
+    },
+    "arsenal_prism_scatter__c10": {
+      "textures": "textures/items/arsenal/weapons/prism_scatter__c10"
+    },
+    "arsenal_prism_scatter__c11": {
+      "textures": "textures/items/arsenal/weapons/prism_scatter__c11"
+    },
+    "arsenal_prism_scatter__c12": {
+      "textures": "textures/items/arsenal/weapons/prism_scatter__c12"
+    },
+    "arsenal_prism_scatter__c2": {
+      "textures": "textures/items/arsenal/weapons/prism_scatter__c2"
+    },
+    "arsenal_prism_scatter__c3": {
+      "textures": "textures/items/arsenal/weapons/prism_scatter__c3"
+    },
+    "arsenal_prism_scatter__c4": {
+      "textures": "textures/items/arsenal/weapons/prism_scatter__c4"
+    },
+    "arsenal_prism_scatter__c5": {
+      "textures": "textures/items/arsenal/weapons/prism_scatter__c5"
+    },
+    "arsenal_prism_scatter__c6": {
+      "textures": "textures/items/arsenal/weapons/prism_scatter__c6"
+    },
+    "arsenal_prism_scatter__c7": {
+      "textures": "textures/items/arsenal/weapons/prism_scatter__c7"
+    },
+    "arsenal_prism_scatter__c8": {
+      "textures": "textures/items/arsenal/weapons/prism_scatter__c8"
+    },
+    "arsenal_prism_scatter__c9": {
+      "textures": "textures/items/arsenal/weapons/prism_scatter__c9"
+    },
+    "arsenal_prism_scatter__o1": {
+      "textures": "textures/items/arsenal/weapons/prism_scatter__o1"
+    },
+    "arsenal_prism_scatter__o2": {
+      "textures": "textures/items/arsenal/weapons/prism_scatter__o2"
     },
     "arsenal_pulse_rifle": {
       "textures": "textures/items/arsenal/weapons/pulse_rifle"
@@ -4025,6 +4568,51 @@
     "arsenal_recon_drone": {
       "textures": "textures/items/arsenal/gear/recon_drone"
     },
+    "arsenal_reflector": {
+      "textures": "textures/items/arsenal/weapons/reflector"
+    },
+    "arsenal_reflector__c1": {
+      "textures": "textures/items/arsenal/weapons/reflector__c1"
+    },
+    "arsenal_reflector__c10": {
+      "textures": "textures/items/arsenal/weapons/reflector__c10"
+    },
+    "arsenal_reflector__c11": {
+      "textures": "textures/items/arsenal/weapons/reflector__c11"
+    },
+    "arsenal_reflector__c12": {
+      "textures": "textures/items/arsenal/weapons/reflector__c12"
+    },
+    "arsenal_reflector__c2": {
+      "textures": "textures/items/arsenal/weapons/reflector__c2"
+    },
+    "arsenal_reflector__c3": {
+      "textures": "textures/items/arsenal/weapons/reflector__c3"
+    },
+    "arsenal_reflector__c4": {
+      "textures": "textures/items/arsenal/weapons/reflector__c4"
+    },
+    "arsenal_reflector__c5": {
+      "textures": "textures/items/arsenal/weapons/reflector__c5"
+    },
+    "arsenal_reflector__c6": {
+      "textures": "textures/items/arsenal/weapons/reflector__c6"
+    },
+    "arsenal_reflector__c7": {
+      "textures": "textures/items/arsenal/weapons/reflector__c7"
+    },
+    "arsenal_reflector__c8": {
+      "textures": "textures/items/arsenal/weapons/reflector__c8"
+    },
+    "arsenal_reflector__c9": {
+      "textures": "textures/items/arsenal/weapons/reflector__c9"
+    },
+    "arsenal_reflector__o0": {
+      "textures": "textures/items/arsenal/weapons/reflector__o0"
+    },
+    "arsenal_reflector__o2": {
+      "textures": "textures/items/arsenal/weapons/reflector__o2"
+    },
     "arsenal_regent": {
       "textures": "textures/items/arsenal/weapons/regent"
     },
@@ -4117,6 +4705,51 @@
     },
     "arsenal_rhino__o2": {
       "textures": "textures/items/arsenal/weapons/rhino__o2"
+    },
+    "arsenal_ricochet_disc": {
+      "textures": "textures/items/arsenal/weapons/ricochet_disc"
+    },
+    "arsenal_ricochet_disc__c1": {
+      "textures": "textures/items/arsenal/weapons/ricochet_disc__c1"
+    },
+    "arsenal_ricochet_disc__c10": {
+      "textures": "textures/items/arsenal/weapons/ricochet_disc__c10"
+    },
+    "arsenal_ricochet_disc__c11": {
+      "textures": "textures/items/arsenal/weapons/ricochet_disc__c11"
+    },
+    "arsenal_ricochet_disc__c12": {
+      "textures": "textures/items/arsenal/weapons/ricochet_disc__c12"
+    },
+    "arsenal_ricochet_disc__c2": {
+      "textures": "textures/items/arsenal/weapons/ricochet_disc__c2"
+    },
+    "arsenal_ricochet_disc__c3": {
+      "textures": "textures/items/arsenal/weapons/ricochet_disc__c3"
+    },
+    "arsenal_ricochet_disc__c4": {
+      "textures": "textures/items/arsenal/weapons/ricochet_disc__c4"
+    },
+    "arsenal_ricochet_disc__c5": {
+      "textures": "textures/items/arsenal/weapons/ricochet_disc__c5"
+    },
+    "arsenal_ricochet_disc__c6": {
+      "textures": "textures/items/arsenal/weapons/ricochet_disc__c6"
+    },
+    "arsenal_ricochet_disc__c7": {
+      "textures": "textures/items/arsenal/weapons/ricochet_disc__c7"
+    },
+    "arsenal_ricochet_disc__c8": {
+      "textures": "textures/items/arsenal/weapons/ricochet_disc__c8"
+    },
+    "arsenal_ricochet_disc__c9": {
+      "textures": "textures/items/arsenal/weapons/ricochet_disc__c9"
+    },
+    "arsenal_ricochet_disc__o0": {
+      "textures": "textures/items/arsenal/weapons/ricochet_disc__o0"
+    },
+    "arsenal_ricochet_disc__o2": {
+      "textures": "textures/items/arsenal/weapons/ricochet_disc__o2"
     },
     "arsenal_ridgeback": {
       "textures": "textures/items/arsenal/weapons/ridgeback"
@@ -4358,6 +4991,51 @@
     "arsenal_side_canted": {
       "textures": "textures/items/arsenal/attachments/side_canted"
     },
+    "arsenal_singularity": {
+      "textures": "textures/items/arsenal/weapons/singularity"
+    },
+    "arsenal_singularity__c1": {
+      "textures": "textures/items/arsenal/weapons/singularity__c1"
+    },
+    "arsenal_singularity__c10": {
+      "textures": "textures/items/arsenal/weapons/singularity__c10"
+    },
+    "arsenal_singularity__c11": {
+      "textures": "textures/items/arsenal/weapons/singularity__c11"
+    },
+    "arsenal_singularity__c12": {
+      "textures": "textures/items/arsenal/weapons/singularity__c12"
+    },
+    "arsenal_singularity__c2": {
+      "textures": "textures/items/arsenal/weapons/singularity__c2"
+    },
+    "arsenal_singularity__c3": {
+      "textures": "textures/items/arsenal/weapons/singularity__c3"
+    },
+    "arsenal_singularity__c4": {
+      "textures": "textures/items/arsenal/weapons/singularity__c4"
+    },
+    "arsenal_singularity__c5": {
+      "textures": "textures/items/arsenal/weapons/singularity__c5"
+    },
+    "arsenal_singularity__c6": {
+      "textures": "textures/items/arsenal/weapons/singularity__c6"
+    },
+    "arsenal_singularity__c7": {
+      "textures": "textures/items/arsenal/weapons/singularity__c7"
+    },
+    "arsenal_singularity__c8": {
+      "textures": "textures/items/arsenal/weapons/singularity__c8"
+    },
+    "arsenal_singularity__c9": {
+      "textures": "textures/items/arsenal/weapons/singularity__c9"
+    },
+    "arsenal_singularity__o0": {
+      "textures": "textures/items/arsenal/weapons/singularity__o0"
+    },
+    "arsenal_singularity__o2": {
+      "textures": "textures/items/arsenal/weapons/singularity__o2"
+    },
     "arsenal_sirocco": {
       "textures": "textures/items/arsenal/weapons/sirocco"
     },
@@ -4486,6 +5164,45 @@
     },
     "arsenal_slugger__o2": {
       "textures": "textures/items/arsenal/weapons/slugger__o2"
+    },
+    "arsenal_smart_pistol": {
+      "textures": "textures/items/arsenal/weapons/smart_pistol"
+    },
+    "arsenal_smart_pistol__c1": {
+      "textures": "textures/items/arsenal/weapons/smart_pistol__c1"
+    },
+    "arsenal_smart_pistol__c10": {
+      "textures": "textures/items/arsenal/weapons/smart_pistol__c10"
+    },
+    "arsenal_smart_pistol__c11": {
+      "textures": "textures/items/arsenal/weapons/smart_pistol__c11"
+    },
+    "arsenal_smart_pistol__c12": {
+      "textures": "textures/items/arsenal/weapons/smart_pistol__c12"
+    },
+    "arsenal_smart_pistol__c2": {
+      "textures": "textures/items/arsenal/weapons/smart_pistol__c2"
+    },
+    "arsenal_smart_pistol__c3": {
+      "textures": "textures/items/arsenal/weapons/smart_pistol__c3"
+    },
+    "arsenal_smart_pistol__c4": {
+      "textures": "textures/items/arsenal/weapons/smart_pistol__c4"
+    },
+    "arsenal_smart_pistol__c5": {
+      "textures": "textures/items/arsenal/weapons/smart_pistol__c5"
+    },
+    "arsenal_smart_pistol__c6": {
+      "textures": "textures/items/arsenal/weapons/smart_pistol__c6"
+    },
+    "arsenal_smart_pistol__c7": {
+      "textures": "textures/items/arsenal/weapons/smart_pistol__c7"
+    },
+    "arsenal_smart_pistol__c8": {
+      "textures": "textures/items/arsenal/weapons/smart_pistol__c8"
+    },
+    "arsenal_smart_pistol__c9": {
+      "textures": "textures/items/arsenal/weapons/smart_pistol__c9"
     },
     "arsenal_sonic_disruptor": {
       "textures": "textures/items/arsenal/weapons/sonic_disruptor"
@@ -4619,11 +5336,101 @@
     "arsenal_spring_knife": {
       "textures": "textures/items/arsenal/melee/spring_knife"
     },
+    "arsenal_stasis_projector": {
+      "textures": "textures/items/arsenal/weapons/stasis_projector"
+    },
+    "arsenal_stasis_projector__c1": {
+      "textures": "textures/items/arsenal/weapons/stasis_projector__c1"
+    },
+    "arsenal_stasis_projector__c10": {
+      "textures": "textures/items/arsenal/weapons/stasis_projector__c10"
+    },
+    "arsenal_stasis_projector__c11": {
+      "textures": "textures/items/arsenal/weapons/stasis_projector__c11"
+    },
+    "arsenal_stasis_projector__c12": {
+      "textures": "textures/items/arsenal/weapons/stasis_projector__c12"
+    },
+    "arsenal_stasis_projector__c2": {
+      "textures": "textures/items/arsenal/weapons/stasis_projector__c2"
+    },
+    "arsenal_stasis_projector__c3": {
+      "textures": "textures/items/arsenal/weapons/stasis_projector__c3"
+    },
+    "arsenal_stasis_projector__c4": {
+      "textures": "textures/items/arsenal/weapons/stasis_projector__c4"
+    },
+    "arsenal_stasis_projector__c5": {
+      "textures": "textures/items/arsenal/weapons/stasis_projector__c5"
+    },
+    "arsenal_stasis_projector__c6": {
+      "textures": "textures/items/arsenal/weapons/stasis_projector__c6"
+    },
+    "arsenal_stasis_projector__c7": {
+      "textures": "textures/items/arsenal/weapons/stasis_projector__c7"
+    },
+    "arsenal_stasis_projector__c8": {
+      "textures": "textures/items/arsenal/weapons/stasis_projector__c8"
+    },
+    "arsenal_stasis_projector__c9": {
+      "textures": "textures/items/arsenal/weapons/stasis_projector__c9"
+    },
+    "arsenal_stasis_projector__o0": {
+      "textures": "textures/items/arsenal/weapons/stasis_projector__o0"
+    },
+    "arsenal_stasis_projector__o2": {
+      "textures": "textures/items/arsenal/weapons/stasis_projector__o2"
+    },
     "arsenal_steel_ingot": {
       "textures": "textures/items/arsenal/materials/steel_ingot"
     },
     "arsenal_sticky_bomb": {
       "textures": "textures/items/arsenal/throwables/sticky_bomb"
+    },
+    "arsenal_sticky_launcher": {
+      "textures": "textures/items/arsenal/weapons/sticky_launcher"
+    },
+    "arsenal_sticky_launcher__c1": {
+      "textures": "textures/items/arsenal/weapons/sticky_launcher__c1"
+    },
+    "arsenal_sticky_launcher__c10": {
+      "textures": "textures/items/arsenal/weapons/sticky_launcher__c10"
+    },
+    "arsenal_sticky_launcher__c11": {
+      "textures": "textures/items/arsenal/weapons/sticky_launcher__c11"
+    },
+    "arsenal_sticky_launcher__c12": {
+      "textures": "textures/items/arsenal/weapons/sticky_launcher__c12"
+    },
+    "arsenal_sticky_launcher__c2": {
+      "textures": "textures/items/arsenal/weapons/sticky_launcher__c2"
+    },
+    "arsenal_sticky_launcher__c3": {
+      "textures": "textures/items/arsenal/weapons/sticky_launcher__c3"
+    },
+    "arsenal_sticky_launcher__c4": {
+      "textures": "textures/items/arsenal/weapons/sticky_launcher__c4"
+    },
+    "arsenal_sticky_launcher__c5": {
+      "textures": "textures/items/arsenal/weapons/sticky_launcher__c5"
+    },
+    "arsenal_sticky_launcher__c6": {
+      "textures": "textures/items/arsenal/weapons/sticky_launcher__c6"
+    },
+    "arsenal_sticky_launcher__c7": {
+      "textures": "textures/items/arsenal/weapons/sticky_launcher__c7"
+    },
+    "arsenal_sticky_launcher__c8": {
+      "textures": "textures/items/arsenal/weapons/sticky_launcher__c8"
+    },
+    "arsenal_sticky_launcher__c9": {
+      "textures": "textures/items/arsenal/weapons/sticky_launcher__c9"
+    },
+    "arsenal_sticky_launcher__o0": {
+      "textures": "textures/items/arsenal/weapons/sticky_launcher__o0"
+    },
+    "arsenal_sticky_launcher__o2": {
+      "textures": "textures/items/arsenal/weapons/sticky_launcher__o2"
     },
     "arsenal_stillwater": {
       "textures": "textures/items/arsenal/weapons/stillwater"
@@ -4730,6 +5537,51 @@
     "arsenal_stock_skeleton": {
       "textures": "textures/items/arsenal/attachments/stock_skeleton"
     },
+    "arsenal_storm_needler": {
+      "textures": "textures/items/arsenal/weapons/storm_needler"
+    },
+    "arsenal_storm_needler__c1": {
+      "textures": "textures/items/arsenal/weapons/storm_needler__c1"
+    },
+    "arsenal_storm_needler__c10": {
+      "textures": "textures/items/arsenal/weapons/storm_needler__c10"
+    },
+    "arsenal_storm_needler__c11": {
+      "textures": "textures/items/arsenal/weapons/storm_needler__c11"
+    },
+    "arsenal_storm_needler__c12": {
+      "textures": "textures/items/arsenal/weapons/storm_needler__c12"
+    },
+    "arsenal_storm_needler__c2": {
+      "textures": "textures/items/arsenal/weapons/storm_needler__c2"
+    },
+    "arsenal_storm_needler__c3": {
+      "textures": "textures/items/arsenal/weapons/storm_needler__c3"
+    },
+    "arsenal_storm_needler__c4": {
+      "textures": "textures/items/arsenal/weapons/storm_needler__c4"
+    },
+    "arsenal_storm_needler__c5": {
+      "textures": "textures/items/arsenal/weapons/storm_needler__c5"
+    },
+    "arsenal_storm_needler__c6": {
+      "textures": "textures/items/arsenal/weapons/storm_needler__c6"
+    },
+    "arsenal_storm_needler__c7": {
+      "textures": "textures/items/arsenal/weapons/storm_needler__c7"
+    },
+    "arsenal_storm_needler__c8": {
+      "textures": "textures/items/arsenal/weapons/storm_needler__c8"
+    },
+    "arsenal_storm_needler__c9": {
+      "textures": "textures/items/arsenal/weapons/storm_needler__c9"
+    },
+    "arsenal_storm_needler__o0": {
+      "textures": "textures/items/arsenal/weapons/storm_needler__o0"
+    },
+    "arsenal_storm_needler__o2": {
+      "textures": "textures/items/arsenal/weapons/storm_needler__o2"
+    },
     "arsenal_stormcaller": {
       "textures": "textures/items/arsenal/weapons/stormcaller"
     },
@@ -4771,6 +5623,51 @@
     },
     "arsenal_streak_terminal": {
       "textures": "textures/items/arsenal/tools/streak_terminal"
+    },
+    "arsenal_swarm_launcher": {
+      "textures": "textures/items/arsenal/weapons/swarm_launcher"
+    },
+    "arsenal_swarm_launcher__c1": {
+      "textures": "textures/items/arsenal/weapons/swarm_launcher__c1"
+    },
+    "arsenal_swarm_launcher__c10": {
+      "textures": "textures/items/arsenal/weapons/swarm_launcher__c10"
+    },
+    "arsenal_swarm_launcher__c11": {
+      "textures": "textures/items/arsenal/weapons/swarm_launcher__c11"
+    },
+    "arsenal_swarm_launcher__c12": {
+      "textures": "textures/items/arsenal/weapons/swarm_launcher__c12"
+    },
+    "arsenal_swarm_launcher__c2": {
+      "textures": "textures/items/arsenal/weapons/swarm_launcher__c2"
+    },
+    "arsenal_swarm_launcher__c3": {
+      "textures": "textures/items/arsenal/weapons/swarm_launcher__c3"
+    },
+    "arsenal_swarm_launcher__c4": {
+      "textures": "textures/items/arsenal/weapons/swarm_launcher__c4"
+    },
+    "arsenal_swarm_launcher__c5": {
+      "textures": "textures/items/arsenal/weapons/swarm_launcher__c5"
+    },
+    "arsenal_swarm_launcher__c6": {
+      "textures": "textures/items/arsenal/weapons/swarm_launcher__c6"
+    },
+    "arsenal_swarm_launcher__c7": {
+      "textures": "textures/items/arsenal/weapons/swarm_launcher__c7"
+    },
+    "arsenal_swarm_launcher__c8": {
+      "textures": "textures/items/arsenal/weapons/swarm_launcher__c8"
+    },
+    "arsenal_swarm_launcher__c9": {
+      "textures": "textures/items/arsenal/weapons/swarm_launcher__c9"
+    },
+    "arsenal_swarm_launcher__o0": {
+      "textures": "textures/items/arsenal/weapons/swarm_launcher__o0"
+    },
+    "arsenal_swarm_launcher__o2": {
+      "textures": "textures/items/arsenal/weapons/swarm_launcher__o2"
     },
     "arsenal_target_kit": {
       "textures": "textures/items/arsenal/tools/target_kit"
@@ -4819,6 +5716,51 @@
     },
     "arsenal_tempest__o2": {
       "textures": "textures/items/arsenal/weapons/tempest__o2"
+    },
+    "arsenal_tesla_rifle": {
+      "textures": "textures/items/arsenal/weapons/tesla_rifle"
+    },
+    "arsenal_tesla_rifle__c1": {
+      "textures": "textures/items/arsenal/weapons/tesla_rifle__c1"
+    },
+    "arsenal_tesla_rifle__c10": {
+      "textures": "textures/items/arsenal/weapons/tesla_rifle__c10"
+    },
+    "arsenal_tesla_rifle__c11": {
+      "textures": "textures/items/arsenal/weapons/tesla_rifle__c11"
+    },
+    "arsenal_tesla_rifle__c12": {
+      "textures": "textures/items/arsenal/weapons/tesla_rifle__c12"
+    },
+    "arsenal_tesla_rifle__c2": {
+      "textures": "textures/items/arsenal/weapons/tesla_rifle__c2"
+    },
+    "arsenal_tesla_rifle__c3": {
+      "textures": "textures/items/arsenal/weapons/tesla_rifle__c3"
+    },
+    "arsenal_tesla_rifle__c4": {
+      "textures": "textures/items/arsenal/weapons/tesla_rifle__c4"
+    },
+    "arsenal_tesla_rifle__c5": {
+      "textures": "textures/items/arsenal/weapons/tesla_rifle__c5"
+    },
+    "arsenal_tesla_rifle__c6": {
+      "textures": "textures/items/arsenal/weapons/tesla_rifle__c6"
+    },
+    "arsenal_tesla_rifle__c7": {
+      "textures": "textures/items/arsenal/weapons/tesla_rifle__c7"
+    },
+    "arsenal_tesla_rifle__c8": {
+      "textures": "textures/items/arsenal/weapons/tesla_rifle__c8"
+    },
+    "arsenal_tesla_rifle__c9": {
+      "textures": "textures/items/arsenal/weapons/tesla_rifle__c9"
+    },
+    "arsenal_tesla_rifle__o0": {
+      "textures": "textures/items/arsenal/weapons/tesla_rifle__o0"
+    },
+    "arsenal_tesla_rifle__o2": {
+      "textures": "textures/items/arsenal/weapons/tesla_rifle__o2"
     },
     "arsenal_thermite": {
       "textures": "textures/items/arsenal/throwables/thermite"
@@ -4957,6 +5899,45 @@
     },
     "arsenal_tomahawk": {
       "textures": "textures/items/arsenal/melee/tomahawk"
+    },
+    "arsenal_tranq_rifle": {
+      "textures": "textures/items/arsenal/weapons/tranq_rifle"
+    },
+    "arsenal_tranq_rifle__c1": {
+      "textures": "textures/items/arsenal/weapons/tranq_rifle__c1"
+    },
+    "arsenal_tranq_rifle__c10": {
+      "textures": "textures/items/arsenal/weapons/tranq_rifle__c10"
+    },
+    "arsenal_tranq_rifle__c11": {
+      "textures": "textures/items/arsenal/weapons/tranq_rifle__c11"
+    },
+    "arsenal_tranq_rifle__c12": {
+      "textures": "textures/items/arsenal/weapons/tranq_rifle__c12"
+    },
+    "arsenal_tranq_rifle__c2": {
+      "textures": "textures/items/arsenal/weapons/tranq_rifle__c2"
+    },
+    "arsenal_tranq_rifle__c3": {
+      "textures": "textures/items/arsenal/weapons/tranq_rifle__c3"
+    },
+    "arsenal_tranq_rifle__c4": {
+      "textures": "textures/items/arsenal/weapons/tranq_rifle__c4"
+    },
+    "arsenal_tranq_rifle__c5": {
+      "textures": "textures/items/arsenal/weapons/tranq_rifle__c5"
+    },
+    "arsenal_tranq_rifle__c6": {
+      "textures": "textures/items/arsenal/weapons/tranq_rifle__c6"
+    },
+    "arsenal_tranq_rifle__c7": {
+      "textures": "textures/items/arsenal/weapons/tranq_rifle__c7"
+    },
+    "arsenal_tranq_rifle__c8": {
+      "textures": "textures/items/arsenal/weapons/tranq_rifle__c8"
+    },
+    "arsenal_tranq_rifle__c9": {
+      "textures": "textures/items/arsenal/weapons/tranq_rifle__c9"
     },
     "arsenal_triad": {
       "textures": "textures/items/arsenal/weapons/triad"
@@ -5200,6 +6181,45 @@
     },
     "arsenal_void_needle__o2": {
       "textures": "textures/items/arsenal/weapons/void_needle__o2"
+    },
+    "arsenal_vortex_cannon": {
+      "textures": "textures/items/arsenal/weapons/vortex_cannon"
+    },
+    "arsenal_vortex_cannon__c1": {
+      "textures": "textures/items/arsenal/weapons/vortex_cannon__c1"
+    },
+    "arsenal_vortex_cannon__c10": {
+      "textures": "textures/items/arsenal/weapons/vortex_cannon__c10"
+    },
+    "arsenal_vortex_cannon__c11": {
+      "textures": "textures/items/arsenal/weapons/vortex_cannon__c11"
+    },
+    "arsenal_vortex_cannon__c12": {
+      "textures": "textures/items/arsenal/weapons/vortex_cannon__c12"
+    },
+    "arsenal_vortex_cannon__c2": {
+      "textures": "textures/items/arsenal/weapons/vortex_cannon__c2"
+    },
+    "arsenal_vortex_cannon__c3": {
+      "textures": "textures/items/arsenal/weapons/vortex_cannon__c3"
+    },
+    "arsenal_vortex_cannon__c4": {
+      "textures": "textures/items/arsenal/weapons/vortex_cannon__c4"
+    },
+    "arsenal_vortex_cannon__c5": {
+      "textures": "textures/items/arsenal/weapons/vortex_cannon__c5"
+    },
+    "arsenal_vortex_cannon__c6": {
+      "textures": "textures/items/arsenal/weapons/vortex_cannon__c6"
+    },
+    "arsenal_vortex_cannon__c7": {
+      "textures": "textures/items/arsenal/weapons/vortex_cannon__c7"
+    },
+    "arsenal_vortex_cannon__c8": {
+      "textures": "textures/items/arsenal/weapons/vortex_cannon__c8"
+    },
+    "arsenal_vortex_cannon__c9": {
+      "textures": "textures/items/arsenal/weapons/vortex_cannon__c9"
     },
     "arsenal_vx9": {
       "textures": "textures/items/arsenal/weapons/vx9"
