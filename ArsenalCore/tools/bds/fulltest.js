@@ -471,6 +471,9 @@ async function streaks() {
   for (const kid of Object.keys(DATA.KILLSTREAKS)) {
     addStreakPoints(p, 9999);
     target(18.5, 0.5);
+    // 狙う系（補給・砲台投下・空爆）は視線の先の地面が要る。teleport の向きはシムの頭には効かないので見下ろさせる
+    p.teleport({ x: 0.5, y: Y, z: 0.5 });
+    p.lookAtLocation({ x: 12.5, y: Y - 1, z: 0.5 });
     await wait(4);
     if (!available(p).includes(kid)) {
       fail("streaks", kid, "not available");
