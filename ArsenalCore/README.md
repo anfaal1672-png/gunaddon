@@ -153,7 +153,7 @@
 | `aimKick` | `"light"` | 撃ったときの視点の跳ね（なし／弱／強） |
 | `cameraShake` | `true` | 画面の揺れ |
 | `fovZoom` | `true` | ADS の視野角のズーム |
-| `fxQuality` | `"high"` | 演出の品質 |
+| `fxQuality` | `"auto"` | 演出の品質 |
 | `volume` | `1` | 効果音の音量 |
 | `trajectory` | `true` | 投擲の軌道表示 |
 | `hudStyle` | `"hud2"` | HUD の種類（HUD 2.0／従来型） |

@@ -41,9 +41,10 @@ class Hud2Expr:
     文字列の * 演算（'%.Ns' * #t の切り出し）は使わない。
     """
 
-    def __init__(self, hud2, var=TITLE_VAR):
+    def __init__(self, hud2, var=TITLE_VAR, mark="§a§r§s§n"):
         self.h = hud2
         self.var = var
+        self.mark = mark
         self.f = {f["name"]: f for f in hud2["fields"]}
 
     def token(self, name, i, ch):
@@ -51,6 +52,8 @@ class Hud2Expr:
         return f"{sep}{self.f[name]['key']}{i}{self.h['blank'] if ch == ' ' else ch}{sep}"
 
     def has(self, name, i, ch):
+        if name == self.h.get("liveRaw"):
+            raise ValueError(f"{name}: 札ではなくそのままの値で送る（raw_texture を使う）")
         if (name in self.h.get("live", [])) != (self.var == SUB_VAR):
             raise ValueError(f"{name}: {'サブタイトル' if name in self.h.get('live', []) else 'タイトル'}で送る値を {self.var} で見ている")
         return _contains(self.token(name, i, ch), self.var)
@@ -66,6 +69,27 @@ class Hud2Expr:
 
     def active(self):
         return _contains(self.h["header"] + self.h["sep"], self.var)
+
+    def raw_value(self):
+        """サブタイトルから、印の後ろのそのままの値（方位 3 桁）だけを残す式。
+        見出し・目印・ほかの札（決まった文字だけ）・区切り・印を引き算で取り除く（* 演算は使わない）"""
+        H = self.h
+        parts = [H["liveHeader"], self.mark]
+        for name in H["live"]:
+            if name == H["liveRaw"]:
+                continue
+            f = self.f[name]
+            parts += [f"{H['sep']}{f['key']}{i}{ch}" for i in range(f["len"]) for ch in H["liveChars"][name]]
+        parts += [H["sep"], H["rawMark"]]
+        return "(" + SUB_VAR + "".join(f" - '{p}'" for p in parts) + ")"
+
+    def raw_texture(self, prefix):
+        return f"('{prefix}' + {self.raw_value()})"
+
+    def raw_shown(self):
+        """生の値があり、隠す印（---）ではない"""
+        H = self.h
+        return f"({_contains(H['liveHeader'] + H['sep'], SUB_VAR)} and (not {_contains(H['rawMark'] + '---', SUB_VAR)}))"
 
 
 class UiMixin:
@@ -201,7 +225,7 @@ class UiMixin:
             wpng(f"{tex}/dmg_{i}.png", ic.damage_arc(i))
             wpng(f"{tex}/wind_{i}.png", ic.wind_arrow(i))
         for i in range(180):
-            wpng(f"{tex}/compass_{i}.png", ic.compass_strip(i * 2))
+            wpng(f"{tex}/compass_{i:03d}.png", ic.compass_strip(i * 2))
         for lv in (1, 2, 3):
             wpng(f"{tex}/sup_{lv}.png", ic.vignette(lv))
         wpng(f"{tex}/nvg.png", ic.nvg_overlay())
@@ -306,13 +330,13 @@ class UiMixin:
             out.append(img(f"wind{i}", f"wind_{i}.png", (20, 20), offset=(70, 34), cond=E.eq("wdir", str(i))))
         for v in ("1", "2", "3"):
             out.append(label(f"wstr{v}", f"x{v}", offset=(88, 34), cond=E.eq("wstr", v), color=(0.7, 0.9, 1.0), scale=0.8, localize=False))
-        # 上：方位バー
-        # 方位バー：2° ごとの 180 枚。上 2 桁のパネル（18 個）で絞り、子は下 1 桁だけを見る（毎フレームの式を減らす）
-        for hi in range(18):
-            tens = "%02d" % hi
-            kids = [img(f"cmp{hi * 10 + lo}", f"compass_{hi * 10 + lo}.png", (192, 18), anchor="top_middle", offset=(0, 2), cond=EL.has("hdg", 2, str(lo)))
-                    for lo in range(10)]
-            out.append(group(f"cmpg{tens}", kids, f"({EL.has('hdg', 0, tens[0])} and {EL.has('hdg', 1, tens[1])})"))
+        # 上：方位バー（2.6）：2° ごとの 180 枚の画像を、1 枚の画像のテクスチャ名で切り替える。
+        # 名前はサブタイトルの方位 3 桁から作る（Hud2Expr.raw_texture）。表示条件は 1 つ
+        n[0] += 1
+        out.append({"cmp": {"type": "image", "texture": "#texture", "size": [192, 18], "anchor_from": "top_middle", "anchor_to": "top_middle", "offset": [0, 2], "layer": 2,
+                            "bindings": [_bind_sub(),
+                                         {"binding_type": "view", "source_property_name": EL.raw_shown(), "target_property_name": "#visible"},
+                                         {"binding_type": "view", "source_property_name": EL.raw_texture("textures/ui/arsenal/hud2/compass_"), "target_property_name": "#texture"}]}})
         # 上：ゲームモードの得点（試合中だけ。子はモード名と得点・時間）
         gm_names = {"1": "arsenal.mode_name.ffa", "2": "arsenal.mode_name.tdm", "3": "arsenal.mode_name.gungame", "4": "arsenal.mode_name.horde", "5": "arsenal.mode_name.koth"}
         gm = [img("gm_panel", "panel.png", (150, 30), anchor="top_middle", offset=(0, 22))]

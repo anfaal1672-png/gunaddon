@@ -501,13 +501,13 @@ def check_hud2_roundtrip(rp, mark):
             return 0, [f"文字列の * 演算を使っている（実機の JSON UI で働かない）: {e[:80]}"]
     for name, _, body, _ in controls:
         t = body.get("texture")
-        if t and not os.path.exists(os.path.join(rp, t + ".png")):
+        if t and not t.startswith("#") and not os.path.exists(os.path.join(rp, t + ".png")):
             errs.append(f"{name}: テクスチャがない {t}")
     import sys
     sys.path.insert(0, TOOLS)
     from gen.ui import Hud2Expr, TITLE_VAR, SUB_VAR
     E = Hud2Expr(H)
-    EL = Hud2Expr(H, SUB_VAR)
+    EL = Hud2Expr(H, SUB_VAR, mark)
     live = set(H.get("live", []))
     # 式が見ている文字列と、バインドしている文字列が合っている。毎 tick 変わる値はサブタイトルだけで見る
     live_keys = {f["key"] for f in H["fields"] if f["name"] in live}
@@ -549,13 +549,13 @@ def check_hud2_roundtrip(rp, mark):
                 extra = conds[-1][1:-len(f" and {own})")]
         cells.setdefault(parent, {}).setdefault(int(m.group(1)), []).append((body["text"], tok, name, extra))
     try:
-        n = _hud2_vectors(vec, controls, cells, E, EL, TITLE_VAR, SUB_VAR, mark, errs)
+        n = _hud2_vectors(vec, controls, cells, E, EL, TITLE_VAR, SUB_VAR, mark, errs, rp)
     except (KeyError, ValueError) as e:
         return 0, errs + [f"JSON UI の式を評価できない: {e!r}"]
     return n, errs[:20]
 
 
-def _hud2_vectors(vec, controls, cells, E, EL, TITLE_VAR, SUB_VAR, mark, errs):
+def _hud2_vectors(vec, controls, cells, E, EL, TITLE_VAR, SUB_VAR, mark, errs, rp):
     """試験ベクトルごとに、札の判定・表示条件・表示される文字を確かめる（評価できた件数を返す）"""
     H = vec["hud2"]
     live = set(H.get("live", []))
@@ -566,6 +566,8 @@ def _hud2_vectors(vec, controls, cells, E, EL, TITLE_VAR, SUB_VAR, mark, errs):
         d = v["decoded"]
         # 札：各桁の文字だけが「含む」になり、ほかの文字は含まない（毎 tick 変わる値はサブタイトルの札）
         for f in H["fields"]:
+            if f["name"] == H.get("liveRaw"):
+                continue
             ex = EL if f["name"] in live else E
             for i in range(f["len"]):
                 for ch in set("0123456789 -:") | {d[f["name"]][i]}:
@@ -578,9 +580,21 @@ def _hud2_vectors(vec, controls, cells, E, EL, TITLE_VAR, SUB_VAR, mark, errs):
         xh = [k for k in vis if re.fullmatch(r"xh\d", k) and vis[k]]
         if (d["xh"].isdigit() and xh != [f"xh{d['xh']}"]) or (not d["xh"].isdigit() and xh):
             errs.append(f"クロスヘア {d['xh']!r} → 表示 {xh}")
-        cmp_ = [k for k in vis if re.fullmatch(r"cmp\d+", k) and vis[k]]
-        if (d["hdg"].isdigit() and cmp_ != [f"cmp{int(d['hdg'])}"]) or (not d["hdg"].isdigit() and cmp_):
-            errs.append(f"方位 {d['hdg']!r} → 表示 {cmp_}")
+        # 方位バー：1 枚の画像。方位が数字なら見え、テクスチャ名が compass_<3 桁> になり、その画像がある
+        cmp_body = next((b for nm, _, b, _ in controls if nm == "cmp"), None)
+        if cmp_body is None:
+            errs.append("方位バー（cmp）がない")
+        else:
+            if vis["cmp"] != d["hdg"].isdigit():
+                errs.append(f"方位 {d['hdg']!r} → 表示 {vis['cmp']}")
+            tex_expr = next((b["source_property_name"] for b in cmp_body.get("bindings", []) if b.get("target_property_name") == "#texture"), None)
+            if d["hdg"].isdigit():
+                got = ev.run(tex_expr) if tex_expr else None
+                want = f"textures/ui/arsenal/hud2/compass_{d['hdg']}"
+                if got != want:
+                    errs.append(f"方位 {d['hdg']!r} → テクスチャ {got!r}（{want!r} のはず）")
+                elif not os.path.exists(os.path.join(rp, want + ".png")):
+                    errs.append(f"方位の画像がない {want}")
         panels = [k for k in vis if re.fullmatch(r"l\d_panel", k) and vis[k]]
         bars = [k for k in vis if re.fullmatch(r"l\d_bar\d", k) and vis[k]]
         want_bar = [] if d["heat"] == "0" else [f"l{d['lay']}_bar{d['heat']}"]

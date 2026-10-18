@@ -436,7 +436,7 @@ async function openPrefs(player) {
   const hudModes = ["full", "compact", "off"];
   const hudPos = ["actionbar", "title"];
   const kick = ["off", "light", "full"];
-  const fx = ["low", "medium", "high"];
+  const fx = ["auto", "low", "medium", "high"];
   const form = new ModalFormData()
     .title(t("arsenal.ui.btn_prefs"))
     .dropdown(t("arsenal.ui.pref_ads"), adsModes.map((m) => t(`arsenal.ui.ads_${m}`)), { defaultValueIndex: Math.max(0, adsModes.indexOf(p.adsMode)) })

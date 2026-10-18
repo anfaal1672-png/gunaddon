@@ -119,6 +119,7 @@ UI = {
     "arsenal.ui.pref_shake": ("Camera shake", "画面の揺れ"),
     "arsenal.ui.pref_fov": ("Zoom when aiming", "ADS 時のズーム"),
     "arsenal.ui.pref_fx": ("Effects quality", "演出の品質"),
+    "arsenal.ui.fx_auto": ("Auto (Medium on mobile)", "自動（スマホは中）"),
     "arsenal.ui.fx_low": ("Low", "低"),
     "arsenal.ui.fx_medium": ("Medium", "中"),
     "arsenal.ui.fx_high": ("High", "高"),

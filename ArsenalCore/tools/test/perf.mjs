@@ -101,6 +101,9 @@ for (const p of players) {
 const times = [];
 const t0 = aiStats().thinks;
 const api0 = { ...LOG.api };
+const sumOf = (o) => Object.values(o ?? {}).reduce((a, b) => a + b, 0);
+const snd0 = sumOf(LOG.sounds);
+const ptc0 = sumOf(LOG.particleIds);
 for (let i = 0; i < 600; i++) {
   const a = performance.now();
   __tick(1);
@@ -133,6 +136,11 @@ const api = Object.fromEntries(Object.entries(LOG.api).map(([k, v]) => [k, (v - 
 console.log(`perf: API/tick blockRay ${api.blockRay.toFixed(1)} entityRay ${api.entityRay.toFixed(1)} getEntities ${api.getEntities.toFixed(1)} getBlock ${api.getBlock.toFixed(1)}`);
 const fireSnd = Object.entries(LOG.sounds).filter(([k2]) => k2.startsWith("arsenal.fire.")).reduce((a, [, v]) => a + v, 0);
 console.log(`perf: player+AI gunshot sounds ${fireSnd}`);
+if (process.env.PERF_DUMP) {
+  console.log(JSON.stringify(Object.entries(LOG.particleIds).sort((a, b) => b[1] - a[1]).slice(0, 15)));
+  console.log(JSON.stringify(Object.entries(LOG.sounds).sort((a, b) => b[1] - a[1]).slice(0, 15)));
+}
+console.log(`perf: sends/tick sounds ${((sumOf(LOG.sounds) - snd0) / 600).toFixed(1)} particles ${((sumOf(LOG.particleIds) - ptc0) / 600).toFixed(1)}`);
 console.log(`perf: avg ${avg.toFixed(2)} ms/tick, p99 ${p99.toFixed(2)} ms, max ${times.at(-1).toFixed(2)} ms, AI thinks/tick ${thinksPerTick.toFixed(2)} (max ${st.maxThinkPerTick}), AI shots ${st.shots}, warnings ${warnings.length}`);
 check("負荷：平均 15 ms/tick 未満（モック環境）", avg < 15, `(${avg.toFixed(2)})`);
 check("負荷：99 パーセンタイル 50 ms 未満", p99 < 50, `(${p99.toFixed(2)})`);

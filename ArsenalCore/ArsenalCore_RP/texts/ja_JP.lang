@@ -813,6 +813,7 @@ arsenal.ui.emp=EMP - 機能停止中
 arsenal.ui.empty=弾切れ
 arsenal.ui.explosive=爆発物
 arsenal.ui.first_hint=§7[ヒント] 使用＝射撃、スニーク＝覗き込み、スニーク2回＝リロード、ジャンプ中にスニーク＝射撃モード、真上を向いて使用＝武器メニュー
+arsenal.ui.fx_auto=自動（スマホは中）
 arsenal.ui.fx_high=高
 arsenal.ui.fx_low=低
 arsenal.ui.fx_medium=中

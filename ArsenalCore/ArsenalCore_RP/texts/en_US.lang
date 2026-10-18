@@ -813,6 +813,7 @@ arsenal.ui.emp=EMP - systems offline
 arsenal.ui.empty=EMPTY
 arsenal.ui.explosive=Explosive
 arsenal.ui.first_hint=§7[Hint] Use = fire, Sneak = aim, double-tap Sneak = reload, Sneak while jumping = fire mode, look straight up + use = weapon menu
+arsenal.ui.fx_auto=Auto (Medium on mobile)
 arsenal.ui.fx_high=High
 arsenal.ui.fx_low=Low
 arsenal.ui.fx_medium=Medium

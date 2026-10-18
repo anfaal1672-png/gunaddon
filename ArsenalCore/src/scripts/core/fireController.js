@@ -367,8 +367,7 @@ export function shoot(player, s, count = 1, charge = 1) {
  */
 function fireHitscan(player, s, eye, view, spread, st, muzzle) {
   const pellets = st.pellets;
-  const q = P(player).fxQuality;
-  const tracerEvery = q === "low" ? 4 : q === "medium" ? 2 : 1;
+  // 曳光は毎発描き、受け手ごとの演出品質で間引く（fx/effects.js の tracer）
   const flame = st.ammoFamily === "shell" && s.ammoType === "fire";
   if (flame) {
     const v = new MolangVariableMap();
@@ -385,7 +384,7 @@ function fireHitscan(player, s, eye, view, spread, st, muzzle) {
       const k = ((i / Math.max(1, pellets - 1)) - 0.5) * Math.tan((st.pelletSpread * 1.6 * Math.PI) / 180);
       d = norm(add(d, mul(right, k)));
     }
-    const showTracer = st.tracerAlways || (st.tracer && (pellets > 1 ? i % 3 === 0 : (s.lastShotTick + s.ammo) % tracerEvery === 0));
+    const showTracer = st.tracerAlways || (st.tracer && (pellets > 1 ? i % 3 === 0 : true));
     if (travel) {
       // 弾が飛ぶ：1 tick ごとに弾速ぶん進み、重力で落ちる（偏差と落下）。最初の 1 tick ぶんはこの場で進める
       fireBullet(player, eye, d, st, { pen: pellets > 1 ? 0 : st.pen, silent: pellets > 1 && i > 0, tracer: showTracer && !flame, whizz: pellets === 1, muzzle });

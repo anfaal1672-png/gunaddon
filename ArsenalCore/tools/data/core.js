@@ -119,7 +119,7 @@ export const DEFAULT_PLAYER_SETTINGS = {
   aimKick: "light",
   cameraShake: true,
   fovZoom: true,
-  fxQuality: "high",
+  fxQuality: "auto",
   volume: 1.0,
   trajectory: true,
   // ---- 2.0 で追加 ----

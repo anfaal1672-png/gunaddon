@@ -655,7 +655,7 @@ export async function suite2(ctx) {
     check("HUD 2.0：タイトルに AC2. と目印を付けて送る", tt.some((x) => x.startsWith("AC2.") && x.includes("§a§r§s§n")), JSON.stringify(tt.slice(0, 1)));
     // 毎 tick 変わる値（照準の広がり・方位）はサブタイトル。タイトルでは固定なので、向きを変えてもタイトルは送らない
     const lastT = LOG.titles.at(-1);
-    check("HUD 2.0：照準と方位はサブタイトルで送る（AC2L・目印付き）", typeof lastT?.o?.subtitle === "string" && lastT.o.subtitle.startsWith("AC2L.") && lastT.o.subtitle.includes(".g0") && lastT.o.subtitle.includes("§a§r§s§n"), JSON.stringify(lastT?.o?.subtitle));
+    check("HUD 2.0：照準と方位はサブタイトルで送る（AC2L・目印付き）", typeof lastT?.o?.subtitle === "string" && lastT.o.subtitle.startsWith("AC2L.") && /~\d{3}/.test(lastT.o.subtitle) && lastT.o.subtitle.includes("§a§r§s§n"), JSON.stringify(lastT?.o?.subtitle));
     const decT = hud2.decodeHud2(lastT.t);
     check("HUD 2.0：タイトルの照準・方位は固定", decT.hdg === "---" && decT.xh === "-", JSON.stringify({ hdg: decT.hdg, xh: decT.xh }));
     s.hud2Tick = system.currentTick;

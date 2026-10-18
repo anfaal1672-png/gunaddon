@@ -3,7 +3,7 @@
  * 演出（パーティクル・効果音）。受け手ごとの設定（演出品質・血しぶき・音量）を反映するため、
  * 近くのプレイヤーそれぞれに個別送信する。
  */
-import { MolangVariableMap, system } from "@minecraft/server";
+import { MolangVariableMap, system, world } from "@minecraft/server";
 import { P } from "../core/settings.js";
 import { DATA, FAR_SOUND_SETS } from "../config/constants.js";
 import { add, mul, basis, dist, rand } from "../util/math.js";
@@ -11,9 +11,56 @@ import { safe } from "../util/log.js";
 
 const Q = { low: 0, medium: 1, high: 2 };
 
-/** @param {import("@minecraft/server").Player} p */
-function quality(p) {
-  return /** @type {any} */ (Q)[P(p).fxQuality] ?? 2;
+/**
+ * 受け手の演出品質。「自動」はスマホなら中、それ以外は高
+ * @param {import("@minecraft/server").Player} p
+ */
+export function quality(p) {
+  const q = P(p).fxQuality;
+  if (q === "auto" || q === undefined) {
+    const mobile = safe("fx.platform", () => /** @type {any} */ (p).clientSystemInfo?.platformType === "Mobile") ?? false;
+    return mobile ? 1 : 2;
+  }
+  return /** @type {any} */ (Q)[q] ?? 2;
+}
+
+/**
+ * 受け手の一覧（tick ごとに 1 回だけ作る）。パーティクル 1 つ・音 1 つごとに getPlayers を呼んでいた
+ * （照射ビームは 1 発で数十個のパーティクルを出す）のをやめ、ここで距離を比べる
+ * @typedef {{p:import("@minecraft/server").Player, id:string, x:number, y:number, z:number, q:number, blood:boolean}} Recv
+ */
+let recvTick = -1;
+/** @type {Map<string, Recv[]>} */
+const recvByDim = new Map();
+
+/** @param {import("@minecraft/server").Dimension} dim @returns {Recv[]} */
+function receivers(dim) {
+  const now = system.currentTick;
+  if (now !== recvTick) {
+    recvTick = now;
+    recvByDim.clear();
+    for (const p of world.getAllPlayers()) {
+      const l = safe("fx.recv", () => (p.isValid ? p.location : undefined));
+      if (!l) continue;
+      const did = p.dimension.id;
+      let arr = recvByDim.get(did);
+      if (!arr) recvByDim.set(did, (arr = []));
+      arr.push({ p, id: p.id, x: l.x, y: l.y, z: l.z, q: quality(p), blood: P(p).blood });
+    }
+  }
+  return recvByDim.get(dim.id) ?? [];
+}
+
+/**
+ * 範囲内の受け手
+ * @param {import("@minecraft/server").Dimension} dim @param {import("../util/math.js").Vec3} loc @param {number} range
+ */
+export function receiversNear(dim, loc, range) {
+  const r2 = range * range;
+  return receivers(dim).filter((r) => {
+    const dx = r.x - loc.x, dy = r.y - loc.y, dz = r.z - loc.z;
+    return dx * dx + dy * dy + dz * dz <= r2;
+  });
 }
 
 /**
@@ -22,17 +69,20 @@ function quality(p) {
  * @param {string} id
  * @param {import("../util/math.js").Vec3} loc
  * @param {MolangVariableMap | undefined} vars
- * @param {{range?:number, minQ?:number, blood?:boolean, except?:string}} [opt]
+ * @param {{range?:number, minQ?:number, blood?:boolean, except?:string, near?:number}} [opt] near … これより遠い受け手には高品質のときだけ送る
  */
 export function emit(dim, id, loc, vars, opt = {}) {
   const range = opt.range ?? 64;
+  const minQ = opt.minQ ?? 0;
+  const near2 = opt.near !== undefined ? opt.near * opt.near : Infinity;
   safe("fx.emit", () => {
-    for (const p of dim.getPlayers({ location: loc, maxDistance: range })) {
-      if (opt.except && p.id === opt.except) continue;
-      if ((opt.minQ ?? 0) > quality(p)) continue;
-      if (opt.blood && !P(p).blood) continue;
+    for (const r of receiversNear(dim, loc, range)) {
+      if (opt.except && r.id === opt.except) continue;
+      if (minQ > r.q) continue;
+      if (near2 < Infinity && r.q < 2 && (r.x - loc.x) ** 2 + (r.y - loc.y) ** 2 + (r.z - loc.z) ** 2 > near2) continue;
+      if (opt.blood && !r.blood) continue;
       try {
-        p.spawnParticle(id, loc, vars);
+        r.p.spawnParticle(id, loc, vars);
       } catch {
         /* チャンク未ロード等 */
       }
@@ -61,8 +111,8 @@ export function playTo(p, sound, o = {}) {
 export function playNear(dim, loc, sound, o = {}) {
   const range = o.range ?? 32;
   safe("fx.playNear", () => {
-    for (const p of dim.getPlayers({ location: loc, maxDistance: range })) {
-      playTo(p, sound, { location: loc, volume: o.volume ?? 1, pitch: o.pitch ?? 1 });
+    for (const r of receiversNear(dim, loc, range)) {
+      playTo(r.p, sound, { location: loc, volume: o.volume ?? 1, pitch: o.pitch ?? 1 });
     }
   });
 }
@@ -81,8 +131,17 @@ export function gunshot(shooter, st, loc) {
     const dim = shooter.dimension;
     // 屋内（天井と 2 方向以上の壁）では、短く密な残響の音（arsenal.in.*）を使い、遠くへはこもって届く
     const indoor = !suppressed && FAR_SOUND_SETS.has(set) && isIndoor(dim, loc, shooter.id);
-    for (const p of dim.getPlayers({ location: loc, maxDistance: Math.max(nearR, farR) })) {
-      const d = dist(p.location, loc);
+    const now = system.currentTick;
+    for (const r of receiversNear(dim, loc, Math.max(nearR, farR))) {
+      const p = r.p;
+      const d = Math.hypot(r.x - loc.x, r.y - loc.y, r.z - loc.z);
+      // 遠くの連射は 3 tick に 1 回だけ届ける（遠くでは 1 発ずつは聞き分けられない。音の送信を減らす）
+      if (d > nearR) {
+        const k = `${p.id}|${shooter.id}`;
+        if (now - (farGate.get(k) ?? -99) < 3) continue;
+        farGate.set(k, now);
+        if (farGate.size > 512) farGate.clear();
+      }
       if (d <= nearR) {
         playTo(p, indoor ? `arsenal.in.${set}` : `arsenal.fire.${set}`, { location: loc, volume: p.id === shooter.id ? 0.9 : 1.0, pitch });
       }
@@ -96,6 +155,9 @@ export function gunshot(shooter, st, loc) {
     }
   });
 }
+
+/** 遠くの射撃音を最後に届けた tick（受け手|撃ち手） @type {Map<string, number>} */
+const farGate = new Map();
 
 /** 屋内判定のキャッシュ（撃った者ごと、2 秒・2 ブロック以内なら使い回す） @type {Map<string, {tick:number, x:number, y:number, z:number, v:boolean}>} */
 const indoorCache = new Map();
@@ -143,7 +205,7 @@ export function muzzleFx(player, st, muzzle, casing) {
   if (st.flash) {
     const v = new MolangVariableMap();
     v.setFloat("variable.size", st.cat === "lmg" || st.cat === "battle" || st.cat === "sniper" ? 0.36 : st.cat === "handgun" ? 0.2 : 0.28);
-    emit(dim, "arsenal:muzzle_flash", muzzle, v, { range: 96 });
+    emit(dim, "arsenal:muzzle_flash", muzzle, v, { range: 96, near: 48 });
   }
   emit(dim, "arsenal:muzzle_smoke", muzzle, undefined, { range: 40, minQ: 1 });
   if (casing) {
@@ -156,14 +218,20 @@ export function muzzleFx(player, st, muzzle, casing) {
   }
 }
 
+/** 曳光の通し番号（間引きに使う） */
+let tracerSeq = 0;
+
 /**
  * 曳光弾：飛んでいく光の筋（加算合成で光る）＋弾道に一瞬残る細い線
  * @param {import("@minecraft/server").Dimension} dim @param {import("../util/math.js").Vec3} from @param {import("../util/math.js").Vec3} to
- * @param {{r:number,g:number,b:number}} color @param {number} [width] @param {string} [except]
+ * @param {{r:number,g:number,b:number}} color @param {number} [width] @param {string} [except] @param {number} [key] 同じ弾の続きの番号（間引きをそろえる）
  */
-export function tracer(dim, from, to, color, width = 0.05, except) {
+export function tracer(dim, from, to, color, width = 0.05, except, key) {
   const d = dist(from, to);
   if (d < 1.2) return;
+  // 受け手の演出品質で間引く：高はすべて、中は 2 本に 1 本、低は 4 本に 1 本（同じ弾の続きは key でそろえる）
+  const k = key ?? tracerSeq++;
+  const minQ = k % 4 === 0 ? 0 : k % 2 === 0 ? 1 : 2;
   // 速すぎると 1 フレームで通り過ぎて見えないので、見やすい速さに抑える
   const speed = Math.min(150, Math.max(70, d * 2.2));
   const v = new MolangVariableMap();
@@ -173,9 +241,10 @@ export function tracer(dim, from, to, color, width = 0.05, except) {
   v.setFloat("variable.width", width);
   v.setFloat("variable.len", d * 0.5);
   v.setColorRGB("variable.color", { red: color.r, green: color.g, blue: color.b });
-  emit(dim, "arsenal:tracer", from, v, { range: 160, except });
+  emit(dim, "arsenal:tracer", from, v, { range: 96, except, minQ });
   const mid = { x: (from.x + to.x) / 2, y: (from.y + to.y) / 2, z: (from.z + to.z) / 2 };
-  emit(dim, "arsenal:tracer_trail", mid, v, { range: 128, minQ: 1 });
+  // 尾は高品質の受け手で、近いときだけ
+  emit(dim, "arsenal:tracer_trail", mid, v, { range: 64, minQ: 2 });
 }
 
 /** @param {string} typeId */
