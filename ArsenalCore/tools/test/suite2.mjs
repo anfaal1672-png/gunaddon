@@ -757,6 +757,21 @@ export async function suite2(ctx) {
     for (let i = 0; i < 240 && LOG.explosions.length === ex3; i++) __tick(1);
     check("誘導ミサイル：当たって爆発し、操縦が終わる", LOG.explosions.length > ex3 && !proj.isGuiding(player.id));
     void cam0;
+    // 敵に直撃しても爆発して操縦が終わる（実機で、直撃のときに例外が出続けてカメラが戻らなかった）
+    ksM.addStreakPoints(player, 9999);
+    player.setRotation({ x: 60, y: 0 });
+    const w0 = ctx.warnings.length;
+    ksM.useStreak(player, "missile_strike");
+    __tick(1);
+    const gm = [...__entities.values()].find((e) => e.typeId === "arsenal:projectile" && e.isValid);
+    // 弾の進む先に敵を置く
+    const gz = gm ? new Entity("minecraft:zombie", { x: gm.location.x, y: gm.location.y - 6, z: gm.location.z + 2 }, dim, 400) : null;
+    if (gz) gz.height = 3;
+    player.setRotation({ x: 70, y: 0 });
+    const ex5 = LOG.explosions.length;
+    for (let i = 0; i < 60 && proj.isGuiding(player.id); i++) __tick(1);
+    check("誘導ミサイル：敵に直撃しても爆発し、操縦が終わる（例外なし）", !proj.isGuiding(player.id) && LOG.explosions.length > ex5 && ctx.warnings.length === w0, ctx.warnings.slice(w0, w0 + 2).join(" | "));
+    if (gz) gz.remove();
     // スニークで空中爆発
     ksM.addStreakPoints(player, 9999);
     player.setRotation({ x: 30, y: 0 });

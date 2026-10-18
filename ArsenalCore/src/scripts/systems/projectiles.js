@@ -1226,7 +1226,7 @@ function tickBallistic(p) {
     return detonate(p);
   }
   p.pos = add(p.pos, p.vel);
-  if (p.age % 2 === 0) emit(p.dim, "arsenal:rocket_trail", p.pos, undefined, { range: 192 });
+  if (p.age % 2 === 0 && isLoaded(p.dim, p.pos, system.currentTick)) emit(p.dim, "arsenal:rocket_trail", p.pos, undefined, { range: 192 });
   if (p.age % 10 === 0) playNear(p.dim, p.pos, "arsenal.world.jet", { range: 160, pitch: 1.4, volume: 0.6 });
   syncVisual(p);
 }
@@ -1294,7 +1294,9 @@ export function launchGuided(player, d) {
   const from = add(player.location, { x: -flat.x * 20, y: d.height, z: -flat.z * 20 });
   if (!isLoaded(player.dimension, from, system.currentTick)) return false;
   const dir = norm({ x: flat.x, y: -0.7, z: flat.z });
-  const p = addProj({ type: "guided", kind: "missile", dim: player.dimension, pos: from, vel: mul(dir, 1.0), ownerId: player.id, maxAge: d.seconds * 20, data: { power: d.power, weaponId: "ks_missile_strike" } }, true);
+  // st は直撃のダメージ（rocketDirectHit が読む）
+  const st = { id: "ks_missile_strike", dmg: 16, armorBonus: 1.5, cat: "launcher" };
+  const p = addProj({ type: "guided", kind: "missile", dim: player.dimension, pos: from, vel: mul(dir, 1.0), ownerId: player.id, maxAge: d.seconds * 20, data: { st, power: d.power, weaponId: st.id } }, true);
   guidedBy.set(player.id, p.id);
   safe("guided.guard", () => {
     player.addEffect("resistance", d.seconds * 20 + 20, { amplifier: 3, showParticles: false });
@@ -1345,7 +1347,7 @@ function tickGuided(p) {
   } else {
     p.pos = add(p.pos, p.vel);
   }
-  emit(p.dim, "arsenal:rocket_trail", add(p.pos, mul(dir, -0.4)), undefined, { range: 160 });
+  if (isLoaded(p.dim, p.pos, system.currentTick)) emit(p.dim, "arsenal:rocket_trail", add(p.pos, mul(dir, -0.4)), undefined, { range: 160 });
   // カメラは弾の少し後ろから、プレイヤーの向きで見る
   safe("guided.cam2", () => pl.camera.setCamera("minecraft:free", { location: add(p.pos, mul(dir, -3)), rotation: pl.getRotation(), easeOptions: { easeTime: 0.05 } }));
   syncVisual(p);
