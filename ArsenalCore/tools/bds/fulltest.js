@@ -429,7 +429,7 @@ async function structures() {
     // シムが移っただけでは周りのチャンクがすぐには読み込まれないので、ティッキングエリアにして待つ
     // 前の回が途中で止まって同じ名前のエリアが残っていると add が失敗するので、先に消す
     try { dim().runCommand("tickingarea remove qa_site"); } catch { /* ない */ }
-    const add = dim().runCommand(`tickingarea add ${at.x - 8} 0 ${at.z - 8} ${at.x + 40} 0 ${at.z + 40} qa_site`);
+    const add = dim().runCommand(`tickingarea add ${at.x - 8} 0 ${at.z - 8} ${at.x + 48} 0 ${at.z + 48} qa_site`);
     const cells = [];
     for (let x = at.x - 4; x <= at.x + 46; x += 8) for (let z = at.z - 4; z <= at.z + 46; z += 8) cells.push({ x, y: Y, z });
     let t = 0;
