@@ -570,6 +570,9 @@ async function misc() {
     await wait(10);
     p.stopUsingItem();
   }
+  // シムにはフォームが表示されず閉じられもしないので、「メニューを開いている」が残る（その間は撃てない）
+  log(`menuOpen after menus: ${S(p).menuOpen}`);
+  S(p).menuOpen = false;
   // 設定の切り替え：弾が飛ぶ・マガジン単位・部位を切って撃つ、HUD を切り替える
   setWorld({ bulletTravel: false, magRealism: false, limbDamage: false });
   for (const style of ["classic", "hud2", "off"]) setPrefs(p, { hudStyle: style });
