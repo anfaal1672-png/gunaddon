@@ -427,10 +427,18 @@ async function structures() {
     const at = { x: 100 + i * 48, y: Y, z: 100 };
     p.teleport({ x: at.x - 6, y: Y + 4, z: at.z - 6 });
     // シムが移っただけでは周りのチャンクがすぐには読み込まれないので、ティッキングエリアにして待つ
-    dim().runCommand(`tickingarea add ${at.x - 8} 0 ${at.z - 8} ${at.x + 40} 0 ${at.z + 40} qa_site`);
+    // 前の回が途中で止まって同じ名前のエリアが残っていると add が失敗するので、先に消す
+    try { dim().runCommand("tickingarea remove qa_site"); } catch { /* ない */ }
+    const add = dim().runCommand(`tickingarea add ${at.x - 8} 0 ${at.z - 8} ${at.x + 40} 0 ${at.z + 40} qa_site`);
     const cells = [];
     for (let x = at.x - 4; x <= at.x + 46; x += 8) for (let z = at.z - 4; z <= at.z + 46; z += 8) cells.push({ x, y: Y, z });
-    for (let t = 0; t < 60 && !cells.every((c) => dim().isChunkLoaded(c)); t++) await wait(10);
+    let t = 0;
+    for (; t < 60 && !cells.every((c) => dim().isChunkLoaded(c)); t++) await wait(10);
+    const notLoaded = cells.filter((c) => !dim().isChunkLoaded(c));
+    if (notLoaded.length) {
+      fail("structures", sid, `site not loaded after ${t * 10} ticks (tickingarea ok=${add.successCount}) ${JSON.stringify(notLoaded[0])}`);
+      continue;
+    }
     dim().fillBlocks(new BlockVolume({ x: at.x - 4, y: Y - 1, z: at.z - 4 }, { x: at.x + 30, y: Y - 1, z: at.z + 30 }), "minecraft:stone");
     let r;
     try {
