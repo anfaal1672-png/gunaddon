@@ -328,21 +328,6 @@ def misc_animations():
                 "position": {"0.0": [0, 0, 0], "0.1": [0, "variable.is_first_person ? -2.0 : 0.0", "variable.is_first_person ? -3.0 : 0.0"], "0.3": [0, "variable.is_first_person ? 1.0 : 0.0", "variable.is_first_person ? 3.0 : 0.0"], "0.45": [0, 0, 0]},
             }},
         },
-        # 走っている間の構え（ロウレディ）：三人称は両腕を下げて銃を体の前で斜めに抱える、一人称は銃を下げて体の中心へ寄せる。
-        # 保持ポーズ（hold）に足し合わされる。0.18 秒かけて構え、走るのをやめると script 側の blendOutTime で戻る
-        "animation.arsenal.sprint": {
-            "loop": "hold_on_last_frame",
-            "animation_length": 0.18,
-            "bones": {
-                "rightarm": {
-                    "rotation": {"0.0": [0, 0, 0], "0.18": ["variable.is_first_person ? 0.0 : 48.0", "variable.is_first_person ? 0.0 : -32.0", "variable.is_first_person ? 0.0 : -6.0"]},
-                    "position": {"0.0": [0, 0, 0], "0.18": ["variable.is_first_person ? -3.0 : 0.0", "variable.is_first_person ? -3.2 : 0.0", "variable.is_first_person ? -0.8 : 0.0"]},
-                },
-                "leftarm": {
-                    "rotation": {"0.0": [0, 0, 0], "0.18": ["variable.is_first_person ? 0.0 : 44.0", "variable.is_first_person ? 0.0 : -22.0", "variable.is_first_person ? 0.0 : 4.0"]},
-                },
-            },
-        },
         "animation.arsenal.inspect": {
             "animation_length": 1.6,
             "bones": {"rightarm": {
@@ -350,6 +335,63 @@ def misc_animations():
             }},
         },
     }
+
+
+# ---------------------------------------------------------------------------
+#  走っている間の構え（2.6.3）
+# ---------------------------------------------------------------------------
+# 一人称：カメラから見た銃の動き（回転・移動）。銃口を左下へ向け（左 28°・下 22°）、上面を左へ約 21° 傾け、
+# 左下手前へ寄せる。長物は手前へ大きく引き、拳銃は手前へ少しだけ・下へ多めに寄せる。
+# 回転は「カメラ空間で、右・上・前を軸に」の順で与え、銃の原点（グリップ付近）を中心に回す
+SPRINT_FP = {
+    # (yaw 左へ, pitch 下へ, roll 上面を左へ)（度）, 移動（右, 上, 前）（px）
+    "rifle": ((28.0, 22.0, 21.0), (-3.0, -2.0, -3.0)),
+    "pistol": ((28.0, 22.0, 21.0), (-2.5, -3.0, -1.0)),
+}
+# 三人称：視線に関係なく決まった角度（右腕を前下へ・左腕で銃を体の前に斜めに抱える）
+SPRINT_TP = {"right": (-40.0, -20.0), "left": (-45.0, 30.0)}
+
+
+def _sprint_fp_item(cat, pose):
+    """一人称で、rightItem ボーンに与える回転・位置（銃が SPRINT_FP の通りに動くように逆算する）"""
+    (yaw, pitch, roll), (mr, mu, mf) = SPRINT_FP["pistol" if pose == "pistol" else "rifle"]
+    # カメラ空間（bb）での回転 D：前（+z）を左（+x）へ yaw、下へ pitch、上（+y）を左へ roll
+    D = Ry(yaw) @ Rx(pitch) @ Rz(-roll)
+    R_par, _ = world("rightItem", FP_GUIDE)
+    fp_rot, fp_pos, _ = solve_fp(cat)
+    a = bb(fp_pos)  # rightItem から見た銃ボーンの位置（bb）
+    L = R_par.T @ D @ R_par
+    w = CAM_RIGHT * mr + CAM_UP * mu + CAM_FWD * mf
+    o = R_par.T @ w + a - L @ a
+    return bb_to_bedrock_rot(L), bb_vec_to_bedrock_pos(o)
+
+
+def sprint_animations(categories):
+    """走っている間の構え（カテゴリごと）。保持ポーズ（hold）に足し合わされる。
+    三人称は hold の角度を打ち消して決まった角度にする。一人称は銃（rightItem）だけを回し、腕はそのまま"""
+    out = {}
+    T = 0.18
+    for cat, c in categories.items():
+        pose = c.get("pose")
+        if pose == "melee":
+            continue
+        rot, pos = _sprint_fp_item(cat, pose)
+        fp = lambda x: f"variable.is_first_person ? {_v(x)} : 0.0"  # noqa: E731
+        tp = lambda e: f"(variable.is_first_person || q.is_swimming) ? 0.0 : ({e})"  # noqa: E731
+        (rx, ry), (lx, ly) = SPRINT_TP["right"], SPRINT_TP["left"]
+        # hold_animation の角度（走っている間はスニークしていない）を引いて、決まった角度にする
+        lhx, lhy = (-88.0, 36.0) if pose == "pistol" else (-93.0, 42.0)
+        out[f"animation.arsenal.sprint.{cat}"] = {
+            "loop": "hold_on_last_frame",
+            "animation_length": T,
+            "bones": {
+                "rightarm": {"rotation": {"0.0": [0, 0, 0], str(T): [tp(f"{_v(rx + 90.0)} - q.target_x_rotation"), tp(f"{_v(ry)} - math.clamp(q.target_y_rotation, -60.0, 45.0)"), 0]}},
+                "leftarm": {"rotation": {"0.0": [0, 0, 0], str(T): [tp(f"{_v(lx - lhx)} - q.target_x_rotation"), tp(f"{_v(ly - lhy)} - math.clamp(q.target_y_rotation, -45.0, 5.0)"), 0]}},
+                "rightItem": {"rotation": {"0.0": [0, 0, 0], str(T): [fp(r) for r in rot]},
+                              "position": {"0.0": [0, 0, 0], str(T): [fp(x) for x in pos]}},
+            },
+        }
+    return out
 
 
 # ---------------------------------------------------------------------------
