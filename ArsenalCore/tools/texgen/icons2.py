@@ -337,11 +337,19 @@ def ammo_icon_any(item):
 # ---------------------------------------------------------------------------
 def throwable_icon_any(tid, t):
     k = t["kind"]
-    if k not in ("gas", "emp", "cluster", "decoy", "knife", "snap"):
+    if k not in ("gas", "emp", "cluster", "decoy", "knife", "snap", "nuke"):
         return throwable_icon(tid, t)
     img = new_icon()
     d = ImageDraw.Draw(img)
-    if k == "knife":
+    if k == "nuke":
+        # 戦術核：太い円筒と黄色の帯、放射能の印
+        rect(d, 7, 8, 25, 29, (96, 104, 84))
+        rect(d, 7, 15, 25, 18, (230, 190, 30), hl=False)
+        rect(d, 12, 3, 20, 8, (60, 64, 70))
+        d.ellipse([12, 20, 20, 28], fill=(230, 190, 30, 255))
+        d.ellipse([14, 22, 18, 26], fill=(30, 30, 32, 255))
+        d.point([16, 2], fill=(255, 60, 40, 255))
+    elif k == "knife":
         d.polygon([(4, 27), (20, 11), (26, 5), (27, 6), (22, 13), (6, 29)], fill=(200, 206, 214, 255))
         d.line([6, 26, 24, 8], fill=(240, 244, 248, 255))
         d.line([3, 24, 9, 30], fill=DK + (255,), width=2)
@@ -541,6 +549,19 @@ def killstreak_icon(kid):
         d.ellipse([3, 3, 29, 29], outline=(90, 170, 255, 255), width=2)
         d.ellipse([9, 9, 23, 23], outline=(90, 170, 255, 255), width=2)
         d.polygon([(17, 6), (11, 17), (15, 17), (13, 26), (21, 14), (17, 14)], fill=(230, 245, 255, 255))
+    elif kid == "missile_strike":
+        d.polygon([(16, 2), (20, 8), (20, 22), (12, 22), (12, 8)], fill=(230, 230, 226, 255))
+        d.polygon([(12, 18), (6, 26), (12, 24)], fill=(90, 100, 116, 255))
+        d.polygon([(20, 18), (26, 26), (20, 24)], fill=(90, 100, 116, 255))
+        d.polygon([(13, 24), (16, 31), (19, 24)], fill=(255, 150, 40, 255))
+        d.rectangle([13, 10, 18, 12], fill=(220, 60, 50, 255))
+    elif kid == "nuke":
+        d.ellipse([3, 3, 29, 29], fill=(230, 190, 30, 255))
+        d.ellipse([13, 13, 19, 19], fill=(30, 30, 32, 255))
+        for a0 in (0, 120, 240):
+            d.pieslice([5, 5, 27, 27], a0 - 90 - 30, a0 - 90 + 30, fill=(30, 30, 32, 255))
+        d.ellipse([11, 11, 21, 21], fill=(230, 190, 30, 255))
+        d.ellipse([13, 13, 19, 19], fill=(30, 30, 32, 255))
     elif kid == "gunship":
         d.polygon([(4, 16), (24, 12), (30, 16), (24, 20)], fill=(70, 76, 86, 255))
         d.polygon([(12, 14), (18, 4), (21, 13)], fill=(60, 66, 76, 255))

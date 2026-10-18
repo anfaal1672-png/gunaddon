@@ -7,10 +7,12 @@
  *   net（網：着弾点のまわりを動けなくする）
  *   tranq（麻酔：少し遅れて眠らせる）
  *   pin（銛で壁に縫い付ける）
+ *   fallout（核の放射性降下物：毒と衰弱。ガスマスク・機械には効かない。2.6）
  * 動けなくするのは鈍足（レベル 7 で移動 0）と、敵 AI のスタン（撃たない・動かない）。
  */
 import { system, world, MolangVariableMap, Player } from "@minecraft/server";
 import { canDamage, dealDamage, hitFeedback } from "../core/damage.js";
+import { isGasImmune } from "../core/armor.js";
 import { W as WS } from "../core/settings.js";
 import { emit, playNear } from "../fx/effects.js";
 import { add, sub, len, norm, dist, isLoaded } from "../util/math.js";
@@ -27,7 +29,7 @@ export function setStunHandler(fn) {
 }
 
 /**
- * @typedef {{kind:"singularity"|"stasis"|"orbital", dim:import("@minecraft/server").Dimension, pos:import("../util/math.js").Vec3, radius:number,
+ * @typedef {{kind:"singularity"|"stasis"|"orbital"|"fallout", dim:import("@minecraft/server").Dimension, pos:import("../util/math.js").Vec3, radius:number,
  *   start:number, until:number, ownerId:string, weaponId:string, data:any}} Field
  */
 /** @type {Field[]} */
@@ -166,6 +168,15 @@ export function pin(e, ticks) {
   emit(e.dimension, "arsenal:impact_spark", e.getAABB().center, undefined, { range: 32 });
 }
 
+/**
+ * 放射性降下物
+ * @param {import("@minecraft/server").Dimension} dim @param {import("../util/math.js").Vec3} pos @param {number} radius @param {number} ticks @param {string} ownerId
+ */
+export function addFallout(dim, pos, radius, ticks, ownerId) {
+  const now = system.currentTick;
+  push({ kind: "fallout", dim, pos, radius, start: now, until: now + ticks, ownerId, weaponId: "tactical_nuke", data: {} });
+}
+
 /** 有効なフィールドの数（テスト用） */
 export function activeFields() {
   return fields.length;
@@ -268,6 +279,26 @@ function strike(f) {
   }
 }
 
+/** @param {Field} f @param {number} now */
+function tickFallout(f, now) {
+  const age = now - f.start;
+  if (age % 60 === 0) {
+    const v = new MolangVariableMap();
+    v.setFloat("variable.duration", 3.5);
+    v.setFloat("variable.radius", f.radius * 0.6);
+    emit(f.dim, "arsenal:gas_cloud", add(f.pos, { x: 0, y: 1.5, z: 0 }), v, { range: 128, minQ: 1 });
+  }
+  if (age % 20 !== 0) return;
+  safe("fallout.scan", () => {
+    for (const e of f.dim.getEntities({ location: f.pos, maxDistance: f.radius, excludeFamilies: ["inanimate", "arsenal_fx", "arsenal_robot", "projectile"] })) {
+      if (!e.getComponent("minecraft:health") || isGasImmune(e)) continue;
+      e.addEffect("poison", 60, { amplifier: 1, showParticles: false });
+      e.addEffect("wither", 60, { amplifier: 0, showParticles: false });
+      e.addEffect("nausea", 100, { amplifier: 0, showParticles: false });
+    }
+  });
+}
+
 /** 毎 tick */
 export function tickFields() {
   const now = system.currentTick;
@@ -286,6 +317,7 @@ export function tickFields() {
     if (f.kind === "singularity") safe("field.sing", () => tickSingularity(f, now));
     else if (f.kind === "stasis") safe("field.stasis", () => tickStasis(f, now));
     else if (f.kind === "orbital") safe("field.orbital", () => tickOrbital(f, now));
+    else if (f.kind === "fallout") safe("field.fallout", () => tickFallout(f, now));
   }
 }
 

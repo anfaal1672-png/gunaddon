@@ -19,13 +19,16 @@ import { dropSentry, markFor } from "./deployables.js";
 import { rollLoot } from "./lootgen.js";
 import { emit, playNear, playTo } from "../fx/effects.js";
 import { announce } from "../ui/hud2.js";
+import { launchBallistic, launchGuided, isGuiding } from "./projectiles.js";
+import { nukesAllowed, warnNear } from "./nuke.js";
 import { add, mul, norm, isLoaded, rand, loadedReach, hitPoint } from "../util/math.js";
 import { t, raw } from "../util/i18n.js";
 import { safe } from "../util/log.js";
 
 const KS = /** @type {Record<string, any>} */ (DATA.KILLSTREAKS);
 const PTS = /** @type {Record<string, number>} */ (DATA.STREAK_POINTS);
-const MAX_PTS = 400;
+/** 貯められるポイントの上限（いちばん高いキルストリーク、最低 400。核ミサイルは 800） */
+const MAX_PTS = Math.max(400, ...Object.values(/** @type {Record<string, any>} */ (DATA.KILLSTREAKS)).map((d) => d.points));
 
 /** @type {(p:Player)=>boolean} ゲームモードがストリークを禁止するか */
 let allowed = () => true;
@@ -241,6 +244,32 @@ function run(p, id, d, target) {
     }
     case "gunship": {
       startGunship(p, d);
+      return true;
+    }
+    // ---- 2.6 ----
+    case "missile_strike": {
+      if (isGuiding(p.id)) return false;
+      const ok = launchGuided(p, d);
+      if (ok) p.sendMessage(t("arsenal.ks.missile_hint"));
+      return ok;
+    }
+    case "nuke": {
+      if (!target) return false;
+      if (!nukesAllowed()) {
+        p.sendMessage(t("arsenal.nuke.disabled"));
+        return false;
+      }
+      // 10 秒の警告（数えながら知らせる）。最後の 3 秒で上空から弾道ミサイルが落ちる
+      const at = { ...target };
+      const fall = 60;
+      for (let k = 0; k < d.warn; k += 20) {
+        system.runTimeout(() => safe("ks.nuke.warn", () => {
+          warnNear(dim, at, "arsenal.nuke.incoming", Math.ceil((d.warn - k) / 20), 400);
+          emit(dim, "arsenal:target_marker", add(at, { x: 0, y: 0.2, z: 0 }), undefined, { range: 192 });
+          if (k % 60 === 0) playNear(dim, at, "arsenal.world.klaxon", { range: 400, pitch: 0.7 });
+        }), k + 1);
+      }
+      system.runTimeout(() => safe("ks.nuke.launch", () => launchBallistic(dim, at, p.id, { height: d.height, ticks: fall, nuke: true, weaponId: "ks_nuke" })), Math.max(1, d.warn - fall));
       return true;
     }
   }

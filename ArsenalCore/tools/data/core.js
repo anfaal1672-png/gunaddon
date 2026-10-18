@@ -105,6 +105,8 @@ export const DEFAULT_WORLD_SETTINGS = {
   // ---- 2.2 ----
   magRealism: true,
   limbDamage: true,
+  // ---- 2.6 ----
+  nukes: true,
 };
 
 export const DEFAULT_PLAYER_SETTINGS = {

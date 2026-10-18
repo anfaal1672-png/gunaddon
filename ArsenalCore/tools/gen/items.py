@@ -60,7 +60,7 @@ class ItemsMixin:
             wpng(f"{self.rp}/textures/items/arsenal/throwables/{tid}.png", ic.throwable_icon_any(tid, t))
             self.item_textures[f"arsenal_{tid}"] = f"textures/items/arsenal/throwables/{tid}"
             extra = {"minecraft:use_modifiers": {"use_duration": 60, "movement_modifier": 1.0, "emit_vibrations": False}}
-            if t["kind"] == "mine":
+            if t["kind"] in ("mine", "nuke"):
                 extra = {f"{NS}:gear": {}}  # ブロックの上面に使うと置く（onUseOn）
             item = item_json(f"{NS}:{tid}", f"arsenal_{tid}", f"item.arsenal.{tid}.name", "equipment", 16,
                              extra=extra, tags=[f"{NS}:throwable"], rarity=T[t["tier"]]["rarity"])

@@ -71,7 +71,7 @@ export async function suite2(ctx) {
   check(`3 勢力・敵 20 種以上（${Object.keys(D.ENEMIES).length}）・ボス 3`, Object.keys(D.FACTIONS).length === 3 && Object.keys(D.ENEMIES).length >= 20 && Object.keys(D.BOSSES).length === 3);
   check(`構造物 6 種以上（${Object.keys(D.STRUCTURES).length}）`, Object.keys(D.STRUCTURES).length >= 6);
   check("銃座 4・乗り物 2", Object.values(D.VEHICLES).filter((v) => v.kind === "emplacement").length === 4 && Object.values(D.VEHICLES).filter((v) => v.kind === "vehicle").length === 2);
-  check("キルストリーク 6 種", Object.keys(D.KILLSTREAKS).length === 6);
+  check("キルストリーク 8 種（2.6 で誘導ミサイル・核ミサイル）", Object.keys(D.KILLSTREAKS).length === 8);
   check("ゲームモード 5 種（FFA・TDM・ガンゲーム・ホード・陣取り）", ["ffa", "tdm", "gungame", "horde", "koth"].every((m) => D.MODES[m]));
   check("武器レベル 1〜40・階級 1〜50 の経験値表", D.WEAPON_XP_TABLE.length === 41 && D.RANK_XP_TABLE.length === 51 && D.WEAPON_XP_TABLE[40] > D.WEAPON_XP_TABLE[39]);
   const variants = Object.keys(D.VARIANT_OF);
@@ -628,6 +628,155 @@ export async function suite2(ctx) {
     player.selectedSlotIndex = savedSlot;
     player.location = savedLoc;
     player.setRotation({ x: 0, y: 0 });
+    __tick(3);
+  }
+
+  // =====================================================================
+  console.log("2.6 核爆弾・ミサイル");
+  // =====================================================================
+  {
+    const proj = await imp("systems/projectiles.js");
+    const nuke = await imp("systems/nuke.js");
+    const fields = await imp("systems/fields.js");
+    const thr = await imp("systems/throwables.js");
+    const savedInv = inv.items.slice();
+    const savedSlot = player.selectedSlotIndex;
+    const savedLoc = { ...player.location };
+    clearInv();
+    reset();
+    const N = D.THROWABLES.tactical_nuke;
+    const ground = dim.getBlock({ x: 30, y: 63, z: 30 });
+    // 置ける・カウントダウン・爆発
+    inv.items[0] = new ItemStack("arsenal:tactical_nuke", 1);
+    player.location = { x: 0.5, y: 64, z: 0.5 };
+    player.health.currentValue = player.health.effectiveMax;
+    settings.setWorld({ nukes: false });
+    check("核：ワールド設定で禁止なら置けない", thr.tryPlaceNuke(player, ground, "Up") === false && count("arsenal:tactical_nuke") === 1);
+    settings.setWorld({ nukes: true });
+    check("核：ブロックの上面にだけ置ける", thr.tryPlaceNuke(player, ground, "North") === false && thr.tryPlaceNuke(player, ground, "Up") === true && count("arsenal:tactical_nuke") === 0);
+    const near = zombie(33.5, 30.5, 150);   // 致死圏内（3 ブロック。致死のダメージは 200）
+    const mid = zombie(30.5, 54.5, 400);    // 爆風圏（24 ブロック）
+    const far = zombie(30.5, 75.5, 400);    // 吹き飛ばしだけ（45 ブロック）
+    const beeps0 = LOG.sounds["arsenal.fx.c4_beep"] ?? 0;
+    const ex0 = LOG.explosions.length;
+    __tick(N.fuse - 20);
+    check("核：起爆まで数えながら鳴る（まだ爆発しない）", (LOG.sounds["arsenal.fx.c4_beep"] ?? 0) > beeps0 && LOG.explosions.length === ex0);
+    __tick(30);
+    check("核：15 秒後に爆発（中心の大きな爆発）", LOG.explosions.some((e, i) => i >= ex0 && e.p === N.power));
+    check("核：致死圏内の敵は倒れる", !near.isValid || near.health.currentValue <= 0);
+    check("核：爆風圏の敵は大きく削られ、燃える", mid.isValid && mid.health.currentValue < 400 && mid.health.currentValue > 0);
+    check("核：遠くの敵は吹き飛ばされるだけ", far.isValid && far.health.currentValue === 400 && (far.knocks ?? []).length > 0);
+    check("核：放射性降下物が残る", fields.activeFields() >= 1);
+    // 放射性降下物：毒と衰弱。ガスマスクで防げる
+    const zr = zombie(35.5, 30.5, 400);
+    // ガスマスクをかぶったプレイヤーは平気
+    const maskId = Object.keys(D.ARMOR).find((k) => D.ARMOR[k].special === "gasmask");
+    player.eqSlots.Head = new ItemStack(`arsenal:${maskId}`, 1);
+    player.location = { x: 27.5, y: 64, z: 30.5 };
+    player.effects = {};
+    __tick(25);
+    check("核：降下物の中は毒と衰弱", !!zr.getEffect("poison") && !!zr.getEffect("wither"));
+    check("核：ガスマスクをかぶっていれば降下物は効かない", !player.getEffect("poison") && !player.getEffect("wither"), JSON.stringify(player.effects));
+    player.eqSlots.Head = undefined;
+    __tick(25);
+    check("核：マスクを外すと降下物が効く", !!player.getEffect("poison"));
+    player.effects = {};
+    player.location = { x: 0.5, y: 64, z: 0.5 };
+    zr.remove(); mid.remove(); far.remove();
+    // 置いた本人も巻き込む
+    reset();
+    inv.items[0] = new ItemStack("arsenal:tactical_nuke", 1);
+    player.location = { x: 31.5, y: 64, z: 31.5 };
+    player.health.currentValue = player.health.effectiveMax;
+    const hp0 = player.health.currentValue;
+    nuke.detonateNuke(dim, { x: 30.5, y: 64, z: 30.5 }, player.id);
+    check("核：置いた本人も巻き込まれる", player.health.currentValue < hp0 || !player.isValid || downed.isDowned(player));
+    __tick(2);
+    reset();
+    player.location = { x: 0.5, y: 64, z: 0.5 };
+    __tick(1300); // 降下物が消えるまで
+    check("核：降下物は 60 秒で消える", fields.activeFields() === 0);
+
+    // 核ミサイル（キルストリーク）：10 秒の警告のあと、上空から落ちて核爆発
+    reset();
+    clearInv();
+    const ksM = await imp("systems/killstreaks.js");
+    ksM.addStreakPoints(player, 9999);
+    player.location = { x: 0.5, y: 64, z: 0.5 };
+    player.setRotation({ x: 30, y: 0 });
+    const tz = zombie(0.5, 3.4, 150);
+    const ex1 = LOG.explosions.length;
+    const ok = ksM.useStreak(player, "nuke");
+    __tick(100);
+    check("核ミサイル：使えて、警告の間は爆発しない", ok && LOG.explosions.length === ex1);
+    __tick(160);
+    check("核ミサイル：上空から落ちて核爆発", LOG.explosions.some((e, i) => i >= ex1 && e.p === N.power) && (!tz.isValid || tz.health.currentValue <= 0));
+    reset();
+    __tick(1300);
+
+    // 巡航ミサイル（アルバトロス）：上昇してから目標の上空へ飛び、急降下する
+    reset();
+    clearInv();
+    player.location = { x: 0.5, y: 64, z: 0.5 };
+    // 77 ブロック先の地面を狙う（目の高さ 1.62 / tan 1.2°）
+    player.setRotation({ x: 1.2, y: 0 });
+    inv.items[0] = new ItemStack("arsenal:albatross", 1);
+    inv.items[9] = new ItemStack("arsenal:ammo_rocket", 8);
+    player.selectedSlotIndex = 0;
+    __tick(12);
+    const sA = S(player);
+    sA.ammo = 1;
+    const maxY = { v: 0 };
+    const ex2 = LOG.explosions.length;
+    // 浅い角度で地面を狙うので、覗いて撃つ（腰だめの拡散だと着弾点が数十ブロック変わる）
+    player.isSneaking = true;
+    __tick(sA.stats.adsTime + 4);
+    const evA = { source: player, itemStack: inv.getItem(0), useDuration: 72000 };
+    world.afterEvents.itemStartUse.fire(evA);
+    __tick(2);
+    world.afterEvents.itemStopUse.fire(evA);
+    player.isSneaking = false;
+    for (let i = 0; i < 200 && LOG.explosions.length === ex2; i++) {
+      __tick(1);
+      for (const e of __entities.values()) if (e.typeId === "arsenal:projectile" && e.isValid) maxY.v = Math.max(maxY.v, e.location.y);
+    }
+    const boom = LOG.explosions[ex2];
+    check("巡航ミサイル：巡航高度（目標 + 22 前後）まで上がる", maxY.v > 82, `(maxY=${maxY.v.toFixed(1)})`);
+    check("巡航ミサイル：狙った地点（77 ブロック先）の近くで爆発する", !!boom && Math.hypot(boom.l.x - 0.5, boom.l.z - 77.8) < 8, JSON.stringify(boom?.l));
+
+    // 誘導ミサイル（キルストリーク）：向いた方へ曲がり、当たって爆発。操縦中はカメラが付く
+    reset();
+    ksM.addStreakPoints(player, 9999);
+    player.location = { x: 0.5, y: 64, z: 0.5 };
+    player.setRotation({ x: 60, y: 0 });
+    const cam0 = player.camera.calls?.length ?? 0;
+    const ex3 = LOG.explosions.length;
+    check("誘導ミサイル：使える", ksM.useStreak(player, "missile_strike") === true && proj.isGuiding(player.id));
+    // 真下を向いて操縦する
+    player.setRotation({ x: 89, y: 0 });
+    for (let i = 0; i < 240 && LOG.explosions.length === ex3; i++) __tick(1);
+    check("誘導ミサイル：当たって爆発し、操縦が終わる", LOG.explosions.length > ex3 && !proj.isGuiding(player.id));
+    void cam0;
+    // スニークで空中爆発
+    ksM.addStreakPoints(player, 9999);
+    player.setRotation({ x: 30, y: 0 });
+    const ex4 = LOG.explosions.length;
+    ksM.useStreak(player, "missile_strike");
+    __tick(15);
+    player.isSneaking = true;
+    __tick(2);
+    player.isSneaking = false;
+    check("誘導ミサイル：スニークで空中爆発", LOG.explosions.length > ex4 && !proj.isGuiding(player.id));
+    __tick(5);
+
+    killAllArsenal();
+    for (const e of [...__entities.values()]) if (e.typeId === "minecraft:zombie") e.remove();
+    clearInv();
+    for (let i = 0; i < savedInv.length; i++) inv.items[i] = savedInv[i];
+    player.selectedSlotIndex = savedSlot;
+    player.location = savedLoc;
+    player.setRotation({ x: 0, y: 0 });
+    reset();
     __tick(3);
   }
 

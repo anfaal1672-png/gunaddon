@@ -214,6 +214,7 @@ VANILLA = {
     "string": ("String", "糸"),
     "target": ("Target", "的"),
     "tnt": ("TNT", "TNT"),
+    "nether_star": ("Nether Star", "ネザースター"),
     "tripwire_hook": ("Tripwire Hook", "トリップワイヤーフック"),
     "banner": ("Banner", "旗"),
     "blaze_rod": ("Blaze Rod", "ブレイズロッド"),

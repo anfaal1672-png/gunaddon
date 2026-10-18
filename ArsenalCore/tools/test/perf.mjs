@@ -73,6 +73,8 @@ const players = [player];
 for (let i = 1; i < 20; i++) {
   const p = new Player(__overworld);
   p.name = `P${i}`;
+  // PERF_MOBILE=1：全員スマホ（演出品質「自動」が中になる）
+  if (process.env.PERF_MOBILE) p.clientSystemInfo = { platformType: "Mobile" };
   p.setDynamicProperty("arsenal:prefs", JSON.stringify({ hudStyle: i % 2 ? "hud2" : "classic" }));
   world.players.push(p);
   world.afterEvents.playerSpawn.fire({ player: p, initialSpawn: true });

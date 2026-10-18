@@ -8,7 +8,8 @@ import { DATA, NS } from "../config/constants.js";
 import { S } from "../core/state.js";
 import { P } from "../core/settings.js";
 import { consumeItem, countItem } from "../core/inventory.js";
-import { throwItem, explodeInHand, previewTrajectory, placeMine, detonateC4, countC4 } from "./projectiles.js";
+import { throwItem, explodeInHand, previewTrajectory, placeMine, placeNuke, detonateC4, countC4 } from "./projectiles.js";
+import { nukesAllowed } from "./nuke.js";
 import { playNear, playTo } from "../fx/effects.js";
 import { renderThrowHud } from "../ui/hud.js";
 import { t } from "../util/i18n.js";
@@ -20,7 +21,7 @@ import { safe } from "../util/log.js";
  */
 export function beginThrow(player, tid) {
   const th = /** @type {any} */ (DATA.THROWABLES)[tid];
-  if (!th || th.kind === "mine") return;
+  if (!th || th.kind === "mine" || th.kind === "nuke") return;
   const s = S(player);
   if (s.throwing) return;
   s.throwing = { id: tid, start: system.currentTick };
@@ -86,6 +87,25 @@ export function useDetonator(player) {
   playTo(player, "arsenal.fx.c4_beep", { pitch: 1.4 });
   const k = detonateC4(player);
   player.onScreenDisplay.setActionBar(t("arsenal.ui.detonated", String(k)));
+}
+
+/**
+ * 戦術核を置く（ブロックの上面。ワールド設定で禁止なら置けない）
+ * @param {import("@minecraft/server").Player} player @param {import("@minecraft/server").Block} block @param {string} face
+ */
+export function tryPlaceNuke(player, block, face) {
+  if (face !== "Up") return false;
+  if (!nukesAllowed()) {
+    player.sendMessage(t("arsenal.nuke.disabled"));
+    playTo(player, "arsenal.ui.error", { volume: 0.6 });
+    return false;
+  }
+  const above = block.above();
+  if (!above || !above.isAir) return false;
+  const creative = safe("gm", () => player.getGameMode() === GameMode.Creative) ?? false;
+  if (!creative && !consumeItem(player, `${NS}:tactical_nuke`, 1)) return false;
+  placeNuke(player, { x: block.location.x + 0.5, y: block.location.y + 1.02, z: block.location.z + 0.5 });
+  return true;
 }
 
 /**

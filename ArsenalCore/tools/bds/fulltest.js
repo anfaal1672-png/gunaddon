@@ -108,7 +108,7 @@ function hpOf(e) {
 // ---------------------------------------------------------------------------
 //  武器
 // ---------------------------------------------------------------------------
-const INDIRECT = new Set(["gl40", "rocket", "seeker", "pathfinder", "flare", "grapple", "mortar", "gravity", "needle", "blink", "orbital", "stickybomb", "singularity"]);
+const INDIRECT = new Set(["gl40", "rocket", "seeker", "pathfinder", "flare", "grapple", "mortar", "gravity", "needle", "blink", "orbital", "stickybomb", "singularity", "cruise"]);
 async function weapons(from, to) {
   const p = sim();
   tough(p);

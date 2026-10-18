@@ -10,7 +10,7 @@ import { spreadNow, applyRecoil } from "./recoil.js";
 import { startReload, reserveRounds, status, isInfinite } from "./reload.js";
 import { traceHitscan, drawTracer, whizzBy, arcLine, isSupersonic } from "./ballistics.js";
 import { canDamage, dealDamage, hitFeedback, bulletHit } from "./damage.js";
-import { fireBallistic, fireBullet, fireGrenade40, fireRocket, fireFlare, fireHook, firePathMissile, fireSpecial } from "../systems/projectiles.js";
+import { fireBallistic, fireBullet, fireGrenade40, fireRocket, fireFlare, fireHook, firePathMissile, fireSpecial, fireCruise } from "../systems/projectiles.js";
 import { takePathLock } from "./pathlock.js";
 import { fireFlame, fireBeam, fireGravity, fireCoil, fireSonic, fireProjectile2, mortarTarget } from "./fire2.js";
 import { fireReflect, firePrism, smartDir, fireBlink, fireHeal, fireAcid, fireOrbital } from "./fire3.js";
@@ -257,6 +257,7 @@ export function shoot(player, s, count = 1, charge = 1) {
         break;
       }
       case "flare": fireFlare(player, muzzle, cone(view, spread), st); break;
+      case "cruise": fireCruise(player, muzzle, cone(view, spread * 0.5), st); break;
       case "grapple": fireHook(player, muzzle, view, st); s.cooldownUntil = now + st.cooldown; break;
       case "rail": fireRail(player, eye, cone(view, spread), st, charge, muzzle); break;
       case "arc": fireArc(player, eye, cone(view, spread), st, muzzle); break;

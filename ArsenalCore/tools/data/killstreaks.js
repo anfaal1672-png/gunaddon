@@ -26,6 +26,15 @@ export const KILLSTREAKS = {
     name: { ja: "EMP", en: "EMP Blast" }, desc: { ja: "半径 48 の敵の電子機器・ドローン・砲台・エネルギー兵器を 15 秒止める", en: "Disables enemy drones, turrets and energy weapons (48 blocks, 15s)" },
     kills: 7, points: 170, radius: 48, seconds: 15, icon: "emp",
   },
+  // ---- 2.6 ----
+  missile_strike: {
+    name: { ja: "誘導ミサイル", en: "Guided Missile" }, desc: { ja: "上空から自分で操縦して落とすミサイル。向いた方へ曲がる。スニークで空中爆発", en: "Steer a missile down from the sky; it turns where you look. Sneak to airburst" },
+    kills: 8, points: 200, camera: true, height: 80, power: 5.0, seconds: 12, icon: "missile",
+  },
+  nuke: {
+    name: { ja: "核ミサイル", en: "Nuclear Missile" }, desc: { ja: "視線の先に 10 秒後、核弾頭の弾道ミサイルが落ちる（ワールド設定「核兵器」が必要）", en: "A nuclear ballistic missile hits the marked spot after 10s (needs the Nukes world setting)" },
+    kills: 25, points: 800, targeted: true, warn: 200, height: 120, icon: "nuke", warhead: "tactical_nuke",
+  },
   gunship: {
     name: { ja: "ガンシップ", en: "Gunship" }, desc: { ja: "上空から 30 秒間、機関砲で地上を撃つ", en: "30 seconds of cannon fire from above" },
     kills: 9, points: 220, camera: true, seconds: 30, height: 36, rpm: 300, damage: 10, blast: 1.6, icon: "gunship",

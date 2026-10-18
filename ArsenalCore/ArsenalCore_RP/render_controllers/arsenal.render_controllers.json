@@ -29,7 +29,8 @@
             "Geometry.needle",
             "Geometry.bomblet",
             "Geometry.blade",
-            "Geometry.missile"
+            "Geometry.missile",
+            "Geometry.nuke"
           ]
         }
       },
