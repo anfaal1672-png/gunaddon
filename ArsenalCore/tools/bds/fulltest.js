@@ -197,6 +197,7 @@ async function throwables() {
   let ok = 0;
   for (const tid of Object.keys(DATA.THROWABLES)) {
     const t = DATA.THROWABLES[tid];
+    if (t.kind === "nuke") continue; // 投げずに置く。nukes の段階で確かめる
     clearMobs();
     clearInv(p);
     p.teleport({ x: 0.5, y: Y, z: 0.5 });
