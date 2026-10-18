@@ -125,6 +125,7 @@ class WeaponsMixin:
         anims_player.update(riggen.kick_animations())
         anims_player.update(reload_anims)
         anims_player.update(riggen.misc_animations())
+        anims_player.update(riggen.sprint_animations(C))
         anims_player.update(riggen.ads_scope_animation())
         anims_player.update(riggen.fp_offset_animations())
         anims_player.update(riggen.melee_animations())

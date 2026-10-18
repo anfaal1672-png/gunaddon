@@ -111,7 +111,7 @@ export async function suite2(ctx) {
     s.ammo = 20;
     player.isSprinting = true;
     __tick(4);
-    check("走っている間は走る構えを再生", s.sprintPose === true && LOG.anims.includes("animation.arsenal.sprint"));
+    check("走っている間は銃の種類の構えを再生（アサルト）", s.sprintPose === true && LOG.anims.includes("animation.arsenal.sprint.assault"), JSON.stringify(LOG.anims.filter((a) => a.includes("sprint"))));
     player.isSprinting = false;
     __tick(1);
     const a0 = s.ammo;

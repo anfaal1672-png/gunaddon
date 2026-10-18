@@ -58,16 +58,17 @@ export function resetMove(player) {
 }
 
 /**
- * 走っている間の構え：銃を体の前に下げて抱える（一人称・三人称）。走るのをやめる・銃を持ち替えると
+ * 走っている間の構え：一人称は銃を左下へ傾けて手前に寄せ、三人称は銃を体の前に斜めに抱える（銃の種類ごと）。走るのをやめる・銃を持ち替えると
  * stopExpression で解け、blendOutTime で元の構えへ戻る。撃った直後とリロード中は構えない。
  * 構えを解いたら、銃が重いほど撃てるまで時間がかかる（st.ready tick）
  * @param {import("@minecraft/server").Player} player @param {import("./state.js").PlayerState} s @param {any} st @param {number} now
  */
 function tickSprintPose(player, s, st, now) {
-  const want = player.isSprinting && !s.reload && !s.holding && !s.tapFiring && now - s.lastShotTick > 6;
+  const want = player.isSprinting && st.cat !== "melee" && !s.reload && !s.holding && !s.tapFiring && now - s.lastShotTick > 6;
   if (want && !s.sprintPose) {
     s.sprintPose = true;
-    safe("sprint.pose", () => player.playAnimation("animation.arsenal.sprint", {
+    // 銃の種類ごとの構え（長物は手前へ大きく引き、拳銃は下へ寄せる。tools/riggen.py の SPRINT_FP）
+    safe("sprint.pose", () => player.playAnimation(`animation.arsenal.sprint.${st.cat}`, {
       controller: "arsenal_sprint",
       blendOutTime: 0.18,
       stopExpression: "!q.is_sprinting || !q.equipped_item_any_tag('slot.weapon.mainhand', 'arsenal:firearm')",
