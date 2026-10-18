@@ -416,7 +416,10 @@ async function bosses() {
 // ---------------------------------------------------------------------------
 //  構造物
 // ---------------------------------------------------------------------------
+const dropArea = (name) => { try { dim().runCommand(`tickingarea remove ${name}`); } catch { /* ない */ } };
 async function structures() {
+  // 前の回が途中で止まって残ったエリアを消す（ティッキングエリアは 10 個まで）
+  try { dim().runCommand("tickingarea remove_all"); } catch { /* ない */ }
   const p = sim();
   tough(p);
   setWorld({ structures: "high" });
@@ -427,9 +430,9 @@ async function structures() {
     const at = { x: 100 + i * 48, y: Y, z: 100 };
     p.teleport({ x: at.x - 6, y: Y + 4, z: at.z - 6 });
     // シムが移っただけでは周りのチャンクがすぐには読み込まれないので、ティッキングエリアにして待つ
-    // 前の回が途中で止まって同じ名前のエリアが残っていると add が失敗するので、先に消す
-    try { dim().runCommand("tickingarea remove qa_site"); } catch { /* ない */ }
-    const add = dim().runCommand(`tickingarea add ${at.x - 8} 0 ${at.z - 8} ${at.x + 48} 0 ${at.z + 48} qa_site`);
+    // 名前は場所ごとに変える（消してすぐ同じ名前で足すと失敗することがある）
+    const area = `qa_site_${i}`;
+    const add = dim().runCommand(`tickingarea add ${at.x - 8} 0 ${at.z - 8} ${at.x + 48} 0 ${at.z + 48} ${area}`);
     const cells = [];
     for (let x = at.x - 4; x <= at.x + 46; x += 8) for (let z = at.z - 4; z <= at.z + 46; z += 8) cells.push({ x, y: Y, z });
     let t = 0;
@@ -437,6 +440,7 @@ async function structures() {
     const notLoaded = cells.filter((c) => !dim().isChunkLoaded(c));
     if (notLoaded.length) {
       fail("structures", sid, `site not loaded after ${t * 10} ticks (tickingarea ok=${add.successCount}) ${JSON.stringify(notLoaded[0])}`);
+      dropArea(area);
       continue;
     }
     dim().fillBlocks(new BlockVolume({ x: at.x - 4, y: Y - 1, z: at.z - 4 }, { x: at.x + 30, y: Y - 1, z: at.z + 30 }), "minecraft:stone");
@@ -445,7 +449,7 @@ async function structures() {
       r = expand(dim(), sid, at, undefined);
     } catch (err) {
       fail("structures", sid, `expand threw ${err}`);
-      dim().runCommand("tickingarea remove qa_site");
+      dropArea(area);
       continue;
     }
     await wait(20);
@@ -453,7 +457,7 @@ async function structures() {
     const got = dim().getEntities({ location: at, maxDistance: 40 }).filter((e) => e.getTags().some((t) => t.startsWith("arsenal_site:"))).length;
     if (got >= want) ok++;
     else fail("structures", sid, `garrison ${got}/${want} expand=${JSON.stringify(r)}`);
-    dim().runCommand("tickingarea remove qa_site");
+    dropArea(area);
   }
   p.teleport({ x: 0.5, y: Y, z: 0.5 });
   log(`structures: n=${sids.length} ok=${ok}`);
