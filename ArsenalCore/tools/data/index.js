@@ -15,6 +15,7 @@ export * from "./recipes.js";
 export * from "./hud.js";
 export * from "./classes.js";
 export * from "./squad.js";
+export * from "./missions.js";
 export { WEAPONS, MELEE } from "./weapons/index.js";
 
 import { NS, MATERIALS, TOOLS } from "./core.js";

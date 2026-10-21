@@ -1944,13 +1944,13 @@ export async function suite2(ctx) {
   {
     reset();
     clearInv();
-    ui.UI_LOG.answers.push({ canceled: false, selection: 3 });
+    ui.UI_LOG.answers.push({ canceled: false, selection: 4 });
     ui.UI_LOG.answers.push({ canceled: false, formValues: [0, 2, 2, true, true, false, 1, false, 1, -1, true, false] });
     await menus.openManual(player);
     await flush();
     const p = settings.P(player);
     check("HUD・2.0 の設定を保存（大きさ・配置・エイムアシスト・一人称の位置）", p.hudScale === "large" && p.hudLayout === "raised" && p.aimAssist === "light" && p.fpOffsetV === 1 && p.fpOffsetD === -1 && p.suppressionFx === false && p.nvgAuto === false);
-    ui.UI_LOG.answers.push({ canceled: false, selection: 5 });
+    ui.UI_LOG.answers.push({ canceled: false, selection: 6 });
     ui.UI_LOG.answers.push({ canceled: false, formValues: [false, true, 3, 2, true, true, true, true, true, 30, false, true, true, true] });
     await menus.openManual(player);
     await flush();
@@ -2085,7 +2085,7 @@ export async function suite2(ctx) {
     check("パルスでマークした敵は受けるダメージ +15%", Math.abs(flost - 5 * 1.15) < 0.6, `(${flost})`);
     // 野戦マニュアル →「兵科・パーク」→ 変える
     s.classSwitchAt = 0;
-    ui.UI_LOG.answers.push({ canceled: false, selection: 0 });
+    ui.UI_LOG.answers.push({ canceled: false, selection: 1 });
     ui.UI_LOG.answers.push({ canceled: false, selection: 0 });
     const ids = Object.keys(D.CLASSES);
     const t1 = Object.keys(D.PERKS).filter((k) => D.PERKS[k].tier === 1);
@@ -2155,12 +2155,131 @@ export async function suite2(ctx) {
     __tick(12);
     check("衛生兵が持ち主の傷を手当てする", player.getComponent("minecraft:health").currentValue > 6, `(${player.getComponent("minecraft:health").currentValue})`);
     // 野戦マニュアル →「分隊」→ 解散
-    ui.UI_LOG.answers.push({ canceled: false, selection: 1 });
+    ui.UI_LOG.answers.push({ canceled: false, selection: 2 });
     ui.UI_LOG.answers.push({ canceled: false, selection: 3 });
     await menus.openManual(player);
     await flush();
     await flush();
     check("野戦マニュアルから分隊を解散できる", sq.squadOf(player).length === 0 && !rif.isValid && !med.isValid);
+    reset();
+    clearInv();
+  }
+
+  // =====================================================================
+  console.log("3.0 ミッション");
+  // =====================================================================
+  {
+    reset();
+    clearInv();
+    const mis = await imp("systems/missions.js");
+    const prof = prog.profile(player);
+    const mine = (m) => dim.getEntities({ tags: [`arsenal_ms:${m.n}`] });
+    const goTo = (m, off = 0) => { player.location = { x: m.x + 0.5 + off, y: 64, z: m.z + 0.5 }; };
+    const until = (fn, max = 400) => { for (let i = 0; i <= max; i += 10) { if (fn()) return true; __tick(10); heal(player); } return false; };
+    prof.cp = 0;
+    const of = mis.offers(player);
+    check("依頼が 3 つ並ぶ（ボス戦は出ない）", of.length === D.MISSION_RULES.offers && of.every((o) => D.CONTRACT_TYPES.includes(o.ty) && D.FACTIONS[o.fac]), JSON.stringify(of));
+    // ---- キャンペーン第 1 話（掃討）----
+    player.setDynamicProperty("a:cr", 0);
+    check("キャンペーン第 1 話を受けられる", mis.startCampaign(player) === null);
+    const m1 = mis.missionOf(player);
+    const d1 = Math.hypot(m1.x - 0.5, m1.z - 0.5);
+    check("目標地点は 55〜85 ブロック先", d1 >= 50 && d1 <= 90 && m1.ty === "sweep" && m1.ph === "go", `(${d1.toFixed(1)})`);
+    check("任務中はもう 1 つ受けられない", mis.startCampaign(player) === "busy" && mis.startContract(player, 0) === "busy");
+    const hv = hud2.hud2Values(player, S(player));
+    check("HUD 2.0 にミッション欄（gm 6・距離）", hv.gm === "6" && Number(hv.tm) > 40, JSON.stringify({ gm: hv.gm, tm: hv.tm }));
+    __tick(20);
+    check("遠くでは敵を出さない", mine(m1).length === 0 && m1.ph === "go");
+    goTo(m1, 20);
+    __tick(12);
+    const want1 = D.CAMPAIGN[0].enemies.reduce((a, e) => a + e[1], 0);
+    check("近づくと目標地点に敵が出る", m1.ph === "fight" && mine(m1).length === want1 && m1.left === want1, JSON.stringify({ ph: m1.ph, n: mine(m1).length, left: m1.left }));
+    check("出した敵は残る（persist）", mine(m1).every((e) => e.events.includes("arsenal:persist")));
+    mis.__forgetMission(player.id);
+    const m1b = mis.missionOf(player);
+    check("任務はプレイヤーに保存される（読み込み直しても続き）", m1b.n === m1.n && m1b.ph === "fight" && m1b.left === want1);
+    for (const e of mine(m1b)) e.applyDamage(9999);
+    check("倒した数を数える", m1b.got === want1 && m1b.left === 0, JSON.stringify({ got: m1b.got, left: m1b.left }));
+    __tick(12);
+    check("全滅で完了・キャンペーンが進む", mis.missionOf(player) === null && mis.campaignProgress(player) === 1);
+    check("報酬（クレジット・統計）", player.getDynamicProperty("a:cr") >= D.CAMPAIGN[0].credits && prof.stats.missions >= 1, `(${player.getDynamicProperty("a:cr")})`);
+    // ---- 第 2 話（情報回収）----
+    player.location = { x: 0.5, y: 64, z: 0.5 };
+    check("第 2 話（情報回収）", mis.startCampaign(player) === null && mis.missionOf(player).ty === "intel");
+    const m2 = mis.missionOf(player);
+    goTo(m2, 10);
+    __tick(12);
+    check("回収：守備隊が出る", m2.ph === "fight" && mine(m2).length > 0);
+    __tick(40);
+    check("地点から離れていると進まない", m2.got === 0);
+    goTo(m2, 1);
+    check("地点に立つと回収が進み、終われば離脱", until(() => m2.ph === "extract", 200) && m2.got >= m2.need, JSON.stringify({ ph: m2.ph, got: m2.got }));
+    goTo(m2, D.MISSION_TYPES.intel.extract + 5);
+    __tick(12);
+    check("離脱で完了", mis.missionOf(player) === null && mis.campaignProgress(player) === 2);
+    check("残った敵は普通の敵に戻る（release）", mine(m2).length > 0 && mine(m2).every((e) => e.events.includes("arsenal:release")));
+    // ---- 依頼：防衛 ----
+    player.location = { x: 0.5, y: 64, z: 0.5 };
+    prof.offers[0] = { ty: "defend", fac: "raiders" };
+    check("依頼（防衛）を受けられる", mis.startContract(player, 0) === null && mis.missionOf(player).ty === "defend");
+    check("受けた枠は引き直される", !!prof.offers[0]);
+    const m3 = mis.missionOf(player);
+    goTo(m3, 5);
+    __tick(12);
+    check("防衛地点に着くと待機", m3.ph === "hold" && mine(m3).length === 0);
+    let wavesOk = true;
+    for (let w = 1; w <= m3.need; w++) {
+      if (!until(() => m3.wave === w && m3.left > 0, 400)) wavesOk = false;
+      const list = mine(m3).filter((e) => !e.events.includes("arsenal:release"));
+      if (list.some((e) => Math.hypot(e.location.x - (m3.x + 0.5), e.location.z - (m3.z + 0.5)) < 15)) wavesOk = false;
+      for (const e of list) e.applyDamage(9999);
+      __tick(10);
+    }
+    check("ウェーブが 3 回、離れた所から来る", wavesOk, JSON.stringify({ wave: m3.wave, left: m3.left }));
+    __tick(12);
+    check("最後のウェーブを退けると完了", mis.missionOf(player) === null);
+    // ---- 依頼：賞金首 ----
+    player.location = { x: 0.5, y: 64, z: 0.5 };
+    prof.offers[1] = { ty: "bounty", fac: "raiders" };
+    check("依頼（賞金首）を受けられる", mis.startContract(player, 1) === null);
+    const m4 = mis.missionOf(player);
+    goTo(m4, 10);
+    __tick(12);
+    const tgt = mine(m4).find((e) => e.hasTag("arsenal_mst"));
+    check("賞金首は強化され、名前が付く", !!tgt && !!tgt.getEffect("health_boost") && String(tgt.nameTag).includes("WANTED") && tgt.typeId === "arsenal:raider_captain", tgt?.typeId);
+    tgt.applyDamage(9999);
+    __tick(12);
+    check("賞金首を倒せば護衛が残っていても完了", mis.missionOf(player) === null);
+    // ---- 中止 ----
+    player.location = { x: 0.5, y: 64, z: 0.5 };
+    check("依頼を受けて中止できる", mis.startContract(player, 2) === null && mis.abandonMission(player) === true && mis.missionOf(player) === null);
+    check("中止した直後は受けられない", mis.startContract(player, 0) === "wait");
+    // ---- 第 4 話（ボス戦）----
+    prof.cp = 3;
+    mis.__forgetMission(player.id);
+    S(player);
+    const cdOk = until(() => mis.startCampaign(player) === null, 600);
+    const m5 = mis.missionOf(player);
+    check("ボス戦（ウォーロード）", cdOk && m5.ty === "boss" && m5.tgt === "boss_warlord");
+    goTo(m5, 15);
+    __tick(12);
+    const boss = mine(m5).find((e) => e.typeId === "arsenal:boss_warlord");
+    check("近づくとボスが出る", !!boss && boss.hasTag("arsenal_mst"));
+    boss.applyDamage(99999);
+    __tick(12);
+    check("ボスを倒すと完了し、第 5 話へ", mis.missionOf(player) === null && mis.campaignProgress(player) === 4);
+    // ---- 野戦マニュアル → ミッション → 依頼 ----
+    player.location = { x: 0.5, y: 64, z: 0.5 };
+    ui.UI_LOG.answers.push({ canceled: false, selection: 0 });
+    ui.UI_LOG.answers.push({ canceled: false, selection: 1 });
+    ui.UI_LOG.answers.push({ canceled: false, selection: 0 });
+    await menus.openManual(player);
+    await flush();
+    await flush();
+    await flush();
+    check("野戦マニュアルから依頼を受けられる", !!mis.missionOf(player) && mis.missionOf(player).k === "x");
+    mis.abandonMission(player);
+    prof.cp = 0;
     reset();
     clearInv();
   }

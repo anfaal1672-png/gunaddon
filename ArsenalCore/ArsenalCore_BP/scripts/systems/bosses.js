@@ -241,7 +241,7 @@ function doAction(e, def, b, act, tg, ai) {
 }
 
 /** @param {import("@minecraft/server").Dimension} dim @param {import("../util/math.js").Vec3} p */
-function groundBelow(dim, p) {
+export function groundBelow(dim, p) {
   const from = { x: p.x, y: p.y + 12, z: p.z };
   if (!isLoaded(dim, from, system.currentTick)) return null;
   const reach = loadedReach(dim, from, { x: 0, y: -1, z: 0 }, 30, system.currentTick);

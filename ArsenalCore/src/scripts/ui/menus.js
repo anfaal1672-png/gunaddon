@@ -20,6 +20,7 @@ import { weaponLevel, camoUnlocked, profile, rankOf } from "../progression/progr
 import { classOf, perksOf, setLoadout, loadoutBody } from "../progression/classes.js";
 import { inMatch } from "../modes/modes.js";
 import { hire, orderSquad, squadOf, squadBody } from "../systems/squad.js";
+import { missionOf, missionBody, offers, contractReward, startContract, startCampaign, abandonMission, campaignProgress } from "../systems/missions.js";
 import { playTo } from "../fx/effects.js";
 import { t, raw, itemName, descOf, anyItemName, onOff } from "../util/i18n.js";
 import { safe, logError } from "../util/log.js";
@@ -397,6 +398,7 @@ export async function openManual(player) {
   const form = new ActionFormData()
     .title("§lARSENAL CORE")
     .body(t("arsenal.ui.manual_body"))
+    .button(t("arsenal.ui.btn_missions"), "textures/ui/world_glyph_color_2x")
     .button(t("arsenal.ui.btn_class"), ICON.tool("tactical_device"))
     .button(t("arsenal.ui.btn_squad"), "textures/ui/FriendsIcon")
     .button(t("arsenal.ui.btn_prefs"), "textures/ui/settings_glyph_color_2x")
@@ -413,24 +415,83 @@ export async function openManual(player) {
   const r = await showForm(player, form);
   if (!r || r.canceled || r.selection === undefined) return;
   switch (r.selection) {
-    case 0: return openLoadout(player);
-    case 1: return openSquad(player);
-    case 2: return openPrefs(player);
-    case 3: return openPrefs2(player);
-    case 4: return op ? openWorldSettings(player) : player.sendMessage(t("arsenal.ui.op_only"));
-    case 5: return op ? openWorld2(player) : player.sendMessage(t("arsenal.ui.op_only"));
-    case 6: return openCodex2(player);
-    case 7: return openGuide2(player);
-    case 8: return openProgress(player);
-    case 9: return openModesMenu(player);
-    case 10: return openTeam(player);
-    case 11: {
+    case 0: return openMissions(player);
+    case 1: return openLoadout(player);
+    case 2: return openSquad(player);
+    case 3: return openPrefs(player);
+    case 4: return openPrefs2(player);
+    case 5: return op ? openWorldSettings(player) : player.sendMessage(t("arsenal.ui.op_only"));
+    case 6: return op ? openWorld2(player) : player.sendMessage(t("arsenal.ui.op_only"));
+    case 7: return openCodex2(player);
+    case 8: return openGuide2(player);
+    case 9: return openProgress(player);
+    case 10: return openModesMenu(player);
+    case 11: return openTeam(player);
+    case 12: {
       const s = S(player);
       s.nvgOn = !s.nvgOn;
       s.nvgTick = -99;
       player.sendMessage(t(s.nvgOn ? "arsenal.ui.nvg_on" : "arsenal.ui.nvg_off"));
       return;
     }
+  }
+}
+
+/**
+ * ミッション（3.0）：キャンペーンの次の話・依頼・いまの任務
+ * @param {Player} player
+ */
+export async function openMissions(player) {
+  const CA = /** @type {any[]} */ (DATA.CAMPAIGN);
+  const cur = missionOf(player);
+  const form = new ActionFormData().title(t("arsenal.ui.btn_missions")).body(missionBody(player));
+  if (cur) {
+    form.button(t("arsenal.mission.abandon"), "textures/ui/cancel").button(t("arsenal.ui.btn_close"));
+    const r = await showForm(player, form);
+    if (!r || r.canceled || r.selection !== 0) return;
+    const c = new MessageFormData().title(t("arsenal.mission.abandon")).body(t("arsenal.mission.abandon_q")).button1(t("arsenal.mission.abandon")).button2(t("arsenal.ui.btn_close"));
+    const r2 = await showForm(player, c);
+    if (r2 && !r2.canceled && r2.selection === 0) abandonMission(player);
+    return;
+  }
+  const cp = campaignProgress(player);
+  const next = CA[cp];
+  form.button(next ? raw("§l", t("arsenal.mission.campaign"), "§r\n", { translate: `arsenal.mission.c.${next.id}` }) : raw("§8", t("arsenal.mission.campaign_done")), "textures/ui/icon_book_writable");
+  const list = offers(player);
+  const rank = rankOf(player);
+  for (const o of list) {
+    const rw = contractReward(o.ty, rank);
+    form.button(raw({ translate: `arsenal.mission.type.${o.ty}` }, " - ", { translate: `arsenal.faction.${o.fac}` }, `\n§6${rw.cr} CR §b${rw.xp} XP`), "textures/ui/icon_map");
+  }
+  form.button(t("arsenal.ui.btn_close"));
+  const r = await showForm(player, form);
+  if (!r || r.canceled || r.selection === undefined) return;
+  let err = null;
+  if (r.selection === 0) {
+    if (!next) return;
+    const b = new MessageFormData()
+      .title(raw({ translate: `arsenal.campaign.chapter.${next.chapter}` }))
+      .body(raw("§l", { translate: `arsenal.mission.c.${next.id}` }, "§r\n\n", { translate: `arsenal.mission.c.${next.id}.brief` }, "\n\n§7",
+        { translate: `arsenal.mission.type.${next.type}` }, " / ", t("arsenal.mission.rec_rank", String(next.rank)), "\n", t("arsenal.mission.reward", String(next.credits), String(next.xp))))
+      .button1(t("arsenal.mission.start"))
+      .button2(t("arsenal.ui.btn_close"));
+    const r2 = await showForm(player, b);
+    if (!r2 || r2.canceled || r2.selection !== 0) return;
+    err = startCampaign(player);
+  } else if (r.selection <= list.length) {
+    const o = list[r.selection - 1];
+    const b = new MessageFormData()
+      .title(raw({ translate: `arsenal.mission.type.${o.ty}` }))
+      .body(raw({ translate: `arsenal.mission.type.${o.ty}.desc` }, "\n§7", { translate: `arsenal.faction.${o.fac}` }))
+      .button1(t("arsenal.mission.start"))
+      .button2(t("arsenal.ui.btn_close"));
+    const r2 = await showForm(player, b);
+    if (!r2 || r2.canceled || r2.selection !== 0) return;
+    err = startContract(player, r.selection - 1);
+  } else return;
+  if (err) {
+    player.sendMessage(t(`arsenal.mission.err.${err}`));
+    playTo(player, "arsenal.ui.error", { volume: 0.6 });
   }
 }
 

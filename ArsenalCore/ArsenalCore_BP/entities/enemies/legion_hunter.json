@@ -301,6 +301,18 @@
             "arsenal:persist"
           ]
         }
+      },
+      "arsenal:release": {
+        "remove": {
+          "component_groups": [
+            "arsenal:persist"
+          ]
+        },
+        "add": {
+          "component_groups": [
+            "arsenal:despawn"
+          ]
+        }
       }
     }
   }

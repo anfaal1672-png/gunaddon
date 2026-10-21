@@ -40,6 +40,40 @@ UI2 = {
     "arsenal.squad.order_hold": ("Hold position", "ここで待て"),
     "arsenal.squad.dismiss": ("Dismiss squad", "分隊を解散"),
     "arsenal.squad.down": ("%s is down!", "%s がやられた！"),
+    # ---- 3.0：ミッション・キャンペーン ----
+    "arsenal.ui.btn_missions": ("Missions", "ミッション"),
+    "arsenal.mode_name.mission": ("MISSION", "ミッション"),
+    "arsenal.mission.campaign": ("Campaign", "キャンペーン"),
+    "arsenal.mission.campaign_done": ("Campaign complete", "キャンペーン完了"),
+    "arsenal.mission.campaign_all": ("completed Operation Arsenal!", "がオペレーション・アーセナルを完遂した！"),
+    "arsenal.mission.current": ("Current mission:", "現在の任務："),
+    "arsenal.mission.none": ("No active mission. Take the next campaign mission or a contract below.", "受けている任務はありません。キャンペーンの次の話か、下の依頼を選んでください"),
+    "arsenal.mission.where": ("Objective: X %s / Z %s  (%s m away)", "目標地点：X %s / Z %s（あと %s m）"),
+    "arsenal.mission.reward": ("Reward: %s CR / %s XP + supplies", "報酬：%s CR / %s XP ＋補給品"),
+    "arsenal.mission.rec_rank": ("Recommended rank %s", "推奨階級 %s"),
+    "arsenal.mission.start": ("Deploy", "出撃"),
+    "arsenal.mission.started": ("MISSION:", "任務開始："),
+    "arsenal.mission.complete": ("MISSION COMPLETE:", "任務完了："),
+    "arsenal.mission.abandon": ("Abandon mission", "任務を中止"),
+    "arsenal.mission.abandon_q": ("Abandon the current mission? You won't get any reward.", "いまの任務を中止しますか？ 報酬はもらえません"),
+    "arsenal.mission.abandoned": ("§7Mission abandoned.", "§7任務を中止しました"),
+    "arsenal.mission.contact": ("CONTACT! Enemies at the objective", "接敵！ 目標地点に敵"),
+    "arsenal.mission.intel_done": ("Intel secured - get clear of the area!", "情報を回収した - この場を離れろ！"),
+    "arsenal.mission.return": ("Return to the defense point!", "防衛地点へ戻れ！"),
+    "arsenal.mission.wave": ("Wave %s / %s incoming!", "ウェーブ %s / %s 接近！"),
+    "arsenal.mission.obj.go": ("Head to the objective", "目標地点へ向かえ"),
+    "arsenal.mission.obj.sweep": ("Eliminate all hostiles (%s/%s)", "敵を全滅させろ（%s/%s）"),
+    "arsenal.mission.obj.intel": ("Stand at the marker to download intel (%s/%s s)", "目印のそばに立って情報を回収（%s/%s 秒）"),
+    "arsenal.mission.obj.extract": ("Get %s m away from the objective", "目標地点から %s m 離れろ"),
+    "arsenal.mission.obj.defend": ("Hold the point (wave %s/%s)", "地点を守れ（ウェーブ %s/%s）"),
+    "arsenal.mission.obj.defend_go": ("Defense point reached - get ready!", "防衛地点に到着 - 備えろ！"),
+    "arsenal.mission.obj.target": ("Eliminate the target", "標的を倒せ"),
+    "arsenal.mission.err.in_match": ("§cYou can't take missions during a match.", "§c試合中は任務を受けられません"),
+    "arsenal.mission.err.busy": ("§cFinish or abandon your current mission first.", "§cいまの任務を終えるか中止してください"),
+    "arsenal.mission.err.wait": ("§cYou abandoned a mission just now. Wait a moment.", "§c任務を中止したばかりです。少し待ってください"),
+    "arsenal.mission.err.unknown": ("§cThat contract is no longer available.", "§cその依頼はもうありません"),
+    "arsenal.mission.err.campaign_done": ("§aYou have completed the campaign.", "§aキャンペーンはすべて完了しています"),
+    "arsenal.prog.stat_line4": ("Missions completed: %s  Campaign: %s", "完了した任務：%s　キャンペーン：%s"),
     # ---- 共通・HUD ----
     "arsenal.ui.ks_ready": ("STREAK READY", "ストリーク使用可"),
     "arsenal.ui.melee": ("MELEE", "近接"),
@@ -428,6 +462,14 @@ def dynamic(d):
         a = c["ability"]
         out[f"arsenal.ability.{a['id']}"] = (a["name"]["en"], a["name"]["ja"])
         out[f"arsenal.ability.{a['id']}.desc"] = (a["desc"]["en"], a["desc"]["ja"])
+    for k, v in d["MISSION_TYPES"].items():
+        out[f"arsenal.mission.type.{k}"] = (v["name"]["en"], v["name"]["ja"])
+        out[f"arsenal.mission.type.{k}.desc"] = (v["desc"]["en"], v["desc"]["ja"])
+    for i, ch in enumerate(d["CAMPAIGN_CHAPTERS"]):
+        out[f"arsenal.campaign.chapter.{i}"] = (ch["name"]["en"], ch["name"]["ja"])
+    for c in d["CAMPAIGN"]:
+        out[f"arsenal.mission.c.{c['id']}"] = (c["title"]["en"], c["title"]["ja"])
+        out[f"arsenal.mission.c.{c['id']}.brief"] = (c["brief"]["en"], c["brief"]["ja"])
     for sid, sq in d["SQUAD"].items():
         out[f"arsenal.squad.{sid}.desc"] = (sq["desc"]["en"], sq["desc"]["ja"])
     for pid, p in d["PERKS"].items():

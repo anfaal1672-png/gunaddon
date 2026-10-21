@@ -46,6 +46,7 @@ import { t } from "./util/i18n.js";
 import { safe, info } from "./util/log.js";
 import { mods, attachClasses, tickClasses, useAbility } from "./progression/classes.js";
 import { attachSquad, tickSquad, scanSquad, squadFire } from "./systems/squad.js";
+import { attachMissions, tickMissions, missionOf, setMissionMatchCheck } from "./systems/missions.js";
 
 // ---------------------------------------------------------------------------
 //  カスタムコンポーネント
@@ -495,6 +496,8 @@ attachProgression();
 attachClasses();
 attachSquad();
 setSquadShotHandler(squadFire);
+attachMissions();
+setMissionMatchCheck(inMatch);
 attachEconomy();
 addHud2Provider((p) => ({ cr: creditsForHud(p), ks: streakReady(p) ? "1" : "0" }));
 
@@ -546,10 +549,10 @@ function tickPlayer(player) {
       s.moveApplied = false;
     }
     if (s.calib) ensureFpOffset(player, s);
-    // HUD 2.0：ARSENAL の品を持っている・試合中・乗車中・ダウン中・ドローンやガンシップの操作中だけ送る
+    // HUD 2.0：ARSENAL の品を持っている・試合中・ミッション中・乗車中・ダウン中・ドローンやガンシップの操作中だけ送る
     // （それ以外ではタイトルを使わず、地図やほかのアドオンの /title を邪魔しない）
     const style = usesHud2(player) && P(player).hudMode !== "off";
-    const want = style && (!!held?.typeId.startsWith(`${NS}:`) || inMatch(player) || !!s.ridingId || isDowned(player) || s.gunshipUntil > now || !!s.droneId);
+    const want = style && (!!held?.typeId.startsWith(`${NS}:`) || inMatch(player) || !!missionOf(player) || !!s.ridingId || isDowned(player) || s.gunshipUntil > now || !!s.droneId);
     if (want) renderHud2(player, s, false);
     else clearHud2(player, s);
   }
@@ -617,6 +620,7 @@ system.runInterval(() => {
   safe("tickStreaks", () => tickStreaks());
   safe("tickClasses", () => tickClasses());
   safe("tickSquad", () => tickSquad());
+  safe("tickMissions", () => tickMissions());
   safe("tickModes", () => tickModes());
   safe("tickStructures", () => tickStructures());
   const now = system.currentTick;

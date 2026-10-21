@@ -235,6 +235,7 @@ export async function openProgress(p) {
   lines.push(t("arsenal.prog.stat_line1", String(st.kills), String(st.deaths), kd, String(st.headKills)));
   lines.push(t("arsenal.prog.stat_line2", `${acc}%`, String(st.longest), String(st.meleeKills), String(st.explosiveKills)));
   lines.push(t("arsenal.prog.stat_line3", String(st.structuresCleared), String(st.wavesSurvived), String(st.matchWins), String(st.bossKills)));
+  lines.push(t("arsenal.prog.stat_line4", String(st.missions ?? 0), `${Math.min(DATA.CAMPAIGN.length, Number(/** @type {any} */ (prof).cp) || 0)}/${DATA.CAMPAIGN.length}`));
   // 武器レベル上位
   const top = Object.entries(prof.wxp).sort((a, b) => b[1] - a[1]).slice(0, 6);
   if (top.length) {

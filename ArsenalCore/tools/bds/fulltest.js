@@ -24,6 +24,8 @@ import { startLobby, joinMatch, endMatch, currentMatch, __setMatchLobbyNow } fro
 import { addCredits, credits, buy, shopItems, sellSlot, priceOf } from "./economy/economy.js";
 import { hire, squadOf, orderSquad } from "./systems/squad.js";
 import { setLoadout, useAbility, mods } from "./progression/classes.js";
+import { startContract, missionOf, abandonMission } from "./systems/missions.js";
+import { profile } from "./progression/progression.js";
 
 const log = (...a) => console.warn("[FULL] " + a.join(" "));
 const dim = () => world.getDimension("overworld");
@@ -982,7 +984,7 @@ async function nukes() {
   await wait(1300); // 降下物が消えるまで（次の段階に残さない）
 }
 
-// 3.0：兵科のアビリティ・分隊（雇う・敵を撃つ・ついて来る・待つ・解散）
+// 3.0：兵科のアビリティ・分隊（雇う・敵を撃つ・ついて来る・待つ・解散）・ミッション（掃討・賞金首）
 async function v3() {
   const p = sim();
   tough(p);
@@ -1039,6 +1041,40 @@ async function v3() {
   expect("squad_dismiss", squadOf(p).length === 0, `n=${squadOf(p).length}`);
   S(p).classSwitchAt = 0;
   setLoadout(p, "assault", [null, null, null]);
+  // ミッション：依頼を受ける → 近づくと敵が出る → 倒すと完了（掃討・賞金首）
+  for (const ty of ["sweep", "bounty"]) {
+    clearMobs();
+    p.teleport({ x: 0.5, y: Y, z: 0.5 });
+    const prof = /** @type {any} */ (profile(p));
+    prof.offers = [{ ty, fac: "raiders" }, { ty: "sweep", fac: "raiders" }, { ty: "sweep", fac: "raiders" }];
+    const merr = startContract(p, 0);
+    const m = missionOf(p);
+    expect(`mission_${ty}_start`, merr === null && !!m && m.ph === "go", `err=${merr}`);
+    if (!m) continue;
+    const top = dim().getTopmostBlock({ x: m.x + 10, z: m.z });
+    p.teleport({ x: m.x + 10.5, y: (top?.location.y ?? Y) + 1, z: m.z + 0.5 });
+    const tag = `arsenal_ms:${m.n}`;
+    for (let i = 0; i < 200 && m.ph === "go"; i++) await wait(1);
+    await wait(2);
+    const foes = dim().getEntities({ tags: [tag] });
+    expect(`mission_${ty}_spawn`, m.ph === "fight" && foes.length === m.left && m.left > 0, `ph=${m.ph} y=${m.y} n=${foes.length} left=${m.left} top=${top?.typeId}`);
+    if (ty === "bounty") {
+      const tg = foes.find((e) => e.hasTag("arsenal_mst"));
+      const hp = tg?.getComponent("minecraft:health");
+      expect("mission_bounty_target", !!tg && !!hp && hp.effectiveMax > 60 && String(tg.nameTag).includes("WANTED"), `type=${tg?.typeId} max=${hp?.effectiveMax}`);
+      tg?.kill();
+    } else for (const e of foes) e.kill();
+    let done = false;
+    for (let i = 0; i < 80 && !done; i++) {
+      await wait(1);
+      done = missionOf(p) === null;
+    }
+    expect(`mission_${ty}_complete`, done, JSON.stringify({ ph: m.ph, got: m.got, left: m.left }));
+    if (!done) abandonMission(p);
+    for (const e of dim().getEntities({ tags: [tag] })) e.remove();
+    clearMobs();
+  }
+  p.teleport({ x: 0.5, y: Y, z: 0.5 });
   log(`v3: ok=${ok}/${n}`);
 }
 

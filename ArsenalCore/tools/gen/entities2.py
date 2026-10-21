@@ -136,6 +136,8 @@ class Entities2Mixin:
             f"{NS}:ai_hold": {"remove": {"component_groups": ["arsenal:engage", "arsenal:move"]}, "add": {"component_groups": ["arsenal:hold", "arsenal:targeting"]}},
             f"{NS}:ai_move": {"remove": {"component_groups": ["arsenal:engage", "arsenal:hold", "arsenal:targeting"]}, "add": {"component_groups": ["arsenal:move"]}},
             f"{NS}:persist": {"remove": {"component_groups": ["arsenal:despawn"]}, "add": {"component_groups": ["arsenal:persist"]}},
+            # 3.0：ミッションが終わった敵を普通の敵に戻す（遠ざかれば消える）
+            f"{NS}:release": {"remove": {"component_groups": ["arsenal:persist"]}, "add": {"component_groups": ["arsenal:despawn"]}},
         }
         props = {}
         if model == "bloater":

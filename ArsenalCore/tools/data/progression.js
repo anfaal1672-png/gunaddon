@@ -138,7 +138,7 @@ export const CHALLENGES = {
 // ---------------------------------------------------------------------------
 export const STAT_KEYS = [
   "kills", "deaths", "headKills", "shots", "hits", "headHits", "longest", "meleeKills", "explosiveKills", "longKills",
-  "medsUsed", "structuresCleared", "wavesSurvived", "matchWins", "matchesPlayed", "streaksUsed", "bossKills", "creditsEarned",
+  "medsUsed", "structuresCleared", "wavesSurvived", "matchWins", "matchesPlayed", "streaksUsed", "bossKills", "creditsEarned", "missions",
 ];
 
 /** 1 つのダイナミックプロパティに入れる JSON の上限（文字数）。超えたら a:prog.1, a:prog.2 … に分ける */

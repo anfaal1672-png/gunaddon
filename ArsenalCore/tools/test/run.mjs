@@ -244,7 +244,7 @@ check("フラッシュバンで盲目", !!player.effects["blindness"] || true);
 
 // ---- UI ----
 console.log("UI");
-ui.UI_LOG.answers.push({ canceled: false, selection: 2 }); // 野戦マニュアルの 3 番目（3.0 で先頭に「兵科・パーク」「分隊」）
+ui.UI_LOG.answers.push({ canceled: false, selection: 3 }); // 野戦マニュアルの 4 番目（3.0 で先頭に「ミッション」「兵科・パーク」「分隊」）
 ui.UI_LOG.answers.push({ canceled: false, formValues: [1, 0, 0, 1, 0, true, false, true, 0, true, true, 1, 60, true] });
 comps.item["arsenal:tool"].onUse({ source: player, itemStack: new ItemStack("arsenal:field_manual") });
 __tick(3);
