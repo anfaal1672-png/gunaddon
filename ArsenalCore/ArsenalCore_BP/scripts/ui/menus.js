@@ -16,7 +16,9 @@ import { resetScopeMark } from "./hud.js";
 import { syncLook, CAMO_PROP } from "../core/migrate.js";
 import { openCodex2, openGuide2, openProgress, openPrefs2, openWorld2 } from "./codex.js";
 import { openModesMenu } from "../modes/modes.js";
-import { weaponLevel, camoUnlocked, profile } from "../progression/progression.js";
+import { weaponLevel, camoUnlocked, profile, rankOf } from "../progression/progression.js";
+import { classOf, perksOf, setLoadout, loadoutBody } from "../progression/classes.js";
+import { inMatch } from "../modes/modes.js";
 import { playTo } from "../fx/effects.js";
 import { t, raw, itemName, descOf, anyItemName, onOff } from "../util/i18n.js";
 import { safe, logError } from "../util/log.js";
@@ -394,6 +396,7 @@ export async function openManual(player) {
   const form = new ActionFormData()
     .title("§lARSENAL CORE")
     .body(t("arsenal.ui.manual_body"))
+    .button(t("arsenal.ui.btn_class"), ICON.tool("tactical_device"))
     .button(t("arsenal.ui.btn_prefs"), "textures/ui/settings_glyph_color_2x")
     .button(t("arsenal.ui.btn_prefs2"), "textures/ui/icon_setting")
     .button(raw(op ? "" : "§8", t("arsenal.ui.btn_world")), "textures/ui/op")
@@ -408,16 +411,17 @@ export async function openManual(player) {
   const r = await showForm(player, form);
   if (!r || r.canceled || r.selection === undefined) return;
   switch (r.selection) {
-    case 0: return openPrefs(player);
-    case 1: return openPrefs2(player);
-    case 2: return op ? openWorldSettings(player) : player.sendMessage(t("arsenal.ui.op_only"));
-    case 3: return op ? openWorld2(player) : player.sendMessage(t("arsenal.ui.op_only"));
-    case 4: return openCodex2(player);
-    case 5: return openGuide2(player);
-    case 6: return openProgress(player);
-    case 7: return openModesMenu(player);
-    case 8: return openTeam(player);
-    case 9: {
+    case 0: return openLoadout(player);
+    case 1: return openPrefs(player);
+    case 2: return openPrefs2(player);
+    case 3: return op ? openWorldSettings(player) : player.sendMessage(t("arsenal.ui.op_only"));
+    case 4: return op ? openWorld2(player) : player.sendMessage(t("arsenal.ui.op_only"));
+    case 5: return openCodex2(player);
+    case 6: return openGuide2(player);
+    case 7: return openProgress(player);
+    case 8: return openModesMenu(player);
+    case 9: return openTeam(player);
+    case 10: {
       const s = S(player);
       s.nvgOn = !s.nvgOn;
       s.nvgTick = -99;
@@ -425,6 +429,67 @@ export async function openManual(player) {
       return;
     }
   }
+}
+
+/**
+ * 兵科・パーク（3.0）
+ * @param {Player} player
+ */
+export async function openLoadout(player) {
+  const CL = /** @type {Record<string, any>} */ (DATA.CLASSES);
+  const PK = /** @type {Record<string, any>} */ (DATA.PERKS);
+  const form = new ActionFormData()
+    .title(t("arsenal.ui.btn_class"))
+    .body(loadoutBody(player))
+    .button(t("arsenal.class.change"), "textures/ui/icon_setting")
+    .button(t("arsenal.class.get_device"), ICON.tool("tactical_device"))
+    .button(t("arsenal.ui.btn_close"));
+  const r = await showForm(player, form);
+  if (!r || r.canceled || r.selection === undefined) return;
+  if (r.selection === 1) {
+    if (countItem(player, `${NS}:tactical_device`) > 0) return player.sendMessage(t("arsenal.class.have_device"));
+    giveItem(player, `${NS}:tactical_device`, 1);
+    return;
+  }
+  if (r.selection !== 0) return;
+  if (inMatch(player)) return player.sendMessage(t("arsenal.class.in_match"));
+  const ids = Object.keys(CL);
+  const rank = rankOf(player);
+  const cur = classOf(player);
+  const perks = perksOf(player);
+  const m = new ModalFormData()
+    .title(t("arsenal.ui.btn_class"))
+    .dropdown(t("arsenal.class.pick"), ids.map((c) => raw({ translate: `arsenal.class.${c}` }, " §8- ", { translate: `arsenal.ability.${CL[c].ability.id}` })), { defaultValueIndex: Math.max(0, ids.indexOf(cur)) });
+  /** @type {string[][]} */
+  const tierIds = [];
+  for (let tier = 1; tier <= 3; tier++) {
+    const list = Object.keys(PK).filter((id) => PK[id].tier === tier);
+    tierIds.push(list);
+    const opts = [t("arsenal.class.none"), ...list.map((id) => (rank >= PK[id].rank ? raw({ translate: `arsenal.perk.${id}` }, " §7", { translate: `arsenal.perk.${id}.desc` }) : raw("§8", { translate: `arsenal.perk.${id}` }, " ", t("arsenal.class.locked_tag", String(PK[id].rank)))))];
+    const now = perks[tier - 1];
+    m.dropdown(t("arsenal.class.tier", String(tier)), opts, { defaultValueIndex: now ? list.indexOf(now) + 1 : 0 });
+  }
+  m.submitButton(t("arsenal.ui.btn_save"));
+  const r2 = await showForm(player, m);
+  if (!r2 || r2.canceled || !r2.formValues) return;
+  const v = r2.formValues;
+  const cls = ids[Number(v[0])] ?? cur;
+  const chosen = [0, 1, 2].map((i) => {
+    const k = Number(v[i + 1]);
+    return k > 0 ? tierIds[i][k - 1] ?? null : null;
+  });
+  // 解放されていないパークは外して保存する（ほかは反映）
+  const locked = chosen.map((id) => (id && rank < PK[id].rank ? id : null)).filter(Boolean);
+  const ok = chosen.map((id) => (id && rank >= PK[id].rank ? id : null));
+  const err = setLoadout(player, cls, ok);
+  if (err) {
+    player.sendMessage(t(err));
+    playTo(player, "arsenal.ui.error", { volume: 0.6 });
+    return;
+  }
+  if (locked.length) player.sendMessage(t("arsenal.class.perk_locked"));
+  player.sendMessage(raw("§a", t("arsenal.class.saved"), " §f", { translate: `arsenal.class.${cls}` }));
+  playTo(player, "arsenal.ui.buy", { volume: 0.6 });
 }
 
 /** @param {Player} player */

@@ -14,6 +14,7 @@ import { fp_step } from "../util/fpstep.js";
 import { safe } from "../util/log.js";
 import { tickPathLock, clearPathLock } from "./pathlock.js";
 import { tickSmart, clearSmart } from "./fire3.js";
+import { mods } from "../progression/classes.js";
 import { canDamage } from "./damage.js";
 
 const BASE_SPEED = 0.1;
@@ -75,7 +76,7 @@ function tickSprintPose(player, s, st, now) {
     }));
   } else if (!want && s.sprintPose) {
     s.sprintPose = false;
-    s.readyAt = now + (st.ready ?? 0);
+    s.readyAt = now + Math.round((st.ready ?? 0) * mods(player).ready);
     if (player.isSprinting) safe("sprint.stop", () => player.playAnimation("animation.arsenal.none", { controller: "arsenal_sprint", blendOutTime: 0.1 }));
   }
 }
@@ -178,7 +179,7 @@ export function tickAim(player, s, st) {
   const prefs = P(player);
   const now = system.currentTick;
   const want = (prefs.adsMode === "toggle" ? s.adsToggle : player.isSneaking) && !(s.reload && s.reload.type === "mag") && !player.isSprinting;
-  const step = 1 / Math.max(1, st.adsTime);
+  const step = 1 / Math.max(1, st.adsTime * mods(player).ads);
   s.adsLevel = want ? Math.min(1, s.adsLevel + step) : Math.max(0, s.adsLevel - step * 1.5);
   tickSprintPose(player, s, st, now);
   const fov = effectiveFov(s, st);
@@ -255,7 +256,7 @@ export function tickAim(player, s, st) {
   // 自動射撃（スマホ向け補助）：照準が敵に重なったら撃つ
   if (prefs.autoFire) tickAutoFire(player, s, st);
   // 移動速度（武器の重さ × 防具 × 盾）
-  const mv = st.move * armorMove(player) * riotShieldMove(player);
+  const mv = st.move * armorMove(player) * riotShieldMove(player) * mods(player).move;
   if (!s.moveApplied || Math.abs(s.moveValue - mv) > 1e-4) {
     applyMove(player, mv);
     s.moveApplied = true;

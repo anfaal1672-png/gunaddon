@@ -12,6 +12,7 @@ import { P } from "./settings.js";
 import { playNear } from "../fx/effects.js";
 import { safe } from "../util/log.js";
 import { dot } from "../util/math.js";
+import { sightMod } from "../progression/classes.js";
 
 const ARMOR = /** @type {Record<string, any>} */ (DATA.ARMOR);
 const PLATE_HP = DATA.PLATE_HP;
@@ -169,7 +170,7 @@ export function stealthFactor(e) {
     if (Math.hypot(v.x, v.z) < 0.02) f = 0.35;
     else f = 0.7;
   } else if (e.isSneaking) f = 0.8;
-  return f;
+  return f * sightMod(e);
 }
 
 /**

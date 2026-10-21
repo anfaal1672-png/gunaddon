@@ -1,0 +1,33 @@
+{
+  "format_version": "1.20.10",
+  "minecraft:recipe_shapeless": {
+    "description": {
+      "identifier": "arsenal:tactical_device"
+    },
+    "tags": [
+      "crafting_table"
+    ],
+    "ingredients": [
+      {
+        "item": "minecraft:redstone",
+        "count": 2
+      },
+      {
+        "item": "arsenal:precision_parts"
+      },
+      {
+        "item": "minecraft:copper_ingot",
+        "count": 2
+      }
+    ],
+    "result": {
+      "item": "arsenal:tactical_device",
+      "count": 1
+    },
+    "unlock": [
+      {
+        "item": "minecraft:redstone"
+      }
+    ]
+  }
+}

@@ -243,7 +243,7 @@ check("フラッシュバンで盲目", !!player.effects["blindness"] || true);
 
 // ---- UI ----
 console.log("UI");
-ui.UI_LOG.answers.push({ canceled: false, selection: 0 });
+ui.UI_LOG.answers.push({ canceled: false, selection: 1 }); // 野戦マニュアルの 2 番目（3.0 で先頭に「兵科・パーク」）
 ui.UI_LOG.answers.push({ canceled: false, formValues: [1, 0, 0, 1, 0, true, false, true, 0, true, true, 1, 60, true] });
 comps.item["arsenal:tool"].onUse({ source: player, itemStack: new ItemStack("arsenal:field_manual") });
 __tick(3);
@@ -302,7 +302,9 @@ const wasReloading = !!st.reload;
 player.selectedSlotIndex = 2;
 __tick(3);
 check("持ち替えでリロードがキャンセルされ、弾は増えない", wasReloading && !st.reload && inv.items[0].props["a:ammo"] === 3, `(was=${wasReloading}, ammo=${inv.items[0].props["a:ammo"]})`);
-check("持ち替えで移動速度が元に戻る", player.move.currentValue === 0.1);
+// 3.0：既定の兵科（突撃兵）は移動 +6% なので、元の速さはその分だけ速い
+const clsMove = D.CLASSES[D.DEFAULT_CLASS].mods.move ?? 1;
+check("持ち替えで移動速度が元に戻る（兵科の補正だけ）", Math.abs(player.move.currentValue - 0.1 * clsMove) < 1e-9, `(${player.move.currentValue})`);
 
 
 // ---- 1.0.2：スマホでの止めやすさ・爆風・スコープ・貫通・未ロードチャンク ----

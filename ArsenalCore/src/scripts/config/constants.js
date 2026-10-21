@@ -32,6 +32,8 @@ export const ITEM = {
   // 2.0
   arenaTool: `${NS}:arena_tool`,
   streakTerminal: `${NS}:streak_terminal`,
+  // 3.0
+  device: `${NS}:tactical_device`,
   warlordBanner: `${NS}:warlord_banner`,
   legionCore: `${NS}:legion_core`,
   hollowHeart: `${NS}:hollow_heart`,

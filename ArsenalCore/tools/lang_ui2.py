@@ -5,6 +5,27 @@ ARSENAL CORE 2.0 — 追加の UI 文言（英語, 日本語）
 """
 
 UI2 = {
+    # ---- 3.0：兵科・パーク ----
+    "arsenal.ui.btn_class": ("Class & Perks", "兵科・パーク"),
+    "arsenal.ui.welcome_v3": ("§6ARSENAL CORE 3.0§r: classes, perks, squad, missions and a campaign are here. Open the Field Manual → Class & Perks. You received a Tactical Device (class ability).",
+                              "§6ARSENAL CORE 3.0§r：兵科・パーク・分隊・任務・キャンペーンが加わりました。野戦マニュアル →「兵科・パーク」から。兵科のアビリティを使う戦術デバイスを渡しました"),
+    "arsenal.class.change": ("Change class & perks", "兵科とパークを変える"),
+    "arsenal.class.get_device": ("Get a Tactical Device", "戦術デバイスを受け取る"),
+    "arsenal.class.have_device": ("§7You already have a Tactical Device.", "§7戦術デバイスはもう持っています"),
+    "arsenal.class.pick": ("Class", "兵科"),
+    "arsenal.class.tier": ("Perk - tier %s", "パーク（ティア %s）"),
+    "arsenal.class.none": ("(none)", "（なし）"),
+    "arsenal.class.locked_tag": ("[rank %s]", "［階級 %s で解放］"),
+    "arsenal.class.saved": ("Loadout saved:", "保存しました："),
+    "arsenal.class.unknown": ("§cUnknown class or perk.", "§c兵科またはパークが見つかりません"),
+    "arsenal.class.perk_locked": ("§eSome perks are locked by rank and were not equipped.", "§e階級が足りないパークは付けられませんでした"),
+    "arsenal.class.switch_wait": ("§cYou changed class recently. Try again in a moment.", "§c兵科を変えたばかりです。少し待ってから変えてください"),
+    "arsenal.class.in_match": ("§cYou can't change class during a match.", "§c試合中は兵科を変えられません"),
+    "arsenal.class.cooldown": ("%s - ready in %s s", "%s：あと %s 秒で使える"),
+    "arsenal.class.used": ("%s!", "%s！"),
+    "arsenal.class.ready": ("%s ready", "%s 使用可"),
+    "arsenal.class.pulse_found": ("Pulse: %s hostiles marked", "パルス：敵 %s 体をマーク"),
+    "arsenal.class.last_stand": ("LAST STAND!", "不屈！"),
     # ---- 共通・HUD ----
     "arsenal.ui.ks_ready": ("STREAK READY", "ストリーク使用可"),
     "arsenal.ui.melee": ("MELEE", "近接"),
@@ -386,6 +407,16 @@ def dynamic(d):
     out = {}
     for fid, f in d["FACTIONS"].items():
         out[f"arsenal.faction.{fid}"] = (f["name"]["en"], f["name"]["ja"])
+    # 3.0：兵科・アビリティ・パーク
+    for cid, c in d["CLASSES"].items():
+        out[f"arsenal.class.{cid}"] = (c["name"]["en"], c["name"]["ja"])
+        out[f"arsenal.class.{cid}.desc"] = (c["desc"]["en"], c["desc"]["ja"])
+        a = c["ability"]
+        out[f"arsenal.ability.{a['id']}"] = (a["name"]["en"], a["name"]["ja"])
+        out[f"arsenal.ability.{a['id']}.desc"] = (a["desc"]["en"], a["desc"]["ja"])
+    for pid, p in d["PERKS"].items():
+        out[f"arsenal.perk.{pid}"] = (p["name"]["en"], p["name"]["ja"])
+        out[f"arsenal.perk.{pid}.desc"] = (p["desc"]["en"], p["desc"]["ja"])
     for r, v in ROLE_NAME.items():
         out[f"arsenal.role.{r}"] = v
     for r, v in ROLE_DESC.items():

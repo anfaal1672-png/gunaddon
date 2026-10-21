@@ -20,6 +20,7 @@ import { announce } from "../ui/hud2.js";
 import { dist, norm, sub, dot, isLoaded } from "../util/math.js";
 import { t } from "../util/i18n.js";
 import { safe } from "../util/log.js";
+import { mods } from "../progression/classes.js";
 
 const MEDICAL = /** @type {Record<string, any>} */ (DATA.MEDICAL);
 const DEPLOYABLES = /** @type {Record<string, any>} */ (DATA.DEPLOYABLES);
@@ -58,7 +59,7 @@ export function completeMedical(player, mid) {
   } else {
     if (m.heal) safe("med.heal", () => {
       const h = player.getComponent("minecraft:health");
-      if (h) h.setCurrentValue(Math.min(h.effectiveMax, h.currentValue + m.heal));
+      if (h) h.setCurrentValue(Math.min(h.effectiveMax, h.currentValue + m.heal * mods(player).heal));
     });
     if (m.stopsBleed && s.bleedUntil > now) {
       s.bleedUntil = 0;

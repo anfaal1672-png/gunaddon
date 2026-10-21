@@ -13,6 +13,7 @@ export * from "./progression.js";
 export * from "./modes.js";
 export * from "./recipes.js";
 export * from "./hud.js";
+export * from "./classes.js";
 export { WEAPONS, MELEE } from "./weapons/index.js";
 
 import { NS, MATERIALS, TOOLS } from "./core.js";

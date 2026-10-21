@@ -502,6 +502,16 @@ def tool_icon_any(tid):
         d.line([10, 15, 13, 12, 16, 14, 19, 9, 22, 11], fill=(80, 255, 120, 255))
         for i in range(3):
             rect(d, 9 + i * 5, 21, 12 + i * 5, 25, (200, 40, 40) if i == 1 else LT)
+    elif tid == "tactical_device":
+        # 手首に付ける小さな端末（3.0）：黒い本体・青い画面・3 つのボタン
+        rect(d, 7, 6, 25, 26, (44, 48, 54))
+        rect(d, 9, 8, 23, 18, (24, 70, 110), hl=False)
+        d.ellipse([13, 10, 19, 16], outline=(120, 220, 255, 255))
+        d.line([16, 9, 16, 17], fill=(120, 220, 255, 255))
+        for i in range(3):
+            rect(d, 10 + i * 5, 20, 13 + i * 5, 24, (230, 170, 30) if i == 1 else LT)
+        rect(d, 4, 12, 7, 20, (30, 30, 34), hl=False)
+        rect(d, 25, 12, 28, 20, (30, 30, 34), hl=False)
     elif tid == "warlord_banner":
         _diag(d, 6, 30, 6, 2, (110, 70, 40), 2)
         d.polygon([(7, 3), (27, 3), (27, 20), (17, 16), (7, 20)], fill=(140, 30, 30, 255))

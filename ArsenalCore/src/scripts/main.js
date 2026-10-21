@@ -6,6 +6,7 @@
 import { world, system, Player, ButtonState, InputButton, GameMode, ItemStack } from "@minecraft/server";
 import { weaponIdOf, throwableIdOf, meleeIdOf, medicalIdOf, deployableIdOf, lookOf, ITEM, NS, DATA } from "./config/constants.js";
 import { S, dropState, allStates } from "./core/state.js";
+import { countItem } from "./core/inventory.js";
 import { P, forgetPrefs, W as WS, isOperator } from "./core/settings.js";
 import { readWeapon, heldItem, itemKey, PROP, isWeaponItem, findWeaponSlot } from "./core/weaponState.js";
 import { tickFire, pressTrigger, releaseCharge, flushWear, stopTapFire } from "./core/fireController.js";
@@ -43,6 +44,7 @@ import { attachModes, tickModes, openArenaTool, inMatch } from "./modes/modes.js
 import { playNear } from "./fx/effects.js";
 import { t } from "./util/i18n.js";
 import { safe, info } from "./util/log.js";
+import { mods, attachClasses, tickClasses, useAbility } from "./progression/classes.js";
 
 // ---------------------------------------------------------------------------
 //  カスタムコンポーネント
@@ -80,6 +82,7 @@ system.beforeEvents.startup.subscribe((ev) => {
         else if (id === ITEM.repairKit) useRepairKit(player);
         else if (id === ITEM.arenaTool) openArenaTool(player);
         else if (id === ITEM.streakTerminal) openTerminal(player);
+        else if (id === ITEM.device) useAbility(player);
         else if (id === ITEM.warlordBanner) summonBoss(player, "boss_warlord", id);
         else if (id === ITEM.legionCore) summonBoss(player, "boss_juggernaut", id);
         else if (id === ITEM.hollowHeart) summonBoss(player, "boss_hollow_mother", id);
@@ -390,18 +393,33 @@ world.afterEvents.playerSpawn.subscribe((ev) => {
     if (ev.initialSpawn) {
       migratePlayer(player);
       resetFov(player, 0);
-      if (player.getDynamicProperty("arsenal:welcomed") !== true) {
+      const veteran = player.getDynamicProperty("arsenal:welcomed") === true;
+      if (!veteran) {
         player.setDynamicProperty("arsenal:welcomed", true);
         player.sendMessage(t("arsenal.ui.welcome"));
         if (player.getGameMode() !== GameMode.Spectator) {
           const inv = player.getComponent("minecraft:inventory")?.container;
-          const rest = inv?.addItem(new ItemStack(ITEM.manual, 1));
-          if (rest) player.dimension.spawnItem(rest, player.location);
+          for (const id of [ITEM.manual, ITEM.device]) {
+            const rest = inv?.addItem(new ItemStack(id, 1));
+            if (rest) player.dimension.spawnItem(rest, player.location);
+          }
         }
       } else if (player.getDynamicProperty("a:v2hint") !== true) {
         // 1.0 系から更新したプレイヤーへ、2.0 の案内を 1 回だけ
         player.setDynamicProperty("a:v2hint", true);
         player.sendMessage(t("arsenal.ui.welcome_v2"));
+      }
+      // 2.x から更新したプレイヤーへ、3.0 の案内と戦術デバイスを 1 回だけ
+      if (player.getDynamicProperty("a:v3hint") !== true) {
+        player.setDynamicProperty("a:v3hint", true);
+        if (veteran && player.getGameMode() !== GameMode.Spectator) {
+          player.sendMessage(t("arsenal.ui.welcome_v3"));
+          const inv = player.getComponent("minecraft:inventory")?.container;
+          if (inv && !countItem(player, ITEM.device)) {
+            const rest = inv.addItem(new ItemStack(ITEM.device, 1));
+            if (rest) player.dimension.spawnItem(rest, player.location);
+          }
+        }
       }
     }
   });
@@ -473,6 +491,7 @@ attachPathfinding();
 attachStreaks();
 attachStructures();
 attachProgression();
+attachClasses();
 attachEconomy();
 addHud2Provider((p) => ({ cr: creditsForHud(p), ks: streakReady(p) ? "1" : "0" }));
 
@@ -515,7 +534,7 @@ function tickPlayer(player) {
     if (tid) tickThrowable(player, tid);
     else if (s.throwing) s.throwing = null;
     // 武器を持っていないときの移動速度（防具・盾・近接武器）
-    const mul = armorMove(player) * riotShieldMove(player) * (mid ? meleeMove(mid) : 1);
+    const mul = armorMove(player) * riotShieldMove(player) * (mid ? meleeMove(mid) : 1) * mods(player).move;
     if (Math.abs(mul - 1) > 1e-3) {
       applyMove(player, mul);
       s.moveApplied = true;
@@ -593,6 +612,7 @@ system.runInterval(() => {
   safe("tickBosses", () => tickBosses());
   safe("tickDeployables", () => tickDeployables());
   safe("tickStreaks", () => tickStreaks());
+  safe("tickClasses", () => tickClasses());
   safe("tickModes", () => tickModes());
   safe("tickStructures", () => tickStructures());
   const now = system.currentTick;

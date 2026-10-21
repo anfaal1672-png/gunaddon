@@ -1379,6 +1379,9 @@
     "arsenal_swarm_launcher__o2": {
       "textures": "textures/items/arsenal/weapons/swarm_launcher__o2"
     },
+    "arsenal_tactical_device": {
+      "textures": "textures/items/arsenal/tools/tactical_device"
+    },
     "arsenal_tactical_nuke": {
       "textures": "textures/items/arsenal/throwables/tactical_nuke"
     },

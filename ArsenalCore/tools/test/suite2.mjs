@@ -1944,13 +1944,13 @@ export async function suite2(ctx) {
   {
     reset();
     clearInv();
-    ui.UI_LOG.answers.push({ canceled: false, selection: 1 });
+    ui.UI_LOG.answers.push({ canceled: false, selection: 2 });
     ui.UI_LOG.answers.push({ canceled: false, formValues: [0, 2, 2, true, true, false, 1, false, 1, -1, true, false] });
     await menus.openManual(player);
     await flush();
     const p = settings.P(player);
     check("HUD・2.0 の設定を保存（大きさ・配置・エイムアシスト・一人称の位置）", p.hudScale === "large" && p.hudLayout === "raised" && p.aimAssist === "light" && p.fpOffsetV === 1 && p.fpOffsetD === -1 && p.suppressionFx === false && p.nvgAuto === false);
-    ui.UI_LOG.answers.push({ canceled: false, selection: 3 });
+    ui.UI_LOG.answers.push({ canceled: false, selection: 4 });
     ui.UI_LOG.answers.push({ canceled: false, formValues: [false, true, 3, 2, true, true, true, true, true, 30, false, true, true, true] });
     await menus.openManual(player);
     await flush();
@@ -2012,5 +2012,96 @@ export async function suite2(ctx) {
     settings.setPrefs(player, { hudStyle: "classic", aimAssist: "off", fpOffsetV: 0, fpOffsetD: 0, suppressionFx: true, nvgAuto: true, hudScale: "normal", hudLayout: "auto" });
     clearInv();
     __tick(3);
+  }
+
+  // =====================================================================
+  console.log("3.0 兵科・パーク");
+  // =====================================================================
+  {
+    reset();
+    clearInv();
+    const cls = await imp("progression/classes.js");
+    const s = S(player);
+    check("既定の兵科は突撃兵（移動 +6%）", cls.classOf(player) === "assault" && Math.abs(cls.mods(player).move - 1.06) < 1e-9);
+    // 階級 1 では ティア 2 の強靭（階級 6）は付けられない
+    const prof = prog.profile(player);
+    const xp0 = prof.rankXp;
+    prof.rankXp = 0;
+    check("階級が足りないパークは付けられない", cls.setLoadout(player, "heavy", [null, "hardened", null]) === "arsenal.class.perk_locked");
+    prof.rankXp = Math.max(xp0, 10_000_000);
+    s.classSwitchAt = 0;
+    cls.setLoadout(player, "assault", [null, null, null]);
+    s.classSwitchAt = 0;
+    check("階級が上がればパークを付けられる", cls.setLoadout(player, "heavy", ["quick_hands", "hardened", "last_stand"]) === null && cls.classOf(player) === "heavy");
+    check("切り替えの待ち時間中は兵科を変えられない", cls.setLoadout(player, "medic", [null, null, null]) === "arsenal.class.switch_wait");
+    const m = cls.mods(player);
+    check("重装兵＋強靭：受けるダメージ 0.88×0.92、リロード 0.85、移動 0.95", Math.abs(m.dmgTaken - 0.88 * 0.92) < 1e-9 && Math.abs(m.reload - 0.85) < 1e-9 && Math.abs(m.move - 0.95) < 1e-9);
+    check("重装兵：機関銃だけ反動 -20%", Math.abs(cls.recoilMod(player, "lmg") - 0.8) < 1e-9 && cls.recoilMod(player, "assault") === 1);
+    // 敵の弾のダメージが軽くなる
+    const foe = brain.spawnEnemy(dim, { x: 0.5, y: 64, z: 6.5 }, "raider_rifleman");
+    heal(player);
+    const h0 = player.getComponent("minecraft:health").currentValue;
+    dmg.dealDamage(foe, player, 10, { kind: "gun" });
+    const lost = h0 - player.getComponent("minecraft:health").currentValue;
+    check("重装兵は受けるダメージが減る（10 → 約 8.1）", Math.abs(lost - 10 * 0.88 * 0.92) < 0.6, `(${lost})`);
+    // アビリティ：防壁
+    heal(player);
+    check("アビリティ（防壁）を使える", cls.useAbility(player) === true && cls.abilityState(player).active);
+    check("防壁中は受けるダメージ -60%", Math.abs(cls.mods(player).dmgTaken - 0.88 * 0.92 * 0.4) < 1e-9);
+    check("クールダウン中はもう一度使えない", cls.useAbility(player) === false);
+    __tick(6 * 20 + 2);
+    check("防壁は 6 秒で切れる", !cls.abilityState(player).active && Math.abs(cls.mods(player).dmgTaken - 0.88 * 0.92) < 1e-9);
+    // 不屈
+    heal(player, 3);
+    dmg.dealDamage(foe, player, 50, { kind: "gun" });
+    check("不屈：倒れるダメージを体力 1 で耐える", player.isValid && player.getComponent("minecraft:health").currentValue === 1 && !!player.effects["resistance"], JSON.stringify(player.effects));
+    // 突撃兵の突撃・衛生兵の回復フィールド・工兵の補給・偵察兵のパルス
+    let foe2 = null;
+    for (const [c, test] of [
+      ["assault", () => Math.abs(cls.mods(player).move - 1.06 * 1.25) < 1e-9 && Math.abs(cls.mods(player).reload - 0.9 * 0.85 * 0.6) < 1e-9],
+      ["medic", () => { __tick(25); return !!player.effects["regeneration"]; }],
+      ["engineer", () => count("arsenal:ammo_medium") > 0],
+      ["recon", () => cls.abilityState(player).active],
+    ]) {
+      reset();
+      clearInv();
+      if (c === "recon") foe2 = brain.spawnEnemy(dim, { x: 0.5, y: 64, z: 12.5 }, "raider_rifleman");
+      if (c === "engineer") {
+        inv.items[0] = new ItemStack("arsenal:sentinel", 1);
+        player.selectedSlotIndex = 0;
+        __tick(4);
+      }
+      s.classSwitchAt = 0;
+      s.abilityReady = 0;
+      cls.setLoadout(player, c, ["quick_hands", null, null]);
+      player.effects = {};
+      const used = cls.useAbility(player);
+      check(`アビリティ（${c}）`, used && test(), JSON.stringify({ used, eff: Object.keys(player.effects), ammo: count("arsenal:ammo_medium") }));
+    }
+    // 偵察兵のパルスでマークした敵は受けるダメージ 1.15 倍
+    const fh0 = foe2.getComponent("minecraft:health").currentValue;
+    dmg.dealDamage(player, foe2, 5, { kind: "gun" });
+    const flost = fh0 - foe2.getComponent("minecraft:health").currentValue;
+    check("パルスでマークした敵は受けるダメージ +15%", Math.abs(flost - 5 * 1.15) < 0.6, `(${flost})`);
+    // 野戦マニュアル →「兵科・パーク」→ 変える
+    s.classSwitchAt = 0;
+    ui.UI_LOG.answers.push({ canceled: false, selection: 0 });
+    ui.UI_LOG.answers.push({ canceled: false, selection: 0 });
+    const ids = Object.keys(D.CLASSES);
+    const t1 = Object.keys(D.PERKS).filter((k) => D.PERKS[k].tier === 1);
+    ui.UI_LOG.answers.push({ canceled: false, formValues: [ids.indexOf("recon"), t1.indexOf("steady_aim") + 1, 0, 0] });
+    await menus.openManual(player);
+    await flush();
+    await flush();
+    check("野戦マニュアルから兵科とパークを変えられる", cls.classOf(player) === "recon" && cls.perksOf(player)[0] === "steady_aim" && cls.perksOf(player)[1] === null, JSON.stringify(cls.perksOf(player)));
+    check("戦術デバイスの使用でアビリティ", typeof comps.item["arsenal:tool"].onUse === "function");
+    // 後片付け：突撃兵・パークなし
+    s.classSwitchAt = 0;
+    cls.setLoadout(player, "assault", [null, null, null]);
+    s.abilityReady = 0;
+    s.abilityUntil = 0;
+    for (const e of [foe, foe2]) if (e?.isValid) e.remove();
+    reset();
+    clearInv();
   }
 }

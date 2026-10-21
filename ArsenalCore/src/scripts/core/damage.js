@@ -22,6 +22,7 @@ import { t, raw, itemName } from "../util/i18n.js";
 import { clamp, isLoaded, dist, sub, norm, dot } from "../util/math.js";
 import { onDummyHit } from "../systems/dummy.js";
 import { emitEvent } from "./events.js";
+import { mods, takenMod } from "../progression/classes.js";
 import { absorbPlates, helmetHeadMul, hasRiotShieldFacing } from "./armor.js";
 
 /** 対象ごとの最後のエンジンダメージ tick */
@@ -48,9 +49,20 @@ const lethalGuards = [];
 /**
  * 致死ダメージの横取りを登録（ダウン制・ゲームモード）
  * @param {(target:import("@minecraft/server").Entity, attacker:import("@minecraft/server").Entity|undefined, info:any)=>boolean} fn
+ * @param {boolean} [first] ほかより先に調べる（不屈のパーク：ダウン制より先）
  */
-export function addLethalGuard(fn) {
-  lethalGuards.push(fn);
+export function addLethalGuard(fn, first = false) {
+  if (first) lethalGuards.unshift(fn);
+  else lethalGuards.push(fn);
+}
+
+/**
+ * 相手をマークする（受けるダメージ 1.15 倍。偵察兵のパルススキャン）
+ * @param {string} id @param {number} ticks
+ */
+export function markEntity(id, ticks) {
+  const until = system.currentTick + ticks;
+  if ((marked.get(id) ?? 0) < until) marked.set(id, until);
 }
 
 /** @param {import("@minecraft/server").Entity} target @param {import("@minecraft/server").Entity|undefined} attacker @param {any} info */
@@ -224,6 +236,14 @@ export function dealDamage(shooter, target, dmg, o = {}) {
       if (cr > now) dmg *= CORRODE_MUL;
       else corroded.delete(target.id);
     }
+    // 兵科・パーク（3.0）：受けるダメージ・頭へのダメージ・工兵の設置物
+    if (target instanceof Player) dmg *= takenMod(target, o.kind);
+    else if (target.matches({ families: ["arsenal_player_deployable"] })) {
+      const own = target.getDynamicProperty("a:own");
+      const op = typeof own === "string" ? world.getEntity(own) : undefined;
+      if (op instanceof Player) dmg /= mods(op).deployHp;
+    }
+    if (o.head && shooter instanceof Player) dmg *= mods(shooter).head;
     const health = target.getComponent("minecraft:health");
     if (!health) {
       target.applyDamage(dmg, { cause: EntityDamageCause.entityAttack, damagingEntity: shooter });

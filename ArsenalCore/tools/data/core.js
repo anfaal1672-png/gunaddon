@@ -65,6 +65,8 @@ export const TOOLS = {
   streak_terminal: { name: { ja: "ストリーク端末", en: "Streak Terminal" }, desc: { ja: "解放したキルストリークを選んで使う", en: "Pick and call in your unlocked killstreaks" }, cost: { "minecraft:redstone": 4, "arsenal:precision_parts": 1, "minecraft:glass_pane": 1 } },
   warlord_banner: { name: { ja: "ウォーロードの軍旗", en: "Warlord's Banner" }, desc: { ja: "使用するとレイダーの首領ウォーロードを呼び出す", en: "Use to summon the Raider Warlord" }, cost: { "minecraft:banner": 1, "minecraft:emerald": 8, "arsenal:steel_ingot": 6, "minecraft:gold_ingot": 4 } },
   legion_core: { name: { ja: "レギオン中枢核", en: "Legion Core" }, desc: { ja: "使用するとジャガーノート・マーク II を起動する", en: "Use to boot the Juggernaut Mk II" }, cost: { "arsenal:energy_core": 2, "minecraft:netherite_scrap": 1, "minecraft:redstone_block": 4 } },
+  // ---- 3.0 で追加 ----
+  tactical_device: { name: { ja: "戦術デバイス", en: "Tactical Device" }, desc: { ja: "使用すると兵科のアビリティを発動（兵科は野戦マニュアル →「兵科・パーク」）", en: "Use to trigger your class ability (pick a class in the Field Manual)" }, cost: { "minecraft:redstone": 2, "arsenal:precision_parts": 1, "minecraft:copper_ingot": 2 } },
   // ---- 2.3 で追加 ----
   hollow_heart: { name: { ja: "ホロウの心臓", en: "Hollow Heart" }, desc: { ja: "使用するとホロウの母体ホロウ・マザーを呼び覚ます", en: "Use to awaken the Hollow Mother" }, cost: { "minecraft:rotten_flesh": 16, "minecraft:fermented_spider_eye": 2, "minecraft:sculk_catalyst": 1, "minecraft:gold_ingot": 4 } },
 };
