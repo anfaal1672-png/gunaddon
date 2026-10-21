@@ -4,64 +4,87 @@
     "description": {
       "identifier": "arsenal:impact_spark",
       "basic_render_parameters": {
-        "material": "particles_blend",
-        "texture": "textures/particle/arsenal_particles"
+        "material": "particles_add",
+        "texture": "textures/particle/arsenal_ao"
       }
     },
     "components": {
-      "minecraft:emitter_rate_instant": {
-        "num_particles": "math.random_integer(2, 4)"
+      "minecraft:emitter_initialization": {
+        "creation_expression": "v.dir ?? { v.dir.x = 0.0; v.dir.y = 1.0; v.dir.z = 0.0; };v.normal ?? { v.normal.x = 0.0; v.normal.y = 1.0; v.normal.z = 0.0; };v.color ?? { v.color.r = 1.0; v.color.g = 1.0; v.color.b = 1.0; };v.len ?? { v.len = 8.0; };v.size ?? { v.size = 1.0; };"
       },
       "minecraft:emitter_lifetime_once": {
         "active_time": 0.05
       },
+      "minecraft:emitter_rate_instant": {
+        "num_particles": "5 + v.size * 3"
+      },
       "minecraft:emitter_shape_point": {
+        "offset": [
+          0,
+          0,
+          0
+        ],
         "direction": [
-          "math.random(-1,1)",
-          "math.random(-0.2,1)",
-          "math.random(-1,1)"
+          "v.normal.x * 1.2 + math.random(-0.9, 0.9)",
+          "v.normal.y * 1.2 + math.random(-0.6, 0.9)",
+          "v.normal.z * 1.2 + math.random(-0.9, 0.9)"
         ]
       },
-      "minecraft:particle_lifetime_expression": {
-        "max_lifetime": "math.random(0.1, 0.3)"
-      },
-      "minecraft:particle_initial_speed": "math.random(3, 7)",
+      "minecraft:particle_initial_speed": "math.random(4, 9)",
       "minecraft:particle_motion_dynamic": {
         "linear_acceleration": [
           0,
-          -12,
+          -18,
           0
-        ]
+        ],
+        "linear_drag_coefficient": 1
+      },
+      "minecraft:particle_lifetime_expression": {
+        "max_lifetime": "0.2 + v.particle_random_2 * 0.35"
       },
       "minecraft:particle_appearance_billboard": {
         "size": [
-          0.02,
-          0.09
+          0.04,
+          0.04
         ],
-        "facing_camera_mode": "lookat_direction",
-        "direction": {
-          "mode": "derive_from_velocity"
-        },
+        "facing_camera_mode": "lookat_xyz",
         "uv": {
-          "texture_width": 64,
-          "texture_height": 64,
+          "texture_width": 128,
+          "texture_height": 128,
           "uv": [
-            16,
+            96,
             0
           ],
           "uv_size": [
-            8,
-            8
+            16,
+            16
           ]
         }
       },
       "minecraft:particle_appearance_tinting": {
-        "color": [
-          1.0,
-          0.85,
-          0.45,
-          1.0
-        ]
+        "color": {
+          "gradient": {
+            "0.0": [
+              1,
+              0.95,
+              0.7,
+              1
+            ],
+            "0.5": [
+              1,
+              0.6,
+              0.2,
+              1
+            ],
+            "1.0": [
+              0.8,
+              0.2,
+              0.05,
+              0
+            ]
+          },
+          "interpolant": "v.particle_age / v.particle_lifetime"
+        }
       }
     }
   }

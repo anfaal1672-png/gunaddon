@@ -10,6 +10,7 @@ import { kickClass } from "../config/constants.js";
 import { lerp, clamp, rand } from "../util/math.js";
 import { suppressionSpread } from "./suppression.js";
 import { safe } from "../util/log.js";
+import { mods, recoilMod } from "../progression/classes.js";
 
 /**
  * 現在の拡散角（度）
@@ -22,6 +23,7 @@ export function spreadNow(player, s, st) {
   if (hs > 0.03) sp += st.moveSpread * clamp(hs / 0.22, 0, 1) * (1 - 0.55 * s.adsLevel);
   if (!player.isOnGround && !player.isFlying) sp += st.moveSpread * 1.6;
   if (player.isSneaking) sp *= st.bipod ? 0.5 : 0.88;
+  sp *= mods(player).spread;
   sp += s.bloom * (1 - 0.45 * s.adsLevel);
   // 息止め中は照準が安定する
   if (s.breathUntil > system.currentTick && s.adsLevel > 0.5) sp *= 0.35;
@@ -41,6 +43,7 @@ export function applyRecoil(player, s, st, mult = 1) {
   if (s.adsLevel > 0.5) k *= 0.8 * (st.adsRecoil ?? 1);
   if (player.isSneaking) k *= st.bipod ? 0.35 : 0.85;
   if (s.armHitUntil > system.currentTick) k *= 1.3;
+  k *= recoilMod(player, st.cat);
   s.bloom = Math.min(st.bloomMax, s.bloom + st.bloom * k);
   const v = st.recoilV * k;
   const h = st.recoilH * k;

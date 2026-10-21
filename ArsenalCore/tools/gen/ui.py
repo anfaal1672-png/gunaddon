@@ -380,7 +380,7 @@ class UiMixin:
                                             {"binding_type": "view", "source_property_name": EL.dmg_shown(), "target_property_name": "#visible"},
                                             {"binding_type": "view", "source_property_name": EL.dmg_text(), "target_property_name": "#text"}]}})
         # 上：ゲームモードの得点（試合中だけ。子はモード名と得点・時間）
-        gm_names = {"1": "arsenal.mode_name.ffa", "2": "arsenal.mode_name.tdm", "3": "arsenal.mode_name.gungame", "4": "arsenal.mode_name.horde", "5": "arsenal.mode_name.koth"}
+        gm_names = {"1": "arsenal.mode_name.ffa", "2": "arsenal.mode_name.tdm", "3": "arsenal.mode_name.gungame", "4": "arsenal.mode_name.horde", "5": "arsenal.mode_name.koth", "6": "arsenal.mode_name.mission"}
         gm = [img("gm_panel", "panel.png", (150, 30), anchor="top_middle", offset=(0, 22))]
         for code, key in gm_names.items():
             gm.append(label(f"gm{code}", key, anchor="top_middle", offset=(0, 23), cond=E.eq("gm", code), color=(1, 0.85, 0.4), scale=0.8))

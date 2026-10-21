@@ -80,8 +80,8 @@ class ItemsMixin:
             wpng(f"{self.rp}/textures/items/arsenal/tools/{iid}.png", ic.tool_icon_any(tid))
             self.item_textures[f"arsenal_{iid}"] = f"textures/items/arsenal/tools/{iid}"
             extra = {f"{NS}:tool": {}}
-            stack = 1 if tid in ("field_manual", "detonator", "arena_tool", "streak_terminal") else 16
-            if tid in ("warlord_banner", "legion_core", "hollow_heart"):
+            stack = 1 if tid in ("field_manual", "detonator", "arena_tool", "streak_terminal", "tactical_device") else 16
+            if tid in ("warlord_banner", "legion_core", "hollow_heart", "crow_dossier"):
                 stack = 4
             if tid == "target_dummy":
                 extra = {"minecraft:entity_placer": {"entity": f"{NS}:target_dummy"}}
@@ -119,7 +119,7 @@ class ItemsMixin:
         dep = [f"{NS}:{m}" for m in self.d["DEPLOYABLES"]] + [f"{NS}:{v}" for v in self.d["VEHICLES"]]
         self.L(f"{NS}:itemGroup.name.deployables", "Deployables & Vehicles", "設置物・銃座・乗り物")
         groups.append({"group_identifier": {"icon": f"{NS}:sentry_turret", "name": f"{NS}:itemGroup.name.deployables"}, "items": dep})
-        tools = [f"{NS}:field_manual", f"{NS}:repair_kit", f"{NS}:streak_terminal", f"{NS}:arena_tool", f"{NS}:warlord_banner", f"{NS}:legion_core", f"{NS}:hollow_heart"]
+        tools = [f"{NS}:field_manual", f"{NS}:repair_kit", f"{NS}:streak_terminal", f"{NS}:tactical_device", f"{NS}:arena_tool", f"{NS}:warlord_banner", f"{NS}:legion_core", f"{NS}:hollow_heart", f"{NS}:crow_dossier"]
         groups.append({"items": tools})
         ammo_ids = [f"{NS}:{a['id']}" for a in self.d["ammoItems"]]
         self.L(f"{NS}:itemGroup.name.ammo", "Ammunition", "弾薬")

@@ -751,10 +751,135 @@ def infested_farm(sd):
     return v
 
 
+def crow_compound(sd):
+    """ブラッククロウの前線基地（3.0）：金網で囲んだ敷地、2 階建ての指揮所、ヘリパッド、照明塔"""
+    sx, sy, sz = sd["size"]
+    v = Vox(sx, sy, sz, "crow_compound")
+    g = sd["sink"]
+    for x in range(sx):
+        for z in range(sz):
+            v.set(x, g - 1, z, v.rng.choice(["minecraft:gravel", "minecraft:gray_concrete_powder", "minecraft:gravel", "minecraft:coarse_dirt"]))
+            v.air(x, g, z, x, sy - 1, z)
+    # 金網の柵（入口は南）
+    for x in range(sx):
+        for z in (0, sz - 1):
+            if z == sz - 1 and sx // 2 - 2 <= x <= sx // 2 + 2:
+                continue
+            v.set(x, g, z, "minecraft:iron_bars")
+            v.set(x, g + 1, z, "minecraft:iron_bars")
+    for z in range(sz):
+        for x in (0, sx - 1):
+            v.set(x, g, z, "minecraft:iron_bars")
+            v.set(x, g + 1, z, "minecraft:iron_bars")
+    # 指揮所（2 階建て、屋上に見張り）
+    bx0, bz0, bx1, bz1 = 2, 2, 10, 9
+    v.box(bx0, g - 1, bz0, bx1, g - 1, bz1, "minecraft:smooth_stone")
+    v.walls(bx0, g, bz0, bx1, g + 6, bz1, "minecraft:gray_concrete")
+    v.box(bx0, g + 3, bz0, bx1, g + 3, bz1, "minecraft:light_gray_concrete")
+    v.box(bx0, g + 7, bz0, bx1, g + 7, bz1, "minecraft:black_concrete")
+    v.air(6, g, bz1, 7, g + 1, bz1)
+    for x in (4, 8):
+        for y in (g + 1, g + 5):
+            v.set(x, y, bz0, "minecraft:tinted_glass")
+            v.set(x, y, bz1, "minecraft:tinted_glass")
+    for z in (4, 7):
+        v.set(bx1, g + 1, z, "minecraft:tinted_glass")
+        v.set(bx1, g + 5, z, "minecraft:tinted_glass")
+    # 階段代わりのはしご（1 階 → 2 階 → 屋上）
+    for y in range(g, g + 8):
+        v.set(bx0 + 1, y, bz0 + 1, "minecraft:ladder", facing_direction=3)
+    v.air(bx0 + 1, g + 3, bz0 + 1, bx0 + 1, g + 3, bz0 + 1)
+    v.air(bx0 + 1, g + 7, bz0 + 1, bx0 + 1, g + 7, bz0 + 1)
+    for y in (g + 3, g + 7):
+        v.set(bx0 + 1, y, bz0 + 1, "minecraft:ladder", facing_direction=3)
+    for x in range(bx0, bx1 + 1):
+        for z in (bz0, bz1):
+            v.set(x, g + 8, z, "minecraft:andesite_wall")
+    for z in range(bz0, bz1 + 1):
+        for x in (bx0, bx1):
+            v.set(x, g + 8, z, "minecraft:andesite_wall")
+    v.set(bx1 - 1, g + 8, bz0 + 1, "minecraft:lightning_rod", facing_direction=1)
+    v.chest(bx1 - 1, g, bz0 + 1, "west")
+    v.chest(bx1 - 1, g + 4, bz1 - 1, "west")
+    v.set(bx1 - 1, g, bz0 + 2, "minecraft:barrel", facing_direction=1)
+    v.set(bx0 + 3, g + 4, bz0 + 2, "minecraft:redstone_lamp")
+    # ヘリパッド（黄色の H）
+    hx, hz = 15, 6
+    v.box(hx - 3, g - 1, hz - 3, hx + 3, g - 1, hz + 3, "minecraft:gray_concrete")
+    for dz in range(-2, 3):
+        v.set(hx - 1, g - 1, hz + dz, "minecraft:yellow_concrete")
+        v.set(hx + 1, g - 1, hz + dz, "minecraft:yellow_concrete")
+    v.set(hx, g - 1, hz, "minecraft:yellow_concrete")
+    # 照明塔と物資
+    for (x, z) in ((1, sz - 2), (sx - 2, sz - 2), (sx - 2, 1)):
+        v.box(x, g, z, x, g + 3, z, "minecraft:andesite_wall")
+        v.set(x, g + 4, z, "minecraft:sea_lantern")
+    v.chest(15, g, sz - 4, "north")
+    for p in ((13, sz - 4), (17, sz - 4), (14, sz - 3), (16, sz - 3)):
+        v.set(p[0], g, p[1], "minecraft:barrel", facing_direction=1)
+    # 土嚢の陣地（入口の前）
+    for x in range(sx // 2 - 3, sx // 2 + 4):
+        if abs(x - sx // 2) >= 2:
+            v.set(x, g, sz - 4, "minecraft:mud_bricks")
+    for (x, z, r) in ((6, 5, 2), (4, 12, 0), (16, 12, 0), (12, 16, 0), (5, 6, 0), (8, 6, 1), (18, 2, 3), (2, sz - 3, 3)):
+        v.marker(x, g + 8 if r == 1 else g, z, r)
+    return v
+
+
+def crow_relay(sd):
+    """ブラッククロウの通信中継所（3.0）：鉄塔のアンテナと小さな機材小屋"""
+    sx, sy, sz = sd["size"]
+    v = Vox(sx, sy, sz, "crow_relay")
+    g = sd["sink"]
+    c = sx // 2
+    for x in range(sx):
+        for z in range(sz):
+            v.set(x, g - 1, z, v.rng.choice(["minecraft:gravel", "minecraft:coarse_dirt", "minecraft:gravel"]))
+            v.air(x, g, z, x, sy - 1, z)
+    # 鉄塔（四隅の柱と横桟。上に足場と避雷針）
+    tx0, tx1 = c - 2, c + 2
+    for y in range(g, g + 11):
+        for (x, z) in ((tx0, tx0), (tx0, tx1), (tx1, tx0), (tx1, tx1)):
+            v.set(x, y, z, "minecraft:andesite_wall")
+        if (y - g) % 4 == 3:
+            for i in range(tx0, tx1 + 1):
+                for (x, z) in ((i, tx0), (i, tx1), (tx0, i), (tx1, i)):
+                    v.set(x, y, z, "minecraft:iron_bars")
+    for y in range(g, g + 11):
+        v.set(c, y, c, "minecraft:ladder", facing_direction=3)
+        v.set(c, y, c - 1, "minecraft:polished_andesite")
+    v.box(tx0, g + 11, tx0, tx1, g + 11, tx1, "minecraft:iron_block")
+    v.air(c, g + 11, c, c, g + 11, c)
+    v.set(c, g + 11, c, "minecraft:ladder", facing_direction=3)
+    for i in range(tx0, tx1 + 1):
+        for (x, z) in ((i, tx0), (i, tx1), (tx0, i), (tx1, i)):
+            v.set(x, g + 12, z, "minecraft:iron_bars")
+    v.box(c + 1, g + 12, c + 1, c + 1, g + 13, c + 1, "minecraft:andesite_wall")
+    v.set(c + 1, g + 14, c + 1, "minecraft:lightning_rod", facing_direction=1)
+    v.set(c - 1, g + 12, c - 1, "minecraft:redstone_lamp")
+    # 機材小屋
+    v.walls(0, g, 0, 4, g + 2, 3, "minecraft:gray_concrete")
+    v.box(0, g + 3, 0, 4, g + 3, 3, "minecraft:black_concrete")
+    v.air(2, g, 3, 2, g + 1, 3)
+    v.set(0, g + 1, 2, "minecraft:tinted_glass")
+    v.chest(1, g, 1, "east")
+    v.set(3, g, 1, "minecraft:barrel", facing_direction=1)
+    v.chest(sx - 2, g, sz - 2, "north")
+    for p in ((sx - 3, sz - 2), (sx - 2, sz - 3)):
+        v.set(p[0], g, p[1], "minecraft:barrel", facing_direction=1)
+    for (x, z) in ((0, sz - 1), (sx - 1, 0)):
+        v.box(x, g, z, x, g + 2, z, "minecraft:andesite_wall")
+        v.set(x, g + 3, z, "minecraft:sea_lantern")
+    for (x, z, r) in ((c, c + 1, 2), (2, 6, 0), (sx - 3, 4, 0), (4, sz - 3, 3), (c - 1, c + 1, 1)):
+        v.marker(x, g + 12 if r == 1 else g, z, r)
+    return v
+
+
 BUILDERS = {
     "raider_camp": raider_camp, "outpost": outpost, "armory_bunker": armory_bunker, "legion_lab": legion_lab,
     "crashed_transport": crashed_transport, "derelict_port": derelict_port, "hollow_ruin": hollow_ruin,
     "checkpoint": checkpoint, "radar_station": radar_station, "infested_farm": infested_farm,
+    "crow_compound": crow_compound, "crow_relay": crow_relay,
 }
 
 

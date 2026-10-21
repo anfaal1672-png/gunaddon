@@ -147,6 +147,11 @@
                     "test": "is_family",
                     "subject": "other",
                     "value": "arsenal_player_deployable"
+                  },
+                  {
+                    "test": "is_family",
+                    "subject": "other",
+                    "value": "arsenal_squad"
                   }
                 ]
               },
@@ -291,6 +296,18 @@
         "add": {
           "component_groups": [
             "arsenal:persist"
+          ]
+        }
+      },
+      "arsenal:release": {
+        "remove": {
+          "component_groups": [
+            "arsenal:persist"
+          ]
+        },
+        "add": {
+          "component_groups": [
+            "arsenal:despawn"
           ]
         }
       }

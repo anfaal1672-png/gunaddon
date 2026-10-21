@@ -29,7 +29,7 @@ export const HUD2 = {
     { name: "hdg", key: "g", len: 3, doc: "方位 0〜hdgSteps-1（0 = 南。サブタイトルでは英字 2 文字 AA〜）/ --- 非表示（サブタイトルで送る。タイトルでは固定）" },
     { name: "sup", key: "u", len: 1, doc: "制圧 0〜3" },
     { name: "nvg", key: "n", len: 1, doc: "暗視の画面効果 0 / 1" },
-    { name: "gm", key: "o", len: 1, doc: "ゲームモード 0 なし / 1 FFA / 2 TDM / 3 ガンゲーム / 4 ホード / 5 陣取り" },
+    { name: "gm", key: "o", len: 1, doc: "ゲームモード 0 なし / 1 FFA / 2 TDM / 3 ガンゲーム / 4 ホード / 5 陣取り / 6 ミッション（3.0）" },
     { name: "sa", key: "j", len: 4, doc: "得点 A（自分／味方チーム／ウェーブ）" },
     { name: "sb", key: "b", len: 4, doc: "得点 B（目標／敵チーム／残り敵）" },
     { name: "tm", key: "t", len: 5, doc: "残り時間 m:ss（右寄せ）" },

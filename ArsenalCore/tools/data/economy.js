@@ -30,10 +30,12 @@ export const PRICE_OVERRIDE = {
   "arsenal:repair_kit": 90,
   "arsenal:field_manual": 5,
   "arsenal:streak_terminal": 60,
+  "arsenal:tactical_device": 80,
   "arsenal:armor_plate": 45,
   "arsenal:warlord_banner": 1800,
   "arsenal:legion_core": 2200,
   "arsenal:hollow_heart": 2000,
+  "arsenal:crow_dossier": 2300,
 };
 
 /** 弾薬 1 個あたりの価格（弾薬系統ごと） */

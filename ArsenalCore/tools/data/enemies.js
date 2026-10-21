@@ -2,7 +2,7 @@
 // 敵（勢力・敵・ボス・スポーン）
 //
 // 共通の項目
-//  faction   … "raiders" | "legion" | "hollow"
+//  faction   … "raiders" | "legion" | "hollow" | "crow"（3.0）
 //  role      … 戦術 AI の役割。"rifle"（撃ち合い）| "sniper"（遠距離に留まる）| "heavy"（制圧射撃）| "leader"（隊長。目標と号令）
 //              | "medic"（味方を回復）| "demo"（手榴弾・ロケット）| "melee"（突撃）| "shield"（盾で前進）| "mortar"（間接射撃）
 //              | "drone"（飛行・偵察）| "bomber"（接近して自爆）
@@ -19,6 +19,7 @@ export const FACTIONS = {
   raiders: { name: { ja: "レイダーズ", en: "Raiders" }, color: [150, 70, 50], setting: "raiders", family: "arsenal_raider" },
   legion: { name: { ja: "アイアン・レギオン", en: "Iron Legion" }, color: [90, 110, 140], setting: "legion", family: "arsenal_legion" },
   hollow: { name: { ja: "ホロウ", en: "The Hollow" }, color: [110, 140, 80], setting: "hollow", family: "arsenal_hollow" },
+  crow: { name: { ja: "ブラッククロウ", en: "Black Crow" }, color: [60, 70, 90], setting: "crow", family: "arsenal_crow" },
 };
 
 const RAIDER_BIOMES = ["plains", "desert", "mesa", "savanna"];
@@ -126,6 +127,46 @@ export const HOLLOW = {
 };
 
 // ---------------------------------------------------------------------------
+//  ブラッククロウ（3.0）：よく訓練された民間軍事会社の精鋭。夜の森・タイガ・ジャングルと自社の施設に出る
+//   レイダーより硬く正確。少人数で動き、衛生兵と指揮官が隊を支える
+// ---------------------------------------------------------------------------
+export const CROW = {
+  crow_operator: {
+    name: { ja: "クロウ・オペレーター", en: "Crow Operator" }, weapon: "starling", health: 30, speed: 0.33, damage: 3.0, interval: [1.2, 1.8], burst: 3, burstInterval: 0.08,
+    range: 26, armor: "crow", color: [44, 48, 56], role: "rifle", sight: 34, armorValue: 0.15, model: "raider", tier: 1,
+  },
+  crow_breacher: {
+    name: { ja: "クロウ・ブリーチャー", en: "Crow Breacher" }, weapon: "blackwing", health: 34, speed: 0.35, damage: 6.5, interval: [1.0, 1.5], burst: 1, burstInterval: 0,
+    range: 10, armor: "crow_breacher", color: [40, 42, 48], role: "rifle", sight: 24, armorValue: 0.25, model: "raider", tier: 2,
+  },
+  crow_marksman: {
+    name: { ja: "クロウ・マークスマン", en: "Crow Marksman" }, weapon: "kingfisher", health: 24, speed: 0.3, damage: 10, interval: [3.0, 4.0], burst: 1, burstInterval: 0,
+    range: 44, armor: "crow_sniper", color: [48, 54, 50], role: "sniper", sight: 52, armorValue: 0.05, model: "raider", tier: 2,
+  },
+  crow_gunner: {
+    name: { ja: "クロウ・ガンナー", en: "Crow Gunner" }, weapon: "corvid", health: 46, speed: 0.27, damage: 2.4, interval: [1.8, 2.4], burst: 8, burstInterval: 0.07,
+    range: 24, armor: "crow_heavy", color: [38, 40, 46], role: "heavy", sight: 30, armorValue: 0.3, model: "raider", tier: 2,
+  },
+  crow_medic: {
+    name: { ja: "クロウ・メディック", en: "Crow Medic" }, weapon: "magpie", health: 26, speed: 0.34, damage: 2.2, interval: [1.2, 1.8], burst: 4, burstInterval: 0.06,
+    range: 18, armor: "crow_medic", color: [52, 56, 64], role: "medic", sight: 28, armorValue: 0.1, model: "raider", tier: 1, heal: 7, healCooldown: 110,
+  },
+  crow_commander: {
+    name: { ja: "クロウ・コマンダー", en: "Crow Commander" }, weapon: "rook", health: 64, speed: 0.32, damage: 4.4, interval: [1.4, 2.0], burst: 3, burstInterval: 0.09,
+    range: 28, armor: "crow_officer", color: [30, 32, 38], role: "leader", sight: 36, armorValue: 0.25, model: "raider", tier: 3,
+  },
+};
+
+const CROW_SPAWN = {
+  crow_operator: { weight: 3, herd: [1, 2] },
+  crow_breacher: { weight: 1, herd: [1, 1] },
+  crow_marksman: { weight: 1, herd: [1, 1] },
+  crow_gunner: { weight: 1, herd: [1, 1] },
+  crow_medic: { weight: 1, herd: [1, 1] },
+  crow_commander: { weight: 1, herd: [1, 1] },
+};
+
+// ---------------------------------------------------------------------------
 //  ボス
 //  phases … 体力の割合がこの値を下回ると次の段階へ（段階ごとに行動が増える）
 //  parts  … 部位破壊。hp を削り切ると装甲が外れ、その部位の行動が止まる
@@ -181,6 +222,23 @@ export const BOSSES = {
     reward: { legendary: 1, credits: 900, xp: 1800 },
     summon: "hollow_heart",
   },
+  // ---- 3.0 で追加 ----
+  boss_director: {
+    faction: "crow", name: { ja: "ディレクター・クロウ", en: "Director Crow" }, weapon: "rook", health: 480, speed: 0.32, damage: 4.2, interval: [1.0, 1.4], burst: 4, burstInterval: 0.08,
+    range: 30, armor: "crow_director", color: [28, 28, 34], role: "leader", sight: 44, armorValue: 0.4, model: "raider", scale: 1.3, tier: 4,
+    phases: [1.0, 0.6, 0.3],
+    actions: {
+      1: ["volley", "blink"],
+      2: ["volley", "blink", "grenade", "reinforce"],
+      3: ["volley", "blink", "grenade", "reinforce", "airstrike", "enrage"],
+    },
+    grenade: "grenade_flash",
+    blink: { range: [7, 10], warn: 16, cooldown: 170 },
+    reinforce: { ids: ["crow_operator", "crow_medic", "crow_breacher"], count: 3, cooldown: 420 },
+    airstrike: { shots: 6, spacing: 3.2, power: 2.8, warn: 50, cooldown: 520 },
+    reward: { legendary: 1, credits: 1100, xp: 2200 },
+    summon: "crow_dossier",
+  },
 };
 
 /** 全勢力の敵（ボスを除く）。AI・生成・図鑑が読む */
@@ -199,6 +257,13 @@ function buildEnemies() {
     out[id] = {
       ...e, faction: "legion", skin: e.armor,
       spawn: { biomes: ["mountains", "mountain", "extreme_hills"], dark: false, surface: true, weight: id === "legion_mortar" || id === "legion_lancer" ? 1 : 2, herd: id === "legion_drone" || id === "legion_hunter" ? [1, 2] : [1, 1] },
+    };
+  }
+  for (const [id, e] of Object.entries(CROW)) {
+    const sp = /** @type {any} */ (CROW_SPAWN)[id];
+    out[id] = {
+      ...e, faction: "crow", skin: e.armor,
+      spawn: { biomes: ["forest", "taiga", "jungle"], dark: true, surface: true, weight: sp.weight, herd: sp.herd },
     };
   }
   for (const [id, e] of Object.entries(HOLLOW)) {

@@ -485,8 +485,33 @@ class ParticlesMixin:
                                                             "uv": {"texture_width": 64, "texture_height": 64, "uv": ["v.u ?? 0", "v.v ?? 0"], "uv_size": [32, 32]}},
                 "minecraft:particle_appearance_tinting": {"color": ["v.r ?? 1.0", "v.g ?? 0.3", "v.b ?? 0.25", "v.a ?? 0.7"]},
             }}}
+        # 3.0.0：発射まわりの見た目は ArsenalOverhaul（同じ作者・MIT）のものに置き換える（tools/vendor/arsenal_overhaul/NOTICE.md）
+        #  識別子とテクスチャの場所だけを書き換える。変数（v.dir・v.normal・v.color・v.len・v.size）は無ければ既定値になるので、
+        #  変数を渡さないほかの呼び出し（設置物の硝煙・ボスの火花など）もそのまま動く
+        #  軽さのため、着弾の破片と火花だけは床との当たり判定を外す（2.6.5 と同じ方針）
+        vendor = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "vendor", "arsenal_overhaul")
+        AO_TEX = "textures/particle/arsenal_ao"
+        for pid, src, no_collision in (
+            ("muzzle_flash", "muzzle_flash", False), ("muzzle_glow", "muzzle_glow", False), ("muzzle_smoke", "muzzle_smoke", False),
+            ("tracer", "tracer", False), ("casing", "shell", False), ("shell_casing", "shell", False),
+            ("impact_debris", "impact", True), ("impact_dust", "impact_dust", False), ("impact_spark", "sparks", True),
+            ("blood", "blood", False), ("hit_flash", "hit_flash", False),
+        ):
+            with open(os.path.join(vendor, "particles", f"{src}.json"), encoding="utf-8") as f:
+                obj = json.load(f)
+            obj["format_version"] = "1.26.10"
+            d = obj["particle_effect"]["description"]
+            d["identifier"] = f"{NS}:{pid}"
+            d["basic_render_parameters"]["texture"] = AO_TEX
+            if no_collision:
+                obj["particle_effect"]["components"].pop("minecraft:particle_motion_collision", None)
+            P[pid] = obj
         for pid, obj in P.items():
             wjson(f"{self.rp}/particles/arsenal/{pid}.json", obj)
+        with open(os.path.join(vendor, "particles.png"), "rb") as f:
+            os.makedirs(f"{self.rp}/textures/particle", exist_ok=True)
+            with open(f"{self.rp}/textures/particle/arsenal_ao.png", "wb") as g:
+                g.write(f.read())
         wpng(f"{self.rp}/textures/particle/arsenal_particles.png", tx.particle_atlas())
         wpng(f"{self.rp}/textures/particle/arsenal_silhouettes.png", tx.silhouette_atlas())
         self.particle_ids = [f"{NS}:{p}" for p in P]

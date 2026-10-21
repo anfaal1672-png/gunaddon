@@ -400,6 +400,20 @@
         },
         {
           "type": "item",
+          "name": "arsenal:jackdaw",
+          "weight": 2,
+          "functions": [
+            {
+              "function": "set_damage",
+              "damage": {
+                "min": 0.35,
+                "max": 0.9
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
           "name": "arsenal:cinder",
           "weight": 2,
           "functions": [
@@ -415,6 +429,20 @@
         {
           "type": "item",
           "name": "arsenal:hummingbird",
+          "weight": 2,
+          "functions": [
+            {
+              "function": "set_damage",
+              "damage": {
+                "min": 0.35,
+                "max": 0.9
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "arsenal:finch",
           "weight": 2,
           "functions": [
             {
@@ -470,7 +498,35 @@
         },
         {
           "type": "item",
+          "name": "arsenal:magpie",
+          "weight": 2,
+          "functions": [
+            {
+              "function": "set_damage",
+              "damage": {
+                "min": 0.35,
+                "max": 0.9
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
           "name": "arsenal:ridgeback",
+          "weight": 2,
+          "functions": [
+            {
+              "function": "set_damage",
+              "damage": {
+                "min": 0.35,
+                "max": 0.9
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "arsenal:grackle",
           "weight": 2,
           "functions": [
             {
@@ -554,6 +610,20 @@
         },
         {
           "type": "item",
+          "name": "arsenal:starling",
+          "weight": 2,
+          "functions": [
+            {
+              "function": "set_damage",
+              "damage": {
+                "min": 0.35,
+                "max": 0.9
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
           "name": "arsenal:anvil",
           "weight": 2,
           "functions": [
@@ -597,6 +667,20 @@
         {
           "type": "item",
           "name": "arsenal:warhorse",
+          "weight": 2,
+          "functions": [
+            {
+              "function": "set_damage",
+              "damage": {
+                "min": 0.35,
+                "max": 0.9
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "arsenal:rook",
           "weight": 2,
           "functions": [
             {
@@ -680,6 +764,20 @@
         },
         {
           "type": "item",
+          "name": "arsenal:corax",
+          "weight": 2,
+          "functions": [
+            {
+              "function": "set_damage",
+              "damage": {
+                "min": 0.35,
+                "max": 0.9
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
           "name": "arsenal:whisper",
           "weight": 2,
           "functions": [
@@ -737,6 +835,20 @@
         {
           "type": "item",
           "name": "arsenal:phantom_lr",
+          "weight": 2,
+          "functions": [
+            {
+              "function": "set_damage",
+              "damage": {
+                "min": 0.35,
+                "max": 0.9
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "arsenal:kingfisher",
           "weight": 2,
           "functions": [
             {
@@ -820,6 +932,20 @@
         },
         {
           "type": "item",
+          "name": "arsenal:blackwing",
+          "weight": 2,
+          "functions": [
+            {
+              "function": "set_damage",
+              "damage": {
+                "min": 0.35,
+                "max": 0.9
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
           "name": "arsenal:grinder",
           "weight": 2,
           "functions": [
@@ -849,6 +975,20 @@
         {
           "type": "item",
           "name": "arsenal:goliath",
+          "weight": 2,
+          "functions": [
+            {
+              "function": "set_damage",
+              "damage": {
+                "min": 0.35,
+                "max": 0.9
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "arsenal:corvid",
           "weight": 2,
           "functions": [
             {

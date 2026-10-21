@@ -28,7 +28,7 @@ const VERSION = DATA.SAVE_VERSION;
 
 /**
  * @typedef {{id:string, n:number, prog:number, done:boolean}} ChallengeState
- * @typedef {{v:number, rankXp:number, wxp:Record<string, number>, stats:Record<string, number>, day:number, week:number, daily:ChallengeState[], weekly:ChallengeState[]}} Profile
+ * @typedef {{v:number, rankXp:number, wxp:Record<string, number>, stats:Record<string, number>, day:number, week:number, daily:ChallengeState[], weekly:ChallengeState[], cls:string, perks:(string|null)[], cp:number, offers:({ty:string, fac:string}|null)[]}} Profile
  */
 
 /** @type {Map<string, {p:Profile, dirty:boolean}>} */
@@ -39,7 +39,7 @@ function blank() {
   /** @type {Record<string, number>} */
   const stats = {};
   for (const k of DATA.STAT_KEYS) stats[k] = 0;
-  return { v: VERSION, rankXp: 0, wxp: {}, stats, day: -1, week: -1, daily: [], weekly: [] };
+  return { v: VERSION, rankXp: 0, wxp: {}, stats, day: -1, week: -1, daily: [], weekly: [], cls: DATA.DEFAULT_CLASS, perks: [null, null, null], cp: 0, offers: [] };
 }
 
 /**
@@ -104,7 +104,18 @@ function migrateProfile(o) {
   b.week = Number(o.week ?? -1);
   if (Array.isArray(o.daily)) b.daily = o.daily.filter((/** @type {any} */ c) => c && typeof c.id === "string");
   if (Array.isArray(o.weekly)) b.weekly = o.weekly.filter((/** @type {any} */ c) => c && typeof c.id === "string");
+  // 3.0：兵科とパーク（2.x のプロフィールには無いので既定のまま）
+  if (typeof o.cls === "string" && /** @type {any} */ (DATA.CLASSES)[o.cls]) b.cls = o.cls;
+  // 3.0：キャンペーンの進み具合と依頼の一覧
+  b.cp = Math.max(0, Number(o.cp) || 0);
+  if (Array.isArray(o.offers)) b.offers = o.offers.filter((/** @type {any} */ x) => x && typeof x.ty === "string" && typeof x.fac === "string");
+  if (Array.isArray(o.perks)) b.perks = [0, 1, 2].map((i) => (typeof o.perks[i] === "string" && /** @type {any} */ (DATA.PERKS)[o.perks[i]] ? o.perks[i] : null));
   return b;
+}
+
+/** プロフィールを書き換えたら呼ぶ（次の保存で書き出す） @param {Player} p */
+export function markProfileDirty(p) {
+  dirty(p);
 }
 
 /** @param {Player} p */

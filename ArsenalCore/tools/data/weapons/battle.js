@@ -59,4 +59,14 @@ export const BATTLE = {
     slots: ["optic", "muzzle", "mag", "stock"],
     model: { type: "rifle", body: 15, h: 4.2, barrel: 12, guard: 10, mag: "straight_short", stock: "wood", finish: "wood", accent: "tier" },
   },
+  // ---- 3.0 で追加（ブラッククロウの装備） ----
+  rook: {
+    cat: "battle", tier: "rare", name: { ja: "ルーク", en: "Rook" },
+    desc: { ja: "3 点バーストのバトルライフル。重い弾を素早く 3 発送り込む", en: "Three-round burst battle rifle" },
+    ammo: "heavy", mag: 21, rpm: 700, burstRpm: 850, burstDelay: 8, modes: ["burst3", "semi"], dmg: 5.6, head: 1.9, range: [38, 80], falloff: 0.6,
+    spread: R(3.3, 0.45, 2.0, 0.5, 3.9, 0.34), recoil: { v: 1.55, h: 0.5, shake: 0.038 },
+    reload: { tac: 40, empty: 52 }, ads: 5, move: 0.95, pen: 2, sound: "battle", pitch: 0.98, optic: "reddot",
+    slots: ["optic", "muzzle", "underbarrel", "mag", "laser", "stock"],
+    model: { type: "rifle", body: 14, h: 4.5, barrel: 9, guard: 9, mag: "straight_short", stock: "fixed", finish: "black", accent: "tier" },
+  },
 };

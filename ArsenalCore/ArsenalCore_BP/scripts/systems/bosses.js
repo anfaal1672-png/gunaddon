@@ -217,6 +217,27 @@ function doAction(e, def, b, act, tg, ai) {
       });
       return;
     }
+    case "blink": {
+      // 3.0：煙を張って標的の横か後ろへ回り込む（予兆：煙と音。着いた所にも煙）
+      const s = def.blink;
+      b.cd.blink = now + s.cooldown;
+      emit(dim, "arsenal:smoke_cloud", e.location, undefined, { range: 48 });
+      playNear(dim, e.location, "arsenal.fx.smoke", { range: 32 });
+      warnText(e, "arsenal.boss.blink");
+      later(b, s.warn, () => {
+        if (!e.isValid || !tg.isValid) return;
+        const back = norm({ x: tg.location.x - e.location.x, y: 0, z: tg.location.z - e.location.z });
+        const a = Math.atan2(back.z, back.x) + rand(-1.2, 1.2);
+        const r = rand(s.range[0], s.range[1]);
+        const to = groundBelow(dim, { x: tg.location.x + Math.cos(a) * r, y: tg.location.y + 2, z: tg.location.z + Math.sin(a) * r });
+        if (!to || Math.abs(to.y - tg.location.y) > 4) return;
+        if (!hasLos(dim, add(to, { x: 0, y: 1.6, z: 0 }), tg.getAABB().center)) return;
+        safe("boss.blink", () => e.teleport(to, { facingLocation: tg.location }));
+        emit(dim, "arsenal:smoke_cloud", to, undefined, { range: 48 });
+        playNear(dim, to, "arsenal.fx.smoke", { range: 32 });
+      });
+      return;
+    }
     case "stomp": {
       const s = def.stomp;
       if (dist(tg.location, e.location) > s.radius * 1.4) return;
@@ -241,7 +262,7 @@ function doAction(e, def, b, act, tg, ai) {
 }
 
 /** @param {import("@minecraft/server").Dimension} dim @param {import("../util/math.js").Vec3} p */
-function groundBelow(dim, p) {
+export function groundBelow(dim, p) {
   const from = { x: p.x, y: p.y + 12, z: p.z };
   if (!isLoaded(dim, from, system.currentTick)) return null;
   const reach = loadedReach(dim, from, { x: 0, y: -1, z: 0 }, 30, system.currentTick);

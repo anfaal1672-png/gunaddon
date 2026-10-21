@@ -78,4 +78,14 @@ export const DMR = {
     slots: ["optic", "muzzle", "underbarrel", "mag", "stock"],
     model: { type: "rifle", body: 15, h: 4.6, barrel: 13, guard: 9, mag: "straight", stock: "fixed", finish: "tan", accent: "tier", scope: 4 },
   },
+  // ---- 3.0 で追加（ブラッククロウの装備） ----
+  corax: {
+    cat: "dmr", tier: "rare", name: { ja: "コラックス", en: "Corax" },
+    desc: { ja: "全自動にも切り替えられるマークスマンライフル。遠近どちらもこなす", en: "Marksman rifle with a full-auto switch" },
+    ammo: "heavy", mag: 20, rpm: 420, modes: ["semi", "auto"], dmg: 7.0, head: 1.95, range: [48, 100], falloff: 0.66,
+    spread: R(3.8, 0.25, 2.2, 0.8, 4.0, 0.32), recoil: { v: 2.0, h: 0.6, shake: 0.045 },
+    reload: { tac: 40, empty: 52 }, ads: 6, move: 0.94, pen: 3, sound: "battle", pitch: 0.93, optic: "scope4",
+    slots: ["optic", "muzzle", "underbarrel", "mag", "laser", "stock"],
+    model: { type: "rifle", body: 14, h: 4.5, barrel: 12, guard: 9, mag: "straight_short", stock: "skeleton", finish: "black", accent: "tier", scope: 4 },
+  },
 };

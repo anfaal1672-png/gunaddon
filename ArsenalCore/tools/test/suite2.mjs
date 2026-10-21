@@ -68,7 +68,7 @@ export async function suite2(ctx) {
   check(`防具 4 系統×3 段階＋特殊 3（${Object.keys(D.ARMOR).length}）`, armorFam.size === 4 && Object.values(D.ARMOR).filter((a) => a.special).length === 3 && Object.keys(D.ARMOR).length >= 27);
   const gearN = Object.keys(D.THROWABLES).length + Object.keys(D.MEDICAL).length + Object.keys(D.DEPLOYABLES).length + Object.keys(D.VEHICLES).length;
   check(`装備 24 種以上（${gearN}）`, gearN >= 24);
-  check(`3 勢力・敵 20 種以上（${Object.keys(D.ENEMIES).length}）・ボス 3`, Object.keys(D.FACTIONS).length === 3 && Object.keys(D.ENEMIES).length >= 20 && Object.keys(D.BOSSES).length === 3);
+  check(`4 勢力・敵 26 種以上（${Object.keys(D.ENEMIES).length}）・ボス 4（3.0 でブラッククロウ）`, Object.keys(D.FACTIONS).length === 4 && Object.keys(D.ENEMIES).length >= 26 && Object.keys(D.BOSSES).length === 4);
   check(`構造物 6 種以上（${Object.keys(D.STRUCTURES).length}）`, Object.keys(D.STRUCTURES).length >= 6);
   check("銃座 4・乗り物 2", Object.values(D.VEHICLES).filter((v) => v.kind === "emplacement").length === 4 && Object.values(D.VEHICLES).filter((v) => v.kind === "vehicle").length === 2);
   check("キルストリーク 8 種（2.6 で誘導ミサイル・核ミサイル）", Object.keys(D.KILLSTREAKS).length === 8);
@@ -330,7 +330,7 @@ export async function suite2(ctx) {
     wall(-3, 3, 64, 66, 6, 6);
     const zb = zombie(0.5, -5.5, 40);
     const ric0 = LOG.sounds["arsenal.fx.ricochet"] ?? 0;
-    shoot("ricochet_disc", { after: 30 });
+    shoot("ricochet_disc", { after: 30, rot: { x: 1.5, y: 0 } }); // わずかに下へ（戻ってきた円盤が敵の頭上を越えないように）
     check("リコシェディスク：壁で跳ね返って後ろの敵に当たる", hp(zb) < 40 && (LOG.sounds["arsenal.fx.ricochet"] ?? 0) > ric0, `(hp=${hp(zb)})`);
     zb.remove();
     unwall();
@@ -1944,13 +1944,13 @@ export async function suite2(ctx) {
   {
     reset();
     clearInv();
-    ui.UI_LOG.answers.push({ canceled: false, selection: 1 });
+    ui.UI_LOG.answers.push({ canceled: false, selection: 4 });
     ui.UI_LOG.answers.push({ canceled: false, formValues: [0, 2, 2, true, true, false, 1, false, 1, -1, true, false] });
     await menus.openManual(player);
     await flush();
     const p = settings.P(player);
     check("HUD・2.0 の設定を保存（大きさ・配置・エイムアシスト・一人称の位置）", p.hudScale === "large" && p.hudLayout === "raised" && p.aimAssist === "light" && p.fpOffsetV === 1 && p.fpOffsetD === -1 && p.suppressionFx === false && p.nvgAuto === false);
-    ui.UI_LOG.answers.push({ canceled: false, selection: 3 });
+    ui.UI_LOG.answers.push({ canceled: false, selection: 6 });
     ui.UI_LOG.answers.push({ canceled: false, formValues: [false, true, 3, 2, true, true, true, true, true, 30, false, true, true, true] });
     await menus.openManual(player);
     await flush();
@@ -2012,5 +2012,277 @@ export async function suite2(ctx) {
     settings.setPrefs(player, { hudStyle: "classic", aimAssist: "off", fpOffsetV: 0, fpOffsetD: 0, suppressionFx: true, nvgAuto: true, hudScale: "normal", hudLayout: "auto" });
     clearInv();
     __tick(3);
+  }
+
+  // =====================================================================
+  console.log("3.0 兵科・パーク");
+  // =====================================================================
+  {
+    reset();
+    clearInv();
+    const cls = await imp("progression/classes.js");
+    const s = S(player);
+    check("既定の兵科は突撃兵（移動 +6%）", cls.classOf(player) === "assault" && Math.abs(cls.mods(player).move - 1.06) < 1e-9);
+    // 階級 1 では ティア 2 の強靭（階級 6）は付けられない
+    const prof = prog.profile(player);
+    const xp0 = prof.rankXp;
+    prof.rankXp = 0;
+    check("階級が足りないパークは付けられない", cls.setLoadout(player, "heavy", [null, "hardened", null]) === "arsenal.class.perk_locked");
+    prof.rankXp = Math.max(xp0, 10_000_000);
+    s.classSwitchAt = 0;
+    cls.setLoadout(player, "assault", [null, null, null]);
+    s.classSwitchAt = 0;
+    check("階級が上がればパークを付けられる", cls.setLoadout(player, "heavy", ["quick_hands", "hardened", "last_stand"]) === null && cls.classOf(player) === "heavy");
+    check("切り替えの待ち時間中は兵科を変えられない", cls.setLoadout(player, "medic", [null, null, null]) === "arsenal.class.switch_wait");
+    const m = cls.mods(player);
+    check("重装兵＋強靭：受けるダメージ 0.88×0.92、リロード 0.85、移動 0.95", Math.abs(m.dmgTaken - 0.88 * 0.92) < 1e-9 && Math.abs(m.reload - 0.85) < 1e-9 && Math.abs(m.move - 0.95) < 1e-9);
+    check("重装兵：機関銃だけ反動 -20%", Math.abs(cls.recoilMod(player, "lmg") - 0.8) < 1e-9 && cls.recoilMod(player, "assault") === 1);
+    // 敵の弾のダメージが軽くなる
+    const foe = brain.spawnEnemy(dim, { x: 0.5, y: 64, z: 6.5 }, "raider_rifleman");
+    heal(player);
+    const h0 = player.getComponent("minecraft:health").currentValue;
+    dmg.dealDamage(foe, player, 10, { kind: "gun" });
+    const lost = h0 - player.getComponent("minecraft:health").currentValue;
+    check("重装兵は受けるダメージが減る（10 → 約 8.1）", Math.abs(lost - 10 * 0.88 * 0.92) < 0.6, `(${lost})`);
+    // アビリティ：防壁
+    heal(player);
+    check("アビリティ（防壁）を使える", cls.useAbility(player) === true && cls.abilityState(player).active);
+    check("防壁中は受けるダメージ -60%", Math.abs(cls.mods(player).dmgTaken - 0.88 * 0.92 * 0.4) < 1e-9);
+    check("クールダウン中はもう一度使えない", cls.useAbility(player) === false);
+    __tick(6 * 20 + 2);
+    check("防壁は 6 秒で切れる", !cls.abilityState(player).active && Math.abs(cls.mods(player).dmgTaken - 0.88 * 0.92) < 1e-9);
+    // 不屈
+    heal(player, 3);
+    dmg.dealDamage(foe, player, 50, { kind: "gun" });
+    check("不屈：倒れるダメージを体力 1 で耐える", player.isValid && player.getComponent("minecraft:health").currentValue === 1 && !!player.effects["resistance"], JSON.stringify(player.effects));
+    // 突撃兵の突撃・衛生兵の回復フィールド・工兵の補給・偵察兵のパルス
+    let foe2 = null;
+    for (const [c, test] of [
+      ["assault", () => Math.abs(cls.mods(player).move - 1.06 * 1.25) < 1e-9 && Math.abs(cls.mods(player).reload - 0.9 * 0.85 * 0.6) < 1e-9],
+      ["medic", () => { __tick(25); return !!player.effects["regeneration"]; }],
+      ["engineer", () => count("arsenal:ammo_medium") > 0],
+      ["recon", () => cls.abilityState(player).active],
+    ]) {
+      reset();
+      clearInv();
+      if (c === "recon") foe2 = brain.spawnEnemy(dim, { x: 0.5, y: 64, z: 12.5 }, "raider_rifleman");
+      if (c === "engineer") {
+        inv.items[0] = new ItemStack("arsenal:sentinel", 1);
+        player.selectedSlotIndex = 0;
+        __tick(4);
+      }
+      s.classSwitchAt = 0;
+      s.abilityReady = 0;
+      cls.setLoadout(player, c, ["quick_hands", null, null]);
+      player.effects = {};
+      const used = cls.useAbility(player);
+      check(`アビリティ（${c}）`, used && test(), JSON.stringify({ used, eff: Object.keys(player.effects), ammo: count("arsenal:ammo_medium") }));
+    }
+    // 偵察兵のパルスでマークした敵は受けるダメージ 1.15 倍
+    const fh0 = foe2.getComponent("minecraft:health").currentValue;
+    dmg.dealDamage(player, foe2, 5, { kind: "gun" });
+    const flost = fh0 - foe2.getComponent("minecraft:health").currentValue;
+    check("パルスでマークした敵は受けるダメージ +15%", Math.abs(flost - 5 * 1.15) < 0.6, `(${flost})`);
+    // 野戦マニュアル →「兵科・パーク」→ 変える
+    s.classSwitchAt = 0;
+    ui.UI_LOG.answers.push({ canceled: false, selection: 1 });
+    ui.UI_LOG.answers.push({ canceled: false, selection: 0 });
+    const ids = Object.keys(D.CLASSES);
+    const t1 = Object.keys(D.PERKS).filter((k) => D.PERKS[k].tier === 1);
+    ui.UI_LOG.answers.push({ canceled: false, formValues: [ids.indexOf("recon"), t1.indexOf("steady_aim") + 1, 0, 0] });
+    await menus.openManual(player);
+    await flush();
+    await flush();
+    check("野戦マニュアルから兵科とパークを変えられる", cls.classOf(player) === "recon" && cls.perksOf(player)[0] === "steady_aim" && cls.perksOf(player)[1] === null, JSON.stringify(cls.perksOf(player)));
+    check("戦術デバイスの使用でアビリティ", typeof comps.item["arsenal:tool"].onUse === "function");
+    // 後片付け：突撃兵・パークなし
+    s.classSwitchAt = 0;
+    cls.setLoadout(player, "assault", [null, null, null]);
+    s.abilityReady = 0;
+    s.abilityUntil = 0;
+    for (const e of [foe, foe2]) if (e?.isValid) e.remove();
+    reset();
+    clearInv();
+  }
+
+  // =====================================================================
+  console.log("3.0 分隊");
+  // =====================================================================
+  {
+    reset();
+    clearInv();
+    const sq = await imp("systems/squad.js");
+    player.setDynamicProperty("a:cr", 100);
+    check("クレジットが足りなければ雇えない", sq.hire(player, "squad_rifleman") === "arsenal.squad.no_credits");
+    player.setDynamicProperty("a:cr", 5000);
+    check("雇える（ライフルマン）", sq.hire(player, "squad_rifleman") === null && sq.squadOf(player).length === 1 && player.getDynamicProperty("a:cr") === 5000 - D.SQUAD.squad_rifleman.cost);
+    check("2 人目（衛生兵）", sq.hire(player, "squad_medic") === null && sq.squadOf(player).length === 2);
+    check("3 人目は雇えない（上限 2）", sq.hire(player, "squad_gunner") === "arsenal.squad.full");
+    const [rif, med] = sq.squadOf(player).map((m) => m.ent);
+    check("持ち主を覚えている（a:own）", rif.getDynamicProperty("a:own") === player.id);
+    check("分隊はプレイヤーを撃てない", dmg.canDamage(rif, player) === false && dmg.canDamage(rif, med) === false);
+    check("持ち主は自分の分隊を撃てない", dmg.canDamage(player, rif) === false);
+    // 前に敵がいれば撃つ、いなければ（プレイヤーの方を向いていても）撃たない
+    rif.location = { x: 0.5, y: 64, z: 0.5 };
+    const foe = brain.spawnEnemy(dim, { x: 0.5, y: 64, z: 10.5 }, "raider_rifleman");
+    check("敵は分隊を撃てる", dmg.canDamage(foe, rif) === true);
+    const fh = foe.getComponent("minecraft:health").currentValue;
+    for (let i = 0; i < 6; i++) sq.squadFire(rif, { x: 0, y: 0, z: 1 });
+    __tick(2);
+    check("分隊は前の敵を撃つ", !foe.isValid || foe.getComponent("minecraft:health").currentValue < fh, `(${fh} → ${foe.isValid ? foe.getComponent("minecraft:health").currentValue : "dead"})`);
+    if (foe.isValid) foe.remove();
+    heal(player);
+    const shots0 = Object.keys(LOG.sounds).reduce((a, k) => a + (k.startsWith("arsenal.fire.") ? LOG.sounds[k] : 0), 0);
+    sq.squadFire(rif, { x: 0, y: 0, z: -1 });
+    const shots1 = Object.keys(LOG.sounds).reduce((a, k) => a + (k.startsWith("arsenal.fire.") ? LOG.sounds[k] : 0), 0);
+    check("敵がいない方へは撃たない", shots1 === shots0);
+    // ついて行く：離れたら追う、遠すぎたら瞬間移動、待てなら動かない
+    player.location = { x: 0.5, y: 64, z: 20.5 };
+    __tick(12);
+    const mR = sq.squadOf(player).find((m) => m.ent.id === rif.id);
+    check("離れたら追いかける（道しるべ）", mR.mode === "move" && !!mR.wp, JSON.stringify({ mode: mR.mode, wp: mR.wp }));
+    player.location = { x: 0.5, y: 64, z: 90.5 };
+    __tick(12);
+    check("遠すぎたらそばへ瞬間移動", Math.hypot(rif.location.x - 0.5, rif.location.z - 90.5) < 6, JSON.stringify(rif.location));
+    sq.orderSquad(player, "hold");
+    player.location = { x: 0.5, y: 64, z: 110.5 };
+    __tick(12);
+    check("「ここで待て」なら追わない", mR.mode === "hold" && rif.getDynamicProperty("a:sq") === "hold");
+    sq.orderSquad(player, "follow");
+    // 衛生兵の手当て
+    med.location = { x: 1.5, y: 64, z: 110.5 };
+    heal(player, 6);
+    __tick(12);
+    check("衛生兵が持ち主の傷を手当てする", player.getComponent("minecraft:health").currentValue > 6, `(${player.getComponent("minecraft:health").currentValue})`);
+    // 野戦マニュアル →「分隊」→ 解散
+    ui.UI_LOG.answers.push({ canceled: false, selection: 2 });
+    ui.UI_LOG.answers.push({ canceled: false, selection: 3 });
+    await menus.openManual(player);
+    await flush();
+    await flush();
+    check("野戦マニュアルから分隊を解散できる", sq.squadOf(player).length === 0 && !rif.isValid && !med.isValid);
+    reset();
+    clearInv();
+  }
+
+  // =====================================================================
+  console.log("3.0 ミッション");
+  // =====================================================================
+  {
+    reset();
+    clearInv();
+    const mis = await imp("systems/missions.js");
+    const prof = prog.profile(player);
+    const mine = (m) => dim.getEntities({ tags: [`arsenal_ms:${m.n}`] });
+    const goTo = (m, off = 0) => { player.location = { x: m.x + 0.5 + off, y: 64, z: m.z + 0.5 }; };
+    const until = (fn, max = 400) => { for (let i = 0; i <= max; i++) { if (fn()) return true; __tick(1); heal(player); } return false; }; // 毎 tick 回復（敵に撃たれて倒れると任務が止まる）
+    prof.cp = 0;
+    const badIds = D.CAMPAIGN.flatMap((c) => [...c.enemies.map((e) => e[0]), c.boss, c.target].filter(Boolean)).filter((id) => !D.ENEMIES[id] && !D.BOSSES[id]);
+    check("キャンペーン 16 話・出てくる敵がすべて存在する", D.CAMPAIGN.length === 16 && badIds.length === 0 && D.CAMPAIGN.every((c) => D.CAMPAIGN_CHAPTERS[c.chapter]), badIds.join(","));
+    const of = mis.offers(player);
+    check("依頼が 3 つ並ぶ（ボス戦は出ない）", of.length === D.MISSION_RULES.offers && of.every((o) => D.CONTRACT_TYPES.includes(o.ty) && D.FACTIONS[o.fac]), JSON.stringify(of));
+    // ---- キャンペーン第 1 話（掃討）----
+    player.setDynamicProperty("a:cr", 0);
+    check("キャンペーン第 1 話を受けられる", mis.startCampaign(player) === null);
+    const m1 = mis.missionOf(player);
+    const d1 = Math.hypot(m1.x - 0.5, m1.z - 0.5);
+    check("目標地点は 55〜85 ブロック先", d1 >= 50 && d1 <= 90 && m1.ty === "sweep" && m1.ph === "go", `(${d1.toFixed(1)})`);
+    check("任務中はもう 1 つ受けられない", mis.startCampaign(player) === "busy" && mis.startContract(player, 0) === "busy");
+    const hv = hud2.hud2Values(player, S(player));
+    check("HUD 2.0 にミッション欄（gm 6・距離）", hv.gm === "6" && Number(hv.tm) > 40, JSON.stringify({ gm: hv.gm, tm: hv.tm }));
+    __tick(20);
+    check("遠くでは敵を出さない", mine(m1).length === 0 && m1.ph === "go");
+    goTo(m1, 20);
+    __tick(12);
+    const want1 = D.CAMPAIGN[0].enemies.reduce((a, e) => a + e[1], 0);
+    check("近づくと目標地点に敵が出る", m1.ph === "fight" && mine(m1).length === want1 && m1.left === want1, JSON.stringify({ ph: m1.ph, n: mine(m1).length, left: m1.left }));
+    check("出した敵は残る（persist）", mine(m1).every((e) => e.events.includes("arsenal:persist")));
+    mis.__forgetMission(player.id);
+    const m1b = mis.missionOf(player);
+    check("任務はプレイヤーに保存される（読み込み直しても続き）", m1b.n === m1.n && m1b.ph === "fight" && m1b.left === want1);
+    for (const e of mine(m1b)) e.applyDamage(9999);
+    check("倒した数を数える", m1b.got === want1 && m1b.left === 0, JSON.stringify({ got: m1b.got, left: m1b.left }));
+    __tick(12);
+    check("全滅で完了・キャンペーンが進む", mis.missionOf(player) === null && mis.campaignProgress(player) === 1);
+    check("報酬（クレジット・統計）", player.getDynamicProperty("a:cr") >= D.CAMPAIGN[0].credits && prof.stats.missions >= 1, `(${player.getDynamicProperty("a:cr")})`);
+    // ---- 第 2 話（情報回収）----
+    player.location = { x: 0.5, y: 64, z: 0.5 };
+    check("第 2 話（情報回収）", mis.startCampaign(player) === null && mis.missionOf(player).ty === "intel");
+    const m2 = mis.missionOf(player);
+    goTo(m2, 10);
+    __tick(12);
+    check("回収：守備隊が出る", m2.ph === "fight" && mine(m2).length > 0);
+    __tick(40);
+    check("地点から離れていると進まない", m2.got === 0);
+    goTo(m2, 1);
+    check("地点に立つと回収が進み、終われば離脱", until(() => m2.ph === "extract", 200) && m2.got >= m2.need, JSON.stringify({ ph: m2.ph, got: m2.got }));
+    goTo(m2, D.MISSION_TYPES.intel.extract + 5);
+    __tick(12);
+    check("離脱で完了", mis.missionOf(player) === null && mis.campaignProgress(player) === 2);
+    check("残った敵は普通の敵に戻る（release）", mine(m2).length > 0 && mine(m2).every((e) => e.events.includes("arsenal:release")));
+    // ---- 依頼：防衛 ----
+    player.location = { x: 0.5, y: 64, z: 0.5 };
+    prof.offers[0] = { ty: "defend", fac: "raiders" };
+    check("依頼（防衛）を受けられる", mis.startContract(player, 0) === null && mis.missionOf(player).ty === "defend");
+    check("受けた枠は引き直される", !!prof.offers[0]);
+    const m3 = mis.missionOf(player);
+    goTo(m3, 5);
+    __tick(12);
+    check("防衛地点に着くと待機", m3.ph === "hold" && mine(m3).length === 0);
+    let wavesOk = true;
+    for (let w = 1; w <= m3.need; w++) {
+      if (!until(() => m3.wave === w && m3.left > 0, 400)) wavesOk = false;
+      const list = mine(m3).filter((e) => !e.events.includes("arsenal:release"));
+      if (list.some((e) => Math.hypot(e.location.x - (m3.x + 0.5), e.location.z - (m3.z + 0.5)) < 15)) wavesOk = false;
+      for (const e of list) e.applyDamage(9999);
+      __tick(10);
+    }
+    check("ウェーブが 3 回、離れた所から来る", wavesOk, JSON.stringify({ wave: m3.wave, left: m3.left }));
+    __tick(12);
+    check("最後のウェーブを退けると完了", mis.missionOf(player) === null);
+    // ---- 依頼：賞金首 ----
+    player.location = { x: 0.5, y: 64, z: 0.5 };
+    prof.offers[1] = { ty: "bounty", fac: "raiders" };
+    check("依頼（賞金首）を受けられる", mis.startContract(player, 1) === null);
+    const m4 = mis.missionOf(player);
+    goTo(m4, 10);
+    __tick(12);
+    const tgt = mine(m4).find((e) => e.hasTag("arsenal_mst"));
+    check("賞金首は強化され、名前が付く", !!tgt && !!tgt.getEffect("health_boost") && String(tgt.nameTag).includes("WANTED") && tgt.typeId === "arsenal:raider_captain", tgt?.typeId);
+    tgt.applyDamage(9999);
+    __tick(12);
+    check("賞金首を倒せば護衛が残っていても完了", mis.missionOf(player) === null);
+    // ---- 中止 ----
+    player.location = { x: 0.5, y: 64, z: 0.5 };
+    check("依頼を受けて中止できる", mis.startContract(player, 2) === null && mis.abandonMission(player) === true && mis.missionOf(player) === null);
+    check("中止した直後は受けられない", mis.startContract(player, 0) === "wait");
+    // ---- 第 4 話（ボス戦）----
+    prof.cp = 3;
+    mis.__forgetMission(player.id);
+    S(player);
+    const cdOk = until(() => mis.startCampaign(player) === null, 600);
+    const m5 = mis.missionOf(player);
+    check("ボス戦（ウォーロード）", cdOk && m5.ty === "boss" && m5.tgt === "boss_warlord");
+    goTo(m5, 15);
+    __tick(12);
+    const boss = mine(m5).find((e) => e.typeId === "arsenal:boss_warlord");
+    check("近づくとボスが出る", !!boss && boss.hasTag("arsenal_mst"));
+    boss.applyDamage(99999);
+    __tick(12);
+    check("ボスを倒すと完了し、第 5 話へ", mis.missionOf(player) === null && mis.campaignProgress(player) === 4);
+    // ---- 野戦マニュアル → ミッション → 依頼 ----
+    player.location = { x: 0.5, y: 64, z: 0.5 };
+    ui.UI_LOG.answers.push({ canceled: false, selection: 0 });
+    ui.UI_LOG.answers.push({ canceled: false, selection: 1 });
+    ui.UI_LOG.answers.push({ canceled: false, selection: 0 });
+    await menus.openManual(player);
+    await flush();
+    await flush();
+    await flush();
+    check("野戦マニュアルから依頼を受けられる", !!mis.missionOf(player) && mis.missionOf(player).k === "x");
+    mis.abandonMission(player);
+    prof.cp = 0;
+    reset();
+    clearInv();
   }
 }

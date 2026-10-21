@@ -122,6 +122,12 @@
  * @property {string} hud2Gate 最後に送ったときのパネルの開け閉め（ui/hud2.js の gateKey）
  * @property {number} crSeen HUD 2.0 に最後に出したクレジット
  * @property {number} crUntil クレジットを出す最後の tick（変わってから 5 秒）
+ * @property {number} abilityReady 兵科のアビリティが次に使える tick（3.0）
+ * @property {number} abilityUntil 使用中のアビリティが切れる tick
+ * @property {string} abilityId 最後に使ったアビリティ
+ * @property {boolean} abilityAnnounced 「使える」を知らせたか
+ * @property {number} classSwitchAt 次に兵科を変えられる tick
+ * @property {number} lastStandReady 不屈のパークが次に効く tick
  * @property {string} hud2Live HUD 2.0 のサブタイトル（毎 tick 変わる値）に最後に送った文字列
  * @property {Record<string, string|number>|null} hud2Vals HUD 2.0 の値（毎 tick 変わる方位・照準以外は、変化時と再送時に集め直す）
  * @property {string} fpoffAnim 再生中の一人称位置調整アニメーション
@@ -176,7 +182,7 @@ function create(id) {
     ads: false, adsLevel: 0, adsToggle: false, lastSneakPress: -99, sneakDown: false, jumpDown: false,
     fovApplied: false, fovValue: 0, moveApplied: false, moveValue: 0.1, nvApplied: false, slowApplied: false,
     poseWeapon: null, poseTick: 0,
-    hudTick: 0, hudDirty: true, hit: null, dmgCombo: null, hud2Follow: 0, hud2Gate: "", crSeen: -1, crUntil: 0,
+    hudTick: 0, hudDirty: true, hit: null, dmgCombo: null, hud2Follow: 0, hud2Gate: "", crSeen: -1, crUntil: 0, abilityReady: 0, abilityUntil: 0, abilityId: "", abilityAnnounced: true, classSwitchAt: 0, lastStandReady: 0,
     lockTarget: null, lockTicks: 0, lockSeen: 0, sprintPose: false, readyAt: 0, mags: [], armHitUntil: 0, legHitUntil: 0,
     lastShotTick: -99, wearPending: 0, lastWearWrite: 0, lastKick: -99,
     breathUntil: 0, breathCooldown: 0, swayTick: 0, cooldownUntil: 0,

@@ -1,0 +1,68 @@
+{
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "item",
+          "name": "arsenal:shell_buck",
+          "weight": 1,
+          "functions": [
+            {
+              "function": "set_count",
+              "count": {
+                "min": 4,
+                "max": 14
+              }
+            },
+            {
+              "function": "looting_enchant",
+              "count": {
+                "min": 0,
+                "max": 2
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "item",
+          "name": "arsenal:steel_ingot",
+          "weight": 6,
+          "functions": [
+            {
+              "function": "set_count",
+              "count": {
+                "min": 1,
+                "max": 2
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "arsenal:precision_parts",
+          "weight": 3
+        },
+        {
+          "type": "item",
+          "name": "arsenal:polymer",
+          "weight": 3
+        },
+        {
+          "type": "item",
+          "name": "arsenal:bandage",
+          "weight": 2
+        },
+        {
+          "type": "empty",
+          "weight": 10
+        }
+      ]
+    }
+  ]
+}

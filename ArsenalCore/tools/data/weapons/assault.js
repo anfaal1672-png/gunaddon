@@ -131,4 +131,14 @@ export const ASSAULT = {
     slots: ["optic", "muzzle", "underbarrel", "mag", "laser", "stock"],
     model: { type: "rifle", body: 13, h: 4.2, barrel: 10, guard: 9, mag: "straight", stock: "skeleton", finish: "white", accent: "tier", scope: 3 },
   },
+  // ---- 3.0 で追加（ブラッククロウの装備） ----
+  starling: {
+    cat: "assault", tier: "rare", name: { ja: "スターリング", en: "Starling" },
+    desc: { ja: "40 発弾倉と 3 点バーストを備えた特殊部隊のライフル", en: "Special-forces rifle with a 40-round magazine and 3-round burst" },
+    ammo: "medium", mag: 40, rpm: 780, burstRpm: 950, burstDelay: 6, modes: ["auto", "burst3", "semi"], dmg: 4.0, head: 1.8, range: [30, 66], falloff: 0.58,
+    spread: R(2.9, 0.5, 1.7, 0.3, 3.5, 0.36), recoil: { v: 0.95, h: 0.55, shake: 0.025 },
+    reload: { tac: 40, empty: 52 }, ads: 4, move: 0.97, pen: 2, sound: "rifle", pitch: 1.03, optic: "reddot",
+    slots: ["optic", "muzzle", "underbarrel", "mag", "laser", "stock"],
+    model: { type: "rifle", body: 12, h: 4, barrel: 8, guard: 8, mag: "straight", stock: "skeleton", finish: "black", accent: "tier", carry: true },
+  },
 };

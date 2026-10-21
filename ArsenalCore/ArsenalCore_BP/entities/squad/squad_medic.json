@@ -1,0 +1,245 @@
+{
+  "format_version": "1.26.20",
+  "minecraft:entity": {
+    "description": {
+      "identifier": "arsenal:squad_medic",
+      "is_spawnable": true,
+      "is_summonable": true,
+      "is_experimental": false
+    },
+    "components": {
+      "minecraft:type_family": {
+        "family": [
+          "arsenal_squad",
+          "mob"
+        ]
+      },
+      "minecraft:collision_box": {
+        "width": 0.6,
+        "height": 1.9
+      },
+      "minecraft:health": {
+        "value": 36,
+        "max": 36
+      },
+      "minecraft:movement": {
+        "value": 0.34
+      },
+      "minecraft:physics": {},
+      "minecraft:pushable_by_entity": {},
+      "minecraft:pushable_by_block": {},
+      "minecraft:breathable": {
+        "total_supply": 15,
+        "suffocate_time": 0
+      },
+      "minecraft:nameable": {
+        "always_show": false,
+        "allow_name_tag_renaming": true
+      },
+      "minecraft:follow_range": {
+        "value": 42
+      },
+      "minecraft:persistent": {},
+      "minecraft:conditional_bandwidth_optimization": {},
+      "minecraft:hurt_on_condition": {
+        "damage_conditions": [
+          {
+            "cause": "lava",
+            "damage_per_tick": 4,
+            "filters": {
+              "test": "in_lava",
+              "subject": "self",
+              "operator": "==",
+              "value": true
+            }
+          }
+        ]
+      },
+      "minecraft:behavior.float": {
+        "priority": 0
+      },
+      "minecraft:behavior.look_at_player": {
+        "priority": 8,
+        "look_distance": 8
+      },
+      "minecraft:behavior.random_look_around": {
+        "priority": 9
+      },
+      "minecraft:movement.basic": {},
+      "minecraft:jump.static": {},
+      "minecraft:navigation.walk": {
+        "can_path_over_water": true,
+        "avoid_damage_blocks": true,
+        "can_open_doors": true
+      },
+      "minecraft:shooter": {
+        "def": "arsenal:ai_shot"
+      },
+      "minecraft:equipment": {
+        "table": "loot_tables/entities/arsenal_squad_medic_gear.json",
+        "slot_drop_chance": [
+          {
+            "slot": "slot.weapon.mainhand",
+            "drop_chance": 0.0
+          }
+        ]
+      }
+    },
+    "component_groups": {
+      "arsenal:targeting": {
+        "minecraft:behavior.hurt_by_target": {
+          "priority": 1,
+          "entity_types": {
+            "filters": {
+              "all_of": [
+                {
+                  "test": "is_family",
+                  "subject": "other",
+                  "operator": "!=",
+                  "value": "player"
+                },
+                {
+                  "test": "is_family",
+                  "subject": "other",
+                  "operator": "!=",
+                  "value": "arsenal_squad"
+                }
+              ]
+            },
+            "max_dist": 48
+          }
+        },
+        "minecraft:behavior.nearest_attackable_target": {
+          "priority": 2,
+          "must_see": true,
+          "reselect_targets": true,
+          "within_radius": 26.0,
+          "entity_types": [
+            {
+              "filters": {
+                "any_of": [
+                  {
+                    "test": "is_family",
+                    "subject": "other",
+                    "value": "arsenal_enemy"
+                  },
+                  {
+                    "test": "is_family",
+                    "subject": "other",
+                    "value": "monster"
+                  }
+                ]
+              },
+              "max_dist": 48
+            }
+          ]
+        }
+      },
+      "arsenal:engage": {
+        "minecraft:behavior.ranged_attack": {
+          "priority": 3,
+          "speed_multiplier": 1.0,
+          "attack_interval_min": 1,
+          "attack_interval_max": 1.5,
+          "attack_radius": 18.0,
+          "burst_shots": 3,
+          "burst_interval": 0.07,
+          "charge_charged_trigger": 0.0,
+          "charge_shoot_trigger": 0.0
+        }
+      },
+      "arsenal:hold": {
+        "minecraft:behavior.ranged_attack": {
+          "priority": 3,
+          "speed_multiplier": 0.0,
+          "attack_interval_min": 1,
+          "attack_interval_max": 1.5,
+          "attack_radius": 18.0,
+          "burst_shots": 3,
+          "burst_interval": 0.07,
+          "charge_charged_trigger": 0.0,
+          "charge_shoot_trigger": 0.0
+        }
+      },
+      "arsenal:move": {
+        "minecraft:behavior.nearest_attackable_target": {
+          "priority": 0,
+          "must_see": false,
+          "reselect_targets": true,
+          "within_radius": 48.0,
+          "entity_types": [
+            {
+              "filters": {
+                "test": "is_family",
+                "subject": "other",
+                "value": "arsenal_waypoint"
+              },
+              "max_dist": 48
+            }
+          ]
+        },
+        "minecraft:behavior.melee_attack": {
+          "priority": 1,
+          "speed_multiplier": 1.4,
+          "track_target": true,
+          "require_complete_path": false
+        },
+        "minecraft:attack": {
+          "damage": 0
+        }
+      }
+    },
+    "events": {
+      "minecraft:entity_spawned": {
+        "add": {
+          "component_groups": [
+            "arsenal:targeting",
+            "arsenal:engage"
+          ]
+        }
+      },
+      "arsenal:ai_engage": {
+        "remove": {
+          "component_groups": [
+            "arsenal:hold",
+            "arsenal:move"
+          ]
+        },
+        "add": {
+          "component_groups": [
+            "arsenal:engage",
+            "arsenal:targeting"
+          ]
+        }
+      },
+      "arsenal:ai_hold": {
+        "remove": {
+          "component_groups": [
+            "arsenal:engage",
+            "arsenal:move"
+          ]
+        },
+        "add": {
+          "component_groups": [
+            "arsenal:hold",
+            "arsenal:targeting"
+          ]
+        }
+      },
+      "arsenal:ai_move": {
+        "remove": {
+          "component_groups": [
+            "arsenal:engage",
+            "arsenal:hold",
+            "arsenal:targeting"
+          ]
+        },
+        "add": {
+          "component_groups": [
+            "arsenal:move"
+          ]
+        }
+      }
+    }
+  }
+}

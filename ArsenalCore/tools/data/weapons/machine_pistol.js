@@ -59,4 +59,14 @@ export const MACHINE_PISTOL = {
     slots: ["optic", "muzzle", "laser", "mag"],
     model: { type: "pistol", slide: 10, h: 2.7, grip: "pistol", finish: "black", accent: "tier", extMag: true },
   },
+  // ---- 3.0 で追加（ブラッククロウの装備） ----
+  finch: {
+    cat: "machine_pistol", tier: "rare", name: { ja: "フィンチ", en: "Finch" },
+    desc: { ja: "30 発弾倉の全自動拳銃。2 点バーストで反動を抑えられる", en: "30-round machine pistol with a 2-round burst" },
+    ammo: "light", mag: 30, rpm: 1100, burstRpm: 1200, burstDelay: 5, modes: ["auto", "burst2"], dmg: 2.6, head: 1.6, range: [10, 22], falloff: 0.5,
+    spread: R(2.8, 1.0, 1.6, 0.3, 4.2, 0.4), recoil: { v: 0.75, h: 0.7, shake: 0.018 },
+    reload: { tac: 30, empty: 38 }, ads: 2, move: 1.06, pen: 1, sound: "smg", pitch: 1.2, optic: "iron",
+    slots: ["optic", "muzzle", "laser", "stock"],
+    model: { type: "pistol", slide: 10, h: 2.6, grip: "pistol", finish: "black", accent: "tier", extMag: true, compensator: true },
+  },
 };

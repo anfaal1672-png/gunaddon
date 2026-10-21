@@ -22,11 +22,12 @@ FACTION_PAL = {
     "legion": {"main": (150, 158, 170), "main_dark": (70, 76, 88), "furniture": (110, 118, 132), "accent": (255, 110, 60), "glow": (255, 120, 60)},
     "hollow": {"main": (118, 140, 96), "main_dark": (72, 84, 58), "furniture": (96, 110, 76), "accent": (180, 210, 90), "glow": (170, 255, 90)},
     "raiders": {"main": (120, 96, 70), "main_dark": (60, 50, 40), "furniture": (92, 80, 60), "accent": (200, 60, 40)},
+    "crow": {"main": (52, 56, 64), "main_dark": (28, 30, 34), "furniture": (44, 46, 52), "accent": (90, 200, 235), "glow": (90, 200, 235)},
 }
 
 
 def _targets(extra_families=()):
-    fams = ["player", "irongolem", "villager", "arsenal_player_deployable", *extra_families]
+    fams = ["player", "irongolem", "villager", "arsenal_player_deployable", "arsenal_squad", *extra_families]
     return [{"filters": {"any_of": [{"test": "is_family", "subject": "other", "value": f} for f in fams]}, "max_dist": 64}]
 
 
@@ -136,6 +137,8 @@ class Entities2Mixin:
             f"{NS}:ai_hold": {"remove": {"component_groups": ["arsenal:engage", "arsenal:move"]}, "add": {"component_groups": ["arsenal:hold", "arsenal:targeting"]}},
             f"{NS}:ai_move": {"remove": {"component_groups": ["arsenal:engage", "arsenal:hold", "arsenal:targeting"]}, "add": {"component_groups": ["arsenal:move"]}},
             f"{NS}:persist": {"remove": {"component_groups": ["arsenal:despawn"]}, "add": {"component_groups": ["arsenal:persist"]}},
+            # 3.0：ミッションが終わった敵を普通の敵に戻す（遠ざかれば消える）
+            f"{NS}:release": {"remove": {"component_groups": ["arsenal:persist"]}, "add": {"component_groups": ["arsenal:despawn"]}},
         }
         props = {}
         if model == "bloater":
@@ -154,6 +157,70 @@ class Entities2Mixin:
             self._enemy_spawn_rule(eid, e)
         self.Lname(f"entity.{NS}:{eid}.name", e["name"])
         self.L(f"item.spawn_egg.entity.{NS}:{eid}.name", f"Spawn {e['name']['en']}", f"{e['name']['ja']}を出現させる")
+
+    # ------------------------------------------------------------------
+    #  分隊（3.0）：味方の兵士。見た目はレイダーの体、射撃の仕組みは敵と同じ（合図の弾をスクリプトが横取り）
+    # ------------------------------------------------------------------
+    def squad_entity(self, sid, e):
+        foes = [{"filters": {"any_of": [{"test": "is_family", "subject": "other", "value": f} for f in ("arsenal_enemy", "monster")]}, "max_dist": 48}]
+        comps = {
+            "minecraft:type_family": {"family": ["arsenal_squad", "mob"]},
+            "minecraft:collision_box": {"width": 0.6, "height": 1.9},
+            "minecraft:health": {"value": e["health"], "max": e["health"]},
+            "minecraft:movement": {"value": e["speed"]},
+            "minecraft:physics": {},
+            "minecraft:pushable_by_entity": {},
+            "minecraft:pushable_by_block": {},
+            "minecraft:breathable": {"total_supply": 15, "suffocate_time": 0},
+            "minecraft:nameable": {"always_show": False, "allow_name_tag_renaming": True},
+            "minecraft:follow_range": {"value": max(32, int(e["sight"]) + 16)},
+            "minecraft:persistent": {},
+            "minecraft:conditional_bandwidth_optimization": {},
+            "minecraft:hurt_on_condition": {"damage_conditions": [{"cause": "lava", "damage_per_tick": 4, "filters": {"test": "in_lava", "subject": "self", "operator": "==", "value": True}}]},
+            "minecraft:behavior.float": {"priority": 0},
+            "minecraft:behavior.look_at_player": {"priority": 8, "look_distance": 8},
+            "minecraft:behavior.random_look_around": {"priority": 9},
+            "minecraft:movement.basic": {},
+            "minecraft:jump.static": {},
+            "minecraft:navigation.walk": {"can_path_over_water": True, "avoid_damage_blocks": True, "can_open_doors": True},
+            "minecraft:shooter": {"def": f"{NS}:ai_shot"},
+            "minecraft:equipment": {"table": f"loot_tables/entities/arsenal_{sid}_gear.json", "slot_drop_chance": [{"slot": "slot.weapon.mainhand", "drop_chance": 0.0}]},
+        }
+        rng = {"attack_interval_min": e["interval"][0], "attack_interval_max": e["interval"][1], "attack_radius": float(e["range"]),
+               "burst_shots": e["burst"], "burst_interval": max(0.05, e["burstInterval"]) if e["burst"] > 1 else 0.05,
+               "charge_charged_trigger": 0.0, "charge_shoot_trigger": 0.0}
+        groups = {
+            "arsenal:targeting": {
+                "minecraft:behavior.hurt_by_target": {"priority": 1, "entity_types": {"filters": {"all_of": [
+                    {"test": "is_family", "subject": "other", "operator": "!=", "value": "player"},
+                    {"test": "is_family", "subject": "other", "operator": "!=", "value": "arsenal_squad"}]}, "max_dist": 48}},
+                "minecraft:behavior.nearest_attackable_target": {"priority": 2, "must_see": True, "reselect_targets": True, "within_radius": float(e["sight"]), "entity_types": foes},
+            },
+            # 戦う（持ち主の近く）：撃ちながら少し歩く
+            "arsenal:engage": {"minecraft:behavior.ranged_attack": {"priority": 3, "speed_multiplier": 1.0, **rng}},
+            # その場で待つ：撃つが動かない
+            "arsenal:hold": {"minecraft:behavior.ranged_attack": {"priority": 3, "speed_multiplier": 0.0, **rng}},
+            # 持ち主を追う：道しるべ（arsenal:waypoint）へ歩く。追う間は撃たない
+            "arsenal:move": {
+                "minecraft:behavior.nearest_attackable_target": {"priority": 0, "must_see": False, "reselect_targets": True, "within_radius": 48.0,
+                                                                 "entity_types": [{"filters": {"test": "is_family", "subject": "other", "value": "arsenal_waypoint"}, "max_dist": 48}]},
+                "minecraft:behavior.melee_attack": {"priority": 1, "speed_multiplier": 1.4, "track_target": True, "require_complete_path": False},
+                "minecraft:attack": {"damage": 0},
+            },
+        }
+        start = ["arsenal:targeting", "arsenal:engage"]
+        events = {
+            "minecraft:entity_spawned": {"add": {"component_groups": start}},
+            f"{NS}:ai_engage": {"remove": {"component_groups": ["arsenal:hold", "arsenal:move"]}, "add": {"component_groups": ["arsenal:engage", "arsenal:targeting"]}},
+            f"{NS}:ai_hold": {"remove": {"component_groups": ["arsenal:engage", "arsenal:move"]}, "add": {"component_groups": ["arsenal:hold", "arsenal:targeting"]}},
+            f"{NS}:ai_move": {"remove": {"component_groups": ["arsenal:engage", "arsenal:hold", "arsenal:targeting"]}, "add": {"component_groups": ["arsenal:move"]}},
+        }
+        desc = {"identifier": f"{NS}:{sid}", "is_spawnable": True, "is_summonable": True, "is_experimental": False}
+        wjson(f"{self.bp}/entities/squad/{sid}.json", {"format_version": ENTITY_FMT, "minecraft:entity": {"description": desc, "components": comps, "component_groups": groups, "events": events}})
+        wjson(f"{self.bp}/loot_tables/entities/arsenal_{sid}_gear.json", {"pools": [{"rolls": 1, "entries": [{"type": "item", "name": f"{NS}:{e['weapon']}", "weight": 1}]}]})
+        self._enemy_client(sid, {**e, "skin": e["armor"]}, "raider", "raiders", False)
+        self.Lname(f"entity.{NS}:{sid}.name", e["name"])
+        self.L(f"item.spawn_egg.entity.{NS}:{sid}.name", f"Spawn {e['name']['en']}", f"{e['name']['ja']}を出現させる")
 
     def _enemy_client(self, eid, e, model, fac, boss):
         color = e.get("color", [120, 120, 120])
@@ -287,6 +354,8 @@ class Entities2Mixin:
             self.enemy_entity(eid, e)
         for bid, b in self.d["BOSSES"].items():
             self.enemy_entity(bid, b, boss=True)
+        for sid, sq in self.d["SQUAD"].items():
+            self.squad_entity(sid, sq)
         self._ai_shot()
         self._waypoint()
         self._deployables()

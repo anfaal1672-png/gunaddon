@@ -113,4 +113,14 @@ export const SHOTGUN = {
     slots: ["muzzle", "barrel", "trigger"],
     model: { type: "double", body: 9, h: 4.4, barrel: 12, stock: "fixed", finish: "steel", accent: "tier" },
   },
+  // ---- 3.0 で追加（ブラッククロウの装備） ----
+  blackwing: {
+    cat: "shotgun", tier: "rare", name: { ja: "ブラックウィング", en: "Blackwing" },
+    desc: { ja: "8 発箱型弾倉のセミ／フルオート散弾銃。弾倉交換で素早く再装填", en: "Box-fed semi/full-auto shotgun with quick mag swaps" },
+    ammo: "shell", mag: 8, rpm: 240, modes: ["semi", "auto"], pellets: 8, pelletSpread: 6.2, dmg: 2.4, head: 1.3, range: [7, 22], falloff: 0.3,
+    spread: R(1.7, 0.9, 1.0, 0, 0, 0.4), recoil: { v: 3.6, h: 1.0, shake: 0.075 },
+    reload: { tac: 44, empty: 56 }, ads: 4, move: 0.97, pen: 0, sound: "shotgun", pitch: 1.05, optic: "iron",
+    slots: ["optic", "muzzle", "underbarrel", "laser", "stock"],
+    model: { type: "shotgun", body: 13, h: 4.5, barrel: 9, mag: "box", stock: "fixed", finish: "black", accent: "tier" },
+  },
 };

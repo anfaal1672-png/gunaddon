@@ -110,7 +110,7 @@ export function traceHitscan(shooter, origin, dir, st, o = {}) {
       }
       const normal = faceNormal(bh.face);
       const typeId = bh.block.typeId;
-      if (!o.noImpact) impactBlock(dim, bpoint, normal, typeId);
+      if (!o.noImpact) impactBlock(dim, bpoint, normal, typeId, false, st.dmg ?? 4);
       const pc = penetration(typeId);
       // ガラスの破壊
       if (pc.glass && WS().glassBreak && shooter instanceof Player) {
@@ -140,7 +140,7 @@ export function traceHitscan(shooter, origin, dir, st, o = {}) {
       const ex = rayExitBlock(bh.block.location, bpoint, dir);
       traveled += bdist + ex.t;
       pos = add(ex.point, mul(dir, 0.01));
-      if (!o.noImpact) impactBlock(dim, ex.point, mul(normal, -1), typeId);
+      if (!o.noImpact) impactBlock(dim, ex.point, mul(normal, -1), typeId, false, st.dmg ?? 4);
     }
   });
   return { end, hitEntity, hitIds, pen, stopped, mulDmg, cut: maxRange < wantRange - 0.01 };

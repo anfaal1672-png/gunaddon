@@ -4884,6 +4884,44 @@
               }
             },
             {
+              "gm6": {
+                "type": "label",
+                "anchor_from": "top_middle",
+                "anchor_to": "top_middle",
+                "offset": [
+                  0,
+                  23
+                ],
+                "layer": 3,
+                "color": [
+                  1,
+                  0.85,
+                  0.4
+                ],
+                "shadow": true,
+                "font_scale_factor": 0.8,
+                "text_alignment": "center",
+                "size": [
+                  "default",
+                  "default"
+                ],
+                "text": "arsenal.mode_name.mission",
+                "localize": true,
+                "bindings": [
+                  {
+                    "binding_name": "#hud_title_text_string",
+                    "binding_name_override": "#arsenal_t",
+                    "binding_type": "global"
+                  },
+                  {
+                    "binding_type": "view",
+                    "source_property_name": "(not ((#arsenal_t - '.o06.') = #arsenal_t))",
+                    "target_property_name": "#visible"
+                  }
+                ]
+              }
+            },
+            {
               "gm_sa": {
                 "type": "panel",
                 "size": [

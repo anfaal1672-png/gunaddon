@@ -18,6 +18,7 @@ import { S } from "./state.js";
 import { playNear } from "../fx/effects.js";
 import { safe } from "../util/log.js";
 import { t } from "../util/i18n.js";
+import { mods } from "../progression/classes.js";
 
 /** @param {import("@minecraft/server").Player} player */
 function infinite(player) {
@@ -99,10 +100,10 @@ export function startReload(player, s, manual = false) {
   s.burstLeft = 0;
   s.charge = 0;
   if (st.single) {
-    s.reload = { type: "single", weaponId: s.weaponId, slot: s.slot, start: now, end: 0, tactical, next: now + st.single.start, finishing: false, cancelRequested: false, cues: [] };
+    s.reload = { type: "single", weaponId: s.weaponId, slot: s.slot, start: now, end: 0, tactical, next: now + Math.round(st.single.start * mods(player).reload), finishing: false, cancelRequested: false, cues: [] };
     anim(player, `animation.arsenal.reload.shell_${st.single.per}`);
   } else {
-    const ticks = tactical ? st.reloadTac : st.reloadEmpty;
+    const ticks = Math.max(4, Math.round((tactical ? st.reloadTac : st.reloadEmpty) * mods(player).reload));
     s.reload = { type: "mag", weaponId: s.weaponId, slot: s.slot, start: now, end: now + ticks, tactical, next: 0, finishing: false, cancelRequested: false, cues: [] };
     const baseTicks = tactical ? baseReloadTicks(st, "tac") : baseReloadTicks(st, "empty");
     anim(player, `animation.arsenal.reload.${style(st)}_${baseTicks}`);
@@ -235,7 +236,7 @@ export function tickReload(player, s) {
       if (slot) writeProps(slot, { [PROP.ammo]: s.ammo });
       s.hudDirty = true;
     }
-    r.next = now + st.single.per;
+    r.next = now + Math.max(2, Math.round(st.single.per * mods(player).reload));
   }
 }
 

@@ -239,34 +239,21 @@ def hold_animation(wid, pose):
     }
 
 
+def _vendor_motions():
+    """ArsenalOverhaul（同じ作者・MIT）の反動とボルト操作のモーション（tools/vendor/arsenal_overhaul/NOTICE.md）"""
+    import json
+    import os
+    path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "vendor", "arsenal_overhaul", "player_motions.animation.json")
+    with open(path, encoding="utf-8") as f:
+        return json.load(f)["animations"]
+
+
 def kick_animations():
+    """撃ったときの反動（3.0.0 から ArsenalOverhaul のもの）。一人称は手に持った銃（rightitem）が跳ね上がり、三人称は両腕が上がる"""
+    src = _vendor_motions()
     out = {}
-    for name, k in (("light", 1.0), ("medium", 1.8), ("heavy", 3.0), ("massive", 4.6)):
-        L = 0.06 + k * 0.03
-        out[f"animation.arsenal.kick.{name}"] = {
-            "animation_length": L,
-            "bones": {
-                "rightarm": {
-                    "rotation": {
-                        "0.0": [0, 0, 0],
-                        str(round(L * 0.25, 3)): ["variable.is_first_person ? 0.0 : %s" % _v(-3.0 * k), 0, 0],
-                        str(round(L, 3)): [0, 0, 0],
-                    },
-                    "position": {
-                        "0.0": [0, 0, 0],
-                        str(round(L * 0.25, 3)): [0, "variable.is_first_person ? %s : 0.0" % _v(0.35 * k), "variable.is_first_person ? %s : %s" % (_v(-0.9 * k), _v(0.5 * k))],
-                        str(round(L, 3)): [0, 0, 0],
-                    },
-                },
-                "leftarm": {
-                    "rotation": {
-                        "0.0": [0, 0, 0],
-                        str(round(L * 0.25, 3)): ["variable.is_first_person ? 0.0 : %s" % _v(-3.0 * k), 0, 0],
-                        str(round(L, 3)): [0, 0, 0],
-                    }
-                },
-            },
-        }
+    for name, ao in (("light", "recoil_light"), ("medium", "recoil_medium"), ("heavy", "recoil_heavy"), ("massive", "recoil_huge")):
+        out[f"animation.arsenal.kick.{name}"] = src[f"animation.gun.player.{ao}"]
     return out
 
 
@@ -307,14 +294,8 @@ def reload_animation(ticks, style):
 def misc_animations():
     return {
         "animation.arsenal.none": {"animation_length": 0.05, "bones": {"rightarm": {"rotation": [0, 0, 0]}}},
-        "animation.arsenal.bolt": {
-            "animation_length": 0.8,
-            "bones": {"rightarm": {
-                "position": {"0.0": [0, 0, 0], "0.2": ["variable.is_first_person ? -0.8 : 0.0", "variable.is_first_person ? -1.2 : 0.0", "variable.is_first_person ? -1.0 : 0.0"],
-                             "0.5": ["variable.is_first_person ? -0.6 : 0.0", "variable.is_first_person ? -1.0 : 0.0", "variable.is_first_person ? -0.4 : 0.0"], "0.8": [0, 0, 0]},
-                "rotation": {"0.0": [0, 0, 0], "0.25": ["variable.is_first_person ? 0.0 : -8.0", 0, "variable.is_first_person ? 0.0 : 8.0"], "0.8": [0, 0, 0]},
-            }},
-        },
+        # ボルト操作（3.0.0 から ArsenalOverhaul のもの）
+        "animation.arsenal.bolt": _vendor_motions()["animation.gun.player.bolt"],
         "animation.arsenal.pump": {
             "animation_length": 0.5,
             "bones": {"rightarm": {

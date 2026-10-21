@@ -238,27 +238,37 @@ function drawRadar(player, eye, dir, lockedId) {
   const phase = (now % PING) / PING;
   const alpha = 0.4 + 0.45 * Math.exp(-phase * 4);
   for (const { e, c } of list) {
-    const np = nearPoint(dim, eye, c);
-    if (!np) continue; // 見えている mob はそのまま見えるので出さない
-    const ext = e.getAABB().extent;
-    const hw = Math.max(ext.x, ext.z);
-    const hh = ext.y;
-    const ratio = hh / Math.max(0.05, hw);
-    const shape = FLYERS.test(e.typeId) || e.matches({ families: ["arsenal_flying"] }) ? "flyer" : ratio >= 1.4 ? "humanoid" : ratio < 0.9 ? "quadruped" : "blob";
-    const v = new MolangVariableMap();
-    v.setFloat("variable.hw", hw * np.k * 1.15);
-    v.setFloat("variable.hh", hh * np.k * 1.05);
-    v.setFloat("variable.u", SIL_UV[shape][0]);
-    v.setFloat("variable.v", SIL_UV[shape][1]);
     const locked = e.id === lockedId;
     const hostile = e.matches({ families: ["monster"] }) || e.matches({ families: ["arsenal_enemy"] });
-    const [r, g, b] = locked ? [0.35, 1.0, 0.45] : hostile ? [1.0, 0.3, 0.25] : [1.0, 0.85, 0.3];
-    v.setFloat("variable.r", r);
-    v.setFloat("variable.g", g);
-    v.setFloat("variable.b", b);
-    v.setFloat("variable.a", locked ? Math.max(alpha, 0.75) : alpha);
-    player.spawnParticle("arsenal:silhouette", np.pos, v);
+    const rgb = locked ? [0.35, 1.0, 0.45] : hostile ? [1.0, 0.3, 0.25] : [1.0, 0.85, 0.3];
+    silhouette(player, eye, e, c, rgb, locked ? Math.max(alpha, 0.75) : alpha);
   }
+}
+
+/**
+ * 壁の向こうの相手の影絵を、その人にだけ出す（見えている相手には出さない）。偵察兵のパルススキャン（3.0）も使う
+ * @param {import("@minecraft/server").Player} player @param {import("../util/math.js").Vec3} eye @param {import("@minecraft/server").Entity} e
+ * @param {import("../util/math.js").Vec3} c @param {number[]} rgb @param {number} alpha
+ */
+export function silhouette(player, eye, e, c, rgb, alpha) {
+  const dim = player.dimension;
+  const np = nearPoint(dim, eye, c);
+  if (!np) return; // 見えている mob はそのまま見えるので出さない
+  const ext = e.getAABB().extent;
+  const hw = Math.max(ext.x, ext.z);
+  const hh = ext.y;
+  const ratio = hh / Math.max(0.05, hw);
+  const shape = FLYERS.test(e.typeId) || e.matches({ families: ["arsenal_flying"] }) ? "flyer" : ratio >= 1.4 ? "humanoid" : ratio < 0.9 ? "quadruped" : "blob";
+  const v = new MolangVariableMap();
+  v.setFloat("variable.hw", hw * np.k * 1.15);
+  v.setFloat("variable.hh", hh * np.k * 1.05);
+  v.setFloat("variable.u", SIL_UV[shape][0]);
+  v.setFloat("variable.v", SIL_UV[shape][1]);
+  v.setFloat("variable.r", rgb[0]);
+  v.setFloat("variable.g", rgb[1]);
+  v.setFloat("variable.b", rgb[2]);
+  v.setFloat("variable.a", alpha);
+  player.spawnParticle("arsenal:silhouette", np.pos, v);
 }
 
 /**

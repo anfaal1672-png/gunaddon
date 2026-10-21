@@ -104,6 +104,23 @@ export const STRUCTURES = {
     chests: [{ tier: "common", count: 1 }, { tier: "uncommon", count: 1 }, { tier: "rare", count: 1 }],
     merchant: 0.0, faction: "hollow",
   },
+  // ---- 3.0 で追加（ブラッククロウ） ----
+  crow_compound: {
+    name: { ja: "ブラッククロウの前線基地", en: "Black Crow Compound" },
+    desc: { ja: "金網で囲まれた指揮所とヘリパッド。精鋭が少人数で守る", en: "Fenced command post and helipad, held by a small elite team" },
+    size: [21, 10, 21], sink: 1, biomes: ["forest", "taiga", "jungle", "plains"], scatter: 0.3,
+    garrison: [{ id: "crow_operator", count: 2 }, { id: "crow_gunner", count: 1 }, { id: "crow_marksman", count: 1, at: "roof" }, { id: "crow_medic", count: 1 }, { id: "crow_commander", count: 1, at: "center" }],
+    chests: [{ tier: "uncommon", count: 1 }, { tier: "rare", count: 2 }],
+    merchant: 0.0, faction: "crow",
+  },
+  crow_relay: {
+    name: { ja: "ブラッククロウの通信中継所", en: "Black Crow Relay" },
+    desc: { ja: "鉄塔のアンテナと機材小屋。塔の上から狙撃手が見張る", en: "Antenna mast and equipment shed, with a marksman up top" },
+    size: [13, 16, 13], sink: 1, biomes: ["forest", "taiga", "mountains", "extreme_hills"], scatter: 0.3,
+    garrison: [{ id: "crow_marksman", count: 1, at: "roof" }, { id: "crow_operator", count: 2 }, { id: "crow_breacher", count: 1, at: "center" }],
+    chests: [{ tier: "uncommon", count: 1 }, { tier: "rare", count: 1 }],
+    merchant: 0.0, faction: "crow",
+  },
 };
 
 // ---------------------------------------------------------------------------

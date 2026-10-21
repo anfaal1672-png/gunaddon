@@ -322,6 +322,7 @@ export class Dimension {
     const fam = familiesOf;
     return [...entities.values()].filter((e) => e.isValid && e.dimension === this && (!opt.type || e.typeId === opt.type)
       && (!opt.families || opt.families.every((f) => fam(e).includes(f)))
+      && (!opt.tags || opt.tags.every((t) => e.tags?.has(t)))
       && (!opt.excludeTypes || !opt.excludeTypes.includes(e.typeId))
       && (!opt.excludeFamilies || !fam(e).some((f) => opt.excludeFamilies.includes(f)))
       && (!opt.location || Math.hypot(e.location.x - opt.location.x, e.location.y - opt.location.y, e.location.z - opt.location.z) <= (opt.maxDistance ?? 1e9)));

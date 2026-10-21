@@ -5,6 +5,75 @@ ARSENAL CORE 2.0 — 追加の UI 文言（英語, 日本語）
 """
 
 UI2 = {
+    # ---- 3.0：兵科・パーク ----
+    "arsenal.ui.btn_class": ("Class & Perks", "兵科・パーク"),
+    "arsenal.ui.welcome_v3": ("§6ARSENAL CORE 3.0§r: missions, a 16-mission campaign, classes, perks, squads and the Black Crow faction are here. Open the Field Manual → Missions to start. You received a Tactical Device (class ability).",
+                              "§6ARSENAL CORE 3.0§r：ミッション・全 16 話のキャンペーン・兵科とパーク・分隊・第 4 勢力ブラッククロウが加わりました。野戦マニュアル →「ミッション」から始められます。兵科のアビリティを使う戦術デバイスを渡しました"),
+    "arsenal.class.change": ("Change class & perks", "兵科とパークを変える"),
+    "arsenal.class.get_device": ("Get a Tactical Device", "戦術デバイスを受け取る"),
+    "arsenal.class.have_device": ("§7You already have a Tactical Device.", "§7戦術デバイスはもう持っています"),
+    "arsenal.class.pick": ("Class", "兵科"),
+    "arsenal.class.tier": ("Perk - tier %s", "パーク（ティア %s）"),
+    "arsenal.class.none": ("(none)", "（なし）"),
+    "arsenal.class.locked_tag": ("[rank %s]", "［階級 %s で解放］"),
+    "arsenal.class.saved": ("Loadout saved:", "保存しました："),
+    "arsenal.class.unknown": ("§cUnknown class or perk.", "§c兵科またはパークが見つかりません"),
+    "arsenal.class.perk_locked": ("§eSome perks are locked by rank and were not equipped.", "§e階級が足りないパークは付けられませんでした"),
+    "arsenal.class.switch_wait": ("§cYou changed class recently. Try again in a moment.", "§c兵科を変えたばかりです。少し待ってから変えてください"),
+    "arsenal.class.in_match": ("§cYou can't change class during a match.", "§c試合中は兵科を変えられません"),
+    "arsenal.class.cooldown": ("%s - ready in %s s", "%s：あと %s 秒で使える"),
+    "arsenal.class.used": ("%s!", "%s！"),
+    "arsenal.class.ready": ("%s ready", "%s 使用可"),
+    "arsenal.class.pulse_found": ("Pulse: %s hostiles marked", "パルス：敵 %s 体をマーク"),
+    "arsenal.class.last_stand": ("LAST STAND!", "不屈！"),
+    # ---- 3.0：分隊 ----
+    "arsenal.ui.btn_squad": ("Squad", "分隊"),
+    "arsenal.squad.body": ("Squad members: %s / %s. They follow you and fight hostile factions and monsters. They never shoot players.",
+                           "分隊員：%s / %s 人。ついて来て、敵勢力と敵対 mob と戦います。プレイヤーは撃ちません"),
+    "arsenal.squad.hire": ("Hire a squad member", "分隊員を雇う"),
+    "arsenal.squad.hire_body": ("Pay credits to hire. Up to %s at a time.", "クレジットで雇います。同時に %s 人まで"),
+    "arsenal.squad.hired": ("Hired:", "雇いました："),
+    "arsenal.squad.full": ("§cYour squad is full.", "§c分隊はいっぱいです"),
+    "arsenal.squad.no_credits": ("§cNot enough credits.", "§cクレジットが足りません"),
+    "arsenal.squad.unknown": ("§cCould not hire here.", "§cここでは雇えません"),
+    "arsenal.squad.order_follow": ("Follow me", "ついて来い"),
+    "arsenal.squad.order_hold": ("Hold position", "ここで待て"),
+    "arsenal.squad.dismiss": ("Dismiss squad", "分隊を解散"),
+    "arsenal.squad.down": ("%s is down!", "%s がやられた！"),
+    # ---- 3.0：ミッション・キャンペーン ----
+    "arsenal.ui.btn_missions": ("Missions", "ミッション"),
+    "arsenal.mode_name.mission": ("MISSION", "ミッション"),
+    "arsenal.mission.campaign": ("Campaign", "キャンペーン"),
+    "arsenal.mission.campaign_done": ("Campaign complete", "キャンペーン完了"),
+    "arsenal.mission.campaign_all": ("completed Operation Arsenal!", "がオペレーション・アーセナルを完遂した！"),
+    "arsenal.mission.current": ("Current mission:", "現在の任務："),
+    "arsenal.mission.none": ("No active mission. Take the next campaign mission or a contract below.", "受けている任務はありません。キャンペーンの次の話か、下の依頼を選んでください"),
+    "arsenal.mission.where": ("Objective: X %s / Z %s  (%s m away)", "目標地点：X %s / Z %s（あと %s m）"),
+    "arsenal.mission.reward": ("Reward: %s CR / %s XP + supplies", "報酬：%s CR / %s XP ＋補給品"),
+    "arsenal.mission.rec_rank": ("Recommended rank %s", "推奨階級 %s"),
+    "arsenal.mission.start": ("Deploy", "出撃"),
+    "arsenal.mission.started": ("MISSION:", "任務開始："),
+    "arsenal.mission.complete": ("MISSION COMPLETE:", "任務完了："),
+    "arsenal.mission.abandon": ("Abandon mission", "任務を中止"),
+    "arsenal.mission.abandon_q": ("Abandon the current mission? You won't get any reward.", "いまの任務を中止しますか？ 報酬はもらえません"),
+    "arsenal.mission.abandoned": ("§7Mission abandoned.", "§7任務を中止しました"),
+    "arsenal.mission.contact": ("CONTACT! Enemies at the objective", "接敵！ 目標地点に敵"),
+    "arsenal.mission.intel_done": ("Intel secured - get clear of the area!", "情報を回収した - この場を離れろ！"),
+    "arsenal.mission.return": ("Return to the defense point!", "防衛地点へ戻れ！"),
+    "arsenal.mission.wave": ("Wave %s / %s incoming!", "ウェーブ %s / %s 接近！"),
+    "arsenal.mission.obj.go": ("Head to the objective", "目標地点へ向かえ"),
+    "arsenal.mission.obj.sweep": ("Eliminate all hostiles (%s/%s)", "敵を全滅させろ（%s/%s）"),
+    "arsenal.mission.obj.intel": ("Stand at the marker to download intel (%s/%s s)", "目印のそばに立って情報を回収（%s/%s 秒）"),
+    "arsenal.mission.obj.extract": ("Get %s m away from the objective", "目標地点から %s m 離れろ"),
+    "arsenal.mission.obj.defend": ("Hold the point (wave %s/%s)", "地点を守れ（ウェーブ %s/%s）"),
+    "arsenal.mission.obj.defend_go": ("Defense point reached - get ready!", "防衛地点に到着 - 備えろ！"),
+    "arsenal.mission.obj.target": ("Eliminate the target", "標的を倒せ"),
+    "arsenal.mission.err.in_match": ("§cYou can't take missions during a match.", "§c試合中は任務を受けられません"),
+    "arsenal.mission.err.busy": ("§cFinish or abandon your current mission first.", "§cいまの任務を終えるか中止してください"),
+    "arsenal.mission.err.wait": ("§cYou abandoned a mission just now. Wait a moment.", "§c任務を中止したばかりです。少し待ってください"),
+    "arsenal.mission.err.unknown": ("§cThat contract is no longer available.", "§cその依頼はもうありません"),
+    "arsenal.mission.err.campaign_done": ("§aYou have completed the campaign.", "§aキャンペーンはすべて完了しています"),
+    "arsenal.prog.stat_line4": ("Missions completed: %s  Campaign: %s", "完了した任務：%s　キャンペーン：%s"),
     # ---- 共通・HUD ----
     "arsenal.ui.ks_ready": ("STREAK READY", "ストリーク使用可"),
     "arsenal.ui.melee": ("MELEE", "近接"),
@@ -62,6 +131,7 @@ UI2 = {
     "arsenal.pref.nvg_auto": ("NVG turns on automatically in the dark", "暗視ゴーグルを暗所で自動オン"),
     # ---- ワールド設定（2.0）----
     "arsenal.ws.legion": ("Iron Legion spawns", "アイアン・レギオンの出現"),
+    "arsenal.ws.crow": ("Black Crow spawns", "ブラッククロウの出現"),
     "arsenal.ws.hollow": ("Hollow spawns", "ホロウの出現"),
     "arsenal.ws.structures": ("Structure density", "構造物の密度"),
     "arsenal.ws.ai_difficulty": ("Enemy AI difficulty", "敵 AI の難易度"),
@@ -97,6 +167,7 @@ UI2 = {
     # ---- ボス ----
     "arsenal.boss.reinforce": ("Reinforcements incoming!", "増援が来る！"),
     "arsenal.boss.airstrike": ("AIRSTRIKE - get off the markers!", "空爆 - 印から離れろ！"),
+    "arsenal.boss.blink": ("Smoke! He is flanking you - watch your back!", "煙幕！ 回り込んでくる - 背後に注意！"),
     "arsenal.boss.enrage": ("The boss is enraged!", "ボスが激昂した！"),
     "arsenal.boss.emp": ("EMP charging - get clear!", "EMP 充電中 - 離れろ！"),
     "arsenal.boss.phase": ("Phase %s", "第 %s 段階"),
@@ -386,6 +457,26 @@ def dynamic(d):
     out = {}
     for fid, f in d["FACTIONS"].items():
         out[f"arsenal.faction.{fid}"] = (f["name"]["en"], f["name"]["ja"])
+    # 3.0：兵科・アビリティ・パーク
+    for cid, c in d["CLASSES"].items():
+        out[f"arsenal.class.{cid}"] = (c["name"]["en"], c["name"]["ja"])
+        out[f"arsenal.class.{cid}.desc"] = (c["desc"]["en"], c["desc"]["ja"])
+        a = c["ability"]
+        out[f"arsenal.ability.{a['id']}"] = (a["name"]["en"], a["name"]["ja"])
+        out[f"arsenal.ability.{a['id']}.desc"] = (a["desc"]["en"], a["desc"]["ja"])
+    for k, v in d["MISSION_TYPES"].items():
+        out[f"arsenal.mission.type.{k}"] = (v["name"]["en"], v["name"]["ja"])
+        out[f"arsenal.mission.type.{k}.desc"] = (v["desc"]["en"], v["desc"]["ja"])
+    for i, ch in enumerate(d["CAMPAIGN_CHAPTERS"]):
+        out[f"arsenal.campaign.chapter.{i}"] = (ch["name"]["en"], ch["name"]["ja"])
+    for c in d["CAMPAIGN"]:
+        out[f"arsenal.mission.c.{c['id']}"] = (c["title"]["en"], c["title"]["ja"])
+        out[f"arsenal.mission.c.{c['id']}.brief"] = (c["brief"]["en"], c["brief"]["ja"])
+    for sid, sq in d["SQUAD"].items():
+        out[f"arsenal.squad.{sid}.desc"] = (sq["desc"]["en"], sq["desc"]["ja"])
+    for pid, p in d["PERKS"].items():
+        out[f"arsenal.perk.{pid}"] = (p["name"]["en"], p["name"]["ja"])
+        out[f"arsenal.perk.{pid}.desc"] = (p["desc"]["en"], p["desc"]["ja"])
     for r, v in ROLE_NAME.items():
         out[f"arsenal.role.{r}"] = v
     for r, v in ROLE_DESC.items():

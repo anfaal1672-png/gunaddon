@@ -22,6 +22,7 @@ import { t, raw, itemName } from "../util/i18n.js";
 import { clamp, isLoaded, dist, sub, norm, dot } from "../util/math.js";
 import { onDummyHit } from "../systems/dummy.js";
 import { emitEvent } from "./events.js";
+import { mods, takenMod } from "../progression/classes.js";
 import { absorbPlates, helmetHeadMul, hasRiotShieldFacing } from "./armor.js";
 
 /** 対象ごとの最後のエンジンダメージ tick */
@@ -48,9 +49,20 @@ const lethalGuards = [];
 /**
  * 致死ダメージの横取りを登録（ダウン制・ゲームモード）
  * @param {(target:import("@minecraft/server").Entity, attacker:import("@minecraft/server").Entity|undefined, info:any)=>boolean} fn
+ * @param {boolean} [first] ほかより先に調べる（不屈のパーク：ダウン制より先）
  */
-export function addLethalGuard(fn) {
-  lethalGuards.push(fn);
+export function addLethalGuard(fn, first = false) {
+  if (first) lethalGuards.unshift(fn);
+  else lethalGuards.push(fn);
+}
+
+/**
+ * 相手をマークする（受けるダメージ 1.15 倍。偵察兵のパルススキャン）
+ * @param {string} id @param {number} ticks
+ */
+export function markEntity(id, ticks) {
+  const until = system.currentTick + ticks;
+  if ((marked.get(id) ?? 0) < until) marked.set(id, until);
 }
 
 /** @param {import("@minecraft/server").Entity} target @param {import("@minecraft/server").Entity|undefined} attacker @param {any} info */
@@ -156,6 +168,8 @@ export function canDamage(shooter, target) {
   if (tt === ENTITY.quartermaster || tt === ENTITY.storage || tt === ENTITY.crate || tt === ENTITY.waypoint) return false;
   // 敵同士は撃ち合わない
   if (isEnemyAI(shooter) && isEnemyAI(target)) return false;
+  // 分隊（3.0）はプレイヤーとほかの分隊を撃たない
+  if (shooter.typeId.startsWith(`${NS}:squad_`) && (target instanceof Player || target.typeId.startsWith(`${NS}:squad_`))) return false;
   if (target instanceof Player) {
     const gm = safe("gm", () => target.getGameMode());
     if (gm === GameMode.Creative || gm === GameMode.Spectator) return false;
@@ -224,6 +238,14 @@ export function dealDamage(shooter, target, dmg, o = {}) {
       if (cr > now) dmg *= CORRODE_MUL;
       else corroded.delete(target.id);
     }
+    // 兵科・パーク（3.0）：受けるダメージ・頭へのダメージ・工兵の設置物
+    if (target instanceof Player) dmg *= takenMod(target, o.kind);
+    else if (target.matches({ families: ["arsenal_player_deployable"] })) {
+      const own = target.getDynamicProperty("a:own");
+      const op = typeof own === "string" ? world.getEntity(own) : undefined;
+      if (op instanceof Player) dmg /= mods(op).deployHp;
+    }
+    if (o.head && shooter instanceof Player) dmg *= mods(shooter).head;
     const health = target.getComponent("minecraft:health");
     if (!health) {
       target.applyDamage(dmg, { cause: EntityDamageCause.entityAttack, damagingEntity: shooter });
@@ -362,7 +384,7 @@ export function bulletHit(shooter, target, point, dir, distance, st, mul, o = {}
   const r = dealDamage(shooter, target, dmg, { fire: (st.fireSecs || 0) + (o.extraFire || 0), weaponId: st.id, head: zone === "head", knock: dir, knockPower, dist: distance, kind: "gun" });
   const robot = en && ["robot", "shield_bot", "mortar_bot", "drone", "juggernaut"].includes(en.model);
   if (en && en.faction === "hollow") emit(target.dimension, "arsenal:ichor", point, undefined, { range: 40, blood: true });
-  else impactEntity(target.dimension, point, !NON_FLESH.has(tt) && !robot && !tt.startsWith(`${NS}:`) || (!!en && !robot));
+  else impactEntity(target.dimension, point, !NON_FLESH.has(tt) && !robot && !tt.startsWith(`${NS}:`) || (!!en && !robot), { x: -dir.x, y: -dir.y, z: -dir.z });
   if (!o.silent) {
     playNear(target.dimension, point, robot ? "arsenal.melee.hit_metal" : "arsenal.fx.impact_flesh", { range: 16, volume: 0.6 });
   }

@@ -1135,7 +1135,72 @@ def raider_skin(kind, color):
         _paint_box(px, 48, 48, 4, 12, 4, ghil)
         _paint_box(px, 0, 32, 4, 12, 4, ghil)
         _paint_box(px, 0, 48, 4, 12, 4, ghil)
+    if armor.startswith("crow"):
+        _crow_gear(px, armor, n, rng)
     return img
+
+
+def _crow_gear(px, armor, n, rng):
+    """ブラッククロウ（3.0）：黒い装備に青いバイザー。兵種ごとに印を変える"""
+    black = (30, 32, 36)
+    visor = (90, 200, 235)
+    trim = {"crow_officer": (210, 170, 60), "crow_director": (190, 40, 40)}.get(armor, visor)
+    hood = armor == "crow_sniper"
+    def helm(face, x, y, fw, fh):
+        if face == "bottom":
+            return None
+        if face == "front":
+            if 3 <= y <= 4 and not hood:
+                return (*visor, 255) if armor != "crow_director" else (*_shade(visor, -40), 255)
+            if y >= 5:
+                return None
+            if armor == "crow_medic" and y == 1:
+                return (230, 230, 226, 255)
+        elif face in ("right", "left", "back") and y >= 6:
+            return None if not hood else n((40, 46, 40), 8)
+        if hood:
+            return (*_shade((40, 46, 40), rng.randint(-14, 10)), 255)
+        return n(black, 4)
+    _paint_box(px, 32, 0, 8, 8, 8, helm)
+    def vest(face, x, y, fw, fh):
+        if y > 9:
+            return None
+        if face in ("front", "back"):
+            if armor == "crow_medic" and face == "front" and ((x in (3, 4) and 1 <= y <= 5) or (y in (2, 3, 4) and 2 <= x <= 5)):
+                return (230, 230, 226, 255) if not (x in (3, 4) and y in (2, 3, 4)) else (190, 40, 40, 255)
+            if face == "front" and y == 0:
+                return (*trim, 255)
+            if 4 <= y <= 6 and x % 3 != 2:
+                return n(_shade(black, 14))
+            if face == "front" and armor == "crow_breacher" and y == 8:
+                return (150, 150, 156, 255)
+            return n(black, 4)
+        if face in ("right", "left", "top"):
+            return n(black, 4)
+        return None
+    _paint_box(px, 16, 32, 8, 12, 4, vest)
+    if armor in ("crow_heavy", "crow_director", "crow_officer"):
+        def pad(face, x, y, fw, fh):
+            if y <= 3:
+                return (*trim, 255) if y == 0 and armor != "crow_heavy" else n((40, 42, 48))
+            return None
+        _paint_box(px, 40, 32, 4, 12, 4, pad)
+        _paint_box(px, 48, 48, 4, 12, 4, pad)
+    if armor == "crow_director":
+        # 長いコートの裾
+        def coat(face, x, y, fw, fh):
+            if face in ("top", "bottom") or y > 7:
+                return None
+            return (*trim, 255) if y == 7 else n((26, 26, 30), 3)
+        _paint_box(px, 0, 32, 4, 12, 4, coat)
+        _paint_box(px, 0, 48, 4, 12, 4, coat)
+    if hood:
+        def ghil(face, x, y, fw, fh):
+            if rng.random() < 0.35:
+                return (*_shade((44, 52, 42), rng.randint(-20, 12)), 255)
+            return None
+        _paint_box(px, 40, 32, 4, 12, 4, ghil)
+        _paint_box(px, 48, 48, 4, 12, 4, ghil)
 
 
 # ---------------------------------------------------------------------------
