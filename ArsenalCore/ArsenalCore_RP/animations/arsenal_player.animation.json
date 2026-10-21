@@ -12408,39 +12408,58 @@
       }
     },
     "animation.arsenal.kick.light": {
-      "animation_length": 0.09,
+      "animation_length": 0.14,
       "bones": {
+        "rightitem": {
+          "position": {
+            "0.0": [
+              "v.is_first_person ? 0 : 0",
+              "v.is_first_person ? 0 : 0",
+              "v.is_first_person ? 0 : 0"
+            ],
+            "0.025": [
+              "v.is_first_person ? -1.12 : 0",
+              "v.is_first_person ? 0.23 : 0",
+              "v.is_first_person ? -0.35 : 0"
+            ],
+            "0.14": [
+              "v.is_first_person ? 0 : 0",
+              "v.is_first_person ? 0 : 0",
+              "v.is_first_person ? 0 : 0"
+            ]
+          },
+          "rotation": {
+            "0.0": [
+              "v.is_first_person ? 0 : 0",
+              "v.is_first_person ? 0 : 0",
+              "v.is_first_person ? 0 : 0"
+            ],
+            "0.025": [
+              "v.is_first_person ? -1.16 : 0",
+              "v.is_first_person ? 3.13 : 0",
+              "v.is_first_person ? 5.5 : 0"
+            ],
+            "0.14": [
+              "v.is_first_person ? 0 : 0",
+              "v.is_first_person ? 0 : 0",
+              "v.is_first_person ? 0 : 0"
+            ]
+          }
+        },
         "rightarm": {
           "rotation": {
             "0.0": [
-              0,
-              0,
-              0
-            ],
-            "0.022": [
-              "variable.is_first_person ? 0.0 : -3.0",
+              "v.is_first_person ? 0 : 0",
               0,
               0
             ],
-            "0.09": [
-              0,
-              0,
-              0
-            ]
-          },
-          "position": {
-            "0.0": [
-              0,
+            "0.025": [
+              "v.is_first_person ? 0 : -8.6",
               0,
               0
             ],
-            "0.022": [
-              0,
-              "variable.is_first_person ? 0.35 : 0.0",
-              "variable.is_first_person ? -0.9 : 0.5"
-            ],
-            "0.09": [
-              0,
+            "0.14": [
+              "v.is_first_person ? 0 : 0",
               0,
               0
             ]
@@ -12449,17 +12468,17 @@
         "leftarm": {
           "rotation": {
             "0.0": [
-              0,
-              0,
-              0
-            ],
-            "0.022": [
-              "variable.is_first_person ? 0.0 : -3.0",
+              "v.is_first_person ? 0 : 0",
               0,
               0
             ],
-            "0.09": [
+            "0.025": [
+              "v.is_first_person ? 0 : -8.6",
               0,
+              0
+            ],
+            "0.14": [
+              "v.is_first_person ? 0 : 0",
               0,
               0
             ]
@@ -12468,39 +12487,58 @@
       }
     },
     "animation.arsenal.kick.medium": {
-      "animation_length": 0.11399999999999999,
+      "animation_length": 0.18,
       "bones": {
+        "rightitem": {
+          "position": {
+            "0.0": [
+              "v.is_first_person ? 0 : 0",
+              "v.is_first_person ? 0 : 0",
+              "v.is_first_person ? 0 : 0"
+            ],
+            "0.032": [
+              "v.is_first_person ? -1.48 : 0",
+              "v.is_first_person ? 0.43 : 0",
+              "v.is_first_person ? -0.44 : 0"
+            ],
+            "0.18": [
+              "v.is_first_person ? 0 : 0",
+              "v.is_first_person ? 0 : 0",
+              "v.is_first_person ? 0 : 0"
+            ]
+          },
+          "rotation": {
+            "0.0": [
+              "v.is_first_person ? 0 : 0",
+              "v.is_first_person ? 0 : 0",
+              "v.is_first_person ? 0 : 0"
+            ],
+            "0.032": [
+              "v.is_first_person ? -1.15 : 0",
+              "v.is_first_person ? 4.2 : 0",
+              "v.is_first_person ? 6.83 : 0"
+            ],
+            "0.18": [
+              "v.is_first_person ? 0 : 0",
+              "v.is_first_person ? 0 : 0",
+              "v.is_first_person ? 0 : 0"
+            ]
+          }
+        },
         "rightarm": {
           "rotation": {
             "0.0": [
-              0,
-              0,
-              0
-            ],
-            "0.028": [
-              "variable.is_first_person ? 0.0 : -5.4",
+              "v.is_first_person ? 0 : 0",
               0,
               0
             ],
-            "0.114": [
-              0,
-              0,
-              0
-            ]
-          },
-          "position": {
-            "0.0": [
-              0,
+            "0.032": [
+              "v.is_first_person ? 0 : -11",
               0,
               0
             ],
-            "0.028": [
-              0,
-              "variable.is_first_person ? 0.63 : 0.0",
-              "variable.is_first_person ? -1.62 : 0.9"
-            ],
-            "0.114": [
-              0,
+            "0.18": [
+              "v.is_first_person ? 0 : 0",
               0,
               0
             ]
@@ -12509,17 +12547,17 @@
         "leftarm": {
           "rotation": {
             "0.0": [
-              0,
-              0,
-              0
-            ],
-            "0.028": [
-              "variable.is_first_person ? 0.0 : -5.4",
+              "v.is_first_person ? 0 : 0",
               0,
               0
             ],
-            "0.114": [
+            "0.032": [
+              "v.is_first_person ? 0 : -11",
               0,
+              0
+            ],
+            "0.18": [
+              "v.is_first_person ? 0 : 0",
               0,
               0
             ]
@@ -12528,39 +12566,58 @@
       }
     },
     "animation.arsenal.kick.heavy": {
-      "animation_length": 0.15,
+      "animation_length": 0.32,
       "bones": {
+        "rightitem": {
+          "position": {
+            "0.0": [
+              "v.is_first_person ? 0 : 0",
+              "v.is_first_person ? 0 : 0",
+              "v.is_first_person ? 0 : 0"
+            ],
+            "0.058": [
+              "v.is_first_person ? -2.41 : 0",
+              "v.is_first_person ? 0.92 : 0",
+              "v.is_first_person ? -0.66 : 0"
+            ],
+            "0.32": [
+              "v.is_first_person ? 0 : 0",
+              "v.is_first_person ? 0 : 0",
+              "v.is_first_person ? 0 : 0"
+            ]
+          },
+          "rotation": {
+            "0.0": [
+              "v.is_first_person ? 0 : 0",
+              "v.is_first_person ? 0 : 0",
+              "v.is_first_person ? 0 : 0"
+            ],
+            "0.058": [
+              "v.is_first_person ? -1.06 : 0",
+              "v.is_first_person ? 6.93 : 0",
+              "v.is_first_person ? 10.13 : 0"
+            ],
+            "0.32": [
+              "v.is_first_person ? 0 : 0",
+              "v.is_first_person ? 0 : 0",
+              "v.is_first_person ? 0 : 0"
+            ]
+          }
+        },
         "rightarm": {
           "rotation": {
             "0.0": [
-              0,
-              0,
-              0
-            ],
-            "0.037": [
-              "variable.is_first_person ? 0.0 : -9.0",
+              "v.is_first_person ? 0 : 0",
               0,
               0
             ],
-            "0.15": [
-              0,
-              0,
-              0
-            ]
-          },
-          "position": {
-            "0.0": [
-              0,
+            "0.058": [
+              "v.is_first_person ? 0 : -17",
               0,
               0
             ],
-            "0.037": [
-              0,
-              "variable.is_first_person ? 1.05 : 0.0",
-              "variable.is_first_person ? -2.7 : 1.5"
-            ],
-            "0.15": [
-              0,
+            "0.32": [
+              "v.is_first_person ? 0 : 0",
               0,
               0
             ]
@@ -12569,17 +12626,17 @@
         "leftarm": {
           "rotation": {
             "0.0": [
-              0,
-              0,
-              0
-            ],
-            "0.037": [
-              "variable.is_first_person ? 0.0 : -9.0",
+              "v.is_first_person ? 0 : 0",
               0,
               0
             ],
-            "0.15": [
+            "0.058": [
+              "v.is_first_person ? 0 : -17",
               0,
+              0
+            ],
+            "0.32": [
+              "v.is_first_person ? 0 : 0",
               0,
               0
             ]
@@ -12588,39 +12645,58 @@
       }
     },
     "animation.arsenal.kick.massive": {
-      "animation_length": 0.19799999999999998,
+      "animation_length": 0.45,
       "bones": {
+        "rightitem": {
+          "position": {
+            "0.0": [
+              "v.is_first_person ? 0 : 0",
+              "v.is_first_person ? 0 : 0",
+              "v.is_first_person ? 0 : 0"
+            ],
+            "0.081": [
+              "v.is_first_person ? -3.56 : 0",
+              "v.is_first_person ? 1.51 : 0",
+              "v.is_first_person ? -0.95 : 0"
+            ],
+            "0.45": [
+              "v.is_first_person ? 0 : 0",
+              "v.is_first_person ? 0 : 0",
+              "v.is_first_person ? 0 : 0"
+            ]
+          },
+          "rotation": {
+            "0.0": [
+              "v.is_first_person ? 0 : 0",
+              "v.is_first_person ? 0 : 0",
+              "v.is_first_person ? 0 : 0"
+            ],
+            "0.081": [
+              "v.is_first_person ? -0.85 : 0",
+              "v.is_first_person ? 10.26 : 0",
+              "v.is_first_person ? 14.05 : 0"
+            ],
+            "0.45": [
+              "v.is_first_person ? 0 : 0",
+              "v.is_first_person ? 0 : 0",
+              "v.is_first_person ? 0 : 0"
+            ]
+          }
+        },
         "rightarm": {
           "rotation": {
             "0.0": [
-              0,
-              0,
-              0
-            ],
-            "0.049": [
-              "variable.is_first_person ? 0.0 : -13.8",
+              "v.is_first_person ? 0 : 0",
               0,
               0
             ],
-            "0.198": [
-              0,
-              0,
-              0
-            ]
-          },
-          "position": {
-            "0.0": [
-              0,
+            "0.081": [
+              "v.is_first_person ? 0 : -24.2",
               0,
               0
             ],
-            "0.049": [
-              0,
-              "variable.is_first_person ? 1.61 : 0.0",
-              "variable.is_first_person ? -4.14 : 2.3"
-            ],
-            "0.198": [
-              0,
+            "0.45": [
+              "v.is_first_person ? 0 : 0",
               0,
               0
             ]
@@ -12629,17 +12705,17 @@
         "leftarm": {
           "rotation": {
             "0.0": [
-              0,
-              0,
-              0
-            ],
-            "0.049": [
-              "variable.is_first_person ? 0.0 : -13.8",
+              "v.is_first_person ? 0 : 0",
               0,
               0
             ],
-            "0.198": [
+            "0.081": [
+              "v.is_first_person ? 0 : -24.2",
               0,
+              0
+            ],
+            "0.45": [
+              "v.is_first_person ? 0 : 0",
               0,
               0
             ]
@@ -19140,9 +19216,26 @@
       }
     },
     "animation.arsenal.bolt": {
-      "animation_length": 0.8,
+      "animation_length": 0.55,
       "bones": {
-        "rightarm": {
+        "rightitem": {
+          "rotation": {
+            "0.0": [
+              0,
+              0,
+              0
+            ],
+            "0.2": [
+              "v.is_first_person ? 11.08 : 0",
+              "v.is_first_person ? 15.04 : 0",
+              "v.is_first_person ? 5.16 : 0"
+            ],
+            "0.55": [
+              0,
+              0,
+              0
+            ]
+          },
           "position": {
             "0.0": [
               0,
@@ -19150,21 +19243,18 @@
               0
             ],
             "0.2": [
-              "variable.is_first_person ? -0.8 : 0.0",
-              "variable.is_first_person ? -1.2 : 0.0",
-              "variable.is_first_person ? -1.0 : 0.0"
+              "v.is_first_person ? 1.18 : 0",
+              "v.is_first_person ? 1.91 : 0",
+              "v.is_first_person ? -0.42 : 0"
             ],
-            "0.5": [
-              "variable.is_first_person ? -0.6 : 0.0",
-              "variable.is_first_person ? -1.0 : 0.0",
-              "variable.is_first_person ? -0.4 : 0.0"
-            ],
-            "0.8": [
+            "0.55": [
               0,
               0,
               0
             ]
-          },
+          }
+        },
+        "leftarm": {
           "rotation": {
             "0.0": [
               0,
@@ -19172,11 +19262,11 @@
               0
             ],
             "0.25": [
-              "variable.is_first_person ? 0.0 : -8.0",
-              0,
-              "variable.is_first_person ? 0.0 : 8.0"
+              "v.is_first_person ? 0 : 15",
+              "v.is_first_person ? 0 : -35",
+              0
             ],
-            "0.8": [
+            "0.55": [
               0,
               0,
               0

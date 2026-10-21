@@ -1,0 +1,67 @@
+{
+ "format_version": "1.10.0",
+ "particle_effect": {
+  "description": {
+   "identifier": "gun:tracer",
+   "basic_render_parameters": {
+    "material": "particles_add",
+    "texture": "textures/gun/particles"
+   }
+  },
+  "components": {
+   "minecraft:emitter_initialization": {
+    "creation_expression": "v.dir ?? { v.dir.x = 0.0; v.dir.y = 1.0; v.dir.z = 0.0; };v.normal ?? { v.normal.x = 0.0; v.normal.y = 1.0; v.normal.z = 0.0; };v.color ?? { v.color.r = 1.0; v.color.g = 1.0; v.color.b = 1.0; };v.len ?? { v.len = 8.0; };v.size ?? { v.size = 1.0; };"
+   },
+   "minecraft:emitter_lifetime_once": {
+    "active_time": 0.05
+   },
+   "minecraft:emitter_rate_instant": {
+    "num_particles": 14
+   },
+   "minecraft:emitter_shape_point": {
+    "offset": [
+     "-v.dir.x * v.particle_random_1 * 2.4",
+     "-v.dir.y * v.particle_random_1 * 2.4",
+     "-v.dir.z * v.particle_random_1 * 2.4"
+    ],
+    "direction": [
+     "v.dir.x",
+     "v.dir.y",
+     "v.dir.z"
+    ]
+   },
+   "minecraft:particle_initial_speed": 150,
+   "minecraft:particle_motion_dynamic": {},
+   "minecraft:particle_lifetime_expression": {
+    "max_lifetime": "math.max(0.02, (v.len - 1.0) / 150)"
+   },
+   "minecraft:particle_appearance_billboard": {
+    "size": [
+     "0.06 * v.size",
+     "0.06 * v.size"
+    ],
+    "facing_camera_mode": "lookat_xyz",
+    "uv": {
+     "texture_width": 128,
+     "texture_height": 128,
+     "uv": [
+      16,
+      64
+     ],
+     "uv_size": [
+      16,
+      16
+     ]
+    }
+   },
+   "minecraft:particle_appearance_tinting": {
+    "color": [
+     "v.color.r",
+     "v.color.g",
+     "v.color.b",
+     0.85
+    ]
+   }
+  }
+ }
+}

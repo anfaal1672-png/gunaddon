@@ -145,13 +145,13 @@ export function fireBallistic(shooter, muzzle, dir, st) {
  * 弾が飛ぶ普通の銃弾（ヒットスキャンの代わり）：目から撃ち、1 tick ごとに弾速ぶん進んで重力で落ちる。
  * 撃ったその tick に最初の 1 区間を進めるので、近距離は今までどおりすぐ当たる
  * @param {import("@minecraft/server").Entity} shooter @param {import("../util/math.js").Vec3} eye @param {import("../util/math.js").Vec3} dir @param {any} st
- * @param {{pen:number, silent:boolean, tracer:boolean, whizz:boolean, muzzle:import("../util/math.js").Vec3}} o
+ * @param {{pen:number, silent:boolean, tracer:boolean, whizz:boolean, muzzle:import("../util/math.js").Vec3, noImpact?:boolean}} o
  */
 export function fireBullet(shooter, eye, dir, st, o) {
   const tr = st.travel;
   const p = addProj({
     type: "bullet", kind: "flare", dim: shooter.dimension, pos: eye, vel: mul(dir, tr.speed), ownerId: shooter.id, maxAge: Math.ceil(st.range1 / tr.speed) + 4,
-    data: { st, gravity: tr.gravity, pen: o.pen, mulDmg: 1, muzzle: o.muzzle, first: true, tracer: o.tracer, whizz: o.whizz, silent: o.silent },
+    data: { st, gravity: tr.gravity, pen: o.pen, mulDmg: 1, muzzle: o.muzzle, first: true, tracer: o.tracer, whizz: o.whizz, silent: o.silent, noImpact: !!o.noImpact },
   }, false);
   safe("proj.bullet", () => tickBullet(p));
 }
@@ -591,7 +591,7 @@ function tickBullet(p) {
   const from = p.pos;
   const L = len(p.vel);
   const dir = mul(p.vel, 1 / L);
-  const r = traceHitscan(shooter, from, dir, st, { maxRange: L, pen: p.data.pen, hitSet: p.hitSet, distOffset: p.traveled, mulDmg: p.data.mulDmg, silent: !!p.data.silent });
+  const r = traceHitscan(shooter, from, dir, st, { maxRange: L, pen: p.data.pen, hitSet: p.hitSet, distOffset: p.traveled, mulDmg: p.data.mulDmg, silent: !!p.data.silent, noImpact: !!p.data.noImpact });
   // 曳光は最初の区間と 2 tick に 1 回（毎 tick 出すと 1 発で 4〜5 本になっていた。軽量化 2.6.5）
   if (p.data.tracer !== false && (p.data.first || p.age % 2 === 0)) drawTracer(shooter, p.data.first ? p.data.muzzle : from, r.end, st, true, p.id);
   if (p.data.first && p.data.whizz !== false) whizzBy(shooter, from, add(from, mul(dir, Math.min(200, st.range1))), isSupersonic(st));

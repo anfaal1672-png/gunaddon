@@ -6,7 +6,7 @@
 import { MolangVariableMap, system, world } from "@minecraft/server";
 import { P } from "../core/settings.js";
 import { DATA, FAR_SOUND_SETS } from "../config/constants.js";
-import { add, mul, basis, dist, rand } from "../util/math.js";
+import { add, mul, norm, basis, dist, rand } from "../util/math.js";
 import { safe } from "../util/log.js";
 
 const Q = { low: 0, medium: 1, high: 2 };
@@ -202,19 +202,29 @@ export function muzzlePos(player, ads) {
  */
 export function muzzleFx(player, st, muzzle, casing) {
   const dim = player.dimension;
+  // 3.0.0：ArsenalOverhaul の発射炎（2 枚）＋発射光（1 枚）＋硝煙。大きさは銃の種類で変える
+  const cat = st.cat;
+  const big = cat === "shotgun" || cat === "sniper" || cat === "launcher" ? 1.5 : cat === "handgun" || cat === "machine_pistol" || cat === "smg" ? 0.8 : 1.1;
+  const view = safe("fx.view", () => player.getViewDirection()) ?? { x: 0, y: 0, z: 1 };
   if (st.flash) {
     const v = new MolangVariableMap();
-    v.setFloat("variable.size", st.cat === "lmg" || st.cat === "battle" || st.cat === "sniper" ? 0.36 : st.cat === "handgun" ? 0.2 : 0.28);
+    v.setFloat("variable.size", big);
     emit(dim, "arsenal:muzzle_flash", muzzle, v, { range: 96, near: 48 });
+    emit(dim, "arsenal:muzzle_glow", muzzle, v, { range: 48, minQ: 1 });
   }
-  emit(dim, "arsenal:muzzle_smoke", muzzle, undefined, { range: 40, minQ: 1 });
+  const sv = new MolangVariableMap();
+  sv.setVector3("variable.dir", view);
+  sv.setFloat("variable.size", cat === "shotgun" || cat === "launcher" ? 2 : 1);
+  emit(dim, "arsenal:muzzle_smoke", muzzle, sv, { range: 40, minQ: 1 });
   if (casing) {
-    const { f, r, u } = basis(player.getViewDirection());
+    const { f, r, u } = basis(view);
     const at = add(add(player.getHeadLocation(), mul(f, 0.55)), add(mul(r, 0.22), mul(u, -0.12)));
     const v = new MolangVariableMap();
-    const dir = add(add(mul(r, 1), mul(u, 0.8)), mul(f, -0.2));
-    v.setSpeedAndDirection("variable.eject", rand(2.2, 3.2), dir);
-    emit(dim, casing === "shell" ? "arsenal:shell_casing" : "arsenal:casing", at, v, { range: 24, minQ: 1 });
+    v.setVector3("variable.dir", norm(add(r, mul(f, -0.25))));
+    const shell = casing === "shell";
+    v.setColorRGB("variable.color", shell ? { red: 0.75, green: 0.12, blue: 0.1 } : { red: 0.86, green: 0.66, blue: 0.27 });
+    v.setFloat("variable.size", shell ? 1.6 : cat === "handgun" || cat === "machine_pistol" || cat === "smg" ? 0.8 : 1);
+    emit(dim, shell ? "arsenal:shell_casing" : "arsenal:casing", at, v, { range: 24, minQ: 1 });
   }
 }
 
@@ -232,19 +242,13 @@ export function tracer(dim, from, to, color, width = 0.05, except, key) {
   // 受け手の演出品質で間引く：高はすべて、中は 2 本に 1 本、低は 4 本に 1 本（同じ弾の続きは key でそろえる）
   const k = key ?? tracerSeq++;
   const minQ = k % 4 === 0 ? 0 : k % 2 === 0 ? 1 : 2;
-  // 速すぎると 1 フレームで通り過ぎて見えないので、見やすい速さに抑える
-  const speed = Math.min(150, Math.max(70, d * 2.2));
+  // 3.0.0：ArsenalOverhaul の曳光（細い光の粒が弾道に沿って秒速 150 ブロックで流れる）。太さは size（0.05 = 1）
   const v = new MolangVariableMap();
-  const dir = mul({ x: to.x - from.x, y: to.y - from.y, z: to.z - from.z }, 1 / d);
-  v.setSpeedAndDirection("variable.tracer", speed, dir);
-  v.setFloat("variable.life", d / speed);
-  v.setFloat("variable.width", width);
-  v.setFloat("variable.len", d * 0.5);
+  v.setVector3("variable.dir", mul({ x: to.x - from.x, y: to.y - from.y, z: to.z - from.z }, 1 / d));
+  v.setFloat("variable.len", d);
+  v.setFloat("variable.size", width / 0.05);
   v.setColorRGB("variable.color", { red: color.r, green: color.g, blue: color.b });
   emit(dim, "arsenal:tracer", from, v, { range: 96, except, minQ });
-  const mid = { x: (from.x + to.x) / 2, y: (from.y + to.y) / 2, z: (from.z + to.z) / 2 };
-  // 尾は高品質の受け手で、近いときだけ
-  emit(dim, "arsenal:tracer_trail", mid, v, { range: 64, minQ: 2 });
 }
 
 /** @param {string} typeId */
@@ -259,26 +263,38 @@ function impactColor(typeId) {
 /**
  * 着弾（ブロック）
  * @param {import("@minecraft/server").Dimension} dim @param {import("../util/math.js").Vec3} point
- * @param {import("../util/math.js").Vec3} normal @param {string} blockType @param {boolean} [metalSpark]
+ * @param {import("../util/math.js").Vec3} normal @param {string} blockType @param {boolean} [metalSpark] @param {number} [dmg] 弾の威力（破片の量）
  */
-export function impactBlock(dim, point, normal, blockType, metalSpark = false) {
+export function impactBlock(dim, point, normal, blockType, metalSpark = false, dmg = 4) {
   const c = impactColor(blockType);
   const v = new MolangVariableMap();
   v.setColorRGB("variable.color", { red: c[0] / 255, green: c[1] / 255, blue: c[2] / 255 });
   v.setVector3("variable.normal", normal);
-  v.setFloat("variable.count", 3);
+  // 3.0.0：ArsenalOverhaul の着弾（強い弾ほど破片と土煙が多い）
+  v.setFloat("variable.size", Math.min(3, 0.6 + dmg / 6));
   const p = add(point, mul(normal, 0.03));
   emit(dim, "arsenal:impact_debris", p, v, { range: 48 });
   emit(dim, "arsenal:impact_dust", p, v, { range: 48, minQ: 1 });
-  if (metalSpark || /iron|gold|copper|stone|deepslate|anvil|bars|chain/.test(blockType)) {
-    emit(dim, "arsenal:impact_spark", p, undefined, { range: 48, minQ: 1 });
+  // 火花は金属なら必ず、石は 3 回に 1 回くらい
+  if (metalSpark || /iron|gold|copper|anvil|bars|chain/.test(blockType) || (/stone|deepslate|brick|concrete/.test(blockType) && Math.random() < 0.35)) {
+    emit(dim, "arsenal:impact_spark", p, v, { range: 48, minQ: 1 });
   }
 }
 
-/** 被弾（生物） @param {import("@minecraft/server").Dimension} dim @param {import("../util/math.js").Vec3} point @param {boolean} flesh */
-export function impactEntity(dim, point, flesh) {
-  if (flesh) emit(dim, "arsenal:blood", point, undefined, { range: 40, blood: true });
-  else emit(dim, "arsenal:impact_spark", point, undefined, { range: 40 });
+/**
+ * 被弾（生物は血、機械・硬いものは火花と光）
+ * @param {import("@minecraft/server").Dimension} dim @param {import("../util/math.js").Vec3} point @param {boolean} flesh
+ * @param {import("../util/math.js").Vec3} [normal] 飛び散る向き（撃った方へ）
+ */
+export function impactEntity(dim, point, flesh, normal) {
+  const v = new MolangVariableMap();
+  if (normal) v.setVector3("variable.normal", normal);
+  if (flesh) emit(dim, "arsenal:blood", point, v, { range: 40, blood: true });
+  else {
+    v.setFloat("variable.size", 0.6);
+    emit(dim, "arsenal:impact_spark", point, v, { range: 40 });
+    emit(dim, "arsenal:hit_flash", point, v, { range: 40, minQ: 1 });
+  }
 }
 
 /** 爆発演出 @param {import("@minecraft/server").Dimension} dim @param {import("../util/math.js").Vec3} loc @param {number} power */

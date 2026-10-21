@@ -388,10 +388,11 @@ function fireHitscan(player, s, eye, view, spread, st, muzzle) {
     const showTracer = st.tracerAlways || (st.tracer && (pellets > 1 ? i % 3 === 0 : true));
     if (travel) {
       // 弾が飛ぶ：1 tick ごとに弾速ぶん進み、重力で落ちる（偏差と落下）。最初の 1 tick ぶんはこの場で進める
-      fireBullet(player, eye, d, st, { pen: pellets > 1 ? 0 : st.pen, silent: pellets > 1 && i > 0, tracer: showTracer && !flame, whizz: pellets === 1, muzzle });
+      fireBullet(player, eye, d, st, { pen: pellets > 1 ? 0 : st.pen, silent: pellets > 1 && i > 0, tracer: showTracer && !flame, whizz: pellets === 1, muzzle, noImpact: pellets > 1 && i % 2 === 1 });
       continue;
     }
-    const r = traceHitscan(player, eye, d, st, { pen: pellets > 1 ? 0 : st.pen, silent: pellets > 1 && i > 0 });
+    // 散弾の着弾の見た目は半分の粒だけ（3.0.0 の着弾は 1 か所あたりの粒子が多いので）
+    const r = traceHitscan(player, eye, d, st, { pen: pellets > 1 ? 0 : st.pen, silent: pellets > 1 && i > 0, noImpact: pellets > 1 && i % 2 === 1 });
     lastEnd = r.end;
     if (st.explosive && (r.stopped || r.hitEntity)) miniBlast(player, r.end, 1.4, 3.0, st.id);
     if (showTracer && !flame) drawTracer(player, muzzle, r.end, st, true);

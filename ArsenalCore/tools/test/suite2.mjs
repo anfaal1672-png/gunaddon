@@ -2175,7 +2175,7 @@ export async function suite2(ctx) {
     const prof = prog.profile(player);
     const mine = (m) => dim.getEntities({ tags: [`arsenal_ms:${m.n}`] });
     const goTo = (m, off = 0) => { player.location = { x: m.x + 0.5 + off, y: 64, z: m.z + 0.5 }; };
-    const until = (fn, max = 400) => { for (let i = 0; i <= max; i += 10) { if (fn()) return true; __tick(10); heal(player); } return false; };
+    const until = (fn, max = 400) => { for (let i = 0; i <= max; i++) { if (fn()) return true; __tick(1); heal(player); } return false; }; // 毎 tick 回復（敵に撃たれて倒れると任務が止まる）
     prof.cp = 0;
     const badIds = D.CAMPAIGN.flatMap((c) => [...c.enemies.map((e) => e[0]), c.boss, c.target].filter(Boolean)).filter((id) => !D.ENEMIES[id] && !D.BOSSES[id]);
     check("キャンペーン 16 話・出てくる敵がすべて存在する", D.CAMPAIGN.length === 16 && badIds.length === 0 && D.CAMPAIGN.every((c) => D.CAMPAIGN_CHAPTERS[c.chapter]), badIds.join(","));

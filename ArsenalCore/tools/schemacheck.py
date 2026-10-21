@@ -187,7 +187,8 @@ def validate_particles(rp_dir, rel):
                 if c not in known:
                     errs.append(f"{rel(p)} [{ver}] {c}: スキーマに存在しないコンポーネント")
             mat = doc["particle_effect"].get("description", {}).get("basic_render_parameters", {}).get("material")
-            if mat not in ("particles_alpha", "particles_blend", "particles_opaque"):
+            # particles_add は加算合成（光る）。Microsoft の material files の説明にある（3.0.0 で ArsenalOverhaul の発射炎などが使う）
+            if mat not in ("particles_alpha", "particles_blend", "particles_opaque", "particles_add"):
                 errs.append(f"{rel(p)}: バニラに無いマテリアル {mat}")
     return n, errs
 

@@ -384,7 +384,7 @@ export function bulletHit(shooter, target, point, dir, distance, st, mul, o = {}
   const r = dealDamage(shooter, target, dmg, { fire: (st.fireSecs || 0) + (o.extraFire || 0), weaponId: st.id, head: zone === "head", knock: dir, knockPower, dist: distance, kind: "gun" });
   const robot = en && ["robot", "shield_bot", "mortar_bot", "drone", "juggernaut"].includes(en.model);
   if (en && en.faction === "hollow") emit(target.dimension, "arsenal:ichor", point, undefined, { range: 40, blood: true });
-  else impactEntity(target.dimension, point, !NON_FLESH.has(tt) && !robot && !tt.startsWith(`${NS}:`) || (!!en && !robot));
+  else impactEntity(target.dimension, point, !NON_FLESH.has(tt) && !robot && !tt.startsWith(`${NS}:`) || (!!en && !robot), { x: -dir.x, y: -dir.y, z: -dir.z });
   if (!o.silent) {
     playNear(target.dimension, point, robot ? "arsenal.melee.hit_metal" : "arsenal.fx.impact_flesh", { range: 16, volume: 0.6 });
   }
