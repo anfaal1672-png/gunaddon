@@ -264,6 +264,7 @@ function findTarget(ai) {
   safe("ai.scan", () => {
     for (const p of dim.getPlayers({ location: e.location, maxDistance: sight })) cands.push(p);
     for (const d of dim.getEntities({ location: e.location, maxDistance: sight, families: ["arsenal_player_deployable"] })) cands.push(d);
+    for (const d of dim.getEntities({ location: e.location, maxDistance: sight, families: ["arsenal_squad"] })) cands.push(d);
   });
   for (const c of cands) {
     if (!targetable(c)) continue;
@@ -787,6 +788,13 @@ export function isEmpd(e) {
 //  イベント
 // ---------------------------------------------------------------------------
 
+/** 分隊の射撃（systems/squad.js。循環 import を避けて main.js が登録する） @type {((e:import("@minecraft/server").Entity, dir:import("../../util/math.js").Vec3)=>void)|null} */
+let squadShot = null;
+/** @param {(e:import("@minecraft/server").Entity, dir:import("../../util/math.js").Vec3)=>void} fn */
+export function setSquadShotHandler(fn) {
+  squadShot = fn;
+}
+
 export function attachBrain() {
   setEmpHandler(applyEmp);
   setStunHandler(stun);
@@ -807,6 +815,11 @@ export function attachBrain() {
         const v = safe("ai.vel", () => e.getVelocity()) ?? { x: 0, y: 0, z: 1 };
         safe("ai.shot.remove", () => e.remove());
         if (!owner || !owner.isValid) return;
+        // 分隊（3.0）の合図は分隊の側で撃ち直す
+        if (squadShot && owner.matches({ families: ["arsenal_squad"] })) {
+          squadShot(owner, len(v) > 0.001 ? norm(v) : owner.getViewDirection());
+          return;
+        }
         const ai = registry.get(owner.id) ?? register(owner);
         if (!ai) return;
         aiFire(owner, ai, len(v) > 0.001 ? norm(v) : owner.getViewDirection());

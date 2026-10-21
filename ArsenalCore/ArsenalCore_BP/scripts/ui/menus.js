@@ -19,6 +19,7 @@ import { openModesMenu } from "../modes/modes.js";
 import { weaponLevel, camoUnlocked, profile, rankOf } from "../progression/progression.js";
 import { classOf, perksOf, setLoadout, loadoutBody } from "../progression/classes.js";
 import { inMatch } from "../modes/modes.js";
+import { hire, orderSquad, squadOf, squadBody } from "../systems/squad.js";
 import { playTo } from "../fx/effects.js";
 import { t, raw, itemName, descOf, anyItemName, onOff } from "../util/i18n.js";
 import { safe, logError } from "../util/log.js";
@@ -397,6 +398,7 @@ export async function openManual(player) {
     .title("§lARSENAL CORE")
     .body(t("arsenal.ui.manual_body"))
     .button(t("arsenal.ui.btn_class"), ICON.tool("tactical_device"))
+    .button(t("arsenal.ui.btn_squad"), "textures/ui/FriendsIcon")
     .button(t("arsenal.ui.btn_prefs"), "textures/ui/settings_glyph_color_2x")
     .button(t("arsenal.ui.btn_prefs2"), "textures/ui/icon_setting")
     .button(raw(op ? "" : "§8", t("arsenal.ui.btn_world")), "textures/ui/op")
@@ -412,16 +414,17 @@ export async function openManual(player) {
   if (!r || r.canceled || r.selection === undefined) return;
   switch (r.selection) {
     case 0: return openLoadout(player);
-    case 1: return openPrefs(player);
-    case 2: return openPrefs2(player);
-    case 3: return op ? openWorldSettings(player) : player.sendMessage(t("arsenal.ui.op_only"));
-    case 4: return op ? openWorld2(player) : player.sendMessage(t("arsenal.ui.op_only"));
-    case 5: return openCodex2(player);
-    case 6: return openGuide2(player);
-    case 7: return openProgress(player);
-    case 8: return openModesMenu(player);
-    case 9: return openTeam(player);
-    case 10: {
+    case 1: return openSquad(player);
+    case 2: return openPrefs(player);
+    case 3: return openPrefs2(player);
+    case 4: return op ? openWorldSettings(player) : player.sendMessage(t("arsenal.ui.op_only"));
+    case 5: return op ? openWorld2(player) : player.sendMessage(t("arsenal.ui.op_only"));
+    case 6: return openCodex2(player);
+    case 7: return openGuide2(player);
+    case 8: return openProgress(player);
+    case 9: return openModesMenu(player);
+    case 10: return openTeam(player);
+    case 11: {
       const s = S(player);
       s.nvgOn = !s.nvgOn;
       s.nvgTick = -99;
@@ -429,6 +432,39 @@ export async function openManual(player) {
       return;
     }
   }
+}
+
+/**
+ * 分隊（3.0）：雇う・命令
+ * @param {Player} player
+ */
+export async function openSquad(player) {
+  const SQ = /** @type {Record<string, any>} */ (DATA.SQUAD);
+  const have = squadOf(player).length > 0;
+  const form = new ActionFormData()
+    .title(t("arsenal.ui.btn_squad"))
+    .body(squadBody(player))
+    .button(t("arsenal.squad.hire"), "textures/ui/FriendsIcon")
+    .button(raw(have ? "" : "§8", t("arsenal.squad.order_follow")), "textures/ui/arrow_right")
+    .button(raw(have ? "" : "§8", t("arsenal.squad.order_hold")), "textures/ui/pause_screen_icon")
+    .button(raw(have ? "" : "§8", t("arsenal.squad.dismiss")), "textures/ui/cancel")
+    .button(t("arsenal.ui.btn_close"));
+  const r = await showForm(player, form);
+  if (!r || r.canceled || r.selection === undefined) return;
+  if (r.selection === 1) return orderSquad(player, "follow");
+  if (r.selection === 2) return orderSquad(player, "hold");
+  if (r.selection === 3) return orderSquad(player, "dismiss");
+  if (r.selection !== 0) return;
+  const ids = Object.keys(SQ);
+  const f2 = new ActionFormData().title(t("arsenal.squad.hire")).body(t("arsenal.squad.hire_body", String(DATA.SQUAD_MAX)));
+  for (const id of ids) f2.button(raw({ translate: `entity.${NS}:${id}.name` }, `\n§6${SQ[id].cost} CR §7`, { translate: `arsenal.squad.${id}.desc` }), ICON.weapon(SQ[id].weapon));
+  const r2 = await showForm(player, f2);
+  if (!r2 || r2.canceled || r2.selection === undefined) return;
+  const err = hire(player, ids[r2.selection]);
+  if (err) {
+    player.sendMessage(t(err));
+    playTo(player, "arsenal.ui.error", { volume: 0.6 });
+  } else player.sendMessage(raw("§a", t("arsenal.squad.hired"), " ", { translate: `entity.${NS}:${ids[r2.selection]}.name` }));
 }
 
 /**

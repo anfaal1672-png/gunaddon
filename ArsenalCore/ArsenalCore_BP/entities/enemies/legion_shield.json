@@ -138,6 +138,11 @@
                     "test": "is_family",
                     "subject": "other",
                     "value": "arsenal_player_deployable"
+                  },
+                  {
+                    "test": "is_family",
+                    "subject": "other",
+                    "value": "arsenal_squad"
                   }
                 ]
               },

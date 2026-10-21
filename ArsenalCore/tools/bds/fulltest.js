@@ -22,6 +22,8 @@ import { summonBoss } from "./systems/bosses.js";
 import { spawnEnemy } from "./systems/ai/brain.js";
 import { startLobby, joinMatch, endMatch, currentMatch, __setMatchLobbyNow } from "./modes/modes.js";
 import { addCredits, credits, buy, shopItems, sellSlot, priceOf } from "./economy/economy.js";
+import { hire, squadOf, orderSquad } from "./systems/squad.js";
+import { setLoadout, useAbility, mods } from "./progression/classes.js";
 
 const log = (...a) => console.warn("[FULL] " + a.join(" "));
 const dim = () => world.getDimension("overworld");
@@ -980,7 +982,67 @@ async function nukes() {
   await wait(1300); // 降下物が消えるまで（次の段階に残さない）
 }
 
-const STAGES = { diag, weapons, melee, throw: throwables, gear, enemies, bosses, structures, streaks, modes, misc, specials, facetest, nukes };
+// 3.0：兵科のアビリティ・分隊（雇う・敵を撃つ・ついて来る・待つ・解散）
+async function v3() {
+  const p = sim();
+  tough(p);
+  let ok = 0, n = 0;
+  const expect = (what, cond, why) => {
+    n++;
+    if (cond) ok++;
+    else fail("v3", what, why);
+  };
+  clearMobs();
+  p.teleport({ x: 0.5, y: Y, z: 0.5 });
+  // 兵科：重装兵の防壁（受けるダメージが減る）
+  S(p).classSwitchAt = 0;
+  const err = setLoadout(p, "heavy", [null, null, null]);
+  const used = useAbility(p);
+  expect("ability", err === null && used && mods(p).dmgTaken < 0.5, `err=${err} used=${used} taken=${mods(p).dmgTaken}`);
+  await wait(10);
+  // 分隊：雇って前の敵を撃たせる
+  addCredits(p, 5000, false);
+  const e1 = hire(p, "squad_rifleman");
+  const e2 = hire(p, "squad_gunner");
+  await wait(20);
+  const team = squadOf(p);
+  expect("hire", e1 === null && e2 === null && team.length === 2, `${e1} ${e2} n=${team.length}`);
+  const z = dim().spawnEntity("minecraft:zombie", { x: 0.5, y: Y, z: 14.5 });
+  z.addEffect("slowness", 20000, { amplifier: 255, showParticles: false });
+  z.addEffect("fire_resistance", 20000, { amplifier: 0, showParticles: false });
+  z.nameTag = "qa_v3";
+  const hz = z.getComponent("minecraft:health").currentValue;
+  let shot = false;
+  for (let i = 0; i < 200 && !shot; i++) {
+    await wait(1);
+    shot = !z.isValid || z.getComponent("minecraft:health").currentValue < hz;
+  }
+  expect("squad_fire", shot, `zombie hp ${hz} → ${z.isValid ? z.getComponent("minecraft:health").currentValue : "dead"}`);
+  expect("squad_no_ff", p.getComponent("minecraft:health").currentValue > 0, "owner hurt");
+  if (z.isValid) z.remove();
+  // ついて来る：持ち主が 14 ブロック離れると寄ってくる
+  p.teleport({ x: 30.5, y: Y, z: 0.5 });
+  let near = false;
+  for (let i = 0; i < 300 && !near; i++) {
+    await wait(1);
+    near = squadOf(p).every((m) => Math.hypot(m.ent.location.x - 30.5, m.ent.location.z - 0.5) < 8);
+  }
+  expect("squad_follow", near, JSON.stringify(squadOf(p).map((m) => m.ent.location)));
+  orderSquad(p, "hold");
+  const before = squadOf(p).map((m) => ({ ...m.ent.location }));
+  p.teleport({ x: 0.5, y: Y, z: 0.5 });
+  await wait(80);
+  const moved = squadOf(p).some((m, i) => Math.hypot(m.ent.location.x - before[i].x, m.ent.location.z - before[i].z) > 3);
+  expect("squad_hold", !moved, "moved while holding");
+  orderSquad(p, "dismiss");
+  await wait(5);
+  expect("squad_dismiss", squadOf(p).length === 0, `n=${squadOf(p).length}`);
+  S(p).classSwitchAt = 0;
+  setLoadout(p, "assault", [null, null, null]);
+  log(`v3: ok=${ok}/${n}`);
+}
+
+const STAGES = { diag, weapons, melee, throw: throwables, gear, enemies, bosses, structures, streaks, modes, misc, specials, facetest, nukes, v3 };
 
 system.afterEvents.scriptEventReceive.subscribe((ev) => {
   if (ev.id !== "dev:full") return;

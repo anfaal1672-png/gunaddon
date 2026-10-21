@@ -26,6 +26,20 @@ UI2 = {
     "arsenal.class.ready": ("%s ready", "%s 使用可"),
     "arsenal.class.pulse_found": ("Pulse: %s hostiles marked", "パルス：敵 %s 体をマーク"),
     "arsenal.class.last_stand": ("LAST STAND!", "不屈！"),
+    # ---- 3.0：分隊 ----
+    "arsenal.ui.btn_squad": ("Squad", "分隊"),
+    "arsenal.squad.body": ("Squad members: %s / %s. They follow you and fight hostile factions and monsters. They never shoot players.",
+                           "分隊員：%s / %s 人。ついて来て、敵勢力と敵対 mob と戦います。プレイヤーは撃ちません"),
+    "arsenal.squad.hire": ("Hire a squad member", "分隊員を雇う"),
+    "arsenal.squad.hire_body": ("Pay credits to hire. Up to %s at a time.", "クレジットで雇います。同時に %s 人まで"),
+    "arsenal.squad.hired": ("Hired:", "雇いました："),
+    "arsenal.squad.full": ("§cYour squad is full.", "§c分隊はいっぱいです"),
+    "arsenal.squad.no_credits": ("§cNot enough credits.", "§cクレジットが足りません"),
+    "arsenal.squad.unknown": ("§cCould not hire here.", "§cここでは雇えません"),
+    "arsenal.squad.order_follow": ("Follow me", "ついて来い"),
+    "arsenal.squad.order_hold": ("Hold position", "ここで待て"),
+    "arsenal.squad.dismiss": ("Dismiss squad", "分隊を解散"),
+    "arsenal.squad.down": ("%s is down!", "%s がやられた！"),
     # ---- 共通・HUD ----
     "arsenal.ui.ks_ready": ("STREAK READY", "ストリーク使用可"),
     "arsenal.ui.melee": ("MELEE", "近接"),
@@ -414,6 +428,8 @@ def dynamic(d):
         a = c["ability"]
         out[f"arsenal.ability.{a['id']}"] = (a["name"]["en"], a["name"]["ja"])
         out[f"arsenal.ability.{a['id']}.desc"] = (a["desc"]["en"], a["desc"]["ja"])
+    for sid, sq in d["SQUAD"].items():
+        out[f"arsenal.squad.{sid}.desc"] = (sq["desc"]["en"], sq["desc"]["ja"])
     for pid, p in d["PERKS"].items():
         out[f"arsenal.perk.{pid}"] = (p["name"]["en"], p["name"]["ja"])
         out[f"arsenal.perk.{pid}.desc"] = (p["desc"]["en"], p["desc"]["ja"])

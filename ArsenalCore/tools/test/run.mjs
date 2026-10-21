@@ -38,8 +38,9 @@ FAM_OF.set("arsenal:storage", ["arsenal_storage", "inanimate", "arsenal_fx"]);
 FAM_OF.set("arsenal:ai_shot", ["projectile", "arsenal_fx"]);
 FAM_OF.set("arsenal:supply_crate", ["arsenal_crate", "inanimate"]);
 FAM_OF.set("arsenal:quartermaster", ["arsenal_npc", "mob"]);
+for (const k of Object.keys(D.SQUAD ?? {})) FAM_OF.set(`arsenal:${k}`, ["arsenal_squad", "mob"]);
 globalThis.__familyOf = (t) => FAM_OF.get(t);
-globalThis.__healthOf = (t) => { const id = t.replace("arsenal:", ""); const e = D.ENEMIES[id] ?? D.BOSSES[id]; if (e) return e.health; const dd = Object.values(D.DEPLOYABLES).find((x) => x.entity === id); if (dd) return dd.health; if (D.VEHICLES[id]) return D.VEHICLES[id].health; return undefined; };
+globalThis.__healthOf = (t) => { const id = t.replace("arsenal:", ""); const e = D.ENEMIES[id] ?? D.BOSSES[id]; if (e) return e.health; const dd = Object.values(D.DEPLOYABLES).find((x) => x.entity === id); if (dd) return dd.health; if (D.VEHICLES[id]) return D.VEHICLES[id].health; if (D.SQUAD?.[id]) return D.SQUAD[id].health; return undefined; };
 const mc = await import(pathToFileURL(path.join(run, "node_modules", "@minecraft", "server", "index.js")).href);
 const ui = await import(pathToFileURL(path.join(run, "node_modules", "@minecraft", "server-ui", "index.js")).href);
 const { world, system, ItemStack, Player, Entity, LOG, __tick, __overworld, __use } = mc;
@@ -243,7 +244,7 @@ check("フラッシュバンで盲目", !!player.effects["blindness"] || true);
 
 // ---- UI ----
 console.log("UI");
-ui.UI_LOG.answers.push({ canceled: false, selection: 1 }); // 野戦マニュアルの 2 番目（3.0 で先頭に「兵科・パーク」）
+ui.UI_LOG.answers.push({ canceled: false, selection: 2 }); // 野戦マニュアルの 3 番目（3.0 で先頭に「兵科・パーク」「分隊」）
 ui.UI_LOG.answers.push({ canceled: false, formValues: [1, 0, 0, 1, 0, true, false, true, 0, true, true, 1, 60, true] });
 comps.item["arsenal:tool"].onUse({ source: player, itemStack: new ItemStack("arsenal:field_manual") });
 __tick(3);

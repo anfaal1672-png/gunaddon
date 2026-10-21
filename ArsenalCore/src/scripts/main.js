@@ -31,7 +31,7 @@ import { beginThrow, releaseThrow, tickThrowable, useDetonator, tryPlaceMine, tr
 import { setNukeAnnouncer } from "./systems/nuke.js";
 import { tickDummies, attachDummyPickup } from "./systems/dummy.js";
 import { attachLoot } from "./systems/loot.js";
-import { attachBrain, tickBrain, scanForAI, spawnEnemy } from "./systems/ai/brain.js";
+import { attachBrain, tickBrain, scanForAI, spawnEnemy, setSquadShotHandler } from "./systems/ai/brain.js";
 import { attachBosses, tickBosses, summonBoss } from "./systems/bosses.js";
 import { attachBleeding, tickGearPlayer, completeMedical, startGearUse, stopGearUse, tryDeploy } from "./systems/gear.js";
 import { attachDeployables, tickDeployables, launchDrone } from "./systems/deployables.js";
@@ -45,6 +45,7 @@ import { playNear } from "./fx/effects.js";
 import { t } from "./util/i18n.js";
 import { safe, info } from "./util/log.js";
 import { mods, attachClasses, tickClasses, useAbility } from "./progression/classes.js";
+import { attachSquad, tickSquad, scanSquad, squadFire } from "./systems/squad.js";
 
 // ---------------------------------------------------------------------------
 //  カスタムコンポーネント
@@ -492,6 +493,8 @@ attachStreaks();
 attachStructures();
 attachProgression();
 attachClasses();
+attachSquad();
+setSquadShotHandler(squadFire);
 attachEconomy();
 addHud2Provider((p) => ({ cr: creditsForHud(p), ks: streakReady(p) ? "1" : "0" }));
 
@@ -613,6 +616,7 @@ system.runInterval(() => {
   safe("tickDeployables", () => tickDeployables());
   safe("tickStreaks", () => tickStreaks());
   safe("tickClasses", () => tickClasses());
+  safe("tickSquad", () => tickSquad());
   safe("tickModes", () => tickModes());
   safe("tickStructures", () => tickStructures());
   const now = system.currentTick;
@@ -621,6 +625,7 @@ system.runInterval(() => {
     safe("tickDowned", () => tickDowned());
   }
   if (now % 100 === 50) safe("scanForAI", () => scanForAI());
+  if (now % 100 === 70) safe("scanSquad", () => scanSquad());
   if (now % 100 === 0) safe("flushProgress", () => flushAll());
   if (now % 1200 === 600) safe("sweepOrphans", () => sweepOrphans());
 }, 1);

@@ -1944,13 +1944,13 @@ export async function suite2(ctx) {
   {
     reset();
     clearInv();
-    ui.UI_LOG.answers.push({ canceled: false, selection: 2 });
+    ui.UI_LOG.answers.push({ canceled: false, selection: 3 });
     ui.UI_LOG.answers.push({ canceled: false, formValues: [0, 2, 2, true, true, false, 1, false, 1, -1, true, false] });
     await menus.openManual(player);
     await flush();
     const p = settings.P(player);
     check("HUD・2.0 の設定を保存（大きさ・配置・エイムアシスト・一人称の位置）", p.hudScale === "large" && p.hudLayout === "raised" && p.aimAssist === "light" && p.fpOffsetV === 1 && p.fpOffsetD === -1 && p.suppressionFx === false && p.nvgAuto === false);
-    ui.UI_LOG.answers.push({ canceled: false, selection: 4 });
+    ui.UI_LOG.answers.push({ canceled: false, selection: 5 });
     ui.UI_LOG.answers.push({ canceled: false, formValues: [false, true, 3, 2, true, true, true, true, true, 30, false, true, true, true] });
     await menus.openManual(player);
     await flush();
@@ -2101,6 +2101,66 @@ export async function suite2(ctx) {
     s.abilityReady = 0;
     s.abilityUntil = 0;
     for (const e of [foe, foe2]) if (e?.isValid) e.remove();
+    reset();
+    clearInv();
+  }
+
+  // =====================================================================
+  console.log("3.0 分隊");
+  // =====================================================================
+  {
+    reset();
+    clearInv();
+    const sq = await imp("systems/squad.js");
+    player.setDynamicProperty("a:cr", 100);
+    check("クレジットが足りなければ雇えない", sq.hire(player, "squad_rifleman") === "arsenal.squad.no_credits");
+    player.setDynamicProperty("a:cr", 5000);
+    check("雇える（ライフルマン）", sq.hire(player, "squad_rifleman") === null && sq.squadOf(player).length === 1 && player.getDynamicProperty("a:cr") === 5000 - D.SQUAD.squad_rifleman.cost);
+    check("2 人目（衛生兵）", sq.hire(player, "squad_medic") === null && sq.squadOf(player).length === 2);
+    check("3 人目は雇えない（上限 2）", sq.hire(player, "squad_gunner") === "arsenal.squad.full");
+    const [rif, med] = sq.squadOf(player).map((m) => m.ent);
+    check("持ち主を覚えている（a:own）", rif.getDynamicProperty("a:own") === player.id);
+    check("分隊はプレイヤーを撃てない", dmg.canDamage(rif, player) === false && dmg.canDamage(rif, med) === false);
+    check("持ち主は自分の分隊を撃てない", dmg.canDamage(player, rif) === false);
+    // 前に敵がいれば撃つ、いなければ（プレイヤーの方を向いていても）撃たない
+    rif.location = { x: 0.5, y: 64, z: 0.5 };
+    const foe = brain.spawnEnemy(dim, { x: 0.5, y: 64, z: 10.5 }, "raider_rifleman");
+    check("敵は分隊を撃てる", dmg.canDamage(foe, rif) === true);
+    const fh = foe.getComponent("minecraft:health").currentValue;
+    for (let i = 0; i < 6; i++) sq.squadFire(rif, { x: 0, y: 0, z: 1 });
+    __tick(2);
+    check("分隊は前の敵を撃つ", !foe.isValid || foe.getComponent("minecraft:health").currentValue < fh, `(${fh} → ${foe.isValid ? foe.getComponent("minecraft:health").currentValue : "dead"})`);
+    if (foe.isValid) foe.remove();
+    heal(player);
+    const shots0 = Object.keys(LOG.sounds).reduce((a, k) => a + (k.startsWith("arsenal.fire.") ? LOG.sounds[k] : 0), 0);
+    sq.squadFire(rif, { x: 0, y: 0, z: -1 });
+    const shots1 = Object.keys(LOG.sounds).reduce((a, k) => a + (k.startsWith("arsenal.fire.") ? LOG.sounds[k] : 0), 0);
+    check("敵がいない方へは撃たない", shots1 === shots0);
+    // ついて行く：離れたら追う、遠すぎたら瞬間移動、待てなら動かない
+    player.location = { x: 0.5, y: 64, z: 20.5 };
+    __tick(12);
+    const mR = sq.squadOf(player).find((m) => m.ent.id === rif.id);
+    check("離れたら追いかける（道しるべ）", mR.mode === "move" && !!mR.wp, JSON.stringify({ mode: mR.mode, wp: mR.wp }));
+    player.location = { x: 0.5, y: 64, z: 90.5 };
+    __tick(12);
+    check("遠すぎたらそばへ瞬間移動", Math.hypot(rif.location.x - 0.5, rif.location.z - 90.5) < 6, JSON.stringify(rif.location));
+    sq.orderSquad(player, "hold");
+    player.location = { x: 0.5, y: 64, z: 110.5 };
+    __tick(12);
+    check("「ここで待て」なら追わない", mR.mode === "hold" && rif.getDynamicProperty("a:sq") === "hold");
+    sq.orderSquad(player, "follow");
+    // 衛生兵の手当て
+    med.location = { x: 1.5, y: 64, z: 110.5 };
+    heal(player, 6);
+    __tick(12);
+    check("衛生兵が持ち主の傷を手当てする", player.getComponent("minecraft:health").currentValue > 6, `(${player.getComponent("minecraft:health").currentValue})`);
+    // 野戦マニュアル →「分隊」→ 解散
+    ui.UI_LOG.answers.push({ canceled: false, selection: 1 });
+    ui.UI_LOG.answers.push({ canceled: false, selection: 3 });
+    await menus.openManual(player);
+    await flush();
+    await flush();
+    check("野戦マニュアルから分隊を解散できる", sq.squadOf(player).length === 0 && !rif.isValid && !med.isValid);
     reset();
     clearInv();
   }

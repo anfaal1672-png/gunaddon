@@ -168,6 +168,8 @@ export function canDamage(shooter, target) {
   if (tt === ENTITY.quartermaster || tt === ENTITY.storage || tt === ENTITY.crate || tt === ENTITY.waypoint) return false;
   // 敵同士は撃ち合わない
   if (isEnemyAI(shooter) && isEnemyAI(target)) return false;
+  // 分隊（3.0）はプレイヤーとほかの分隊を撃たない
+  if (shooter.typeId.startsWith(`${NS}:squad_`) && (target instanceof Player || target.typeId.startsWith(`${NS}:squad_`))) return false;
   if (target instanceof Player) {
     const gm = safe("gm", () => target.getGameMode());
     if (gm === GameMode.Creative || gm === GameMode.Spectator) return false;
