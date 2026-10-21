@@ -68,4 +68,14 @@ export const CARBINE = {
     slots: ["optic", "muzzle", "underbarrel", "mag", "laser", "stock"],
     model: { type: "rifle", body: 10, h: 4, barrel: 3, guard: 4, mag: "curved", stock: "wire", finish: "black", accent: "tier" },
   },
+  // ---- 3.0 で追加（ブラッククロウの装備） ----
+  grackle: {
+    cat: "carbine", tier: "rare", name: { ja: "グラックル", en: "Grackle" },
+    desc: { ja: "消音器一体型のカービン。静かに中距離を制する", en: "Integrally suppressed carbine" },
+    ammo: "medium", mag: 30, rpm: 700, modes: ["auto", "semi"], dmg: 3.6, head: 1.75, range: [24, 52], falloff: 0.56,
+    spread: R(2.7, 0.6, 1.5, 0.3, 3.6, 0.38), recoil: { v: 0.8, h: 0.5, shake: 0.02 },
+    reload: { tac: 34, empty: 44 }, ads: 4, move: 1.01, pen: 2, sound: "suppressed", pitch: 0.95, optic: "reddot",
+    slots: ["optic", "underbarrel", "mag", "laser", "stock"], fixed: { muzzle: "muzzle_suppressor" },
+    model: { type: "rifle", body: 11, h: 4, barrel: 0, guard: 5, mag: "curved", stock: "skeleton", finish: "black", accent: "tier", intSuppressor: 7 },
+  },
 };

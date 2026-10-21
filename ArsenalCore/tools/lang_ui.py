@@ -206,6 +206,7 @@ VANILLA = {
     "iron_nugget": ("Iron Nugget", "鉄塊"),
     "oak_planks": ("Oak Planks", "オークの板材"),
     "paper": ("Paper", "紙"),
+    "ink_sac": ("Ink Sac", "イカスミ"),
     "redstone": ("Redstone Dust", "レッドストーンダスト"),
     "redstone_torch": ("Redstone Torch", "レッドストーントーチ"),
     "slime_ball": ("Slimeball", "スライムボール"),

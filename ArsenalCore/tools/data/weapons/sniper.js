@@ -125,4 +125,15 @@ export const SNIPER = {
     slots: ["optic", "underbarrel", "mag", "stock"], fixed: { muzzle: "muzzle_suppressor" },
     model: { type: "sniper", body: 15, h: 4.6, barrel: 4, mag: "box", stock: "fixed", finish: "black", accent: "tier", scope: 8, intSuppressor: 12 },
   },
+  // ---- 3.0 で追加（ブラッククロウの装備） ----
+  kingfisher: {
+    cat: "sniper", tier: "rare", name: { ja: "キングフィッシャー", en: "Kingfisher" },
+    desc: { ja: "弾速の速いストレートプル式狙撃銃。動く標的に強い", en: "Fast straight-pull sniper with a very fast round" },
+    ammo: "precision", mag: 8, rpm: 110, modes: ["semi"], dmg: 13.0, head: 2.3, range: [90, 200], falloff: 0.78,
+    spread: R(6.0, 0.05, 3.0, 1.4, 4.0, 0.3), recoil: { v: 3.3, h: 0.8, shake: 0.065 },
+    reload: { tac: 44, empty: 56 }, ads: 6, move: 0.92, pen: 3, sound: "sniper", pitch: 1.15, optic: "scope8",
+    fire: "ballistic", projectile: { speed: 20, gravity: 0.011 },
+    slots: ["optic", "muzzle", "underbarrel", "mag", "stock"],
+    model: { type: "sniper", body: 16, h: 4.8, barrel: 15, mag: "box", stock: "skeleton", finish: "black", accent: "tier", scope: 8, bolt: true },
+  },
 };

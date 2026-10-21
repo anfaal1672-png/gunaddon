@@ -334,6 +334,7 @@ export async function openWorld2(player) {
     .toggle(t("arsenal.ws.mag_realism"), { defaultValue: w.magRealism !== false })
     .toggle(t("arsenal.ws.limb_damage"), { defaultValue: w.limbDamage !== false })
     .toggle(t("arsenal.ws.nukes"), { defaultValue: w.nukes !== false })
+    .toggle(t("arsenal.ws.crow"), { defaultValue: w.crow !== false })
     .submitButton(t("arsenal.ui.btn_save"));
   const r = await showForm(player, form);
   if (!r || r.canceled || !r.formValues) return;
@@ -357,6 +358,7 @@ export async function openWorld2(player) {
     magRealism: !!v[15],
     limbDamage: !!v[16],
     nukes: !!v[17],
+    crow: !!v[18],
   });
   world.sendMessage(raw("§e[ARSENAL] ", t("arsenal.ui.world_saved", player.name)));
 }
@@ -433,7 +435,7 @@ export function reportLines() {
     `AI registered ${a.registered}  thinks ${a.thinks}  shots ${a.shots}  maxThink/tick ${a.maxThinkPerTick}  skipped ${a.skipped}`,
     `bosses ${bossCount()}  deployables ${deployableCount()}  sites ${sites.length} (cleared ${sites.filter((s) => s.cleared).length})`,
     `match ${m ? `${m.mode}/${m.phase} players ${m.parts.size}` : "-"}`,
-    `world: diff ${w.aiDifficulty} structures ${w.structures} economy ${w.economy} streaks ${w.killstreaks} downed ${w.downed} legion ${w.legion} hollow ${w.hollow} raiders ${w.raiders}`,
+    `world: diff ${w.aiDifficulty} structures ${w.structures} economy ${w.economy} streaks ${w.killstreaks} downed ${w.downed} legion ${w.legion} hollow ${w.hollow} crow ${w.crow} raiders ${w.raiders}`,
   ];
 }
 

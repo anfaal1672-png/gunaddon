@@ -88,6 +88,7 @@ system.beforeEvents.startup.subscribe((ev) => {
         else if (id === ITEM.warlordBanner) summonBoss(player, "boss_warlord", id);
         else if (id === ITEM.legionCore) summonBoss(player, "boss_juggernaut", id);
         else if (id === ITEM.hollowHeart) summonBoss(player, "boss_hollow_mother", id);
+        else if (id === ITEM.crowDossier) summonBoss(player, "boss_director", id);
       }));
     },
   });

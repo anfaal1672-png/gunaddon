@@ -14,7 +14,7 @@ import { S } from "../core/state.js";
 import { W as WS } from "../core/settings.js";
 import { status } from "../core/reload.js";
 import { giveStack } from "../core/inventory.js";
-import { spawnEnemy } from "./ai/brain.js";
+import { spawnEnemy, aiOf } from "./ai/brain.js";
 import { groundBelow } from "./bosses.js";
 import { rollLoot } from "./lootgen.js";
 import { addCredits } from "../economy/economy.js";
@@ -348,6 +348,19 @@ function spawnRoster(dim, m, c, r0, r1) {
   for (const [id, n] of m.ens) for (let i = 0; i < n; i++) spawnAround(dim, m, c, r0, r1, id);
 }
 
+/**
+ * 出した敵にプレイヤーの居場所を知らせる（見えていない敵がそこへ向かう。防衛のウェーブ・回収の増援）
+ * @param {import("@minecraft/server").Dimension} dim @param {Mission} m @param {Player} p
+ */
+function alertMine(dim, m, p) {
+  const now = system.currentTick;
+  const list = safe("mis.alert", () => dim.getEntities({ tags: [`arsenal_ms:${m.n}`], location: p.location, maxDistance: 64 })) ?? [];
+  for (const e of list) {
+    const ai = aiOf(e);
+    if (ai && !ai.target) ai.alert = { pos: { ...p.location }, tick: now };
+  }
+}
+
 /** 目標地点に着いた：敵を出す @param {Player} p @param {Mission} m @param {import("@minecraft/server").Dimension} dim */
 function deploy(p, m, dim) {
   const c = { x: m.x + 0.5, y: /** @type {number} */ (m.y), z: m.z + 0.5 };
@@ -485,6 +498,7 @@ function step(p, m) {
           const c = { x: m.x + 0.5, y: /** @type {number} */ (m.y), z: m.z + 0.5 };
           const pool = enemyPool(m.fac, rankOf(p));
           for (let i = 0; i < TYPES.intel.reinforce && pool.length; i++) spawnAround(dim, m, c, 16, 24, pool[Math.floor(Math.random() * pool.length)]);
+          alertMine(dim, m, p);
           announce(p, raw("§e", t("arsenal.mission.intel_done")), 60);
           playTo(p, "arsenal.ui.streak_ready");
         }
@@ -496,7 +510,10 @@ function step(p, m) {
     const def = TYPES.defend;
     if (d > def.radius) {
       if (now % 60 < STEP) announce(p, raw("§c", t("arsenal.mission.return")), 30);
-    } else if (m.left <= 0) {
+    } else if (m.left > 0) {
+      // 見えていないウェーブの敵を呼び寄せる（4 秒ごと）
+      if (now % 80 < STEP) alertMine(dim, m, p);
+    } else {
       if (m.wave >= m.need) return complete(p, m);
       if (m.gap > 0) {
         m.gap--;
@@ -511,6 +528,7 @@ function step(p, m) {
         for (let i = 0; i < extra && pool.length; i++) spawnAround(dim, m, c, def.spawnDist[0], def.spawnDist[1], pool[Math.floor(Math.random() * pool.length)]);
         m.gap = def.waveGap * 2;
         dirty = true;
+        alertMine(dim, m, p);
         announce(p, raw("§c", t("arsenal.mission.wave", String(m.wave), String(m.need))), 50);
         playNear(dim, c, "arsenal.world.klaxon", { range: 64 });
       }

@@ -86,4 +86,14 @@ export const HANDGUN = {
     slots: ["optic", "muzzle", "laser", "mag"],
     model: { type: "pistol", slide: 10, h: 2.6, grip: "pistol", finish: "od", accent: "tier", extMag: true },
   },
+  // ---- 3.0 で追加（ブラッククロウの装備） ----
+  jackdaw: {
+    cat: "handgun", tier: "rare", name: { ja: "ジャックドー", en: "Jackdaw" },
+    desc: { ja: "8 連発のダブルアクション・リボルバー。クリップで一気に装填できる", en: "8-shot double-action revolver with clip loading" },
+    ammo: "magnum", mag: 8, rpm: 210, modes: ["semi"], dmg: 8.6, head: 1.9, range: [22, 50], falloff: 0.62,
+    spread: R(2.4, 0.35, 1.8, 1.0, 4.0, 0.28), recoil: { v: 3.4, h: 1.0, shake: 0.065 },
+    reload: { tac: 34, empty: 34 }, ads: 4, move: 1.02, pen: 2, sound: "magnum", pitch: 0.92, optic: "iron",
+    slots: ["optic", "laser"],
+    model: { type: "revolver", slide: 11, h: 3, grip: "pistol", finish: "black", accent: "tier" },
+  },
 };

@@ -1,0 +1,24 @@
+{
+  "format_version": "1.26.30",
+  "minecraft:item": {
+    "description": {
+      "identifier": "arsenal:crow_dossier",
+      "menu_category": {
+        "category": "equipment"
+      }
+    },
+    "components": {
+      "minecraft:icon": "arsenal_crow_dossier",
+      "minecraft:display_name": {
+        "value": "item.arsenal.crow_dossier.name"
+      },
+      "minecraft:max_stack_size": 4,
+      "minecraft:tags": {
+        "tags": [
+          "arsenal:tool"
+        ]
+      },
+      "arsenal:tool": {}
+    }
+  }
+}

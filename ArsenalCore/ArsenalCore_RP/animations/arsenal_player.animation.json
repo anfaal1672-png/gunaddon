@@ -797,6 +797,100 @@
         }
       }
     },
+    "animation.arsenal.hold.jackdaw": {
+      "loop": true,
+      "bones": {
+        "rightarm": {
+          "rotation": [
+            "variable.is_first_person ? 0.0 : (q.is_swimming ? 0.0 : -90.0 + q.target_x_rotation - q.is_sneaking * 27.0 - this)",
+            "variable.is_first_person ? 0.0 : (q.is_swimming ? 0.0 : math.clamp(q.target_y_rotation, -60.0, 45.0) - this)",
+            "variable.is_first_person ? 0.0 : -this"
+          ]
+        },
+        "leftarm": {
+          "rotation": [
+            "variable.is_first_person ? 0.0 : (q.is_swimming ? 0.0 : -88.0 + q.target_x_rotation - q.is_sneaking * 27.0 - this)",
+            "variable.is_first_person ? 0.0 : (q.is_swimming ? 0.0 : 36.0 + math.clamp(q.target_y_rotation, -45.0, 5.0) - this)",
+            "variable.is_first_person ? 0.0 : -this"
+          ]
+        }
+      }
+    },
+    "animation.arsenal.ads.jackdaw": {
+      "loop": "hold_on_last_frame",
+      "animation_length": 0.2,
+      "bones": {
+        "rightarm": {
+          "position": {
+            "0.0": [
+              0,
+              0,
+              0
+            ],
+            "0.12": [
+              "variable.is_first_person ? -7.171 : 0.0",
+              "variable.is_first_person ? 0.721 : 0.0",
+              "variable.is_first_person ? -4.78 : 0.0"
+            ],
+            "0.2": [
+              "variable.is_first_person ? -8.436 : 0.0",
+              "variable.is_first_person ? 0.848 : 0.0",
+              "variable.is_first_person ? -5.624 : 0.0"
+            ]
+          }
+        }
+      }
+    },
+    "animation.arsenal.ads.jackdaw.o1": {
+      "loop": "hold_on_last_frame",
+      "animation_length": 0.2,
+      "bones": {
+        "rightarm": {
+          "position": {
+            "0.0": [
+              0,
+              0,
+              0
+            ],
+            "0.12": [
+              "variable.is_first_person ? -7.171 : 0.0",
+              "variable.is_first_person ? -0.044 : 0.0",
+              "variable.is_first_person ? -4.78 : 0.0"
+            ],
+            "0.2": [
+              "variable.is_first_person ? -8.436 : 0.0",
+              "variable.is_first_person ? -0.052 : 0.0",
+              "variable.is_first_person ? -5.624 : 0.0"
+            ]
+          }
+        }
+      }
+    },
+    "animation.arsenal.ads.jackdaw.o2": {
+      "loop": "hold_on_last_frame",
+      "animation_length": 0.2,
+      "bones": {
+        "rightarm": {
+          "position": {
+            "0.0": [
+              0,
+              0,
+              0
+            ],
+            "0.12": [
+              "variable.is_first_person ? -7.171 : 0.0",
+              "variable.is_first_person ? -0.299 : 0.0",
+              "variable.is_first_person ? -4.78 : 0.0"
+            ],
+            "0.2": [
+              "variable.is_first_person ? -8.436 : 0.0",
+              "variable.is_first_person ? -0.352 : 0.0",
+              "variable.is_first_person ? -5.624 : 0.0"
+            ]
+          }
+        }
+      }
+    },
     "animation.arsenal.hold.midge": {
       "loop": true,
       "bones": {
@@ -1355,6 +1449,100 @@
             "0.1": [
               "variable.is_first_person ? -11.436 : 0.0",
               "variable.is_first_person ? 0.548 : 0.0",
+              "variable.is_first_person ? -7.024 : 0.0"
+            ]
+          }
+        }
+      }
+    },
+    "animation.arsenal.hold.finch": {
+      "loop": true,
+      "bones": {
+        "rightarm": {
+          "rotation": [
+            "variable.is_first_person ? 0.0 : (q.is_swimming ? 0.0 : -90.0 + q.target_x_rotation - q.is_sneaking * 27.0 - this)",
+            "variable.is_first_person ? 0.0 : (q.is_swimming ? 0.0 : math.clamp(q.target_y_rotation, -60.0, 45.0) - this)",
+            "variable.is_first_person ? 0.0 : -this"
+          ]
+        },
+        "leftarm": {
+          "rotation": [
+            "variable.is_first_person ? 0.0 : (q.is_swimming ? 0.0 : -88.0 + q.target_x_rotation - q.is_sneaking * 27.0 - this)",
+            "variable.is_first_person ? 0.0 : (q.is_swimming ? 0.0 : 36.0 + math.clamp(q.target_y_rotation, -45.0, 5.0) - this)",
+            "variable.is_first_person ? 0.0 : -this"
+          ]
+        }
+      }
+    },
+    "animation.arsenal.ads.finch": {
+      "loop": "hold_on_last_frame",
+      "animation_length": 0.1,
+      "bones": {
+        "rightarm": {
+          "position": {
+            "0.0": [
+              0,
+              0,
+              0
+            ],
+            "0.06": [
+              "variable.is_first_person ? -9.721 : 0.0",
+              "variable.is_first_person ? 1.571 : 0.0",
+              "variable.is_first_person ? -5.97 : 0.0"
+            ],
+            "0.1": [
+              "variable.is_first_person ? -11.436 : 0.0",
+              "variable.is_first_person ? 1.848 : 0.0",
+              "variable.is_first_person ? -7.024 : 0.0"
+            ]
+          }
+        }
+      }
+    },
+    "animation.arsenal.ads.finch.o1": {
+      "loop": "hold_on_last_frame",
+      "animation_length": 0.1,
+      "bones": {
+        "rightarm": {
+          "position": {
+            "0.0": [
+              0,
+              0,
+              0
+            ],
+            "0.06": [
+              "variable.is_first_person ? -9.721 : 0.0",
+              "variable.is_first_person ? 0.806 : 0.0",
+              "variable.is_first_person ? -5.97 : 0.0"
+            ],
+            "0.1": [
+              "variable.is_first_person ? -11.436 : 0.0",
+              "variable.is_first_person ? 0.948 : 0.0",
+              "variable.is_first_person ? -7.024 : 0.0"
+            ]
+          }
+        }
+      }
+    },
+    "animation.arsenal.ads.finch.o2": {
+      "loop": "hold_on_last_frame",
+      "animation_length": 0.1,
+      "bones": {
+        "rightarm": {
+          "position": {
+            "0.0": [
+              0,
+              0,
+              0
+            ],
+            "0.06": [
+              "variable.is_first_person ? -9.721 : 0.0",
+              "variable.is_first_person ? 0.551 : 0.0",
+              "variable.is_first_person ? -5.97 : 0.0"
+            ],
+            "0.1": [
+              "variable.is_first_person ? -11.436 : 0.0",
+              "variable.is_first_person ? 0.648 : 0.0",
               "variable.is_first_person ? -7.024 : 0.0"
             ]
           }
@@ -2157,6 +2345,100 @@
         }
       }
     },
+    "animation.arsenal.hold.magpie": {
+      "loop": true,
+      "bones": {
+        "rightarm": {
+          "rotation": [
+            "variable.is_first_person ? 0.0 : (q.is_swimming ? 0.0 : -90.0 + q.target_x_rotation - q.is_sneaking * 27.0 - this)",
+            "variable.is_first_person ? 0.0 : (q.is_swimming ? 0.0 : math.clamp(q.target_y_rotation, -60.0, 45.0) - this)",
+            "variable.is_first_person ? 0.0 : -this"
+          ]
+        },
+        "leftarm": {
+          "rotation": [
+            "variable.is_first_person ? 0.0 : (q.is_swimming ? 0.0 : -93.0 + q.target_x_rotation - q.is_sneaking * 27.0 - this)",
+            "variable.is_first_person ? 0.0 : (q.is_swimming ? 0.0 : 42.0 + math.clamp(q.target_y_rotation, -45.0, 5.0) - this)",
+            "variable.is_first_person ? 0.0 : (q.is_sneaking * -15.0 - this)"
+          ]
+        }
+      }
+    },
+    "animation.arsenal.ads.magpie": {
+      "loop": "hold_on_last_frame",
+      "animation_length": 0.15,
+      "bones": {
+        "rightarm": {
+          "position": {
+            "0.0": [
+              0,
+              0,
+              0
+            ],
+            "0.09": [
+              "variable.is_first_person ? -8.446 : 0.0",
+              "variable.is_first_person ? 0.126 : 0.0",
+              "variable.is_first_person ? -2.74 : 0.0"
+            ],
+            "0.15": [
+              "variable.is_first_person ? -9.936 : 0.0",
+              "variable.is_first_person ? 0.148 : 0.0",
+              "variable.is_first_person ? -3.224 : 0.0"
+            ]
+          }
+        }
+      }
+    },
+    "animation.arsenal.ads.magpie.o1": {
+      "loop": "hold_on_last_frame",
+      "animation_length": 0.15,
+      "bones": {
+        "rightarm": {
+          "position": {
+            "0.0": [
+              0,
+              0,
+              0
+            ],
+            "0.09": [
+              "variable.is_first_person ? -8.446 : 0.0",
+              "variable.is_first_person ? -0.299 : 0.0",
+              "variable.is_first_person ? -2.74 : 0.0"
+            ],
+            "0.15": [
+              "variable.is_first_person ? -9.936 : 0.0",
+              "variable.is_first_person ? -0.352 : 0.0",
+              "variable.is_first_person ? -3.224 : 0.0"
+            ]
+          }
+        }
+      }
+    },
+    "animation.arsenal.ads.magpie.o2": {
+      "loop": "hold_on_last_frame",
+      "animation_length": 0.15,
+      "bones": {
+        "rightarm": {
+          "position": {
+            "0.0": [
+              0,
+              0,
+              0
+            ],
+            "0.09": [
+              "variable.is_first_person ? -8.446 : 0.0",
+              "variable.is_first_person ? -0.554 : 0.0",
+              "variable.is_first_person ? -2.74 : 0.0"
+            ],
+            "0.15": [
+              "variable.is_first_person ? -9.936 : 0.0",
+              "variable.is_first_person ? -0.652 : 0.0",
+              "variable.is_first_person ? -3.224 : 0.0"
+            ]
+          }
+        }
+      }
+    },
     "animation.arsenal.hold.drifter": {
       "loop": true,
       "bones": {
@@ -2807,6 +3089,100 @@
               "variable.is_first_person ? -2.74 : 0.0"
             ],
             "0.15": [
+              "variable.is_first_person ? -11.436 : 0.0",
+              "variable.is_first_person ? -0.652 : 0.0",
+              "variable.is_first_person ? -3.224 : 0.0"
+            ]
+          }
+        }
+      }
+    },
+    "animation.arsenal.hold.grackle": {
+      "loop": true,
+      "bones": {
+        "rightarm": {
+          "rotation": [
+            "variable.is_first_person ? 0.0 : (q.is_swimming ? 0.0 : -90.0 + q.target_x_rotation - q.is_sneaking * 27.0 - this)",
+            "variable.is_first_person ? 0.0 : (q.is_swimming ? 0.0 : math.clamp(q.target_y_rotation, -60.0, 45.0) - this)",
+            "variable.is_first_person ? 0.0 : -this"
+          ]
+        },
+        "leftarm": {
+          "rotation": [
+            "variable.is_first_person ? 0.0 : (q.is_swimming ? 0.0 : -93.0 + q.target_x_rotation - q.is_sneaking * 27.0 - this)",
+            "variable.is_first_person ? 0.0 : (q.is_swimming ? 0.0 : 42.0 + math.clamp(q.target_y_rotation, -45.0, 5.0) - this)",
+            "variable.is_first_person ? 0.0 : (q.is_sneaking * -15.0 - this)"
+          ]
+        }
+      }
+    },
+    "animation.arsenal.ads.grackle": {
+      "loop": "hold_on_last_frame",
+      "animation_length": 0.2,
+      "bones": {
+        "rightarm": {
+          "position": {
+            "0.0": [
+              0,
+              0,
+              0
+            ],
+            "0.12": [
+              "variable.is_first_person ? -9.721 : 0.0",
+              "variable.is_first_person ? -0.299 : 0.0",
+              "variable.is_first_person ? -2.74 : 0.0"
+            ],
+            "0.2": [
+              "variable.is_first_person ? -11.436 : 0.0",
+              "variable.is_first_person ? -0.352 : 0.0",
+              "variable.is_first_person ? -3.224 : 0.0"
+            ]
+          }
+        }
+      }
+    },
+    "animation.arsenal.ads.grackle.o0": {
+      "loop": "hold_on_last_frame",
+      "animation_length": 0.2,
+      "bones": {
+        "rightarm": {
+          "position": {
+            "0.0": [
+              0,
+              0,
+              0
+            ],
+            "0.12": [
+              "variable.is_first_person ? -9.721 : 0.0",
+              "variable.is_first_person ? 0.126 : 0.0",
+              "variable.is_first_person ? -2.74 : 0.0"
+            ],
+            "0.2": [
+              "variable.is_first_person ? -11.436 : 0.0",
+              "variable.is_first_person ? 0.148 : 0.0",
+              "variable.is_first_person ? -3.224 : 0.0"
+            ]
+          }
+        }
+      }
+    },
+    "animation.arsenal.ads.grackle.o2": {
+      "loop": "hold_on_last_frame",
+      "animation_length": 0.2,
+      "bones": {
+        "rightarm": {
+          "position": {
+            "0.0": [
+              0,
+              0,
+              0
+            ],
+            "0.12": [
+              "variable.is_first_person ? -9.721 : 0.0",
+              "variable.is_first_person ? -0.554 : 0.0",
+              "variable.is_first_person ? -2.74 : 0.0"
+            ],
+            "0.2": [
               "variable.is_first_person ? -11.436 : 0.0",
               "variable.is_first_person ? -0.652 : 0.0",
               "variable.is_first_person ? -3.224 : 0.0"
@@ -4131,6 +4507,100 @@
         }
       }
     },
+    "animation.arsenal.hold.starling": {
+      "loop": true,
+      "bones": {
+        "rightarm": {
+          "rotation": [
+            "variable.is_first_person ? 0.0 : (q.is_swimming ? 0.0 : -90.0 + q.target_x_rotation - q.is_sneaking * 27.0 - this)",
+            "variable.is_first_person ? 0.0 : (q.is_swimming ? 0.0 : math.clamp(q.target_y_rotation, -60.0, 45.0) - this)",
+            "variable.is_first_person ? 0.0 : -this"
+          ]
+        },
+        "leftarm": {
+          "rotation": [
+            "variable.is_first_person ? 0.0 : (q.is_swimming ? 0.0 : -93.0 + q.target_x_rotation - q.is_sneaking * 27.0 - this)",
+            "variable.is_first_person ? 0.0 : (q.is_swimming ? 0.0 : 42.0 + math.clamp(q.target_y_rotation, -45.0, 5.0) - this)",
+            "variable.is_first_person ? 0.0 : (q.is_sneaking * -15.0 - this)"
+          ]
+        }
+      }
+    },
+    "animation.arsenal.ads.starling": {
+      "loop": "hold_on_last_frame",
+      "animation_length": 0.2,
+      "bones": {
+        "rightarm": {
+          "position": {
+            "0.0": [
+              0,
+              0,
+              0
+            ],
+            "0.12": [
+              "variable.is_first_person ? -8.871 : 0.0",
+              "variable.is_first_person ? -0.299 : 0.0",
+              "variable.is_first_person ? -3.165 : 0.0"
+            ],
+            "0.2": [
+              "variable.is_first_person ? -10.436 : 0.0",
+              "variable.is_first_person ? -0.352 : 0.0",
+              "variable.is_first_person ? -3.724 : 0.0"
+            ]
+          }
+        }
+      }
+    },
+    "animation.arsenal.ads.starling.o0": {
+      "loop": "hold_on_last_frame",
+      "animation_length": 0.2,
+      "bones": {
+        "rightarm": {
+          "position": {
+            "0.0": [
+              0,
+              0,
+              0
+            ],
+            "0.12": [
+              "variable.is_first_person ? -8.871 : 0.0",
+              "variable.is_first_person ? -0.469 : 0.0",
+              "variable.is_first_person ? -3.165 : 0.0"
+            ],
+            "0.2": [
+              "variable.is_first_person ? -10.436 : 0.0",
+              "variable.is_first_person ? -0.552 : 0.0",
+              "variable.is_first_person ? -3.724 : 0.0"
+            ]
+          }
+        }
+      }
+    },
+    "animation.arsenal.ads.starling.o2": {
+      "loop": "hold_on_last_frame",
+      "animation_length": 0.2,
+      "bones": {
+        "rightarm": {
+          "position": {
+            "0.0": [
+              0,
+              0,
+              0
+            ],
+            "0.12": [
+              "variable.is_first_person ? -8.871 : 0.0",
+              "variable.is_first_person ? -0.554 : 0.0",
+              "variable.is_first_person ? -3.165 : 0.0"
+            ],
+            "0.2": [
+              "variable.is_first_person ? -10.436 : 0.0",
+              "variable.is_first_person ? -0.652 : 0.0",
+              "variable.is_first_person ? -3.724 : 0.0"
+            ]
+          }
+        }
+      }
+    },
     "animation.arsenal.hold.longbow": {
       "loop": true,
       "bones": {
@@ -4689,6 +5159,100 @@
             "0.25": [
               "variable.is_first_person ? -10.436 : 0.0",
               "variable.is_first_person ? -0.852 : 0.0",
+              "variable.is_first_person ? -3.724 : 0.0"
+            ]
+          }
+        }
+      }
+    },
+    "animation.arsenal.hold.rook": {
+      "loop": true,
+      "bones": {
+        "rightarm": {
+          "rotation": [
+            "variable.is_first_person ? 0.0 : (q.is_swimming ? 0.0 : -90.0 + q.target_x_rotation - q.is_sneaking * 27.0 - this)",
+            "variable.is_first_person ? 0.0 : (q.is_swimming ? 0.0 : math.clamp(q.target_y_rotation, -60.0, 45.0) - this)",
+            "variable.is_first_person ? 0.0 : -this"
+          ]
+        },
+        "leftarm": {
+          "rotation": [
+            "variable.is_first_person ? 0.0 : (q.is_swimming ? 0.0 : -93.0 + q.target_x_rotation - q.is_sneaking * 27.0 - this)",
+            "variable.is_first_person ? 0.0 : (q.is_swimming ? 0.0 : 42.0 + math.clamp(q.target_y_rotation, -45.0, 5.0) - this)",
+            "variable.is_first_person ? 0.0 : (q.is_sneaking * -15.0 - this)"
+          ]
+        }
+      }
+    },
+    "animation.arsenal.ads.rook": {
+      "loop": "hold_on_last_frame",
+      "animation_length": 0.25,
+      "bones": {
+        "rightarm": {
+          "position": {
+            "0.0": [
+              0,
+              0,
+              0
+            ],
+            "0.15": [
+              "variable.is_first_person ? -8.871 : 0.0",
+              "variable.is_first_person ? -0.724 : 0.0",
+              "variable.is_first_person ? -3.165 : 0.0"
+            ],
+            "0.25": [
+              "variable.is_first_person ? -10.436 : 0.0",
+              "variable.is_first_person ? -0.852 : 0.0",
+              "variable.is_first_person ? -3.724 : 0.0"
+            ]
+          }
+        }
+      }
+    },
+    "animation.arsenal.ads.rook.o0": {
+      "loop": "hold_on_last_frame",
+      "animation_length": 0.25,
+      "bones": {
+        "rightarm": {
+          "position": {
+            "0.0": [
+              0,
+              0,
+              0
+            ],
+            "0.15": [
+              "variable.is_first_person ? -8.871 : 0.0",
+              "variable.is_first_person ? -0.299 : 0.0",
+              "variable.is_first_person ? -3.165 : 0.0"
+            ],
+            "0.25": [
+              "variable.is_first_person ? -10.436 : 0.0",
+              "variable.is_first_person ? -0.352 : 0.0",
+              "variable.is_first_person ? -3.724 : 0.0"
+            ]
+          }
+        }
+      }
+    },
+    "animation.arsenal.ads.rook.o2": {
+      "loop": "hold_on_last_frame",
+      "animation_length": 0.25,
+      "bones": {
+        "rightarm": {
+          "position": {
+            "0.0": [
+              0,
+              0,
+              0
+            ],
+            "0.15": [
+              "variable.is_first_person ? -8.871 : 0.0",
+              "variable.is_first_person ? -0.979 : 0.0",
+              "variable.is_first_person ? -3.165 : 0.0"
+            ],
+            "0.25": [
+              "variable.is_first_person ? -10.436 : 0.0",
+              "variable.is_first_person ? -1.152 : 0.0",
               "variable.is_first_person ? -3.724 : 0.0"
             ]
           }
@@ -5441,6 +6005,100 @@
             "0.3": [
               "variable.is_first_person ? -10.436 : 0.0",
               "variable.is_first_person ? -0.952 : 0.0",
+              "variable.is_first_person ? -3.724 : 0.0"
+            ]
+          }
+        }
+      }
+    },
+    "animation.arsenal.hold.corax": {
+      "loop": true,
+      "bones": {
+        "rightarm": {
+          "rotation": [
+            "variable.is_first_person ? 0.0 : (q.is_swimming ? 0.0 : -90.0 + q.target_x_rotation - q.is_sneaking * 27.0 - this)",
+            "variable.is_first_person ? 0.0 : (q.is_swimming ? 0.0 : math.clamp(q.target_y_rotation, -60.0, 45.0) - this)",
+            "variable.is_first_person ? 0.0 : -this"
+          ]
+        },
+        "leftarm": {
+          "rotation": [
+            "variable.is_first_person ? 0.0 : (q.is_swimming ? 0.0 : -93.0 + q.target_x_rotation - q.is_sneaking * 27.0 - this)",
+            "variable.is_first_person ? 0.0 : (q.is_swimming ? 0.0 : 42.0 + math.clamp(q.target_y_rotation, -45.0, 5.0) - this)",
+            "variable.is_first_person ? 0.0 : (q.is_sneaking * -15.0 - this)"
+          ]
+        }
+      }
+    },
+    "animation.arsenal.ads.corax": {
+      "loop": "hold_on_last_frame",
+      "animation_length": 0.3,
+      "bones": {
+        "rightarm": {
+          "position": {
+            "0.0": [
+              0,
+              0,
+              0
+            ],
+            "0.18": [
+              "variable.is_first_person ? -8.871 : 0.0",
+              "variable.is_first_person ? -0.979 : 0.0",
+              "variable.is_first_person ? -3.165 : 0.0"
+            ],
+            "0.3": [
+              "variable.is_first_person ? -10.436 : 0.0",
+              "variable.is_first_person ? -1.152 : 0.0",
+              "variable.is_first_person ? -3.724 : 0.0"
+            ]
+          }
+        }
+      }
+    },
+    "animation.arsenal.ads.corax.o0": {
+      "loop": "hold_on_last_frame",
+      "animation_length": 0.3,
+      "bones": {
+        "rightarm": {
+          "position": {
+            "0.0": [
+              0,
+              0,
+              0
+            ],
+            "0.18": [
+              "variable.is_first_person ? -8.871 : 0.0",
+              "variable.is_first_person ? -0.299 : 0.0",
+              "variable.is_first_person ? -3.165 : 0.0"
+            ],
+            "0.3": [
+              "variable.is_first_person ? -10.436 : 0.0",
+              "variable.is_first_person ? -0.352 : 0.0",
+              "variable.is_first_person ? -3.724 : 0.0"
+            ]
+          }
+        }
+      }
+    },
+    "animation.arsenal.ads.corax.o1": {
+      "loop": "hold_on_last_frame",
+      "animation_length": 0.3,
+      "bones": {
+        "rightarm": {
+          "position": {
+            "0.0": [
+              0,
+              0,
+              0
+            ],
+            "0.18": [
+              "variable.is_first_person ? -8.871 : 0.0",
+              "variable.is_first_person ? -0.724 : 0.0",
+              "variable.is_first_person ? -3.165 : 0.0"
+            ],
+            "0.3": [
+              "variable.is_first_person ? -10.436 : 0.0",
+              "variable.is_first_person ? -0.852 : 0.0",
               "variable.is_first_person ? -3.724 : 0.0"
             ]
           }
@@ -6525,6 +7183,100 @@
         }
       }
     },
+    "animation.arsenal.hold.kingfisher": {
+      "loop": true,
+      "bones": {
+        "rightarm": {
+          "rotation": [
+            "variable.is_first_person ? 0.0 : (q.is_swimming ? 0.0 : -90.0 + q.target_x_rotation - q.is_sneaking * 27.0 - this)",
+            "variable.is_first_person ? 0.0 : (q.is_swimming ? 0.0 : math.clamp(q.target_y_rotation, -60.0, 45.0) - this)",
+            "variable.is_first_person ? 0.0 : -this"
+          ]
+        },
+        "leftarm": {
+          "rotation": [
+            "variable.is_first_person ? 0.0 : (q.is_swimming ? 0.0 : -93.0 + q.target_x_rotation - q.is_sneaking * 27.0 - this)",
+            "variable.is_first_person ? 0.0 : (q.is_swimming ? 0.0 : 42.0 + math.clamp(q.target_y_rotation, -45.0, 5.0) - this)",
+            "variable.is_first_person ? 0.0 : (q.is_sneaking * -15.0 - this)"
+          ]
+        }
+      }
+    },
+    "animation.arsenal.ads.kingfisher": {
+      "loop": "hold_on_last_frame",
+      "animation_length": 0.3,
+      "bones": {
+        "rightarm": {
+          "position": {
+            "0.0": [
+              0,
+              0,
+              0
+            ],
+            "0.18": [
+              "variable.is_first_person ? -8.871 : 0.0",
+              "variable.is_first_person ? -1.149 : 0.0",
+              "variable.is_first_person ? -3.42 : 0.0"
+            ],
+            "0.3": [
+              "variable.is_first_person ? -10.436 : 0.0",
+              "variable.is_first_person ? -1.352 : 0.0",
+              "variable.is_first_person ? -4.024 : 0.0"
+            ]
+          }
+        }
+      }
+    },
+    "animation.arsenal.ads.kingfisher.o0": {
+      "loop": "hold_on_last_frame",
+      "animation_length": 0.3,
+      "bones": {
+        "rightarm": {
+          "position": {
+            "0.0": [
+              0,
+              0,
+              0
+            ],
+            "0.18": [
+              "variable.is_first_person ? -8.871 : 0.0",
+              "variable.is_first_person ? -0.299 : 0.0",
+              "variable.is_first_person ? -3.42 : 0.0"
+            ],
+            "0.3": [
+              "variable.is_first_person ? -10.436 : 0.0",
+              "variable.is_first_person ? -0.352 : 0.0",
+              "variable.is_first_person ? -4.024 : 0.0"
+            ]
+          }
+        }
+      }
+    },
+    "animation.arsenal.ads.kingfisher.o1": {
+      "loop": "hold_on_last_frame",
+      "animation_length": 0.3,
+      "bones": {
+        "rightarm": {
+          "position": {
+            "0.0": [
+              0,
+              0,
+              0
+            ],
+            "0.18": [
+              "variable.is_first_person ? -8.871 : 0.0",
+              "variable.is_first_person ? -0.724 : 0.0",
+              "variable.is_first_person ? -3.42 : 0.0"
+            ],
+            "0.3": [
+              "variable.is_first_person ? -10.436 : 0.0",
+              "variable.is_first_person ? -0.852 : 0.0",
+              "variable.is_first_person ? -4.024 : 0.0"
+            ]
+          }
+        }
+      }
+    },
     "animation.arsenal.hold.breacher": {
       "loop": true,
       "bones": {
@@ -7553,6 +8305,100 @@
         }
       }
     },
+    "animation.arsenal.hold.blackwing": {
+      "loop": true,
+      "bones": {
+        "rightarm": {
+          "rotation": [
+            "variable.is_first_person ? 0.0 : (q.is_swimming ? 0.0 : -90.0 + q.target_x_rotation - q.is_sneaking * 27.0 - this)",
+            "variable.is_first_person ? 0.0 : (q.is_swimming ? 0.0 : math.clamp(q.target_y_rotation, -60.0, 45.0) - this)",
+            "variable.is_first_person ? 0.0 : -this"
+          ]
+        },
+        "leftarm": {
+          "rotation": [
+            "variable.is_first_person ? 0.0 : (q.is_swimming ? 0.0 : -93.0 + q.target_x_rotation - q.is_sneaking * 27.0 - this)",
+            "variable.is_first_person ? 0.0 : (q.is_swimming ? 0.0 : 42.0 + math.clamp(q.target_y_rotation, -45.0, 5.0) - this)",
+            "variable.is_first_person ? 0.0 : (q.is_sneaking * -15.0 - this)"
+          ]
+        }
+      }
+    },
+    "animation.arsenal.ads.blackwing": {
+      "loop": "hold_on_last_frame",
+      "animation_length": 0.2,
+      "bones": {
+        "rightarm": {
+          "position": {
+            "0.0": [
+              0,
+              0,
+              0
+            ],
+            "0.12": [
+              "variable.is_first_person ? -8.871 : 0.0",
+              "variable.is_first_person ? 0.126 : 0.0",
+              "variable.is_first_person ? -3.165 : 0.0"
+            ],
+            "0.2": [
+              "variable.is_first_person ? -10.436 : 0.0",
+              "variable.is_first_person ? 0.148 : 0.0",
+              "variable.is_first_person ? -3.724 : 0.0"
+            ]
+          }
+        }
+      }
+    },
+    "animation.arsenal.ads.blackwing.o1": {
+      "loop": "hold_on_last_frame",
+      "animation_length": 0.2,
+      "bones": {
+        "rightarm": {
+          "position": {
+            "0.0": [
+              0,
+              0,
+              0
+            ],
+            "0.12": [
+              "variable.is_first_person ? -8.871 : 0.0",
+              "variable.is_first_person ? -0.639 : 0.0",
+              "variable.is_first_person ? -3.165 : 0.0"
+            ],
+            "0.2": [
+              "variable.is_first_person ? -10.436 : 0.0",
+              "variable.is_first_person ? -0.752 : 0.0",
+              "variable.is_first_person ? -3.724 : 0.0"
+            ]
+          }
+        }
+      }
+    },
+    "animation.arsenal.ads.blackwing.o2": {
+      "loop": "hold_on_last_frame",
+      "animation_length": 0.2,
+      "bones": {
+        "rightarm": {
+          "position": {
+            "0.0": [
+              0,
+              0,
+              0
+            ],
+            "0.12": [
+              "variable.is_first_person ? -8.871 : 0.0",
+              "variable.is_first_person ? -0.894 : 0.0",
+              "variable.is_first_person ? -3.165 : 0.0"
+            ],
+            "0.2": [
+              "variable.is_first_person ? -10.436 : 0.0",
+              "variable.is_first_person ? -1.052 : 0.0",
+              "variable.is_first_person ? -3.724 : 0.0"
+            ]
+          }
+        }
+      }
+    },
     "animation.arsenal.hold.juggernaut": {
       "loop": true,
       "bones": {
@@ -7967,6 +8813,100 @@
             "0.4": [
               "variable.is_first_person ? -10.936 : 0.0",
               "variable.is_first_person ? -1.352 : 0.0",
+              "variable.is_first_person ? -3.724 : 0.0"
+            ]
+          }
+        }
+      }
+    },
+    "animation.arsenal.hold.corvid": {
+      "loop": true,
+      "bones": {
+        "rightarm": {
+          "rotation": [
+            "variable.is_first_person ? 0.0 : (q.is_swimming ? 0.0 : -90.0 + q.target_x_rotation - q.is_sneaking * 27.0 - this)",
+            "variable.is_first_person ? 0.0 : (q.is_swimming ? 0.0 : math.clamp(q.target_y_rotation, -60.0, 45.0) - this)",
+            "variable.is_first_person ? 0.0 : -this"
+          ]
+        },
+        "leftarm": {
+          "rotation": [
+            "variable.is_first_person ? 0.0 : (q.is_swimming ? 0.0 : -93.0 + q.target_x_rotation - q.is_sneaking * 27.0 - this)",
+            "variable.is_first_person ? 0.0 : (q.is_swimming ? 0.0 : 42.0 + math.clamp(q.target_y_rotation, -45.0, 5.0) - this)",
+            "variable.is_first_person ? 0.0 : (q.is_sneaking * -15.0 - this)"
+          ]
+        }
+      }
+    },
+    "animation.arsenal.ads.corvid": {
+      "loop": "hold_on_last_frame",
+      "animation_length": 0.3,
+      "bones": {
+        "rightarm": {
+          "position": {
+            "0.0": [
+              0,
+              0,
+              0
+            ],
+            "0.18": [
+              "variable.is_first_person ? -9.296 : 0.0",
+              "variable.is_first_person ? -0.469 : 0.0",
+              "variable.is_first_person ? -3.165 : 0.0"
+            ],
+            "0.3": [
+              "variable.is_first_person ? -10.936 : 0.0",
+              "variable.is_first_person ? -0.552 : 0.0",
+              "variable.is_first_person ? -3.724 : 0.0"
+            ]
+          }
+        }
+      }
+    },
+    "animation.arsenal.ads.corvid.o0": {
+      "loop": "hold_on_last_frame",
+      "animation_length": 0.3,
+      "bones": {
+        "rightarm": {
+          "position": {
+            "0.0": [
+              0,
+              0,
+              0
+            ],
+            "0.18": [
+              "variable.is_first_person ? -9.296 : 0.0",
+              "variable.is_first_person ? -0.044 : 0.0",
+              "variable.is_first_person ? -3.165 : 0.0"
+            ],
+            "0.3": [
+              "variable.is_first_person ? -10.936 : 0.0",
+              "variable.is_first_person ? -0.052 : 0.0",
+              "variable.is_first_person ? -3.724 : 0.0"
+            ]
+          }
+        }
+      }
+    },
+    "animation.arsenal.ads.corvid.o2": {
+      "loop": "hold_on_last_frame",
+      "animation_length": 0.3,
+      "bones": {
+        "rightarm": {
+          "position": {
+            "0.0": [
+              0,
+              0,
+              0
+            ],
+            "0.18": [
+              "variable.is_first_person ? -9.296 : 0.0",
+              "variable.is_first_person ? -0.724 : 0.0",
+              "variable.is_first_person ? -3.165 : 0.0"
+            ],
+            "0.3": [
+              "variable.is_first_person ? -10.936 : 0.0",
+              "variable.is_first_person ? -0.852 : 0.0",
               "variable.is_first_person ? -3.724 : 0.0"
             ]
           }
@@ -12877,6 +13817,96 @@
         }
       }
     },
+    "animation.arsenal.reload.mag_54": {
+      "animation_length": 2.7,
+      "bones": {
+        "rightarm": {
+          "rotation": {
+            "0.0": [
+              0,
+              0,
+              0
+            ],
+            "0.486": [
+              "variable.is_first_person ? 0.0 : -28.0",
+              0,
+              "variable.is_first_person ? 0.0 : 12.0"
+            ],
+            "1.485": [
+              "variable.is_first_person ? 0.0 : -22.400000000000002",
+              0,
+              "variable.is_first_person ? 0.0 : 10.0"
+            ],
+            "2.295": [
+              "variable.is_first_person ? 0.0 : -11.200000000000001",
+              0,
+              0
+            ],
+            "2.7": [
+              0,
+              0,
+              0
+            ]
+          },
+          "position": {
+            "0.0": [
+              0,
+              0,
+              0
+            ],
+            "0.486": [
+              "variable.is_first_person ? 1.5 : 0.0",
+              "variable.is_first_person ? -3.5 : 0.0",
+              "variable.is_first_person ? -1.5 : 0.0"
+            ],
+            "1.485": [
+              "variable.is_first_person ? 1.2 : 0.0",
+              "variable.is_first_person ? -3.15 : 0.0",
+              "variable.is_first_person ? -1.2 : 0.0"
+            ],
+            "2.295": [
+              "variable.is_first_person ? 0.3 : 0.0",
+              "variable.is_first_person ? -0.7000000000000001 : 0.0",
+              0
+            ],
+            "2.7": [
+              0,
+              0,
+              0
+            ]
+          }
+        },
+        "leftarm": {
+          "rotation": {
+            "0.0": [
+              0,
+              0,
+              0
+            ],
+            "0.486": [
+              "variable.is_first_person ? 0.0 : 35.0",
+              0,
+              "variable.is_first_person ? 0.0 : -10.0"
+            ],
+            "1.485": [
+              "variable.is_first_person ? 0.0 : 10.0",
+              0,
+              0
+            ],
+            "2.295": [
+              "variable.is_first_person ? 0.0 : 25.0",
+              0,
+              0
+            ],
+            "2.7": [
+              0,
+              0,
+              0
+            ]
+          }
+        }
+      }
+    },
     "animation.arsenal.reload.mag_48": {
       "animation_length": 2.4,
       "bones": {
@@ -13499,96 +14529,6 @@
               0
             ],
             "2.6": [
-              0,
-              0,
-              0
-            ]
-          }
-        }
-      }
-    },
-    "animation.arsenal.reload.mag_54": {
-      "animation_length": 2.7,
-      "bones": {
-        "rightarm": {
-          "rotation": {
-            "0.0": [
-              0,
-              0,
-              0
-            ],
-            "0.486": [
-              "variable.is_first_person ? 0.0 : -28.0",
-              0,
-              "variable.is_first_person ? 0.0 : 12.0"
-            ],
-            "1.485": [
-              "variable.is_first_person ? 0.0 : -22.400000000000002",
-              0,
-              "variable.is_first_person ? 0.0 : 10.0"
-            ],
-            "2.295": [
-              "variable.is_first_person ? 0.0 : -11.200000000000001",
-              0,
-              0
-            ],
-            "2.7": [
-              0,
-              0,
-              0
-            ]
-          },
-          "position": {
-            "0.0": [
-              0,
-              0,
-              0
-            ],
-            "0.486": [
-              "variable.is_first_person ? 1.5 : 0.0",
-              "variable.is_first_person ? -3.5 : 0.0",
-              "variable.is_first_person ? -1.5 : 0.0"
-            ],
-            "1.485": [
-              "variable.is_first_person ? 1.2 : 0.0",
-              "variable.is_first_person ? -3.15 : 0.0",
-              "variable.is_first_person ? -1.2 : 0.0"
-            ],
-            "2.295": [
-              "variable.is_first_person ? 0.3 : 0.0",
-              "variable.is_first_person ? -0.7000000000000001 : 0.0",
-              0
-            ],
-            "2.7": [
-              0,
-              0,
-              0
-            ]
-          }
-        },
-        "leftarm": {
-          "rotation": {
-            "0.0": [
-              0,
-              0,
-              0
-            ],
-            "0.486": [
-              "variable.is_first_person ? 0.0 : 35.0",
-              0,
-              "variable.is_first_person ? 0.0 : -10.0"
-            ],
-            "1.485": [
-              "variable.is_first_person ? 0.0 : 10.0",
-              0,
-              0
-            ],
-            "2.295": [
-              "variable.is_first_person ? 0.0 : 25.0",
-              0,
-              0
-            ],
-            "2.7": [
               0,
               0,
               0

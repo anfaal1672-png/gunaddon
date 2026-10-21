@@ -789,7 +789,7 @@ async function benchList(player, kind, cat) {
     for (const [id, m] of Object.entries(DATA.MEDICAL)) entries.push({ id, name: itemName(id), icon: `textures/items/arsenal/medical/${id}`, cost: /** @type {any} */ (m).cost, out: /** @type {any} */ (m).out ?? 1, tier: /** @type {any} */ (m).tier });
     for (const [id, d] of Object.entries(DATA.DEPLOYABLES)) entries.push({ id, name: itemName(id), icon: `textures/items/arsenal/gear/${id}`, cost: /** @type {any} */ (d).cost, out: 1, tier: /** @type {any} */ (d).tier });
     for (const [id, v] of Object.entries(DATA.VEHICLES)) entries.push({ id, name: itemName(id), icon: `textures/items/arsenal/gear/${id}`, cost: /** @type {any} */ (v).cost, out: 1, tier: /** @type {any} */ (v).tier });
-    for (const id of ["streak_terminal", "arena_tool", "warlord_banner", "legion_core", "hollow_heart"]) entries.push({ id, name: itemName(id), icon: ICON.tool(id), cost: /** @type {any} */ (DATA.TOOLS)[id].cost, out: 1, tier: id === "warlord_banner" || id === "legion_core" || id === "hollow_heart" ? "legendary" : "uncommon" });
+    for (const id of ["streak_terminal", "arena_tool", "warlord_banner", "legion_core", "hollow_heart", "crow_dossier"]) entries.push({ id, name: itemName(id), icon: ICON.tool(id), cost: /** @type {any} */ (DATA.TOOLS)[id].cost, out: 1, tier: id === "warlord_banner" || id === "legion_core" || id === "hollow_heart" ? "legendary" : "uncommon" });
   } else if (kind === "attachment") {
     for (const id of Object.keys(DATA.ATTACHMENTS)) entries.push({ id, name: itemName(id), icon: ICON.att(id), cost: DATA.attachmentRecipe(id), out: 1, tier: A(id).tier });
   } else {

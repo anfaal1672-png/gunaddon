@@ -68,7 +68,7 @@ export async function suite2(ctx) {
   check(`防具 4 系統×3 段階＋特殊 3（${Object.keys(D.ARMOR).length}）`, armorFam.size === 4 && Object.values(D.ARMOR).filter((a) => a.special).length === 3 && Object.keys(D.ARMOR).length >= 27);
   const gearN = Object.keys(D.THROWABLES).length + Object.keys(D.MEDICAL).length + Object.keys(D.DEPLOYABLES).length + Object.keys(D.VEHICLES).length;
   check(`装備 24 種以上（${gearN}）`, gearN >= 24);
-  check(`3 勢力・敵 20 種以上（${Object.keys(D.ENEMIES).length}）・ボス 3`, Object.keys(D.FACTIONS).length === 3 && Object.keys(D.ENEMIES).length >= 20 && Object.keys(D.BOSSES).length === 3);
+  check(`4 勢力・敵 26 種以上（${Object.keys(D.ENEMIES).length}）・ボス 4（3.0 でブラッククロウ）`, Object.keys(D.FACTIONS).length === 4 && Object.keys(D.ENEMIES).length >= 26 && Object.keys(D.BOSSES).length === 4);
   check(`構造物 6 種以上（${Object.keys(D.STRUCTURES).length}）`, Object.keys(D.STRUCTURES).length >= 6);
   check("銃座 4・乗り物 2", Object.values(D.VEHICLES).filter((v) => v.kind === "emplacement").length === 4 && Object.values(D.VEHICLES).filter((v) => v.kind === "vehicle").length === 2);
   check("キルストリーク 8 種（2.6 で誘導ミサイル・核ミサイル）", Object.keys(D.KILLSTREAKS).length === 8);
@@ -330,7 +330,7 @@ export async function suite2(ctx) {
     wall(-3, 3, 64, 66, 6, 6);
     const zb = zombie(0.5, -5.5, 40);
     const ric0 = LOG.sounds["arsenal.fx.ricochet"] ?? 0;
-    shoot("ricochet_disc", { after: 30 });
+    shoot("ricochet_disc", { after: 30, rot: { x: 1.5, y: 0 } }); // わずかに下へ（戻ってきた円盤が敵の頭上を越えないように）
     check("リコシェディスク：壁で跳ね返って後ろの敵に当たる", hp(zb) < 40 && (LOG.sounds["arsenal.fx.ricochet"] ?? 0) > ric0, `(hp=${hp(zb)})`);
     zb.remove();
     unwall();
@@ -2177,6 +2177,8 @@ export async function suite2(ctx) {
     const goTo = (m, off = 0) => { player.location = { x: m.x + 0.5 + off, y: 64, z: m.z + 0.5 }; };
     const until = (fn, max = 400) => { for (let i = 0; i <= max; i += 10) { if (fn()) return true; __tick(10); heal(player); } return false; };
     prof.cp = 0;
+    const badIds = D.CAMPAIGN.flatMap((c) => [...c.enemies.map((e) => e[0]), c.boss, c.target].filter(Boolean)).filter((id) => !D.ENEMIES[id] && !D.BOSSES[id]);
+    check("キャンペーン 16 話・出てくる敵がすべて存在する", D.CAMPAIGN.length === 16 && badIds.length === 0 && D.CAMPAIGN.every((c) => D.CAMPAIGN_CHAPTERS[c.chapter]), badIds.join(","));
     const of = mis.offers(player);
     check("依頼が 3 つ並ぶ（ボス戦は出ない）", of.length === D.MISSION_RULES.offers && of.every((o) => D.CONTRACT_TYPES.includes(o.ty) && D.FACTIONS[o.fac]), JSON.stringify(of));
     // ---- キャンペーン第 1 話（掃討）----

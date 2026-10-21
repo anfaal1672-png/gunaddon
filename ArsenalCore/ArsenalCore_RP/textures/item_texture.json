@@ -203,6 +203,15 @@
     "arsenal_bipod": {
       "textures": "textures/items/arsenal/attachments/bipod"
     },
+    "arsenal_blackwing": {
+      "textures": "textures/items/arsenal/weapons/blackwing"
+    },
+    "arsenal_blackwing__o1": {
+      "textures": "textures/items/arsenal/weapons/blackwing__o1"
+    },
+    "arsenal_blackwing__o2": {
+      "textures": "textures/items/arsenal/weapons/blackwing__o2"
+    },
     "arsenal_blink_pistol": {
       "textures": "textures/items/arsenal/weapons/blink_pistol"
     },
@@ -290,6 +299,15 @@
     "arsenal_condor__o1": {
       "textures": "textures/items/arsenal/weapons/condor__o1"
     },
+    "arsenal_corax": {
+      "textures": "textures/items/arsenal/weapons/corax"
+    },
+    "arsenal_corax__o0": {
+      "textures": "textures/items/arsenal/weapons/corax__o0"
+    },
+    "arsenal_corax__o1": {
+      "textures": "textures/items/arsenal/weapons/corax__o1"
+    },
     "arsenal_corsair": {
       "textures": "textures/items/arsenal/weapons/corsair"
     },
@@ -298,6 +316,18 @@
     },
     "arsenal_corsair__o2": {
       "textures": "textures/items/arsenal/weapons/corsair__o2"
+    },
+    "arsenal_corvid": {
+      "textures": "textures/items/arsenal/weapons/corvid"
+    },
+    "arsenal_corvid__o0": {
+      "textures": "textures/items/arsenal/weapons/corvid__o0"
+    },
+    "arsenal_corvid__o2": {
+      "textures": "textures/items/arsenal/weapons/corvid__o2"
+    },
+    "arsenal_crow_dossier": {
+      "textures": "textures/items/arsenal/tools/crow_dossier"
     },
     "arsenal_cryo_beam": {
       "textures": "textures/items/arsenal/weapons/cryo_beam"
@@ -383,6 +413,15 @@
     "arsenal_field_manual": {
       "textures": "textures/items/arsenal/tools/field_manual"
     },
+    "arsenal_finch": {
+      "textures": "textures/items/arsenal/weapons/finch"
+    },
+    "arsenal_finch__o1": {
+      "textures": "textures/items/arsenal/weapons/finch__o1"
+    },
+    "arsenal_finch__o2": {
+      "textures": "textures/items/arsenal/weapons/finch__o2"
+    },
     "arsenal_flare_pistol": {
       "textures": "textures/items/arsenal/weapons/flare_pistol"
     },
@@ -430,6 +469,15 @@
     },
     "arsenal_goliath__o2": {
       "textures": "textures/items/arsenal/weapons/goliath__o2"
+    },
+    "arsenal_grackle": {
+      "textures": "textures/items/arsenal/weapons/grackle"
+    },
+    "arsenal_grackle__o0": {
+      "textures": "textures/items/arsenal/weapons/grackle__o0"
+    },
+    "arsenal_grackle__o2": {
+      "textures": "textures/items/arsenal/weapons/grackle__o2"
     },
     "arsenal_grapple": {
       "textures": "textures/items/arsenal/weapons/grapple"
@@ -653,6 +701,15 @@
     "arsenal_jackal__o2": {
       "textures": "textures/items/arsenal/weapons/jackal__o2"
     },
+    "arsenal_jackdaw": {
+      "textures": "textures/items/arsenal/weapons/jackdaw"
+    },
+    "arsenal_jackdaw__o1": {
+      "textures": "textures/items/arsenal/weapons/jackdaw__o1"
+    },
+    "arsenal_jackdaw__o2": {
+      "textures": "textures/items/arsenal/weapons/jackdaw__o2"
+    },
     "arsenal_juggernaut": {
       "textures": "textures/items/arsenal/weapons/juggernaut"
     },
@@ -673,6 +730,15 @@
     },
     "arsenal_kestrel_pdw__o2": {
       "textures": "textures/items/arsenal/weapons/kestrel_pdw__o2"
+    },
+    "arsenal_kingfisher": {
+      "textures": "textures/items/arsenal/weapons/kingfisher"
+    },
+    "arsenal_kingfisher__o0": {
+      "textures": "textures/items/arsenal/weapons/kingfisher__o0"
+    },
+    "arsenal_kingfisher__o1": {
+      "textures": "textures/items/arsenal/weapons/kingfisher__o1"
     },
     "arsenal_kite": {
       "textures": "textures/items/arsenal/weapons/kite"
@@ -802,6 +868,15 @@
     },
     "arsenal_magistrate__o1": {
       "textures": "textures/items/arsenal/weapons/magistrate__o1"
+    },
+    "arsenal_magpie": {
+      "textures": "textures/items/arsenal/weapons/magpie"
+    },
+    "arsenal_magpie__o1": {
+      "textures": "textures/items/arsenal/weapons/magpie__o1"
+    },
+    "arsenal_magpie__o2": {
+      "textures": "textures/items/arsenal/weapons/magpie__o2"
     },
     "arsenal_mako": {
       "textures": "textures/items/arsenal/weapons/mako"
@@ -1196,6 +1271,15 @@
     "arsenal_riot_shield": {
       "textures": "textures/items/arsenal/gear/riot_shield"
     },
+    "arsenal_rook": {
+      "textures": "textures/items/arsenal/weapons/rook"
+    },
+    "arsenal_rook__o0": {
+      "textures": "textures/items/arsenal/weapons/rook__o0"
+    },
+    "arsenal_rook__o2": {
+      "textures": "textures/items/arsenal/weapons/rook__o2"
+    },
     "arsenal_sawtooth": {
       "textures": "textures/items/arsenal/weapons/sawtooth"
     },
@@ -1297,6 +1381,15 @@
     },
     "arsenal_spring_knife": {
       "textures": "textures/items/arsenal/melee/spring_knife"
+    },
+    "arsenal_starling": {
+      "textures": "textures/items/arsenal/weapons/starling"
+    },
+    "arsenal_starling__o0": {
+      "textures": "textures/items/arsenal/weapons/starling__o0"
+    },
+    "arsenal_starling__o2": {
+      "textures": "textures/items/arsenal/weapons/starling__o2"
     },
     "arsenal_stasis_projector": {
       "textures": "textures/items/arsenal/weapons/stasis_projector"

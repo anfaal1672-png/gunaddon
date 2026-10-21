@@ -35,6 +35,7 @@ export const PRICE_OVERRIDE = {
   "arsenal:warlord_banner": 1800,
   "arsenal:legion_core": 2200,
   "arsenal:hollow_heart": 2000,
+  "arsenal:crow_dossier": 2300,
 };
 
 /** 弾薬 1 個あたりの価格（弾薬系統ごと） */

@@ -37,6 +37,7 @@ export const ITEM = {
   warlordBanner: `${NS}:warlord_banner`,
   legionCore: `${NS}:legion_core`,
   hollowHeart: `${NS}:hollow_heart`,
+  crowDossier: `${NS}:crow_dossier`,
   fuel: `${NS}:fuel_canister`,
   plate: `${NS}:armor_plate`,
 };

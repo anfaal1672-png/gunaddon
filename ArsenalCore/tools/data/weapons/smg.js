@@ -85,4 +85,14 @@ export const SMG = {
     slots: ["optic", "underbarrel", "mag", "laser", "stock"], fixed: { muzzle: "muzzle_suppressor" },
     model: { type: "smg", body: 11, h: 3.3, barrel: 0, mag: "straight", stock: "wire", finish: "black", accent: "tier", intSuppressor: 8 },
   },
+  // ---- 3.0 で追加（ブラッククロウの装備） ----
+  magpie: {
+    cat: "smg", tier: "rare", name: { ja: "マグパイ", en: "Magpie" },
+    desc: { ja: "50 発の螺旋弾倉を持つ SMG。撃ち続けて押し切る", en: "SMG with a 50-round helical magazine" },
+    ammo: "light", mag: 50, rpm: 950, modes: ["auto", "semi"], dmg: 2.8, head: 1.6, range: [14, 28], falloff: 0.52,
+    spread: R(2.6, 0.85, 1.3, 0.3, 3.8, 0.38), recoil: { v: 0.7, h: 0.55, shake: 0.017 },
+    reload: { tac: 44, empty: 54 }, ads: 3, move: 1.02, pen: 1, sound: "smg", pitch: 1.05, optic: "iron",
+    slots: ["optic", "muzzle", "underbarrel", "laser", "stock"],
+    model: { type: "smg", body: 13, h: 3.5, barrel: 4, mag: "drum", stock: "fixed", finish: "black", accent: "tier" },
+  },
 };

@@ -49,4 +49,14 @@ export const LMG = {
     slots: ["optic", "muzzle", "underbarrel", "laser"],
     model: { type: "lmg", body: 16, h: 5.5, barrel: 13, guard: 8, mag: "belt_box", stock: "fixed", finish: "black", accent: "tier", carry: true },
   },
+  // ---- 3.0 で追加（ブラッククロウの装備） ----
+  corvid: {
+    cat: "lmg", tier: "rare", name: { ja: "コルヴィッド", en: "Corvid" },
+    desc: { ja: "軽量の分隊支援火器。機関銃としては取り回しが良い", en: "Lightweight squad automatic weapon" },
+    ammo: "medium", mag: 120, rpm: 820, modes: ["auto"], dmg: 3.6, head: 1.6, range: [34, 74], falloff: 0.58,
+    spread: R(4.4, 1.0, 2.3, 0.3, 4.6, 0.28), recoil: { v: 1.2, h: 0.9, shake: 0.032 },
+    reload: { tac: 90, empty: 110 }, ads: 6, move: 0.88, pen: 2, sound: "lmg", pitch: 1.05, optic: "reddot",
+    slots: ["optic", "muzzle", "underbarrel", "laser"],
+    model: { type: "lmg", body: 15, h: 5, barrel: 10, guard: 7, mag: "box_side", stock: "skeleton", finish: "black", accent: "tier", bipodBuilt: true },
+  },
 };

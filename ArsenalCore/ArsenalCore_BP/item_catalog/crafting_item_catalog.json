@@ -19,7 +19,8 @@
               "arsenal:flare_pistol",
               "arsenal:kodiak",
               "arsenal:sparrow",
-              "arsenal:regent"
+              "arsenal:regent",
+              "arsenal:jackdaw"
             ]
           },
           {
@@ -33,7 +34,8 @@
               "arsenal:cinder",
               "arsenal:wisp",
               "arsenal:hummingbird",
-              "arsenal:gadfly"
+              "arsenal:gadfly",
+              "arsenal:finch"
             ]
           },
           {
@@ -50,7 +52,8 @@
               "arsenal:specter",
               "arsenal:lynx",
               "arsenal:jackal",
-              "arsenal:wren"
+              "arsenal:wren",
+              "arsenal:magpie"
             ]
           },
           {
@@ -65,7 +68,8 @@
               "arsenal:quillback",
               "arsenal:corsair",
               "arsenal:ranger",
-              "arsenal:kite"
+              "arsenal:kite",
+              "arsenal:grackle"
             ]
           },
           {
@@ -87,7 +91,8 @@
               "arsenal:valkyrie",
               "arsenal:hydra",
               "arsenal:sirocco",
-              "arsenal:aurora"
+              "arsenal:aurora",
+              "arsenal:starling"
             ]
           },
           {
@@ -101,7 +106,8 @@
               "arsenal:harrier",
               "arsenal:halberd",
               "arsenal:warhorse",
-              "arsenal:highlander"
+              "arsenal:highlander",
+              "arsenal:rook"
             ]
           },
           {
@@ -117,7 +123,8 @@
               "arsenal:magistrate",
               "arsenal:longwatch",
               "arsenal:osprey",
-              "arsenal:peregrine"
+              "arsenal:peregrine",
+              "arsenal:corax"
             ]
           },
           {
@@ -136,7 +143,8 @@
               "arsenal:wraithmark",
               "arsenal:condor",
               "arsenal:shrike",
-              "arsenal:phantom_lr"
+              "arsenal:phantom_lr",
+              "arsenal:kingfisher"
             ]
           },
           {
@@ -156,7 +164,8 @@
               "arsenal:mauler",
               "arsenal:bulldog",
               "arsenal:cyclone",
-              "arsenal:hammerhead"
+              "arsenal:hammerhead",
+              "arsenal:blackwing"
             ]
           },
           {
@@ -169,7 +178,8 @@
               "arsenal:grinder",
               "arsenal:bulwark",
               "arsenal:rhino",
-              "arsenal:goliath"
+              "arsenal:goliath",
+              "arsenal:corvid"
             ]
           },
           {
@@ -450,7 +460,8 @@
               "arsenal:arena_tool",
               "arsenal:warlord_banner",
               "arsenal:legion_core",
-              "arsenal:hollow_heart"
+              "arsenal:hollow_heart",
+              "arsenal:crow_dossier"
             ]
           }
         ]

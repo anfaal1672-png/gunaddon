@@ -7,8 +7,8 @@ ARSENAL CORE 2.0 — 追加の UI 文言（英語, 日本語）
 UI2 = {
     # ---- 3.0：兵科・パーク ----
     "arsenal.ui.btn_class": ("Class & Perks", "兵科・パーク"),
-    "arsenal.ui.welcome_v3": ("§6ARSENAL CORE 3.0§r: classes, perks, squad, missions and a campaign are here. Open the Field Manual → Class & Perks. You received a Tactical Device (class ability).",
-                              "§6ARSENAL CORE 3.0§r：兵科・パーク・分隊・任務・キャンペーンが加わりました。野戦マニュアル →「兵科・パーク」から。兵科のアビリティを使う戦術デバイスを渡しました"),
+    "arsenal.ui.welcome_v3": ("§6ARSENAL CORE 3.0§r: missions, a 16-mission campaign, classes, perks, squads and the Black Crow faction are here. Open the Field Manual → Missions to start. You received a Tactical Device (class ability).",
+                              "§6ARSENAL CORE 3.0§r：ミッション・全 16 話のキャンペーン・兵科とパーク・分隊・第 4 勢力ブラッククロウが加わりました。野戦マニュアル →「ミッション」から始められます。兵科のアビリティを使う戦術デバイスを渡しました"),
     "arsenal.class.change": ("Change class & perks", "兵科とパークを変える"),
     "arsenal.class.get_device": ("Get a Tactical Device", "戦術デバイスを受け取る"),
     "arsenal.class.have_device": ("§7You already have a Tactical Device.", "§7戦術デバイスはもう持っています"),
@@ -131,6 +131,7 @@ UI2 = {
     "arsenal.pref.nvg_auto": ("NVG turns on automatically in the dark", "暗視ゴーグルを暗所で自動オン"),
     # ---- ワールド設定（2.0）----
     "arsenal.ws.legion": ("Iron Legion spawns", "アイアン・レギオンの出現"),
+    "arsenal.ws.crow": ("Black Crow spawns", "ブラッククロウの出現"),
     "arsenal.ws.hollow": ("Hollow spawns", "ホロウの出現"),
     "arsenal.ws.structures": ("Structure density", "構造物の密度"),
     "arsenal.ws.ai_difficulty": ("Enemy AI difficulty", "敵 AI の難易度"),
@@ -166,6 +167,7 @@ UI2 = {
     # ---- ボス ----
     "arsenal.boss.reinforce": ("Reinforcements incoming!", "増援が来る！"),
     "arsenal.boss.airstrike": ("AIRSTRIKE - get off the markers!", "空爆 - 印から離れろ！"),
+    "arsenal.boss.blink": ("Smoke! He is flanking you - watch your back!", "煙幕！ 回り込んでくる - 背後に注意！"),
     "arsenal.boss.enrage": ("The boss is enraged!", "ボスが激昂した！"),
     "arsenal.boss.emp": ("EMP charging - get clear!", "EMP 充電中 - 離れろ！"),
     "arsenal.boss.phase": ("Phase %s", "第 %s 段階"),

@@ -20,7 +20,7 @@ export const MISSION_TYPES = {
   defend: {
     name: { ja: "拠点防衛", en: "Hold the Line" },
     desc: { ja: "地点を守り、押し寄せる敵のウェーブを退ける", en: "Hold the point against incoming waves" },
-    credits: 400, xp: 500, loot: "rare", count: [3, 4], waves: 3, radius: 12, waveGap: 8, spawnDist: [20, 26],
+    credits: 400, xp: 500, loot: "rare", count: [3, 4], waves: 3, radius: 12, waveGap: 8, spawnDist: [16, 22],
   },
   bounty: {
     name: { ja: "賞金首", en: "Bounty" },
@@ -56,7 +56,7 @@ export const MISSION_RULES = {
 };
 
 /** 依頼に出る勢力（ワールド設定で OFF の勢力は除く） */
-export const CONTRACT_FACTIONS = ["raiders", "legion", "hollow"];
+export const CONTRACT_FACTIONS = ["raiders", "legion", "hollow", "crow"];
 
 // ---------------------------------------------------------------------------
 //  キャンペーン「オペレーション・アーセナル」
@@ -67,6 +67,7 @@ export const CAMPAIGN_CHAPTERS = [
   { name: { ja: "第 1 章　荒野の略奪者", en: "Chapter 1: Wasteland Raiders" } },
   { name: { ja: "第 2 章　鉄の軍団", en: "Chapter 2: The Iron Legion" } },
   { name: { ja: "第 3 章　深淵より", en: "Chapter 3: From the Deep" } },
+  { name: { ja: "第 4 章　黒い翼", en: "Chapter 4: Black Wings" } },
 ];
 
 export const CAMPAIGN = [
@@ -139,7 +140,31 @@ export const CAMPAIGN = [
   {
     id: "c12", chapter: 2, type: "boss", faction: "hollow", rank: 22, credits: 2000, xp: 3000, loot: "legendary",
     enemies: [], boss: "boss_hollow_mother",
+    title: { ja: "母なるもの", en: "The Mother" },
+    brief: { ja: "すべての変異体を生む母体が地表へ出てくる。足を止めるな。踏みつけはジャンプでかわせる。", en: "The mother of all Hollow is surfacing. Keep moving: jump to dodge her stomp." },
+  },
+  {
+    id: "c13", chapter: 3, type: "intel", faction: "crow", rank: 24, credits: 900, xp: 1500, loot: "rare",
+    enemies: [["crow_operator", 2], ["crow_marksman", 1], ["crow_medic", 1]],
+    title: { ja: "黒い翼", en: "Black Wings" },
+    brief: { ja: "混乱に乗じて動く部隊がいる。民間軍事会社ブラッククロウ。中継所から通信記録を抜け。狙撃手に注意。", en: "Someone is moving in the chaos: the private military firm Black Crow. Pull the comms logs from their relay. Mind the marksman." },
+  },
+  {
+    id: "c14", chapter: 3, type: "defend", faction: "crow", rank: 26, credits: 1000, xp: 1700, loot: "rare",
+    enemies: [["crow_operator", 2], ["crow_breacher", 1], ["crow_gunner", 1]],
+    title: { ja: "報復", en: "Retaliation" },
+    brief: { ja: "記録を抜かれたクロウが報復に来る。地点を守れ。ブリーチャーは散弾で一気に詰めてくる。", en: "Black Crow wants their logs back. Hold the point. Breachers will rush you with shotguns." },
+  },
+  {
+    id: "c15", chapter: 3, type: "bounty", faction: "crow", rank: 28, credits: 1100, xp: 1900, loot: "legendary",
+    enemies: [["crow_operator", 2], ["crow_medic", 1], ["crow_marksman", 1]], target: "crow_commander",
+    title: { ja: "指揮官狩り", en: "Commander Hunt" },
+    brief: { ja: "前線を率いる指揮官の居場所をつかんだ。指揮官が倒れれば、ディレクターは自ら出てくるしかない。", en: "We know where their field commander is. Take him out and the Director will have to show himself." },
+  },
+  {
+    id: "c16", chapter: 3, type: "boss", faction: "crow", rank: 30, credits: 2500, xp: 4000, loot: "legendary",
+    enemies: [], boss: "boss_director",
     title: { ja: "オペレーション・アーセナル", en: "Operation Arsenal" },
-    brief: { ja: "すべての変異体を生む母体が地表へ出てくる。これが最後の作戦だ。持てる力を全部使え。", en: "The mother of all Hollow is surfacing. This is the final operation. Use everything you have." },
+    brief: { ja: "すべての黒幕、ディレクター・クロウ。煙を見たら背後を警戒しろ。閃光弾からは目をそらせ。これが最後の作戦だ。", en: "Director Crow, the one behind it all. When you see smoke, watch your back. Look away from flashbangs. This is the final operation." },
   },
 ];

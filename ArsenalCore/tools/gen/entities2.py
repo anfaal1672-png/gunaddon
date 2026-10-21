@@ -22,6 +22,7 @@ FACTION_PAL = {
     "legion": {"main": (150, 158, 170), "main_dark": (70, 76, 88), "furniture": (110, 118, 132), "accent": (255, 110, 60), "glow": (255, 120, 60)},
     "hollow": {"main": (118, 140, 96), "main_dark": (72, 84, 58), "furniture": (96, 110, 76), "accent": (180, 210, 90), "glow": (170, 255, 90)},
     "raiders": {"main": (120, 96, 70), "main_dark": (60, 50, 40), "furniture": (92, 80, 60), "accent": (200, 60, 40)},
+    "crow": {"main": (52, 56, 64), "main_dark": (28, 30, 34), "furniture": (44, 46, 52), "accent": (90, 200, 235), "glow": (90, 200, 235)},
 }
 
 

@@ -129,7 +129,7 @@ WORLD_SETTING_DOC = {
     "damageMul": "銃のダメージ倍率", "headMul": "ヘッドショット倍率の効き", "friendlyFire": "味方撃ち", "explosionGrief": "爆発でブロックを壊すか（ゲームルールに従う／常に／しない）",
     "glassBreak": "弾でガラスが割れる", "durability": "武器の耐久とジャム", "creativeInfinite": "クリエイティブで弾が減らない", "raiders": "レイダーズの出現",
     "spawnProtect": "ワールドのスポーン周辺で撃てない半径", "flashlightBlocks": "フラッシュライトで光源ブロックを置く", "killFeed": "キルログ", "autoReload": "弾切れで自動リロード",
-    "legion": "アイアン・レギオンの出現", "hollow": "ホロウの出現", "structures": "構造物の密度（なし／少なめ／標準／多め）", "economy": "経済（クレジット・店）",
+    "legion": "アイアン・レギオンの出現", "hollow": "ホロウの出現", "crow": "ブラッククロウの出現", "structures": "構造物の密度（なし／少なめ／標準／多め）", "economy": "経済（クレジット・店）",
     "progressionLocks": "アタッチメント作成に武器レベルが必要", "killstreaks": "キルストリーク", "downed": "ダウン制（即死せず蘇生待ち）", "bleeding": "出血",
     "backstabPvp": "PvP の背後攻撃の倍率の上限", "aimAssistPvp": "プレイヤーへのエイムアシスト", "wind": "風（遠距離弾が流れる）", "aiDifficulty": "敵 AI の難易度",
     "suppression": "制圧（至近弾で拡散が増える）", "bosses": "ボスの召喚",

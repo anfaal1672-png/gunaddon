@@ -1,0 +1,38 @@
+{
+  "format_version": "1.20.10",
+  "minecraft:recipe_shapeless": {
+    "description": {
+      "identifier": "arsenal:crow_dossier"
+    },
+    "tags": [
+      "crafting_table"
+    ],
+    "ingredients": [
+      {
+        "item": "minecraft:paper",
+        "count": 8
+      },
+      {
+        "item": "minecraft:ink_sac",
+        "count": 4
+      },
+      {
+        "item": "arsenal:precision_parts",
+        "count": 2
+      },
+      {
+        "item": "minecraft:gold_ingot",
+        "count": 4
+      }
+    ],
+    "result": {
+      "item": "arsenal:crow_dossier",
+      "count": 1
+    },
+    "unlock": [
+      {
+        "item": "minecraft:paper"
+      }
+    ]
+  }
+}
